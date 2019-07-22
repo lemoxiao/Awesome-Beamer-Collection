@@ -1,0 +1,92 @@
+%% This is file `beamerthemeuow.sty',
+%% 2014-01-07 (cc) tmgriffiths Version 1.0
+%%
+%% Copyright (CC BY-NC-SA 4.0 Int) 2015 by T. M. Griffiths
+%% under the creative commons licence, attribution, non-comercial, share alike
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License version 1.3c
+%% http://www.latex-project.org/lppl/lppl-1-3c.txt
+%%
+%%--------------------------------------------------------------------------------
+%% These Packages essentially port the UOW powerpoint templates over to Beamer, 
+%% a LaTeX class for presentations. Inspiration for parts of this theme (where 
+%% design decision had to be made) and guidance on the implementation of the 
+%% pgfkeys were taken from the metropolis by Matthias Vogelgesang et al., of which 
+%% the author of this package is a contributor.
+%% 
+%% Created by Thomas M. Griffiths (tmg994[at]uowmail[dot]edu[dot]au) 2015-07-23 
+%% Version 1.0 2015-07-23 tmgriffiths       
+%%--------------------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeuow}
+   [2015/07/23 A Beamer Theme That Matches the UOW Branding Guidelines V 1.0 (cc) tmgriffiths]
+
+% Required packages
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\RequirePackage{xparse}
+\RequirePackage{etex}
+\RequirePackage{calc}
+\RequirePackage{etoolbox}
+\RequirePackage{pgfopts}
+\RequirePackage{ifxetex}
+\RequirePackage{ifluatex}
+\RequirePackage{textcase}
+
+% Define a macro for the user to set options in the theme (just a color or eco at this stage).
+\newcommand{\UOWthemeset}[1]{\pgfkeys{/UOWtheme/.cd,#1}}
+
+% UOWtheme/themecolour is equivalent to UOWtheme/*/themecolour from the sub-packages.
+\pgfkeys{/UOWtheme/.cd,
+   .search also={
+      /UOWtheme/inner,
+      /UOWtheme/outer,
+      /UOWtheme/color,
+   },
+   layout/.code=\pgfkeysalso{
+      outer/layout=#1,
+      color/layout=#1,
+   },
+   themecolour/.code=\pgfkeysalso{%
+      color/themecolor=#1,%
+   },
+   sectionpage/.code=\pgfkeysalso{
+      inner/sectionpage=#1,
+   },
+}
+
+
+%% Alias themecolour to themecolor
+\pgfkeys{%
+   /themecolour/.style={
+      /themecolor=#1
+   },
+}
+% Set default values for options.
+\newcommand{\@UOWtheme@defaults}{
+   \pgfkeys{/UOWtheme/.cd,
+      themecolor=blue,
+      layout=standard,
+      framenumbering=none,
+      sectionpage=progressbar,
+   }
+}
+
+\AtEndOfClass{%
+   % Make maths in titles go automatically bold. From the HEP thesis class.
+   \g@addto@macro\bfseries{\boldmath}
+   % Declare a bold version of the typewriter font
+   \DeclareFontShape{OT1}{cmtt}{bx}{n}{<5><6><7><8><9><10><10.95><12><14.4><17.28><20.74><24.88>cmttb10}{}
+}
+
+% subpackages
+\useinnertheme{uow}
+\useoutertheme{uow}
+\usecolortheme{uow}
+\usefonttheme{uow}
+
+\@UOWtheme@defaults
+\ProcessPgfOptions{/UOWtheme}

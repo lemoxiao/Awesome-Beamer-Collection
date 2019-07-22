@@ -1,0 +1,76 @@
+\mode<presentation>
+
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \ifnum\thepage>1
+  
+  %% Main body background
+  
+  	\node[inner sep=0pt,anchor=north west] (eye_candy_3) at (0,1.05*\the\paperheight)	{\includegraphics[width=.075\textwidth]{media/eye_candy_3}};
+  	
+  	\node[inner sep=0pt] (eye_candy_1) at (\the\paperwidth,\the\paperheight)	{\includegraphics[width=.4\textwidth]{media/eye_candy_1}};
+  	
+  	\node[inner xsep=0pt,inner ysep=7pt,anchor=south west] (kios_logo) at (0.05,0.5)	{\includegraphics[height=.068\textwidth,angle=90]{media/kios_logo}};
+  
+  	\fill[color=black!30!red] (0,0) rectangle (\the\paperwidth,0.4);
+  	\node[white,anchor=south west] at (0,-0.1) {\scriptsize \textbf{www.kios.ucy.ac.cy}};
+  	
+  	\node[white,anchor=south east] at (\the\paperwidth,-0.05) {\scriptsize \textbf{\insertframenumber\ of \inserttotalframenumber}};
+  	
+%  	\node[white,anchor=south] at (0.5*\the\paperwidth,-0.05) {\scriptsize \textbf{\insertauthor}};
+  	
+
+  
+  \else
+  
+  %% Title page background
+  	
+  	\node[inner sep=0pt,anchor=north west] (eye_candy_2) at (0,1.043*\the\paperheight)	{\includegraphics[width=.3\textwidth]{media/eye_candy_2}};
+  	
+  	\node[inner sep=0pt,anchor=north east] (kios_logo_2) at (0.98*\the\paperwidth,0.98*\the\paperheight)	{\includegraphics[height=.2\textheight]{media/kios_logo_2}};
+  	
+  	 \node[inner sep=0pt,anchor=south west] (imperial_logo) at (0.01*\the\paperwidth,0.01*\the\paperheight)	{\includegraphics[width=.3\textwidth]{media/imperial_logo}};
+  	  	
+  	\node[inner xsep=0,inner ysep=0.01*\the\paperheight,anchor=south west] (ucy_logo) at (imperial_logo.north west) {\includegraphics[width=.3\textwidth]{media/ucy_logo}};
+  	
+  	\node[inner sep=0pt,anchor=south east] (eu_logo) at (0.99*\the\paperwidth,0.01*\the\paperheight) {\includegraphics[height=.175\textheight]{media/eu_logo}};
+  	 
+ 	\node[inner xsep=0.01*\the\paperwidth,inner ysep=0,anchor=south east] (cy_logo) at (eu_logo.south west) {\includegraphics[height=.175\textheight]{media/cy_logo}};
+	
+	\node[inner xsep=0,inner ysep=2pt,anchor=south west] at (cy_logo.north west) {\textbf{Funded by:}};
+	
+	\draw[line width=5mm,white!50!gray] (kios_logo_2.south west) ++ (-2.7cm,0.15cm) -- ++ (-3.6cm,0);
+	
+	\draw[line width=0.75mm,black!30!red] (kios_logo_2.south west) ++ (-0.3cm,0.15cm) -- ++ (-5.7cm,0);
+
+  \fi
+  \end{tikzpicture}
+}
+
+% Title page
+\defbeamertemplate*{title page}{kios}[1][]
+{ 
+   \vskip1.5cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=.3\textwidth,#1]{title page header}
+      \usebeamerfont{title}\textbf{\inserttitle}\par%
+    \end{beamercolorbox}%
+    \vskip0.75cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=.3\textwidth,#1]{author}
+      \usebeamerfont{author}\textbf{\insertauthor}%
+    \end{beamercolorbox}
+
+%	\begin{tikzpicture}
+%	\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+%	\node[white,anchor=south east] at (0.5*\the\paperwidth,-0.05) {\scriptsize \textbf{\insertframenumber\ of \inserttotalframenumber}};
+%	\end{tikzpicture}
+
+     \vskip0.2cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=.3\textwidth,#1]{date}
+      \usebeamerfont{author}\insertdate%
+    \end{beamercolorbox}
+  \vfill
+}
+
+\mode
+<all>

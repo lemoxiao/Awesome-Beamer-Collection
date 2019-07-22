@@ -1,0 +1,47 @@
+\documentclass[orientation=landscape,size=a1,scale=1.2]{lh-poster}
+%\documentclass[inverse,orientation=landscape,size=a1,scale=1.2]{lh-poster}
+%\documentclass[orientation=portrait,size=a1,scale=1.2]{lh-poster}
+%\documentclass[inverse,orientation=portrait,size=a1,scale=1.2]{lh-poster}
+
+\title{A Simple Poster Example}
+\subtitle{}
+
+\institute[The University of Sheffield]
+{Department of Computer Science, The University of Sheffield, Sheffield, UK}
+\author[A.D. Brucker]{Achim D. Brucker\\[0.2em]
+    \texttt{\small\href{mailto:"Achim D. Brucker"
+    <a.brucker@sheffield.ac.uk>}{a.brucker@sheffield.ac.uk}}
+}
+
+% \setbeamertemplate{rhlogo}{\includegraphics[width=6cm]{partnerlogo}}
+\begin{document}
+\begin{frame}[t]
+  \begin{columns}[t]
+    \begin{column}{.31\textwidth}
+      \begin{block}{Test Title}
+         A regular box with an itemize list
+         \begin{itemize}
+           \item First item.
+           \item Second item.
+           \item Third item.
+         \end{itemize}
+      \end{block}
+      \begin{block}{Test Title}
+       Some text \ldots
+      \end{block}
+    \end{column}
+    \begin{column}{.31\textwidth}
+      \begin{alertblock}{Test Title}
+      \end{alertblock}
+      \begin{block}{Test Title}
+      \end{block}
+    \end{column}
+    \begin{column}[t]{.31\textwidth}
+      \begin{example}{Test Title (Example)}
+      \end{example}
+      \begin{block}{Test Title}
+      \end{block}
+    \end{column}
+    \end{columns}
+\end{frame}
+\end{document}

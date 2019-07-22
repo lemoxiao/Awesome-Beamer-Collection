@@ -1,0 +1,81 @@
+\documentclass{beamer}
+
+\usepackage{anyfontsize}
+\usepackage{pgfpages}
+
+\setcounter{tocdepth}{2} % hide subsubsection in tableofcontents
+\usetheme[hideothersubsections,numbers,sidebarshades]{Radboud}
+
+% no indenting
+\setlength{\parindent}{0pt}
+
+% frame style
+\AtBeginSection[]{
+    \begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+    \end{frame}
+}
+
+% beamer settings
+\setbeamertemplate{footline}{}
+\setbeamertemplate{sidebar left}[sidebar theme]
+\setbeamercovered{transparent}
+%\setbeameroption{show notes on second screen=right}
+%\setbeamerfont{note page}{size=\tiny}
+%\setbeameroption{show notes}
+%\setbeameroption{show only notes}
+\setbeameroption{hide notes}
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{subitemize item}[-]
+
+
+
+\begin{document}
+
+    \title{\emph{Presentation Title}}
+    \author{by \emph{author}}
+    \date{}
+
+    % disable sidebar content
+    \setbeamertemplate{sidebar left}{}
+
+    \begin{frame}
+        \titlepage
+    \end{frame}
+
+
+    \begin{frame}
+        \frametitle{Outline}
+        \tableofcontents
+    \end{frame}
+
+    % enable sidebar content
+    \setbeamertemplate{sidebar left}[sidebar theme]
+
+
+    % ===== insert sections here =====
+
+    \input{sections/example.tex}
+    %\input{...}
+
+    % ================================
+
+
+    \section*{}
+    \begin{frame}
+        \begin{center}
+            \begin{Large}Questions?\end{Large}
+            $ $\\
+            $ $\\
+            $ $\\
+            $ $\\
+            $ $\\
+            Email me at \\
+            \texttt{user} \textbf{at} \texttt{domain}\\
+            for any further questions.
+        \end{center}
+    \end{frame}
+
+\end{document}
+

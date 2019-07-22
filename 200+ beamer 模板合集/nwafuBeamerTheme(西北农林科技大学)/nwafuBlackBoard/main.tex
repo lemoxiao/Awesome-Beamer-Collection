@@ -1,0 +1,107 @@
+% \documentclass[fontset = none, t]{ctexbeamer}
+\documentclass[fontset = none, t, aspectratio=169]{ctexbeamer}
+
+% 黑板主题
+\usetheme{nwafubb}
+
+% 载入需要的宏包
+\input{settings/packages.tex}
+% 进行必要的设置
+\input{settings/format.tex}
+
+% 基本信息
+\title[黑板主题]{\Large 西北农林科技大学 {\LaTeX}  Beamer 主题}%主标题，
+                                %需要用可选参数给出短标题
+\subtitle{黑板主题 V\ 2.0}% 子标题
+\author[N. Geng]{耿楠}%作者
+\date{\tosemester} % 也可以使用类似\date[2017/04/20]{\zhdate{2017/04/20}}的
+                   %方式指定时间
+\institute[智能媒体]{\cie} % 单位，需用可选参数给出单位简写
+
+% 为标题页/封底页指定一个 logo
+\pgfdeclareimage[height=0.5cm]{titlepagelogo}{nwafulogo/h_bar_w}% 标题页
+\titlegraphic{% 标题页底部
+  \pgfuseimage{titlepagelogo}
+}
+
+\begin{document}
+
+% 标题页，用plain参数禁用页眉页脚
+\begin{frame}[plain]
+  \maketitle
+\end{frame}
+
+\section{简介}
+\begin{frame}{简介}{黑板主题}
+  \begin{itemize}
+  \item 用黑板作为Beamer每一页Slide的背景
+  \item 设置了适用于黑板的颜色主题
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{简介}{为什么叫「黑板」？}
+  \begin{itemize}
+  \item 不为别的，就是因为要天天\alert{讲课}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 关于我们 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[关于我们]{关于我们}
+\subsection[联系方式]{联系方式}
+\begin{frame}[fragile]{关于我们}{联系方式}
+  % colour options
+  \definecolor{seplinecolour}{HTML}{357f2d} % green
+  \definecolor{iconcolour}{HTML}{2f3142} % dark
+  \definecolor{textcolour}{HTML}{2f3142} % dark
+  \definecolor{jobtitlecolour}{HTML}{474a65} % light dark
+
+  % define some lengths for internal spacing
+  \newlength{\seplinewidth} \setlength{\seplinewidth}{2cm}
+  \newlength{\seplineheight} \setlength{\seplineheight}{1pt}
+  \newlength{\seplinedistance} \setlength{\seplinedistance}{0.3cm}
+  \begin{center}
+      \begin{tikzpicture}[font=\small]
+      % name
+      \matrix[every node/.style={anchor=center,font=\huge},anchor=center] (name) {
+        \node{耿\hspace{\ccwd}楠}; \\
+        %\node{\color{jobtitlecolour}\normalsize\textit{教授}}; \\
+      };
+      % sep line 1
+      \node[below=0.3\seplinedistance of name] (hl1) {};
+      \draw[line width=\seplineheight,color=seplinecolour] (hl1)++(-\seplinewidth/2,0) -- ++(\seplinewidth,0);
+      % contact info
+      \matrix [below=\seplinedistance of hl1,%
+               column 1/.style={anchor=center},%
+               column 2/.style={anchor=west}] (contact) {
+        \node{\faGlobe}; & \node{\url{http://cie.nwsuaf.edu.cn/szdw/}};\\
+        \node{\faBuilding}; & \node{西北农林科技大学信息工程学院计算机科学系};\\ 
+        \node{\faEnvelope}; & \node{nangeng@nwafu.edu.cn; nangeng@qq.com};\\
+        %\node{\faQq}; & \node{970291228};\\
+        %\node{\faPhone}; & \node{15829540966}; \\
+        \node{\faGithub}; & \node{\url{https://github.com/registor/}}; \\
+      };
+      sep line 2
+      \node[below=\seplinedistance of contact] (hl2) {};
+      \draw[line width=\seplineheight,color=seplinecolour] (hl2)++(-\seplinewidth/2,0) -- ++(\seplinewidth,0);
+      % interests
+      \matrix [below=\seplinedistance of hl2,
+         every node/.style={anchor=center,font=\large}]
+         (interests) {
+        \node{\faCode}; & \node{\faCoffee}; &
+        \node{\faLock}; & \node{\faWrench}; &
+        \node{\faCameraRetro}; \\
+      };
+    \end{tikzpicture}
+  \end{center}    
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
+  \finalpage{谢谢你使用该{\LaTeX} Beamer主题！\\欢迎多提宝贵意见和建议!}
+\end{frame}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

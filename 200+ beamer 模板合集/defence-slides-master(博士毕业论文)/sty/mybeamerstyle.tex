@@ -1,0 +1,232 @@
+\documentclass[utf8]{beamer}
+\usepackage{etex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% There are a number of symbols (e.g., \Square) that are defined by      %
+% multiple packages.  In order to typeset all the variants in this       %
+% document, we have to give glyph a unique name.  To do that, we define  %
+% \savesymbol{XXX}, which renames a symbol from \XXX to \origXXX, and    %
+% \restoresymbols{yyy}{XXX}, which renames \origXXX back to \XXX and     %
+% defines a new command, \yyyXXX, which corresponds to the most recently %
+% loaded version of \XXX.                                                %
+%                                                                        %
+
+% Save a symbol that we know is going to get redefined.
+\def\savesymbol#1{%
+  \expandafter\let\expandafter\origsym\expandafter=\csname#1\endcsname
+  \expandafter\let\csname orig#1\endcsname=\origsym
+  \expandafter\let\csname#1\endcsname=\relax
+}
+
+% Restore a previously saved symbol, and rename the current one.
+\def\restoresymbol#1#2{%
+  \expandafter\let\expandafter\newsym\expandafter=\csname#2\endcsname
+  \expandafter\global\expandafter\let\csname#1#2\endcsname=\newsym
+  \expandafter\let\expandafter\origsym\expandafter=\csname orig#2\endcsname
+  \expandafter\global\expandafter\let\csname#2\endcsname=\origsym
+}
+
+% Rather than create a rat's nest of \if statements, we keep the table
+% whole and have each symbol conditionally appear.
+\makeatletter
+\newcommand{\trysym}[1]{\@ifundefined{#1}{\mbox{\tiny N/A}}{\csname#1\endcsname}}
+\makeatother
+%                                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%---- usepackages ----
+\usepackage{amscd}
+\usepackage{amsmath,amssymb,amsfonts}%,mathrsfs}
+
+\usepackage{CJKutf8}
+\usepackage{CJKpunct,CJKspace}
+\punctstyle{CCT}
+\usepackage{xcolor}
+\usepackage{pgf,tikz}
+\usepackage{graphicx}
+\usepackage{subfigure}
+%\usepackage{picins}  % 图片嵌入段落宏包 比如照片
+%\usepackage{pstool} % for matlabfrag.m figures
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+%\usepackage{booktabs}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+\usepackage{hyperref}
+	\hypersetup{
+		CJKbookmarks=true
+		pdfpagemode={FullScreen}
+	}
+%---- set beamer page size to fit 16:9 or 16:10 screen ----
+%---- uncomment next line for 16:9 aspect ratio ---
+%\usepackage[orientation=landscape,size=custom,width=17.067,height=9.6,scale=0.5,debug]{beamerposter}
+%---- uncomment next line for 16:10 aspect ratio ---
+%\usepackage[orientation=landscape,size=custom,width=15.36,height=9.6,scale=0.5,debug]{beamerposter}
+
+%---- 重定义字体、字号命令 ----
+	\newcommand{\songti}{\CJKfamily{song}}     % 宋体   (Windows自带simsun.ttf)
+	\newcommand{\kaishu}{\CJKfamily{kai}}      % 楷体   (Windows自带simkai.ttf)
+	\newcommand{\lishu}{\CJKfamily{li}}
+	\newcommand{\bodmtblk}{\CJKfamily{bodonimtblk}}
+	% ---- 字号设置 ----
+	\newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}
+	\newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}
+	\newcommand{\yichu}{\fontsize{32pt}{\baselineskip}\selectfont}
+	\newcommand{\yihao}{\fontsize{28pt}{\baselineskip}\selectfont}
+	\newcommand{\erhao}{\fontsize{21pt}{\baselineskip}\selectfont}
+	\newcommand{\xiaoerhao}{\fontsize{18pt}{\baselineskip}\selectfont}
+	\newcommand{\sanhao}{\fontsize{15.75pt}{\baselineskip}\selectfont}
+	\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}
+	\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}
+	\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}
+	\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}
+	\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}
+	\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}
+
+\mode<presentation>
+{
+	%\usetheme{Warsaw}
+	\usecolortheme{EmoryBlue} % beaver, crane, wolverine - warm color theme
+						% dove - black and white color theme
+						% seahorse, shark - nice color theme
+						% whale, dolphin - blue color theme, use 'outercolortheme' option for 'chamfered' inner theme
+						% thu, EmoryBlue
+	\usefonttheme{serif} % serif, structurebold, structuresmallcapsserif, professionalfonts
+	\useinnertheme[realshadow]{chamfered}
+	%\useinnertheme[realshadow, outercolortheme]{chamfered}
+	\useoutertheme[nofootline]{wuerzburg}
+	%\useoutertheme[nofootline, shadeframetitlebg]{wuerzburg}% options: glossy, nofootline, shadeframetitlebg
+	\setbeamercovered{dynamic}
+}
+
+%---- setbeamertemplate ----
+	%\setbeamertemplate[infolines theme]{headline}{}
+	%\setbeamertemplate{footline}{} % ---- 删除底部信息条 ----
+	% --删除底部导航工具栏, 替换为页数 或 logo--
+	\usenavigationsymbolstemplate{\vbox{\hfill\structure{
+		%\usebeamercolor[bg]{palette secondary}{\normalsize\bodmtblk\bfseries SUNIST}
+		\includegraphics[height=0.3cm]{logo/sunist.pdf}
+		%\includegraphics[height=0.3cm]{logo/sunist-wolverine.pdf}
+		%\includegraphics[height=0.3cm]{logo/sunist-thu.pdf}
+		%\includegraphics[height=0.3cm]{logo/sunist-whale.pdf}
+		%\tiny\insertframenumber{} / \inserttotalframenumber
+	}\hspace{1ex}\vspace*{1ex}}}
+%---- 设置背景渐变色 ----
+%	\setbeamertemplate{background canvas}[vertical shading][bottom=structure.fg!15,top=white]
+	%\setbeamertemplate{frametitle}[horizontal shading][left=blue, right=black]
+%---- pictures dir ----
+\graphicspath{{pics/}}
+
+%---- sunist logo ----
+	% \pgfdeclareimage[height=0.5cm]{thu}{thu.JPG}
+	% \logo{\pgfuseimage{thu}}
+	%or
+	%\logo{\includegraphics[height=0.3cm]{sunistlogo2.pdf}}
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSubsection[]
+{
+	\begin{frame}<beamer>
+		\frametitle{Outline}
+		\tableofcontents[currentsection,currentsubsection]
+	\end{frame}
+}
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command:
+%\beamerdefaultoverlayspecification{<+->}
+
+%---- includeonlyframes ----
+%\includeonlyframes{inclonlyframelabel}
+
+%---- set paragraph skip ----%
+\setlength{\parskip}{1ex  plus  0.5ex  minus  0.2ex}
+
+% ---- Change the bullets ----
+\useitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{{$\blacksquare$}}%
+}
+\usesubitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{{$\blacklozenge$}}%
+}
+\usesubsubitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{{$\blacktriangleright$}}%
+}
+%\usesubsubsubitemizeitemtemplate{%
+%    \tiny\raise1.5pt\hbox{{$\bullet$}}%
+%}
+% Plot a tiny plasma current graph
+% Input:
+%   #1 Plot data
+%   #2 Mean current
+\newcommand{\dataplot}[2]{%
+    \begin{tikzpicture}[xscale=0.5, yscale=0.03]
+        \begin{scope}[ycomb, yscale=0.5]
+        	\draw[densely dotted, thin, black!50] (35,0)--(40,0);
+            \draw[densely dotted, thin, black!50] (35,#2)--(40,#2);
+            \draw[ultra thin, black!80] plot[smooth] #1;
+            \node[above left, scale=0.35] at (35,0) {$0$};
+            \node[below left, scale=0.35] at (35,#2) {$#2$};
+        \end{scope}
+    \end{tikzpicture}%
+}
+
+%\pgfdeclarehorizontalshading[frametitle.bg]{beamer@frametitleshade}{1em}{%
+%	color(0pt)=(frametitle.bg);
+%	color(\paperwidth)=(white)
+%}
+
+\newcommand{\thankyoupage}[1]{%
+	\begin{frame}
+		\begin{centering}
+		\begin{beamercolorbox}[sep=3pt,center]{title}
+			\usebeamerfont{title}\inserttitle\par%
+			\ifx\insertsubtitle\@empty%
+			\else%
+				\vskip0.25em%
+				{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+			\fi%
+		\end{beamercolorbox}%
+		\end{centering}
+		\vskip2em\par
+		\begin{centering}
+		\hfill
+		\begin{beamercolorbox}[wd=0.8\linewidth,center,rounded=true]{palette secondary}
+			\usebeamerfont{title  in  head/foot}
+			\huge{#1}
+		\end{beamercolorbox}
+		\hfill
+		\end{centering}
+	\end{frame}
+}
+
+\newcommand<>{\hover}[3]{\uncover#4{%
+	\begin{tikzpicture}[remember picture,overlay]%
+		\draw[fill,opacity=0.4] (current page.south west)
+			rectangle (current page.north east);
+		\node at (current page.center) {%
+			\begin{minipage}{{#1}}
+			\begin{block}{{#2}}
+				{#3}
+			\end{block}
+			\end{minipage}
+		};
+	\end{tikzpicture}}
+}
+
+\newcommand{\myfootnote}[1]{\footnote{\tiny{{#1}}}}
+
+\newcommand{\backupframebegin}{
+     \newcounter{framenumberbeforeappendix}
+     \setcounter{framenumberbeforeappendix}{\value{framenumber}}
+     \setbeamertemplate{headline}[wuerzburg theme appendix]
+     \setbeamertemplate{footline}[wuerzburg theme appendix]
+}
+\newcommand{\backupframeend}{
+   \addtocounter{framenumberbeforeappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberbeforeappendix}}
+   \setbeamertemplate{headline}[wuerzburg theme]
+   \setbeamertemplate{footline}[wuerzburg theme]
+}

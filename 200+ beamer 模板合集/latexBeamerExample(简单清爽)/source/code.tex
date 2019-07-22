@@ -1,0 +1,69 @@
+% ******************************************************************************
+\section{Code}
+% ******************************************************************************
+
+% new slide
+\frame{
+  \frametitle{Code}
+       \begin{itemize}
+            \item <1-> This final section is just to show you how to add \textbf{code} and/or \textbf{equations} in
+                        your presentations
+        \end{itemize}
+}
+
+% new slide
+\begin{frame}[t,fragile]{Introduction: Vectors}
+    \begin{itemize}
+        \item <1-> The basic structure to store data in R
+        \item <2-> A vector is a one dimensional array $[a_1,a_2,...,a_n]$
+        \item <3-> Common used function of "concatenate" in R: \textbf{c()}\\
+        \pause
+        \pause
+          \vskip1ex
+          \verb!x <- c(1,14,16,10)!\\
+          \verb! [1] 1 14 16 10!\\
+          \pause
+          \verb!x <- c("hola","adios","hola de nuevo")!\\
+          \verb! [1] "hola" "adios" "hola de nuevo"!\\
+          \pause
+          \verb!x <- c(TRUE,FALSE,TRUE)!\\
+          \verb! [1] TRUE FALSE TRUE!
+    \end{itemize}
+\end{frame}
+
+
+% new slide
+\begin{frame}[fragile]
+   \frametitle{Print code in LaTex using verbatim}
+	\begin{verbatim}
+for(i in 1:allGenes){
+ if(expression[i] > threshold){
+   expressed[i] <- gene.id[i]
+ }
+}
+	\end{verbatim}
+\end{frame}
+
+% new slide
+\begin{frame}[fragile]
+   \frametitle{Print code in LaTex using lstlisting}
+	\begin{lstlisting}
+for(i in 1:allGenes){
+ if(expression[i] > threshold){
+   expressed[i] <- gene.id[i]
+ }
+}
+	\end{lstlisting}
+\end{frame}
+
+
+% new slide
+\frame{
+  \frametitle{Print a demo equations}
+    \begin{equation}
+      x =\frac{-b\pm\sqrt{b^2-4ac}}{2a}
+    \end{equation}
+    \begin{equation}
+      y= \sum_{i=0}^k i^k 
+    \end{equation}    
+}

@@ -1,0 +1,108 @@
+\documentclass[compress]{beamer}
+\usepackage{polyglossia} % hyphenation % works only in LuaTex with TexLive '13
+% \setmainlanguage[spelling=new]{german} % works only in LuaTex with TexLive '13
+\setmainlanguage[variant=british]{english} % works only in LuaTex with TexLive '13
+
+% enable own font declarations, we take the Klavika font (official one)
+% don't have this font: google for it or ask me how to google
+\usepackage{fontspec}
+\setsansfont[%
+  % Path = /path/to/otf-files/i.e/home/.fonts/k/,
+  % Extension = .otf,
+  UprightFont={*-Regular},      
+  ItalicFont={*-RegularItalic},
+  BoldFont={*-Medium},
+  BoldItalicFont={*-MediumItalic},
+]{Klavika}
+
+% Alter the Beamer template
+
+% set new colors according to AMU design
+% http://dircom.univ-amu.fr/sites/dircom.univ-amu.fr/files/charte_graphique_generale_amu_0.pdf
+\definecolor{AMUDarkBlue}{RGB}{0,103,186}
+\definecolor{AMULightBlue}{RGB}{110,188,253}
+\definecolor{AMUYellow}{RGB}{246,189,23}
+\usecolortheme[named=AMUDarkBlue]{structure}
+% top bar with section navigation
+\setbeamercolor{palette tertiary}{bg=black,fg=white}
+% 2nd top bar with subsection navigation (only if subsection=true)
+\setbeamercolor{palette secondary}{bg=AMUDarkBlue!50,fg=white}
+% title bar of each slide
+\setbeamercolor{titlelike}{bg=AMUDarkBlue,fg=white}
+\setbeamercolor{title}{bg=AMUDarkBlue,fg=white}
+\setbeamercolor{subtitle}{fg=white}
+\setbeamercolor{block title}{bg=AMUDarkBlue,fg=white}
+\setbeamercolor{block body}{bg=AMUDarkBlue!30}
+\setbeamercolor{block title example}{bg=AMUYellow,fg=white}
+\setbeamercolor{block body example}{bg=AMUYellow!30}
+\setbeamercolor{block title alerted}{bg=red,fg=white}
+\setbeamercolor{block body alerted}{bg=red!30}
+% \setbeamercolor{colorbox}{bg=HUSand!30}
+% http://tex.stackexchange.com/questions/74303
+\usepackage{etoolbox}
+\AtBeginEnvironment{exampleblock}{%
+  \setbeamercolor{itemize item}{fg=AMUYellow!70}
+}
+\AtBeginEnvironment{alertblock}{%
+  \setbeamercolor{itemize item}{fg=red!70}
+}
+\AtBeginEnvironment{block}{%
+  \setbeamercolor{itemize item}{fg=AMUDarkBlue!70}
+}
+% \rowcolors{2}{Gray!30}{white}
+
+% apply default template partials
+\useinnertheme{rectangles}
+\useoutertheme[subsection=false]{miniframes}
+\setbeamertemplate{navigation symbols}{}
+% reset the footer: show slide numbers
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+    leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+    {\usebeamerfont{title in head/foot}\insertshorttitle}%
+    \,
+    {\usebeamerfont{author in head/foot}(\insertshortauthor)}%
+    \hfill
+    {\usebeamerfont{framenumber in head/foot}\textbf{\insertframenumber}}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+  \end{beamercolorbox}
+}
+% emphasizing means text in default accent color
+\renewcommand{\emph}[1]{\textcolor{structure}{#1}}
+
+% \usepackage{microtype} % enable this for improved text typesetting
+\usepackage{hyperref} % this is of \href{}{} or \url{}
+\usepackage{booktabs} % this is for \midrule \toprule etc in tables
+
+\title[Status Report cw \#45]{%
+  Status Report calendar week \#45
+}
+\subtitle{%
+  what I did this week
+}
+\institute{%
+  My Lab, AMU\\
+  \medskip\emph{my@mail.fr}
+}
+\author{Thomas Dumont}
+\titlegraphic{\includegraphics[width=0.4\linewidth]{amu}}
+\date{November 05, 2013}
+\logo{\includegraphics[width=0.25\linewidth]{amu}}
+\subject{%
+  weekly progress report
+}
+\keywords{%
+  weekly progress report, progress, status
+}
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+\include{content}
+
+\end{document}

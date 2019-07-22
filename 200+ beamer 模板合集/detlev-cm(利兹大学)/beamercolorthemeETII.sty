@@ -1,0 +1,55 @@
+% Copyright 2013 Detlev Conrad Mielczarek
+% Based on work by Herbert Voss (FU Berlin Theme)
+%
+% This file may be distributed and/or modified
+% under the LaTeX Project Public License
+%
+\ProvidesPackage{beamercolorthemeETII}[2013/12/08 v 1.00 (dcm)]
+
+% Defines layout of Presentation
+\mode<presentation>
+
+
+% Defined for the background of the image box
+%\definecolor{FUgray}{gray}{0.6}
+
+
+% Colour Scheme designed for ETII at the University of Leeds
+\definecolor{ETIIbg}{RGB}{0,90,47} % background in green
+\definecolor{ETIIHead}{RGB}{250,250,250} % header in very light grey text
+
+
+%Define colour for background and foreground (text) in the title area
+\setbeamercolor*{frametitle}{fg=ETIIHead,bg=ETIIbg}
+
+% Defines colour in header and footer section
+\setbeamercolor{section in head/foot}{fg=ETIIHead,bg=ETIIbg}
+
+%Define colour for background and foreground (text) in the footline area
+\setbeamercolor*{footline}{fg=ETIIHead,bg=ETIIbg}
+
+
+% Define colour for use in the title
+\setbeamercolor*{structure}{fg=ETIIbg}
+\setbeamercolor*{titlelike}{parent=structure}
+
+% Define colour for text on normal slides, black text on white
+\setbeamercolor*{normal text}{fg=black,bg=white}
+
+
+
+
+%% Colour scheme from the original FU Berlin scheme - might need to be cleaned up later
+\setbeamercolor*{block title alerted}{use=alerted text,fg=alerted text.fg,bg=alerted text.fg!20!bg}
+\setbeamercolor*{block title example}{use=example text,fg=example text.fg,bg=example text.fg!20!bg}
+\setbeamercolor*{block body}{parent=normal text,use=block title,bg=block title.bg!50!bg}
+\setbeamercolor*{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!50!bg}
+\setbeamercolor*{block body example}{parent=normal text,use=block title example,bg=block title example.bg!50!bg}
+
+
+
+
+\mode
+<all>
+
+\endinput

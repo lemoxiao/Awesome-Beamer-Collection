@@ -1,0 +1,327 @@
+
+\section{Formatting}
+
+\begin{frame}
+\frametitle{A First Application Example}
+\framesubtitle{Headlines, Table of Contents, simple formatting,
+special characters}
+\begin{block}{New commands in this section}
+\begin{multicols}{2}
+\begin{itemize}
+  \item \begin{ttfamily}\color{nounibaredII}\textbackslash usepackage\color{black}\{package\}
+  \item \color{nounibaredII}\textbackslash command\color{nounibagreenI}[poss\_options]\color{black}\{\\formatted\_text\}
+  \item \color{unibablueI}\textbackslash begin\color{black}\{environment\}
+  \item \color{unibablueI}\textbackslash end\color{black}\{environment\}
+  \item \color{nounibaredII}$\backslash\backslash$\color{black}
+  \item \color{nounibaredI}\textbackslash newpage\color{black}
+  \item \color{unibablueI}\textbackslash sub$^*$section\color{black}\{Title\}
+  \item $\color{nounibaredII}\backslash$\color{nounibaredII}textbf\color{black}\{Text\}
+  \item $\color{nounibaredII}\backslash$\color{nounibaredII}textit\color{black}\{Text\}
+  \item $\color{nounibaredII}\backslash$\color{nounibaredII}underline\color{black}\{Text\}
+  \item \color{nounibaredI}$\color{nounibaredI}\backslash$tiny
+  \item \color{nounibaredI}$\color{nounibaredI}\backslash$scriptsize
+  \item \color{nounibaredI}$\color{nounibaredI}\backslash$footnotesize
+  \item \color{nounibaredI}$\color{nounibaredI}\backslash$normalsize
+  \item \color{nounibaredI}$\color{nounibaredI}\backslash$large
+  \item \color{nounibaredI}$\color{nounibaredI}\backslash$Large
+  \item \color{nounibaredI}$\color{nounibaredI}\backslash$LARGE
+  \item \color{nounibaredI}$\color{nounibaredI}\backslash$huge\end{ttfamily}
+\end{itemize}
+\end{multicols}
+\end{block}
+\end{frame}
+
+
+%\begin{frame}
+%\frametitle{Ein erstes Anwendungsbeispiel}
+%\framesubtitle{Pakete einbinden und Befehle anwenden}
+%\begin{itemize}
+%  \item Pakete sind Sammlungen von Befehlen oder enthalten z.B. Zeichensätze.\\ Sie werden zu
+%  Beginn einer \TeX-Datei angegeben:\\
+%  \smallskip
+%\textbf{\begin{ttfamily}\color{nounibaredII}\textbackslash usepackage\color{black}\{babel\}
+%
+%\smallskip
+%\end{ttfamily}}
+% Einbinden des Paketes „\begin{ttfamily}babel\end{ttfamily}“. (F\"ur Internationalisierung)
+%\item Schreibweise von Latex-Befehlen:
+%
+%\textbf{\begin{ttfamily}\color{nounibaredII}\textbackslash befehl\color{nounibagreenI}[evtl\_optionen]\color{black}\{Formatierter\_Text\}\end{ttfamily}}
+%\begin{itemize}
+%  \item in \begin{ttfamily}\{\}\end{ttfamily} stehen immer notwendige Parameter bzw. Text
+% \item in \begin{ttfamily}[ ]\end{ttfamily} stehen (falls vorhanden)
+% zus"atzliche, optionale Parameter
+% \item zum Beispiel:
+%
+%
+%\begin{ttfamily}
+%\color{nounibaredII}\textbackslash documentclass\color{nounibagreenI}[a4paper,12pt,pdftex,ngerman]\color{black}\{article\}
+%\end{ttfamily}
+%\end{itemize}
+%\end{frame}
+
+\begin{frame}
+\frametitle{A First Application Example}
+\framesubtitle{Commands cont'd}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{ttfamily}\scriptsize
+\input{content/listings/minidocument_escaped}
+\end{ttfamily}
+\end{column}
+
+\begin{column}{0.4\textwidth}
+There are different types of documents.\\ The document type
+\begin{ttfamily}article\end{ttfamily} is used here (also possible:
+\begin{ttfamily}book\end{ttfamily} and \begin{ttfamily}report\end{ttfamily}). The input in
+\begin{ttfamily}[]\end{ttfamily} indicates paper size and font size of the
+standard text.\\
+%! TODO!
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{A First Application Example}
+\framesubtitle{Commands cont'd}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{ttfamily}\scriptsize
+\input{content/listings/minidocument_escaped}
+ \normalsize
+\end{ttfamily}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{ttfamily}\textbf{\color{unibablueI}\textbackslash begin\color{black}\{environment\}}\end{ttfamily}\\
+A new environment begins, in this case the actual document.\\[5mm]
+
+\begin{ttfamily}\textbf{\color{unibablueI}\textbackslash end\color{black}\{environment\}}\end{ttfamily}\\
+The environment that started with \begin{ttfamily}\textbf{\color{unibablueI}\textbackslash begin}\color{black}\{\}\end{ttfamily}
+ends here.\\[5mm]
+
+\begin{ttfamily}\textbf{\color{nounibaredII}$\backslash\backslash$}\color{black}
+~line break\end{ttfamily}\\
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{A First Application Example}
+\framesubtitle{Packages}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{ttfamily}\scriptsize
+\input{content/listings/minidocument_escaped}
+ \normalsize
+\end{ttfamily}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{ttfamily}\textbf{ngerman}\end{ttfamily}\\
+The typical formattings and rules of the german language are used (instead of \grqq ngerman\grqq ~you can use \grqq english\grqq ~for english texts).\\[5mm]
+
+\begin{ttfamily}\textbf{inputenc}\end{ttfamily}\\
+Defines the character-\\set, that has to be used. You should always use
+\begin{ttfamily}UTF-8\end{ttfamily}, because it runs
+on all operating systems.\\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Excursion}
+\framesubtitle{Character encoding}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\image{\textwidth}{image/utf8.png}{UTF-8 in Texmaker}{img:utf8}
+
+\end{column}
+\begin{column}{0.4\textwidth}
+When you open a document, the correct character set is used automatically.
+When you create a new document, it is saved with the default settings 
+ of the editor. In the Texmaker settings, the same character set has to be used, that is used in the LaTeX-document.\\
+\end{column}
+\end{columns}
+\textbf{When working in a team, every team member has to set \underline{UTF-8} in
+the editor, or problems ar inevitable!} (Broken
+vowel mutations, errors during compiling and much more, if there are not only „Windows“-users.)
+\end{frame}
+
+\begin{frame}
+\frametitle{A First Application Example}
+\framesubtitle{As .PDF}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{ttfamily}\scriptsize
+\input{content/listings/minidocument_escaped}
+ \normalsize
+\end{ttfamily}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\image{\textwidth}{image/minidocument.png}{The code of the left side as .pdf.}{listing:minidocument}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Sections}
+\framesubtitle{Chapters}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{ttfamily}\scriptsize
+\input{content/listings/chapters_escaped.tex}
+\end{ttfamily}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{ttfamily}\color{nounibaredI}\textbackslash newpage\color{black}\end{ttfamily}\\
+pagebreak\\[3mm]
+\begin{ttfamily}\color{unibablueI}\textbackslash section\color{black}\{Title\}\end{ttfamily}\\
+A new section begins with the title specified in \begin{ttfamily}\{\}\end{ttfamily}.\\[3mm]
+\begin{ttfamily}\color{unibablueI}\textbackslash subsection\color{black}\{Title\}\end{ttfamily}\\
+A subsection.\\[3mm]
+\begin{ttfamily}\color{unibablueI}\textbackslash subsubsection\color{black}\{Title\}\end{ttfamily}\\
+Another level deeper.\\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sections}
+\framesubtitle{Chapters .PDF}
+\begin{columns}
+\begin{column}{0.45\textwidth}
+\begin{ttfamily}\scriptsize
+\input{content/listings/chapters_escaped.tex}
+\end{ttfamily}
+\end{column}
+\begin{column}{0.55\textwidth}
+\image{0.7\textwidth}{image/chapters.png}{The chapters are counted automatically}{img:chapters}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Sections}
+\framesubtitle{Part \& Chapter}
+Besides \begin{ttfamily}\color{unibablueI}\textbackslash section\color{black}\{\},
+\color{unibablueI}\textbackslash subsection\color{black}\{\}\end{ttfamily}, and \begin{ttfamily}\color{unibablueI}\textbackslash subsubsection\color{black}\{\}\end{ttfamily}, there is also the command
+ \begin{ttfamily}\color{unibablueI}\textbackslash part\color{black}\{\}\end{ttfamily} which defines a bigger part.
+\begin{ttfamily}\color{unibablueI}\textbackslash part\color{black}\{\}\end{ttfamily} fills a whole page on its own.\\
+Besides the document type {\ttfamily article}, there are some others for continous
+text documents like {\ttfamily book} and {\ttfamily report}.\\
+{\ttfamily book} normally distinguishes between left and right side, 
+i.e., whether the page number is left or right, and also the other information that can be contained in header and/or footer.
+{\ttfamily book} and {\ttfamily report} have the outline
+command \begin{ttfamily}\color{unibablueI}\textbackslash chapter\color{black}\{\}\end{ttfamily}.
+
+%\begin{columns}
+%\begin{column}{0.5\textwidth}
+%CODE
+%\end{column}
+%\begin{column}{0.5\textwidth}
+%OUTPUT
+%\end{column}
+%\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Formattings}
+\framesubtitle{Bold, Italic, Underlined}
+\begin{columns}
+\begin{column}{0.45\textwidth}
+\begin{ttfamily}\scriptsize
+\input{content/listings/formats_escaped.tex}
+\end{ttfamily}
+\end{column}
+\begin{column}{0.55\textwidth}
+Among others there are the following options:\\[3mm]
+\textbf{bold}\\
+\textit{italic}\\
+\underline{underlined}\\
+\underline{\textbf{underlined and bold}}
+%\input{formats_pdf.tex}
+\begin{block}{Textformatting}
+\begin{ttfamily}$\color{nounibaredII}\backslash$\color{nounibaredII}textbf\color{black}\{text\}\end{ttfamily}
+bold text\\
+\begin{ttfamily}$\color{nounibaredII}\backslash$\color{nounibaredII}textit\color{black}\{text\}\end{ttfamily}
+italic text\\
+\begin{ttfamily}$\color{nounibaredII}\backslash$\color{nounibaredII}underline\color{black}\{text\}\end{ttfamily}
+underlined
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Formattings}
+\framesubtitle{Font Size}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{ttfamily}\scriptsize
+\input{content/listings/textsize_escaped.tex}
+\end{ttfamily}
+\end{column}
+\begin{column}{0.5\textwidth}
+\rm \tiny ~illegible text\\
+\scriptsize ~very small text\\
+\footnotesize ~footnote size\\
+\normalsize ~standard size\\
+\large ~bigger\\
+\Large ~even bigger\\
+\LARGE ~very big\\
+\huge  ~gargantuan\\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Formattings}
+\framesubtitle{Bold, Italic, Underlined}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{ttfamily}\scriptsize\color{nounibaredII}\textbackslash documentclass\color{nounibagreenI}[a4paper, pdftex, 12pt, ngerman]\color{black}\{article\}\\[3mm] 
+$\color{nounibaredII}\backslash$\color{nounibaredII}usepackage\color{nounibagreenI}[utf8]\color{black}\{inputenc\}\\
+$\color{nounibaredII}\backslash$\color{nounibaredII}usepackage\color{nounibagreenI}[T1]\color{black}\{fontenc\}\\
+$\color{nounibaredII}\backslash$\color{nounibaredII}usepackage\color{nounibagreenI}[iso]\color{black}\{umlaute\}\\
+$\color{nounibaredII}\backslash$\color{nounibaredII}usepackage\color{black}\{babel\}\\
+\color{gray}\% NEU NEU NEU\\
+$\color{nounibaredII}\backslash$\color{nounibaredII}usepackage\color{black}\{eurosym\}\\
+$\color{unibablueI}\backslash$\color{unibablueI}begin\color{black}\{document\}\\
+$\color{nounibaredII}\backslash$\color{nounibaredII}textit\color{black}\{Some
+special characters:\}\\
+\color{nounibaredII}\textbackslash \% \textbackslash \$ \textbackslash \& \textbackslash \{ \textbackslash \}
+\textbackslash \_ \textbackslash \# \textbackslash S \textbackslash copyright\\
+\textbackslash slash \~ ~ \color{unibayellowI}\$\color{nounibaredII}$\color{nounibaredII}\backslash$backslash\color{unibayellowI}\$\color{nounibaredII}  ~\textbackslash euro \\
+
+$\color{nounibaredII}\backslash$\color{nounibaredII}textit\color{black}\{hyphen and dash:\} \\
+- -- --- \color{unibayellowI}\$\color{black}-\color{unibayellowI}\$\color{black} (the last one is the mathematical minus) \\
+
+$\color{nounibaredII}\backslash$\color{nounibaredII}textit\color{black}\{quotation marks from \begin{ttfamily}ngerman\end{ttfamily}:\} \\
+\color{nounibaredII}\textbackslash glqq \textbackslash grqq \textbackslash flqq \textbackslash frqq\\
+\color{unibablueI}\textbackslash end\color{black}\{document\}
+\end{ttfamily}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textit{Some special characters:}    \\
+\% \$ \& \{ \} \_ \# \S ~ \copyright \slash ~ \textbackslash  \euro \\
+
+\textit{hyphen and dash:} \\
+- -- --- $-$ (the last one is the mathematical minus) \\
+
+\textit{quotation marks from (n)german:} \\
+\glqq \grqq \flqq \frqq\\[5mm]
+For the \euro -sign, you need the package \begin{ttfamily}eurosym\end{ttfamily}.\\
+
+\end{column}
+\end{columns}
+\medskip
+\footnotesize Special characters have to be introduced with '\color{nounibaredI}\textbackslash \color{black}'.
+Sometimes, e.g. in headlines, vowel mutations from the package ngerman  have to be built with \grqq a \grqq o
+\grqq u and \ss ~with \color{nounibaredI} \textbackslash ss \color{black}, for the rest it is sufficient to include the package {\ttfamily babel}.
+\end{frame}

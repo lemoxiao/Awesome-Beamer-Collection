@@ -1,0 +1,101 @@
+% 这是nwafu(西北农林科技大学)Flux扁平主题的颜色主题.
+% 版权(c) 2015-2019, 信息工程学院 耿楠<nangeng@nwafu.edu.cn>
+%
+% 本主题修改于主题：https://github.com/pvanberg/flux-beamer
+%
+% 这是一个免费代码：发布和修改该代码，请遵守最新版的自由软件联盟发布
+% 的GNU通用公共协议
+%
+% 期望这一代码对你有用，但值得注意的是，我不对任何后续问题进行维护，
+% 请参考<http://www.gnu.org/licenses/>查看最新的协议内容。
+
+\mode<presentation>
+
+\usepackage{xcolor}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 调色板
+\definecolor{background}{HTML}{fafafa}
+\definecolor{Gray}{HTML}{858b8f}
+\definecolor{text}{HTML}{000000}%{4F5D66}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 主色
+\DeclareOptionBeamer{style}{\def\beamer@mytheme@style{#1}}
+\ExecuteOptionsBeamer{style=asphalt} % 默认值
+\ProcessOptionsBeamer
+
+\def\beamer@mytheme@stylegreen{green}%
+\def\beamer@mytheme@styleblue{blue}%
+\def\beamer@mytheme@stylered{red}%
+\def\beamer@mytheme@stylegray{gray}%
+
+\ifx\beamer@mytheme@style\beamer@mytheme@stylegreen%
+  % 绿色
+  \definecolor{primaryLight}{HTML}{77933c}
+  \definecolor{primary}{HTML}{4f622a}
+  \definecolor{secondary}{HTML}{884F4D}
+  \definecolor{tertiary}{HTML}{2B3234}
+\else\ifx\beamer@mytheme@style\beamer@mytheme@stylered%
+  % 红色
+  \definecolor{primaryLight}{HTML}{C0392B}
+  \definecolor{primary}{HTML}{96281B}
+  \definecolor{secondary}{HTML}{347986}
+  \definecolor{tertiary}{HTML}{56423e}
+\else\ifx\beamer@mytheme@style\beamer@mytheme@styleblue%
+  % 蓝色
+  \definecolor{primaryLight}{HTML}{3a99d9}
+  \definecolor{primary}{HTML}{2e81b7}
+  \definecolor{secondary}{HTML}{2e81b7}
+  \definecolor{tertiary}{HTML}{e76d55}
+\else\ifx\beamer@mytheme@style\beamer@mytheme@stylegray%
+  % 灰色
+  \definecolor{primaryLight}{HTML}{616161}
+  \definecolor{primary}{HTML}{424242}
+  \definecolor{secondary}{HTML}{518071}
+  \definecolor{tertiary}{HTML}{8b7687}
+\else% 
+  % 默认：Asphalt
+  \definecolor{primaryLight}{HTML}{34495e}
+  \definecolor{primary}{HTML}{2d3e50}
+  \definecolor{secondary}{HTML}{d15306}
+  \definecolor{tertiary}{HTML}{35837b}
+\fi\fi\fi%
+\fi%
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 设置颜色主题
+\setbeamercolor*{background canvas}{bg=background}
+\setbeamercolor*{footer}{fg=Gray!50}
+\setbeamercolor*{footer text}{fg=Gray}
+\setbeamercolor*{header title}{fg=primaryLight!20}
+\setbeamercolor*{header primary}{fg=white,bg=primaryLight}
+\setbeamercolor*{header secondary}{fg=white,bg=primary!60!white}
+\setbeamercolor*{secondary}{fg=secondary!10,bg=secondary}
+\setbeamercolor*{example text}{fg=tertiary}
+\setbeamercolor*{normal text}{fg=text}
+\setbeamercolor*{alerted text}{fg=secondary}
+\setbeamercolor*{itemize item}{fg=primary}
+\setbeamercolor*{itemize subitem}{fg=primary}
+\setbeamercolor*{itemize subsubitem}{fg=primary}
+\setbeamercolor*{enumerate item}{fg=primary}
+\setbeamercolor*{enumerate subitem}{fg=primary}
+\setbeamercolor*{enumerate subsubitem}{fg=primary}
+\setbeamercolor*{description item}{fg=primary}
+\setbeamercolor*{caption name}{fg=primary}
+% 默认块结构
+\setbeamercolor{block title}{bg=primaryLight, fg=background}%
+\setbeamercolor{block body}{bg=normal text.bg!90!fg}%
+\setbeamercolor{block title alerted}{bg=secondary!80, fg=background}%
+\setbeamercolor{block body alerted}{bg=normal text.bg!90!fg}%
+\setbeamercolor{block title example}{bg=example text.fg!80, fg=background}%
+\setbeamercolor{block body example}{bg=normal text.bg!90!fg}%
+% 参考文献
+\setbeamercolor*{bibliography entry author}{fg=primary}
+\setbeamercolor*{bibliography entry title}{fg=text}
+\setbeamercolor*{bibliography entry location}{fg=text}
+\setbeamercolor*{bibliography entry note}{fg=text}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\mode<all>

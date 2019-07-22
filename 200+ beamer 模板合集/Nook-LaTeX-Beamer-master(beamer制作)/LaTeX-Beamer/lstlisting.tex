@@ -1,0 +1,114 @@
+% all keywords defined
+\lstdefinelanguage[MyLaTeX]{TeX}[LaTeX]{TeX}%
+% TeX commands
+{moretexcs={enquote,includegraphics,%
+part,chapter,section,subsection,paragraph,subparagraph%
+tableofcontents,listoffigures,listoftables,maketitle,%
+subsection,subsubsection,paragraph,autoref,it,%
+textcolor,colorbox,xdefinecolor,colorlet,foreach,%
+rowcolors,rowcolor,lstdefinestyle,lstset,KOMAoptions,%
+setkomavar,setkomavar*,opening,closing,encl,%
+lehead,cehead,rehead,lefoot,cefoot,refoot,%
+lohead,cohead,rohead,lofoot,cofoot,rofoot,%
+ohead,chead,ihead,ofoot,cfoot,ifoot,%
+areaset,color,%
+automark,manualmark,markright,markboth,%
+tableofcontents,url,clearscrheadfoot,pagemark,headmark,%
+setheadtopline,setkomafont,setheadsepline,setfootsepline,%
+setfootbotline,chaptermark,thesection,thechapter,%
+thesubsection,subtitle,inst,section*,subsection*,institute,%
+chapter*,part*,%
+qedhere,usetheme,useinnertheme,useoutertheme,usecolortheme,%
+,uncover,only,alert,invisible,onslide,mode,mode*,usetikzlibrary,%
+draw,filldraw,path,node,usefonttheme,setbeamertemplate,%
+declaretheorem,FiveFlowerOpen,%
+frontmatter,mainmatter,appendix,backmatter,%
+operatorname, titlegraphic, AtBeginSection},%
+% LaTeX environments
+morekeywords={[2]lstlisting,document,letter,center,flushleft,%
+flushright,align,itemize,enumerate,description,tabular,%
+titlepage,figure,table,frame,tikzpicture,quote,quotation,verse, 
+columns, column, theorem, block},%
+% other things (like packages) to highlight
+morekeywords={[3]listings,textcomp,courier,xcolor,scrartcl,%
+scrlttr2,inputenc,babel,pause,%
+fontenc,lmodern,mathptmx,%
+helvet,geometry,scrpage2,scrreprt,scrbook,%
+article,report,book,hyperref,%
+csquotes,amsmath,amssymb,la,beamer,beamerarticle,%
+tikz,amsthm,thmtools},
+alsoletter={0123456789*},
+morekeywords={[4]Optionen},
+alsoletter={0123456789*}
+}%
+
+%% ------ Colors ------
+\definecolor{CadetBlue}{rgb}{.37, .62, .63}
+\definecolor{Gray}{rgb}{.70, .70, .70}
+\colorlet{maincolor}{orange}
+\colorlet{alertedcolor}{red}
+\colorlet{examplecolor}{green!50!black}
+\colorlet{texicon}{examplecolor}
+\colorlet{pdficon}{maincolor}
+\colorlet{auxicon}{-examplecolor}
+\colorlet{logicon}{black}
+\colorlet{bblicon}{-maincolor}
+\colorlet{bibicon}{alertedcolor}
+\colorlet{texcs}{violet!70}
+
+
+%% ----- Listings -----
+\lstset{ %
+basicstyle=\footnotesize\fontfamily{pcr}\selectfont,        % the size of the fonts that are used for the code
+backgroundcolor=\color{maincolor!10},             % select a background color
+breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+breaklines=true,                 % sets automatic line breaking
+commentstyle=\ttfamily\color{Green}\fontfamily{pcr}\selectfont, % comment style
+deletekeywords={...},            % if you want to delete keywords from the given language
+extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+frame=lines,                     % adds a frame around the code
+keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+keywordstyle=\ttfamily\color{Blue}\fontfamily{pcr}\selectfont\bfseries, % keyword style
+keywordstyle={[2]\ttfamily\color{Emerald}\fontfamily{pcr}\selectfont\bfseries},
+keywordstyle={[3]\ttfamily\color{Orange}\fontfamily{pcr}\selectfont\bfseries},
+keywordstyle={[4]\ttfamily\color{red}\fontfamily{pcr}\selectfont\bfseries},
+identifierstyle=\ttfamily\color{black}\fontfamily{pcr}\selectfont,
+numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+numbersep=5pt,                   % how far the line-numbers are from the code
+numberstyle=\tiny\color{Gray}\fontfamily{pcr}\selectfont, % the style that is used for the line-numbers
+rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+showstringspaces=false,          % underline spaces within strings only
+showtabs=false,                  % show tabs within strings adding particular underscores
+stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+stringstyle=\ttfamily\color{Gray}\fontfamily{pcr}\selectfont,     % string literal style
+tabsize=2                        % sets default tabsize to 2 spaces
+}
+
+\lstdefinelanguage{pseudocode}{
+keywordstyle=\ttfamily\textbf{\fontfamily{pcr}}\selectfont,
+identifierstyle=\ttfamily\color{black}\fontfamily{pcr}\selectfont,
+commentstyle=\color{PseudocodeComment}\fontfamily{pcr}\selectfont,
+stringstyle=\ttfamily\fontfamily{pcr}\color{PseudocodeString}\selectfont,
+%morekeywords={documentclass, usepackage, begin, end, frame},
+morecomment=[l]{//},
+morecomment=[s]{/*}{*/},
+morestring=[b]",
+sensitive=false,
+showstringspaces=false,
+rulecolor=\color{Gray},
+escapechar=@,
+}
+
+% allows öäüß in lstlisting
+\lstset{
+literate={ö}{{\"o}}1
+       {Ö}{{\"O}}1
+       {ä}{{\"a}}1
+       {Ä}{{\"A}}1
+       {ü}{{\"u}}1
+       {Ü}{{\"U}}1
+       {ß}{{\ss}}1
+}
+
+

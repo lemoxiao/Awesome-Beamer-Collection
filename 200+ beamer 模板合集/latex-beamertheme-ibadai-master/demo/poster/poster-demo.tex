@@ -1,0 +1,258 @@
+%%%%%% \documentclass[%10pt,compress,
+%%%%%% %              draft,
+%%%%%%                xcolor={dvipsnames,table},
+%%%%%%                hyperref={breaklinks}
+%%%%%%               ]{beamer}
+
+\documentclass[final]{beamer}
+%%%%%
+% Fonts, input, language and other nice things
+% http://tex.stackexchange.com/q/44694/33413
+% http://tex.stackexchange.com/q/664/33413
+% 
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+% Use a nicer font
+\usepackage{lmodern}
+% Wrong scaling from lmodern
+% http://www.tex.ac.uk/FAQ-exscale.html
+\usepackage{exscale}
+% Hyphenation et.al.
+\usepackage[english]{babel}
+% Non-italised greek letters
+\usepackage[euler]{textgreek}
+% Roman numerals
+\usepackage{romanbar}                           %Römische Zahlen mit Balken.
+
+%%%%%
+% Science related packages
+%
+%%%
+% Mathematics
+%
+\usepackage{amsmath}
+\usepackage{amssymb}
+%%%
+% Units
+%
+% Easy typesetting of SI conform units
+\usepackage{siunitx}
+\DeclareSIUnit  % Use non-SI units
+  \calorie{cal} % calorie, i.e. kcal/mol
+\DeclareSIUnit  
+  \electron{e}  % electron, i.e. eV
+%%%
+% Chemistry
+%
+% Easy typesetting of formulae
+\usepackage[version=4,arrows=pgf-filled]{mhchem}
+% Enumerating compounds
+\usepackage{chemnum}
+% Support for creating and using schemes
+% http://tex.stackexchange.com/q/6478/33413
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[
+  fileext=los,
+  listname=List of Schemes,
+  name=Scheme,
+  placement=tbhp,
+%  within=section,
+]{scheme}
+%%%
+% Misc.
+%
+% Manual set-up for captions
+% this is predominantly handy if used for posters
+\usepackage[%font+=footnotesize, %small,
+            %labelfont+={footnotesize,bf},
+            format=hang,
+            singlelinecheck=no, %for poster
+            justification=justified %for poster
+           ]{caption}
+% provides captions comand without using environments
+\usepackage{capt-of}
+% Nice tables
+\usepackage{booktabs}
+
+%%%%%
+% Graphic settings
+% http://tex.stackexchange.com/q/23075/33413
+% http://tex.stackexchange.com/q/139401/33413
+% 
+\usepackage{graphicx}
+\graphicspath{{./graphics/}}
+% http://ctan.org/pkg/adjustbox
+% Using the export key with adjustbox, this will load the graphicx package, 
+% and allow you to use its keys as part of \includegraphics.
+\usepackage[export]{adjustbox}                        
+% Use animations within presentation
+\usepackage{animate}
+                                                      
+%%%%%
+% Beamer specific commands
+% possible options are alttitle, light, dark (default), poster
+% specifying the latter uses its own templates,
+% so the former options have no effect
+%
+\usetheme[poster]{Mito}
+%\usefonttheme[stillsansseriflarge]{serif}
+%\usefonttheme[onlymath]{serif}
+
+% prevent counting the appendix as slides
+% \usepackage{appendixnumberbeamer} %only beamer mode
+% Setting title, etc.
+\title{Short and Catchy Title}
+\subtitle{Long and boring subtitle with unnecessary explanations.}
+\author[F. Bar]{Foo Bar}
+\institute[Baz Inst.]{Baz Insititute}
+%\titlegraphic{\includegraphics[scale=2]{example-image-1x1}}
+\titlegraphic{\includegraphics[scale=2]{example-image}}
+% example-image from https://www.ctan.org/pkg/mwe
+% need to be scaled up, because they appear too small
+\date{the Internet, \today}
+% The following command can be used to create a custom footline for 
+% a poster of the alternative titlepage.
+% This is optional, but it will be set with default content.
+\posterfootline{\insertdate\hfill Very Important Symposium}
+% The following command can be used to give extra content to the alt. titlepage.
+% This is optional and won't be set if empty.
+% It has no use for a poster. 
+% \titlepageextra{\includegraphics[width=0.5\linewidth]{example-image}}
+%
+% Make a poster, e.g. for DIN-A0 poster
+\usepackage[orientation=portrait,size=a0,scale=1.4,debug]{beamerposter}
+
+% Use multiple columns, the beamer built-in is only okay-ish
+\usepackage{multicol}
+
+%%%%%
+% Custom commands and hacks
+%
+% Only for this demonstration we like
+\usepackage{blindtext}
+%
+% custom newcommands can go here, for example
+\newcommand{\diff}{\mathrm{d}} % upright differential operator
+%
+%%%%% End preamble.
+
+\begin{document}
+
+% All content has to fit into one frame
+\begin{frame}[t]
+\setlength{\columnsep}{0.02\textwidth}
+\begin{multicols}{2}
+  \begin{block}{A normal block with text and lists}
+    Each block contains a minipage environment so it can be set as a normal page.
+    This includes footnotes\footnote{See here} at the bottom of the block.
+
+    Citations are supported in the freeform \texttt{thebibliography} environment
+    and can be inserted via \texttt{\textbackslash{}cite\{<key>\}}. 
+    This example uses the \texttt{[text]} template, see \cite{beamerhandbook} 
+    for more information.
+
+    It is possible to use more advanced citation handling like \texttt{biblatex},\cite{tex.sx}
+    but this template is not yet finished, so it'll have to wait.
+
+    \blindtext
+    \blindlistlist[3]{itemize}[3]
+
+    \blindlistlist[3]{enumerate}[2]
+  \end{block}
+  
+  \begin{block}{Many figures}
+    \blindtext
+
+    \begin{center}
+      \includegraphics[width=0.4\linewidth]{example-image-a}\hspace{0.1\linewidth}
+      \includegraphics[width=0.4\linewidth]{example-image-b}
+      \captionof{figure}{This is an example image from the mwe package.}
+      \includegraphics[width=0.4\linewidth]{example-image-c}
+      \captionof{figure}{This is an example image from the mwe package.}
+    \end{center}
+  \end{block}
+
+  \begin{block}{And a table of course}
+    \blindtext
+%     Hello, here is some text without a meaning. This text should show what a
+%     printed text will look like at this place. If you read this text, you will get no in-
+%     formation. Really? Is there no information? Is there a difference between this
+%     text and some nonsens?
+
+    \begin{center}
+      \captionof{table}{This is an example table.}
+      \begin{tabular}{lrrrr}
+        \toprule
+               & Column A & Column B & Column C & Column D  \\
+        \midrule                                          
+        Row 1  & A1       & B1       & C1       & D1        \\
+        Row 2  & A2       & B2       & C2       & D2        \\
+        Row 3  & A3       & B3       & C3       & D3        \\
+        Row 4  & A4       & B4       & C4       & D4        \\
+%        Row 5  & A5       & B5       & C5       & D5        \\
+        \bottomrule
+      \end{tabular}
+    \end{center}
+  \end{block}
+  
+  \begin{block}{Mathematics}
+    Mathematics can be included in-line or as a display. 
+    For the following examples we can substitute \(u=e^x\) and \(v=e^{-x}\) 
+    to save us some writing pain.
+    
+    The fundamental tricks of algebra are adding zero \eqref{eq:addingzero} %
+    or multiplying by one \eqref{eq:multiplyingone}.
+    \begin{subequations}
+      \begin{align}\label{eq:addingzero}
+        \int \frac{\diff x}{1 + e^x} &= \int \frac{\diff u}{u (u + 1)}\\ 
+          &= \int \diff u \frac{1 + u - u}{u (1 + u)} \\
+          &= \int \frac{\diff u}{u} - \int \frac{\diff u}{1 + u}
+          &&= \ldots
+      \end{align}
+    \end{subequations}
+    \begin{subequations}
+      \begin{align}\label{eq:multiplyingone}
+        \int \frac{\diff x}{1 + e^x} &= \int \diff x \frac{e^{-x}}{1 + e^{-x}} \\
+          &= -\int \frac{\diff v}{1 + v}
+          &&= \ldots
+      \end{align}
+    \end{subequations}
+  \end{block}
+
+  \begin{block}{Chemistry}
+    Writing about chemistry can be a tricky, but additional packages can make it easier.
+    It is similar to mathematics and can be quite easily incorporated into it.
+  
+    For example take the combustion of dihydrogen (\ce{H2}, \cmpd{dihydrogen})
+    with dioxygen (\ce{O2}, \cmpd{dioxygen}) to form water (\ce{H2O}, \cmpd{water}).\cite{chem.se}
+    The reaction seems quite simple: \[\ce{H2 + O2 -> 2 H2O}.\]
+  
+    The mechanism is much more complex and even scheme~\ref{sch:mechanism} is incomplete.
+  
+    \begin{align*}
+      \ce{H2 &<=>[\Delta T] 2 H.}\\
+      \ce{H. + O2 &-> HO. + O.}\\
+      \ce{O. + H2 &-> HO. + H.}\\
+      \ce{HO. + H. &-> H2O}
+    \end{align*}
+    \captionof{scheme}{Incomplete reaction mechanism of the combustion of \cmpd{dihydrogen} and \cmpd{dioxygen}.}
+    \label{sch:mechanism}
+  \end{block}
+
+  \begin{block}{Bibliography (needs work)}
+    \begin{thebibliography}{99}
+      \bibitem{example} A~Author~et.al., *Journal* **year,** *vol.*,  pp.
+      \bibitem{beamerhandbook} Beamer User Guide, Cahpter 10.6
+      \bibitem{tex.sx} http://tex.stackexchange.com/q/69133/
+      \bibitem{chem.se} http://chemistry.stackexchange.com/q/14704/
+    \end{thebibliography}
+    %\blindtext
+  \end{block}
+\end{multicols}
+
+Rather unimportant information can be gathered below the columns,
+just before the footline. \dotfill \LaTeX
+\end{frame}
+
+\end{document}
+

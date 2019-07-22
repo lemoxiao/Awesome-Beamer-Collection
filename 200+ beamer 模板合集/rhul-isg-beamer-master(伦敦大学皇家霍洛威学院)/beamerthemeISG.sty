@@ -1,0 +1,457 @@
+% The ISG theme is built on top of the smooth bars and rectangles themes with code adapted from other themes (such as split) for the footers.
+%
+% Changelog
+% 28/05/2015 - Version 1.6.2 by Robert Lee <robert (dot) lee (dot) 2013 (at) live (dot) rhul (dot) ac (dot) uk> - Changed the names of the headers to more user-friendly versions.  Updated the if statements in body to reflect parameter name changes.
+% 28/05/2015 - Version 1.6.1 by Dan Hutchinson <dojh342 (at) gmail (dot) com> - Updated environment colouring to match the theme, minor changes.
+% 27/05/2015 - Version 1.6.0 by Robert Lee <robert (dot) lee (dot) 2013 (at) live (dot) rhul (dot) ac (dot) uk> - fixed the vertical spacing on the title page and added a command which only inputs the options (and their corresponding vspace) if the element is present.
+% 27/05/2015 - Version 1.5.2 by Robert Lee <robert (dot) lee (dot) 2013 (at) live (dot) rhul (dot) ac (dot) uk> - rearranged footer/header code to prevent shadowheader option overriding the defined footers.  Also renamed some of the optional parameters to more logical names.  Removed some code which had been commented out.  Fixed some comments.
+% 27/05/2015 - Version 1.5.1 by Dan Hutchinson <dojh342 (at) gmail (dot) com> - Added options for different header styles including oldheader, shadow and noshadow (default)
+% 26/05/2015 - Version 1.5.0 by Robert Lee <robert (dot) lee (dot) 2013 (at) live (dot) rhul (dot) ac (dot) uk> - incorporated the colours from the ISGCommon style file in order to merge the two into one file.
+% 26/05/2015 - Version 1.4.3 by Robert Lee <robert (dot) lee (dot) 2013 (at) live (dot) rhul (dot) ac (dot) uk> - added an option to use one of the two footers provided.  Improved the colouring of the presentation
+% 26/05/2015 - Version 1.4.2 by Robert Lee <robert (dot) lee (dot) 2013 (at) live (dot) rhul (dot) ac (dot) uk> - cleared up some dead code, changed some colours.  The Github update.
+% 25/05/2015 - Version 1.4.1 by Dan Hutchinson <dojh342 (at) gmail (dot) com> - Fixed the logo position with tikz
+% 06/05/2015 - Version 1.4.0 by Dan Hutchinson <dojh342 (at) gmail (dot) com> - Set sections in header at max 3 & title page logo hack fix.
+% 25/11/2014 - Version 1.3.1 by Dan Hutchinson <dojh342 (at) gmail (dot) com> - small changes
+% 10/11/2014 - Version 1.3.0 by Dan Hutchinson <dojh342 (at) gmail (dot) com> - fixed bibliography parts use: \begin{frame}[t,allowframebreaks]\frametitle{References}
+% 01/06/2014 - Version 1.2.0 by Dan Hutchinson <dojh342 (at) gmail (dot) com>
+% 23/02/2012 - Version 1.1.0 by Marcelo Carlomagno Carlos <marcelo.carlos.2009@rhul.ac.uk>
+% 05/11/2009 - Version 1.0.0 by Marcelo Carlomagno Carlos <marcelo.carlos.2009@rhul.ac.uk>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+
+\ProvidesPackage{beamerthemeISG}[2015/05/26]
+\RequirePackage{tikz}%Needed for the titlepage logo
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{graphicx}
+\RequirePackage{listings}
+\RequirePackage{amssymb,amsmath}
+\RequirePackage{ifthen}
+\RequirePackage{natbib}
+
+%%%%%%%%%%%%%%%%
+%    MACROS    %
+%%%%%%%%%%%%%%%%
+
+%A quick command used on the title page, the second argument is only included if the first is not empty.
+%Used in regulating vspace on the title page
+\newcommand{\TitleOption}[2]{%
+\ifthenelse{\equal{#1}{}}{}{#2}%
+}
+
+
+%%%%%%%%%%%%%%%%%
+%    COLOURS    %
+%%%%%%%%%%%%%%%%%
+\definecolor{isgdarkblue}{HTML}{01137A}
+\definecolor{isglightblue}{HTML}{6699CC}
+\definecolor{isgmediumblue}{HTML}{2e42ba}
+\definecolor{isggreen}{HTML}{338F35}
+\definecolor{rhulblue}{HTML}{4e9EE2}
+\definecolor{rhulorange}{HTML}{EB641E}
+\definecolor{rhulgreen}{HTML}{99CC00}
+\definecolor{rhullightgrey}{RGB}{102, 102, 102}
+\definecolor{rhulgrey}{HTML}{2E3235}
+\definecolor{isglightgrey}{HTML}{EEEEEE}
+\definecolor{isggrey}{HTML}{404040}
+\definecolor{footerlightblue}{HTML}{DADAF6}
+
+
+%%%%%%%%%%%%%%%%
+% INNER THEMES %
+%%%%%%%%%%%%%%%%
+\useinnertheme{rectangles}
+
+%%%%%%%%%%%%%%
+% PARAMETERS %
+%%%%%%%%%%%%%%
+
+% Toggle footer
+\newif\ifdisplaysplitfooter
+\DeclareOption{displaysplitfooter}{\displaysplitfootertrue}
+
+\newif\ifdisplaysinglefooter
+\DeclareOption{displaysinglefooter}{\displaysinglefootertrue}
+
+% Toggle TOC at every section
+\newif\ifdisplaytocsection
+\DeclareOption{displaytocsection}{\displaytocsectiontrue}
+\DeclareOption{notocsection}{\displaytocsectionfalse}
+
+% Toggle TOC at every subsection
+\newif\ifdisplaytocsubsection
+\DeclareOption{displaytocsubsection}{\displaytocsubsectiontrue}
+\DeclareOption{notocsubsection}{\displaytocsubsectionfalse}
+
+% Shadows
+\newif\ifsharpheader
+\DeclareOption{sharpheader}{\sharpheadertrue}
+\DeclareOption{blurredheader}{\sharpheaderfalse}
+
+% Old (shadow theme based) header
+\newif\ifsplitheader
+\DeclareOption{splitheader}{\splitheadertrue}
+
+\ExecuteOptions{displaysinglefooter} %The default footer is the single coloured footer
+\ExecuteOptions{sharpheader} %The default is to not use the smooth headers, instead to use the sharp-lined header
+
+\beamer@compresstrue
+
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theme specific settings %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{navigation symbols}{} %remove navigation buttons
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Redefining Title Page %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\defbeamertemplate*{title page}{ISG}
+{%
+	\begin{center}
+		\vspace{ -1cm } %force the effective top margin to be right under the header
+		\vspace{ \stretch{2} }
+  		{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\par
+		
+		\TitleOption{\insertsubtitle}{%
+		\vspace{ \stretch{0.5} }%
+		{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}\par}
+		
+		\vspace{ \stretch{1.5} }%
+  		{\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor}\par
+		
+		\vspace{ \stretch{0.5} }%
+ 		{\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute}\par
+		
+		\TitleOption{\insertdate}{%
+		\vspace{ \stretch{1} }%
+  		{\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate}}
+		\vspace{ 1.1cm } %force the effective bottom margin to be above the logo banner
+    \end{center}
+}
+
+\addtobeamertemplate{title page}{%Ideally the shifts would depend on the size of the footer..\footerheight?
+\begin{tikzpicture}[remember picture,overlay] 
+	\node [xshift=0cm,yshift=1.075cm] at (current page.south)%place the logo bar just above the footer
+	{\includegraphics[width=\paperwidth]{graphics/beamer-style/titlepagelogo.jpg}};                
+\end{tikzpicture}%
+}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Applying the parameters defined above %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Outertheme
+\ifsharpheader
+	\useoutertheme{miniframes}%This has clean lines between portions of the header
+\else
+	\useoutertheme{smoothbars}%This uses the smoothbars header which has colours fading between sections	
+\fi
+
+
+\ifsplitheader
+	\useoutertheme{shadow}%This is the header used in some old versions of the beamer theme.
+	%%%This limits the number of sections displayed in the header to 3.  This prevents the header from taking over the usable space on the slides
+	\makeatletter
+		\newcount\c@p
+		\newcount\c@m
+		\newcount\c@pp
+		\newcount\c@mm	
+	\def\insertsectionnavigation#1{%
+	\hbox to #1{%
+	\vbox{{\usebeamerfont{section in head/foot}\usebeamercolor[fg]{section in head/foot}%
+	\vskip0.5625ex%
+	\def\slideentry##1##2##3##4##5##6{}%
+	\def\sectionentry##1##2##3##4##5{%
+		\ifnum##5=\c@part%
+			\def\insertsectionhead{##2}%
+			\def\insertsectionheadnumber{##1}%
+			\def\insertpartheadnumber{##5}%
+			\c@p=\c@section%
+			\c@m=\c@section%
+			\c@pp=\c@section%
+			\c@mm=\c@section%
+			\advance\c@m by -1 %
+			\advance\c@p by 1 %
+			\advance\c@mm by -2 %
+			\advance\c@pp by 2 %
+			%     
+			\ifnum \c@section=1
+				\ifnum\c@section=##1%
+					\setbox\beamer@tempbox=\hbox{%
+						\hyperlink{Navigation##3}{\hbox to #1{%
+							{\hskip0.3cm\usebeamertemplate{section in head/foot}\hskip0.3cm}}}}%
+				\else%
+					\ifnum##1=\c@p%
+						\setbox\beamer@tempbox=\hbox{%
+							\hyperlink{Navigation##3}{\hbox to #1{%
+								{\hskip0.3cm\usebeamertemplate{section in head/foot shaded}\hskip0.3cm}}}}%
+					\else%
+						\ifnum##1=\c@pp%
+							\setbox\beamer@tempbox=\hbox{%
+								\hyperlink{Navigation##3}{\hbox to #1{%
+									{\hskip0.3cm\usebeamertemplate{section in head/foot shaded}\hskip0.3cm}}}}%
+						\else%
+						\fi%
+					\fi%
+				\fi%%  
+			\else%
+				\ifnum \c@section=\beamer@sectionmax
+					\ifnum\c@section=##1%
+						\setbox\beamer@tempbox=\hbox{%
+							\hyperlink{Navigation##3}{\hbox to #1{%
+								{\hskip0.3cm\usebeamertemplate{section in head/foot}\hskip0.3cm}}}}%
+					\else%
+						\ifnum##1=\c@m%
+							\setbox\beamer@tempbox=\hbox{%
+								\hyperlink{Navigation##3}{\hbox to #1{%
+									{\hskip0.3cm\usebeamertemplate{section in head/foot shaded}\hskip0.3cm}}}}
+						%
+						\else%
+							\ifnum##1=\c@mm%
+								\setbox\beamer@tempbox=\hbox{%
+									\hyperlink{Navigation##3}{\hbox to #1{%
+										{\hskip0.3cm\usebeamertemplate{section in head/foot shaded}\hskip0.3cm}}}}%
+							%
+							\else%
+							%
+							\fi%
+						\fi%
+					%
+					\fi%%
+				\else%
+					\ifnum\c@section=##1%
+						\setbox\beamer@tempbox=\hbox{%
+							\hyperlink{Navigation##3}{\hbox to #1{%
+								{\hskip0.3cm\usebeamertemplate{section in head/foot}\hskip0.3cm}}}}%
+					\else%
+						\ifnum##1=\c@m%
+							\setbox\beamer@tempbox=\hbox{%
+								\hyperlink{Navigation##3}{\hbox to #1{%
+									{\hskip0.3cm\usebeamertemplate{section in head/foot shaded}\hskip0.3cm}}}}
+						\else%
+							\ifnum##1=\c@p%
+								\setbox\beamer@tempbox=\hbox{%
+									\hyperlink{Navigation##3}{\hbox to #1{%
+										{\hskip0.3cm\usebeamertemplate{section in head/foot shaded}\hskip0.3cm}}}}%
+							\else%
+							\fi%
+						\fi%
+					\fi%
+				\fi%
+			\fi%
+		%
+		
+		\ht\beamer@tempbox=1.6875ex%
+		\dp\beamer@tempbox=0.75ex%
+		\box\beamer@tempbox
+		\fi}%
+		\dohead\vskip0.5625ex}}\hfil}}
+	
+	
+	\setbeamertemplate{headline}%{split theme} % full manual adjustment
+	{%
+		\leavevmode%
+		\@tempdimb=3em%
+		\ifdim\@tempdimb>0pt%
+			\advance\@tempdimb by 1.825ex%
+			\begin{beamercolorbox}[wd=.5\paperwidth,ht=\@tempdimb]{section in head/foot}%
+				\vbox to\@tempdimb{\vfil\insertsectionnavigation{.5\paperwidth}\vfil}%
+			\end{beamercolorbox}%
+			\begin{beamercolorbox}[wd=.5\paperwidth,ht=\@tempdimb]{subsection in head/foot}%
+				\vbox to\@tempdimb{\vfil\insertsubsectionnavigation{.5\paperwidth}\vfil}%
+			\end{beamercolorbox}%
+		\fi%
+	}
+	
+		\AtBeginDocument %a hack which ensures the theme will work correctly.  The header doesn't work correctly before the first section of the presentation.
+		{
+			\section*{}
+		}
+\fi
+
+
+% Footer
+\ifdisplaysinglefooter
+	\setbeamercolor*{footlinecolor}{fg=rhulorange,bg=rhulorange}
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[sep=0.07cm,wd=\paperwidth,leftskip=0.5cm,rightskip=0.5cm]{footlinecolor}
+	  {\color{white}\insertshorttitle\ --\ \insertshortauthor \hfill \insertframenumber/\inserttotalframenumber}
+	  \end{beamercolorbox}}%}
+\fi
+
+\ifdisplaysplitfooter
+\setbeamertemplate{footline}{%
+    \hbox{\begin{beamercolorbox}[wd=0.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=0.5cm,rightskip=0.5cm]{author in head/foot}%
+      \hfill \insertshortauthor
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=0.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=0.5cm,rightskip=0.5cm]{title in head/foot}%
+      \usebeamerfont{title in head/foot}\insertshorttitle \hfill \insertframenumber/\inserttotalframenumber
+    \end{beamercolorbox}}
+}
+\fi
+
+
+%ensure that there are always dots by adding a phantom subsection into every section.
+%A bit of a hack, but the dots only appear where there are subsections and this prevents authors from having to repeatedly add this command themselves
+\AtBeginSection[]
+{
+	\subsection*{}
+}
+
+% TOC Section
+\ifdisplaytocsection
+	\AtBeginSection[]
+	{
+		\begin{frame}
+			\frametitle{\insertsection}
+			%\tableofcontents[sectionstyle=show/shaded]%,subsectionstyle=show/show/shaded]
+			\tableofcontents[currentsection]
+		\end{frame}
+		\subsection*{} %added to perform as described on line 150/151.  Apparently only one set of commands can be set to run AtBeginSection
+	}
+\fi
+
+% TOC SubSection
+\ifdisplaytocsubsection
+	\AtBeginSubsection[]
+	{
+		\begin{frame}
+			\frametitle{\insertsubsection}
+			\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/shaded]
+		\end{frame}
+	}
+\fi
+
+
+%%%%%%%%%%%%%%%%%%
+% COLOR SETTINGS % 
+%%%%%%%%%%%%%%%%%%
+%%% TITLE %%%
+%\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true,shadow=true]
+\setbeamercolor*{titlelike}{fg=rhulorange}
+\setbeamercolor*{title in head/foot}{fg=black,bg=rhulorange}
+\setbeamerfont*{title}{series=\bfseries, size=\Large}
+\setbeamercolor*{subtitle}{fg=black}
+\setbeamerfont*{subtitle}{shape=\normalfont,size=\large}
+%\setbeamertemplate{frametitle}[default][colsep=-4bp]%,rounded=false,shadow=false]
+
+%%% COVER %%%
+%\setbeamercolor*{author}{}
+%\setbeamerfont*{author}{shape=\upshape,series=\bfseries}
+\setbeamerfont*{author}{shape=\itshape,size=\normalfont}
+\setbeamercolor*{author in head/foot}{fg=white, bg=rhulgrey}
+%\setbeamercolor*{author in sidebar}{use=palette sidebar tertiary,fg=palette sidebar tertiary.fg}
+%\setbeamercolor*{institute}{}
+\setbeamerfont{institute}{size=\small,shape=\normalfont}
+%\setbeamercolor*{institute in head/foot}{parent=palette tertiary}
+%\setbeamercolor*{institute in sidebar}{use=palette sidebar tertiary,fg=palette sidebar tertiary.fg}
+\setbeamercolor*{date}{fg=rhulorange}
+\setbeamerfont*{date}{size=\footnotesize,shape=\normalfont}
+\setbeamercolor*{date}{fg=rhulorange}
+%\setbeamercolor*{date in head/foot}{parent=palette secondary}
+%\setbeamercolor*{date in sidebar}{use=palette sidebar tertiary,fg=palette sidebar tertiary.fg}
+
+%%% SECTION %%%
+%\setbeamercolor{section in toc}{parent=structure}
+%\setbeamercolor{section in toc shaded}{parent=section in toc}
+%\setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
+\setbeamercolor*{section in head/foot}{fg=white,bg=rhulgrey}
+%\setbeamercolor*{section in sidebar}{parent=palette sidebar secondary}
+%\setbeamercolor*{section in sidebar shaded}{use=section in sidebar,fg=section in sidebar.fg!40!bg}
+%\setbeamercolor*{section number projected}{parent=item projected}
+
+%%% SUBSECTION %%%
+%\setbeamercolor{subsection in toc}{fg = black}
+%\setbeamercolor{subsection in toc shaded}{parent=subsection in toc}
+\setbeamercolor*{subsection in head/foot}{bg=rhulorange}%,fg=rhulorange}
+%\setbeamertemplate{subsection in head/foot}[colsep=-2bp,rounded=false,shadow=false]
+%\setbeamercolor*{subsection in sidebar}{parent=palette sidebar primary}
+%\setbeamercolor*{subsection in sidebar shaded}{use=subsection in sidebar,fg=subsection in sidebar.fg!40!bg}
+%\setbeamercolor*{subsection number projected}{parent={subitem projected}}
+
+%%% SUBSUBSECTION %%%
+%\setbeamercolor*{subsubsection in toc}{parent=subsection in toc}
+%\setbeamercolor*{subsubsection in toc shaded}{parent=subsubsection in toc}
+%\setbeamercolor*{subsubsection in head/foot}{parent=subsection in head/foot}
+%\setbeamercolor*{subsubsection in sidebar}{parent=subsection in sidebar}
+%\setbeamercolor*{subsubsection in sidebar shaded}{parent=subsection in sidebar shaded}
+%\setbeamercolor*{subsubsection number projected}{parent=subsubitem projected}
+
+%%% SIDEBAR %%%
+%\setbeamercolor*{sidebar}{}
+%\setbeamercolor*{sidebar left}{parent=sidebar}
+%\setbeamercolor*{sidebar right}{parent=sidebar}
+
+%%% FRAMES %%%
+\setbeamercolor*{frametitle}{bg=rhulgrey,fg=white}
+%\setbeamertemplate{frametitle}[default][colsep=-4bp,rounded=false,shadow=false]
+\setbeamercolor*{framesubtitle}{parent=frametitle}
+\setbeamercolor*{frametitle right}{bg=rhulgrey}
+
+%%% BLOCKS%%%
+\setbeamertemplate{blocks}[shadow=false]%Can add rounded to get the old look
+%\addtobeamertemplate{block begin}{\pgfsetfillopacity{0.8}}{\pgfsetfillopacity{1}}%Transparency
+\setbeamercolor{block title example}{bg=rhullightgrey,fg=white!50}
+\setbeamercolor{block body example}{bg=isglightgrey,fg=rhulgrey}
+\setbeamercolor{block title}{bg=rhulorange,fg=white!50}
+\setbeamercolor{block body}{bg=isglightgrey,fg=rhulgrey}
+\setbeamercolor{block body alerted}{bg=isglightgrey,fg=rhulgrey}
+\setbeamercolor{structure}{fg=black}
+\setbeamercolor{block title alerted}{bg=red,fg=white}
+%\setbeamercolor*{block title example}{bg=gray,fg=white}
+%\setbeamercolor{block title}{use=structure,fg=white,bg=structure.fg!75!black}
+%\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg!75!black}
+%\setbeamercolor{block title example}{use=example text,fg=white,bg=example text.fg!75!black}
+%\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!10!bg}
+%\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!10!bg}
+%\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+
+%%% SEPARATION LINES / HEADER / FOOTER %%%
+\setbeamertemplate{upper separation line head}[colsep=-2bp,rounded=false,shadow=false]
+%\setbeamercolor*{separation line}{}
+%\setbeamercolor*{upper separation line head}{parent=separation line}
+%\setbeamercolor*{middle separation line head}{parent=separation line}
+%\setbeamercolor*{lower separation line head}{parent=separation line}
+%\setbeamercolor*{upper separation line foot}{parent=separation line}
+%\setbeamercolor*{middle separation line foot}{parent=separation line}
+%\setbeamercolor*{lower separation line foot}{parent=separation line}
+
+%%% ITEMS / ENUMERATE / DESCRIPTION %%%
+\setbeamercolor{item}{bg=white,fg=rhulorange}
+%\setbeamercolor*{subitem}{parent=item}
+%\setbeamercolor*{subsubitem}{parent=subitem}
+%\setbeamercolor*{item projected}{parent=item,use=item,fg=white,bg=blue}
+%\setbeamercolor*{subitem projected}{parent=item projected}
+%\setbeamercolor*{subsubitem projected}{parent=subitem projected}
+%\setbeamercolor*{enumerate item}{parent=item}
+%\setbeamercolor*{enumerate subitem}{parent=subitem}
+%\setbeamercolor*{enumerate subsubitem}{parent=subsubitem}
+%\setbeamercolor*{itemize item}{parent=item}
+%\setbeamercolor*{itemize subitem}{parent=subitem}
+%\setbeamercolor*{itemize subsubitem}{parent=subsubitem}
+%\setbeamercolor*{itemize/enumerate body}{}
+%\setbeamercolor*{itemize/enumerate subbody}{}
+%\setbeamercolor*{itemize/enumerate subsubbody}{}
+%\setbeamercolor*{description item}{parent=item}
+
+%%% TEXT %%%
+\setbeamercolor*{normal text}{fg=black,bg=white}
+\setbeamercolor*{alerted text}{fg=rhulorange,bg=white}
+
+%%%Bibliography%%%
+\bibliographystyle{alpha}
+\renewcommand\bibfont{\scriptsize} % make bibliography entries smaller
+\setbeamertemplate{frametitle continuation}[from second] %place continuation label on bibliography from the second slide onwards
+\setbeamercolor*{bibliography entry title}{fg=black} % Use only black when writing the references
+\setbeamercolor*{bibliography entry author}{fg=black}
+\setbeamercolor*{bibliography entry location}{fg=black}
+\setbeamercolor*{bibliography entry note}{fg=black}
+\setbeamertemplate{bibliography item}{} % remove the icons for the references
+
+\mode
+<all>

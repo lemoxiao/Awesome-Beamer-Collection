@@ -1,0 +1,335 @@
+% Copyright (c) 2013-16 Stephane GALLAND <galland@arakhne.org>
+%
+% UTBM logo and name are registered and owned by the
+% "Universite de Technology of Belfort-Montbeliard".
+%
+% LE2I logo and name are registered and owned by the
+% "Universite de Bourgogne".
+% CNRS logo and name are registered and owned by the
+% "Centre National de la Recherche Scientifique".
+% 
+% This program is free library; you can redistribute it and/or modify
+% it under the terms of the GNU Lesser General Public License as
+% published by the Free Software Foundation; either version 3 of the
+% License, or any later version.
+%
+% This library is distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+% Lesser General Public License for more details.
+%
+% You should have received a copy of the GNU Lesser General Public
+% License along with this library; see the file COPYING.  If not,
+% write to the Free Software Foundation, Inc., 59 Temple Place - Suite
+% 330, Boston, MA 02111-1307, USA.
+%
+\ProvidesPackage{beamerouterthemeLE2IUTBM}
+   [2017/07/20 Beamer Outer 'LE2I at UTBM' Theme]
+
+\mode<presentation>
+
+\useoutertheme{default}
+
+\gdef\beamer@theme@leiiutbm@outer@offsety{0}
+
+\newlength\beamer@theme@leiiutbm@outer@tmplength
+
+\newlength\beamer@theme@leiiutbm@outer@linewidth
+\setlength\beamer@theme@leiiutbm@outer@linewidth{\paperwidth}
+\addtolength{\beamer@theme@leiiutbm@outer@linewidth}{-2em}
+
+\newlength\beamer@theme@leiiutbm@outer@titlewidth
+\setlength\beamer@theme@leiiutbm@outer@titlewidth{\paperwidth}
+\addtolength{\beamer@theme@leiiutbm@outer@titlewidth}{-6.5em}
+
+\newlength\beamer@theme@leiiutbm@outer@titlewidth@plain
+\setlength\beamer@theme@leiiutbm@outer@titlewidth@plain{\textwidth}
+
+\newlength\beamer@theme@leiiutbm@outer@sideboxwidth
+\setlength\beamer@theme@leiiutbm@outer@sideboxwidth{6.8cm}
+
+\newlength\beamer@theme@leiiutbm@outer@topalignmentspan
+\setlength\beamer@theme@leiiutbm@outer@topalignmentspan{-.7cm}
+\newlength\beamer@theme@leiiutbm@outer@centeralignmentspan
+\setlength\beamer@theme@leiiutbm@outer@centeralignmentspan{-1ex}
+\newlength\beamer@theme@leiiutbm@outer@bottomalignmentspan
+\setlength\beamer@theme@leiiutbm@outer@bottomalignmentspan{0cm}
+
+\gdef\beamer@theme@leiiutbm@outer@valign{c}
+
+\let\beamer@theme@leiiutbm@outer@KV@beamerframe@t\KV@beamerframe@t
+\define@key{beamerframe}{t}[true]{%
+	\beamer@theme@leiiutbm@outer@KV@beamerframe@t{#1}%
+	\ifthenelse{\equal{#1}{true}}{%
+		\gdef\beamer@theme@leiiutbm@outer@valign{t}%
+	}{}%
+}
+
+\let\beamer@theme@leiiutbm@outer@KV@beamerframe@c\KV@beamerframe@c
+\define@key{beamerframe}{c}[true]{%
+	\beamer@theme@leiiutbm@outer@KV@beamerframe@c{#1}%
+	\ifthenelse{\equal{#1}{true}}{%
+		\gdef\beamer@theme@leiiutbm@outer@valign{c}%
+	}{}%
+}
+
+\let\beamer@theme@leiiutbm@outer@KV@beamerframe@b\KV@beamerframe@b
+\define@key{beamerframe}{b}[true]{%
+	\beamer@theme@leiiutbm@outer@KV@beamerframe@b{#1}%
+	\ifthenelse{\equal{#1}{true}}{%
+		\gdef\beamer@theme@leiiutbm@outer@valign{b}%
+	}{}%
+}
+
+% No navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+\newcommand{\beamer@theme@leiiutbm@outer@background}{%
+		\begin{tikzpicture}%
+		\fill[LE2IUTBMdarkgray](0,0) rectangle (13,1);%
+		\fill[LE2IUTBMdarkgray](0,0) rectangle (13,1);%
+		\fill[LE2IUTBMlightblue](0,0.15) rectangle (13,0.05);%
+		\fill[white](0,0.15) rectangle (13,0.17);%
+		\end{tikzpicture}%
+}
+
+\setbeamertemplate{title page}{%
+		\expandafter\begin{picture}(0,0)(0,\beamer@theme@leiiutbm@outer@offsety)%
+		% Header
+		\put(-28.4,91.8){%
+			\beamer@theme@leiiutbm@outer@background%
+		}%
+		\pgfmathsetmacro{\beamer@theme@leiiutbm@titlepagetemplate@tmpa}{\beamer@theme@leiiutbm@headerlineuserlogo@x - 28.5}%
+		\pgfmathsetmacro{\beamer@theme@leiiutbm@titlepagetemplate@tmpb}{\beamer@theme@leiiutbm@headerlineuserlogo@y + 120.3}%
+		\expandafter\put(\beamer@theme@leiiutbm@titlepagetemplate@tmpa,\beamer@theme@leiiutbm@titlepagetemplate@tmpb){%
+			\beamer@theme@leiiutbm@headline@currentpicture%
+		}%
+		% Title
+		\put(-20,0){\usebeamercolor[fg]{maintitle}\parbox[c]{\beamer@theme@leiiutbm@outer@linewidth}{%
+			\nohyphens{\begin{center}\LARGE\textbf{\@beamer@theme@leiiutbm@wraptextformats{\inserttitle}}%
+			\ifthenelse{\boolean{beamer@theme@leiiutbm@eventintitlebar}}{%
+				\ifthenelse{\equal{a\insertsubtitle}{a}}{%
+					\ifthenelse{\equal{a\inserteventname}{a}}{%
+					}{%
+						\\[.5em]\footnotesize\inserteventname%
+					}%
+				}{%
+					\\[.5em]\footnotesize\insertsubtitle%
+				}%
+			}{%
+				\ifthenelse{\equal{a\insertsubtitle}{a}}{}{%
+					\\[.5em]\footnotesize\insertsubtitle%
+				}
+			}%
+			\end{center}}}}%
+		% Authors and event
+		\put(-20,-80){\parbox[c]{\beamer@theme@leiiutbm@outer@linewidth}{\begin{center}
+			{\usebeamercolor[fg]{author}\large\bf\insertauthor}
+			\ifthenelse{\boolean{beamer@theme@leiiutbm@eventintitlebar}}{%
+				\ifthenelse{\equal{a\insertsubtitle}{a}}{}{%
+					\ifthenelse{\equal{a\inserteventname}{a}}{{}}{\\[.1cm]\usebeamercolor[fg]{author}\footnotesize\inserteventname}%
+				}%
+			}{%
+				\ifthenelse{\equal{a\inserteventname}{a}}{}{%
+					\\\usebeamercolor[fg]{author}\footnotesize\inserteventname%
+				}%
+			}%
+			\ifauthordescription%
+				\\[.4cm]\usebeamercolor[fg]{author}\tiny\insertauthordescription%
+			\fi%
+			\end{center}}}%
+		% Separation line
+		\put(-28.45,-152.9){%
+			\begin{tikzpicture}%
+			\draw[white] (0,0) -- (13,0);
+			\draw[LE2IUTBMblue] (0.2,0.6) -- (12.6,0.6);
+			\end{tikzpicture}%
+		}%
+		% Institute
+		\put(-20,-147){\tiny\parbox[c]{\beamer@theme@leiiutbm@outer@linewidth}{\begin{flushleft}%
+			{\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute}\end{flushleft}}}%
+		% Partner logos
+		\put(175,-151.7){\parbox[b]{5.4cm}{\mbox{}\hfill%
+					\beamer@theme@leiiutbm@partnerlogo%
+					\ifthenelse{\boolean{beamer@theme@leiiutbm@lablogo}}{%
+						\hspace{.1cm}\insertinstitutelogosinfootline{\hspace{.1cm}}%
+					}{}%
+					}}%
+		%
+		\end{picture}%
+}
+
+\setbeamertemplate{frametitle}{%
+		\ifbeamer@plainframe%
+			\begin{picture}(0,40)(0,0)%
+			% Header
+			\put(-23,26){\usebeamercolor[fg]{plain frametitle}%
+				\parbox[c]{\beamer@theme@leiiutbm@outer@titlewidth@plain}{%
+				\nohyphens{\begin{flushleft}\large\bf\@beamer@theme@leiiutbm@wraptextformats{\insertframetitle}%
+				\ifthenelse{\equal{a\insertframesubtitle}{a}}{{}}{%
+					\usebeamercolor[fg]{plain framesubtitle}\small\bf~--~\@beamer@theme@leiiutbm@wraptextformats{\insertframesubtitle}}%
+				\end{flushleft}}%
+			}}%
+			\end{picture}%
+		\else%
+			\begin{picture}(0,40)(0,0)%
+			% Header
+			\ifbeamer@theme@leiiutbm@headline@empty%
+				\setlength{\beamer@theme@leiiutbm@outer@tmplength}{\beamer@theme@leiiutbm@outer@titlewidth}%
+				\addtolength{\beamer@theme@leiiutbm@outer@tmplength}{1cm}%
+				\def\@tmp{-23}%
+			\else%
+				\setlength{\beamer@theme@leiiutbm@outer@tmplength}{\beamer@theme@leiiutbm@outer@titlewidth}%
+				\def\@tmp{5}%
+			\fi%
+			\expandafter\put(\@tmp,26){\usebeamercolor[fg]{frametitle}%
+				\parbox[c]{\beamer@theme@leiiutbm@outer@tmplength}{%
+				\nohyphens{\begin{flushleft}\large\bf\@beamer@theme@leiiutbm@wraptextformats{\insertframetitle}%
+				\ifthenelse{\equal{a\insertframesubtitle}{a}}{{}}{%
+					\usebeamercolor[fg]{framesubtitle}\small\bf~--~\@beamer@theme@leiiutbm@wraptextformats{\insertframesubtitle}}%
+				\end{flushleft}}%
+			}}%
+			% Side note
+			\ifx\beamer@theme@leiiutbm@sidenote\relax\else%
+				\put(328,-210){\rotatebox{90}{\parbox[c]{\beamer@theme@leiiutbm@outer@sideboxwidth}{%
+						\usebeamerfont{sidenote}\usebeamercolor[fg]{sidenote}%
+						\beamer@theme@leiiutbm@sidenote%
+				}}}%
+				\global\let\beamer@theme@leiiutbm@sidenote\relax%
+			\fi%
+			% Frame number
+			\put(292,26){\parbox[c]{3em}{%
+				{\mbox{}\hfill\usebeamercolor[fg]{frametitle}\tiny\insertframenumbering}%
+			}}%
+			% Partner logo
+			\put(175,-231){\parbox[b]{5.4cm}{\mbox{}\hfill%
+					\beamer@theme@leiiutbm@partnerlogo%
+					\ifthenelse{\boolean{beamer@theme@leiiutbm@lablogo}}{%
+						\hspace{.1cm}\insertinstitutelogosinfootline{\hspace{.1cm}}%
+					}{}%
+					}}%
+			% Put the background elements
+			\beamer@theme@leiiutbm@beginframe@hooks
+			\end{picture}%
+		\fi%
+		% Change the space between the header and the body of the text.
+		\mbox{}%
+		\ifthenelse{\equal{=\beamer@theme@leiiutbm@outer@valign}{=t}}{%
+			\vspace{\beamer@theme@leiiutbm@outer@topalignmentspan}%
+		}{%
+			\ifthenelse{\equal{=\beamer@theme@leiiutbm@outer@valign}{=c}}{%
+				\vspace{\beamer@theme@leiiutbm@outer@centeralignmentspan}%
+			}{%
+				\vspace{\beamer@theme@leiiutbm@outer@bottomalignmentspan}%
+			}%
+		}%
+}
+
+\gdef\beamer@theme@leiiutbm@outer@footline{%
+	\ifbeamer@plainframe\else%
+	\begin{picture}(0,25)(0,0)%
+		% Separation line
+		\put(0,0){%
+			\begin{tikzpicture}%
+			\draw[white] (0,0) -- (13,0);
+			\draw[LE2IUTBMblue] (0.2,0.65) -- (12.6,0.65);
+			\end{tikzpicture}%
+		}%
+		% Left text
+		\beamer@theme@leiiutbm@footline@default%
+	\end{picture}%
+	\fi%
+}
+
+\setbeamertemplate{part page}{%
+		\begin{picture}(0,0)(0,0)%
+		% Separation line
+		\put(-28.45,-167.3){%
+			\begin{tikzpicture}%
+			\draw[white] (0,0) -- (13,0);
+			\draw[LE2IUTBMblue] (0.2,0.6) -- (12.6,0.6);
+			\end{tikzpicture}%
+		}%
+		% Institute
+		\put(-20,-161){\tiny\parbox[c]{\beamer@theme@leiiutbm@outer@linewidth}{\begin{flushleft}%
+			{\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute}\end{flushleft}}}%
+		% Partners
+		\put(175,-166.2){\parbox[b]{5.4cm}{\mbox{}\hfill%
+					\beamer@theme@leiiutbm@partnerlogo%
+					\ifthenelse{\boolean{beamer@theme@leiiutbm@lablogo}}{%
+						\hspace{.1cm}\insertinstitutelogosinfootline{\hspace{.1cm}}%
+					}{}%
+					}}%
+		% Title
+		\put(-20,-39){\usebeamercolor[fg]{maintitle}\parbox[c]{\beamer@theme@leiiutbm@outer@linewidth}{%
+			\nohyphens{\begin{center}\LARGE\textbf{\@beamer@theme@leiiutbm@wraptextformats{{\insertpartprefix}\beamer@partname}}%
+		\end{center}}}}%
+		% Author
+		\ifbeamer@theme@leiiutbm@part@hasauthor%
+		\put(-20,-95){\parbox[c]{\beamer@theme@leiiutbm@outer@linewidth}{\begin{center}
+			{\usebeamercolor[fg]{author}\large\bf\beamer@theme@leiiutbm@part@theauthor}
+			\end{center}}}%
+		\fi%
+		\end{picture}%
+}
+
+\newcommand{\thanksslide}{%
+	\setbeamertemplate{footline}{}
+	\usebackgroundtemplate{\beamer@theme@leiiutbm@outer@background}%
+	\frame{
+		% Copy of the title page
+		\ifthenelse{\value{@beamer@theme@leiiutbm@finalslidelabel}=3}{%
+			\gdef\beamer@theme@leiiutbm@outer@offsety{14.4}%
+			\usebeamertemplate{title page}%
+			\gdef\beamer@theme@leiiutbm@outer@offsety{0}%
+		}{%
+			\begin{picture}(0,10)(0,0)%
+				% Message
+				\put(-20,-38.5){\usebeamercolor[fg]{maintitle}\parbox[c]{\beamer@theme@leiiutbm@outer@linewidth}{%
+					\nohyphens{\begin{center}\LARGE\textbf{%
+						\ifcase\value{@beamer@theme@leiiutbm@finalslidelabel}%
+							\translate{Thanks}%
+						\or%
+							\translate{Questions}%
+						\or%
+							\beamer@theme@leiiutbm@label@finalslidelabel%
+						\else%
+							\errmessage{Package Beamer/LE2I-UTBM: Unsupported type of message for the final slide.}%
+						\fi%
+					}\end{center}}}}%
+				% Separation line
+				\put(-28.45,-167.3){%
+					\begin{tikzpicture}%
+					\draw[white] (0,0) -- (13,0);
+					\draw[LE2IUTBMblue] (0.2,0.6) -- (12.6,0.6);
+					\end{tikzpicture}%
+				}%
+				% Institute
+				\put(-20.5,-161.5){\tiny\parbox[c]{\beamer@theme@leiiutbm@outer@linewidth}{\begin{flushleft}%
+					{\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute}\end{flushleft}}}%
+				% Partner logos
+				\put(175,-166.15){\parbox[b]{5.4cm}{\mbox{}\hfill%
+							\beamer@theme@leiiutbm@partnerlogo
+							\ifthenelse{\boolean{beamer@theme@leiiutbm@lablogo}}{%
+								\hspace{.1cm}\insertinstitutelogosinfootline{\hspace{.1cm}}%
+							}{}%
+							}}%
+			\end{picture}%
+		}%
+	}%
+	\usebackgroundtemplate{\ifbeamer@plainframe\else\beamer@theme@leiiutbm@outer@background\fi}%
+	\setbeamertemplate{footline}{\beamer@theme@leiiutbm@outer@footline}%
+}
+\newcommand{\beamer@theme@leiiutbm@outer@thanksslide}{%
+	\beamer@theme@leiiutbm@nav@advancesection%
+	\xdef\beamer@theme@leiiutbm@totalcoreframenumber{\the\c@framenumber}
+	\addtocounter{section}{1}% To be sure that the 'thank' slide is not in the same section as the previous slide.
+	\thanksslide%
+}
+
+\setbeamertemplate{frametitle continuation}{%
+	{\smaller(\#\insertcontinuationcount)}%
+}
+
+\mode
+<all>

@@ -1,0 +1,20 @@
+% !TeX TXS-program:compile = txs:///pdflatex/
+% !TeX TXS-program:bibliography = txs:///biber
+% !TeX program = pdflatex
+% !BIB program = biber
+
+\subsection{Structural Estimation}
+\label{sec:structural}
+
+\blindmathfalse
+\Blindtext[1]
+
+\[
+	\mathbfup{\Sigma} \coloneqq
+	\mathup{Cov}(\mathbf{X}) =
+	\begin{bmatrix}
+		\mathup{Var}(X_1)      & \cdots & \mathup{Cov}(X_1, X_n) \\[-2.5pt]
+		\vdots                 & \ddots & \vdots                 \\
+		\mathup{Cov}(X_n, X_1) & \cdots & \mathup{Var}(X_n)
+	\end{bmatrix}
+\]

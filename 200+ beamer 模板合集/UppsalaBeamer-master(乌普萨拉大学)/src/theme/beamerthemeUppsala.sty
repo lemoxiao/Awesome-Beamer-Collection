@@ -1,0 +1,74 @@
+\ProvidesPackage{beamerthemeUppsala}[2007/04/04]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Uppsala theme was designed by Frédéric Haziza <daz@it.uu.se>
+%% April 2008
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% -------------------------------------------------------------------
+%% Definitions, Options
+
+%% Should use the provided \logo
+\newif\ifbeamer@mylogo
+\beamer@mylogofalse
+\DeclareOptionBeamer{mylogo}{\beamer@mylogotrue}
+
+%% Options for the numbers
+\newif\ifbeamer@nonumbers
+\beamer@nonumbersfalse
+\DeclareOptionBeamer{nonumbers}{\beamer@nonumberstrue}
+
+\newif\ifbeamer@totalnumber
+\beamer@totalnumberfalse
+\DeclareOptionBeamer{totalnumber}{\beamer@totalnumbertrue}
+
+%% If you don't want the progression bar on the right
+\newif\ifbeamer@progressbar
+\beamer@progressbartrue
+\DeclareOptionBeamer{noprogressbar}{\beamer@progressbarfalse}
+
+%% If you still want the navigation
+\newif\ifbeamer@withnav
+\beamer@withnavfalse
+\DeclareOptionBeamer{withnav}{\beamer@withnavtrue}
+
+%% Should use the grey theme?
+\newif\ifbeamer@grey
+\beamer@greyfalse
+\DeclareOptionBeamer{grey}{\beamer@greytrue}
+
+%% -------------------------------------------------------------------
+\ProcessOptionsBeamer
+
+
+%% -------------------------------------------------------------------
+%% Fonts
+\usefonttheme{uu}
+
+%% -------------------------------------------------------------------
+%% Colors
+%\DeclareOptionBeamer{grey}[false]{\PassOptionsToPackage{grey=#1}{beamercolorthemeuu}}
+\usecolortheme{uu}
+
+%% ----------------------------------------------------------------------
+\mode
+<beamer>
+\input{uu-main.tex}
+
+%% ----------------------------------------------------------------------
+\mode
+<handout>
+\input{uu-handout.tex}
+
+%% ----------------------------------------------------------------------
+\mode
+<trans>
+\input{uu-trans.tex}
+
+%% ----------------------------------------------------------------------
+%% Common stuff, used in all themes
+\mode
+<all>
+\input{uu-all.tex}

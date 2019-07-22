@@ -1,0 +1,72 @@
+% Roma Beamer Theme - Claudio Fiandrino
+% Reworked by Matteo Ipri
+\mode<presentation>
+
+% Margins
+\newlength{\beamer@Roma@mid}
+\setlength{\beamer@Roma@mid}{0.5\paperheight}
+\newlength{\beamer@Roma@sep}
+\setlength{\beamer@Roma@sep}{0.45\paperheight}
+\newlength{\beamer@Roma@normalmargin}
+\setlength{\beamer@Roma@normalmargin}{.06\paperwidth}
+\setbeamersize{text margin left=\beamer@Roma@normalmargin}
+\setbeamersize{text margin right=\beamer@Roma@normalmargin}
+\setlength\leftmargini{.6\beamer@Roma@normalmargin}
+\setlength\leftmarginii{.6\beamer@Roma@normalmargin}
+\setlength\leftmarginiii{.6\beamer@Roma@normalmargin}
+
+% Logo
+\def\beamer@Roma@logo{logo-sap}
+\pgfdeclareimage[interpolate=true,width=3cm,height=1cm]{logo}{\beamer@Roma@logo}
+
+% Background
+\setbeamertemplate{background}{
+  \ifnum\thepage=1\relax%
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle (\the\paperwidth,\the\paperheight); 
+  \fill[blueRoma] (0-\beamer@Roma@normalmargin,\the\paperheight)--(\the\paperwidth,\the\paperheight)--(\the\paperwidth,\beamer@Roma@mid)--(3\beamer@Roma@normalmargin,\beamer@Roma@mid)--(3\beamer@Roma@normalmargin,\beamer@Roma@sep)--(0-\beamer@Roma@normalmargin,\beamer@Roma@sep)--(0-\beamer@Roma@normalmargin,\the\paperheight);
+  \fill[redRoma] (0-\beamer@Roma@normalmargin,0)--(0-\beamer@Roma@normalmargin,\beamer@Roma@sep)--(3\beamer@Roma@normalmargin,\beamer@Roma@sep)--(3\beamer@Roma@normalmargin,\beamer@Roma@mid)--(\the\paperwidth,\beamer@Roma@mid)--(\the\paperwidth,0)--(0-\beamer@Roma@normalmargin,0);
+  \pgftext[at=\pgfpoint{2\beamer@Roma@normalmargin}{0.7\beamer@Roma@sep},left,base]{\pgfuseimage{logo}};
+  \end{tikzpicture}
+  \else
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle (\the\paperwidth,\the\paperheight);
+      \fill[white, opacity=1](0-\beamer@Roma@normalmargin,\the\paperheight)--(\the\paperwidth,\the\paperheight)--(\the\paperwidth,0)--(0,0)--(0-\beamer@Roma@normalmargin,\the\paperheight);
+       \fill[redRoma] (0-\beamer@Roma@normalmargin,0)--(0-\beamer@Roma@normalmargin,0.05\paperheight)--(2\beamer@Roma@normalmargin,0.05\paperheight)--(2\beamer@Roma@normalmargin,0.07\paperheight)--(\the\paperwidth,0.07\paperheight)--(\the\paperwidth,0)--(0-\beamer@Roma@normalmargin,0);
+  \end{tikzpicture}
+  \fi
+}
+
+% Title page
+\defbeamertemplate*{title page}{Roma}[1][]
+{ 
+  %\begin{centering}
+    %\leavevmode
+    \begin{beamercolorbox}[wd=\paperwidth,sep=8pt,leftskip=3\beamer@Roma@normalmargin,#1]{title page header}
+      \usebeamerfont{title}\inserttitle\par
+      \ifx\insertsubtitle\@empty
+      \else
+        %\vskip0.25em
+        {\usebeamerfont{subtitle}\insertsubtitle\par}
+        %\usebeamercolor[fg]{subtitle}
+      \fi
+    \end{beamercolorbox}
+    \vskip1em\par
+    \begin{beamercolorbox}[wd=\paperwidth,sep=8pt,leftskip=3\beamer@Roma@normalmargin,#1]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \vskip1em\par
+    \begin{beamercolorbox}[wd=\paperwidth,sep=8pt,leftskip=3\beamer@Roma@normalmargin,#1]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}
+    \vskip5cm\par
+  %\end{centering}
+  %\vfill
+}
+
+% Items
+\setbeamertemplate{items}[ball]
+\setbeamertemplate{sections/subsections in toc}[ball]
+
+\mode
+<all>

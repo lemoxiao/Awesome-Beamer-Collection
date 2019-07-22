@@ -1,0 +1,165 @@
+\documentclass[dvipdfmx]{beamer}
+\usetheme[nonav]{IUJ}
+\usecolortheme{hakkaisanDark}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{dcolumn}
+
+\usepackage{mathptmx}
+\usepackage{helvet}
+\usepackage{courier}
+
+
+\title{Unofficial Beamer Theme for IUJ}
+\subtitle{{\LaTeX} Presentation in IUJ Style}
+\author[Yanai]{Yuki Yanai}
+\institute[IUJ]{Graduate School of International Relations}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+ \maketitle
+\end{frame}
+
+\begin{frame}{Outline} 
+  \tableofcontents
+\end{frame}
+
+\section{Introduction}
+
+  \subsection{Beamer Theme for IUJ}
+
+\begin{frame}{Let's use IUJ-Beamer!}
+  \begin{itemize}
+   \item An \textit{unofficial} Beamer Theme for IUJ
+   \item Uses the dark colors
+   \item Theme with IUJ's school color (blue), which is the default of
+         IUJ-Beamer, is also available 
+  \end{itemize}
+\end{frame}
+
+
+
+
+
+\section{Basics}
+
+
+\subsection{Blocks}
+
+\begin{frame}{Use blocks}
+  \begin{block}{Block}
+   This is a block environment.
+  \end{block}
+  \pause
+  \begin{exampleblock}{Example}
+   This is an example block environment.
+  \end{exampleblock}
+ \pause
+  \begin{alertblock}{Alert}
+   This is an alert block environment.
+  \end{alertblock}
+\end{frame}
+
+
+\subsection{Equations}
+
+\begin{frame}{Show equations}
+ Probability density function of $\mbox{Normal}(\mu, \sigma^2)$: 
+ \begin{equation}
+  f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}}\exp\left[-\frac{(x - \mu)^2}{2 \sigma^2} \right]
+ \end{equation}  
+
+\begin{block}{PDF of the Standard Normal Distribution: $\mbox{Normal}(0,
+ 1)$}
+  \begin{equation}
+   f(x) = \frac{1}{\sqrt{2 \pi}}\exp\left(-\frac{x^2}{2}\right)
+  \end{equation}
+\end{block}
+ \end{frame}
+
+
+\section{Tables and Figures}
+
+\subsection{Tables} 
+ 
+\begin{frame}{Show the results with Tables}
+  \begin{table}
+   \vspace{-18pt}
+   \caption{Estimation by OLS: Vote share (\%) is the outcome}
+    \begin{tabular}{lD{.}{.}{-2}D{.}{.}{-2}}
+     \hline
+                           & \multicolumn{2}{c}{Estimates}\\
+     Explanatory variables & \multicolumn{1}{c}{Model 1} & \multicolumn{1}{c}{Model 2} \\
+     \hline
+     Constant   & 7.91 & -2.07\\
+                & (0.69) & (0.72)\\
+     Experience & 18.10  & 45.91\\
+                & (1.23) & (1.58)\\
+     Expense    & 1.85   & 4.87\\
+                & (0.12) & (0.16)\\
+     Experience $\times$ Expense &  & -4.76\\
+                                 &  & (0.21)\\ 
+     \hline
+     Observations（$n$） & \multicolumn{1}{c}{1124} & \multicolumn{1}{c}{1124}\\
+     Adjusted $R^2$ & 0.56 & 0.70\\
+     \hline 
+    {\footnotesize \textit{Note}: Standard errors are in parentheses.} & &\\
+    \end{tabular}
+  \end{table}
+
+\end{frame}
+
+\subsection{Figures}
+
+{
+\setbeamertemplate{footline}{}
+\frame{{Explain things with figures}
+ \begin{figure}[h]
+   \centering
+   \includegraphics[scale=.9]{normal-density.pdf}
+   \vspace{-12pt}
+   \caption{Normal PDF}
+ \end{figure}
+}}
+
+
+\begin{frame}{Pictures}
+  \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+     \centering
+     \includegraphics[scale=.4]{figs/bayes.jpg}\\
+     Thomas Bayes
+   \end{column}
+    \begin{column}{0.5\textwidth}
+     \centering
+     \includegraphics[scale=.7]{figs/laplace.jpg}\\
+     Pierre-Simon Laplace
+   \end{column}
+ \end{columns}
+ \vspace{12pt}
+ \[
+  p(\theta | y) = \frac{p(y | \theta)p(\theta)}{p(y)}
+ \]
+\end{frame}
+
+
+\section{Conclusion}
+\subsection{}
+
+\begin{frame}{Conclusion}
+ With {\LaTeX} and IUJ-Beamer, you can
+ \begin{itemize}
+  \item create awesome slides
+  \item express \alert{IUJ pride}
+ \end{itemize}
+ \pause
+ \vspace{36pt}
+ Your feedback is highly appreciated!\\
+ \hspace{2em} Email: 
+ \href{mailto:yanai@iuj.ac.jp}{\texttt{yanai@iuj.ac.jp}}
+ \end{frame}
+
+\end{document}

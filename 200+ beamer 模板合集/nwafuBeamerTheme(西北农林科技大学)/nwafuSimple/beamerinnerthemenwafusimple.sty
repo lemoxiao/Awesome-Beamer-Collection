@@ -1,0 +1,94 @@
+% 这是nwafu(西北农林科技大学)简单主题的颜色主题.
+% 版权(c) 2015-2019, 信息工程学院 耿楠<nangeng@nwafu.edu.cn>
+%
+% 本主题基于丹麦奥尔堡大学（Aalborg University）的AAU Beamer主题
+% 有关这一主题的详情请参考：https://github.com/jkjaer/aauLatexTemplates
+%
+% 这是一个免费代码：发布和修改该代码，请遵守最新版的自由软件联盟发布
+% 的GNU通用公共协议
+%
+% 期望这一代码对你有用，但值得注意的是，我不对任何后续问题进行维护，
+% 请参考<http://www.gnu.org/licenses/>查看最新的协议内容。
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemenwafusimple}[2019/06/24 The nwafu Simple Beamer Theme]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 主题选项和定义
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{tikz}
+\usetikzlibrary{external}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% beamer特殊选项
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation>%参考前四个模式(beamer,handout,second and trans).也就是说，除article外的所有模式
+{
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % 模板
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % 标题页
+  \setbeamertemplate{title page}{%
+    \begin{minipage}[c][\textheight][c]{\textwidth}
+      \vfill
+      \centering
+      %{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}
+
+      %{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}\vspace*{\baselineskip}
+      
+      \begin{beamercolorbox}[wd=\textwidth,center, rounded=true, sep=\baselineskip]{frametitle}%
+        {\usebeamerfont{title}\inserttitle}\vspace*{0.5\baselineskip}%
+
+        {\usebeamerfont{subtitle}\insertsubtitle}%
+        %{\usebeamerfont{date}\insertdate}\vspace*{\baselineskip}
+        %
+        %{\usebeamerfont{author}\insertauthor}\vspace*{\baselineskip}
+        %
+        %{\usebeamerfont{institute}\insertinstitute}
+      \end{beamercolorbox}\vspace*{\baselineskip}
+      
+      %{\inserttitlegraphic}\vspace*{\baselineskip}
+      {\usebeamerfont{author}\insertauthor}\vspace*{0.5\baselineskip}%
+      \vfill%
+      {\usebeamerfont{institute}\insertinstitute}%
+      {\inserttitlegraphic \\ \usebeamerfont{institute}中国$\boldsymbol{\cdot}$杨凌}\\[-1.0ex]%
+      {\usebeamerfont{institute}\usebeamerfont{date}\insertdate}\vspace*{0.1\baselineskip}%
+    \end{minipage}
+  }
+  
+  
+  % 封底页
+  \defbeamertemplate{final page}{text}[1]{%
+    \begin{minipage}[c][\textheight][c]{\textwidth}
+      \centering
+      \vfill
+      \begin{beamercolorbox}[wd=\textwidth, center, rounded=true, sep=2\baselineskip]{frametitle}
+          #1
+      \end{beamercolorbox}
+      \vfill
+      {\usebeamerfont{institute}\insertinstitute}%
+      %{\inserttitlegraphic}\vspace*{\baselineskip}%
+      {\inserttitlegraphic \\ \usebeamerfont{institute}中国$\boldsymbol{\cdot}$杨凌}\vspace*{0.1\baselineskip}%
+    \end{minipage}
+  }
+  \newcommand{\finalpage}[1]{%
+    \setbeamertemplate{final page}[text]{#1}
+    \usebeamertemplate{final page}
+  }
+  
+  % 背影图案设置命令
+  \newcommand{\nwafuwavesbg}{%
+    \setbeamertemplate{background canvas}{
+      \includegraphics[width=\paperwidth,height=\paperheight]{nwafulogo/nwafu_waves}
+      \tikzexternaldisable
+      \tikz[overlay] \fill[fill opacity=0.75,fill=white] (0,0) rectangle (-\paperwidth
+      ,\paperheight);
+      \tikzexternalenable
+    }
+  }
+  
+  % use numbers instead of a picture for the references
+  \setbeamertemplate{bibliography item}[text]
+
+}%end of beamer specific options
+
+\mode<all>

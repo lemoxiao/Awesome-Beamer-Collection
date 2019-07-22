@@ -1,0 +1,41 @@
+% Name : beamercolorthemeuha.sty
+% Author : Sébastien Bindel <sébastien.bindel@uha.fr>
+
+%--------------------------------------------------------------
+% Mandatory part
+%--------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemeuha}[2018/10/22 uha color theme]
+
+%--------------------------------------------------------------
+% Packages
+%--------------------------------------------------------------
+\RequirePackage{xcolor}
+
+% Colours
+\definecolor{blueUHA1}{RGB}{0,62,128}%\definecolor{blueUHA1}{RGB}{0,73,150}}
+\definecolor{blueUHA2}{RGB}{0,159,227}
+\definecolor{GreenOlive}{RGB}{63,126,50}
+\definecolor{light-gray}{RGB}{245,245,245}
+
+
+% Settings
+\setbeamercolor{titlepage}{fg=light-gray,bg=blueUHA1}
+\setbeamercolor{background canvas}{bg=light-gray}
+\setbeamercolor{background}{bg=light-gray}
+\setbeamercolor{normal text}{fg=blueUHA1!50!black,bg=light-gray}
+\setbeamercolor*{item}{fg=blueUHA1}
+
+% Block
+\setbeamercolor{block title}{fg=blueUHA1}
+\setbeamercolor{block body}{fg=blueUHA1!50!black,bg=gray!12!white}
+% Example block
+\setbeamercolor{block title example}{fg=green!60!black}
+\setbeamercolor{block body example}{fg=green!60!black}
+% Alert block
+\setbeamercolor{block title alerted}{bg=red!80!black,fg=gray!12!white}
+\setbeamercolor{block body alerted}{fg=red!80!black, bg=gray!12!white }
+
+%palettes
+\setbeamercolor{palette primary}{fg=light-gray,bg=blueUHA1}
+\setbeamercolor{palette secondary}{bg=light-gray,fg=blueUHA1}

@@ -1,0 +1,398 @@
+\documentclass[10pt,compress,
+%              draft,
+               xcolor={dvipsnames,table},
+               hyperref={breaklinks}
+              ]{beamer}
+%%%%%
+% Fonts, input, language and other nice things
+% http://tex.stackexchange.com/q/44694/33413
+% http://tex.stackexchange.com/q/664/33413
+% 
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+% Non-italised greek letters
+\usepackage{textgreek}
+% Roman numerals
+\usepackage{romanbar}                           %Römische Zahlen mit Balken.
+\usepackage{lmodern}
+
+%%%%%
+% Science related packages
+%
+%%%
+% Mathematics
+%
+\usepackage{amsmath}
+\usepackage{amssymb}
+%%%
+% Units
+%
+% Easy typesetting of SI conform units
+\usepackage{siunitx}
+\DeclareSIUnit  % Use non-SI units
+  \calorie{cal} % calorie, i.e. kcal/mol
+\DeclareSIUnit  
+  \electron{e}  % electron, i.e. eV
+%%%
+% Chemistry
+%
+% Easy typesetting of formulae
+\usepackage[version=4]{mhchem}
+% Enumerating compounds
+\usepackage{chemnum}
+% Support for creating and using schemes
+% http://tex.stackexchange.com/q/6478/33413
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[
+  fileext=los,
+  listname=List of Schemes,
+  name=Scheme,
+  placement=tbhp,
+%  within=section,
+]{scheme}
+%%%
+% Misc.
+%
+% Manual set-up for captions
+% this is predominantly handy if used for posters
+\usepackage[font+=footnotesize, %small,
+            labelfont+={footnotesize,bf},
+            format=hang,
+            singlelinecheck=yes, % no for poster
+            justification=raggedright % justified for poster
+           ]{caption}
+% provides captions comand without using environments
+\usepackage{capt-of}
+% Nice tables
+\usepackage{booktabs}
+
+%%%%%
+% Graphic settings
+% http://tex.stackexchange.com/q/23075/33413
+% http://tex.stackexchange.com/q/139401/33413
+% 
+\usepackage{graphicx}
+\graphicspath{{./graphics/}}
+% http://ctan.org/pkg/adjustbox
+% Using the export key with adjustbox, this will load the graphicx package, 
+% and allow you to use its keys as part of \includegraphics.
+\usepackage[export]{adjustbox}                        
+% Use animations within presentation
+\usepackage{animate}
+                                                      
+%%%%%
+% Beamer specific commands
+%
+% possible options are alttitle, light, dark (default), poster 
+% specifying the latter uses its own templates, 
+% so the former options have no effect
+\usetheme[dark,alttitle]{Mito}
+% prevent counting the appendix as slides
+\usepackage{appendixnumberbeamer}               
+% Setting title, etc.
+\title{Short and Catchy Title}
+\subtitle{Long and boring subtitle with unnecessary explanations.}
+\author[F. Bar]{Foo Bar}
+\institute[Baz Inst.]{Baz Insititute}
+\titlegraphic{\includegraphics[scale=2]{example-image-a}}
+% example-image from https://www.ctan.org/pkg/mwe
+% scale ensures that the image is too big and must be resized by the template
+\date{the Internet, \today}
+% The following command can be used to create a custom footline for 
+% a poster or the alternative titlepage.
+% This is optional, but it will be set with default content
+% if the alternative titlepage is requested.
+\posterfootline{\insertdate\hfill Very Important Symposium}
+% The following command can be used to give extra content to the alt. titlepage.
+% This is optional and won't be set if empty.
+% the content is centered, centered (to the best of my knowledge)
+\titlepageextra{\includegraphics[width=0.5\linewidth]{example-image}}
+
+%%%%%
+% Custom commands and hacks
+%
+% Only for this demonstration we like
+\usepackage{blindtext}
+%
+% custom newcommands can go here, for example
+\newcommand{\diff}{\mathrm{d}} % upright differential operator
+%
+%%%%% End preamble.
+
+\begin{document}
+
+%\maketitle
+\frame[plain]{\titlepage}
+
+\begin{frame}
+  \frametitle{Table of Contents}
+  \tableofcontents
+\end{frame}
+
+\section{Text and Lists}
+\begin{frame}
+\frametitle{\insertsection}
+\framesubtitle{ordinary text}
+\blindtext
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection}
+\framesubtitle{itemised lists}
+\blindlistlist[3]{itemize}[3]
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection}
+\framesubtitle{enumerated lists}
+\blindlistlist[3]{enumerate}[3]
+\end{frame}
+
+\section{Boxed Text and Lists}
+\begin{frame}
+\frametitle{\insertsection}
+\framesubtitle{ordinary block}
+\begin{block}{with ordinary text}
+\blindtext
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection}
+\framesubtitle{alerted block}
+\begin{alertblock}{with ordinary text}
+\blindtext
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection}
+\framesubtitle{block for examples}
+\begin{exampleblock}{with ordinary text}
+\blindtext
+\end{exampleblock}
+\end{frame}
+
+\section{Figures and Tables}
+\begin{frame}
+\frametitle{\insertsection}
+\centering
+\includegraphics[width=0.5\textwidth]{example-image}
+\captionof{figure}{This is an example image from the mwe package.}
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection}
+\centering
+\captionof{table}{This is an example table.}
+\begin{tabular}{lrrr}
+  \toprule
+         & Column A & Column B & Column C \\
+  \midrule
+  Row 1  & A1       & B1       & C1       \\
+  Row 2  & A2       & B2       & C2       \\
+  Row 3  & A3       & B3       & C3       \\
+  \bottomrule
+\end{tabular}
+\end{frame}
+
+\section{Mathematics and Chemistry}
+\begin{frame}
+  \frametitle{\insertsection}
+  \framesubtitle{Mathematics}
+  Mathematics can be included in-line or as a display. 
+  For the following examples we can substitute \(u=e^x\) and \(v=e^{-x}\) 
+  to save us some writing pain.
+  
+  The fundamental tricks of algebra are adding zero \eqref{eq:addingzero} %
+  or multiplying by one \eqref{eq:multiplyingone}.
+  \begin{subequations}
+    \begin{align}\label{eq:addingzero}
+      \int \frac{\diff x}{1 + e^x} &= \int \frac{\diff u}{u (u + 1)}\\ 
+        &= \int \diff u \frac{1 + u - u}{u (1 + u)} \\
+        &= \int \frac{\diff u}{u} - \int \frac{\diff u}{1 + u}
+        &&= \ldots
+    \end{align}
+  \end{subequations}
+  \begin{subequations}
+    \begin{align}\label{eq:multiplyingone}
+      \int \frac{\diff x}{1 + e^x} &= \int \diff x \frac{e^{-x}}{1 + e^{-x}} \\
+        &= -\int \frac{\diff v}{1 + v}
+        &&= \ldots
+    \end{align}
+  \end{subequations}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\insertsection}
+  \framesubtitle{Chemistry}
+  Writing about chemistry can be a tricky, but additional packages can make it easier.
+  It is similar to mathematics and can be quite easily incorporated into it.
+
+  For example take the combustion of dihydrogen (\ce{H2}, \cmpd{dihydrogen})
+  with dioxygen (\ce{O2}, \cmpd{dioxygen}) to form water (\ce{H2O}, \cmpd{water}).
+  The reaction seems quite simple: \[\ce{H2 + O2 -> 2 H2O}.\]
+
+  The mechanism is much more complex and even scheme~\ref{sch:mechanism} is incomplete.
+
+  \begin{align*}
+    \ce{H2 &<=>[\Delta T] H.}\\
+    \ce{H. + O2 &-> HO. + O.}\\
+    \ce{O. + H2 &-> HO. + H.}\\
+    \ce{HO. + H. &-> H2O}
+  \end{align*}
+  \captionof{scheme}{Incomplete reaction mechanism of the combustion of \cmpd{dihydrogen} and \cmpd{dioxygen}.}
+  \label{sch:mechanism}
+
+\end{frame}
+
+\section{Multiple columns}
+\begin{frame}[t]
+\frametitle{\insertsection}
+\framesubtitle{symmetric columns}
+\begin{columns}[T]
+  \column{0.49\textwidth}
+    \begin{block}{For example}
+      Hello, here is some text without a
+      meaning. This text should show
+      what a printed text will look like at
+      this place. If you read this text,
+      you will get no information.
+      Really? Is there no information? Is
+      there a difference between this text
+      and some nonsense?
+    \end{block}
+  \hfill
+  \column{0.49\textwidth}
+    \blindlistlist[3]{enumerate}[3]
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection}
+\framesubtitle{asymmetric columns}
+\begin{columns}
+  \begin{column}{0.59\textwidth}
+    \begin{block}{For example}
+      Hello, here is some text without a
+      meaning. This text should show
+      what a printed text will look like at
+      this place. If you read this text,
+      you will get no information.
+      Really? Is there no information? Is
+      there a difference between this text
+      and some nonsense?
+    \end{block}
+  \end{column}\hfill
+  \begin{column}{0.39\textwidth}
+    \includegraphics[width=\linewidth]{example-image}%-1x1}
+    %\includegraphics[width=\linewidth]{example-image-golden-upright}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\section{Animation and Highlighting}
+\begin{frame}[t]
+\frametitle{\insertsection}
+\begin{columns}[T]
+  \column{0.49\textwidth}
+  \begin{block}{For example}
+      This block comes first.
+
+      \alert<1>{And this is highlighted}
+
+      And the \emph{usual} blindtext:
+
+      Hello, here is some text without a
+      meaning. This text should show
+      what a printed text will look like at
+      this place. If you read this text,
+      you will get no information.
+      Really? Is there no information? Is
+      there a difference between this text
+      and some nonsense?
+    \end{block}
+    \pause
+  \column{0.49\textwidth}
+    After a break it is revealed, that 
+    \begin{itemize}[<+- | alert@+>]
+      \item this is important
+      \item and this also
+      \item and this needs to be considered.
+    \end{itemize}
+    \vspace{2ex}
+    \pause
+    \includegraphics[width=\linewidth]{example-image}
+\end{columns}
+\end{frame}
+
+\section*{Endcard}
+
+%\setbeamertemplate{background canvas}{\includegraphics[width=1.0\paperwidth]{theend}}
+\begin{frame}[plain]
+  \begin{centering}
+    \begin{beamercolorbox}[sep=16pt,center]{part title} 
+      \usebeamerfont{section title}{Thank you for your attention.}
+    \end{beamercolorbox} 
+  \end{centering}
+\end{frame}
+
+\appendix
+\setbeamertemplate{background canvas}[default]
+\section{\appendixname}
+
+\bgroup
+\setbeamercolor{background canvas}{bg=black}
+\begin{frame}[plain]{}
+\end{frame}
+\egroup
+
+\begin{frame}
+  \frametitle{\insertsection}
+  Backup slides can be included here.
+
+  \blindtext
+\end{frame}
+
+
+\begin{frame}[t]
+\frametitle{Catchy Slide Title}
+\framesubtitle{Boring subtitle}
+\begin{columns}[T]
+  \column{0.49\textwidth}
+    \begin{block}{Normal Block}
+      Sampletext
+    \end{block}
+    \vspace{1ex}
+    \begin{alertblock}{Alerted Block}
+      Sampletext
+    \end{alertblock}
+    \vspace{1ex}
+    \begin{exampleblock}{Example Block}
+      Sampletext
+    \end{exampleblock}
+    \vspace{1ex}
+    \includegraphics[width=0.4\textwidth]{example-image}
+    \captionof{figure}{Example image from mwe.}
+    
+  \column{0.49\textwidth}
+    \blindlistlist[2]{enumerate}[2]
+    \vspace{1ex}
+    \blindlistlist[2]{itemize}[2]
+    \vspace{1ex}
+    \captionof{table}{This is an example table.}
+      \begin{tiny}
+        \begin{tabular}{lrr}
+          \toprule
+                 & Column A & Column B \\
+          \midrule
+          Row 1  & A1       & B1       \\
+          Row 2  & A2       & B2       \\
+          \bottomrule
+        \end{tabular}
+      \end{tiny}
+\end{columns}
+\end{frame}
+
+\end{document}

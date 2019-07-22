@@ -1,0 +1,21 @@
+Roma Beamer Theme
+
+This theme is based on the original work of Claudio Fiandrino.
+It can be found here: http://claudiofiandrino.altervista.org/LaTeX/Roma.zip
+New work on this theme since september 2012 by Matteo Ipri.
+
+This file may be distributed and/or modified
+
+1. under the LaTeX Project Public License and/or
+2. under the GNU Public License.
+
+Installation:
+To use this theme just copy the following files in the folder of your keynote:
+
+* beamercolorthemeRoma.sty
+* beamerinnerthemeRoma.sty
+* beamerouterthemeRoma.sty
+* beamerthemeRoma.sty
+* logo-sap.jpg
+
+Typesetting with pdflatekmk ora lualatexmk works just fine.

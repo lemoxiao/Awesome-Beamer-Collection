@@ -1,0 +1,22 @@
+Available Themes:
+	1) Bayreuth
+		The Bayreuth beamer theme a simple, neutral LaTeX beamer theme. 
+		It uses the blue and green colors of the Bayreuth city logo.
+		Note: THIS THEME IS NOT AN OFFICIAL ONE!!
+
+	2) GYPT
+		The GYPT beamer theme is considered as a simple, neutral LaTeX beamer theme for use in GYPT reports.
+		It uses the blue and green color of the GYPT logo.
+		Note: THIS THEME IS NOT AN OFFICIAL ONE!!
+
+	3) MWG
+		The MWG beamer theme is a simple, neutral LaTeX beamer theme using the red color of the Markgräfin Wilhelmine Gymnasium in Bayreuth.
+		Note: THIS THEME IS NOT AN OFFICIAL ONE!!
+
+	4) Ulm
+		The Ulm beamer theme is a simple, neutral LaTeX beamer theme using the red colors of the University Ulm.
+		Note: THIS THEME IS NOT AN OFFICIAL ONE!!
+
+	5) UBayreuth
+		The UBayreuth beamer theme is as a simple, neutral LaTeX beamer theme using the colors of the University Bayreuth.
+		Note: THIS THEME IS NOT AN OFFICIAL ONE

@@ -1,0 +1,30 @@
+% Layout 2
+\input{setup/KTR-Seminar-Layout-Vorlage}
+
+\begin{document}
+% Layout 2 - Title Page
+\input{content/KTRtitlepage}
+\newpage
+%%   Page numbering with roman numbers   %%
+\pagenumbering{Roman}
+%%   Begin the page numbering with 2 for the table of contents   %%
+\setcounter{page}{2}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+%%   Main part   %%
+%%   Page numbering with arabic numbers   %%
+\pagenumbering{arabic}
+%%   Begin the page numbering with 1, beginning from the first included document   %%
+\setcounter{page}{1}
+\input{content/task2}
+\newpage
+\input{content/task3}
+\newpage
+\input{content/task4}
+
+\noindent \textbf{Congratulations, you almost finished the \LaTeX -Tutorial of Fachschaft WIAI!}
+\end{document}

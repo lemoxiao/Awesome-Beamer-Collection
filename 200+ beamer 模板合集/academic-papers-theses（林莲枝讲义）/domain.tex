@@ -1,0 +1,644 @@
+% !TEX root=talk.tex
+\section{Special Material}
+
+\begin{frame}[fragile]
+\frametitle{Mathematics}
+\begin{center}\begin{minipage}{.7\textwidth}\rmfamily
+\eqref{eq:gratio} relates the golden ratio and the Fibonacci series.  Recall that the golden ratio, $\varphi = \frac{1}{2} (1 + \sqrt{5})$.
+
+\begin{equation}\label{eq:gratio}
+\varphi = 1 + \sum^{\infty}_{n=1}
+                \frac{ (-1)^{n+1} }{ F_n F_{n+1} }
+\end{equation}
+\end{minipage}
+\end{center}
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[escapechar=|,basicstyle=\ttfamily\small,moretexcs=eqref,emph={equation}]
+\eqref{eq:gratio} relates the golden ratio and the Fibonacci series. 
+Recall that the golden ratio, |\textcolor{red}{\large\ttfamily\$}|\phi = \frac{1}{2} (1 + \sqrt{5})|\textcolor{red}{\large\ttfamily\$}|.
+
+\begin{equation}\label{eq:gratio}
+\phi = 1 + \sum^{\infty} _{n=1}
+                \frac{ (-1)^{n+1} }{ F_n F_{n+1} }
+\end{equation}
+\end{lstlisting}
+\vspace*{-1em}
+\end{beamerboxesrounded}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Chemical Equations and Molecules}
+
+\begin{center}\rmfamily\small
+\ce{Zn^2+ <=>[\ce{+ 2OH-}][\ce{+ 2H+}]
+$\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$
+<=>C[+2OH-][{+ 2H+}]
+$\underset{\text{Hydroxozikat}}{\cf{[Zn(OH)4]^2-}}$
+}
+\hfil
+\chemfig{H-C(-[2]H)(-[6]H)-C(-[7]H)=[1]O}
+\end{center}
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[basicstyle=\ttfamily\small,moretexcs={ce,chemfig,underset,text,cf},
+emph={mhchem,chemfig}]
+\usepackage[version=3]{mhchem}   % sufficient for chemical equations
+\usepackage{chemfig}   % for 2-D molecule drawings
+...
+\ce{Zn^2+ <=>[\ce{+ 2OH-}][\ce{+ 2H+}]
+$\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$
+<=> C[+2OH-][{+ 2H+}] 
+$\underset{\text{Hydroxozikat}}{\cf{[Zn(OH)4]^2-}}$ }
+
+\chemfig{H-C(-[2]H)(-[6]H)-C(-[7]H)=[1]O}
+\end{lstlisting}
+\vspace*{-1em}
+\end{beamerboxesrounded}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Linguistics}
+
+\begin{columns}[T]
+\begin{column}{.54\textwidth}\small\rmfamily
+\ex
+\begingl
+\gla \%*Wen liebt seine Mutter?//
+\glb Whom loves his mother//
+\glc `Who does his mother love?'//
+\endgl
+\xe
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[moretexcs={ex,xe,gla,glb,glc},basicstyle=\ttfamily\footnotesize\lsstyle,
+emph={expex},
+lineskip=-2pt,commentstyle={}]
+\usepackage{linguex,qtree}
+...
+\ex
+\begingl
+\gla \%*Wen liebt seine Mutter?//
+\glb Whom loves his mother//
+\glc `Who does his mother love?'//
+\endgl
+\xe
+\end{lstlisting}
+\vskip-1em
+\end{beamerboxesrounded}
+\end{column}
+\begin{column}{.45\textwidth}\footnotesize\rmfamily
+\Tree [ .S [.NP [.Pron He ] ] [.VP [.V kicked ] [.NP [.Det the ] [.N ball ] ] ] ]
+
+\medskip
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[moretexcs={ex,xe,gla,glb,glcTree},basicstyle=\ttfamily\footnotesize\lsstyle,
+emph={expex,qtree},
+lineskip=-2pt,commentstyle={}]
+\usepackage{qtree}
+...
+\Tree [ .S [.NP [.Pron He ] ] [.VP [.V kicked ] [.NP [.Det the ] [.N ball ] ] ] ]
+\end{lstlisting}
+\vspace*{-1em}
+\end{beamerboxesrounded}
+
+\end{column}
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Program Listings}
+
+\begin{columns}
+\begin{column}{.5\textwidth}
+\begin{beamerboxesrounded}{}
+\vspace{-1em}
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize,
+emph={listings,lstlisting},moretexcs={color}]
+\usepackage{listings,xcolor}
+...
+\begin{lstlisting}
+[language=C,columns=fullflexible,
+basicstyle=\ttfamily,
+keywordstyle=\bfseries\color{red},
+commentstyle=\sffamily\color{green},
+stringstyle=\rmfamily\color{orange}]
+#include <stdio.h>
+/* 
+ | Prints "hello world"
+ */
+int main(void)
+{
+    printf("hello, world\n");
+    return 0;
+}
+:\bfseries\color{Maroon}\textbackslash end:{lstlisting}
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+\end{column}
+\hfill\begin{column}{.46\textwidth}
+\begin{lstlisting}[language=C,escapechar=~,lineskip=-2pt,
+basicstyle=\ttfamily,
+commentstyle=\upshape\sffamily\small\color{SeaGreen4},keepspaces=true,
+keywordstyle=\bfseries\color{Maroon},stringstyle=\rmfamily\color{Sienna2}]
+#include <stdio.h>
+
+/* 
+ | Prints "hello world"
+ */
+int main(void)
+{
+    printf("hello, world\n");
+    return 0;
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Network Protocols}
+\begin{columns}
+\begin{column}{.505\textwidth}
+\begin{beamerboxesrounded}{}
+\vspace{-1em}
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize,
+moretexcs={bitheader,wordgroupr,bitbox,endwordgroupr,wordbox},
+emph={bytefield,rightwordgroup}]
+\usepackage{bytefield}
+...
+\begin{bytefield}{16} 
+\bitheader{0,7,8,15} \\ 
+\begin{rightwordgroup}{Header} 
+\bitbox{4}{Tag} & \bitbox{12}{Mask} \\ 
+\bitbox{8}{Source} & 
+\bitbox{8}{Destination} 
+\end{rightwordgroup} \\ 
+\wordbox{3}{Data} 
+\end{bytefield} 
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+\end{column}
+\begin{column}{.49\textwidth}\rmfamily\small
+\hfill\begin{bytefield}[bitwidth=.75em]{16}
+\bitheader{0,7,8,15} \\ 
+\begin{rightwordgroup}{Header} 
+\bitbox{4}{Tag} & \bitbox{12}{Mask} \\ 
+\bitbox{8}{Source} & \bitbox{8}{Destination} 
+\end{rightwordgroup}\\ 
+\wordbox{3}{Data} 
+\end{bytefield} 
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Life Sciences}
+
+\begin{texshade}{examples/AQPpro.MSF.txt}
+\shadingmode{similar} 
+\threshold[80]{50} 
+\setends{1}{80..112} 
+\hideconsensus 
+\feature{top}{1}{93..93}{fill:$\downarrow$}{first case (see text)} 
+\feature{bottom}{1}{98..98}{fill:$\uparrow$}{second case (see text)} 
+\end{texshade}
+\vskip-1em
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[
+moretexcs={setends,shadingmode,threshold,hideconsensus,feature,downarrow,uparrow},
+emph={texshade},
+basicstyle=\ttfamily\small,lineskip=-2pt,escapechar=|]
+\usepackage{texshade}  % for nucleotide and peptide alignments
+...
+\begin{texshade}{AQPpro.MSF.txt} 
+\shadingmode{similar} 
+\threshold[80]{50} 
+\setends{1}{80..112} 
+\hideconsensus 
+\feature{top}{1}{93..93}{fill:$\downarrow$}{first case (see text)} 
+\feature{bottom}{1}{98..98}{fill:$\uparrow$}{second case (see text)} 
+\end{texshade} 
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Circuits and SI Units}
+\begin{columns}
+\begin{column}{.49\textwidth}\rmfamily
+\begin{circuitikz}[transform shape,scale=.9]
+\draw (0,0) node[anchor=east] {B}  to[short, o-*] (1,0)    to[R=20<\ohm>, *-*] (1,2)
+  to[R=10<\ohm>, v=$v_x$] (3,2) -- (4,2)
+  to[ cI=$\frac{\si{\siemens}}{5} v_x$, *-*] (4,0) -- (3,0)  to[R=5<\ohm>, *-*] (3,2)
+  (3,0) -- (1,0)   (1,2) to[short, -o] (0,2) node[anchor=east]{A}
+;\end{circuitikz}
+\end{column}
+\begin{column}{.49\textwidth}
+\begin{itemize}\rmfamily
+\item \SI{3.45d4}{\square\volt\cubic\lumen\per\farad}
+\item \SIlist[per-mode=symbol]{40;85;103}{\kilo\metre\per\hour}
+\end{itemize}
+\end{column}
+\end{columns}
+
+\medskip
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize,lineskip=-2pt,
+moretexcs={draw,si,siemens,ohm,SI,SIlist,square,volt,cubic,lumen,per,farad,kilo,metre,hour},
+emph={siunitx,circuitikz},emph={[2]{draw,node,to}}
+]
+\usepackage{siunitx}
+\usepackage[siunitx]{circuitikz}
+...
+\begin{circuitikz}
+\draw (0,0) node[anchor=east] {B}
+  to[short, o-*] (1,0)    to[R=20<\ohm>, *-*] (1,2)
+  to[R=10<\ohm>, v=$v_x$] (3,2) -- (4,2)
+  to[ cI=$\frac{\si{\siemens}}{5} v_x$, *-*] (4,0) -- (3,0)
+  to[R=5<\ohm>, *-*] (3,2)
+  (3,0) -- (1,0)   (1,2) to[short, -o] (0,2) node[anchor=east]{A}
+;\end{circuitikz}
+
+\SI{3.45d4}{\square\volt\cubic\lumen\per\farad}
+\SIlist[per-mode=symbol]{40;85;103}{\kilo\metre\per\hour}
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Meh, What Good is That? Can't Use it Anywhere Else.}
+Actually, you can.
+
+\bigskip
+
+\pause
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[moretexcs={PreviewEnvironment,texshade},basicstyle=\ttfamily,emph={preview}]
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{texshade}
+...
+\begin{texshade}
+...
+\end{texshade}
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+
+\begin{itemize}
+\item Run \texttt{pdflatex} $\rightarrow$ cropped \textsmaller{PDF} containing \emph{only} contents of \texttt{texshade}
+\pause
+\item ImageMagick: \verb|convert -depth 150 texshade.pdf texshade.png|
+\pause
+\item Multiple environments $\rightarrow$ multi-page \textsmaller{PDF} and multiple \textsmaller{PNG}s
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Bar Codes}
+%%% CAUTION!!! This takes a LOOONG time to compile if you're using pdflatex. I'm just going to load the already generated PDFs instead.
+
+% \begin{pspicture}
+% \psbarcode{MECARD:N:Malaysia Open Source Conference 2011;TEL:+60196085482;URL:http://www.mosc.my/;EMAIL:secretariat@mosc.my;ADR:Bayview Beach Resort, Baru Ferringgi Penang;NOTE:Malaysia Open Source Conference 2011 (MOSC2011);;}{eclevel=L width=0.75 height=0.75}{qrcode}
+% \end{pspicture}\;
+\includegraphics[page=1]{talk-pics}\;
+% \begin{pspicture}
+% \psbarcode[scalex=0.7,scaley=0.7]{9781860742712}{ includetext guardwhitespace }{ean13} 
+% \end{pspicture}\;
+\includegraphics[page=2]{talk-pics}\;
+% \begin{pspicture}
+% \psbarcode[scalex=0.7,scaley=0.7]{978-3-86541-114}{includetext guardwhitespace}{isbn} 
+% \end{pspicture}\;\;
+\includegraphics[page=3]{talk-pics}\;
+% \begin{pspicture}
+% \psbarcode[scalex=0.7,scaley=0.7]{^453^178^121^239}{ columns=2 rows=10}{pdf417}
+% \end{pspicture}%
+\includegraphics[page=4]{talk-pics}
+\llap{\raisebox{0.45in}{\includegraphics[page=5]{talk-pics}%
+% \begin{pspicture}
+% \psbarcode[scalex=0.6,scaley=0.6]{LE28HS9Z}{includetext}{royalmail}
+% \end{pspicture}
+}}
+
+\bigskip
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[moretexcs={psbarcode},escapechar=|,basicstyle=\ttfamily\footnotesize,
+emph={pst-barcode},emph={[2]{qrcode,ean13,isbn,pdf417,royalmail,}},
+alsoletter={1347-}
+]
+\usepackage{auto-pst-pdf}  % Needed if running pdflatex; must use option -shell-escape
+\usepackage{pstricks,pst-barcode}
+...
+|\color{Maroon}\bfseries\textbackslash begin|{pspicture}
+\psbarcode{MECARD:N:Malaysia Open Source Conference...}{eclevel=L}{qrcode}
+\psbarcode{9781860742712}{includetext guardwhitespace}{ean13} 
+\psbarcode{978-3-86541-114}{includetext guardwhitespace}{isbn} 
+\psbarcode{LE28HS9Z}{includetext}{royalmail}
+\psbarcode{^453^178^121^239}{columns=2 rows=10}{pdf417}
+|\color{Maroon}\bfseries\textbackslash end|{pspicture} 
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Graph Plots}
+
+{\centering
+\pgfplotsset{height=.75\textheight,width=.9\textwidth}
+\begin{tikzpicture}[transform shape,scale=.7]
+\begin{loglogaxis}[xlabel=Dof]
+\addplot table[x=dof,y=L2] {examples/datafile.dat}; \addlegendentry{$L_2$};
+\addplot table[x=dof,y=Lmax] {examples/datafile.dat}; \addlegendentry{$L_\text{max}$};
+\end{loglogaxis} 
+\end{tikzpicture}
+\par}
+
+\medskip
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize,
+emph={pgfplots,tikzpicture,loglogaxis},
+moretexcs={addplot, table, addlegendentry,text},lineskip=-2pt]
+\usepackage{pgfplots}
+...
+\begin{tikzpicture}
+\begin{loglogaxis}[xlabel=Dof]
+\addplot table[x=dof,y=L2]{datafile.dat}; \addlegendentry{$L_2$};
+\addplot table[x=dof,y=Lmax]{datafile.dat};  \addlegendentry{$L_\text{max}$};
+\end{loglogaxis} 
+\end{tikzpicture} 
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Spreadsheets}
+\framesubtitle{(Seriously, use a proper spreadsheet application for complex stuff.)}
+\begin{center}\rmfamily\STautoround*{2}
+\begin{spreadtab}{{tabular}{l rrr}}
+@ Year ending Mar 31 & @2009 & @2008 & @2007\\\midrule
+@ Revenue & 14580.2 & 11900.4 & 8290.3\\
+@ Cost of sales & 6740.2 & 5650.1 & 4524.2\\\cmidrule{2-4}
+@\emph{Gross profit} & \STcopy{>}{b2-b3} & &\\\cmidrule[\lightrulewidth]{2-4}
+\end{spreadtab}
+\end{center}
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[basicstyle=\ttfamily\small,moretexcs={STcopy,STautoround*},
+alsoletter={23->}, emph={spreadtab},
+emph={[2]{b2-b3,>}}]
+\STautoround*{2}
+\begin{spreadtab}{{tabular}{l rrr}}
+@Year ending Mar 31 & @2009 & @2008 & @2007\\ \hline
+@Revenue & 14580.2 & 11900.4 & 8290.3\\
+@Cost of sales & 6740.2 & 5650.1 & 4524.2\\ \cline{2-4}
+@\emph{Gross profit} & \STcopy{>}{b2-b3} & &\\ \cline{2-4}
+\end{spreadtab}
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Gantt Charts}
+
+\scalebox{.85}{\rmfamily
+\begin{ganttchart}%
+[y unit title=0.4cm,
+y unit chart=0.5cm,
+vgrid=true,
+title/.style={draw=none, fill=RoyalBlue!50!black},
+title label font=\sffamily\bfseries\color{white}, title label anchor/.style={below=-1.6ex},
+title left shift=.05,
+title right shift=-.05,
+title height=1,
+bar/.style={draw=none, fill=OliveGreen!75},
+bar height=.6,
+bar label font=\normalsize\color{black!50},
+group right shift=0,
+group top shift=.6,
+group height=.3, group peaks height=.2,
+bar incomplete/.style={fill=Maroon}]{1}{16} 
+\gantttitle{2010}{4} \gantttitle{2011}{12} \\ 
+\ganttbar%
+[progress=100, bar progress label font=\small\color{OliveGreen!75}, progress label anchor/.style={right=4pt},
+bar label font=\normalsize\color{OliveGreen},
+name=pp]%
+  {Preliminary Project}{1}{4} \\
+\ganttset{progress label text={}, link/.style={black, -to}}
+\ganttgroup{Objective 1}{5}{16} \\
+\ganttbar[progress=4, name=T1A]{Task A}{5}{10} \\
+\ganttlinkedbar[progress=0]{Task B}{11}{16} \\
+\ganttgroup{Objective 2}{5}{16} \\
+\ganttbar[progress=15, name=T2A]{Task A}{5}{13} \\
+\ganttlinkedbar[progress=0]{Task B}{14}{16}
+\end{ganttchart}
+}
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize,lineskip=-2pt,
+moretexcs={gantttitle,ganttbar,ganttlink,ganttgroup,ganttlinkedbar},
+emph={pgfgantt,tikzpicture,ganttchart}]
+\usepackage{pgfgantt}
+...
+\begin{ganttchart}[...settings...]{1}{16} 
+\gantttitle{2010}{4} \gantttitle{2011}{12} \\ 
+\ganttbar[progress=100]{Preliminary Project}{1}{4} \\ 
+\ganttgroup{Objective 1}{5}{16} \\ 
+\ganttbar[progress=4, name=T1A]{Task A}{5}{10} \\ 
+\ganttlinkedbar[progress=0]{Task B}{11}{16} \\ 
+...
+\end{ganttchart} 
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{`Smart Diagrams'}
+\begin{columns}[T]
+
+\begin{column}{.49\textwidth}
+\resizebox{\linewidth}{!}{\smartdiagram[bubble diagram]{Planning Cycle,Assess,Plan,Implement,Renew}}
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize,lineskip=-2pt]
+\usepackage{smartdiagram}
+\smartdiagram[bubble diagram]{
+  Planning Cycle,Assess,Plan,
+  Implement,Renew}
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+\end{column}
+
+\begin{column}{.49\textwidth}
+\resizebox{\linewidth}{!}{\smartdiagram[priority descriptive diagram]{Assess,Plan,Implement,Renew}}
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize,lineskip=-2pt]
+\usepackage{smartdiagram}
+\smartdiagram
+  [priority descriptive diagram]{
+  Assess,Plan,Implement,Renew}
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+\end{column}
+
+\end{columns}
+
+% \resizebox{\linewidth}{\smartdiagram[priority descriptive diagram]{Planning Cycle,Assess,Plan,Implement,Renew}}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Chess games}
+
+\begin{columns}
+\begin{column}{.51\textwidth}
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[basicstyle=\ttfamily\small,
+moretexcs={newgame,mainline,chessboard},
+emph={skak,chessboard}]
+\usepackage[skaknew]%
+{skak,chessboard}
+...
+\newgame
+\mainline{1. e4 e5 2. Nf3 Nc6 3. Bb5 a6}
+\chessboard[smallboard]
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+\end{column}
+
+\begin{column}{.47\textwidth}
+\rmfamily
+\newgame\mainline{1. e4 e5 2. Nf3 Nc6 3. Bb5 a6}
+
+\chessboard[smallboard]
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Crossword Puzzles}
+\begin{columns}
+\begin{column}{.3\textwidth}\rmfamily
+\begin{Puzzle}{5}{3}
+|* |* |[1]E|X |* |.
+|[2]A|[3]S|T |* |[4]T|.
+|* |[5]P|A |R |T |.
+\end{Puzzle}
+\end{column}
+\begin{column}{.65\textwidth}\rmfamily
+\begin{PuzzleClues}{
+\textbf{Across:} }
+  \Clue{1}{EX}{unit of measure}
+  \Clue{2}{AST}{\(\ast\)}
+  \Clue{5}{PART}{sectioning unit}
+\end{PuzzleClues}
+\begin{PuzzleClues}{
+\textbf{Down:} }
+  \Clue{1}{ETA}{\(\eta\)}
+  \Clue{3}{SP}{unit of measure}
+  \Clue{4}{TT}{nonproportional font}
+\end{PuzzleClues}
+\end{column}
+\end{columns}
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{multicols}{2}
+\begin{lstlisting}[escapechar=?,basicstyle=\ttfamily\footnotesize,
+moretexcs={Clue},emph={cwpuzzle,Puzzle,PuzzleClues}]
+\usepackage{cwpuzzle}
+...
+\begin{Puzzle}{5}{3}
+|* |* |[1]E|X |* |.
+|[2]A|[3]S|T |* |[4]T|.
+|* |[5]P|A |R |T |.
+\end{Puzzle}
+\begin{PuzzleClues}{
+\textbf{Across:} }
+  \Clue{1}{EX}{unit of measure}
+  \Clue{2}{AST}{\(\ast\)}
+  \Clue{5}{PART}{sectioning unit}
+\end{PuzzleClues}
+\begin{PuzzleClues}{
+\textbf{Down:} }
+  \Clue{1}{ETA}{\(\eta\)}
+  \Clue{3}{SP}{unit of measure}
+  \Clue{4}{TT}{nonproportional font}
+\end{PuzzleClues}
+\end{lstlisting}
+\end{multicols}
+\vspace{-.5em}
+\end{beamerboxesrounded}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Song Books with Guitar Tabs}
+\vskip-.55\textheight
+\begin{guitar}
+\rmfamily\smallchords\def\chordsize{.5em}
+\renewcommand\yoff{2}
+\renewcommand\xoff{0}
+\renewcommand\namefont{\footnotesize\sffamily}
+\renewcommand\normalsiz{1.1}
+\renewcommand\topfretsiz{1.2pt}
+\newcommand{\CMaj}{\chord{t}{n,p3,p2,n,p1,n}{C}}
+\newcommand{\Amin}{\chord{t}{n,n,p2,p2,p1,n}{Am}}
+\newcommand{\FMaj}{\chord{t}{n,n,p3,p2,p1,p1}{F}}
+\newcommand{\GMaj}{\chord{t}{p3,p2,n,n,n,p3}{G}}
+Country [\CMaj]road, take me [\GMaj]home, to the [\Amin]place I be[\FMaj]long.
+West Vir[\CMaj]ginia, mountain [\GMaj]momma, take me [\FMaj]home, country [\CMaj]road.
+\end{guitar}
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[moretexcs={chord,CMaj,Amin,FMaj,GMaj},
+emph={gchords,guitar},
+basicstyle=\ttfamily\small]
+\usepackage{gchords,guitar}
+...
+\begin{guitar}
+\newcommand{\CMaj}{\chord{t}{n,p3,p2,n,p1,n}{C}}
+\newcommand{\Amin}...
+Country [\CMaj]road, take me [\GMaj]home, ...
+\end{guitar}
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}
+\end{frame}
+

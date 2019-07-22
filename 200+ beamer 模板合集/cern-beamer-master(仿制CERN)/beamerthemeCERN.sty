@@ -1,0 +1,105 @@
+\mode<presentation>
+
+\usecolortheme{default}
+\usecolortheme{default}
+\useinnertheme{default}
+\useoutertheme{default}
+
+% Colors
+\definecolor{bluecern}{HTML}{0053A1}
+\setbeamercolor{normal text}{fg=bluecern, bg=white}
+\setbeamercolor{frametitle}{fg=bluecern, bg=white}
+\setbeamercolor{section in toc}{fg=bluecern, bg=white}
+\setbeamercolor{title}{fg=bluecern, bg=white}
+\setbeamercolor{inverted normal text}{fg=white, bg=bluecern}
+\setbeamercolor{itemize item}{fg=bluecern}
+\setbeamercolor{itemize subitem}{fg=bluecern}
+\setbeamercolor{itemize subsubitem}{fg=bluecern}
+\setbeamercolor{enumerate item}{fg=bluecern}
+\setbeamercolor{enumerate subitem}{fg=bluecern}
+\setbeamercolor{caption name}{fg=bluecern}
+\setbeamercolor{block title}{fg=bluecern, bg=gray!30}
+\setbeamercolor{block body}{fg=bluecern, bg=gray!10}
+\setbeamercolor{block title alerted}{bg=gray!30}
+\setbeamercolor{block body alerted}{bg=gray!10}
+
+% Fonts
+\usefonttheme{structurebold}
+\usepackage[scaled]{helvet}
+\renewcommand*\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+
+% Title page
+\setbeamertemplate{title page}{
+    \begin{center}
+        { \Huge \textbf{\inserttitle} }
+        \vfill
+        { \Large \insertsubtitle }
+        \vfill
+        \insertauthor
+        \vfill
+        \talkdate 
+    \end{center}
+}
+
+% Footline
+\setbeamerfont{footline}{size=\large}
+\setbeamertemplate{footline}{
+    \begin{beamercolorbox}[ht=20px, center]{inverted normal text}
+    \begin{columns}
+    \column{.001\textwidth}
+    \column{.15\textwidth}
+        \vspace{2px} % To lift logo from bottom
+        \includegraphics[scale=0.35]{logos/cern-logo-small.png}
+    \column{.45\textwidth}
+        \insertshorttitle
+    \column{.20\textwidth}
+	\talkdate
+    \column{.1\textwidth}
+        \insertpagenumber
+    \end{columns}
+    \end{beamercolorbox}
+}
+
+\newcommand{\talkdate}{
+  \@ifundefined{mydate}
+	{
+	\today
+	}
+	{
+	\mydate
+	}
+}
+
+\newcommand{\cernSplashBlue}{
+    % CERN blue splash page slide with white logo
+    \bgroup
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamercolor{background canvas}{bg=bluecern}
+    \frame[plain]{
+        \hfill
+        \vspace{-1.5cm}
+        \includegraphics[scale=0.37]{logos/cern-logo-white-on-blue.png}
+        \hfill\hfill
+    }
+    \egroup
+}
+
+\newcommand{\cernSplashWhite}{
+    % CERN ending slide with blue logo and web page
+    \bgroup
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamercolor{background canvas}{bg=white}
+    \frame[plain]{
+        \centering
+        \vspace{10px}
+        \begin{figure}
+            \includegraphics[scale=.61]{./logos/LogoBadge-01.png} \\
+            {\Large \textbf{www.cern.ch}}
+        \end{figure}
+    }
+    \egroup
+}
+
+\mode
+<all>

@@ -1,0 +1,173 @@
+%-------------------------------------------------------------------------------
+% Inner theme file
+%
+% This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
+% International License. To view a copy of this license, visit
+% http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative
+% Commons, PO Box 1866, Mountain View, CA 94042, USA.
+% Copyright (C) 2017 Oliver Reiche <oliver.reiche@fau.de>
+%-------------------------------------------------------------------------------
+
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Columns %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{columnsdepth}
+\setcounter{columnsdepth}{0}
+
+% Hijack columns to enforce option 'onlytextwidth'
+\let\origcolumns\columns
+\let\origendcolumns\endcolumns
+\renewenvironment{columns}[1][t]{%
+  \addtocounter{columnsdepth}{1}%
+  \origcolumns[onlytextwidth,#1]%
+}{%
+  \origendcolumns%
+  \addtocounter{columnsdepth}{-1}%
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Columns End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Column %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pgfmathsetmacro{\fauinnersep}{\factor*2.13}
+\newlength\faublocksep
+\setlength\faublocksep{\fauinnersep cm}
+
+% Hijack column to enforce equidistant (\faublocksep) layouting of columns
+\let\origcolumn\column
+\let\origendcolumn\endcolumn
+\renewenvironment{column}[2][]{%
+  \ifnum\value{columnsdepth}=1%
+    % Given: Set I, contains width of each column (only fractions of \textwidth)
+    % Assume: \sum_{i \in I} i = \textwidth
+    % Search: Overall space reduction \faublocksep * n,
+    %         where n = (|I| - 1) = \sum{i \in I} 1 - i
+    % Compute: Column width = \textwidth - ((1 - i) * \faublocksep)
+    \pgfmathparse{1-(#2/\textwidth)}%
+    \origcolumn[#1]{#2-\pgfmathresult\faublocksep}%
+  \else%
+    \origcolumn[#1]{#2}%
+  \fi%
+}{%
+  \origendcolumn%
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Column End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Blocks %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{blockdepth}
+\setcounter{blockdepth}{0}
+
+\newif\ifcolumnsforced
+\columnsforcedfalse
+
+% Hijack block to count levels and insert columns if necessary
+\renewcommand<>{\block}[1]{%
+  \begin{actionenv}#2%
+    \def\insertblocktitle{#1}%
+    \par%
+    \addtocounter{blockdepth}{1}%
+    \ifnum\value{blockdepth}=1\else%
+			\vspace{.5ex}
+    \fi%
+    \ifnum\value{columnsdepth}=0%
+      % If block is top level without columns environment, surround block by
+      % columns to achieve consistent vertical spacing with other columns
+      \begin{columns}%
+        \begin{column}{\textwidth}%
+          \columnsforcedtrue%
+    \fi%
+    \usebeamertemplate{block begin}%
+}
+\renewcommand<>{\endblock}{%
+    \par%
+    \usebeamertemplate{block end}%
+    \ifnum\value{columnsdepth}=1%
+      \ifcolumnsforced%
+          \end{column}%
+        \end{columns}%
+        \columnsforcedfalse%
+      \fi%
+    \fi%
+    \ifnum\value{blockdepth}=1%
+      \vspace{\faublocksep}%
+    \fi%
+    \addtocounter{blockdepth}{-1}%
+  \end{actionenv}%
+}
+
+% Load beamer color
+\usebeamercolor{block body}
+
+% Define FAU color box
+\newmdenv[%
+  skipabove=0pt,
+  skipbelow=0pt,
+  roundcorner=0pt,
+  linewidth=\beamer@framedblock,
+  linecolor=block title.bg,
+  backgroundcolor=block body.bg,
+  frametitlerule=true,
+  frametitlerulewidth=\beamer@framedblock,
+  %frametitlealignment={\centering},
+  frametitlefont={\usebeamercolor[fg]{block title}\usebeamerfont*{block title}},
+  frametitlebackgroundcolor=block title.bg,
+  innertopmargin=2ex,
+  innerbottommargin=2ex,
+  innerleftmargin=.75em,
+  innerrightmargin=.75em
+]{faucolorbox}
+
+% Lengths for vertically centering outer block title
+\newlength{\beamer@blocktitleex}
+\newlength{\beamer@blocktitledepth}
+\newlength{\beamer@belowskip}
+\newlength{\beamer@aboveskip}
+\settoheight{\beamer@blocktitleex}{\usebeamerfont*{block title}x}
+
+% Renew block template to use FAU color box
+\setbeamertemplate{block begin}{%
+  \settodepth{\beamer@blocktitledepth}{%
+    \usebeamerfont*{block title}\insertblocktitle}%
+  \setlength{\beamer@aboveskip}{\beamer@blocktitleex}%
+  \setlength{\beamer@belowskip}{\beamer@blocktitleex-\beamer@blocktitledepth}%
+  \ifdefined\tikzexternaldisable%
+    \tikzexternaldisable%
+  \fi
+  \begin{faucolorbox}[%
+    frametitleaboveskip=\beamer@aboveskip,%
+    frametitlebelowskip=\beamer@belowskip,%
+    frametitle={\insertblocktitle}]%
+  \ifdefined\tikzexternalenable%
+    \tikzexternalenable%
+  \fi
+}
+\setbeamertemplate{block end}{%
+  \end{faucolorbox}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Blocks End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Captions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{caption}[numbered]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Captions End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Itemize List %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{itemize item}{$\blacktriangleright$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Itemize List End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{bibliography item}[text]
+\ifdefined\printbibliography
+  \let\origprintbibliography\printbibliography
+  \renewcommand{\printbibliography}{%
+    \parbox{\textwidth}{%
+      \origprintbibliography}}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bibliography End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\mode
+<all>

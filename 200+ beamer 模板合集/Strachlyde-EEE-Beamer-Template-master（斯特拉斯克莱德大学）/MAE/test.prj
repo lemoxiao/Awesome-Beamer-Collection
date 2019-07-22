@@ -1,0 +1,38 @@
+307 Patch Control
+
+0
+0
+1
+test.tex
+7
+2
+1
+
+
+
+
+
+
+test.tex
+TeX:UNIX
+152154107 0 -1 1366 -1 1367 75 75 1483 509 0 105 255 -1 -1 0 0 22 -1 -1 22 1 0 1367 -1   0
+beamerthemeSTR.sty
+TeX:STY:UNIX
+286371834 0 177 26 177 29 100 100 1508 534 0 249 408 -1 -1 0 0 46 0 0 46 1 0 29 177   0
+:\StrathCloud\My Files & Folders\WARC\N1 - leak tightness\_papers\Loss Prevention\paper\N1a_paper.tex
+TeX:UNIX
+286371835 0 -1 22631 -1 23496 0 0 1138 304 0 241 697 -1 -1 0 0 42 -1 -1 42 1 0 23496 -1   0
+:\StrathCloud\My Files & Folders\WARC\N1 - leak tightness\_papers\Loss Prevention\paper\xampl.bib
+BibTeX:UNIX
+1147890 1 278 1 289 2 100 100 1238 404 0 33 425 -1 -1 0 0 42 0 0 42 1 0 2 289   0
+:\StrathCloud\My Files & Folders\WARC\N1 - leak tightness\_papers\Loss Prevention\paper\references.bib
+BibTeX
+1049586 2 0 14 0 23 75 75 1213 379 0 201 0 -1 -1 0 0 19 157 157 19 1 0 23 0   0
+:\StrathCloud\My Files & Folders\WARC\N1 - leak tightness\_papers\Loss Prevention\paper\N1a_paper.prj
+DATA
+273678578 0 0 1 0 1 75 75 1483 509 1 73 0 -1 -1 0 0 -1 -1 -1 -1 1 0 1 0   0
+:\StrathCloud\My Files & Folders\WARC\N1 - leak tightness\_papers\Loss Prevention\paper\N1a_paper.bbl
+DATA
+273678578 7 94 18 94 50 100 100 1238 404 1 465 221 -1 -1 0 0 -1 -1 -1 -1 1 0 50 94   0
+
+*test.tex

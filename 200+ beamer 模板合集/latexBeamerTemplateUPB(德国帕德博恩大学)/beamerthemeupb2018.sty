@@ -1,0 +1,417 @@
+%This Source Code Form is subject to the terms of the Mozilla Public License,
+%v. 2.0. If a copy of the MPL was not distributed with this file, You can
+%obtain one at http://mozilla.org/MPL/2.0/
+
+% beamerthemeupb2018.sty
+% Max Hoffmann
+% max.hoffmann@math.upb.de
+% Version: 19/12/2018
+
+% This is suggestion for using the Paderborn University corperated design
+% in LaTeX-Beamer. Feel free to optimize this implementation.
+
+\mode<presentation>
+
+% disable navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% REQUIREMENTS
+% we use TIKZ for drawing the background network on the slides
+\RequirePackage{tikz}
+\usetikzlibrary{positioning}
+
+% we need this packages for importing images and using colors
+% especially in tables
+\RequirePackage{graphicx,xcolor,colortbl}
+
+
+% change the font size of captions 
+\RequirePackage[font=footnotesize]{caption}
+
+
+% FONT
+% we use Cabin as a modern open source sans serif font. It is similar to the
+% UPB font and is provided by default in LaTeX.
+\RequirePackage[sfdefault,condensed]{cabin}
+\renewcommand{\familydefault}{\sfdefault}
+
+
+% GEOMETRY
+% setting the parskip and the margins
+\parskip=1ex
+\setbeamersize{text margin left=7mm,text margin right=7mm}
+
+
+% FRAME TITLE'S SIZE
+% We provide commands for changing the size of the frame title.
+% The value of the counter is used later for the specification
+% of the frametitle template.
+\newcounter{smallft}
+\setcounter{smallft}{0}
+\newcommand{\smallframetitle}{\setcounter{smallft}{1}}
+\newcommand{\normalframetitle}{\setcounter{smallft}{0}}
+
+
+% HANDOUT LAYOUT
+% We provide a beamer option to choose the number of slides
+% which are printed on one page in the 'handout'-mode. The
+% value of the counter is used later.
+\newcounter{slidesperhandout}
+\setcounter{slidesperhandout}{4}
+\DeclareOptionBeamer{oneslideonhandout}[true]{\setcounter{slidesperhandout}{1}}
+\DeclareOptionBeamer{twoslidesonhandout}[true]{\setcounter{slidesperhandout}{2}}
+\DeclareOptionBeamer{fourslidesonhandout}[true]{\setcounter{slidesperhandout}{4}}
+
+% USING SHORT TITLE
+% We provide a beamer option for the decision, if the short
+% title shoud be used in the slide header. The value for the
+% counter is used later for the specification of the header
+\newcounter{useshorttitle}
+\setcounter{useshorttitle}{0}
+\DeclareOptionBeamer{shortTitleInHeader}[true]{\setcounter{useshorttitle}{1}}
+
+
+% COLOR DEFINITION
+% defining the UPB-colors
+\definecolor{upbblue}{RGB}{0,32,91}
+\definecolor{upbgray}{RGB}{85,85,85}
+\definecolor{upblightgray}{RGB}{199,201,199}
+\definecolor{upbred}{RGB}{215,51,103}
+\definecolor{upbgreen}{RGB}{164,196,36}
+\definecolor{upbcyan}{RGB}{24,176,226}
+\definecolor{upborange}{RGB}{242,149,18}
+\definecolor{upbcassis}{RGB}{169,57,131}
+\definecolor{upblightblue}{RGB}{0,127,185}
+
+
+% We declare beamer options for using the color theme of the presentation.
+\newcommand{\titlecolor}{upbcyan}
+\DeclareOptionBeamer{cyan}[true]{\renewcommand{\titlecolor}{upbcyan}}
+\DeclareOptionBeamer{orange}[true]{\renewcommand{\titlecolor}{upborange}}
+\DeclareOptionBeamer{green}[true]{\renewcommand{\titlecolor}{upbgreen}}
+\DeclareOptionBeamer{cassis}[true]{\renewcommand{\titlecolor}{upbcassis}}
+\DeclareOptionBeamer{blue}[true]{\renewcommand{\titlecolor}{upblightblue}}
+\DeclareOptionBeamer{red}[true]{\renewcommand{\titlecolor}{upbred}}
+
+\ProcessOptionsBeamer
+
+%We use the theme color for all design elements
+\setbeamercolor{alerted text}{fg=upbred} 
+\setbeamercolor{title}{fg=\titlecolor}
+\setbeamercolor{frametitle}{fg=\titlecolor}
+\setbeamercolor{structure}{fg=\titlecolor}
+
+% TEXT COLOR
+\setbeamercolor{normal text}{fg=upbgray}
+
+
+% DEFAULT TABLE LAYOUT
+\arrayrulecolor{upbgray}
+\setlength{\arrayrulewidth}{1pt}
+
+
+% special emph commands which use the color theme
+\newcommand{\colemph}[1]{{\color{\titlecolor}#1}}
+\newcommand{\important}[1]{{\color{upbred}#1}}
+
+
+% IMAGES
+% commands vor setting the title image and the logo
+\newcommand{\titleimage}{abb/upbBackground.png}
+\newcommand{\headerlogo}{abb/upbLogoDE.png}
+
+
+% ITEMIZE PROPERTIES
+% we use bullets according to the UPB template
+\setbeamercolor*{item}{fg=\titlecolor}
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{itemize item}{\begin{tikzpicture}
+	\draw[thick] (0,0) circle (.9mm);
+	\end{tikzpicture}}
+\newcommand{\colitem}{\color{\titlecolor} \item}
+
+
+
+% DEFINING BLOCK STYLES
+\setbeamercolor{block title}{fg=\titlecolor,bg=white}
+\setbeamercolor{block body}{bg=white}
+
+\setbeamercolor{block title alerted}{bg=upbred, fg=white}
+\setbeamercolor{block body alerted}{bg=upbred!45!white,fg=white}
+
+\setbeamercolor{block title example}{fg=\titlecolor,bg=white}
+\setbeamercolor{block body example}{bg=\titlecolor!45!white,fg=white}
+
+
+
+
+% BACKGROUND OF THE TITLE PAGE
+\setbeamertemplate{background}{%
+	% We use TIKZ for the whole layout. A big advantage is that we
+	% do not have to embed any more images.
+	\begin{tikzpicture}
+	\ifnum\thepage<2\relax % this is only relevant for the first page
+		\useasboundingbox (0,0) rectangle (\the\paperwidth,\the\paperheight);
+		
+		% crop path for the title image
+		\coordinate(f0) at (12.8,5);
+		\coordinate(f1) at (11.7,3.9);
+		\coordinate(f2) at (8.475,4.3);
+		\coordinate(f3) at (6.4,7.55);
+		\coordinate(f4) at (8.1,9);
+		\coordinate(f5) at (10.4,\the\paperheight);
+
+		% include the title image and crop it
+		\node[anchor=north east, inner sep = 0pt] at (\the\paperwidth,\the\paperheight)
+			{\includegraphics[height=.5\paperwidth]{\titleimage}};
+		\fill[white] (0,0)--(\the\paperwidth,0)--(f0)--(f1)--(f2)--(f3)--(f4)
+			--(f5) -- (0,\the\paperheight) -- (0,0);
+
+		% draw the network
+		\definecolor{netcol}{gray}{.9}
+		\coordinate (0) at (2.5,0);
+		\node[color=netcol] (1) at (6.2,0.6) {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] (2) at (7.4,0.9) {\LARGE \(\bullet\)};
+		\coordinate (3) at (7.5,-.3);
+		\node[color=netcol,inner sep=0pt] (4) at (8.45,0.55) {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] (5) at (11.2,1.65) {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] (6) at (9.45,2.3) {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] (7) at (12.8,1.4) {\LARGE \(\bullet\)};
+
+		\node[color=netcol,inner sep=0pt] (8) at (.475,7.2) {\LARGE \(\bullet\)};
+		\coordinate (9) at (0,7);
+		\coordinate (10) at (0,8.3);
+		\node[color=netcol,inner sep=0pt] (11) at (2.1,6.8) {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] (12) at (4.8,6.7) {\LARGE \(\bullet\)};
+		\coordinate (13) at (8.1,4.82);
+		\node[color=netcol,inner sep=0pt] (14) at (5.65,8.3) {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] (15) at (2.7,9.2) {\LARGE \(\bullet\)};
+		\coordinate (16) at (7.3,10);
+		\node[color=netcol,inner sep=0pt] (17) at (3.2,9.6) {\LARGE \(\bullet\)};
+		\coordinate (18) at (2.475,9.7);
+
+
+		\node[color=netcol,inner sep=0pt] at (f1)  {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] at (f2)  {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] at (f3)  {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] at (f4)  {\LARGE \(\bullet\)};
+
+		\draw[dashed, color = netcol] (0)--(1)--(2)--(3);
+		\draw[dashed, color = netcol] (2)--(4)--(5)--(6)--(2);
+		\draw[dashed, color = netcol] (7)--(5)--(f1);
+		\draw[dashed, color = netcol] (6)--(4)--(3);
+		\draw[dashed, color = netcol] (5)--(f2)--(1);
+		\draw[dashed, color = netcol] (9)--(8);
+		\draw[dashed, color = netcol] (10)--(8)--(11)--(12)--(13);
+		\draw[dashed, color = netcol] (12)--(f3)--(14)--(12);
+		\draw[dashed, color = netcol] (11)--(14)--(f4)--(16)--(14)--(17)--(15)--(18);
+
+
+
+		%add the UPB-Logo
+		\node[anchor=north west,inner sep = 0pt,yshift=-.6cm] at (.65,\the\paperheight)
+			{\includegraphics[height=1cm]{\headerlogo}};
+
+	\fi
+
+	\end{tikzpicture}
+}
+
+
+
+% TEMPLATE FOR THE TITLE PAGE
+\defbeamertemplate*{title page}{upb2018}[1][]{%
+	%We use TIKZ for the whole layout.
+	\begin{tikzpicture}
+		% the title is displayed in a colored box with white sepration lines
+		% between the lines of the title
+		\useasboundingbox (0,0) rectangle (\the\paperwidth,\the\paperheight);
+		\node[anchor = south west, align = left, text width = 8cm, color = white,
+			 inner xsep = 0cm,inner ysep = 1mm, fill = \titlecolor] (title) at (-.7,1.75)
+			{\hspace{.7cm}\parbox{7cm}{
+			\LARGE \baselineskip=8mm \textbf{\MakeUppercase{\inserttitle}}\par
+			}};
+		\draw[ultra thick,white] ([yshift=2.4cm]title.south west)--([yshift=2.4cm]title.south east);	
+		\draw[ultra thick,white] ([yshift=.8cm]title.south west)--([yshift=.8cm]title.south east);	
+		\draw[ultra thick,white] ([yshift=1.6cm]title.south west)--([yshift=1.6cm]title.south east);
+		\fill[\titlecolor]	([yshift=-.5mm,xshift=.07mm] title.north west)rectangle([yshift=1.5mm,xshift=-.07mm]title.north east);
+
+		% display the other presentation informations according to the UPB template
+		\node[anchor = south west, align = left, color = upbblue, inner sep = 0cm,
+			xshift=7mm, yshift = 3mm]
+			at (title.north west) {\textbf{\insertinstitute}};
+
+		\node[anchor = north west, align = left, color = upbblue, inner sep = 0cm,
+			xshift=7mm, yshift = -3mm] (subtitle)
+			at (title.south west) {\textbf{\MakeUppercase{\insertsubtitle}}};
+
+		\node[anchor = north west, align = left, color = upbblue, inner sep = 0cm,
+			xshift=0mm, yshift = -3mm] (author)
+			at (subtitle.south west) {\footnotesize \insertauthor};
+
+		\node[anchor = north east, align = right, color = upbblue, inner sep = 0cm,
+			xshift=\the\paperwidth-14mm, yshift = 0mm]
+			at (author.north west) {\footnotesize \insertdate};
+	\end{tikzpicture}
+}
+
+
+% TEMPLATE FOR THE FRAME TITLE
+\defbeamertemplate*{frametitle}{upb2018}[1][] {%
+	\begin{tikzpicture}
+		% defining the TIKZ coordinates of the top of the frametitle
+		\ifnum\thesmallft>0\relax
+			\coordinate (topright) at (\the\paperwidth-7mm,.23*\the\paperheight);
+			\coordinate (topleft) at (0,.23*\the\paperheight);
+		\else
+			\coordinate (topright) at (\the\paperwidth-7mm,.24*\the\paperheight);
+			\coordinate (topleft) at (0,.24*\the\paperheight);
+		\fi
+		\useasboundingbox (0,0) rectangle (topright);
+
+
+		% add the UPB-LOGO
+		\node[anchor=north west,inner sep = 0pt,yshift=-.6cm] at (topleft)
+			{\includegraphics[height=.7cm]{\headerlogo}};
+
+
+		% display the title or the short title
+		\ifnum \theuseshorttitle<1 \relax
+			\node[anchor=north east,inner sep = 1mm,yshift=-.6cm,xshift = -.7cm,
+				align = flush right, text width =.3\textwidth,
+				color = white, fill= \titlecolor] (title) at (topright)
+				{\tiny \baselineskip=10pt \textbf{\MakeUppercase \inserttitle}\par};
+
+			\draw[ultra thick,white] ([yshift=.35cm]title.south west)--([yshift=.35cm]title.south east);
+		\else
+				\node[anchor=north east,inner sep = 1mm,yshift=-.6cm,xshift = -.7cm,
+				align = flush right,
+				color = white, fill= \titlecolor] (title) at (topright)
+				{\tiny \baselineskip=10pt \textbf{\MakeUppercase \insertshorttitle}\par};
+
+			\draw[ultra thick,white] ([yshift=.4cm]title.south west)--([yshift=.4cm]title.south east);	
+		\fi
+
+
+
+		% display the frametitle taken into account the choosen size
+		\ifnum\thesmallft>0\relax%
+			\node[anchor=south west, inner sep = 0mm, align = flush left,
+				color=\titlecolor] at (0,0)
+				{\normalsize \textbf{\insertframetitle}}; 
+		\else
+			\node[anchor=west,inner sep = 0mm, align = flush left,
+				text width = .8\textwidth, color=\titlecolor] at (0,0)
+				{\LARGE \textbf{\insertframetitle}}; 
+		\fi
+	\end{tikzpicture}
+}
+
+
+% TEMPATE FOR THE HEADER 
+\setbeamertemplate{headline}
+{
+	\begin{tikzpicture}
+		% the header is not displayed on the title page
+		\ifnum \thepage >1\relax%
+  		\useasboundingbox (0,0) rectangle (\the\paperwidth-7mm,3.5);
+
+  		%draw the network
+		\definecolor{netcol}{gray}{.8}
+		\node[color=netcol,inner sep=0pt] (1) at (3.5,2.7) {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] (2) at (4.3,2.2) {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] (5) at (8.1,3) {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] (6) at (12.1,1.3) {\LARGE \(\bullet\)};
+		\coordinate (3) at (1.3,3.5);
+		\coordinate (4) at (4.5,5);
+		\coordinate (7) at (12.9,-.3);
+		\coordinate (8) at (8.4,3.5);
+
+		\draw[dashed, color=netcol] (3)--(1)--(2)--(5)--(\the\paperwidth,3.5)--(6);
+		\draw[dashed, color=netcol] (4)--(1);
+		\draw[dashed, color=netcol] (7)--(6)--(5)--(8);
+		\fi
+	\end{tikzpicture}
+}
+
+
+% TEMPLATE FOR THE FOOTER
+\setbeamertemplate{footline}
+{
+	\begin{tikzpicture}
+		\coordinate (bottomleft) at (\the\paperwidth-8mm,.25);
+  		\useasboundingbox (0,0) rectangle (\the\paperwidth-7mm,.01);
+
+  		% draw the network
+		\definecolor{netcol}{gray}{.8}
+		\node[color=netcol,inner sep=0pt] (1) at (10,.75) {\LARGE \(\bullet\)};
+		\node[color=netcol,inner sep=0pt] (2) at (12,1.3) {\LARGE \(\bullet\)};
+		\coordinate (3) at (8.75,0);
+		\coordinate (4) at (10.2,-.75);
+		\coordinate (5) at (13,1);
+		\coordinate (6) at (13,3);
+
+		\draw[dashed, color=netcol] (3)--(1)--(2)--(5);
+		\draw[dashed, color=netcol] (1)--(4)--(2)--(6);
+
+		% add author and frame number
+  		\node[anchor=south west, align = flush left, inner sep = 0,
+  			color = upbblue] at (.7,.25) {\insertauthor};
+  		\node[anchor=south east, align = flush right, inner sep = 0,
+  			color = upbblue] at (bottomleft) {\footnotesize \insertframenumber};
+  	\end{tikzpicture}
+}
+
+
+
+
+
+% COLORED TABLES
+% We provide some new column types for colored tables which are based on
+% the UPB-Colors
+
+% colored columns with different alignments, color and width can be choosen
+\newcolumntype{\L}[2]{>{\raggedright\arraybackslash\columncolor{#2}\color{white}}p{#1}}
+\newcolumntype{\C}[2]{>{\centering\arraybackslash\columncolor{#2}\color{white}}p{#1}}
+\newcolumntype{\R}[2]{>{\raggedleft\arraybackslash\columncolor{#2}\color{white}}p{#1}}
+
+
+% lighter colored columns with different alignments, color and width can be choosen
+\newcolumntype{\lL}[2]{>{\raggedright\arraybackslash\columncolor{#2!45!white}\color{white}}p{#1}}
+\newcolumntype{\lC}[2]{>{\centering\arraybackslash\columncolor{#2!45!white}\color{white}}p{#1}}
+\newcolumntype{\lR}[2]{>{\raggedleft\arraybackslash\columncolor{#2!45!white}\color{white}}p{#1}}
+
+
+% colored columns using the theme color of the presentation
+\newcolumntype{\thmL}[1]{\L{#1}{\titlecolor}}
+\newcolumntype{\thmC}[1]{\C{#1}{\titlecolor}}
+\newcolumntype{\thmR}[1]{\R{#1}{\titlecolor}}
+
+\newcolumntype{\lthmL}[1]{\lL{#1}{\titlecolor}}
+\newcolumntype{\lthmC}[1]{\lC{#1}{\titlecolor}}
+\newcolumntype{\lthmR}[1]{\lR{#1}{\titlecolor}}
+
+% commands for changing the line color
+\newcommand{\whiterules}{\arrayrulecolor{white}}
+\newcommand{\normalrules}{\arrayrulecolor{upbgray}}
+
+
+
+% defining the handout style 
+\mode<handout>{
+	\RequirePackage{pgfpages}
+	\ifnum\theslidesperhandout=1\relax
+		\pgfpagesuselayout{resize to}[a4paper, border shrink = 2.5mm,landscape]
+	\fi
+
+	\ifnum\theslidesperhandout=2\relax
+		\pgfpagesuselayout{2 on 1}[a4paper, border shrink = 2.5mm]
+	\fi
+
+	\ifnum\theslidesperhandout=4\relax
+		\pgfpagesuselayout{4 on 1}[a4paper, border shrink = 2.5mm,landscape]
+	\fi
+}
+
+
+\mode<all>

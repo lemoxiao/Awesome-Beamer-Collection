@@ -1,0 +1,135 @@
+% 符合表
+\newcommand{\var}[2]{#1_\mathrm{#2}}
+\newcommand{\Mdu}{M_{\mathrm{du}}}
+\newcommand{\MGK}{M_{\mathrm{GK}}}
+\newcommand{\Md}{M_{\mathrm{d}}}
+\newcommand{\Ac}{A_\mathrm{c}}
+\newcommand{\Ec}{E_\mathrm{c}}
+\newcommand{\Es}{E_\mathrm{s}}
+\newcommand{\Gc}{G_\mathrm{c}}
+\newcommand{\Asb}{A_\mathrm{sb}}
+\newcommand{\Asv}{A_\mathrm{sv}}
+\newcommand{\As}{A_\mathrm{s}}
+\newcommand{\Vd}{V_\mathrm{d}}
+\newcommand{\Sv}{S_\mathrm{v}}
+\newcommand{\Qd}{Q_\mathrm{d}}
+\newcommand{\fcd}{f_\mathrm{cd}}
+\newcommand{\fcc}{f_\mathrm{cc}}
+\newcommand{\fc}{f_\mathrm{c}}
+\newcommand{\fk}{f_\mathrm{k}}
+\newcommand{\ak}{a_\mathrm{k}}
+\newcommand{\pf}{P_\mathrm{f}}
+\newcommand{\ps}{P_\mathrm{s}}
+\newcommand{\pfk}{P_\mathrm{fk}}
+\newcommand{\ur}{\sigma_\mathrm{r}}
+\newcommand{\fcuk}{f_\mathrm{cu,k}}
+\newcommand{\fsdv}{f_\mathrm{sd,v}}
+\newcommand{\fsdb}{f_\mathrm{sd,b}}
+\newcommand{\fsd}{f_\mathrm{sd}}
+\newcommand{\fck}{f_\mathrm{ck}}
+\newcommand{\ftk}{f_\mathrm{tk}}
+\newcommand{\ho}{h_\mathrm{0}}
+\newcommand{\xb}{x_\mathrm{b}}
+\newcommand{\xib}{\xi_\mathrm{b}}
+\newcommand{\yc}{y_\mathrm{c}}
+\newcommand{\gammas}[1]{\gamma_\mathrm{#1}}
+\newcommand{\Ss}[1]{S_\mathrm{#1}}
+
+\newcommand{\sigmas}{\sigma_\mathrm{s}}
+\newcommand{\sigmac}{\sigma_\mathrm{c}}
+\newcommand{\sigmao}{\sigma_\mathrm{0}}
+\newcommand{\sigmaM}{\sigma_\mathrm{M}}
+\newcommand{\sigmaR}{\sigma_\mathrm{R}^2}
+\newcommand{\sigmaS}{\sigma_\mathrm{S}^2}
+\newcommand{\vac}{\varepsilon_\mathrm{c}}
+\newcommand{\vao}{\varepsilon_\mathrm{o}}
+\newcommand{\vacu}{\varepsilon_\mathrm{cu}}
+
+
+
+
+\newcommand{\kn}{\ \mathrm{kN\cdot m}}
+\newcommand{\mm}{\ \mathrm{mm}}
+\newcommand{\mpa}{\ \mathrm{MPa}}
+\newcommand{\ufcs}{\mu_\mathrm{{fc}}^{s}}
+\newcommand{\ufs}{\mu_\mathrm{{f150}}^{s}}
+\newcommand{\ufc}{\mu_\mathrm{fc}}
+\newcommand{\uo}{\mu_\mathrm{\Omega 0}}
+\newcommand{\uM}{\mu_\mathrm{M}}
+\newcommand{\uR}{\mu_\mathrm{R}}
+\newcommand{\uS}{\mu_\mathrm{S}}
+\newcommand{\fvs}{f_\mathrm{{\nu}}^{s}}
+\newcommand{\fcs}{f_\mathrm{c}^{s}}
+\newcommand{\fts}{f_\mathrm{t}^{s}}
+\newcommand{\fcus}{f_\mathrm{cu}^{s}}
+
+
+
+\renewcommand{\vec}[2]{\mathbf{#1}_\mathrm{#2}}
+\newcommand{\tranvec}[2]{\mathbf{#1}$^{\mathrm{'}}$ $_{\mathrm{#2}}$}
+\newcommand{\lqg}[4]{\tranvec{#1}{#2}(#4)\mathbf{#3}(#4)\vec{#1}{#2}(#4)}
+\providecommand{\alert}[1]{\textbf{#1}}
+
+\newcommand{\ut}{\mathbf{T}}
+\newcommand{\uti}[1]{\mathbf{T}^{(#1)}}
+\newcommand{\uts}{\mathbf{T}^{*}}
+\newcommand{\iut}[1]{\mathbf{T}_{#1}}
+
+\newcommand{\lt}{\mathbf{t}}
+\newcommand{\lti}[1]{\mathbf{t}^{(#1)}}
+\newcommand{\lts}{\mathbf{t}^{*}}
+\newcommand{\ilt}[1]{\mathbf{t}_{#1}}
+\newcommand{\pt}{\dfrac{\partial \ut}{\partial \lt}}
+\newcommand{\dut}{\Delta \mathbf{T}}
+\newcommand{\duti}[1]{\Delta \mathbf{T}^{(#1)}}
+\newcommand{\dTdt}{\dfrac{\partial \ut}{\partial \lt}}
+\newcommand{\dSdt}{\dfrac{\partial \us}{\partial \lt}}
+\newcommand{\ltsi}[1]{\mathbf{t}^{*(#1)}}
+\newcommand{\us}{\mathbf{S}}
+\newcommand{\usi}[1]{\mathbf{S}^{(#1)}}
+\newcommand{\uss}{\mathbf{S^*}}
+\newcommand{\ussi}[1]{\mathbf{S^*}^{(#1)}}
+
+\newcommand{\alphai}[1]{\mathbf{\alpha}^{(#1)}} 
+\newcommand{\alphaij}[2]{\mathbf{\alpha}_{#2}^{(#1)}}
+\newcommand{\alphao}{\mathbf{\alpha_{\rm{I}}}}
+\newcommand{\alphal}{\mathbf{\alpha_{\rm{II}}}}
+\newcommand{\dTdti}[1]{\dfrac{\partial \uti{#1}}{\partial \lt^{(#1)}}}
+\newcommand{\dSdti}[1]{\dfrac{\partial \usi{#1}}{\partial \lti{#1}}}
+\newcommand{\ug}{\mathbf{G}}
+\newcommand{\dTdtik}[1]{\dfrac{\partial \mathbf{T}^{(i)}}{\partial t^{(i)}_{#1}}}     
+\newcommand{\floor}[1]{\lfloor{#1}\rfloor}
+\newcommand{\before}[2]{{#1}{\rightarrowtail}{#2}}
+\newcommand{\after}[2]{{#1}{\leftarrowtail}{#2}}
+\newcommand{\together}[2]{{#1}{\leftrightarrows}{#2}}
+% \newcommand{\lts}{\mathbf{t}^{*}}
+
+\newcommand\Tx{\vec{T}{x}}
+\newcommand\Tu{\vec{T}{u}}
+\newcommand\Tk{\mathbf{T}(k)}
+
+\newcommand\xk{\mathbf{x}(k)}
+\newcommand\xko{\mathbf{x}(k_0)}
+\newcommand\xkf{\mathbf{x}(k_f)}
+\newcommand\uk{\mathbf{u}(k)}
+\newcommand\zk{\mathbf{z}(k)}
+\newcommand\zkf{\mathbf{z}(k_f)}
+\newcommand\yk{\mathbf{y}(k)}
+\newcommand\ek{\mathbf{e}(k)}        
+\newcommand\Pk{\mathbf{P}(k)}
+\newcommand\Pkk{\mathbf{P}(k+1)}
+\newcommand\Pkf{\mathbf{P}(k_f)}
+\newcommand\gk{\mathbf{g}(k)}
+\newcommand\gkk{\mathbf{g}(k)}
+\newcommand\gkf{\mathbf{g}(k_f)}
+\newcommand\Lk{\mathbf{L}(k)}
+\newcommand\Lg{\mathbf{L_g}(k)}
+\newcommand\Lgk{\mathbf{L_g}(k)}
+\newcommand\xsk{\mathbf{x^*}(k)}
+\newcommand\xskk{\mathbf{x^*}(k+1)}
+\newcommand\usk{\mathbf{u^*}(k)}
+
+%%% Local Variables:
+%%% mode: plain-tex
+%%% TeX-master: "../main"
+%%% End:

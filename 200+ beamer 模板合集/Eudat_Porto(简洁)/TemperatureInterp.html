@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>
+			Temperature interpolation
+		</title>
+		<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+		  integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+		  crossorigin=""></script>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+		  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+		  crossorigin=""/>
+    <link rel="stylesheet" href="lib/leaflet/Leaflet.Coordinates-0.1.5.css"/>
+		<script type="text/javascript" src="lib/leaflet/Leaflet.Coordinates-0.1.5.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.4/Control.FullScreen.css"/>
+		<style type="text/css">
+			#map { height : 900px; width : 1800px}
+			.legend { background : white; line-height : 2em}
+			.legend i { width : 5em; float : left}
+			.textlabel { border: 2px solid black; font-size: 24px }
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="map"></div>
+		<script type="text/javascript" src='lib/js/basemaps.js'></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.4/Control.FullScreen.js"></script>
+		<script type="text/javascript" src="./data/medsea_coast.js"></script>
+		<script type="text/javascript" src="./data/medsea_mesh.js"></script>
+		<script type="text/javascript" src="./data/data_position5.dat"></script>
+		<script type="text/javascript" src="./data/grid.js"></script>
+		<script type="text/javascript" src="./data/grid2.js"></script>
+		<script type="text/javascript" src="./data/temperature.js"></script>
+		<script>
+
+			var map = L.map('map',{fullscreenControl: true,})
+
+			map.addLayer(CartoDB)
+
+			var NASAGIBS_ViirsEarthAtNight2012 = L.tileLayer('https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/{time}/{tilematrixset}{maxZoom}/{z}/{y}/{x}.{format}', {
+				attribution: 'Imagery provided by services from the Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/Earth Science Data and Information System (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.',
+				bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
+				minZoom: 1,
+				maxZoom: 8,
+				format: 'jpg',
+				time: '',
+				tilematrixset: 'GoogleMapsCompatible_Level'
+			});
+
+
+			var baseMaps = {
+				"CartoDB": CartoDB,
+				"OpenStreetMap": OpenStreetMap_Mapnik,
+				"Stamen Terrain": Stamen_Terrain,
+				"CartoDB Dark": CartoDB_DarkMatter,
+				"ESRI World Imagery": Esri_WorldImagery,
+				"Earth at Night": NASAGIBS_ViirsEarthAtNight2012,
+			};
+
+			/*
+			L.control.coordinates({
+				position:"bottomleft",
+				decimals:3,
+				decimalSeperator:".",
+				labelTemplateLat:"Lat: {y}",
+				labelTemplateLng:"Lon: {x}"
+			}).addTo(map);
+			*/
+			var heatStyle = {
+				gradient : {.65: "white", .75:"#FFFF36", .85:"#FF9D00", .9:"#FF1700", .95:"#900000", 1:"black"},
+				minOpacity: 0.25,
+                radius: 5,
+                blur: 5,
+			};
+
+			var dataStyle = {
+					radius: 1,
+					fillColor: 'red',
+					weight: 1,
+					opacity: 1,
+					color: 'black',
+					fillOpacity: 0.7
+			}
+
+			var meshStyle = {
+				weight: 0.5,
+				opacity: .7,
+				color : 'black',
+				fillOpacity: 0.
+			}
+
+			var contourStyle = {
+				weight: 3,
+				opacity: 1,
+				color : 'black',
+				fillOpacity: 0.
+			}
+
+			var heatStyle = {
+		    gradient : {.5: "white", .65:"#FFFF36", .85:"#FF9D00", .9:"#FF1700", .95:"#900000", 1:"black"},
+		    minOpacity: 0.75, radius: 2, blur: 2,
+		  };
+
+			/*
+			function getFieldColor(d) {
+		    return d > 23  ? '#a50026' :
+		           d > 22  ? '#d73027' :
+		           d > 21  ? '#f46d43' :
+		           d > 20  ? '#fdae61' :
+		           d > 19  ? '#fee090' :
+		           d > 18  ? '#ffffbf' :
+		           d > 17  ? '#e0f3f8' :
+							 d > 16  ? '#abd9e9' :
+							 d > 15  ? '#74add1' :
+							 d > 14  ? '#4575b4' :
+							 d > 13  ? '#313695' :
+		                     '#FFEDA0';
+			}
+			*/
+
+			function getFieldColor(d) {
+		    return d > 22  ? '#ffffd9' :
+		           d > 21  ? '#edf8b1' :
+			 		     d > 20  ? '#c7e9b4' :
+			 		     d > 19  ? '#7fcdbb' :
+			 		     d > 18  ? '#41b6c4' :
+			 		     d > 17  ? '#1d91c0' :
+			 		     d > 16  ? '#225ea8' :
+			 		      				 '#0c2c84' ;
+
+			}
+
+			function fieldStyle(feature) {
+          return {
+							radius: 5,
+              fillColor: getFieldColor(feature.properties.field),
+              color: 'k',
+              weight: 2,
+              opacity: 0.9,
+              fillOpacity: 0.8
+          };
+      }
+
+			latlon = [];
+
+			//var porto = new L.LatLng(); // 14.4
+			var porto = new L.LatLng(41.162142, -8.92195)
+			var malta = new L.LatLng(36.7,13.2);
+			var midpoint = new L.LatLng(38.931, 2.139);
+
+			var portoCircle = L.circle(porto, {radius: 30000, color: 'red', fillOpacity: .5});
+			var maltaCircle = L.circle(malta, {radius: 30000, color: 'blue', fillOpacity: .5});
+			var midpointCircle = L.circle(midpoint, {radius: 30000, color: 'black', fillOpacity: .5});
+			var cities = L.layerGroup([portoCircle, maltaCircle, midpointCircle]);
+
+
+			portoCircle.bindTooltip("14.4°C", {permanent: true, className: "textlabel", offset: [20, 0] });
+			portoCircle.addTo(map);
+
+			maltaCircle.bindTooltip("16.2°C", {permanent: true, className: "textlabel", offset: [-20, 0] });
+			maltaCircle.addTo(map);
+
+			midpointCircle.bindTooltip("<b>?</b>", {permanent: true, className: "textlabel", offset: [20, 0] });
+			midpointCircle.addTo(map);
+
+			midpointCircle.bindTooltip("<b>15.7°C</b>", {permanent: true, className: "textlabel", offset: [20, 0] });
+
+			var linePorto = L.polyline([porto, midpoint], {color: 'red'});
+			var lineMalta = L.polyline([malta, midpoint], {color: 'blue'});
+			var lines = L.layerGroup([linePorto, lineMalta]);
+
+			var bathymetry = L.tileLayer.wms('http://ows.emodnet-bathymetry.eu/wms', {
+			    layers: 'emodnet:mean_atlas_land,coastlines,world:sea_names'
+			}).addTo(map);
+
+			var heatmap = L.heatLayer(datapoints, heatStyle);
+			var divacontours = new L.GeoJSON(contours, {style: contourStyle});
+			var divamesh = new L.GeoJSON(medmesh, {style: meshStyle});
+			var divafield = new L.GeoJSON(temperature5m, {style: fieldStyle});
+
+			markerlist = []
+			for (var i = 0; i < grid.length; i++) {
+				marker = new L.circleMarker([grid[i][0],grid[i][1]],
+					{color: "k", radius: 3, opacity: 1, fillOpacity:.9});
+				markerlist.push(marker);
+			}
+			var coarsegrid = L.layerGroup(markerlist);
+			// coarsegrid.addTo(map);
+
+			markerlist = []
+			for (var i = 0; i < finegrid.length; i++) {
+				marker = new L.circleMarker([finegrid[i][0], finegrid[i][1]],
+					{color: "k", radius: 2, opacity: 1, fillOpacity:.9});
+				markerlist.push(marker);
+			}
+			var finegrid = L.layerGroup(markerlist);
+
+
+			var overlayers = {
+				"bathymetry": bathymetry,
+				"Locations": cities,
+				"Lines": lines,
+				"Contours": divacontours,
+				"Finite-element mesh": divamesh,
+				"Heat map": heatmap,
+				"Coarse grid": coarsegrid,
+				"Fine grid": finegrid,
+				"Interpolated field": divafield,
+			};
+
+
+			map.setView([40,3], 6);
+			L.control.scale().addTo(map);
+
+			L.control.layers(baseMaps, overlayers,
+				{autoZIndex:true, collapsed:true}).addTo(map);
+
+
+		</script>
+		</body>
+</html>

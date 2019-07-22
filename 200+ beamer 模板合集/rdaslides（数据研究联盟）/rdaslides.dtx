@@ -1,0 +1,1887 @@
+% \iffalse
+%<*internal>
+\RequirePackage{etoolbox}
+% \fi
+\providebool{ThisIsTheMainRun}
+% \iffalse
+%</internal>
+%<*internal|class|theme|palette|mscwg|msdwg>
+\def\Version{2016/08/18 v3.0}
+%</internal|class|theme|palette|mscwg|msdwg>
+%<*internal>
+\iffalse
+%</internal>
+%<*class|theme|palette|mscwg|msdwg>
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+%</class|theme|palette|mscwg|msdwg>
+%<*class>
+\ProvidesClass{rdaslides}
+    [\Version\space Class for Research Data Alliance presentations]
+%</class>
+%<*theme>
+\ProvidesPackage{beamerthemeRDA}
+    [\Version\space Beamer theme for Research Data Alliance presentations]
+%</theme>
+%<*palette>
+\ProvidesPackage{rdacolors}
+    [\Version\space Colour palette for Research Data Alliance documents]
+%</palette>
+%<*mscwg>
+\ProvidesPackage{rdamscwg}
+    [\Version\space Logo and details of the RDA Metadata Standards Catalog Working Group]
+%</mscwg>
+%<*msdwg>
+\ProvidesPackage{rdamsdwg}
+    [\Version\space Logo and details of the RDA Metadata Standards Directory Working Group]
+%</msdwg>
+%<*readme>
+The rdaslides class: Research Data Alliance presentations
+=========================================================
+
+The rdaslides LaTeX class is intended to produce slides for Research
+Data Alliance (RDA) presentations, or an accompanying transcript, or both.
+It is based on the [beamerswitch] class.
+
+Internally, rdaslides uses a presentation theme called 'RDA',
+which can be used independently within beamer.
+
+Installation
+------------
+
+### Automated way ###
+
+A makefile is provided which you can use with the Make utility:
+
+  * Running `make` generates the derived files
+
+      - README.md
+      - rdaslides.pdf
+      - rdaslides-slides.pdf
+      - rdaslides.cls
+      - rdacolors.sty
+      - beamerthemeRDA.sty
+      - rdamscwg.sty
+      - rdamsdwg.sty
+      - rdaslides.ins
+
+  * Running `make inst` installs the files (and images) in the user's
+    TeX tree.
+  * Running `make install` installs the files (and images) in the
+    local TeX tree.
+
+### Pre-requisites ###
+
+The documentation uses fonts from the XCharter and sourcesanspro
+packages, as well as sourcecodepro if XeLaTeX or LuaLaTeX is used,
+or zi4 (inconsolata) otherwise. To compile the documentation
+successfully, you will need the minted package installed and working.
+
+### Manual way ###
+
+To install the class from scratch, follow these instructions. If you have
+downloaded the zip file from the [Releases] page on GitHub, you can skip the
+first two steps.
+
+ 1. Compile rdaslides.dtx just as you would a normal LaTeX file. You will
+    need to enable shell escape for minted to work properly. As well
+    as the usual PDF (or DVI) and auxiliary files, several others are
+    generated.
+
+ 2. Compile rdaslides.dtx a second time with `-jobname=rdaslides-slides`
+    as a command line option to generate the sample slides. Again, you will
+    need to enable shell escape for minted to work properly.
+
+ 3. Move the files to your TeX tree as follows:
+
+      - `source/latex/rdaslides`: rdaslides.dtx, rdaslides.ins
+      - `tex/latex/rdaslides`: rdaslides.cls, rdacolors.sty,
+         beamerthemeRDA.sty, rdamscwg.sty, rdamsdwg.sty,
+         rda-bg-normal.jpeg rda-bg-title1.jpeg rda-bg-title2.jpeg
+      - `doc/latex/rdaslides`: rdaslides.pdf, rdaslides-slides.pdf,
+         README.md
+
+ 4. You may then have to update your installation's file name database
+    before TeX and friends can see the files.
+
+Licence
+-------
+
+Copyright 2016 Alex Ball.
+
+This work consists of three image files (rda-bg-normal.jpeg,
+rda-bg-title1.jpeg, and rda-bg-title2.jpeg), the documented LaTeX file
+rdaslides.dtx, and a Makefile.
+
+The text files contained in this work may be distributed and/or modified
+under the conditions of the [LaTeX Project Public License (LPPL)][lppl],
+either version 1.3c of this license or (at your option) any later
+version.
+
+The rights to the image files distributed with this bundle are held by
+the [Research Data Alliance][rda].
+
+This work is "maintained" (as per LPPL maintenance status) by
+[Alex Ball][me].
+
+[beamerswitch]: https://github.com/alex-ball/beamerswitch
+[Releases]: https://github.com/alex-ball/rdaslides/releases
+[lppl]: http://www.latex-project.org/lppl.txt
+[rda]: https://rd-alliance.org/
+[me]: http://alexball.me.uk/
+
+%</readme>
+%<*internal>
+\fi
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+  \expandafter\begingroup
+\fi
+\makeatletter
+\protected@edef\su@SubString{-}%
+\protected@edef\su@String{\jobname}%
+\def\su@compare#1-#2\@nil{%
+  \def\su@param{#2}%
+  \ifx\su@param\@empty
+    \expandafter\@secondoftwo
+  \else
+    \expandafter\@firstoftwo
+  \fi
+}%
+\def\su@comp@compare#1#2{\su@compare#2\@nnil#1\@nil}%
+\expandafter\expandafter\expandafter\su@comp@compare%
+\expandafter\expandafter\expandafter{%
+\expandafter\su@SubString\expandafter
+}\expandafter{\su@String}%
+{\ThisIsTheMainRunfalse}{\ThisIsTheMainRuntrue}
+\makeatother
+\ifThisIsTheMainRun
+%</internal>
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+
+----------------------------------------------------------------
+The rdaslides class: Research Data Alliance presentations
+Author:  Alex Ball
+E-mail:  a.j.ball@bath.ac.uk
+License: Released under the LaTeX Project Public License v1.3c or later
+See:     http://www.latex-project.org/lppl.txt
+----------------------------------------------------------------
+
+\endpreamble
+\postamble
+
+Copyright (C) 2016 Alex Ball <a.j.ball@bath.ac.uk>
+\endpostamble
+
+\usedir{tex/latex/rdaslides}
+\generate{
+  \file{rdaslides.cls}{\from{\jobname.dtx}{class}}
+  \file{rdacolors.sty}{\from{\jobname.dtx}{palette}}
+  \file{beamerthemeRDA.sty}{\from{\jobname.dtx}{theme}}
+  \file{rdamsdwg.sty}{\from{\jobname.dtx}{msdwg}}
+  \file{rdamscwg.sty}{\from{\jobname.dtx}{mscwg}}
+}
+%</install>
+%<install>\endbatchfile
+%<*internal>
+\usedir{source/latex/rdaslides}
+\generate{
+  \file{\jobname.ins}{\from{\jobname.dtx}{install}}
+}
+\nopreamble\nopostamble
+\usedir{doc/latex/rdaslides}
+\generate{
+  \file{README.md}{\from{\jobname.dtx}{readme}}
+}
+\fi
+\ifx\fmtname\nameofplainTeX
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+
+%</internal>
+%<*driver>
+\ProvidesFile{rdaslides.dtx}
+    [\Version\space Class for Research Data Alliance presentations]
+\documentclass[article]{rdaslides}
+\let\RdaslidesMaketitle=\maketitle
+
+% Basic typography
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage[scaled=0.96,sups]{XCharter}
+  \usepackage[scaled=0.95,tabular]{sourcesanspro}
+  \usepackage[varl,varqu]{zi4}
+\else
+  \usepackage{fontspec}
+  \setmainfont
+    [Scale=0.96
+    ,Ligatures=TeX
+    ]%
+    {XCharter}
+  \setsansfont
+    [Scale=MatchLowercase
+    ,Ligatures=TeX
+    ,StylisticSet=4
+    ,BoldFont={Source Sans Pro Bold}
+    ,ItalicFont={Source Sans Pro Italic}
+    ,BoldItalicFont={Source Sans Pro Bold Italic}
+    ]%
+    {Source Sans Pro}
+  \setmonofont
+    [Scale=MatchLowercase
+    ,RawFeature={extend=0.83}
+    ,BoldFont={Source Code Pro Bold}
+    ,ItalicFont={Source Code Pro Italic}
+    ,BoldItalicFont={Source Code Pro Bold Italic}
+    ,ItalicFeatures={FakeSlant=0.04}
+    ,BoldItalicFeatures={FakeSlant=0.04}
+    ]%
+    {Source Code Pro}
+\fi
+\usepackage{metalogo}
+\usepackage{multicol}
+
+% For typesetting the documentation generally
+\usepackage{tcolorbox}
+\tcbuselibrary{documentation,breakable,minted,skins}
+\mode<article>{
+  \usepackage{doc}
+}
+\colorlet{Option}{violet}
+\colorlet{Command}{red!75!black}
+\colorlet{Environment}{blue!75!black}
+\colorlet{Value}{olive!75!black}
+\colorlet{Color}{cyan!75!black}
+\colorlet{ExampleFrame}{rdagrey}
+\colorlet{ExampleBack}{rdayellow!10}
+\tcbset
+  { colframe=rdagrey
+  , colback=rdayellow!10
+  , left=2mm
+  , right=2mm
+  , listing engine=minted
+  , minted options=
+    { breaklines
+    , fontsize=\footnotesize
+    , linenos
+    , numbersep=20pt
+    , firstnumber=last
+    }
+  , index format=pgf
+  , color command=Command
+  , color environment=Environment
+  , color key=Option
+  , color value=Value
+  , color color=Color
+  , docexample/.style=
+    { colframe=ExampleFrame
+    , colback=ExampleBack
+    , before skip=1em plus 0.2em minus 0.2em
+    , after skip=1em plus 0.2em minus 0.2em
+    , fontlower=\footnotesize
+    , skin=enhanced
+    }
+  }
+\renewcommand{\theFancyVerbLine}{\footnotesize\itshape\color{gray}\arabic{FancyVerbLine}}
+
+% For typesetting the user documentation
+\newcommand{\pkg}[1]{\href{http://www.ctan.org/pkg/#1}{\textsf{#1}}}
+\let\tcbcs=\cs
+\renewcommand*{\cs}[1]{\textcolor{Command}{\tcbcs{#1}}}
+\def\sqbrackets#1{%
+  \texttt{\textcolor{Option}{[}#1\textcolor{Option}{]}}}
+\def\brackets#1{%
+  \texttt{\textcolor{Environment}{\char`\{}#1\textcolor{Environment}{\char`\}}}}
+\def\marg#1{%
+  \textcolor{Environment}{\ttfamily\char`\{}\meta{#1}\textcolor{Environment}{\ttfamily\char`\}}}
+\newcommand*{\env}[1]{\textcolor{Environment}{\ttfamily #1}}
+\newcommand*{\key}[1]{\textcolor{Option}{\ttfamily #1}}
+\newcommand*{\val}[1]{\textcolor{Value}{\ttfamily #1}}
+\newcommand{\sample}[2][1em]{\bgroup\setlength{\fboxsep}{0pt}\fbox{\color{#2}\rule{#1}{#1}}\egroup}
+
+% For typesetting the implementation
+\mode<article>{
+  \renewenvironment{macro}[1]{%
+    \def\MyName{#1}%
+    \index{\MyName@\tcbIndexPrintComC {\MyName}|(emph}%
+  }{%
+    \ifdef{\MyName}{}{%
+      \errmessage{You have closed a macro environment you have not opened on \the\inputlineno.}%
+    }
+    \index{\MyName@\tcbIndexPrintComC {\MyName}|)}%
+  }
+  \renewenvironment{environment}[1]{%
+    \def\MyName{#1}%
+    \index{\MyName@\tcbIndexPrintEnvCA {\MyName}|(emph}%
+    \index{Environments!\MyName@\tcbIndexPrintEnvC {\MyName}|(emph}%
+  }{%
+    \ifdef{\MyName}{}{%
+      \errmessage{You have closed an environment environment you have not opened on \the\inputlineno.}%
+    }
+    \index{Environments!\MyName@\tcbIndexPrintEnvC {\MyName}|)}%
+    \index{\MyName@\tcbIndexPrintEnvCA {\MyName}|)}%
+  }
+}
+\newenvironment{optionkey}[1]{%
+  \def\MyName{#1}%
+  \index{\MyName@\tcbIndexPrintKeyCA {\MyName}|(emph}%
+  \index{Keys!\MyName@\tcbIndexPrintKeyC {\MyName}|(emph}%
+}{%
+  \ifdef{\MyName}{}{%
+    \errmessage{You have closed an optionkey environment you have not opened on \the\inputlineno.}%
+  }
+  \index{Keys!\MyName@\tcbIndexPrintKeyC {\MyName}|)}%
+  \index{\MyName@\tcbIndexPrintKeyCA {\MyName}|)}%
+}
+\newenvironment{optionvalue}[1]{%
+  \def\MyName{#1}%
+  \index{\MyName@\tcbIndexPrintValCA {\MyName}|(emph}%
+  \index{Values!\MyName@\tcbIndexPrintValC {\MyName}|(emph}%
+}{%
+  \ifdef{\MyName}{}{%
+    \errmessage{You have closed an optionvalue environment you have not opened on \the\inputlineno.}%
+  }
+  \index{Values!\MyName@\tcbIndexPrintValC {\MyName}|)}%
+  \index{\MyName@\tcbIndexPrintValCA {\MyName}|)}%
+}
+\makeatletter
+\newcommand{\resetmintedformat}{%
+  % Comments
+  \expandafter\def\csname PYGdefault@tok@c\endcsname{\let\PYGdefault@it=\textit\def\PYGdefault@tc####1{\textcolor{gray}{####1}}}
+  % Command sequences
+  \expandafter\def\csname PYGdefault@tok@k\endcsname{\def\PYGdefault@tc####1{\textcolor{Command}{####1}}}
+  % Optional arguments
+  \expandafter\def\csname PYGdefault@tok@na\endcsname{\def\PYGdefault@tc####1{\textcolor{Option}{####1}}}
+  % Braces
+  \expandafter\def\csname PYGdefault@tok@nb\endcsname{\def\PYGdefault@tc####1{\textcolor{Environment}{####1}}}
+}
+\apptocmd{\minted@checkstyle}{\resetmintedformat}{}{}
+\makeatother
+\mode<article>{
+  \MakeShortVerb{\|}
+}
+\makeatletter
+\let\PrintMacroName\@gobble
+\let\PrintEnvName\@gobble
+\renewenvironment{tcb@manual@entry}{\begin{list}{}{%
+      \setlength{\topsep}{0pt}
+      \setlength{\partopsep}{0pt}
+      \setlength{\leftmargin}{\kvtcb@doc@left}%
+      \setlength{\itemindent}{0pt}%
+      \setlength{\itemsep}{0pt}%
+      \setlength{\parsep}{0pt}%
+      \setlength{\rightmargin}{\kvtcb@doc@right}%
+    }\item}{\end{list}}
+\makeatother
+% This bit inspired by ydoc
+\mode<article>
+\makeatletter
+\newwrite\ydocwrite
+\def\ydocfname{\jobname.tcbtemp}
+\def\ydoc@catcodes{%
+  \let\do\@makeother
+  \dospecials
+  \catcode`\\=\active
+  \catcode`\^^M=\active
+  \catcode`\ =\active
+}
+\def\macrocode{%
+  \begingroup
+  \ydoc@catcodes
+  \macro@code
+}
+\def\endmacrocode{}
+\begingroup
+\endlinechar\m@ne
+\@firstofone{%
+  \catcode`\|=0\relax
+  \catcode`\(=1\relax
+  \catcode`\)=2\relax
+  \catcode`\*=14\relax
+  \catcode`\{=12\relax
+  \catcode`\}=12\relax
+  \catcode`\ =12\relax
+  \catcode`\%=12\relax
+  \catcode`\\=\active
+  \catcode`\^^M=\active
+  \catcode`\ =\active
+}*
+|gdef|macro@code#1^^M%    \end{macrocode}(*
+|endgroup|expandafter|macro@@code|expandafter(|ydoc@removeline#1|noexpand|lastlinemacro)*
+)*
+|gdef|ydoc@removeline#1^^M(|noexpand|firstlinemacro)*
+|gdef|ydoc@defspecialmacros(*
+|def^^M(|noexpand|newlinemacro)*
+|def (|noexpand|spacemacro)*
+|def\(|noexpand|bslashmacro)*
+)*
+|gdef|ydoc@defrevspecialmacros(*
+|def|newlinemacro(|noexpand^^M)*
+|def|spacemacro(|noexpand )*
+|def|bslashmacro(|noexpand\)*
+)*
+|endgroup
+\def\macro@@code#1{%
+  {\ydoc@defspecialmacros
+    \xdef\themacrocode{#1}}%
+  \PrintMacroCode
+  \end{macrocode}%
+}
+\def\PrintMacroCode{%
+  \begingroup
+  \let\firstlinemacro\empty
+  \let\lastlinemacro\empty
+  \def\newlinemacro{^^J}%
+  \let\bslashmacro\bslash
+  \let\spacemacro\space
+  \immediate\openout\ydocwrite=\ydocfname\relax
+  \immediate\write\ydocwrite{\themacrocode}%
+  \immediate\closeout\ydocwrite
+  \let\input\@input
+  \tcbinputlisting{breakable,listing only,docexample,listing file=\ydocfname}%
+  \endgroup
+}
+\makeatother
+
+\DisableCrossrefs
+\makeindex
+%\CodelineIndex
+\RecordChanges
+\mode
+<all>
+
+\let\maketitle=\RdaslidesMaketitle
+
+\usepackage{rdamscwg}
+
+% \def\licenseLogo{\includegraphics[width=\hsize]{cc_by}}
+% \def\licenseStatement{Except where otherwise stated,%
+% this work is licensed under the Creative Commons Attribution 4.0 International licence}
+% \def\licenseUrl{https://creativecommons.org/licenses/by/4.0/}
+
+\mode<presentation>{
+  \usepackage{readprov}
+}
+\GetFileInfo{rdaslides.cls}
+\title{The \protect\textsf{rdaslides} class: Research Data Alliance presentations}
+\author{Alex Ball}
+\authorurl{http://alexball.me.uk/}
+\institute{University of Bath}
+\StrSubstitute{\filedate}{/}{-}[\IsoFileDate]
+\date{\IsoFileDate}
+\occasion{An RDA Plenary}
+\hashtag{dummy}
+
+\begin{document}
+\begin{frame}
+\maketitle
+\end{frame}
+
+\begin{absquote}
+This is the documentation for and a demonstration of \filename, ‘\fileinfo’, \fileversion, dated \printdateTeX{\filedate}.
+\end{absquote}
+
+\section{Usage}
+
+\subsection{Loading the class}
+
+\begin{frame}[fragile]{Using the class}
+The class is loaded in the usual way.
+
+\begin{dispListing}
+\documentclass{rdaslides}
+\end{dispListing}
+
+The class defaults to producing slides. You can change this with an option:
+\begin{docKey}{handout}{}{no value, initially unset}
+Lay slides out two to an A4 page, for easy printing.
+\end{docKey}
+\begin{docKey}{trans}{}{no value, initially unset}
+Produce less dynamic slides: useful for archival versions.
+\only<article>{See the \pkg{beamer} manual for a more detailed explanation
+  of how this ‘transparencies version’ behaves.}
+\end{docKey}
+\begin{docKey}{article}{}{no value, initially unset}
+Produce a document in article mode: useful for transcripts.
+\end{docKey}
+\begin{docKey}{set}{}{no value, initially unset}
+Produce a document in article mode, plus a set of slides\only<article>{
+(suffixed with ‘\texttt{-slides}’)}.
+\end{docKey}
+\end{frame}
+
+Since this class was first released, the mode switching aspects have been
+improved and separated out into a separate class file, \pkg{beamerswitch}.
+The options above are only a subset; please see the \pkg{beamerswitch}
+documentation for the full set. Note that the \key{set} option is now simply
+shorthand for \key{article} and \key{alsobeamer}.
+
+\subsection{Loading the theme}
+
+\begin{frame}[fragile]{Using the beamer theme}
+If you don't want the article mode settings introduced by the full class,
+you can simply load the theme directly into \pkg{beamer}:
+
+\begin{dispListing}
+\documentclass{beamer}
+\usetheme{RDA}
+\end{dispListing}
+\end{frame}
+
+\subsection{Preamble metadata}
+
+The class file provides some additional commands for describing your presentation.
+\begin{frame}{Metadata}
+When filling out the document metadata, you can use the regular \pkg{beamer} conventions with a few differences:
+
+\begin{docCommand}{date}{\marg{ISO date}}
+\only<article>{This is not a new command (!) but it is handled slightly differently.}
+Enter the date in ISO format, e.g.\ 2011-12-13.
+\end{docCommand}
+\begin{docCommand}{occasion}{\marg{event name}}
+Use this to provide the name of the event where the presentation will be given.
+\end{docCommand}
+\begin{docCommand}{authorurl}{\marg{URL}}
+Use this to provide a URL where more details about the author may be consulted (not so useful for multi-author presentations).
+\end{docCommand}
+\begin{docCommand}{hashtag}{\marg{hashtag}}
+Use this to specify exactly one hashtag for sharing on social media. Omit the hash (\#), as the class will add it for you.
+\end{docCommand}
+\end{frame}
+
+The above changes are not present in the standalone \pkg{beamer} theme.
+You can however sneak the information into your presentation by defining
+\cs{insertoccasion}, \cs{insertauthorurl} and \cs{inserthashtag} respectively.
+To trigger the change in date handling, load the \pkg{isodate} package.
+
+\subsection{Customizing the title slide}
+
+You can add elements to the title slide by using the hooks provided.
+(The hooks are also recognized in article mode but they mainly affect the
+\cs{finale} command, of which more later.) You use the hooks by defining them,
+so to use \cs{rdaGroupName}, for example, you would need to do something like this:
+\begin{dispListing}
+\def\rdaGroupName{Metadata}
+\end{dispListing}
+
+\begin{frame}[fragile]{Hooks (RDA Group)}
+You can associate your presentation with a particular group by defining the following hooks.
+
+\begin{docCommand}{rdaGroupLogo}{}
+This should insert the logo of an RDA group. For best results, scale it to fit the width of the bounding box like so:
+\begin{dispListing}
+\def\licenseLogo{\insertgraphics[width=\hsize]{filename}}
+\end{dispListing}
+\end{docCommand}
+\begin{docCommand}{rdaGroupName}{}
+The name of the RDA group, e.g. ‘Metadata’.
+\end{docCommand}
+\begin{docCommand}{rdaGroupType}{}
+The type of RDA group, e.g. ‘Interest Group’.
+\end{docCommand}
+\begin{docCommand}{rdaGroupUrl}{}
+The URL of the group web page.
+\end{docCommand}
+\end{frame}
+
+By way of demonstration, the package \textsf{rdamscwg.sty} is provided for
+associating presentations with the Metadata Standards Catalog Working Group.
+Use it in the usual way:
+
+\begin{dispListing}
+\usepackage{rdamscwg}
+\end{dispListing}
+
+Contributions of similar packages representing other groups are welcome,
+but there is no intention to provide a comprehensive set.
+
+\begin{frame}[fragile]{Hooks (Licence)}
+If releasing the presentation under licence, you can declare this by defining
+the following hooks.
+
+\begin{docCommand}{licenseLogo}{}
+This should insert the logo of the licence under which the presentation is released, if applicable. For best results, scale it to fit the width of the bounding box like so:
+\begin{dispListing}
+\def\licenseLogo{\insertgraphics[width=\hsize]{filename}}
+\end{dispListing}
+\end{docCommand}
+\begin{docCommand}{licenseStatement}{}
+A notice concerning the licence, e.g.\ ‘Released under an X licence.’
+\end{docCommand}
+\begin{docCommand}{licenseUrl}{}
+The URL of the full licence text, if applicable.
+\end{docCommand}
+\end{frame}
+
+\subsection{Composing your presentation}
+
+The class is set up to ignore non-frame text in presentation mode, and ignore
+frame titles in article mode. The idea is that you put additional commentary
+outside frames, and it shows up in the transcript but not the slides. With
+pictorial slides, you can wrap them in \env{figure} environments, and with
+textual slides you can run them into the text of the commentary.
+
+In article mode, article-only text is shown in a serif font,
+while text that also appears on a slide is shown in a sans serif font,
+so you can tell them apart.
+
+\begin{frame}{Colours}
+\begin{multicols}{3}[Both the class and standalone theme provide the RDA colour palette:]
+\only<article>{\setlength{\parskip}{1ex}}%
+\sample{rdayellow}\enspace\texttt{rdayellow}\par
+\sample{rdagreen}\enspace \texttt{rdagreen}\par
+\sample{rdabrown}\enspace \texttt{rdabrown}\par
+\sample{rdagray}\enspace  \texttt{rdagray}\par
+\sample{rdagrey}\enspace  \texttt{rdagrey}\par
+\sample{rdamidyellow}\enspace\texttt{rdamidyellow}\par
+\sample{rdamidgreen}\enspace \texttt{rdamidgreen}\par
+\sample{rdamidbrown}\enspace \texttt{rdamidbrown}\par
+\sample{rdamidgray}\enspace  \texttt{rdamidgray}\par
+\sample{rdamidgrey}\enspace  \texttt{rdamidgrey}\par
+\sample{rdalightyellow}\enspace\texttt{rdalightyellow}\par
+\sample{rdalightgreen}\enspace \texttt{rdalightgreen}\par
+\sample{rdalightbrown}\enspace \texttt{rdalightbrown}\par
+\sample{rdalightgray}\enspace  \texttt{rdalightgray}\par
+\sample{rdalightgrey}\enspace  \texttt{rdalightgrey}\par
+\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]{New frame options}
+The class provides two new options for frames.
+
+\begin{docKey}{background}{=\meta{filename}}{default \texttt{rda-bg-normal}}
+Use this option on its own to restore the usual slide background.
+Use it with an image filename to use that image as the background instead.
+\end{docKey}
+\begin{docKey}{nobackground}{}{no value, initially unset}
+This gives the slide a plain white background.
+\end{docKey}
+\end{frame}
+
+Note that the background image will be resized to fill the slide completely,
+so to avoid distortion use an image that has approximately the right aspect ratio.
+By default, \pkg{beamer} slides are 128\,mm $\times$ 96\,mm, which is a 4:3 ratio.
+
+These two options have no effect in article mode.
+
+\begin{frame}[fragile]{Progress meter}
+Slides show progress information at the bottom right in the form of a charge-style indicator.
+To show progress as a fraction using frame numbers
+\only<presentation>{(e.g. \insertframenumber\slash\inserttotalframenumber):}
+\only<article>{(e.g. 10\slash 17):}
+\begin{dispListing}
+\setbeamertemplate{progress}[fraction]
+\end{dispListing}
+
+To show just the current frame number:
+\begin{dispListing}
+\setbeamertemplate{progress}[number]
+\end{dispListing}
+
+To show nothing at all:
+\begin{dispListing}
+\setbeamertemplate{progress}{}
+\end{dispListing}
+\end{frame}
+
+\subsection{Finishing off}
+
+\begin{frame}[fragile]{Finishing off}
+You can insert a closing slide in your presentation to parallel your opening slide.
+
+\begin{docCommand}{finale}{\oarg{important note}}
+The optional argument lets you add an important note, such as a key link or date, to the end of the slide. There is not much room, so be sparing.
+
+Wrap it in a bare frame, as you would for \cs{maketitle}:
+\begin{tcolorbox}
+\cs{begin}\brackets{frame}\\
+\cs{finale}\\
+\cs{end}\brackets{frame}
+\end{tcolorbox}
+\end{docCommand}
+\end{frame}
+
+In article mode, \cs{finale} inserts a postscript consisting of a horizontal line
+followed by the licence and RDA group information or, failing that,
+a brief statement about RDA.
+
+\begin{frame}
+\finale
+\end{frame}
+
+\mode<presentation>
+\end{document}
+
+\mode*
+\StopEventually{^^A
+  \PrintChanges
+  \printindex
+}
+
+\newpage
+\section{Implementation}
+
+Note that some code is duplicated across several files. Therefore the line
+numbers here are totally fictitious when it comes to the actual files.
+
+\setcounter{FancyVerbLine}{0}%
+\DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+% \iffalse
+%<*class|theme>
+% \fi
+%
+% \subsection{Internal conveniences}
+%
+% We will need the \pkg{etoolbox} package's patching utilities, and \pkg{calc} will be
+% helpful for calculating lengths.
+%
+%    \begin{macrocode}
+\RequirePackage{etoolbox, calc}
+
+%    \end{macrocode}
+%
+% \iffalse
+%</class|theme>
+%<*class>
+% \fi
+%
+% \subsection{Class: Options and mode switching}
+%
+% \begin{optionkey}{set}
+% Mode switching is delegated to \pkg{beamerswitch}, but we need to support the
+% legacy \key{set} option.
+%
+%    \begin{macrocode}
+\DeclareOption{set}{\PassOptionsToClass{article,alsobeamer}{beamerswitch}}
+%    \end{macrocode}
+% \end{optionkey}
+%
+% All other options are passed to \pkg{beamerswitch}.
+%
+%    \begin{macrocode}
+\DeclareOption*{%
+  \PassOptionsToClass{\CurrentOption}{beamerswitch}%
+}
+\ProcessOptions\relax
+
+%    \end{macrocode}
+%
+% \subsection{Class: Setting options in loaded classes and packages}
+%
+% Now we load everything we need.
+%
+% It looks odd to have the \cs{inst} markers from \pkg{beamer} in the maths font, so
+% we use the \key{textinst} option for \pkg{beamerswitch}.
+%
+%    \begin{macrocode}
+\PassOptionsToClass{textinst}{beamerswitch}
+%    \end{macrocode}
+%
+% In article mode, we use 12pt text to keep it readable on the podium.
+%
+%    \begin{macrocode}
+\PassOptionsToClass{a4paper,12pt}{article}
+%    \end{macrocode}
+%
+% I anticipate using fonts with the necessary symbols for \pkg{beamer}, but which
+% may clash with \pkg{amssymb}.
+%
+%    \begin{macrocode}
+\PassOptionsToClass{noamssymb}{beamer}
+\PassOptionsToPackage{noamssymb}{beamerarticle}
+%    \end{macrocode}
+%
+% We provide the possibility of using colourful tables.
+%
+%    \begin{macrocode}
+\PassOptionsToPackage{table}{xcolor}
+\LoadClass{beamerswitch}
+
+%    \end{macrocode}
+%
+% \subsection{Class: Layout, orthography and typography}
+%
+% In handout mode, we lay out two slides to an A4 page.
+%
+%    \begin{macrocode}
+\handoutlayout{paper=a4paper,nup=2,pnos}
+%    \end{macrocode}
+%
+% I find slide titles somewhat intrusive in article mode (unless repurposed as
+% float captions, say), so we turn them off. I also make use of the more
+% \pkg{beamer}-esque \cs{maketitle} routine provided by \pkg{beamerswitch}.
+%
+%    \begin{macrocode}
+\articlelayout{maketitle,frametitles=none}
+%    \end{macrocode}
+%
+% Left and right margins of 3cm and top and bottom margins of 2.5cm
+% give a typeblock with an approximate golden aspect ratio.
+%
+%    \begin{macrocode}
+\mode<article>{
+  \RequirePackage[hmargin=3cm,vmargin=2.5cm]{geometry}
+}
+%    \end{macrocode}
+%
+% I anticipate using fonts with professional features.
+%
+%    \begin{macrocode}
+\mode<presentation>{
+  \usefonttheme{professionalfonts}
+}
+%    \end{macrocode}
+%
+% I use British orthography. If there is a demand for it, I might convert the
+% following lines to respect class options instead of a hard-coded language, but
+% it is easy enough to patch them with \cs{PassOptionsToPackage} before loading
+% the class.
+%
+%    \begin{macrocode}
+\RequirePackage[british]{babel}
+\RequirePackage[british,cleanlook]{isodate}
+%    \end{macrocode}
+%
+% We take advantage of \pkg{microtype} enhancements. We defer loading it until the
+% end of the preamble in case the author loads \pkg{fontspec}.
+%
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \RequirePackage{microtype}%
+}
+%    \end{macrocode}
+%
+% In article mode, to give the speaker an impression of what appears on the
+% slides and what doesn't, we switch to sans serif for slide contents.
+%
+%    \begin{macrocode}
+\addtobeamertemplate{frame begin}{}{\sffamily}
+\addtobeamertemplate{frame end}{\rmfamily}{}
+%    \end{macrocode}
+%
+% When reading from a podium, some extra whitespace helps me keep track of where
+% I am. So we switch to using Web-style paragraphs.
+%
+%    \begin{macrocode}
+\mode<article>{%
+  \setlength{\parindent}{0pt}%
+  \setlength{\parskip}{1em plus 0.2em minus 0.2em}%
+%    \end{macrocode}
+%
+% But this makes lists a bit too open, so we tighten them up again by reducing
+% the \cs{topsep} to zero. We do this by injecting the appropriate code into the
+% second argument of \cs{list} where this appears in the definition of the three
+% main list environments.
+%
+%    \begin{macrocode}
+  \patchcmd{\itemize}{\def}{\topsep\z@\def}%
+    {\wlog{Patching itemize succeeded}}%
+    {\wlog{Patching itemize failed}}
+  \patchcmd{\@enum@}{\def}{\topsep\z@\def}%
+    {\wlog{Patching enumerate succeeded}}%
+    {\wlog{Patching enumerate failed}}
+  \patchcmd{\description}{\labelwidth\z@}{\labelwidth\z@\topsep\z@}%
+    {\wlog{Patching description succeeded}}%
+    {\wlog{Patching description failed}}
+%    \end{macrocode}
+%
+% We make captions easier to spot. We try to make the placement of the final
+% period more intelligent using \cs{@addpunct} from \pkg{amsthm}.
+%
+%    \begin{macrocode}
+  \usepackage[format=hang,justification=raggedright,labelfont=bf]{caption}
+  \usepackage{amsthm}
+  \DeclareCaptionTextFormat{condperiod}{#1\@addpunct{.}}
+  \captionsetup{textformat=condperiod}
+%    \end{macrocode}
+%
+% We also make footnotes look a little neater.
+%
+%    \begin{macrocode}
+  \usepackage[hang,multiple,bottom]{footmisc}
+  \setlength{\footnotemargin}{1em}
+}
+%    \end{macrocode}
+%
+% The \pkg{cleveref} package is not essential, but it is nice to have.
+%
+%    \begin{macrocode}
+\IfFileExists{cleveref.sty}{%
+  \RequirePackage[noabbrev,capitalize,nameinlink]{cleveref}
+}
+
+%    \end{macrocode}
+%
+% \iffalse
+%</class>
+%<*theme>
+% \fi
+%
+% \subsection{Theme: Presentation font theme}
+%
+% Some sensible font sizes and weights for use on slides.
+%
+%    \begin{macrocode}
+\setbeamerfont{frametitle}{size=\LARGE}
+\setbeamerfont{framesubtitle}{size=\large}
+\setbeamerfont{headline}{size=\LARGE}
+\setbeamerfont{footline}{size=\scriptsize}
+\setbeamerfont{alerted text}{series=\bfseries}
+%    \end{macrocode}
+%
+% \subsection{Theme: Presentation colour theme}
+%
+% \iffalse
+%</theme>
+%<*class|theme>
+% \fi
+%
+% We load the RDA colour palette.
+%
+%    \begin{macrocode}
+\RequirePackage{rdacolors}
+%    \end{macrocode}
+%
+% \iffalse
+%</class|theme>
+%<*theme>
+% \fi
+%
+% Here are the basic colours:
+%
+%    \begin{macrocode}
+\setbeamercolor{normal text}{bg=white,fg=black}
+\setbeamercolor{alerted text}{fg=rdagreen}
+\setbeamercolor{example text}{fg=rdagrey}
+\setbeamercolor{structure}{fg=rdabrown}
+%    \end{macrocode}
+%
+% Here are the colours for the inner theme elements:
+%
+%    \begin{macrocode}
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{subtitle}{fg=white}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{institute}{fg=white}
+\setbeamercolor{date}{fg=white}
+%    \end{macrocode}
+%
+% Here are the colours for the outer theme elements:
+%
+%    \begin{macrocode}
+\setbeamercolor{frametitle}{bg=,fg=rdagreen}
+\setbeamercolor{headline}{parent=frametitle}
+\setbeamercolor{footline}{bg=,fg=rdabrown}
+\setbeamercolor{progress}{bg=rdalightyellow,fg=rdamidbrown}
+
+%    \end{macrocode}
+%
+% \iffalse
+%</theme>
+%<*class>
+% \fi
+%
+% \subsection{Class: Metadata handling}
+%
+% \begin{macro}{occasion}
+% \begin{macro}{insertoccasion}
+% We define some new elements of metadata.
+% The \cs{occasion} command is used to record the event at which the presentation
+% is given. The content is available if provided via \cs{insertoccasion}.
+%
+%    \begin{macrocode}
+\newcommand*{\occasion}[1]{%
+  \def\insertoccasion{#1}%
+  \subject{Presentation given at #1}%
+  \mode<article>{%
+    \AtBeginDocument{\hypersetup{pdfsubject={Presentation given at #1}}}%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{hashtag}
+% \begin{macro}{inserthashtag}
+% The \cs{hashtag} command is used to suggest a hashtag people can use to share
+% this presentation on social media. The content is available if provided via
+% \cs{inserthashtag}
+%
+%    \begin{macrocode}
+\newcommand*{\hashtag}[1]{%
+  \newcommand*{\inserthashtag}{\href{https://twitter.com/hashtag/#1}{\##1}}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{authorurl}
+% \begin{macro}{insertauthorurl}
+% The \cs{authorurl} command is used to give a URL where more information about
+% the speaker is available. The content is available if provided via
+% \cs{insertauthorurl}
+%
+%    \begin{macrocode}
+\newcommand*{\authorurl}[1]{%
+  \def\insertauthorurl{#1}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% In case the author forgets to include some key metadata, we provide some
+% safety values to allow the document to compile.
+%
+%    \begin{macrocode}
+\def\@title{Please provide a title}
+\def\@author{Please specify the author}
+\edef\@date{\the\year-\ifnum\month<10 0\fi\the\month-\ifnum\day<10 0\fi\the\day}
+%    \end{macrocode}
+%
+% We add these new elements to the \cs{maketitle} routine in article mode.
+%
+%    \begin{macrocode}
+\ifundef{\beamer@originstitute}{%
+  \renewcommand{\institute}[2][]{\def\insertinstitute{#2}}%
+}{%
+  \renewcommand{\institute}[2][]{\def\insertinstitute{#2}\beamer@originstitute{#2}}%
+}%
+\mode<article>{
+  \patchcmd{\@maketitle}{%
+    \@author
+  }{%
+    \ifundef{\insertauthorurl}{\@author}{\href{\insertauthorurl}{\@author}}%
+  }{}{}
+  \patchcmd{\@maketitle}{%
+    \large \@date
+  }{%
+    \large
+    \ifdefvoid{\insertoccasion}{}{\insertoccasion, }%
+    \printdate{\@date}%
+  }{}{}
+}
+
+%    \end{macrocode}
+%
+% \iffalse
+%</class>
+%<*theme>
+% \fi
+%
+% \subsection{Theme: Presentation outer theme}
+%
+% We introduce a toggle, |titlepage|, that can be used to provide a
+% different layout depending on whether this is a normal or a title slide.
+%
+%    \begin{macrocode}
+\newtoggle{titlepage}
+%    \end{macrocode}
+%
+% We provide another toggle, |bgpicture|, which is used to decide whether
+% to use a blank background (‘false’) or an image (‘true’).
+%
+%    \begin{macrocode}
+\newtoggle{bgpicture}\toggletrue{bgpicture}
+%    \end{macrocode}
+%
+% The standard RDA slide template uses some distinctive background images. We
+% apply them by default, but allow users to choose a different one if needs be.
+%
+% \begin{macro}{bgpicture}
+% \begin{optionkey}{background}
+% \begin{optionkey}{nobackground}
+% The method used is to save the filename of the image to \cs{bgpicture}, and let
+% the user change it with a frame option, \key{background}. The image can be turned
+% off entirely by issuing with the frame option \key{nobackground}.
+%
+%    \begin{macrocode}
+\newcommand{\bgpicture}{rda-bg-normal}
+\define@key{beamerframe}{background}[rda-bg-normal]{%
+  \gdef\bgpicture{#1}\toggletrue{bgpicture}%
+}
+\define@key{beamerframe}{nobackground}[true]{%
+  \togglefalse{bgpicture}%
+}
+\setbeamertemplate{background}{%
+  \iftoggle{bgpicture}{%
+    \includegraphics[width=\paperwidth,height=\paperheight]{\bgpicture}%
+  }{}%
+}
+%    \end{macrocode}
+% \end{optionkey}
+% \end{optionkey}
+% \end{macro}
+%
+% To prevent the settings for these switches persisting between slides, we reset
+% them as part of the set-up of `frame' environments.
+%
+%    \begin{macrocode}
+\preto\beamer@reseteecodes{\setkeys{beamerframe}{background}\togglefalse{titlepage}}
+%    \end{macrocode}
+%
+% This headline template is only shown on title slides. It is used to show
+% details of the RDA group, if provided.
+%
+%    \begin{macrocode}
+\defbeamertemplate*{headline}{RDA headline}{%
+  \iftoggle{titlepage}{
+%    \end{macrocode}
+%
+% We need to widen the text block and strip out vertical white space to fit
+% everything in.
+%
+%    \begin{macrocode}
+    \parindent \z@
+    \leftskip \z@ \@plus 1fil \@minus \textwidth
+    \rightskip\leftskip
+    \parfillskip \z@skip
+%    \end{macrocode}
+%
+% Here we insert some hooks so that users can customize the title space with
+% details of an RDA group by defining \cs{rdaGroupLogo}, \cs{rdaGroupName} and
+% \cs{rdaGroupType}.
+%
+%    \begin{macrocode}
+    \begin{minipage}[b][24mm][c]{\paperwidth - 6mm}
+      \ifdefvoid{\rdaGroupLogo}{}{\parbox[c]{16mm}{\rdaGroupLogo}}%
+      \hfill
+      \ifdefvoid{\rdaGroupName}{}{%
+        \parbox[c]{42mm}{%
+          \raggedleft\rdaGroupName
+          \ifdefvoid{\rdaGroupType}{}{\par\smallskip{\small\textsc{\rdaGroupType}}}%
+          \par
+        }%
+      }%
+    \end{minipage}\par
+  }{}%
+}
+%    \end{macrocode}
+%
+% This is our new version of the \texttt{frametitle} template.
+%
+%    \begin{macrocode}
+\defbeamertemplate*{frametitle}{RDA theme}{%
+  \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+%    \end{macrocode}
+%
+% The title page background image does not lend itself to a frame title,
+% so just in case the user provides one, we deliberately ignore it.
+%
+%    \begin{macrocode}
+  \iftoggle{titlepage}{}{%
+%    \end{macrocode}
+%
+% The frame title block in the default background image curves down in the
+% middle, so we need to tell \pkg{beamer} to make its \texttt{frametitle} template a little
+% deeper to cover it. The following code mimics the default, but adds a \key{dp}
+% option to the \env{beamercolorbox} environment.
+%
+%    \begin{macrocode}
+    \@tempdima=\textwidth%
+    \advance\@tempdima by\beamer@leftmargin%
+    \advance\@tempdima by\beamer@rightmargin%
+    \begin{beamercolorbox}[sep=0.3cm,wd=\the\@tempdima,dp=6mm]{frametitle}
+      \usebeamerfont{frametitle}%
+      \vbox{}\vskip-1ex%
+      \strut\insertframetitle\strut\par%
+      {%
+        \ifdefvoid{\insertframesubtitle}{}{%
+          \usebeamerfont{framesubtitle}%
+          \usebeamercolor[fg]{framesubtitle}%
+          \insertframesubtitle\strut\par
+        }%
+      }%
+      \vskip-1ex%
+      \if@tempswa\else\vskip-.3cm\fi%
+    \end{beamercolorbox}%
+  }%
+}
+
+%    \end{macrocode}
+%
+% We provide a variety of progress indicators.
+%
+% The default is a charge-style indicator.
+% The mathematics here makes sure the indicator start at 0\% on the
+% first slide and ends up at 100\% on the last, with linear variation
+% between. The case of a single slide is handled differently to prevent
+% division by zero.
+%
+%    \begin{macrocode}
+\RequirePackage{tikz}
+\defbeamertemplate*{progress}{charge}{%
+  \raisebox{2.7mm}[0pt][0pt]{%
+    %\usebeamercolor{progress}%
+    \begin{tikzpicture}[line join=round,baseline=1mm]
+      \pgfmathparse{equal(\inserttotalframenumber,1)}%
+      \ifnum1=\pgfmathresult
+        \def\PerCentComplete{12}%
+      \else
+        \pgfmathqparse{12pt * ((\insertframenumber pt - 1pt) / (\inserttotalframenumber pt - 1pt))}%
+        \let\PerCentComplete\pgfmathresult
+      \fi
+      \draw[fg,fill=bg] (0mm,0mm) rectangle (12mm,1.35mm);
+      \filldraw[fg] (0mm,0mm) rectangle (\PerCentComplete mm,1.35mm);
+    \end{tikzpicture}%
+  }%
+}
+%    \end{macrocode}
+%
+% As an alternative, progress can be shown as a fraction of frame number over
+% total number of frames.
+%
+%    \begin{macrocode}
+\defbeamertemplate{progress}{fraction}{%
+  \insertframenumber\slash\inserttotalframenumber
+}
+%    \end{macrocode}
+%
+% Another possibility is just displaying the frame number.
+%
+%    \begin{macrocode}
+\defbeamertemplate{progress}{number}{%
+  \insertframenumber%
+}
+%    \end{macrocode}
+%
+% The \pkg{beamer} footline template lays out elements along the bottom of the screen.
+% We set the height of the footline to 8mm so it fits over the RDA logo in the
+% standard background image.
+%
+%    \begin{macrocode}
+\setbeamertemplate{footline}{%
+  \vbox to 8mm{%
+    \vfil
+%    \end{macrocode}
+%
+% We use a typical layout: a left-aligned box at the left, a centre-aligned box
+% in the middle and a right-aligned box at the right. The left hand box is
+% occupied by the RDA strapline in the standard background image, so we only use
+% it on the title slide, for the \pkg{beamer} title graphic.
+%
+%    \begin{macrocode}
+    \makebox[0pt][l]{%
+      \iftoggle{titlepage}{%
+        \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+      }{}%
+    }%
+    \hfill
+%    \end{macrocode}
+%
+% We use the centre box (on all slides) for the hashtag, if given. The title
+% slide has a darker background so requires a lighter text colour.
+%
+%    \begin{macrocode}
+    \parbox{0.5\paperwidth}{\centering
+      \usebeamerfont{footline}%
+      \iftoggle{titlepage}{\usebeamercolor[fg]{date}}{\usebeamercolor[fg]{footline}}%
+      \ifdefvoid{\inserthashtag}{}{\inserthashtag}\strut\par
+    }%
+    \hfill
+%    \end{macrocode}
+%
+% On the title slide, we use the right hand box for the licence image.
+%
+%    \begin{macrocode}
+    \makebox[0pt][r]{%
+      \iftoggle{titlepage}{%
+        \parbox{18mm}{\raisebox{2mm}{%
+          \ifdefvoid{\licenseLogo}{}{%
+            \ifdefvoid{\licenseUrl}{\licenseLogo}{\href{\licenseUrl}{\licenseLogo}}%
+          }%
+        }}%
+        \hspace*{3mm}%
+        \global\togglefalse{titlepage}%
+%    \end{macrocode}
+%
+% In the standard background image the right hand box is occupied by the RDA
+% logo, but since it is shorter than the strapline on the left, we can balance
+% it with a progress indicator.
+%
+%    \begin{macrocode}
+      }{%
+        \usebeamertemplate*{progress}%
+        \hspace*{26mm}%
+      }%
+    }%
+    \par
+    \vfil
+  }%
+}
+
+%    \end{macrocode}
+%
+% By default we remove the tell-tale and seldom used \pkg{beamer} navigation symbols.
+%
+%    \begin{macrocode}
+\setbeamertemplate{navigation symbols}{}
+
+%    \end{macrocode}
+%
+% By default \pkg{beamer} uses Roman numerals for split frames. We change this to
+% Arabic numerals.
+%
+%    \begin{macrocode}
+\setbeamertemplate{frametitle continuation}{%
+  (\insertcontinuationcount)%
+}
+
+%    \end{macrocode}
+%
+% \subsection{Theme: Presentation inner theme}\label{sec:inner}
+%
+% Since space is tight on the title slide, we change the default presentation
+% of multiple institutions so they can share a line.
+%
+%    \begin{macrocode}
+\mode<presentation>{\def\beamer@andinst{\quad}}
+%    \end{macrocode}
+%
+% The \pkg{beamer} title page template lays out the elements of the title page.
+%
+%    \begin{macrocode}
+\providetoggle{isodate}
+\AtBeginDocument{%
+  \@ifpackageloaded{isodate}{\toggletrue{isodate}}{\togglefalse{isodate}}%
+}
+\setbeamertemplate{title page}{%
+  \global\toggletrue{titlepage}%
+%    \end{macrocode}
+%
+% We set the special background image.
+%
+%    \begin{macrocode}
+  \setkeys{beamerframe}{background=rda-bg-title1}%
+%    \end{macrocode}
+%
+% We insert a spacer at the top that pushes content below the curved green line
+% on the title page graphic.
+%
+%    \begin{macrocode}
+  \vbox to 24mm{}%
+%    \end{macrocode}
+%
+% We provide the presentation metadata in two parts. The title, author and
+% institute lines go in the middle third of the slide. We use stretchy skips
+% to ensure the elements are evenly spaced.
+%
+%    \begin{macrocode}
+  \begin{minipage}[b][32mm][c]{\textwidth}
+    \vspace*{\stretch{1}}%
+    \begin{beamercolorbox}[sep=0pt,center]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifdefvoid{\insertsubtitle}{}{%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      }%
+    \end{beamercolorbox}%
+    \vfill
+    \begin{beamercolorbox}[sep=0pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \vfill
+    \begin{beamercolorbox}[sep=0pt,center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \vspace*{\stretch{1}}%
+  \end{minipage}
+  \par\vspace*{2mm}
+%    \end{macrocode}
+%
+% The occasion and date squeeze in at the top of the lower third.
+%
+%    \begin{macrocode}
+  \begin{minipage}[b][10mm][c]{\textwidth}
+    \begin{beamercolorbox}[sep=0pt,center]{date}
+      \usebeamerfont{date}%
+      \ifdefvoid{\insertoccasion}{}{\insertoccasion\\}%
+      \iftoggle{isodate}{\printdate{\insertdate}}{\insertdate}
+    \end{beamercolorbox}
+  \end{minipage}
+  \vspace*{2mm}
+}
+
+%    \end{macrocode}
+%
+% \subsection{Finishing off}
+%
+% We provide a \cs{finale} command for use on the last slide, to parallel
+% \cs{maketitle}. It behaves differently depending on the mode.
+%
+% \subsubsection{In the presentation inner theme}
+%
+% \begin{macro}{finale}
+% In presentation mode, \cs{finale} is intended to be used in a frame. It prints
+% a thank you and some key information that the audience can note down during
+% the questions. It looks like the opening slide but uses an alternative
+% background.
+%
+%    \begin{macrocode}
+\mode<presentation>{%
+  \newcommand{\finale}[1][\empty]{%
+    \global\toggletrue{titlepage}%
+    \setkeys{beamerframe}{background=rda-bg-title2}%
+%    \end{macrocode}
+%
+% We insert a spacer at the top that pushes content below the curved green line
+% on the (alternative) title page graphic.
+%
+%    \begin{macrocode}
+    \vbox to 24mm{}%
+%    \end{macrocode}
+%
+% The background image again leaves us with the middle third of the slide into
+% which to cram some text. We use stretchy skips to ensure the elements are
+% evenly spaced.
+%
+%    \begin{macrocode}
+    \begin{minipage}[b][32mm][s]{\textwidth}
+      \vspace*{\stretch{1}}%
+%    \end{macrocode}
+%
+% We start with a thank you.
+%
+%    \begin{macrocode}
+      \begin{beamercolorbox}[sep=0pt,center]{title}
+        \usebeamerfont{title}Thank you for your attention\par%
+      \end{beamercolorbox}%
+%    \end{macrocode}
+%
+% If the author URL has been provided, we display that.
+%
+%    \begin{macrocode}
+      \ifdefvoid{\insertauthorurl}{}{%
+        \vfill
+        \begin{beamercolorbox}[sep=0pt,center]{institute}
+          \usebeamerfont{institute}\insertauthor: \url{\insertauthorurl}\par%
+        \end{beamercolorbox}%
+      }%
+%    \end{macrocode}
+%
+% If the RDA group URL has been provided, we display that.
+%
+%    \begin{macrocode}
+      \ifdefvoid{\rdaGroupUrl}{}{%
+        \vfill
+        \begin{beamercolorbox}[sep=0pt,center]{institute}
+          \usebeamerfont{institute}%
+          \ifdefvoid{\rdaGroupName}{}{\rdaGroupName
+            \ifdefvoid{\rdaGroupType}{}{ \rdaGroupType}:
+          }\url{\rdaGroupUrl}\par%
+        \end{beamercolorbox}%
+      }%
+%    \end{macrocode}
+%
+% Lastly, we display whatever is in the optional argument, if one has been
+% provided.
+%
+%    \begin{macrocode}
+      \ifx\empty#1
+      \else
+        \vfill
+        \begin{beamercolorbox}[sep=0pt,center]{institute}
+          \usebeamerfont{institute}#1\par%
+        \end{beamercolorbox}%
+      \fi
+      \vspace*{\stretch{1}}%
+    \end{minipage}
+    \vspace*{15mm}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \iffalse
+%</theme>
+%<*class>
+% \fi
+%
+% \subsubsection{In the class, in article mode}
+%
+% \begin{macro}{finale}
+% In article mode, we will present relevant information laid out in tabular
+% fashion with \pkg{tabularx}. (We could do it with minipages but this is
+% fractionally easier.)
+%
+%    \begin{macrocode}
+\mode<article>{
+  \RequirePackage{tabularx,ifpdf}
+%    \end{macrocode}
+%
+% We begin with a horizontal rule.
+%
+%    \begin{macrocode}
+  \newcommand{\finale}[1][\empty]{%
+    \vbox{}
+    \begin{small}
+      \rule[1em]{\textwidth}{0.8pt}\par
+%    \end{macrocode}
+%
+% We then draw a table with logos on the left and corresponding text on the
+% right.
+%
+%    \begin{macrocode}
+      \setlength{\extrarowheight}{1ex}%
+      \renewcommand{\tabularxcolumn}[1]{m{##1}}
+      \begin{tabularx}{\textwidth}{@{}m{22mm}X@{}}
+%    \end{macrocode}
+%
+% If a licence statement has been provided, we add a row displaying it.
+%
+%    \begin{macrocode}
+      \ifdefvoid{\licenseStatement}{}{%
+        \ifdefvoid{\licenseLogo}{}{\parbox[c]{\hsize}{\licenseLogo}} &
+        \licenseStatement
+        \ifdefvoid{\licenseUrl}{}{: \url{\licenseUrl}} \\
+      }%
+%    \end{macrocode}
+%
+% We then add a row about the RDA. If a group logo has been defined we display
+% it. Otherwise, we display the RDA logo (|RDA_Logotype_CMYK|) if the user has
+% it where \LaTeX\ can find it.
+%
+%    \begin{macrocode}
+      \ifdefvoid{\rdaGroupLogo}{%
+        \ifpdf
+          \IfFileExists{RDA_Logotype_CMYK.pdf}{%
+            \includegraphics[width=\hsize]{RDA_Logotype_CMYK}%
+          }{}%
+        \else
+          \IfFileExists{RDA_Logotype_CMYK.eps}{%
+            \includegraphics[width=\hsize]{RDA_Logotype_CMYK}%
+          }{}%
+        \fi
+      }{\parbox[c]{\hsize}{\rdaGroupLogo}} &
+%    \end{macrocode}
+%
+% If group information has not been defined, we explain what the RDA is.
+%
+%    \begin{macrocode}
+      \ifdefvoid{\rdaGroupName}{%
+        The Research Data Alliance is supported by the
+        European Commission, the US Government and the Australian Government.\par
+        \vspace{1ex}%
+        For more information, please visit \url{https://rd-alliance.org/}%
+%    \end{macrocode}
+%
+% Otherwise we explain about the group.
+%
+%    \begin{macrocode}
+      }{%
+        The \rdaGroupName\ifdefvoid{\rdaGroupType}{}{ \rdaGroupType}
+        is part of the Research Data Alliance, which is supported by the
+        European Commission, the US Government and the Australian Government.
+        \ifdefvoid{\rdaGroupUrl}{}{%
+          \par\vspace{1ex}%
+          For more information, please visit \url{\rdaGroupUrl}%
+        }%
+      }\\
+      \end{tabularx}
+%    \end{macrocode}
+%
+% Lastly, if the optional argument has been provided, we typeset it below the
+% table.
+%
+%    \begin{macrocode}
+      \ifx\empty#1\else\par\vskip2pt #1\par\fi
+    \end{small}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Class: Loading the beamer theme}
+%
+% For styling the presentation, we use the accompanying \pkg{beamer} theme.
+%
+%    \begin{macrocode}
+\usetheme{RDA}
+%    \end{macrocode}
+%
+% \iffalse
+%</class>
+%<*palette>
+% \fi
+%
+% \subsection{Research Data Alliance colour palette}
+%
+% These settings are separated out into \texttt{rdacolors.sty}.
+%
+% The RDA colour palette consists of four main colours:
+% Pantone 478 \sample[0.7em]{rdabrown},
+% Pantone 369 \sample[0.7em]{rdagreen},
+% Pantone 3965 \sample[0.7em]{rdayellow}, and
+% Pantone Cool Gray 7 \sample[0.7em]{rdagrey}.
+%
+%    \begin{macrocode}
+\RequirePackage{xcolor}
+
+\xdefinecolor{rdabrown}{RGB}{107,46,32}%         Pantone 478
+\xdefinecolor{rdagreen}{RGB}{99,168,68}%         Pantone 369
+\xdefinecolor{rdayellow}{RGB}{235,220,20}%       Pantone 3965
+\xdefinecolor{rdagrey}{RGB}{144,149,157}%        Pantone Cool Gray 7
+
+%    \end{macrocode}
+%
+% As variants of these, the palette also contains the same colours at 50\% and
+% 25\% saturation.
+%
+%    \begin{macrocode}
+\xdefinecolor{rdamidbrown}{RGB}{171,128,115}%    Pantone 478 at 50%
+\xdefinecolor{rdamidgreen}{RGB}{191,221,149}%    Pantone 369 at 50%
+\xdefinecolor{rdamidyellow}{RGB}{253,236,133}%   Pantone 3965 at 50%
+\xdefinecolor{rdamidgrey}{RGB}{192,195,199}%     Pantone Cool Gray 7 at 50%
+
+\xdefinecolor{rdalightbrown}{RGB}{208,183,173}%  Pantone 478 at 25%
+\xdefinecolor{rdalightgreen}{RGB}{224,237,201}%  Pantone 369 at 25%
+\xdefinecolor{rdalightyellow}{RGB}{255,245,194}% Pantone 3965 at 25%
+\xdefinecolor{rdalightgrey}{RGB}{219,220,223}%   Pantone Cool Gray 7 at 25%
+
+%    \end{macrocode}
+%
+% We also provide some handy aliases
+%
+%    \begin{macrocode}
+\colorlet{rdagray}{rdagrey}
+\colorlet{rdamidgray}{rdamidgrey}
+\colorlet{rdalightgray}{rdalightgrey}
+\colorlet{warm}{rdalightyellow}
+\colorlet{cool}{rdalightgrey}
+%    \end{macrocode}
+%
+% \iffalse
+%</palette>
+%<*mscwg>
+% \fi
+%
+% \subsection{Sample RDA group package: MSCWG}
+%
+% \subsubsection{Group logo}
+%
+% For perfect fidelity we draw the logo with \pkg{tikz} rather than use a bitmap.
+% This means we need to ensure it is loaded, along with \pkg{keyval} for option
+% handling, \pkg{ifthen} for implementing the option handling logic, and \pkg{calc} for
+% calculating lengths. Note that the Metadata Standards Catalog Working Group
+% recycles the logo of the Metadata Standards Directory Working Group, hence
+% the macros below use \texttt{msd} instead of \texttt{msc}.
+%
+%    \begin{macrocode}
+\RequirePackage{ifthen,calc,keyval}
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.geometric,positioning}
+
+%    \end{macrocode}
+%
+% We load the RDA colour palette, if not already available.
+%
+%    \begin{macrocode}
+\usepackage{rdacolors}
+
+%    \end{macrocode}
+%
+% \begin{macro}{msdwgl@unit}
+% \begin{macro}{msdwgl@unit@calc}
+% We provide options for scaling the logo without changing the aspect ratio.
+% Two lengths are needed to scale the logo:
+% \begin{itemize}
+% \item \cs{msdwgl@unit} is the actual scale factor;
+% \item \cs{msdwgl@unit@calc} is the scale factor calculated from the options.
+% \end{itemize}
+%
+%    \begin{macrocode}
+\newlength{\msdwgl@unit}
+\newlength{\msdwgl@unit@calc}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{optionkey}{height}
+% The \key{height} option sets the maximum height for the logo.
+% With \cs{msdwgl@unit} set to 1pt, the logo ends up 59.690pt high. So we
+% calculate what \cs{msdwgl@unit} would need to be to achieve the target height.
+% We store this in \cs{msdwgl@unit@calc} unless \cs{msdwgl@unit@calc} is a shorter
+% (but non-zero) length.
+%
+%    \begin{macrocode}
+\define@key{msdwgl}{height}{%
+  \setlength{\@tempdima}{#1}%
+  \setlength{\@tempdimb}{\@tempdima / \real{59.690}}%
+  \ifthenelse{%
+    \lengthtest{\msdwgl@unit@calc = 0pt}\OR
+    \lengthtest{\@tempdimb < \msdwgl@unit@calc}%
+  }{%
+    \setlength{\msdwgl@unit@calc}{\@tempdimb}%
+  }{}%
+}
+%    \end{macrocode}
+% \end{optionkey}
+%
+% \begin{optionkey}{width}
+% The \key{width} option sets the maximum width for the logo.
+% With \cs{msdwgl@unit} set to 1pt, the logo ends up 62.091pt wide. So we
+% calculate what \cs{msdwgl@unit} would need to be to achieve the target width.
+% We store this in \cs{msdwgl@unit@calc} unless \cs{msdwgl@unit@calc} is a shorter
+% (but non-zero) length.
+%
+%    \begin{macrocode}
+\define@key{msdwgl}{width}{%
+  \setlength{\@tempdima}{#1}%
+  \setlength{\@tempdimb}{\@tempdima / \real{62.091}}%
+  \ifthenelse{%
+    \lengthtest{\msdwgl@unit@calc = 0pt}\OR
+    \lengthtest{\@tempdimb < \msdwgl@unit@calc}%
+  }{%
+    \setlength{\msdwgl@unit@calc}{\@tempdimb}%
+  }{}%
+}
+%    \end{macrocode}
+% \end{optionkey}
+%
+% \begin{optionkey}{scale}
+% We also provide the option \key{scale} for unconditionally setting the scale to a
+% given numeric factor, where 1 means \cs{msdwgl@unit} equals 1pt.
+%
+%    \begin{macrocode}
+\define@key{msdwgl}{scale}{%
+  \setlength{\@tempdima}{1pt}%
+  \setlength{\msdwgl@unit@calc}{#1\@tempdima}%
+}
+%    \end{macrocode}
+% \end{optionkey}
+%
+% \begin{macro}{msdwgl@line@color}
+% \begin{optionkey}{outline}
+% In case the logo is put on a coloured background, we provide the option
+% \key{outline} for outlining it in a given colour (white by default).
+%
+%    \begin{macrocode}
+\newcommand{\msdwgl@line@color}{none}
+\define@key{msdwgl}{outline}[white]{\renewcommand{\msdwgl@line@color}{#1}}
+
+%    \end{macrocode}
+% \end{optionkey}
+% \end{macro}
+%
+% \begin{macro}{MSDWGLogo}
+% The logo itself is drawn with the \cs{MSDWGLogo} command. The \pkg{keyval} options
+% are read from the optional argument. There is no mandatory argument.
+%
+%    \begin{macrocode}
+\newcommand{\MSDWGLogo}[1][]{%
+  \bgroup
+%    \end{macrocode}
+%
+% First we reset \cs{msdwgl@unit@calc} to 0pt, then read in the user keys.
+%
+%    \begin{macrocode}
+  \setkeys{msdwgl}{scale=0,#1}%
+%    \end{macrocode}
+%
+% If \cs{msdwgl@unit@calc} has been set, we scale the logo accordingly. Otherwise
+% we use the default scale of \cs{msdwgl@unit} = 1pt.
+%
+%    \begin{macrocode}
+  \ifthenelse{\lengthtest{\msdwgl@unit@calc > 0pt}}{%
+    \setlength{\msdwgl@unit}{\msdwgl@unit@calc}%
+  }{%
+    \setlength{\msdwgl@unit}{1pt}%
+  }%
+%    \end{macrocode}
+%
+% Now we come to draw the logo. The \key{text} node is used to centre the logo
+% vertically with respect to the surrounding text. The graphic itself is
+% achieved as a matrix of cylinders.
+%
+%    \begin{macrocode}
+  \begin{tikzpicture}
+    [ inner sep = 0pt
+    , outer sep = 0pt
+    , baseline = (text.base)
+    , line width = 0.4pt
+    ]
+  \matrix
+    [ ampersand replacement = \&
+    , nodes =
+      { cylinder
+      , cylinder uses custom fill
+      , cylinder end fill=rdayellow
+      , aspect=1.0
+      , rotate=43
+      , anchor=center
+      , draw=\msdwgl@line@color
+      }
+    , row 1 column 1/.style = {cylinder body fill=rdagreen}
+    , row 1 column 2/.style = {cylinder body fill=rdabrown}
+    , row 2 column 1/.style = {cylinder body fill=rdabrown}
+    , row 2 column 2/.style = {cylinder body fill=rdagreen}
+    , column sep = -3\msdwgl@unit
+    , row sep = -4\msdwgl@unit
+    ]
+    (logo)
+    {
+      \node{\phantom{\rule{4\msdwgl@unit}{20\msdwgl@unit}}}; \&
+      \node{\phantom{\rule{4\msdwgl@unit}{20\msdwgl@unit}}}; \\
+      \node{\phantom{\rule{4\msdwgl@unit}{20\msdwgl@unit}}}; \&
+      \node{\phantom{\rule{4\msdwgl@unit}{20\msdwgl@unit}}}; \\
+    };
+  \node (text) at (logo.center) {\phantom{RDA}};
+  \end{tikzpicture}%
+  \egroup
+}
+
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsubsection{Group information}
+%
+% \begin{macro}{rdaGroupLogo}
+% \begin{macro}{rdaGroupName}
+% \begin{macro}{rdaGroupType}
+% \begin{macro}{rdaGroupUrl}
+% Finally, we define hooks that are recognized by \texttt{rdaslides.cls}.
+%
+%    \begin{macrocode}
+\def\rdaGroupLogo{\MSDWGLogo[width=\hsize]}
+\def\rdaGroupName{Metadata Standards Catalog}
+\def\rdaGroupType{Working Group}
+\def\rdaGroupUrl{https://rd-alliance.org/groups/metadata-standards-catalog-working-group.html}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \iffalse
+%</mscwg>
+%<*msdwg>
+% \fi
+%
+% \subsection{Sample RDA group package: MSDWG}
+%
+% \begin{macro}{rdaGroupName}
+% \begin{macro}{rdaGroupUrl}
+% The Metadata Standards Directory Working Group has the same properties
+% as the Metadata Standards Catalog Working Group except the name and URL.
+%
+%    \begin{macrocode}
+\RequirePackage{rdamscwg}
+\def\rdaGroupName{Metadata Standards Directory}
+\def\rdaGroupUrl{https://rd-alliance.org/groups/metadata-standards-directory-working-group.html}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \iffalse
+%</msdwg>
+% \fi
+%\Finale

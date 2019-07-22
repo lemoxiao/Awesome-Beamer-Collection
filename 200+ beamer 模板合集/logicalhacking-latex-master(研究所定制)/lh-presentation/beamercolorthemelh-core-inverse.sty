@@ -1,0 +1,35 @@
+%% Copyright (C) 2016 Achim D. Brucker, https://www.brucker.ch
+%%
+%% License:
+%%   This program can be redistributed and/or modified under the terms
+%%   of the LaTeX Project Public License Distributed from CTAN
+%%   archives in directory macros/latex/base/lppl.txt; either
+%%   version 1 of the License, or any later version.
+%%   OR
+%%   The 2-clause BSD-style license.
+%%
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{beamercolorthemelh-core-inverse}
+     [2016/11/01 v0.0  LaTeX presentation class implementing the cooperate design of LogicalHacking.com]
+
+\mode<presentation>
+  \setbeamercolor{background canvas}{bg=lhBlack,fg=lhWhite}
+  \setbeamercolor{footer}{bg=lhDarkGray, fg=lhLightGray}
+  \setbeamercolor{normal text}{fg=lhWhite}
+  \setbeamercolor*{palette primary}{fg=lhWhite, bg=lhDarkGray}
+  \setbeamercolor*{palette secondary}{bg=lhWhite,fg=lhDarkGray}
+  \setbeamercolor*{palette tertiary}{bg=lhWhite,fg=lhLightGray}
+  \setbeamercolor*{palette quaternary}{bg=lhWhite,fg=lhBlack}
+
+  \setbeamercolor{subitem}{parent=item, fg=lhDarkGray}
+  \setbeamercolor{subsubitem}{parent=subitem,fg=lhLightGray}
+  
+  \setbeamercolor{block body example}{parent=normal text,use=block title example,fg=block title example.bg, bg=block title example.bg!10!bg}
+  \setbeamercolor{block body alerted}{parent=normal text,use=block title example,fg=block title example.bg, bg=block title example.bg!10!bg}
+
+  \setbeamercolor*{palette secondary}{bg=lhLightGray,fg=lhDarkGray}
+  \setbeamercolor{kicker}{use=structure,bg=lhDarkGray,fg=lhLightGray}
+
+\mode
+<all>
+

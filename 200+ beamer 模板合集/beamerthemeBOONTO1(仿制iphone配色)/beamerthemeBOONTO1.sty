@@ -1,0 +1,207 @@
+
+\def\beamer@boonto1beamer@version{1.0.0.0.0}
+\ProvidesPackage{beamerthemeBOONTO1}
+\RequirePackage{beamerbasethemes}[2011/10/07]
+\usetheme{Copenhagen}
+
+% For some symbols
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+%\graphicspath{{d:/workTUHH/logorelate/},{figure/},{logo/}}
+% ==================================================================================== %
+% Use ball for item
+\setbeamertemplate{mini frames}[round]
+\setbeamertemplate{items}[ball]
+\setbeamertemplate{enumerate items}[ball]
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent}
+% We would like to have normal text etc in sans-serif, but equations in serif.
+\usefonttheme[onlymath]{serif}
+ \setbeamercolor{emph}{bg=white}
+
+% ==================================================================================== %
+% Color stuff
+
+%-------------------------------------------------------------------------------
+\definecolor{wurblue}{rgb}{0.15,0.298,0.471}       %   0  76 120   1    0  0    0.58
+\definecolor{wurgreen}{rgb}{0.502,0.729,0.392}  % 128 186 100   0.55 0  0.77 0      360
+\definecolor{wurorange}{rgb}{0.918,0.698,0}     % 234 178   0
+\definecolor{mybgcolor}{rgb}{0.361,0.412,0.463}% for background; dark version of slate gray (http://kuler.adobe.com/#create/fromacolor) (#5c6976)
+\definecolor{myblue}{rgb}{0.365,0.565,0.761}% for emphasizing text (#5d90c2)
+\definecolor{mybrown}{rgb}{0.761,0.643,0.443}% for emphasizing text (#c2a471)
+\definecolor{myred}{rgb}{0.800,0.482,0.463}% for emphasizing text (#cc7b76)
+\definecolor{mylightblue}{rgb}{0.596,0.678,0.761}% for box (#98adc2)
+\definecolor{mydarkgray}{rgb}{0.282,0.322,0.361}% for box (#48525c)
+\newcommand*{\myblue}[1]{\textcolor{myblue}{#1}}
+\newcommand*{\mybrown}[1]{\textcolor{mybrown}{#1}}
+\newcommand*{\mylightblue}[1]{\textcolor{mylightblue}{#1}}
+\newcommand*{\mydarkgray}[1]{\textcolor{mydarkgray}{#1}}
+\newcommand*{\myred}[1]{\textcolor{myred}{#1}}
+%
+
+
+
+\def\normalcolorhack{
+\usebeamercolor{normal text}
+\color{fg}
+\def\normalcolor{\color{normal text.fg}}
+}
+
+\def\setanysheetcolors{
+%\setbeamercolor*{local structure}{fg=wurorange}
+\setbeamercolor*{local structure}{fg=Mahogany}
+\setbeamercolor*{title}{fg=White}
+\setbeamercolor*{subitem}{parent=item,fg=wurblue}
+\setbeamercolor*{logobar}{fg=White}
+\setbeamercolor*{Title bar}{fg=White}%,bg=AliceBlue}
+\setbeamercolor*{Footline bar}{fg=White}
+}
+
+
+
+% Enforce blue-on-white when making handouts.
+
+\mode<handout>{\let\setbluesheetcolors=\setwhitesheetcolors}
+
+
+% ==================================================================================== %
+% Font definitions
+\setbeamerfont{title}{size=\LARGE}
+\setbeamerfont{subtitle}{size=\large}
+\setbeamerfont{author}{}
+\setbeamerfont{institution}{size=\small}
+\setbeamerfont{logobar}{}
+\setbeamerfont{headbar}{size=\tiny}
+\setbeamerfont{frametitle}{size=\Large}
+
+
+% ==================================================================================== %
+% basic layout stuff
+
+\newlength\barheight\setlength\barheight{\paperheight}
+\divide\barheight by 12
+% ==================================================================================== %
+% \underline
+
+\newdimen\ul@depth
+
+\def\underline#1{%
+\par\noindent
+\@tempdima=\textwidth
+\advance\@tempdima by \beamer@leftmargin
+\advance\@tempdima by \beamer@rightmargin
+\setbox0=\hbox to \@tempdima{\hspace*{\beamer@leftmargin}#1\hfill}%
+\hspace*{-\beamer@leftmargin}%
+\global\ul@depth=\dp0%
+\hbox to \@tempdima{\vbox{\box0\vskip-\ul@depth\hrule}}%
+}
+
+\def\underlinegap#1{%
+\par\noindent
+\@tempdima=\textwidth
+\advance\@tempdima by \beamer@leftmargin
+\advance\@tempdima by \beamer@rightmargin
+\setbox0=\hbox to \@tempdima{\hspace*{\beamer@leftmargin}#1\hfill}%
+\hspace*{-\beamer@leftmargin}%
+\global\ul@depth=-0.4cm%
+\hbox to  \@tempdima{\vbox{\box0\vskip-\ul@depth\color{GhostWhite}{\hrule}}}%
+}
+
+
+\def\leftlogo#1{\gdef\@leftlogo{#1}}
+\def\leftscale#1{\gdef\@leftscale{#1}}
+\def\@leftlogo{}
+\def\@leftscale{}
+\def\rightlogo#1{\gdef\@rightlogo{#1}}
+\def\rightscale#1{\gdef\@rightscale{#1}}
+\def\@rightlogo{}
+\def\@rightscale{}
+
+
+
+% ==================================================================================== %
+\setbeamertemplate{title page}
+{
+\begin{tikzpicture}[remember picture,overlay]
+	\node[rectangle,fill,inner sep=0pt,minimum width=2\paperwidth,%
+            minimum height=2\paperheight,%
+            top color=mybgcolor,bottom color=mybgcolor!35]{};
+\end{tikzpicture}%
+\begin{flushright}
+	\color{white}\sffamily\vspace{1cm}
+   {\bfseries\Large\inserttitle\par}
+   {\vspace{1.2cm}\bfseries \large \insertauthor}\\
+   {\vspace{1cm} \small \insertinstitute}
+   %{\vspace{0.1cm}\bfseries \mydate}
+	\vfill
+    {\vspace{1cm}
+    \includegraphics[scale=\@leftscale]{\@leftlogo} \hfill
+    \includegraphics[scale=\@rightscale]{\@rightlogo}}%
+\end{flushright}
+\clearpage
+}
+
+% ==================================================================================== %
+% Title Background
+
+\setbeamertemplate{background}{
+    \hspace{10.2cm}
+    \begin{beamercolorbox}[ht=0.8\paperheight,wd=\paperwidth]{logobar}
+        \inserttitlegraphic
+    \end{beamercolorbox}
+}
+
+% ==================================================================================== %
+% Frame title
+\setbeamertemplate{frametitle}
+{
+  \begin{beamercolorbox}[wd=1.2\paperwidth,ht=2.5\barheight]{Title bar}
+  \begin{tikzpicture}[remember picture,overlay]
+		\node [xshift=\paperwidth/2,yshift=-\headheight] (mybar) at (current page.north west)
+              [rectangle,fill,inner sep=0pt,minimum width=\paperwidth,
+              minimum height=2.9\barheight,top color=mybgcolor!64,
+              bottom color=mybgcolor]{};% bar
+		\node[below of=mybar,yshift=-2mm,rectangle,shade,inner sep=0pt,minimum width=128mm,minimum height=1.5mm,top color=black!50,bottom color=white]{};% shadow
+	\end{tikzpicture}%
+  \end{beamercolorbox}
+
+  \vskip -1.3cm
+  \linethickness{0.0pt}
+  \vskip.0cm
+  \framelatex{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.5\barheight]{Title bar}
+   \vskip-0.5cm\hskip.5cm\textbf{\insertframetitle}
+   \ifx\insertframesubtitle\@empty \vskip0.3cm\else%
+   {\vskip-0.2cm\usebeamerfont*{framesubtitle}\hskip.5cm\insertframesubtitle}
+   \fi
+   \vskip0.15cm
+ \end{beamercolorbox}
+ }
+}
+% ==================================================================================== %
+% Footline
+\setbeamertemplate{footline}
+{
+   \begin{beamercolorbox}[wd=1\paperwidth,ht=0.5\barheight]{Footline bar}
+   \begin{tikzpicture}[remember picture,overlay]
+		\node [xshift=\paperwidth/2,yshift=\footheight/2] at (current page.south west)[rectangle,fill,inner sep=0pt,minimum width=\paperwidth,minimum height=\footheight,top color=mybgcolor!64,bottom color=mybgcolor]{};% bar
+	\end{tikzpicture}%
+    \hspace{1.5cm} \raisebox{0.2cm}{\tiny \bfseries \textcolor{white}{\inserttitle}}
+    \hfil{} \hfill{}  \raisebox{0.2cm}{\small \bfseries
+            \tiny \textcolor{white}{\Acrobatmenu{FirstPage}{$\blacktriangleleft$}
+            \insertframenumber/\inserttotalframenumber \hspace{0.01cm} \Acrobatmenu{LastPage}{$\blacktriangleright$}}\
+            \Acrobatmenu{FullScreen}{\textcolor{black}{$\circledcirc$}}}
+   \end{beamercolorbox}
+
+}
+
+\def\conferencetext#1{\gdef\@conferencetext{#1}}
+\def\@conferencetext{}
+
+%-------------------------------------------------------------------------------
+%                                                                          setup
+
+% Disable the navigation buttons
+\setbeamertemplate{navigation symbols}{}
+
+\endinput

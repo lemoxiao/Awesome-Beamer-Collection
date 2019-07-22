@@ -1,0 +1,63 @@
+%%
+%% Copyright (C) 2015 by Michael Muehlberghuber
+%%
+%% This file may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.2 of this license or (at your
+%% option) any later version. The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%%
+
+%% Make sure docstrip is loaded.
+\input docstrip.tex
+
+%% Line-by-line activity messages are usually not really useful.
+\keepsilent
+
+%% Declare the base directory.
+\usedir{tex/latex/iisbeamer}
+
+%% The preamble to be written to every generated file by docstrip.
+\preamble
+
+This is a generated file.
+
+Copyright (C) 2015 by Michael Muehlberghuber
+
+This file may be distributed and/or modified under the conditions of the
+LaTeX Project Public License, either version 1.2 of this license or (at your
+option) any later version. The latest version of this license is in:
+
+   http://www.latex-project.org/lppl.txt
+
+and version 1.2 or later is part of all distributions of LaTeX version
+1999/12/01 or later.
+
+\endpreamble
+
+%% Make sure docstrip does not always ask when it overwrites a existing file
+%% during generation. 
+\askforoverwritefalse
+
+%% Declare the files to be generated.
+\generate{\file{iisbeamer.cls}{\from{iisbeamer.dtx}{package}}}
+
+\obeyspaces
+\Msg{***************************************************************************}
+\Msg{*                                                                         *}
+\Msg{* To finish the installation you have to move the following file into a   *}
+\Msg{* directory searched by TeX:                                              *}
+\Msg{*                                                                         *}
+\Msg{*    iisbeamer.cls                                                        *}
+\Msg{*                                                                         *}
+\Msg{* To produce the documentation run the file iisbeamer.dtx through LaTeX.  *}
+\Msg{*                                                                         *}
+\Msg{* Happy TeXing!                                                           *}
+\Msg{*                                                                         *}
+\Msg{***************************************************************************}
+
+%% Tell docstrip that this is the end of the installation file.
+\endbatchfile

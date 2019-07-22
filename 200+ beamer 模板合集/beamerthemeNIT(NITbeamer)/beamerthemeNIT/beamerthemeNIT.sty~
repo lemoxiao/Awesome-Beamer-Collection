@@ -1,0 +1,79 @@
+% Copyright 2012 by Ryo KOBAYASHI <ryo.kbys@gmail.com>
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+\DeclareOptionBeamer{compress}{\beamer@compresstrue}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\usecolortheme{NIT}
+\useinnertheme[shadow=true]{NIT}
+
+% \definecolor{colorbarwhite}{RGB}{255,255,255}
+% \definecolor{colorbargray}{RGB}{190,190,190}
+
+\setbeamertemplate{headline}[text line]
+{%
+%  \begin{beamercolorbox}[wd=\paperwidth,ht=16pt,leftskip=5pt,rightskip=5pt]{title in head/foot}
+%   \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+%  \end{beamercolorbox}%
+ \vbox{\insertvrule{16pt}{white}%
+   \vskip-15pt
+   %\vskip3pt%
+   \beamerline{\color{black}\insertnavigation{\paperwidth}}%
+   \vskip3pt%
+   \insertvrule{0.8pt}{black}%
+   \vskip0pt%
+   %\color{beamerstructure}\scriptsize\insertsubsection\hfill
+   %\color{black}\scriptsize\insertsubsection\hfill
+ }%
+}
+
+\AtBeginDocument{
+    \pgfdeclareverticalshading{beamer@belowframetitle}{\the\paperwidth}{%
+      color(0pt)=(bg);
+      color(4pt)=(black!50!bg)
+    }
+}
+
+\defbeamertemplate*{frametitle}{smoothtree theme}
+{%
+  \nointerlineskip%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1cm,leftskip=.5cm,rightskip=.3cm]{frametitle}
+   \usebeamerfont*{frametitle}%
+   \raisebox{0.6ex}{\insertframetitle}%
+   \hfill%
+   %\raisebox{-0.6ex}{\includegraphics[width=0.6cm]{NIT_logo.eps}}
+   \par\vskip-.8ex{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
+   \usebeamerfont{headline}%
+   \vskip.5ex
+  \end{beamercolorbox}%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=.5ex,dp=0ex]{empty}
+    \pgfuseshading{beamer@belowframetitle}%
+  \end{beamercolorbox}%
+}
+
+                                % Footline
+\defbeamertemplate*{footline}{infolines theme}
+{
+  \leavevmode%
+  \hbox{\hspace{-2mm}
+  \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.62\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{3em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{3ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\userightsidebartemplate{0cm}{}
+
+\mode
+<all>

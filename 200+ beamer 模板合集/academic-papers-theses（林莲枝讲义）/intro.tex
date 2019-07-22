@@ -1,0 +1,436 @@
+% !TEX root=talk.tex
+\section[Introduction]{What are \TeX, \LaTeX\ and Friends?}
+
+\begin{frame}
+
+\includegraphics[width=.53\textwidth]{phdcomics-submission01}\par
+\pause{\centering\includegraphics[width=.53\textwidth]{phdcomics-submission02}\par}
+\pause{\fontfamily{augie}\small\selectfont PHD Comics by Jorge Cham}\hfill\includegraphics[width=.53\textwidth]{phdcomics-submission03}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ever Worried about These?}
+\begin{itemize}
+\item<2-16> Is my literature survey strong enough?
+\item<3-15,17|alert@17|trans:alert@1|handout:alert@1> My bibliography/citation formatting got inconsistent.
+\item<4-15,17|alert@17|trans:alert@1|handout:alert@1> My citation and bibliography aren't synchronised!
+\item<5-15,17|alert@17|trans:alert@1|handout:alert@1> My math equations don't display/print correctly.
+\item<6-16> Should this discussion go under this section or that?
+\item<7-15,17|alert@17|trans:alert@1|handout:alert@1> What formatting did I use for my subsection headings again?
+\item<8-15,17|alert@17|trans:alert@1|handout:alert@1> Didn't I set that heading to bold and italic 5 minutes ago?
+\item<9-15,17|alert@17|trans:alert@1|handout:alert@1> My section/figure/page numbering's gone all wrong!
+\item<10-16> Does this subsection go together with this section?
+%\item<alert@2> My page numbering's gone all wrong!
+\item<11-15,17|alert@17|trans:alert@1|handout:alert@1> Oops, I forgot to update the TOC.
+\item<12-16> What results should I put in this table?
+%\item<13-16,18|alert@18> How do I fit/split this huge table on/across page(s)?
+\item<13-15,17|alert@17|trans:alert@1|handout:alert@1> My figure jumped off the page again!
+\item<14-15,17|alert@17|trans:alert@1|handout:alert@1> The application crashed!
+\item<15-15,17|alert@17|trans:alert@1|handout:alert@1> \textbf{MY FILE GOT CORRUPTED!!!}
+\end{itemize}
+\end{frame}
+
+\begin{frame}<1>[label=texNfriends]
+\frametitle{What are \TeX\ and \LaTeX,\ and Friends?}
+
+\begin{description}
+\item<1>[\TeX] 
+\begin{itemize}
+\item From Greek $\uptau\upepsilon\upchi$
+\item \textsmaller{ASCII} \texttt{TeX}, \textsmaller{\textipa{/tEx/}, \textipa{/tEk/}}
+\item A \structure{computer typesetting system} created by Donald Knuth
+\item for `the creation of beautiful books'
+\end{itemize}
+
+
+\item<2>[\LaTeX]
+\begin{itemize}
+\item \textsmaller{ASCII} \texttt{LaTeX}, \textsmaller{\textipa{/"leItEx/}, \textipa{/"leItEk/}, \textipa{/"lA:tEx/}, \textipa{/"lA:tEk/}}
+\item A \structure{document preparation system} by Leslie Lamport
+	\end{itemize}
+
+\pause
+
+\item<3-4>[Binaries]
+	\begin{itemize}
+  \item \structure{\hologo{eTeX}}: additional primitives to \hologo{TeX}
+	\item \structure{\alert<4>{\hologo{pdfTeX}}}: additional PDF-related primitives
+  \item \structure{Xe\TeX}: native UTF-8 input; can access system fonts
+	\item \structure{\hologo{LuaTeX}}: includes the Lua scripting engine
+\end{itemize}
+\item <5>[Friends]
+\begin{itemize}
+\item \structure{Bib\TeX}, \structure{MakeIndex}, \structure{METAFONT}, \structure{METAPOST},  \ldots
+\item \url{http://www.ctan.org/what_is_tex.html}
+\end{itemize}
+\end{description}
+\end{frame}
+
+{\setbeamertemplate{background canvas}{\hskip-2em\includegraphics[height=\paperheight]{d_knuth_noticia}}
+\setbeamercolor{itemize item}{fg=structure.fg!45}
+\begin{frame}[plain,t]
+\vfill
+\hfill
+\begin{minipage}{.42\textwidth}
+\usebeamercolor[bg]{normal text}
+\hspace{1em}\textbf{\large Donald Knuth (1938--)}
+\begin{itemize}
+\usebeamercolor[bg]{normal text}
+\item American computer scientist, mathematician, and professor emeritus at Stanford University
+\item Author of the multi-volume work The Art of Computer Programming
+\item ``Father of the analysis of algorithms''
+\end{itemize}
+\end{minipage}
+
+\bigskip
+
+\begin{quote}
+\usebeamercolor[bg]{normal text}
+``Science is what we understand well enough to explain to a computer. Art is everything else we do.''
+
+\medskip
+
+``If you optimize everything, you will always be unhappy.''
+\end{quote}
+\vspace*{-4\baselineskip}\null
+\end{frame}}
+
+\mode<beamer>{
+  \againframe<2>{texNfriends}
+}
+
+{\setbeamertemplate{background canvas}{\includegraphics[height=\paperheight]{lamport}}
+\setbeamercolor{itemize item}{fg=structure.fg!45}
+\begin{frame}[plain,t]
+\vfill
+\begin{minipage}{.45\textwidth}
+\usebeamercolor[bg]{normal text}
+\hspace{1em}\textbf{\large Leslie Lamport (1941--)}
+\begin{itemize}
+\usebeamercolor[bg]{normal text}
+\item American computer scientist
+\item Laid the foundations of the theory of distributed systems
+\end{itemize}
+
+\bigskip
+
+\begin{quote}
+\usebeamercolor[bg]{normal text}
+``A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable.''\end{quote}
+\end{minipage}
+\end{frame}
+}
+
+\mode<beamer>{
+  \againframe<3->{texNfriends}
+}
+
+\begin{frame}
+\frametitle{Why?}
+\framesubtitle{From \url{http://www.ctan.org/what_is_tex.html}}
+\begin{columns}[T]
+\begin{column}{.46\textwidth}
+\begin{block}{Output Quality}
+\begin{itemize}
+\item It has the best output.
+\item It knows typesetting.
+\end{itemize}
+\end{block}
+
+\begin{block}{Superior Engineering}
+\begin{itemize}
+\item It's fast.
+\item It's stable.
+\item It's not rigid (extensible).
+\item Plain text input.
+\item Many output types.
+\end{itemize}
+\end{block}
+\end{column}
+
+\begin{column}{.46\textwidth}
+\begin{block}{Freedom}
+\begin{itemize}
+\item It's free.
+\item It runs anywhere.
+\end{itemize}
+\end{block}
+
+\begin{block}{Popularity}
+\begin{itemize}
+\item It's the standard (in academia and science).
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Typesetting and Word Processing}
+\framesubtitle{Apples and Oranges}
+\begin{itemize}
+\item<+-> Word processors
+\begin{itemize}
+\item Replacement of mechanical typewriters
+\item Word, OpenOffice, AbiWord, \ldots
+\end{itemize}
+\item<+-> Typesetting and Desktop publishing
+\begin{itemize}
+\item For publication and printing
+\item InDesign, QuarkXPress, Scribus\ldots
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Scalability}
+
+\centering
+\begin{tikzpicture}
+%\draw[help lines,gray!20] (0,0) grid (6,4);
+%\draw[semithick] (0,0) rectangle (6,4);
+\draw[semithick,->,>=latex'] (-.5, 0) -- (6.5, 0);
+\draw[semithick,->,>=latex'] (0, -.5) -- (0,5);
+\draw[dashed,structure.fg!50!black,semithick] (0, 0.2) parabola (3.5,4) node[above,font=\footnotesize,text=black]{impossible to do} (3.5, 4);
+\node[left] at (3,3) {Word$\textsuperscript{\textregistered}$};
+\draw[structure.fg!50!black,semithick] (0, 1) parabola (6,3); 
+\node at (5.2,2) {\LaTeX};
+\node[below,font=\footnotesize] at (3,0) {document complexity and size};
+\node[xshift=-8pt,yshift=4pt,font=\footnotesize,transform shape,rotate=90] at (0,2.2) {effort and time consumption};
+\end{tikzpicture}
+
+{\small Scalability of \LaTeX\ and Microsoft Word\textregistered\ against document size and complexity (redrawn from Marko Pinteric's original at \url{http://www.pinteric.com/miktex.html})}
+
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Professional Typesetting Quality Output}
+\setlength\fboxsep{.25em}
+
+\begin{itemize}
+%\item Follows typography best practice
+\item<+-> Typesetting quality and legibility
+\begin{itemize}
+\item good kerning hinting and correct ligatures
+\item inter-word, line and paragraph spacing
+\item context-sensitive hyphenation
+\end{itemize}
+%
+\begin{columns}[T]
+\begin{column}{.48\linewidth}
+\fcolorbox{black}{white}{
+\begin{minipage}{.98\linewidth}
+\centering\large\fontfamily{qtm}\selectfont \alert{Ta}ble \alert{fi}ery \alert{fl}u\alert{ff}y\par
+\includegraphics[width=\linewidth]{examples/latex-text-sample}
+\end{minipage}}
+\end{column}
+\begin{column}{.48\linewidth}
+\fcolorbox{black}{white}{
+\begin{minipage}{.98\linewidth}
+\centering\large\includegraphics[height=.95em]{examples/word-ligature-cropped}\par
+\vspace*{-1pt}\onslide<1>{\includegraphics[width=.98\linewidth]{examples/word-text-nohyph-cropped}}\onslide<2-|trans:0|handout:0>{\llap{\setlength\fboxsep{0pt}\colorbox{white}{\includegraphics[width=.98\linewidth]{examples/word-text-hyph-cropped}}}}
+\end{minipage}}
+\end{column}
+\end{columns}
+
+\medskip
+
+\item<3-> Correct mathematical typesetting (spacing etc)
+
+\begin{columns}[T]
+\begin{column}{.48\linewidth}
+\fcolorbox{black}{white}{
+\includegraphics[width=.98\linewidth]{examples/latex-math-sample-cropped}}
+\end{column}
+\begin{column}{.48\linewidth}
+\onslide<3>{\fcolorbox{black}{white}{
+\includegraphics[width=.94\linewidth]{examples/eq-word}}}%
+\onslide<4|trans:0|handout:0>{\llap{\fcolorbox{black}{white}{
+\includegraphics[width=.94\linewidth]{examples/word2010-maths-cropped}}}}
+\end{column}
+\end{columns}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Where Would I Want to Use \hologo{LaTeX}?}
+\begin{itemize}
+\item Beautiful typographic output \pause(OK not everyone cares that much\ldots)
+\item Documents with complex structures
+\item Lots of mathematics \pause(or other specific needs)\pause
+\item When publishers \alert{require} them
+\item Batch processing of data into reports, etc.
+\pause
+\item Back-end of other applications
+\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Some Cons}
+%\begin{itemize}
+%%  \item Usually not WYSIWYG (except commercial solutions)
+%  \item Initial learning curve (that's what I'm here for)
+%%  \item Hard to produce ``flashy'' docs (with too many fonts, colours\ldots)
+%  \item Overkill for simple documents
+%  \item Not as suitable for graphic-intensive material (e.g.\ advertising)
+%%  \item Not so good for advertisements, etc
+%\end{itemize}
+%\end{frame}
+
+\begin{frame}
+\frametitle{This is not a Word Processors vs \hologo{LaTeX} debate.}
+\begin{itemize}
+\item It's a `teaser' preview of an alternative tool.
+\item Some word processors also provide mechanisms to handle same routine tasks (with varying degrees of ease, consistency and stability)
+\item Use the best tool for the task at hand.
+\item \textbf{\alert{You}} are the best judge to decide for yourself.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{How Do I Use It?}
+\begin{enumerate}
+\item<+-> Write a plain text \hologo{LaTeX} file (\texttt{.tex})
+\item<+-> Run it through \texttt{pdflatex} or \texttt{xelatex} $\rightarrow$ \textsmaller{PDF} output\\
+\textsmaller{(or \texttt{latex + dvips + ps2pdf} for \textsmaller{DVI} + \textsmaller{PS} + \textsmaller{PDF})}
+\item<+-> Run \texttt{bibtex} and/or \texttt{makeindex} to process bibliographies, indices
+\item<+-> Re-run \texttt{pdflatex} to resolve references and pointers
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example \texttt{.tex} File}
+\setlength{\fboxsep}{.5em}
+
+\begin{columns}[T]
+\begin{column}{.47\textwidth}
+\begin{beamerboxesrounded}[width=\linewidth]{}
+\vskip-1.2em
+\begin{lstlisting}[moretexcs={maketitle,tableofcontents,subsection},
+emph={document,abstract},
+basicstyle={\ttfamily\footnotesize\lsstyle},lineskip=-2pt]
+\documentclass[a4paper,11pt]{article}
+\author{Lim Lian Tze}
+\title{An Introductory Paper}
+\date{\today}
+:\onslide<1-3>{{\bfseries\color{Maroon}\textbackslash usepackage}[\textcolor{Sienna2}{\bfseries english}]\{\textcolor{RoyalBlue3}{\bfseries babel}\}}%
+\onslide<4|trans:0|handout:0>{\llap{{\bfseries\color{Maroon}\textbackslash usepackage}[\textcolor{Sienna2}{\bfseries ngerman}]\{\textcolor{RoyalBlue3}{\bfseries babel}\}}}%
+\onslide<5|trans:0|handout:0>{\llap{{\bfseries\color{Maroon}\textbackslash usepackage}[\textcolor{Sienna2}{\bfseries bahasam}]\{\textcolor{RoyalBlue3}{\bfseries babel}\}}}:
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+This paper introduces\ldots
+\end{abstract}
+
+\section{Introduction}
+We consider\ldots
+
+\section{State of the Art}
+We look at\ldots
+
+\subsection{Document Formats}
+There are many\ldots
+\end{document}
+\end{lstlisting}
+\vspace*{-1.2em}
+\end{beamerboxesrounded}
+\end{column}
+
+\begin{column}{.46\textwidth}
+\hfill\uncover<3>{\fcolorbox{black}{white}{\includegraphics[width=.95\linewidth]{examples/first-en}}}%
+\uncover<4|trans:0|handout:0>{\llap{\fcolorbox{black}{white}{\includegraphics[width=.95\linewidth]{examples/first-de}}}}%
+\uncover<5|trans:0|handout:0>{\llap{\fcolorbox{black}{white}{\includegraphics[width=.95\linewidth]{examples/first-ms}}}}
+\end{column}
+\end{columns}
+
+\uncover<2->{\begin{tikzpicture}[remember picture,overlay]
+\node[single arrow,fill=DarkSeaGreen,font=\ttfamily\bfseries,xshift=-1em] at (current page.center) {pdflatex};
+\end{tikzpicture}
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Where Do I Get It?}
+\begin{description}
+\setlength\labelwidth{8.5em}
+\setlength\itemindent{3em}
+\item[Online] Overleaf (\url{www.overleaf.com})
+\pause
+\bigskip
+\item[Windows] Mik\TeX, \TeX Live
+\item[Un*x, \textsmaller{GNU}/Linux] \TeX Live
+\item[Mac OS X] Mac\TeX\ (based on \TeX Live)
+\item[Installation] Use your OS' package manager\\\hspace{\itemindent}(or download manually)
+\pause
+\item[Editors] vi, emacs, Texmaker, TeXworks, Texstudio, TeXshop\ldots
+\pause
+\item[\hologo{LaTeX} Packages] Use Mik\TeX\ or \TeX Live's package manager
+\pause
+\bigskip
+\item[Documentation] 
+{\small (Online)} \url{http://texdoc.net/pkg/<package name>}\\
+\hspace{\itemindent}{\small (\TeX Live)} \texttt{\$ texdoc <package name>}\\
+\hspace{\itemindent}{\small (Mik\TeX)} \texttt{\$ mthelp <package name>}
+\end{description}
+\end{frame}
+
+\begin{frame}
+\frametitle{Easy to Learn, Hard to Master}
+\begin{itemize}
+\item<+-> Customising may not be straightforward (vs word processors)
+\item<+-> Intentionally so: Style guidelines should be followed strictly
+\begin{itemize}
+\item Publisher/organisation provides \structure{document class} or \structure{style} files
+\item Use these to take care of formatting and styling, focus on the \structure{content}
+\end{itemize}
+% \item<+-> Fair enough. \\But where do I learn all the stuff the \TeX nicians do?
+% \item<+-> (There \emph{is} a learning curve)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Too hard, only for engineers/mathematicians?}
+
+\begin{columns}[T]
+\begin{column}{0.58\textwidth}
+\begin{itemize}[<+->]
+\item I once guided a student in the humanities to learn authoring Chinese \LaTeX{} documents entirely through e-mail
+\item Recently a 75-year-old user transitioned to \LaTeX{} on Overleaf to write a book (with indices, end notes, cross references)
+\item Professor in Finance at Trinity College transitioned to \LaTeX{} successfully (\url{https://www.overleaf.com/blog/299})
+\item Linguists, psychologists, biostatistics (integrating with R), legal profession\ldots
+\end{itemize}
+\end{column}
+\hfill
+\begin{column}{.29\textwidth}<3->
+\includegraphics[width=\linewidth]{brian-lucey-full}\\
+{\footnotesize Prof Brian Lucey, Trinity College, Dublin}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+{\setbeamertemplate{background canvas}{\hskip-1.75em\includegraphics[height=\paperheight]{IMG_1710}}
+\begin{frame}[plain,t]
+\tikz\node[text=palette tertiary.fg,fill=palette tertiary.bg,opacity=0.8,font=\small\bfseries,text width=\textwidth,align=center]{Nano Ninjas -- a group of 7th- and 8th-graders from Portland, OR};
+
+\vspace*{.87\textheight}
+
+\tikz\node[text=palette tertiary.fg,fill=palette tertiary.bg,opacity=0.8,font=\footnotesize,text width=\textwidth,align=center]{Collaboratively wrote an engineering notebook with \textbf{300+ pages} in \LaTeX{} as part of their FIRST Tech Challenge win (\url{https://www.overleaf.com/read/hkxzqcncngyv})};
+\end{frame}
+}
+
+\begin{frame}
+\centering\Huge
+So, What Can \hologo{LaTeX} Do?
+\par
+\end{frame}

@@ -1,0 +1,50 @@
+%% This is file `beamerfontthemeuow.sty',
+%% 2014-01-07 (cc) tmgriffiths Version 1.0
+%%
+%% Copyright (CC BY-NC-SA 4.0 Int) 2015 by T. M. Griffiths
+%% under the creative commons licence, attribution, non-comercial, share alike
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License version 1.3c
+%% http://www.latex-project.org/lppl/lppl-1-3c.txt
+%%
+%%--------------------------------------------------------------------------------
+%% These Packages essentially port the UOW powerpoint templates over to Beamer, 
+%% a LaTeX class for presentations. Inspiration for parts of this theme (where 
+%% design decision had to be made) and guidance on the implementation of the 
+%% pgfkeys were taken from the metropolis by Matthias Vogelgesang et al., of which 
+%% the author of this package is a contributor.
+%% 
+%% Created by Thomas M. Griffiths (tmg994[at]uowmail[dot]edu[dot]au) 2015-07-23 
+%% Version 1.0 2015-07-23 tmgriffiths       
+%%--------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerfontthemeuow}
+    [2015/07/23 A Beamer Font Theme That Matches the UOW Branding Guidelines V 1.0 (cc) tmgriffiths]
+\RequirePackage{ifxetex}
+\RequirePackage{textcase}
+\ifxetex
+   \RequirePackage{microtype}
+\else
+   \RequirePackage[tracking=true]{microtype}
+\fi
+
+% No more annoying font warnings. Hooray!
+\let\Tiny=\tiny
+
+% Font Assignment
+\setbeamerfont*{title}{size=\Huge,}
+\setbeamerfont*{author}{size=\normalsize}
+\setbeamerfont*{date}{size=\normalsize}
+\setbeamerfont*{institute}{size=\normalsize}
+\setbeamerfont*{subtitle}{size=\normalsize,}
+\setbeamerfont*{frametitle}{size=\Large, shape=\bfseries}
+\setbeamerfont*{framesubtitle}{size=\normalsize,}
+\setbeamerfont*{section title}{size=\Large, shape=\bfseries}
+\setbeamerfont*{alerted text}{shape=\bfseries}
+\setbeamerfont*{block title}{shape=\bfseries}
+\setbeamerfont*{block title alerted}{shape=\bfseries}
+\setbeamerfont*{enumerate item}{shape=\bfseries}
+\setbeamerfont*{caption name}{size=\small, shape=\bfseries}
+\setbeamerfont*{caption}{size=\small}

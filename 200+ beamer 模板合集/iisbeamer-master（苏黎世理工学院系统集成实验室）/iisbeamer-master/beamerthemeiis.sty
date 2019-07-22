@@ -1,0 +1,30 @@
+\mode<presentation>
+
+%% Specify the required packages.
+\RequirePackage[absolute,overlay]{textpos} % For positioning the wafer image on the title page.
+
+%% Setup the horizontal an vertical units for the textpos package.
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+
+% Requirement
+\RequirePackage{tikz}
+
+%% Define some booleans for the class options.
+\newif\if@waferpng
+\@waferpngfalse
+
+%% Declare a theme option for choosing the PNG image of the wafer on
+%% the title page.
+\DeclareOption{waferpng}{\@waferpngtrue}
+
+%% Process the provided theme options.
+\ProcessOptions
+
+%% Theme settings
+\usecolortheme{iis}
+\usefonttheme{iis}
+\useinnertheme{iis}
+\useoutertheme{iis}
+
+\mode<all>

@@ -1,0 +1,327 @@
+\lecture{使用说明}{lec:introduction}
+\section{简介}
+% 这一主题的动机
+\begin{frame}{简介}{内容简介}
+  \begin{itemize}
+  \item 西北农林科技大学 {\LaTeX} \alert{Beamer 主题}
+    \begin{itemize}
+    \item 简单易用
+    \item 标准、规范
+      \begin{itemize}
+      \item 高质量
+      \item 高效率
+      \end{itemize}
+    \item \alert{所想即所得}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\subsection{协议}
+% 协议
+\begin{frame}{简介}{协议}
+  \begin{itemize}
+  \item 所有logo的版权属于西北农林科技大
+    学\href{http://www.nwafu.edu.cn}{http://www.nwafu.edu.cn}
+  \item 若署名为西北农林科技大学，则可以使用这些logo
+  \item 请遵守 GNU 通用公共协议 v.3 (GPLv3)
+    \begin{itemize}
+    \item 详
+      见：
+      \href{http://www.gnu.org/licenses/}{http://www.gnu.org/licenses/}
+    \item 可以发布和修改本主题中的任何内容
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\section{安装}
+% 通用安装
+\begin{frame}{安装}{概述}
+  \begin{itemize}
+  \item 文件构成
+    \begin{enumerate}
+    \item {\tt beamerthemenwafusidebar.sty}
+    \item {\tt beamerinnerthemenwafusidebar.sty}
+    \item {\tt beamerouterthemenwafusidebar.sty}
+    \item {\tt beamercolorthemenwafusidebar.sty}
+    \item {\tt beamerfontthemenwafusidebar.sty}
+    \end{enumerate}
+  \item 全局安装
+    \begin{itemize}
+    \item 拷贝到本地\LaTeX 目录树中
+    \end{itemize}
+  \item 本地安装
+    \begin{itemize}
+    \item 将5个主题文件拷贝到当前工作文件夹
+    \end{itemize}    
+  \end{itemize}
+\end{frame}
+
+\subsection{GNU/Linux}
+% GNU/Linux中的安装
+\begin{frame}{安装}{GNU/Linux}
+  \begin{block}{Ubuntu中的TeX Live}
+    \begin{enumerate}
+    \item 将 {\tt <dirstruct>} 拷贝到本地{\LaTeX}目录树的根目录. 默认是\\
+      {\tt \textasciitilde /texmf}\\
+      如果根目录不存在，则创建该目录。 符号 {\tt \textasciitilde} 表示
+      家目录, 例如：{\tt /home/<username>}
+    \item 在终端中运行如下命令\\
+      {\tt \$ texhash \textasciitilde /texmf}
+    \end{enumerate}
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+% Microsoft Windows
+\begin{frame}{安装}{Microsoft Windows}
+  \begin{block}{Windows中的TeX Live}
+    假设使用默认目录（在高级 TeX Live 安装中，可以更改latex目录树的根目
+    录）。
+    \begin{enumerate}
+    \item 将 {\tt <dirstruct>} 拷贝到本地{\LaTeX}目录树的根目录\\
+      {\tt \%USERPROFILE\%\textbackslash texmf}\\
+      如果不存在，则创建. XP的默认目录是 {\tt \%USERPROFILE\%} 是\\
+      {\tt c:\textbackslash Document and
+        Settings\textbackslash<username>}，\\
+      Vista及更高版本是\\
+      {\tt c:\textbackslash Users\textbackslash<username>}
+    \item 打开 TeX Live 管理器对话框选择 'Actions'中的'Update filename
+      database'，并执行.
+    \end{enumerate}
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\subsection{Mac OS X}
+% Mac OS X的安装
+\begin{frame}{安装}{Mac OS X}
+  \begin{block}{Mac OS X中的 MacTeX}
+    将 {\tt <dirstruct>} 拷贝到本地latex目录树的根目录. 默认是\\
+    {\tt \textasciitilde /Library/texmf}\\
+    如果不存在，则创建. 符号 {\tt \textasciitilde} 表示家目录, 例
+    如：{\tt /home/<username>}
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\subsection{宏包依赖}
+% 宏包依赖
+\begin{frame}{安装}{宏包依赖}
+  除需要 Beamer 类外，本主题需要调用两个宏包
+  \begin{itemize}
+  \item TikZ\footnote{TikZ 是一个绘制图形的杰出宏包.请参
+      考\href{http://www.texample.net/tikz/examples/}{在线示
+        例} 或
+      \href{http://tug.ctan.org/tex-archive/graphics/pgf/base/doc/generic/pgf/pgfmanual.pdf}{pgf
+        用户手册}. }
+  \item calc
+  \end{itemize}
+  这些宏包是{\LaTeX}的通用宏包。
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\section{用户接口}
+\subsection{主题及选项}
+% 主题和选项列表
+\begin{frame}{用户接口}{加载主题和主题选项}
+  \begin{block}{演示文稿主题}
+    加载主题只需要输入\\
+    {\tt \textbackslash usetheme[<选项>]\{nwafusidebar\}}\\
+    与加载其它主题方法一致，本主题会加载内部、外部和颜色主题并且可以传
+    递 {\tt <选项>} 参数.
+  \end{block}
+  \begin{block}{内部主题}
+    使用如下命令加载内部主题\\
+    {\tt \textbackslash useinnertheme\{nwafusidebar\}}\\
+    内部主题无参数.
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\begin{frame}{用户接口}{加载主题和主题选项}
+  \begin{block}{外部主题}
+    使用如下命令加载外部主题\\
+    {\tt \textbackslash useoutertheme[<选项>]\{nwafusidebar\}}\\
+    目前，外部主题的参数有：
+    \begin{itemize}
+      \scriptsize
+    \item {\tt hidetitle}: 隐藏边栏中的短标题
+    \item {\tt hideauthor}: 隐藏边栏中的作者缩写
+    \item {\tt hideinstitute}: 隐藏边栏底部的单位缩写
+    \item {\tt shownavsym}: 显示导航符号
+    \item {\tt left} or {\tt right}: 边栏位置 (默认在右边)
+    \item {\tt width=<length>}: 边栏宽度 (默认是 2 cm)
+      % 宽度指从垂直分割条的右边到slide的右边
+    \item {\tt hideothersubsections}: 除了当前section的subsection隐藏其
+      它所有 subsections
+    \item {\tt hideallsubsections}: 隐藏所有 subsections
+    \end{itemize}
+    最后4个选项继承于外部sidebar主题.
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+\subsection{编译}
+% 编译
+\begin{frame}{用户界面}{编译}
+  \begin{block}{演示文稿的编译}
+    本主题需要至少编译 \alert{3} 次，以保证正确处理页码计数器的数字。
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\subsection{主题修改}
+% 如何修改主题
+{\setbeamercolor{nwafusidebar}{fg=gray!50,bg=gray}
+  \setbeamercolor{sidebar}{bg=red!20}
+  \setbeamercolor{structure}{fg=red}
+  \setbeamercolor{frametitle}{use=structure,fg=structure.fg,bg=red!5}
+  \setbeamercolor{normal text}{bg=gray!20}
+  \begin{frame}{用户界面}{主题修改}
+    \begin{itemize}
+    \item 主题设置了默认的字体、颜色和布局。
+    \item 请参考beamer用户手册。
+    \item 例如，在这一页中，使用如下方式修改了主题元素
+      \begin{itemize}
+      \item 修改边栏颜色:\\
+        {\tt \textbackslash
+          setbeamercolor\{nwafusidebar\}\{fg=gray!50,bg=gray\}} {\tt
+          \textbackslash setbeamercolor\{sidebar\}\{bg=red!20\}}
+      \item 修改结构元素颜色:\\
+        {\tt \textbackslash setbeamercolor\{structure\}\{fg=red\}}\\
+      \item 修改帧标题文本颜色和背景颜色: {\tt \textbackslash
+          setbeamercolor\{frametitle\}\{use=structure,
+          fg=structure.fg,bg=red!5\}}
+      \item 修改文本背景颜色{\tt \textbackslash setbeamercolor\{normal
+          text\}\{bg=gray!20\}}
+      \end{itemize}
+    \end{itemize}
+  \end{frame}}
+%%%%%%%%%%%%%%%%
+
+\subsection{波浪背景}
+% nwafu波浪背景图案
+\begin{frame}{用户界面}{波浪背景图案}
+  \begin{block}{波浪背景图案}
+    \begin{itemize}
+    \item 可以在任意一个单独帧中用下述方法添加背景图案\\
+      {\tt \{\textbackslash nwafuwavesbg\\
+        \textbackslash begin\{frame\}[<选项>]\{帧标题\}\{帧子标题\}\\
+        \ldots\\
+        \textbackslash end\{frame\}\}}
+    \end{itemize}
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\subsection{宽屏支持}
+% 宽屏支持
+\begin{frame}{用户界面}{宽屏支持}
+  \begin{block}{宽屏支持}
+    新式投影仪，甚至是现代的电视机已支持如 16:10 或 16:9 模式的宽屏模式.
+    Beamer (>= v. 3.10) 支持多种演示文稿的缩放比例。根据Beamer 用户手册
+    (v. 3.10)的77页的8.3节的说明，可以使用如下选项设置显示比例\\
+    {\tt\textbackslash documentclass[aspectratio=1610]\{beamer\}}\\
+    这一命令设置为 16:10. 也可以是 169, 149, 54, 43 (默认).
+  \end{block}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%
+
+\section{主题应用}
+{\setbeamercolor{nwafusidebar}{fg=gray!50,bg=gray}
+ \setbeamercolor{sidebar}{bg=red!20}
+ \setbeamercolor{structure}{fg=red}
+ \setbeamercolor{frametitle}{use=structure,fg=structure.fg,bg=red!5}
+ \setbeamercolor{normal text}{bg=gray!20}
+ \subsection{文件夹结构}
+\begin{frame}{主题应用}{文件夹结构}
+  \begin{itemize}
+  \item 本地安装时的工作文件构成
+  \end{itemize}
+  \begin{center}
+    \scalebox{0.58}{
+      \begin{forest}
+        pic dir tree,
+        pic root,
+        for tree={% folder icons by default; override using file for file icons
+          directory,
+        },
+        [jobname【工作根目录】%,           
+          [contents【分章节内容\LaTeX 源文件，可根据需要增减】        
+            [ch01.tex【第1章】, file
+            ]
+            [$\vdots$, file
+            ]
+          ]
+          [nwafulogo【学校校徽图标，\alert{必须存在}，且置于根目录】
+            [circle.pdf【学校圆形透明Logo】, file
+            ]
+            [h\_bar.pdf【学校横条形中英文透明Logo】, file
+            ]
+            [nwafu\_waves.pdf【波纹背景透明图】, file
+            ]
+            [nwafu\_logo\_cie.png【信息工程学院透明Logo】, file
+            ]
+          ]
+          [settings【自定义命令、环境、引入宏包等\LaTeX 源文件，可根据需要调整】        
+            [format.tex【自定义命令、环境、参数设置等】, file
+            ]
+            [packages.tex【引入宏包】, file
+            ]
+          ]
+          [beamerthemenwafusidebar.sty【主题主文件，\alert{必须存在}，且置于根目录】, file
+          ]
+          [beamerinnerthemenwafusidebar.sty【内部主题文件，\alert{必须存在}，且置于根目录】, file
+          ]
+          [beamerouterthemenwafusidebar.sty【外部主题文件，\alert{必须存在}，且置于根目录】, file
+          ]
+          [beamercolorthemenwafusidebar.sty【颜色主题文件，\alert{必须存在}，且置于根目录】, file
+          ]
+          [beamerfontthemenwafusidebar.sty【字体主题文件，\alert{必须存在}，且置于根目录】, file
+          ]
+          [main.tex【主控文件，\emph{必须存在}，且置于根目录】, file
+          ]
+          [Makefile【make命令需要的脚本文件，若不执行make命令，可以不需要】, file
+          ]
+          [.latexmkrc【latexmk命令需要的脚本文件，若不执行latexmk命令，可以不需要】, file
+          ]
+        ]
+      \end{forest}
+    }
+  \end{center}
+\end{frame}
+}
+%%%%%%%%%%%%%%%%
+
+\section{问题反馈}
+\subsection{错误, 意见和建议}
+% 问题、意见和建议
+\begin{frame}{问题反馈}{错误、意见和建议}
+  \begin{itemize}
+  \item 本主题中会存在错误，如果发现了错误，请联系我进行改进
+    \begin{itemize}
+    \item \alert{再小的问题也是问题}
+    \end{itemize}
+  \item 如果你有好建议和使用体验改善意见，请联系我进行改进
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+% \tiny
+% \scriptsize
+% \footnotesize
+% \small
+% \normalsize
+% \large
+% \Large
+% \LARGE
+% \huge
+% \Huge
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main.tex"
+%%% End: 

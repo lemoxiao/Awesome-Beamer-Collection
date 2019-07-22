@@ -1,0 +1,276 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usetheme{uconn}
+
+\title[Beamer themes for UConn]{Beamer themes for the\\ University of Connecticut}
+\subtitle{part of a suite of themes}
+\author[Cory Brunson]{Jason Cory Brunson, PhD}
+\institute[UConn Health]{Center for Quantitative Medicine\\ University of Connecticut School of Medicine}
+\date{\today}
+
+\newtheorem{remark}{Remark}
+
+\setlength{\parskip}{.5em}
+
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}{Table of contents}
+\tableofcontents
+\end{frame}
+
+
+\begin{frame}{UConn theme}
+
+The {\ttfamily uconn} Beamer theme, stored in the file {\ttfamily beamerthemeuconn.sty}, simply invokes four specific {\ttfamily uconn} Beamer themes, stored in the following files:
+\begin{itemize}
+\ttfamily
+\item beamercolorthemeuconn.sty
+\item beamerfontthemeuconn.sty
+\item beamerinnerthemeuconn.sty
+\item beamerouterthemeuconn.sty
+\end{itemize}
+
+This example slideshow is just a concatenation of two example slideshows for the color and font themes ({\ttfamily uconn-color-font-example.tex}) and for the inner and outer themes ({\ttfamily uconn-inner-outer-example.tex}).
+
+\end{frame}
+
+
+\section{Layout}
+
+
+\begin{frame}{Background}
+
+The background image is a faded navy blue oak leaf, stored as a PNG. Like the other images used in this theme, it comes from the \href{https://brand.uconn.edu/downloads/logos/}{bulk logos download at UConn Brand Standard}.
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Symbols}
+
+The classic (black) oak leaf is encoded as a symbol \verb|\oakleaf|, and can be used in mathematical environments, e.g.
+\[\oakleaf^{\mathbb{C}}=\oakleaf\otimes_{\mathbb{R}}\mathbb{C}\text,\]
+or in text (\oakleaf).
+
+An inverted-color oak leaf is encoded as \verb|\oakleafbox| (see the slide on claims and proofs).
+
+\end{frame}
+
+
+\section{Environments}
+
+
+\subsection{Text environments}
+
+
+\begin{frame}{Blocks}
+
+\begin{block}{Block}
+This is a text block, formatted as in the {\ttfamily default} template.
+\end{block}
+
+\begin{alertblock}{Alert block}
+This is an alert text block, also formatted by default.
+\end{alertblock}
+
+More may be done in future to customize the block environments. Suggestions are welcome!
+
+\end{frame}
+
+
+\subsection{Mathematical environments}
+
+
+\begin{frame}[fragile]{Definitions and examples}
+
+\begin{definition}
+A {\bfseries definition} block is by default formatted like a text block.
+\end{definition}
+
+Text formatting like \verb|\bfseries| (boldface) can be called within blocks.
+
+\begin{example}
+An \emph{example} is also a block, formatted a bit differently.
+\end{example}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Claim and proof environments}
+
+\begin{theorem}
+Claim blocks, including \verb|lemma|, \verb|theorem|, and \verb|corollary|, use slant-shaped font (\verb|\slshape|) to emphasize their contents.
+\end{theorem}
+
+\begin{proof}
+This proof block shows that the proof-ending symbol has been changed from the customary square to a UConn oak leaf (white inside a black square).
+\end{proof}
+
+\begin{corollary}
+The box oak leaf can also be used inline: \oakleafbox
+\end{corollary}
+
+\end{frame}
+
+
+\section{Color and font defaults}
+
+
+\begin{frame}{Default font family}
+
+The default font family is Arial, which is used in the PowerPoint templates (see the \hyperlink{slide:acknowledgments}{Acknowledgments slide}).
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Palette colors}
+
+The palette colors used by outer themes interpolate between navy blue and white:
+
+\vfill
+
+\begin{columns}
+\begin{column}{.5\textwidth}
+
+\centering
+\verb|palette|
+\vspace{1ex}
+
+\begin{beamercolorbox}[sep=4pt,center]{palette primary}
+\usebeamerfont{palette primary}primary
+\end{beamercolorbox}
+
+\begin{beamercolorbox}[sep=4pt,center]{palette secondary}
+\usebeamerfont{palette secondary}secondary
+\end{beamercolorbox}
+
+\begin{beamercolorbox}[sep=4pt,center]{palette tertiary}
+\usebeamerfont{palette tertiary}tertiary
+\end{beamercolorbox}
+
+\begin{beamercolorbox}[sep=4pt,center]{palette quaternary}
+\usebeamerfont{palette quaternary}quaternary
+\end{beamercolorbox}
+
+\end{column}
+\begin{column}{.5\textwidth}
+
+\centering
+\verb|palette sidebar|
+\vspace{1ex}
+
+\begin{beamercolorbox}[sep=4pt,center]{palette primary}
+\usebeamerfont{palette primary}primary
+\end{beamercolorbox}
+
+\begin{beamercolorbox}[sep=4pt,center]{palette secondary}
+\usebeamerfont{palette secondary}secondary
+\end{beamercolorbox}
+
+\begin{beamercolorbox}[sep=4pt,center]{palette tertiary}
+\usebeamerfont{palette tertiary}tertiary
+\end{beamercolorbox}
+
+\begin{beamercolorbox}[sep=4pt,center]{palette quaternary}
+\usebeamerfont{palette quaternary}quaternary
+\end{beamercolorbox}
+
+\end{column}
+\end{columns}
+
+\vspace{2ex}
+For example, \verb|palette secondary| is defined using
+\begin{verbatim}
+bg=uconn navy blue!80!uconn white,fg=uconn white
+\end{verbatim}
+
+\end{frame}
+
+
+\begin{frame}{Frame element colors}
+
+The symbol colors for itemized and enumerated lists progress
+\begin{itemize}
+\item from purple,
+\begin{itemize}
+\item through orange-gold,
+\begin{itemize}
+\item to green.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\alert{Alerted text is rendered in orange-gold.}
+
+\vfill\begin{remark}
+Block and caption titles are boldfaced and rendered in dark red.
+\end{remark}
+
+\vfill
+Hyperlinks and buttons are rendered in teal blue.
+See \hyperlink{sec:customization}{Customization} and \hyperlink{slide:acknowledgments}{Acknowledgments} for examples.
+
+\end{frame}
+
+
+\section{Customization}
+\label{sec:customization}
+
+
+\begin{frame}[fragile]{Manually assigning colors}
+
+Type
+\begin{verbatim}
+{\color{uconn purple} purple}
+\end{verbatim}
+(with brackets) to render {\color{uconn purple} purple}, or set
+\begin{verbatim}
+\color{uconn health bright teal}
+\end{verbatim}
+\color{uconn health bright teal}
+(without brackets) to color all text in a slide the bright teal in the UConn Health palette.
+
+\color{black}\vfill
+Color names are based on the UConn Brand color palette.
+
+\center\href{http://brand.uconn.edu/standards/color-palette/}{\beamerbutton{Visit the Brand Standards website}}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Changing the theme}
+
+You can change the default colors by using setbeamercolor in the preamble, as i did:
+\begin{verbatim}
+\setbeamercolor*{titlelike}{
+  bg=uconn navy blue,
+  fg=uconn white
+}
+\end{verbatim}
+\ldots or by editing the color theme file {\ttfamily beamercolorthemeuconn.sty}.
+Please \hyperlink{mailto:brand@uconn.edu}{check with the Brands office} about using the derivative theme, e.g.\ one with the colors themselves altered.
+
+\end{frame}
+
+
+\section{Thanks}
+
+
+\begin{frame}{Acknowledgments}
+\label{slide:acknowledgments}
+
+See the color/font themes example and the inner/outer themes example for specific acknowledgments.
+
+Suggestions are always welcome! Email Cory: \href{mailto:brunson@uchc.edu}{\ttfamily brunson@uchc.edu}
+
+\end{frame}
+
+
+\end{document}

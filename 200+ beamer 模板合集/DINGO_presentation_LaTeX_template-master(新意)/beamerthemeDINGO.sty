@@ -1,0 +1,127 @@
+%Created by Kristóf Rozgonyi in 2017
+%Contact info: rstofi@gmail.com
+%Version 0.1
+
+\mode<presentation>
+
+\usepackage[english]{babel}				%internationalization
+\usepackage[utf8]{inputenc}				%input encoding
+\usepackage[T1]{fontenc}				%enhanced font encoding
+\usepackage{fix-cm}						%per­mit Com­puter Modern fonts at ar­bi­trary sizes
+\usepackage{amsfonts}					%set of miscellaneous TeX fonts that augment the standard Computer Modern set
+\usepackage{multimedia}     %animations
+\usepackage{pgf}          %for images
+%\usepackage{graphicx}         %for images
+\usepackage{tikz}         %for the titlepage image
+\usepackage{tikzpagenodes}        %for the titlepage image
+\usepackage{caption}        %set captions
+
+%colors
+	\definecolor{DINGO_gray}{rgb}{0.41,0.41,0.41}	  %gray (originally from Oxygen template) for text
+	\definecolor{DINGO_lightgray}{rgb}{0.93,0.93,0.93}    %gray (originally from Oxygen template) for block background
+	
+	\setbeamercolor{title}{fg=black}		%title color
+	\setbeamercolor{subtitle}{fg=black}		%subtitle color
+	\setbeamercolor{author}{fg=black}		%author color
+	\setbeamercolor{institute}{fg=DINGO_gray}		%institute color
+	\setbeamercolor{date}{fg=black}		%date color
+	
+	\setbeamercolor{normal text}{fg = DINGO_gray}	%text color
+	\setbeamercolor{frametitle}{fg=black}		%frame title color
+	\setbeamercolor{item}{fg=DINGO_gray}		%item color
+	\setbeamercolor{subitem}{fg=DINGO_gray}		%subitem color
+	\setbeamercolor{text}{fg=white,bg=DINGO_gray}		%text block color
+	\setbeamercolor{block title}{bg=DINGO_gray,fg=white}		%block title color
+  \setbeamercolor{block body}{bg=DINGO_lightgray,fg=black} %block body color
+  \setbeamercolor{caption name}{fg=black}         %caption name color --> 'Figure' color
+  \setbeamercolor{caption}{fg=black}         %caption color
+  %\setbeamercolor{foot}{bg=black,fg=white}        %minimalistic black and white foot looks good
+  \setbeamercolor{foot}{fg=white}        %only fontsize needed if there is a background picture
+
+%fonts
+  \newcommand\HUGE{\@setfontsize\Huge{22}{25}} %first is the letters height in px the second is the spacing between lines (the so called baselineskip) in px
+  
+	\setbeamerfont{title}{size = \HUGE, family=\fontfamily{lmss}\selectfont}			%title font size and type
+	\setbeamerfont{subtitle}{size = \Large, family=\fontfamily{cmtt}\selectfont}			%subtitle font size and type
+	\setbeamerfont{author}{size = \LARGE, family=\fontfamily{lmss}\selectfont}			%author font size and type
+	\setbeamerfont{institute}{size = \small, family=\fontfamily{lmss}\selectfont}			%institute font size and type
+	\setbeamerfont{date}{size = \Large, family=\fontfamily{lmss}\selectfont}			%date font size and type
+	
+	\setbeamerfont{normal text}{size = \large}			%text font size	
+  \AtBeginDocument{\usebeamerfont{normal text}}
+		
+	\setbeamerfont{frametitle}{size = \Huge}			%frame title font size
+  \setbeamerfont{enumerate item}{size=\Large} %item symbol font size
+  \setbeamerfont{foot}{size=\footnotesize , series=\normalfont}
+
+  \captionsetup[figure]{labelformat=empty}        %do not write Figure before figure captions
+  \captionsetup[table]{labelformat=empty}        %do not write Figure before figure captions
+  
+  \DeclareMathSizes{12}{20}{14}{10}  %For size 12 text
+%DINGO logo
+  \pgfdeclareimage[height=0.10\paperwidth]{logo}{logos/DINGO_only}
+
+%outer theme
+  \setbeamersize{text margin left=15pt,text margin right=15pt}        %set up margins
+	\setbeamertemplate{navigation symbols}{} %remove the navigation symbols
+  %headline
+    \def\hrulefill{\leavevmode\leaders\hrule height 1pt\hfill\kern\z@} %redefine hrulefill width	
+  	\setbeamertemplate{frametitle}
+	  {
+		  \begin{columns}[T]
+		    \begin{column}{0.9\textwidth}
+		      {\vskip 5pt \hskip 4pt \insertframetitle \par\vskip -13pt \hrulefill} %frame title and slide number
+		    \end{column}
+		    \begin{column}{0.1\textwidth}
+		      \vskip -10pt \pgfuseimage{logo}
+		    \end{column}
+		  \end{columns}
+    }
+	%footline
+    \setbeamertemplate{footline}
+    {
+      \leavevmode%
+      \includegraphics[width=\paperwidth, height=0.032\paperwidth]{logos/footnote_background}%background image
+      \vskip-11pt%NEW
+      \hbox{
+        \begin{beamercolorbox}[leftskip=.3cm,wd=\paperwidth,ht=0.03\paperwidth,sep=0.1cm]{foot}%
+          \usebeamerfont{foot}
+		  \begin{columns}[T]
+		    \begin{column}{0.9\paperwidth}
+              \hskip 15pt              
+              \insertshorttitle %change title to change footline text -> quck and dirty method
+              \hfill
+    		    \end{column}
+		    \begin{column}{0.1\paperwidth}
+               \hskip 15pt              
+              \textbf{\insertframenumber}%/\inserttotalframenumber %uncomment to set page/all page format
+		    \end{column}
+		  \end{columns}
+        \end{beamercolorbox}%
+      }
+      \vskip0pt
+    }
+%title page
+	\setbeamertemplate{title page}
+	{
+	  \vskip 0.03\paperwidth
+    \usebeamerfont{title}\usebeamercolor[fg]{title}\MakeUppercase\inserttitle\\
+    \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle
+    \vskip 0.03\paperwidth
+    \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor
+    \vskip 0.01\paperwidth
+    \usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute
+    \vskip 0.05\paperwidth
+    \usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate
+	  
+    \begin{tikzpicture}[remember picture,overlay]
+      %\node[at=(current page.center)]
+      \node[yshift=1.725cm] at (current page.south)
+      {
+        \includegraphics[width=\paperwidth]{logos/DINGO_long_inverted}
+      };
+    \end{tikzpicture}
+  }
+
+\mode
+<all> 

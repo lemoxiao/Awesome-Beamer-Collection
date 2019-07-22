@@ -1,0 +1,35 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage[scaled=.89]{helvet}
+
+\setcounter{secnumdepth}{0}
+\usepackage{hyperref}
+
+\hypersetup{pdfborder={1 1 1}}
+\def\LayoutTextField#1#2{\makebox[6em][l]{#1: }\raisebox{-.5ex}{#2}}
+\def\LayoutChoiceField#1#2{\makebox[6em][l]{#1: }#2}
+\newdimen\longline
+\longline=\textwidth\advance\longline-6em
+
+\begin{document}
+\section{Feedback Form}
+
+\noindent\begin{Form}
+
+\TextField[name=Name,width=\longline,borderwidth=1,bordercolor={0 0 0},backgroundcolor={.85 .85 .85}]{Name}\vskip1ex
+
+\TextField[name=Affiliation,width=\longline,borderwidth=1,bordercolor={0 0 0},backgroundcolor={.85 .85 .85},]{Affiliation}\vskip1ex
+
+\ChoiceMenu[borderwidth=1,radio=true,backgroundcolor={.85 .85 .85},bordercolor={0 0 0}]{Are you a}{Student, Academic}\vskip2ex
+
+\makebox[6em][l]{Interests:}%
+\CheckBox[borderwidth=1,backgroundcolor={.85 .85 .85},bordercolor={0 0 0}]{Security}\hskip1.5em
+\CheckBox[borderwidth=1,backgroundcolor={.85 .85 .85},bordercolor={0 0 0}]{Systems}\hskip1.5em
+\CheckBox[borderwidth=1,backgroundcolor={.85 .85 .85},bordercolor={0 0 0}]{User space}\vskip1.5ex
+
+\TextField[name=Comment,multiline=true,width=\longline,borderwidth=1,backgroundcolor={.85 .85 .85},bordercolor={0 0 0}]{Comments}\\
+\end{Form}
+\end{document}

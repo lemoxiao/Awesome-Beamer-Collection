@@ -1,0 +1,144 @@
+% UH Manoa presentation theme for beamer
+% Jeff Delmerico <jeffdelmerico@gmail.com> 2012
+% https://github.com/jeffdelmerico/UH_Beamer_Theme.git
+%
+% Adapted from ZBH theme by:
+% Sascha Steinbiss <steinbiss@zbh.uni-hamburg.de>
+% https://github.com/satta/zbh-beamer-theme.git
+
+\usepackage{graphicx}
+
+\ProvidesPackage{beamerthemeUH}[2013/10/25 UH Beamer Theme]
+
+\def\backgroundfile{uhm_bg}
+\def\plainbgfile{uhm_bg}
+\newcommand\titlepic{UHMLogo}
+
+\definecolor{UHGreen}{RGB}{2,71,49}
+\definecolor{UHTeal}{RGB}{0,116,122}
+\definecolor{UHBlue}{RGB}{0,35,149}
+\definecolor{UHLtBlue}{RGB}{113,111,179}
+\definecolor{UHBrown}{RGB}{179,153,93}
+
+\newlength{\@headerdist}
+\setlength{\@headerdist}{5mm}
+
+\newcommand{\address}{
+	Laboratory Lab\\
+	123 Building Hall\\
+    UH Manoa\\
+}
+
+\mode<presentation>
+
+\setbeamerfont{author}{size=\large}
+\setbeamerfont{date}{size=\large}
+\setbeamerfont{example text}{series=\bfseries}
+\setbeamerfont{section}{series=\bfseries}
+\setbeamercolor{structure}{fg=UHTeal}
+\setbeamercolor{title}{fg=black}
+\setbeamerfont{title}{series=\bfseries}
+\setbeamerfont{block title alerted}{series=\bfseries}
+\setbeamercolor{block title}{bg=UHBlue,fg=UHLtBlue!20!white}
+\setbeamercolor{block body}{bg=UHLtBlue!15!white}
+\setbeamercolor{block title example}{bg=UHBrown!60!white}
+\setbeamercolor{block body example}{bg=UHBrown!20!white}
+\setbeamercolor{block title alerted}{bg=red!60!white,fg=black}
+\setbeamercolor{block body alerted}{bg=red!10!white}
+
+% disable navigation symbols 
+\setbeamertemplate{navigation symbols}{}
+
+% frame
+\setbeamercolor{frametitle}{fg=UHGreen}
+\setbeamerfont{frametitle}{series=\mdseries,size=\Large}
+\setbeamerfont{framesubtitle}{series=\mdseries,size=\large}
+
+\setbeamertemplate{frametitle}
+{
+  \ifbeamer@plainframe
+  \else
+  	\vspace{0.5cm}
+    \textbf{\insertframetitle}
+    \vspace{.25cm}
+  \fi
+}
+
+% headline
+\setbeamercolor{headline}{fg=white}
+\setbeamertemplate{headline}{
+	\ifbeamer@plainframe
+	\else
+    	\vspace{8mm}
+    	\leavevmode\tiny%
+    	\hspace*{9.15cm}
+	   	\normalsize
+	\fi
+}
+
+% title page with UB image
+\setbeamertemplate{title page}{
+  \textbf{\LARGE{\inserttitle}}
+
+  \textbf{\large{\insertsubtitle}}
+  \vfill
+  \begin{columns}
+  \begin{column}{.45\textwidth}
+	\textbf{\insertauthor}\\[3mm]
+	\scriptsize
+    \address
+	\vspace*{0.25cm}
+	\insertshortinstitute
+	\vspace*{0.25cm}
+	\insertshortdate
+  \end{column}
+  \begin{column}{.45\textwidth}
+	\hfill\includegraphics[height=5cm,width=\linewidth,keepaspectratio]{\titlepic}
+  \end{column}
+  \end{columns}
+  \normalsize
+  \setbeamertemplate{footline}{}
+}
+
+% footer with name, date and page numbers
+\setbeamercolor{footline}{fg=UHGreen}
+\setbeamertemplate{footline}{
+  \ifbeamer@plainframe
+  \else
+    \leavevmode\tiny%
+    \hspace*{2.0cm}%
+    \makebox[3cm][l]{\insertauthor}%
+    \makebox[3cm][l]{\insertdate}%
+	  \hfill
+	  \ifx\insertsection\empty
+	  \else
+    	\insertsection
+	  \fi
+	  \ifx\insertsubsection\empty
+	  \else
+	  	:\insertsubsection
+	  \fi
+	  \ifx\insertsubsubsection\empty
+	  \else
+	    :\insertsubsubsection
+	  \fi
+      \hfill\insertframenumber/\inserttotalframenumber\hspace{5mm}%
+    \vspace{3mm}%
+  \fi
+}
+
+% use UH slide layout template as background image
+\setbeamertemplate{background} {
+	\ifnum\thepage=1\relax%
+		\includegraphics[width=\paperwidth,height=\paperheight]{\plainbgfile}%
+	\else%
+  		\ifbeamer@plainframe%
+  	%\makebox[\textwidth]{\raisebox{0.675cm}[0pt][0pt]{\includegraphics[width=\paperwidth,height=\paperheight]{\plainbgfile}}}
+  		\else%
+    		\includegraphics[width=\paperwidth,height=\paperheight]{\backgroundfile}%
+  		\fi%
+	\fi%
+}
+
+\mode
+<all>

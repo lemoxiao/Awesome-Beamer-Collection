@@ -1,0 +1,11 @@
+# intermediate files
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+
+# osx
+.DS_Store

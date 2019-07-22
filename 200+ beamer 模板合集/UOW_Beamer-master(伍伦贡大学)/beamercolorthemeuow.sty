@@ -1,0 +1,297 @@
+%% This is file `beamercolorthemeuow.sty',
+%% 2014-01-07 (cc) tmgriffiths Version 1.0
+%%
+%% Copyright (CC BY-NC-SA 4.0 Int) 2015 by T. M. Griffiths
+%% under the creative commons licence, attribution, non-comercial, share alike
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License version 1.3c
+%% http://www.latex-project.org/lppl/lppl-1-3c.txt
+%%
+%%--------------------------------------------------------------------------------
+%% These Packages essentially port the UOW powerpoint templates over to Beamer, 
+%% a LaTeX class for presentations. Inspiration for parts of this theme (where 
+%% design decision had to be made) and guidance on the implementation of the 
+%% pgfkeys were taken from the metropolis by Matthias Vogelgesang et al., of which 
+%% the author of this package is a contributor.
+%% 
+%% Created by Thomas M. Griffiths (tmg994[at]uowmail[dot]edu[dot]au) 2015-07-23 
+%% Version 1.0 2015-07-23 tmgriffiths       
+%%--------------------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemeuow}
+   [2015/07/23 A Beamer Colour Theme That Matches the UOW Branding Guidelines V 1.0 (cc) tmgriffiths]
+
+\RequirePackage{pgfopts}
+\RequirePackage{xcolor}
+   % Use the UOW colour pallet
+   \definecolor{UOWblack}{RGB}{0, 0, 0}
+   \definecolor{UOWgold}{RGB}{253, 184, 19}
+   \definecolor{UOWdarkblue}{RGB}{0, 83, 154}
+   \definecolor{UOWred}{RGB}{238, 64, 52}
+   \definecolor{UOWblue}{RGB}{0, 149, 214}
+   \definecolor{UOWdarkgreen}{RGB}{0, 146, 94}
+   \definecolor{UOWlimegreen}{RGB}{183, 198, 38}
+   \definecolor{UOWorange}{RGB}{243, 121, 32}
+   \definecolor{UOWdarkred}{RGB}{195, 18, 48}
+   \definecolor{UOWpink}{RGB}{238 ,0, 139}
+   \definecolor{UOWpurple}{RGB}{74, 47, 142}
+   \definecolor{UOWgrey}{RGB}{69, 85, 95}
+
+% Layouts before colours to ensure layout=eco sets to black as default
+% unless another color is chosen
+\pgfkeys{
+   /UOWtheme/color/layout/.cd,
+      .is choice,
+      plain/.code={%
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      },
+      eco/.code={%
+         \renewcommand{\@UOWtheme@color}{UOWblack}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      },
+      ecominimal/.code={%
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      },
+      minimal/.code={%
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      },
+      minimaltitle/.code={%
+         \@UOWtheme@color@darktitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      },
+      standard/.code={%
+         \@UOWtheme@color@lighttitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      },
+      boldplain/.code={%
+         \@UOWtheme@color@lighttitle
+         \@UOWtheme@color@darknormaltext
+         \@UOWtheme@color@darkblock%
+      }, 
+      bold/.code={%
+         \@UOWtheme@color@lighttitle
+         \@UOWtheme@color@lightnormaltext%
+         \@UOWtheme@color@lightblock
+      },
+}
+
+\newcommand{\@UOWtheme@color}{}
+\newcommand{\@UOWtheme@alertcolor}{}
+\newcommand{\@UOWtheme@examplecolor}{}
+\pgfkeys{
+   /UOWtheme/color/themecolor/.cd,
+      .is choice,
+      black/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWblack}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
+      },
+      gold/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWgold}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWdarkred}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
+      },
+      yellow/.code={%
+         \pgfkeysalso{themecolor=gold}
+      },
+      darkblue/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWdarkblue}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
+      },
+      red/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWred}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
+      },
+      blue/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWblue}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
+      },
+      darkgreen/.code={%
+         \renewcommand{\@UOWtheme@color}{UOWdarkgreen}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWblue}
+      },
+      green/.code={%
+         \pgfkeysalso{themecolor=darkgreen}
+      },
+      limegreen/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWlimegreen}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWblue}
+      },
+      orange/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWorange}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWdarkred}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
+      },
+      darkred/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWdarkred}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWorange}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
+      },
+      pink/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWpink}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
+      },
+      purple/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWpurple}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
+      },
+      grey/.code={%
+         \renewcommand*{\@UOWtheme@color}{UOWgrey}
+         \renewcommand{\@UOWtheme@alertcolor}{UOWred}
+         \renewcommand{\@UOWtheme@examplecolor}{UOWdarkgreen}
+      },
+      gray/.code={%
+         \pgfkeysalso{themecolor=grey}
+      }
+}
+
+\newcommand{\@UOWtheme@color@darknormaltext}{%
+   \setbeamercolor{normal text}{fg=black}%
+   \setbeamercolor{frametitle}{fg=black}%
+}
+
+\newcommand{\@UOWtheme@color@lightnormaltext}{%
+   \setbeamercolor{normal text}{fg=white}%
+   \setbeamercolor{frametitle}{fg=white,bg=\@UOWtheme@color}%
+}
+
+\newcommand{\@UOWtheme@color@darktitle}{%
+   \setbeamercolor*{title}{fg=black}%
+   \setbeamercolor*{subtitle}{fg=black}%
+   \setbeamercolor*{author}{fg=black}%
+   \setbeamercolor*{institute}{fg=black}%
+   \setbeamercolor*{date}{fg=black}%
+}
+
+\newcommand{\@UOWtheme@color@lighttitle}{%
+   \setbeamercolor*{title}{fg=white}%
+   \setbeamercolor*{subtitle}{fg=white}%
+   \setbeamercolor*{author}{fg=white}%
+   \setbeamercolor*{institute}{fg=white}%
+   \setbeamercolor*{date}{fg=white}%
+}
+
+\newcommand{\@UOWtheme@color@lightblock}{%
+   \setbeamercolor*{block title}{%
+      use=normal text,
+      fg=black,
+      bg=white,
+   }
+   \setbeamercolor*{block body}{
+      use={block title, normal text},
+      bg=\@UOWtheme@color!20,
+      fg=black,
+   }
+   \setbeamercolor*{block title alerted}{%
+      use={block title, alerted text},
+      fg=\@UOWtheme@alertcolor,
+      bg=white,
+   }
+   \setbeamercolor*{block body alerted}{
+      use={block title, normal text},
+      bg=\@UOWtheme@alertcolor!20,
+      fg=black,
+   }
+   \setbeamercolor*{block title example}{%
+      use={block title, example text},
+      fg=\@UOWtheme@examplecolor,
+      bg=white,
+   }
+   \setbeamercolor*{block body example}{
+      use={block title, normal text},
+      bg=\@UOWtheme@examplecolor!20,
+      fg=black,
+   }
+}
+
+\newcommand{\@UOWtheme@color@darkblock}{%
+   \setbeamercolor*{block title}{%
+      use=normal text,
+      fg=white,%normal text.fg,
+      bg=\@UOWtheme@color,
+   }
+   \setbeamercolor*{block body}{
+      use={block title, normal text},
+      bg=\@UOWtheme@color!20,
+      fg=black,
+   }
+   \setbeamercolor*{block title alerted}{%
+      use={block title, alerted text},
+      bg=\@UOWtheme@alertcolor,
+      fg=white,
+   }
+   \setbeamercolor*{block body alerted}{
+      use={block title, normal text},
+      bg=\@UOWtheme@alertcolor!20,
+      fg=black,
+   }
+   \setbeamercolor*{block title example}{%
+      use={block title, example text},
+      bg=\@UOWtheme@examplecolor,
+      fg=white,
+   }
+   \setbeamercolor*{block body example}{
+      use={block title, normal text},
+      bg=\@UOWtheme@examplecolor!20,
+      fg=black,
+   }
+}
+
+\newcommand{\@UOWtheme@color@defaults}{
+   \pgfkeys{/UOWtheme/color/.cd,
+      themecolor=blue,
+      layout=standard,
+   }
+}
+
+\setbeamercolor*{block body alerted}{use=block body, parent=block body}
+\setbeamercolor*{block body example}{use=block body, parent=block body}
+
+\setbeamercolor{alerted text}{%
+   fg=\@UOWtheme@alertcolor
+}
+\setbeamercolor{example text}{%
+   fg=\@UOWtheme@examplecolor
+}
+\setbeamercolor{titlelike}{%
+   use=normal text,
+   parent=normal text
+}
+\setbeamercolor{structure}{%
+   fg=normal text.fg
+}
+\setbeamercolor{palette primary}{%
+   use=normal text,
+   fg=normal text.bg,
+   bg=normal text.fg
+}
+\setbeamercolor{page number in head/foot}{%
+   fg=black!50
+}
+
+\@UOWtheme@color@defaults
+\ProcessPgfPackageOptions{/UOWtheme/color}
+
+\mode<all>

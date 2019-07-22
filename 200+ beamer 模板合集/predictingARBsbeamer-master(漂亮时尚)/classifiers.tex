@@ -1,0 +1,142 @@
+\section{Classifiers}
+
+\subsection{Metrics to use}
+\begin{frame}
+ \frametitle{Which metrics to use ?}
+ 46 metrics correlated with bug density:
+ \begin{itemize}
+  \item Program size. 26 metrics\\
+  (lines of codes, comments, blank, semicolons, functions, preprocessor)
+  \item Cyclomatic complexity. 11 metrics
+  \item Halstead metrics. 9 metrics
+ \end{itemize}
+\end{frame}
+% TODO liste complete en annexe
+% Program size: cout lines of code, blank lines, comments, functions, classes, semicolons.
+% Program size: count, average, ration, etc,
+
+\begin{frame}
+ \frametitle{Halstead metrics}
+ Halstead metrics: set of metrics based on the number of operands and number of operators.\\
+ Based on
+ \begin{center}
+  \begin{tabular}{ll}
+   $\eta_1$ & = The number of distinct operators\\
+   $\eta_2$ & = The number of distinct operands\\
+   $N_1$ & = The total number of operators\\
+   $N_2$ & = The total number of operands\\
+  \end{tabular}
+ \end{center}
+ \begin{exampleblock}{Some halstead metrics}
+  \begin{itemize}
+   \item Program vocabulary = $\eta = \eta_1 + \eta_2$
+   \item Program length = $N = N_1 + N_2$
+   \item Volume = $N \times \text{log}_2\eta$
+   \item Difficulty = $\frac{\eta_1}{2} \times \frac{N_2}{\eta_2}$
+  \end{itemize}
+ \end{exampleblock}
+\end{frame}
+
+\subsection{Results without new metrics}
+\begin{frame}
+ \frametitle{Tried classifiers}
+ \begin{itemize}
+  \item Naive Bayes (NB)
+  \item Bayesian networks (BayesNet)
+  \item Decision trees (DecTree)
+  \item Logistic regression (Logistic)
+ \end{itemize}
+\end{frame}
+%TODO montrer la gueule que ça a
+
+\begin{frame}
+ \frametitle{Results without new metrics}
+ \framesubtitle{Terminology}
+ $$PD = \text{Probability of detection} = \frac{\text{true positives}}{\text{true positives + false negatives}} . 100\%$$
+ \vspace{0.1cm}
+ $$PF = \text{Probability of false alarms} = \frac{\text{false positives}}{\text{true negatives + false positives}} . 100\%$$
+ \vspace{0.1cm}
+ $$Bal = Balance = 100 - \frac{\sqrt{(0-PF)^2 + (100-PD)^2}}{\sqrt{2}}$$
+ \begin{center}
+  \begin{tabular}{ll}
+   log : & metrics at a logarithmic scale
+  \end{tabular}
+ \end{center}
+ \small note: the difference between the highest and the second highest value can be statistically not significant. See numbers in bold. \normalsize
+\end{frame}
+%Probability of detection is the probability that a ARB-prone module will be classified as ARB-prone
+%Probability of false alamrs is the probability that a non-ARB-prone module is erroneously identified as ARB-prone
+%A classifier with a high PD can also have a high PF (imagine a classifier that always answer 'yes') So balance is a trade-off
+
+\begin{frame}
+ \frametitle{Results without new metrics}
+ \framesubtitle{Linux}
+ \begin{center}
+ \begin{tabular}{lrrr}
+  \hspace{0.2cm} Classifier & PD & PF & Bal\\
+  \hline
+  NB & 60.13 & 12.46 & \textbf{69.24}\\
+  NB + log &  \textbf{92.33} & \textbf{37.09} & \textbf{72.28}\\
+  BayesNet & 3.72 & 1.85 & 31.91\\
+  BayesNet + log & 5.34 & 1.95 & 33.06\\
+  DectTree & 0.00 & 0.03 & 29.30\\
+  DectTree + log & 0.00 & 0.00 & 29.30\\
+  Logistic & 1.00 & 0.63 & 30.01\\
+  Logistic + log & 3.84 & 0.62 & 32.01\\
+  \hline
+ \end{tabular}
+ \end{center}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Results without new metrics}
+ \framesubtitle{MySQL}
+ \begin{center}
+ \begin{tabular}{lrrr}
+  \hspace{0.2cm} Classifier & PD & PF & Bal\\
+  \hline
+  NB & 49.14 & 10.46 & 63.02\\
+  NB + log &  \textbf{88.30} & \textbf{34.67} & \textbf{73.53}\\
+  BayesNet & 44.57 & 8.65 & 60.26\\
+  BayesNet + log & 44.50 & 8.65 & 60.21\\
+  DectTree & 11.21 & 2.64 & 37.17\\
+  DectTree + log & 11.28 & 2.65 & 37.22\\
+  Logistic & 22.93 & 4.46 & 45.40\\
+  Logistic + log & 25.07 & 5.13 & 46.88\\
+  \hline
+ \end{tabular}
+ \end{center}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Results without new metrics}
+ \framesubtitle{CARDAMOM}
+ \begin{center}
+ \begin{tabular}{lrrr}
+  \hspace{0.2cm} Classifier & PD & PF & Bal\\
+  \hline
+  NB & 0.00 & 7.18 & 29.08\\
+  NB + log &  \textbf{54.50} & \textbf{25.15} & \textbf{53.25}\\
+  BayesNet & 0.00 & 0.00 & 29.30\\
+  BayesNet + log & 0.00 & 0.00 & 29.30\\
+  DectTree & 0.00 & 0.00 & 29.30\\
+  DectTree + log & 0.00 & 0.00 & 29.30\\
+  Logistic & 0.00 & 1.21 & 29.30\\
+  Logistic + log & 0.00 & 0.65 & 29.30\\
+  \hline
+ \end{tabular}
+ \end{center}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Results without new metrics}
+ \begin{center}
+  $\Longrightarrow$ \alert{Select the Naive Bayes classifier with metrics at a logarithmic scale.}
+ \end{center}
+ \vspace{1cm}
+ High probability of detection but high probability of false alarm.
+ Still useful for Verification \& Validation process:
+ \begin{center}
+  \alert{avoids to inspect the files classified as non-ARB !}
+ \end{center}
+\end{frame}

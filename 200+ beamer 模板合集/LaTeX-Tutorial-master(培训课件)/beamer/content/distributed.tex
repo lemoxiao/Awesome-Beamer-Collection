@@ -1,0 +1,113 @@
+\section{Distributed Work}
+\begin{frame}
+\frametitle{Build A Stout Document}
+\framesubtitle{\ldots And Experience The Real Congeniality Of \LaTeX !}
+\begin{block}{New commands in this section}
+\begin{itemize}
+  \item \color{nounibaredI}\textbackslash input\color{black}\{\}
+  \item \color{nounibaredI}\textbackslash tableofcontents\color{black}
+  \item \color{nounibaredI}\textbackslash listoffigures\color{black}
+  \item \color{nounibaredI}\textbackslash listoftables\color{black}
+  \item \color{nounibaredI}\textbackslash vspace\color{black}\{\}
+  \item \color{nounibaredI}\textbackslash today\color{black}
+\item \color{unibablueI}\textbackslash begin\color{black}\{titlepage\} \ldots \color{unibablueI}\textbackslash end\color{black}\{titlepage\} 
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Building A Bigger Document}
+
+\begin{columns}
+\begin{column}{.5\textwidth}
+\footnotesize
+\begin{figure}[t]
+\begin{tikzpicture}[dirtree]
+\node {main.tex} 
+        child {node {command.tex}}
+        child {node {titlepage.tex}}
+        child {node {introduction.tex}}
+        child {node {task1.tex}}
+        child {node {task2.tex}}
+        child {node {task3.tex}}
+        child {node {conclusion.tex}};
+\end{tikzpicture}
+\end{figure}
+\end{column}
+\begin{column}{.5\textwidth}
+All other files are combined to one document in the file main.tex. 
+For this, you have to adjust the other files.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{\ldots ~let's do it!}
+You have to delete \textbf{everything} (including) before and after \color{unibablueI}\textbackslash begin\color{black}- 
+and\color{unibablueI}~\textbackslash end\color{black}\{document\}:\\[5mm]
+\begin{columns}
+\begin{column}{.47\textwidth}
+\sout{\color{nounibaredI}\color{nounibaredI}\textbackslash documentclass\color{black}\color{nounibagreenI}[pdftex]\color{black}\{article\} \\
+\color{nounibaredI}\textbackslash usepackage\color{black}\{babel\}\\
+\color{nounibaredI}\color{unibablueI}\textbackslash\color{unibablueI}begin\color{black}\color{black}\{document\} }\\
+This document can now be included in LaTeX using the command \color{nounibaredI}\color{nounibaredI}\textbackslash input\color{nounibaredI}\color{black}\{file name\}.\\
+\sout{\color{nounibaredI}\color{unibablueI}\textbackslash\color{unibablueI}end\color{black}\color{black}\{document\} }
+\end{column}
+\begin{column}{.47\textwidth}
+With the command \color{nounibaredI}\textbackslash input\color{black}\{path/to/file\} you can afterwards
+ include this into another {\ttfamily .tex}-file. 
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Distributed Work}
+\framesubtitle{\ldots Stay On Top Of Things}
+\begin{columns}{2}
+\begin{column}{.6\textwidth}
+\image{\textwidth}{image/outline.png}{Texmaker lists the {\ttfamily\color{nounibaredI}\textbackslash input}\color{black}s}{img:outline}
+\end{column}
+\begin{column}{.3\textwidth}
+\begin{alertblock}{Attention:}
+The path declaration is always relative to the main file!
+\end{alertblock}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}[t]
+\frametitle{Excursus: Title Page}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\input{content/listings/titlepage}
+\end{column}
+\begin{column}{0.5\textwidth}
+\color{nounibaredI}\color{unibablueI}\textbackslash\color{unibablueI}begin\color{black}\color{black}\{titlepage\} \\\color{black}
+\color{nounibaredI}\color{unibablueI}\textbackslash\color{unibablueI}begin\color{black}\color{black}\{center\} \\
+\color{nounibaredI}\color{nounibaredI}\textbackslash Huge\color{black} \color{nounibaredI}\color{nounibaredI}\textbackslash LaTeX\color{nounibaredI}\textbackslash \color{nounibaredI}\textbackslash \color{black} \\
+\color{nounibaredI}\color{nounibaredI}\textbackslash vspace\color{black}\{5mm\} \color{nounibaredI}\color{nounibaredI}\textbackslash LARGE \color{black} A Short Introduction\color{nounibaredI}\color{nounibaredI}\textbackslash \color{nounibaredI}\textbackslash \color{black} \\
+\color{nounibaredI}\color{nounibaredI}\textbackslash vspace\color{black}\{12mm\} \color{nounibaredI}\color{nounibaredI}\textbackslash Large \color{black} University of Bamberg\color{nounibaredI}\color{nounibaredI}\textbackslash \color{nounibaredI}\textbackslash \color{black}\color{nounibagreenI}[5mm]\color{black} \\
+\color{nounibaredI}\color{nounibaredI}\textbackslash large\color{black} \color{nounibaredI}\color{nounibaredI}\textbackslash today\color{nounibaredI}\textbackslash \color{nounibaredI}\textbackslash \color{black} \\
+Fachschaft WIAI\color{nounibaredI}\color{nounibaredI}\textbackslash normalsize\color{black} \color{nounibaredI}\color{nounibaredI}\textbackslash \color{nounibaredI}\textbackslash \color{black} \\
+\color{nounibaredI}\color{unibablueI}\textbackslash\color{unibablueI}end\color{black}\color{black}\{center\} \\
+\color{nounibaredI}\color{unibablueI}\textbackslash\color{unibablueI}end\color{black}\color{black}\{titlepage\} \\\color{black}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Distributed Work}
+\framesubtitle{Commands For Page Numbering}
+\begin{block}{Page Numbering}
+\begin{itemize}
+\item \color{nounibaredI}\textbackslash thispagestyle\color{black}\{empty\} -- No page numbering
+\item \color{nounibaredI}\textbackslash setcounter\color{black}\{page\}\{1\} -- Sets a defined value as page number
+\item \color{nounibaredI}\textbackslash pagenumbering\color{black}\{Roman$\mid$roman$\mid$arabic$\mid$Alph$\mid$alph\} -- Defines the page numbering
+\item \color{nounibaredI}\textbackslash  newpage \color{black}-- Creates a new page
+\end{itemize}
+\end{block}
+\end{frame}

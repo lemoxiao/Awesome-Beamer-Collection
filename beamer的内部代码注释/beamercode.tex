@@ -1,0 +1,107 @@
+% -*- coding: utf-8 -*-
+\documentclass{article}
+\usepackage[b5paper,margin=5mm]{geometry}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks,
+  citecolor = teal,
+  linkcolor = blue,
+  urlcolor = purple,
+  pdfstartview = {FitH},
+  bookmarksnumbered
+}
+%
+\usepackage{listings,marvosym,xcolor}
+\lstset{
+  basicstyle=\ttfamily,columns=flexible,breaklines=true,frame=single,backgroundcolor=\color{gray!10},
+  language=[LaTeX]{TeX},commentstyle=\color{teal},keywordstyle=\color{blue},
+  prebreak={\space\hbox{\textcolor{brown}{?}}},postbreak=\hbox{\textcolor{brown}{?}}\space
+}
+\lstnewenvironment{beamercode}{}{}
+\newcommand\addclass[1]{
+  \section{\textsf{beamer#1.cls}}
+  \lstinputlisting{beamer/beamer#1.cls}
+}
+\newcommand\addstyle[2][]{
+  \section{\textsf{beamer#2.sty}}
+  \lstinputlisting{beamer#1/beamer#2.sty}
+}
+%
+\usepackage{makedoc}
+\newcommand\addmdclass[1]{
+  \section{\textsf{beamer#1.cls}}
+  \renewcommand*{\mdJobName}{beamer/beamer#1}
+  \MakeInputJobDoc*[cls][txt]{0}{\ProcessInputWith{PPScomment}}
+}
+\newcommand\addmdstyle[2][]{
+  \section{\textsf{beamer#2.sty}}
+  \renewcommand*{\mdJobName}{beamer#1/beamer#2}
+  \MakeInputJobDoc*[sty][txt]{0}{\ProcessInputWith{PPScomment}}
+}
+%
+\usepackage{etoolbox}
+\patchcmd{\TreatAsComment}{mdPackageCode}{beamercode}{}{}
+\patchcmd{\TreatAsCode}{mdPackageCode}{beamercode}{}{}
+\catcode`\_=11
+\patchcmd{\make_doc_arg}{mdPackageCode}{beamercode}{}{}
+\patchcmd{\make_doc_arg}{mdPackageCode}{beamercode}{}{}
+\patchcmd{\makedoc_maybe_autocorr}{\input{mdoccorr.cfg}}{}{}{}
+\catcode`\_=8
+\AfterEndEnvironment{beamercode}{\par}
+%
+\usepackage{shortvrb}
+\MakeShortVerb\|
+\DeclareRobustCommand\cs[1]{\texttt{\char`\\#1}}
+\DeclareRobustCommand\env{\texttt}
+\DeclareRobustCommand\cls{\textsf}
+\DeclareRobustCommand\pkg{\textsf}
+\DeclareRobustCommand\sty[1]{\textsf{#1.sty}}
+%
+\setlength{\parindent}{2em}
+\setlength{\parskip}{5pt plus 1pt}
+%
+\usepackage{xeCJK}
+\setCJKmainfont{SimSun}
+\setCJKsansfont{KaiTi}
+\setCJKmonofont{SimHei}
+\begin{document}
+\title{\pkg{Beamer} 源码分析}
+\author{\href{https://bitbucket.org/zohooo/beamercode}{zohooo@yeah.net}}
+\maketitle
+\addclass{}
+\addstyle{basercs}
+\addstyle{basemodes}
+\addmdstyle{basedecode}
+\addstyle{baseoptions}
+\addstyle{baserequires}
+\addstyle{basecompatibility}
+\addstyle{basefont}
+\addstyle{basetranslator}
+\addstyle{basemisc}
+\addstyle{basetwoscreens}
+\addmdstyle{baseoverlay}
+\addstyle{basetitle}
+\addmdstyle{basesection}
+\addmdstyle{baseframe}
+\addstyle{baseverbatim}
+\addmdstyle{baseframesize}
+\addmdstyle{baseframecomponents}
+\addstyle{basecolor}
+\addstyle{basenotes}
+\addmdstyle{basetoc}
+\addstyle{basetemplates}
+\addstyle{baseauxtemplates}
+\addstyle{baseboxes}
+\addstyle{baselocalstructure}
+\addstyle{basenavigation}
+\addstyle{basetheorems}
+\addstyle{basethemes}
+\addstyle{article}
+\addstyle{basearticle}
+\addstyle{baseexercise}
+\addstyle[/themes/theme]{themedefault}
+\addstyle[/themes/font]{fontthemedefault}
+\addstyle[/themes/color]{colorthemedefault}
+\addstyle[/themes/inner]{innerthemedefault}
+\addmdstyle[/themes/outer]{outerthemedefault}
+\end{document}

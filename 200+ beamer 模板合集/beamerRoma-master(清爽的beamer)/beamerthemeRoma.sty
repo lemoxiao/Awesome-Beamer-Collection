@@ -1,0 +1,30 @@
+% Roma Beamer Theme - Claudio Fiandrino
+% Reworked by Matteo Ipri
+\mode<presentation>
+
+% Requirements
+\RequirePackage{calc}
+\RequirePackage{tikz}
+
+% Options
+\DeclareOptionBeamer{pageofpages}{\PassOptionsToPackage{pageofpages=#1}{beamerouterthemeRoma}}
+\DeclareOptionBeamer{titleline}[false]{\PassOptionsToPackage{titleline=#1}{beamerouterthemeRoma}}
+\ProcessOptionsBeamer
+
+% Settings
+\useinnertheme{Roma}
+\useoutertheme{Roma}
+\usecolortheme{Roma}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+% Command for the title page
+\newcommand\titlepageframe{
+  \begin{frame}[plain]
+  \titlepage
+  \end{frame}
+}
+
+\mode
+<all>

@@ -1,0 +1,131 @@
+\documentclass[final,xcolor=table,svgnames]{beamer}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{doi}
+\usepackage{fontawesome}
+\usepackage{academicons}
+\usepackage{fontspec}
+\usepackage{textpos}
+\usepackage{listings}
+\usepackage{bbding}
+
+
+% Fonts
+% -------------
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+%\setmainfont{Arial}
+\newcommand{\logoheight}{1cm}
+\newcommand{\yestab}{{\cellcolor{LightGreen} Yes}}
+
+\DeclareGraphicsExtensions{.pdf,.png,.PNG,.JPG,.jpg,.jpeg,.gif}
+\graphicspath{
+{./figures/},
+{/home/ctroupin/Presentations/figures4presentations/logo/},
+}
+
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{items}[square] 
+
+\usefonttheme{professionalfonts} % using non standard fonts for beamer
+
+\usetikzlibrary{arrows,shapes,backgrounds,spy,calc}
+\tikzstyle{every picture}+=[remember picture]
+\tikzstyle{na} = [baseline=-.5ex]
+
+\definecolor{bluegher}{HTML}{4E519F}
+\definecolor{mygrey}{rgb}{0.25,.25,.25}
+\definecolor{commentcolor}{rgb}{0.75,.75,.75}
+\definecolor{arrowcolor}{rgb}{0.1,0.1,0.1}
+\definecolor{shadecolor}{rgb}{0.1,0.1,0.1}
+\definecolor{bluesdn}{HTML}{0551A0}
+\definecolor{darkbluesdn}{HTML}{044F9C}
+\definecolor{bluetwitter}{HTML}{1DA1F3}
+
+\definecolor{alertbg}{HTML}{FEFFBA}
+
+\setbeamercovered{invisible}
+\setbeamertemplate{items}[triangle] 
+
+\newenvironment{boxalertenv}{\begin{altenv}%
+      {\usebeamertemplate{alerted text begin}\usebeamercolor[fg]{alerted text}\usebeamerfont{alerted text}\colorbox{bg}}
+      {\usebeamertemplate{alerted text end}}{\color{.}}{}}{\end{altenv}}
+
+\newcommand<>{\boxalert}[1]{{%
+  \begin{boxalertenv}#2{#1}\end{boxalertenv}%
+}}
+
+\setbeamercolor{author}{fg=bluesdn}
+\setbeamercolor{title}{fg=bluesdn,bg=red}
+\setbeamercolor{institute}{fg=bluesdn}
+\setbeamercolor{frametitle}{fg=bluesdn,bg=white}
+\setbeamercolor{item projected}{fg=black}
+
+\setbeamerfont{sectiontitle1}{size=\huge,family=\rmfamily}
+\setbeamerfont{sectiontitle2}{size=\fontsize{40}{20}\selectfont,shape=\itshape,family=\rmfamily}
+\setbeamerfont{author}{size=\large}
+\setbeamerfont{institute}{size=\normalsize}
+\setbeamerfont{title}{size=\fontsize{34}{20}\selectfont,shape=\itshape,family=\rmfamily}
+\setbeamerfont{subtitle}{size=\normalsize,family=\rmfamily}
+\setbeamerfont{projected text}{size=\normalsize,family=\rmfamily}
+
+\setbeamercolor{item projected}{bg=alertbg,fg=bluegher}
+
+\setbeamertemplate{enumerate items}[square]
+\setbeamertemplate{footline}[frame number]
+
+
+\setbeamertemplate{frametitle}[default][left,leftskip=2.cm] % <-- choose here the leftskip you wish
+\addtobeamertemplate{frametitle}{}{%
+\begin{textblock*}{100mm}(0cm,-.9cm)
+\includegraphics[height=1cm]{logo_seadatacloud_notransp.png}
+\end{textblock*}}
+
+\newcommand\mynum[1]{%
+  \usebeamercolor{enumerate item}%
+  \tikzset{beameritem/.style={circle,inner sep=0,minimum size=3ex,text=white,fill=bluesdn}}%
+  \tikz[baseline=(n.base)]\node(n)[beameritem]{#1};%
+}
+
+%\setbeamersize{text margin left=1cm}
+
+\newlength{\logoH}
+\setlength{\logoH}{1cm}
+\newcommand{\comment}[1]{\hfill\textcolor{commentcolor}{#1}}
+
+\newcommand\Wider[2][3em]{%
+\makebox[\linewidth][c]{%
+  \begin{minipage}{\dimexpr\textwidth+#1\relax}
+  \raggedright#2
+  \end{minipage}%
+  }%
+}
+
+%--------------------------------
+\hypersetup{bookmarksopen=true,
+bookmarksnumbered=true,  
+pdffitwindow=true, 
+pdfstartview=FitPage,
+pdffitwindow=true,
+pdftoolbar=true,
+pdfmenubar=true,
+pdfwindowui=true,
+pdfsubject={SeaDataCloud, Data analysis, Interpolation, Diva, DIVAnd, EUDAT},
+pdfauthor={C. Troupin, S. Watelet, A. Barth, J.M. Beckers},
+bookmarksopenlevel=0,
+colorlinks=true,
+linkcolor=bluegher,anchorcolor=black,%
+citecolor=bluegher,filecolor=black,%
+menucolor=black,urlcolor=bluegher,%
+pdfpageduration=1,%
+}
+

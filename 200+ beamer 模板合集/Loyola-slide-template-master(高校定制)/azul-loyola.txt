@@ -1,0 +1,7 @@
+En la web: 
+
+Azul:
+#023E83
+
+Gris Azulado: 
+#DDE0F3

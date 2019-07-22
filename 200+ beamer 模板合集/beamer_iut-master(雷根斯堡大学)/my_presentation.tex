@@ -1,0 +1,91 @@
+\documentclass[t]{beamer}
+\usepackage{beamerthemeiut}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{amsfonts,amssymb,amsmath} %package math
+\usepackage{txfonts}
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+
+\definecolor{color1}{RGB}{255, 178, 178}
+\definecolor{color2}{RGB}{178, 178, 255}
+\definecolor{color3}{RGB}{236, 217, 198}
+
+
+\setbeamertemplate{theorems}[numbered]
+\setlength{\abovecaptionskip}{1ex}
+
+\title{Le titre de ma présentation}
+\author{Mon nom Mon prenom}
+\institute{IUT de Brest}
+\date{}
+\setbeamercolor{alerted text}{fg=red} 
+\setbeamercovered{transparent}
+\setcounter{tocdepth}{2}     %% Visibles dans la table des matieres
+
+\begin{document}
+\setbeamertemplate{background canvas}{\includegraphics[width=\paperwidth,height=\paperheight]{fond_iut_1.pdf}}
+
+%premier slide
+    \begin{frame}[plain]
+    \vskip 2cm
+    \titlepage
+    \end{frame}
+
+\setbeamertemplate{background canvas}{\includegraphics[width=\paperwidth,height=\paperheight]{fond_iut_2.pdf}}
+
+%table des matières
+\section*{Plan de la présentation}
+
+\begin{frame}
+   	\frametitle{\insertsection}
+	\hskip 0.4cm
+    	\begin{minipage}[c]{.95\linewidth}
+    		\color{bleu2}
+   		\tableofcontents
+     	\end{minipage}
+ \end{frame}
+
+%Autres slide
+\section{Rappels}
+\subsection{Datés Clés}
+
+\begin{frame}{\insertsection - \insertsubsection}
+	\begin{itemize}
+	\item 2006: La licence professionnelle "Électronique \& Informatique des système Industriels" (EISI) est créée. Cette licence comporte deux options: "Systèmes Automatisés et
+	Réseaux Industriels" et "Électrotechnique et Électronique de Puissance".
+	\item 2008: Suite à la campagne de réhabilitation de 2007, la licence professionnelle EISI est découpée en deux licences professionnelles nommées respectivement SARI et EEP. 
+	\item 2011: La licence SI-SARI obtient la note A lors de la campagne d'évaluation de l'AERES 2010-2011.
+	\item 2015: La spécialité SI-SARI sera remplacée par la mention "\alert{Systèmes Automatisés, Réseaux, Informatique Industrielle}" (SARII) lors de la rentrée 2015.
+	\end{itemize}
+\end{frame}
+
+\subsection{Contexte National}
+
+\begin{frame}{\insertsection - \insertsubsection}
+	\begin{figure}[!h]
+	\centering
+	\includegraphics[width=7cm]{./figure/SARI.png}
+	\caption{Emplacement géographique des licences SARI}.
+	\end{figure}
+\end{frame}
+
+\subsection{Transformée de Fourier}
+
+\begin{frame}{\insertsection - \insertsubsection}
+	\begin{itemize}
+	\item La transformée de Fourier:
+	\begin{align}
+	X(f)&=\int_{-\infty}^{\infty}x(t)e^{-2j\pi ft}dt
+	\end{align}
+	\visible<2->{  %Démasquage au deuxième sous-slide
+	\item La transformée de Fourier \alert<3>{Inverse}:
+	\begin{align}
+	x(t)&=\int_{-\infty}^{\infty}X(f)e^{2j\pi ft}df
+	\end{align}}
+	\end{itemize}
+\end{frame}
+
+
+\end{document}

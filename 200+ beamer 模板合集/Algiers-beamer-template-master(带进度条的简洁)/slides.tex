@@ -1,0 +1,130 @@
+\documentclass[compress,mathserif,xcolor=dvipsnames,svgnames,aspectratio=169]{beamer} 
+%% $%!TEX program = xelatex
+\usetheme{Algiers}
+
+%%% My favorite packages
+
+\usepackage[default]{sourcesanspro}
+% \usepackage[default]{raleway}
+
+\usepackage[T1]{fontenc}
+\usefonttheme[onlymath]{serif}
+
+% \usepackage{fontspec}
+% \usepackage{xunicode} %Unicode extras!
+% \usepackage{xltxtra}  %Fixes
+% \usepackage{Ubuntu}
+% \usepackage[final,expansion=true,protrusion=true,spacing=true,kerning=true]{microtype} % better font output
+
+%%% Really nice for tables
+% \usepackage{booktabs}
+% \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+% \usepackage{float}
+
+%%% Citations
+% \usepackage{natbib}
+% \renewcommand{\bibsection}{\subsubsection*{\bibname } } %prevents natbib from adding a section
+
+\usepackage[english]{babel}
+% \usepackage[utf8]{inputenc}
+
+% It puts a simplistic plain slide with the section name 
+% at the beginning of each section
+\usepackage{nameref}
+\makeatletter
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+\AtBeginSection[]
+{
+\plaintitle{\currentname}
+}
+
+% Take this off when using the template
+\usepackage{blindtext}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{\fontfamily{kurier}\selectfont{The title of the talk}\\\medskip
+    \large\textcolor{beautyblue}{
+    \textbf{(with potentially a subtitle\ldots)}} \medskip}
+\author[{Djalel Benbouzid}]{\textcolor{grizoo}{Djalel Benbouzid}}
+\date[someday\ldots]{Someday}%{1\up{er} juillet 2010}
+\institute{Laboratoire de l'Accelerateur Lineaire}
+
+\begin{frame}[plain, noframenumbering]
+\titlepage
+\end{frame}
+
+\section{Section}
+% \plaintitle{Section}
+
+\begin{frame}[c]
+\frametitle{Slide 1}
+\begin{itemize}
+    \item \textbf{Stuff:} description 
+    \item \textbf{Machin:} avec truc 
+\end{itemize}
+\end{frame}
+
+\begin{frame}[c]
+\framesubtitle{Slide}{With subtitle}
+\blindtext
+\end{frame}
+
+\begin{frame}[c]
+\framesubtitle[1cm]{Slide}{With shifted subtitle (2)}
+\blindmathtrue
+\blindtext
+\end{frame}
+
+\begin{frame}[c]
+\frametitle[1cm]{Slide}
+\blinditemize
+\end{frame}
+
+\begin{frame}[c]
+\frametitle[1cm]{Slide}
+\blinddescription
+\end{frame}
+
+\begin{frame}[c]
+\frametitle[1cm]{Slide}
+\blindenumerate
+\end{frame}
+
+
+
+% A trick for having back slides while ending the slide counter
+% on the conclusion slide
+\appendix
+\newcounter{finalframe}
+\setcounter{finalframe}{\value{framenumber}}
+
+% Geeky ending
+\begin{frame}[c,plain,fragile] %fragile
+\begin{python}
+feedback = raw_input( 'Questions ?' )
+if '?' in feedback:
+    if have_answer():
+        give_answer()
+    else:
+        pretend_the_question_is_ill_posed()
+else:
+    print 'Thanks for your attention.'
+\end{python}
+
+% Or simply... 
+%\begin{center}
+%\LARGE{Thank you}
+%\end{center}
+\end{frame}
+
+% References
+% \begin{frame}[allowframebreaks, plain]
+%         \bibliographystyle{apalike}
+%         \bibliography{}
+% \end{frame}
+
+\setcounter{framenumber}{\value{finalframe}}
+\end{document}

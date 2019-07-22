@@ -1,0 +1,167 @@
+\section{Tables}
+
+\begin{frame}
+\frametitle{Tables}
+\framesubtitle{Insertion Of Tables}
+
+\begin{exampleblock}{New packages in this section}
+\begin{itemize}
+\item longtable
+\end{itemize}
+\end{exampleblock}
+
+\begin{block}{New commands in this section}
+\begin{itemize}
+\item \color{unibablueI}\textbackslash begin\color{black}\{tabular\} \dots
+~\color{unibablueI}\textbackslash end\color{black}\{tabular\}
+\item \color{unibablueI}\textbackslash begin\color{black}\{table\} \dots
+~\color{unibablueI}\textbackslash end\color{black}\{table\}
+\item \color{unibablueI}\textbackslash begin\color{black}\{longtable\} \dots
+~\color{unibablueI}\textbackslash end\color{black}\{longtable\}
+\item \color{unibablueI}\textbackslash begin\color{black}\{tabbing\} \dots
+~\color{unibablueI}\textbackslash end\color{black}\{tabbing\}
+\item \color{nounibaredI}$|$\color{black}
+\item \color{nounibaredI}\& \color{black}
+\item \color{nounibaredI}\textbackslash hline\color{black}
+\item \color{nounibaredI}\textbackslash multicolumn\color{black}\{\}\{\}\{\}
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Tables}
+\framesubtitle{``table'' \& \glqq tabular\grqq}
+\textbf{Structure:}\\[2mm]
+\color{unibablueI}\begin{ttfamily}\textbackslash begin\color{black}\{table\}\color{nounibagreenI}[position]\color{black}\\
+\color{unibablueI}\textbackslash begin\color{black}\{tabular\}\{\textit{Definition of columns}\}\\
+\textit{Table content}\\
+\color{unibablueI}\textbackslash end\color{black}\{tabular\}\\
+\color{nounibaredI}\textbackslash caption\color{black}\{caption\}\\
+\color{nounibaredI}\textbackslash label\color{black}\{tab:bsptab1\}\\
+\color{unibablueI}\textbackslash end\color{black}\{table\}\\
+~\\
+\end{ttfamily}
+
+\begin{block}{Reminder: positioning in most \LaTeX -- environments}
+\color{nounibagreenI}[h]\color{black}~or \color{nounibagreenI}[H]\color{black}~= At this very position\\
+\color{nounibagreenI}[t]\color{black}~= On top of the page\\ 
+\color{nounibagreenI}[b]\color{black}~= On bottom of the page\\ 
+\color{nounibagreenI}[p]\color{black}~= Positioning on an own page
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Tables}
+\framesubtitle{Definition Of Columns}
+Here you can define how the columns should be aligned
+and how the vertical lines should be set:\\[3mm]
+\begin{tabbing}[H]p{column width}xxx\=\kill
+\textbf{Commands:}\\
+l \>= left-justified\\
+c \>= centered\\
+r \>= right-justified\\
+p\{column width\} \>= a left-justified column with defined width\\
+\color{nounibaredI}$|$\color{black} \>= sets a vertical line
+at this position\\
+\end{tabbing}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tables}
+\framesubtitle{View From Inside}
+\begin{ttfamily}
+\input{content/listings/tabular_escaped.tex}
+\end{ttfamily}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tables}
+\framesubtitle{Table Content}
+Here you fill the defined columns with content.\\[3mm]
+\begin{tabbing}[H]p{column width}xxx\=\kill
+\textbf{Commands:}\\
+\color{nounibaredI}\&\color{black} \>= horizontal separation of rows\\
+\color{nounibaredI}\textbackslash \textbackslash \color{black} \>=  new line\\
+\color{nounibaredI}\textbackslash hline\color{black} \>= sets a horizontal line\\[2mm]
+\color{nounibaredI}\textbackslash multicolumn\color{black}\{column number\}\{column alignment\}\{text\}\\[2mm]
+\>= Combines as many columns as you like.\\
+\end{tabbing}
+\end{frame}
+
+\begin{frame}[t]
+
+\frametitle{Tables}
+\framesubtitle{Example Tabular}
+\begin{footnotesize}
+\begin{ttfamily}
+\input{content/listings/tabular_escaped.tex}
+\end{ttfamily}
+\end{footnotesize}
+
+\begin{tabular}{c|p{40mm}|lr|c}
+\multicolumn{5}{c}{E-Sports Championship Franconia}
+ \\
+\hline
+\hline
+Number & Place & Player 1 & Player 2 & Result \\
+\hline
+1 & N\"urnberg & Wolf & Lamm & 23:10 \\
+\hline
+2 & Bamberg & Meyer & Beyer & \\
+\hline
+3 & Zirndorf & Brandst. & Brauer & 21:21 \\
+\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Tables}
+\framesubtitle{Longtable -- Table With Line Break}
+\bigskip
+„tabular“ shows the table on one page. If it does not fit on the page, the remainder is cut off.\\
+For tables longer than one page, a table is needed that performs a division of the table.\\
+\textbf{Solution: {\ttfamily longtable}}\\
+{\ttfamily longtable} allows a line break in the table. Moreover, {\ttfamily longtable} is an environment, so the  {\ttfamily table}-environment is not needed anymore!\\[3mm]
+
+\begin{ttfamily}
+\color{unibablueI}\textbackslash begin\color{black}\{longtable\}\{\textit{definition of columns}\}\\
+\textit{table content}\\
+\color{nounibaredI}\textbackslash caption\color{black}\{caption\}\\
+\color{nounibaredI}\textbackslash label\color{black}\{tab:bsptab2\}\\
+\color{unibablueI}\textbackslash end\color{black}\{longtable\}
+\end{ttfamily}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Indentations With „tabbing“}
+\begin{block}{Control}
+\begin{itemize}
+\item[\begin{ttfamily}\color{nounibaredI}\textbackslash =\end{ttfamily}]\color{black}set a tab position 
+\item[\begin{ttfamily}\color{nounibaredI}\textbackslash $>$\end{ttfamily}]select a tab position
+\end{itemize}
+\end{block}
+
+\begin{columns}
+\begin{column}{.5\textwidth}
+\begin{ttfamily}{\scriptsize
+\input{content/listings/tabbing_escaped.tex}}
+\end{ttfamily}
+\end{column}
+\begin{column}{.5\textwidth}
+\begin{tabbing}
+Employ\=ee:\\
+A  \> Daniel\\
+B  \> Martin\\
+C  \> Linus\\
+xxx\=xxx\=xxxxxxx\kill
+\> Committees\\
+\>\> Tests\\
+\>\> Mails\\
+\end{tabbing}
+\end{column}
+\end{columns}
+
+If you use the command \begin{ttfamily}\color{nounibaredI}\textbackslash kill\color{black}\end{ttfamily}, the rest of the line is not shown. In this way you can do the formatting without showing the respective text.
+\end{frame}

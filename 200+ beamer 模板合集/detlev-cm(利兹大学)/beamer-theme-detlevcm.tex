@@ -1,0 +1,96 @@
+
+\documentclass[aspectratio=43,display]{beamer}
+
+%% http://tex.stackexchange.com/questions/114219/add-notes-to-latex-beamer
+%\documentclass[note]{beamer}
+%\setbeameroption{show notes}
+
+\usetheme{DetlevCM}
+%% The colourtheme must be provided by the user
+%% This allows extra flexibility and allows the use of other
+%% colour themes.
+\usecolortheme{ETII}
+
+
+
+\usepackage{enumerate}
+\usepackage{hyperref}
+\hypersetup{
+bookmarksopen=false,
+pdfpagemode=UseNone,
+%pdfpagemode=FullScreen,   %% Enable to have Adobe Reader query for fullscreen mode
+pdfauthor={Detlev Conrad Mielczarek} %% Enter the apppropriate author in here
+}
+
+%% Title
+\title[Beamer Theme]{LaTeX Beamer Theme following Uni Leeds, engineering branding}
+
+%% Author with both abbreviation and affiliation
+\author[DCM] %
+{%
+	Detlev C. Mielczarek\inst{1}
+}
+
+%% Auther affiliation
+\institute[UL]{\inst{1}Your Institution Here}
+
+
+
+%% Begin the actual document
+\begin{document}
+
+
+\maketitle
+
+
+
+\begin{frame}{Optional Table of Contents Slide}
+	\tableofcontents
+\end{frame}
+
+%% Sections must be explicitly defined
+%% square brackets for the short form in the headline
+%% braces for the long entry in the table of contents
+\section[Short Title]{Long Title}
+
+%% slide titles must be given explicitly in braces
+%% exclude to not print a slide title
+%% the slide title can be different from the section
+\begin{frame}{Example Frame}
+\begin{itemize}[<1->]
+	
+	\item A LaTeX template designed for use at the University of Leeds \\ (NOT officially endorsed in any way)
+	
+	\item This is a sample presentation \& manual
+	
+	\item Other colour choices are allowed in the preamble
+	
+	\item University logo not supplied (copyright issues) - use your own (LogoTop.png)
+	
+	\item The images are copyrighted - a licence is herewith granted to use the supplied low resolution version on a royalty free basis in connection with this theme
+\end{itemize}
+\end{frame}
+
+\section[No Title Frame]{Frame With an Empty Title Title}
+\begin{frame}[<1->]
+	
+	\begin{itemize}
+	
+		\item frame titles can be included by inserting them in a second set of braces, e.g.: \\
+		\textbackslash begin\{frame\}\{frametitle\} \\
+		\textbackslash end\{frame\}
+		
+		\item frame titles can be omitted by excluding the second set of braces, e.g.: \\
+		\textbackslash begin\{frame\} \\
+		\textbackslash end\{frame\}
+		
+		\item please refer to the Beamer documentation for Beamer options \\
+		\footnotesize
+		\url{https://www.ctan.org/tex-archive/macros/latex/contrib/beamer}
+	\end{itemize}
+	
+\end{frame}
+
+
+
+\end{document}

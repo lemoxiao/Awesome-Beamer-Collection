@@ -1,0 +1,111 @@
+\RequirePackage{tikz}
+\RequirePackage{iftex}
+\ifPDFTeX
+	\RequirePackage{garamondx}
+\fi
+
+\AtBeginDocument{\setbeamertemplate{logo}{}}
+
+\newcommand{\milano@logo}{}
+\newcommand{\milano@supervisor}{}
+\newcommand{\milano@department}{}
+\newcommand{\milano@titlepagelogoA}{}
+\newcommand{\milano@titlepagelogoB}{}
+\newcommand{\milano@backgroundlogo}{}
+
+\renewcommand{\logo}[1]{\renewcommand{\milano@logo}{#1}}
+\newcommand{\supervisor}[1]{\renewcommand{\milano@supervisor}{#1}}
+\newcommand{\department}[1]{\renewcommand{\milano@department}{#1}}
+\newcommand{\titlepagelogoA}[1]{\renewcommand{\milano@titlepagelogoA}{#1}}
+\newcommand{\titlepagelogoB}[1]{\renewcommand{\milano@titlepagelogoB}{#1}}
+\newcommand{\backgroundlogo}[1]{\renewcommand{\milano@backgroundlogo}{#1}}
+
+\newcommand{\thanksframe}[1]{{
+	\setbeamertemplate{background}{
+		\begin{tikzpicture}
+			\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+			\fill[MilanoBlue] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+		\end{tikzpicture}
+	}
+	\begin{frame}[c]
+	\centering\Large\color{white} #1
+	\end{frame}
+}}
+
+\definecolor{MilanoBlue}{RGB}{19,49,109}
+\definecolor{MilanoLightBlue}{RGB}{24,55,123}
+\definecolor{MilanoDarkBlue}{RGB}{16,36,85}
+\definecolor{MilanoTitleBlue}{RGB}{7,27,80}
+\definecolor{MilanoTextGray}{RGB}{66,66,66}
+\definecolor{MilanoTitleLine}{RGB}{23,33,113}
+\definecolor{MilanoBackground}{RGB}{234,234,234}
+
+\setbeamercolor{normal text}{fg=MilanoTextGray, bg=}
+\setbeamercolor{frametitle}{fg=MilanoTitleBlue}
+\setbeamercolor{footline}{bg=MilanoBlue, fg=white}
+\setbeamercolor{logo}{parent={footline}}
+\setbeamercolor{institute in head/foot}{parent={footline}}
+\setbeamercolor{item}{parent={normal text}}
+\setbeamercolor{title page}{fg=white}
+\setbeamercolor{block title}{fg=MilanoLightBlue}
+\setbeamercolor{block title example}{fg=MilanoLightBlue}
+\setbeamercolor{section in toc}{fg=MilanoLightBlue}
+\setbeamercolor{subsection in toc}{fg=MilanoLightBlue}
+
+\setbeamerfont{title}{size=\LARGE}
+\setbeamerfont{author}{shape=\itshape}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamerfont{institute}{family=\rmfamily, series=\bfseries, size=\normalsize}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{background canvas}[vertical shading][bottom=MilanoBackground,top=white]
+
+\setbeamertemplate{footline}{
+  \leavevmode\hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth, ht=.8cm, dp=1ex, left, leftskip=0.2cm, sep=0.2cm]{institute in head/foot}%
+    \usebeamerfont{institute in head/foot}\ifnum\thepage>1\milano@department\fi
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth, ht=.8cm, dp=1ex, right, rightskip=0.4cm]{logo}%
+    \usebeamerfont{logo}\ifnum\thepage>1\milano@logo\fi
+  \end{beamercolorbox}
+}}
+
+\setbeamertemplate{background}{%
+	\ifnum\thepage>1\relax%
+		\begin{tikzpicture}
+		\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+		\draw[MilanoTitleLine] ([yshift=-1.2cm]current page.north west) -- ([yshift=-1.2cm]current page.north east);
+		\end{tikzpicture}
+	\else%
+	\begin{tikzpicture}
+		\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+		\fill[color=MilanoBlue] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+	\end{tikzpicture}%
+	\fi%
+}
+
+\setbeamertemplate{title page}{
+\usebeamercolor{title page}
+\begin{tikzpicture}
+	\useasboundingbox (1,0) rectangle (\the\paperwidth,\the\paperheight);
+	\node[opacity=.3] at (12.5, 0.7) {\milano@backgroundlogo};
+%	\draw[step=1, help lines] (0,0) grid (\the\paperwidth,\the\paperheight);
+	\fill[top color=MilanoLightBlue, middle color=MilanoLightBlue, bottom color=MilanoDarkBlue] (0, 6.75) rectangle (\the\paperwidth, 8.75);
+	\node at (2.15, 7.75) {\milano@titlepagelogoA};
+	\draw[thick] (3.4, 8.25) -- (3.4, 7.25);
+	\node[right, align=left, font=\usebeamerfont{institute}] at (3.7, 7.8) {\insertinstitute};
+	\node[right] at (9.9, 7.8) {\milano@titlepagelogoB};
+	\node[align=center, font=\usebeamerfont{title}] at (6.1, 4.5) {\inserttitle};
+	\node[align=center, font=\usebeamerfont{subtitle}] at (6.1, 3.5) {\insertsubtitle};
+	\node[align=left, font=\usebeamerfont{author}] at (10.3, 1.4) {\insertauthor};
+	\node[align=left, font=\usebeamerfont{author}, right] at (1.3, 1.4) {\milano@supervisor};
+\end{tikzpicture}
+}
+
+\setbeamertemplate{frametitle}{
+\vspace*{0.1cm}%
+\begin{beamercolorbox}{frametitle}
+	\usebeamerfont{frametitle}\insertframetitle
+\end{beamercolorbox}
+}

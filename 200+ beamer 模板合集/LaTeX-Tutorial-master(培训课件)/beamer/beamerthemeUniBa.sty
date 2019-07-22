@@ -1,0 +1,284 @@
+%Berkeley / Goettingen / Hannover / Marburg / PaloAlto / Rochester
+\usetheme{Rochester}
+
+\RequirePackage{pgf}
+\RequirePackage{tikz}
+
+\tikzset{
+  rectangle with rounded corners north west/.initial=4pt,
+  rectangle with rounded corners south west/.initial=4pt,
+  rectangle with rounded corners north east/.initial=4pt,
+  rectangle with rounded corners south east/.initial=4pt,
+}
+%\makeatletter
+\pgfdeclareshape{rectangle with rounded corners}{
+  \inheritanchorborder[from=rectangle]
+  \savedmacro{\neoffset}{
+    \pgfkeysgetvalue{/tikz/rectangle with rounded corners north east}{\pgf@rectc}
+    \let\neoffset\pgf@rectc
+  }
+  \savedmacro{\nwoffset}{
+    \pgfkeysgetvalue{/tikz/rectangle with rounded corners north west}{\pgf@rectc}
+    \let\nwoffset\pgf@rectc
+  }
+  \savedmacro{\seoffset}{
+    \pgfkeysgetvalue{/tikz/rectangle with rounded corners south east}{\pgf@rectc}
+    \let\seoffset\pgf@rectc
+  }
+  \savedmacro{\swoffset}{
+    \pgfkeysgetvalue{/tikz/rectangle with rounded corners south west}{\pgf@rectc}
+    \let\swoffset\pgf@rectc
+  }
+  \savedanchor{\north}{
+    \pgf@y=.5\ht\pgfnodeparttextbox
+    \pgf@x=0pt
+    \setlength{\pgf@ya}{\pgfshapeminheight}
+    \ifdim\pgf@y<.5\pgf@ya
+      \pgf@y=.5\pgf@ya
+    \fi
+  }
+  \savedanchor{\south}{
+    \pgf@y=-.5\ht\pgfnodeparttextbox
+    \pgf@x=0pt
+    \setlength{\pgf@ya}{\pgfshapeminheight}
+    \ifdim\pgf@y>-.5\pgf@ya
+      \pgf@y=-.5\pgf@ya
+    \fi
+  }
+  \savedanchor{\east}{
+    \pgf@y=0pt
+    \pgf@x=.5\wd\pgfnodeparttextbox
+    \addtolength{\pgf@x}{2ex}
+    \setlength{\pgf@xa}{\pgfshapeminwidth}
+    \ifdim\pgf@x<.5\pgf@xa
+      \pgf@x=.5\pgf@xa
+    \fi
+  }
+  \savedanchor{\west}{
+    \pgf@y=0pt
+    \pgf@x=-.5\wd\pgfnodeparttextbox
+    \addtolength{\pgf@x}{-2ex}
+    \setlength{\pgf@xa}{\pgfshapeminwidth}
+    \ifdim\pgf@x>-.5\pgf@xa
+      \pgf@x=-.5\pgf@xa
+    \fi
+  }
+  \savedanchor{\northeast}{
+    \pgf@y=.5\ht\pgfnodeparttextbox % height of the box
+    \pgf@x=.5\wd\pgfnodeparttextbox % width of the box
+    \addtolength{\pgf@x}{2ex}
+    \setlength{\pgf@xa}{\pgfshapeminwidth}
+    \ifdim\pgf@x<.5\pgf@xa
+      \pgf@x=.5\pgf@xa
+    \fi
+    \setlength{\pgf@ya}{\pgfshapeminheight}
+    \ifdim\pgf@y<.5\pgf@ya
+      \pgf@y=.5\pgf@ya
+    \fi
+  }
+  \savedanchor{\southwest}{
+    \pgf@y=-.5\ht\pgfnodeparttextbox
+    \pgf@x=-.5\wd\pgfnodeparttextbox
+    \addtolength{\pgf@x}{-2ex}
+%     \pgf@x=0pt
+    \setlength{\pgf@xa}{\pgfshapeminwidth}
+    \ifdim\pgf@x>-.5\pgf@xa
+      \pgf@x=-.5\pgf@xa
+    \fi
+    \setlength{\pgf@ya}{\pgfshapeminheight}
+    \ifdim\pgf@y>-.5\pgf@ya
+      \pgf@y=-.5\pgf@ya
+    \fi
+  }
+  \anchor{text}{%
+    \northeast%
+    \pgf@x=-.5\wd\pgfnodeparttextbox%
+    \pgfmathsetlength{\pgf@y}{-.5ex}
+  }
+  \anchor{north east}{
+    \northeast
+    \pgfmathsetmacro{\nw}{(1-sin(45))*\neoffset}
+    \addtolength{\pgf@x}{-\nw pt}
+    \addtolength{\pgf@y}{-\nw pt}
+  }
+  \anchor{center}{
+    \pgf@x=0pt
+    \pgf@y=0pt
+  }
+  \anchor{south west}{
+    \southwest
+    \pgfmathsetmacro{\nw}{(1-sin(45))*\swoffset}
+    \addtolength{\pgf@x}{\nw pt}
+    \addtolength{\pgf@y}{\nw pt}
+  }
+  \anchor{north west}{
+    \northeast
+    \pgfmathsetmacro{\temp@x}{\pgf@x}
+    \southwest
+    \pgfmathsetmacro{\temp@xtwo}{\pgf@x}
+    \northeast
+    \pgfmathsetmacro{\xdiff}{\temp@x-\temp@xtwo}
+    \def\pgf@xa{\pgf@x-\xdiff}
+    \
+    \pgfmathsetmacro{\nw}{(1-sin(45))*\nwoffset}
+    \def\pgf@xaa{\pgf@xa+\nw}
+    \def\pgf@yaa{\pgf@y-\nw}
+    \pgfpoint{\pgf@xaa}{\pgf@yaa}
+  }
+  \anchor{south east}{
+    \southwest
+    \pgfmathsetmacro{\temp@x}{\pgf@x}
+    \northeast
+    \pgfmathsetmacro{\temp@xtwo}{\pgf@x}
+    \southwest
+    \pgfmathsetmacro{\xdiff}{\temp@x-\temp@xtwo}
+    \def\pgf@xa{\pgf@x-\xdiff}
+    \pgfmathsetmacro{\nw}{(1-sin(45))*\seoffset}
+    \def\pgf@xaa{\pgf@xa-\nw}
+    \def\pgf@yaa{\pgf@y+\nw}
+    \pgfpoint{\pgf@xaa}{\pgf@yaa}
+  }
+  \anchor{south}{\south}
+  \anchor{north}{\north}
+  \anchor{east}{\east}
+  \anchor{west}{\west}
+  \backgroundpath{% this is new
+    % store lower right in xa/ya and upper right in xb/yb
+    \southwest \pgf@xa=\pgf@x \pgf@ya=\pgf@y
+    \northeast \pgf@xb=\pgf@x \pgf@yb=\pgf@y
+    % construct main path
+    \pgfkeysgetvalue{/tikz/rectangle with rounded corners north west}{\pgf@rectc}
+    \pgfsetcornersarced{\pgfpoint{\pgf@rectc}{\pgf@rectc}}
+    \pgfpathmoveto{\pgfpoint{\pgf@xa}{\pgf@ya}}
+    \pgfpathlineto{\pgfpoint{\pgf@xa}{\pgf@yb}}
+    \pgfkeysgetvalue{/tikz/rectangle with rounded corners north east}{\pgf@rectc}
+    \pgfsetcornersarced{\pgfpoint{\pgf@rectc}{\pgf@rectc}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@yb}}
+    \pgfkeysgetvalue{/tikz/rectangle with rounded corners south east}{\pgf@rectc}
+    \pgfsetcornersarced{\pgfpoint{\pgf@rectc}{\pgf@rectc}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@ya}}
+    \pgfkeysgetvalue{/tikz/rectangle with rounded corners south west}{\pgf@rectc}
+    \pgfsetcornersarced{\pgfpoint{\pgf@rectc}{\pgf@rectc}}
+    \pgfpathclose
+ }
+}
+%\makeatother
+
+\pgfdeclareimage[width=0.115\textwidth]{uniheader}{image/logow}
+
+\setbeamertemplate{blocks}[shadow=false]
+\setbeamercovered{transparent}
+
+\beamer@headheight=0.13\paperwidth
+
+\definecolor{unibablueI}{HTML}{00457D}
+\definecolor{unibablueII}{HTML}{336A97}
+\definecolor{unibablueIII}{HTML}{6690B1}
+\definecolor{unibablueIV}{HTML}{99B5CB}
+\definecolor{unibablueV}{HTML}{CCDAE5}
+
+\definecolor{unibayellowI}{HTML}{FFD300}
+\definecolor{unibayellowII}{HTML}{FFDC33}
+\definecolor{unibayellowIII}{HTML}{FFE566}
+\definecolor{unibayellowIV}{HTML}{FFED99}
+\definecolor{unibayellowV}{HTML}{FFF6CC}
+
+\definecolor{unibagreenI}{HTML}{97BF0D}
+\definecolor{unibagreenII}{HTML}{ACCC3D}
+\definecolor{unibagreenIII}{HTML}{C1D86E}
+\definecolor{unibagreenIV}{HTML}{D5E59E}
+\definecolor{unibagreenV}{HTML}{EAF2CF}
+%Not CD, darker versions
+\definecolor{nounibagreenI}{HTML}{82A50B}
+\definecolor{nounibagreenII}{HTML}{708C0A}
+
+\definecolor{unibaredI}{HTML}{E6444F}
+\definecolor{unibaredII}{HTML}{EB6972}
+\definecolor{unibaredIII}{HTML}{F08F95}
+\definecolor{unibaredIV}{HTML}{F5B4B8}
+\definecolor{unibaredV}{HTML}{FADADC}
+%Not CD, darker versions
+\definecolor{nounibaredI}{HTML}{CC3D47}
+\definecolor{nounibaredII}{HTML}{B3363E}
+
+\definecolor{unibagrayI}{HTML}{878783}
+\definecolor{unibagrayII}{HTML}{9F9F9C}
+\definecolor{unibagrayIII}{HTML}{B7B7B5}
+\definecolor{unibagrayIV}{HTML}{CFCFCE}
+\definecolor{unibagrayV}{HTML}{E7E7E6}
+
+
+\setbeamercolor*{Title bar}{fg=white}
+\setbeamercolor*{Location bar}{fg=unibablueI,bg=unibagrayV}
+\setbeamercolor*{frametitle}{parent=Title bar}
+\setbeamercolor*{block title}{bg=unibablueI,fg=white}
+\setbeamercolor*{block body}{bg=unibagrayV,fg=black}
+\setbeamercolor*{block title alerted}{bg=nounibaredII,fg=white}
+\setbeamercolor*{block body alerted}{bg=unibaredV,fg=black}
+\setbeamercolor*{block title example}{bg=unibayellowII,fg=black}
+\setbeamercolor*{block body example}{bg=unibayellowV,fg=black}
+\setbeamercolor*{normal text}{bg=white,fg=black}
+\setbeamercolor*{alerted text}{fg=nounibaredII}
+\setbeamercolor*{section in head/foot}{bg=unibablueI,fg=white}
+\setbeamercolor*{item}{fg=unibablueI, bg=unibagrayV}
+
+\usecolortheme[named=nounibagreenII]{structure}
+
+\setbeamerfont{section in head/foot}{size=\tiny,series=\normalfont}
+\setbeamerfont{frametitle}{size=\large}
+
+\setbeamertemplate{frametitle}
+{
+  \vskip-0.3\beamer@headheight
+  \vskip-\baselineskip
+  \vskip-0.2cm
+  \hskip-0.5cm\usebeamerfont*{frametitle}\insertframetitle
+  \vskip-0.10em
+  \hskip-0.25cm\usebeamerfont*{framesubtitle}\insertframesubtitle
+}
+
+\setbeamertemplate{headline}
+{
+
+\begin{tikzpicture}
+\node[
+anchor=south west,
+  draw=unibablueI,
+  thin,
+  fill=unibablueI,
+  shape=rectangle with rounded corners,
+  minimum height=\beamer@headheight, minimum width=\textwidth,
+  rectangle with rounded corners north west=0pt,
+  rectangle with rounded corners south west=0pt,
+  rectangle with rounded corners north east=25pt,
+  rectangle with rounded corners south east=0pt,
+] at (0,0) (b) {};
+\draw (b.east) +(-.7em,0) node(logo) [anchor=east]   { \pgfuseimage{uniheader} };
+\draw[white] node(uniba) [left of=logo, anchor=east]{\scriptsize\unibastring};
+\end{tikzpicture}
+
+  \vskip -1.75cm
+  \linethickness{0pt}
+
+  \framelatex{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.3\beamer@headheight]{Title bar}
+    \usebeamerfont{section in head/foot}%
+    \insertsectionnavigationhorizontal{0pt}{\hskip0.22cm}{}%
+  \end{beamercolorbox}}
+
+  \framelatex{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.7\beamer@headheight]{Title bar}
+  \end{beamercolorbox}}
+}
+
+\setbeamertemplate{footline}
+{
+  \linethickness{0.2pt}
+  \framelatex{
+  \begin{beamercolorbox}[leftskip=.3cm,wd=\paperwidth,ht=0.25\beamer@headheight,sep=0.1cm]{Location bar}
+    \usebeamerfont{section in head/foot}%
+    \insertshortauthor \ - \insertshortinstitute
+    \hfill
+    \insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}}
+}

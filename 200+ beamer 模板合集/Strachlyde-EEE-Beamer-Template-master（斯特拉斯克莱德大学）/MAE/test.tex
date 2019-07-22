@@ -1,0 +1,88 @@
+\documentclass{beamer}
+\usetheme{STR}
+
+\usepackage{graphicx,psfrag,epsf,color} % if you want to include jpeg, eps or pdf pictures
+\graphicspath{{EPS/}}
+\usepackage{epstopdf}       % for PDFLaTeX to include EPS files
+\epstopdfsetup{update} % only regenerate pdf files when eps file is newer
+
+\usepackage{hyperref}
+\usepackage[normalem]{ulem} % underline
+
+\usepackage{lipsum}
+
+\newenvironment{myindentpar}[1]%
+{\begin{list}{}%
+         {\setlength{\leftmargin}{#1}}%
+         \item[]%
+}
+{\end{list}}
+
+
+\author{\textit{Name Surname}}
+\title[UoS MAE/WARC Beamer Template]{Unofficial Beamer Template for Strathclyde University MAE/WARC}
+\subtitle{Unofficial Beamer Template for Strathclyde University MAE/WARC}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Contents}
+	\tableofcontents
+\end{frame}
+
+\section{Section 1}
+\subsection{Subsection 1.1}
+\begin{frame}{Slide title 1}
+\lipsum[1]
+\end{frame}
+
+\section{Section 2}
+\subsection{Subsection 2.1}
+\begin{frame}{Slide title 2}
+\lipsum[2]
+%\vfill
+%\begin{center}\begin{Huge}Thank you \\[10pt]
+%for listening.\end{Huge}\vfill
+%\end{center}
+%\vfill
+\end{frame}
+
+%Ending Slide
+\section{Questions}
+
+\begin{frame}[plain]
+
+\vspace{2cm}
+\begin{myindentpar}{3cm}
+\textbf{\textcolor{white}{
+\underline{Further questions:}
+}}
+\end{myindentpar}
+
+\textbf{\textcolor{white}{
+\hspace{1cm}\underline{Email:}\;\;yevgen.gorash@strath.ac.uk}}
+\vspace{-0.4em}
+\begin{myindentpar}{2cm}
+\textbf{\textcolor{white}{
+william.nicholls@strath.ac.uk\\
+william.dempster@strath.ac.uk\\
+r.hamilton@strath.ac.uk\\
+}}
+\end{myindentpar}
+
+\vspace{1.3cm}
+\includegraphics[height=0.12\paperheight]{sponsor_logo}\\
+\scriptsize
+\textcolor{white}{DCO Screens\\
+Weir Minerals Africa (Pty) Ltd\\
+31 Isando Road\\
+Isando, Johannesburg, RSA}
+
+\end{frame}
+
+\end{document}

@@ -1,0 +1,107 @@
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+
+\usetheme{Dresden}      % or try Darmstadt, Madrid, Warsaw, Goettingen...
+\usecolortheme{beaver}  % or try albatross, beaver, crane, ... seahorse
+\usefonttheme{default}  % or try serif, structurebold, ...
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{section}[numbered]
+
+% Changing the color of itemize item in beamer
+\setbeamercolor{enumerate item}{fg=darkred}
+\setbeamercolor{itemize item}{fg=darkred}
+\setbeamercolor{itemize subitem}{fg=darkred}
+\setbeamercolor{description item}{fg=darkred}
+
+% Packages
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{multicol}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsfonts}
+\usepackage{pgfpages}
+\usepackage{listings}
+\input{lstlisting.tex}
+\usepackage{xcolor}
+\usepackage{framed}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning,%
+  fit,%
+  arrows,%
+  automata,%
+  trees,%
+  intersections,%
+  mindmap,%
+  shapes.geometric,%
+  shapes.arrows,%
+  decorations,%
+  decorations.pathmorphing,%
+  decorations.pathreplacing,%
+  matrix,%
+  chains,%
+  scopes,%
+  circuits,%
+  circuits.ee.IEC,%
+  calc,%
+  fadings,%
+  lindenmayersystems,%
+  decorations.markings,%
+  shadows.blur
+}
+
+% those small pics from a sheet
+\newcommand*{\icon}[2][2]{%
+  \tikz\draw[very thick, line join=round]
+    (-.5,.5) -- ++(.7,0) -- ++(.3,-.3) --
+    ++(-.3,0) -- ++(0,.3) -- ++(.3,-.3) -- ++(0,-.4)
+    \foreach \x in {1,...,#1} {
+      -- ++(0,-.2)
+    }
+    -- ++(-1,0) -- cycle
+    (-.5,.2) node[fill, text=white,
+      inner sep=2pt, minimum width=8mm, anchor=center] {#2}
+    ++ (.1,-.3) -- ++(.8,0) \foreach \x in {1,...,#1} {
+      -- ++(0,-.1) -- ++(-.8,0) -- ++(0,-.1) -- ++(.8,0)
+    };
+}
+
+% Color Definition
+\lstdefinelanguage{BibTeX}
+{keywords={%
+  @article,@book,@collectedbook,@conference,@electronic,@ieeetranbstctl,%
+  @inbook,@incollectedbook,@incollection,@injournal,@inproceedings,%
+  @manual,@mastersthesis,@misc,@patent,@periodical,@phdthesis,@preamble,%
+  @proceedings,@standard,@string,@techreport,@unpublished%
+  },
+comment=[l][\itshape]{@comment},
+morekeywords={[2]author,title,year,publisher,editor,booktitle,journal,series,volume,number,pages,institution,note,howpublished},
+ }
+
+\newenvironment{mybib}{%
+  \begin{thebibliography}{10}
+}{%
+  \end{thebibliography}
+}
+
+% needed in table
+\usepackage{pifont}
+\newcommand{\goodmark}{\textcolor{green!50!black}{\Pisymbol{pzd}{52}}}
+\newcommand{\badmark}{\textcolor{red}{\Pisymbol{pzd}{56}}}
+
+
+\lstset{language=[MyLaTeX]{TeX}}
+\lstset{columns=fixed}
+\lstMakeShortInline[columns=fixed]|
+
+% changes for Blockes
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamercolor{block title}{fg=black ,bg=gray!20!bg}
+\setbeamercolor{block body}{fg=black ,bg=gray!5!bg}
+
+\setbeamercolor{block title alerted}{fg=darkred,bg=pink}
+\setbeamercolor{block body alerted}{fg=black,bg=white}

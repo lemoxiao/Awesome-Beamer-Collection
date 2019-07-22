@@ -1,0 +1,30 @@
+% Layout 1
+\input{setup/command}
+
+\begin{document}
+% Layout 1 - Title Page
+\input{content/titlepage}
+
+%%   Page numbering with roman numbers   %%
+\pagenumbering{Roman}
+%%   Begin the page numbering with 2 for the table of contents   %%
+\setcounter{page}{2}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+%%   Main part   %%
+%%   Page numbering with arabic numbers   %%
+\pagenumbering{arabic}
+%%   Begin the page numbering with 1, beginning from the first included document   %%
+\setcounter{page}{1}
+\input{content/task2}
+\newpage
+\input{content/task3}
+\newpage
+\input{content/task4}
+
+\noindent \textbf{Congratulations, you almost finishes the \LaTeX -Tutorial of Fachschaft WIAI!}
+\end{document}

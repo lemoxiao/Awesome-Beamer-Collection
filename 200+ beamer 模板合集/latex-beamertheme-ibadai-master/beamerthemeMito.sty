@@ -1,0 +1,459 @@
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeMito}[2016/12/12]  
+
+%%%%%
+% Required packages to be loaded
+%
+\RequirePackage{adjustbox}
+\RequirePackage{etoolbox}
+
+%%%%%
+% Create toggles for options
+%
+\providetoggle{poster}
+\providetoggle{alternativetitle}
+\providetoggle{light}
+
+%%%%%
+% List options
+%
+\DeclareOption{beamer}{\togglefalse{poster}}
+\DeclareOption{alttitle}{\toggletrue{alternativetitle}}
+\DeclareOption{poster}{\toggletrue{poster}}
+\DeclareOption{light}{\toggletrue{light}}
+\DeclareOption{dark}{\togglefalse{light}}
+\DeclareOption*{\PackageWarning{beamerthemeMito}{Unknown ‘\CurrentOption’}}
+\ExecuteOptions{beamer,dark}
+\ProcessOptions\relax
+
+%%%%%
+% Define a standard length based on the normal fontsize
+%
+\newlength{\normaltextsize}
+\AtBeginDocument{\setlength{\normaltextsize}{\f@size pt}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%
+% Predefined Fonts and Colours
+%
+% Both themes (dark/light) use the same palette,
+% the difference is only that the templates for 
+% the title(s) switch fg and bg
+\iftoggle{light}{
+  \usecolortheme[light]{ibadai}
+}{%
+  \usecolortheme{ibadai}
+}
+% Poster uses larger fonts for title, author, etc
+\iftoggle{poster}{%
+  \usefonttheme[poster]{ibadai}
+}{%
+  \usefonttheme[beamer]{ibadai}
+}
+
+%%%%%
+% Modify Inner theme
+%
+% Choose triangles for the itemize environment
+% this really doesn't have much of an effect since it is redefinedi later
+\setbeamertemplate{itemize items}[triangle]
+% Two levels should be quite enough
+\setbeamertemplate{itemize item}{\raisebox{0.12ex}{$\blacktriangleright$}\hskip0.1em}
+\setbeamertemplate{itemize subitem}{\raisebox{0.12ex}{$\triangleright$}\hskip0.1em}
+% There are no (should not be) sections in a poster
+\iftoggle{poster}{%
+}{%
+  \setbeamertemplate{sections/subsections in toc}[sections numbered]
+  % Provide additional level for itemize environment
+  \setbeamertemplate{itemize subsubitem}{\raisebox{0.12ex}{$\triangleright$}\hskip0.1em}
+}
+
+% enumerated figures, tables (,and schemes if defined)
+\setbeamertemplate{caption}[numbered]     
+
+%%%%%
+% Modify Outer theme
+%
+\useoutertheme{default} %fallback
+
+% Don't use navigation symbols
+\beamertemplatenavigationsymbolsempty
+
+%%%%%
+% New templates
+%
+% The theme doesn't use a headline on standard frames.
+% Define a headline template which can be used as 
+% the title for a poster
+\defbeamertemplate{headline}{ibadai-poster}{%
+  \begin{beamercolorbox}%
+        [wd=1\paperwidth,sep=0.02\paperwidth,
+	leftskip=0.01\paperwidth,rightskip=0.01\paperwidth]%
+        {use=frametitle,fg=frametitle.bg.bg=frametitle.fg}%
+    \parbox[b][0.16\paperwidth]{0.68\paperwidth}{%
+      \raggedleft
+      {\usebeamerfont{title}\inserttitle\strut\par}%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        {\usebeamerfont{subtitle}\insertsubtitle\strut\par}%
+      \fi
+      {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\strut\par}%
+      \ifx\insertinstitute@empty\vfill%
+      \else%
+        {\usebeamerfont{institute}\usebeamercolor[fg]{normal text}\insertinstitute\strut\par}
+      \fi\vskip0ex % Ignore depth
+    }\hfill%
+    \ifx\inserttitlegraphic\@empty%
+    \else%\hfill%%
+      \adjustbox{max height=0.16\paperwidth,%
+                 max width=0.25\paperwidth,%
+	         keepaspectratio,valign=B}{\inserttitlegraphic}%
+      \fi\par
+  \end{beamercolorbox}
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=1\paperwidth,ht=0.2\normaltextsize]{frametitle}
+  \end{beamercolorbox}%
+}
+
+% Define how the title for a slide is set
+% This is the default for the dark theme
+\defbeamertemplate{frametitle}{ibadai-frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}%
+        [wd=1\paperwidth,sep=0.01\paperwidth,
+	leftskip=0.01\paperwidth,rightskip=0.01\paperwidth]%
+        {frametitle}%
+    \usebeamerfont{frametitle}\insertframetitle\strut\par
+    \ifx\insertframesubtitle\@empty%
+    \else%
+    {\usebeamerfont{framesubtitle}\insertframesubtitle\strut\par}%
+    \fi
+  \end{beamercolorbox}
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=1\paperwidth,ht=0.1\normaltextsize]{separation line head}
+  \end{beamercolorbox}%
+}
+
+% Define footline as a single box for a slide
+\defbeamertemplate{footline}{ibadai}{%
+  \begin{beamercolorbox}[wd=1\paperwidth,ht=0.1\normaltextsize]{separation line foot}
+  \end{beamercolorbox}%
+  \nointerlineskip
+  \begin{beamercolorbox}%
+        [wd=1\paperwidth,ht=3ex,dp=1.5ex,leftskip=1em,rightskip=1em]%
+        {footline}%
+    \usebeamerfont{footline}%
+    \insertshortauthor{} (\insertshortinstitute)\hfill\insertframenumber/\inserttotalframenumber%
+  \end{beamercolorbox}%
+}
+
+% Define alternative footline as a single box
+% for a title page or the poster
+% Provide a command to easily insert a custom footline
+\providecommand{\insertcustomfootline}{}
+\providecommand{\posterfootline}[1]{\renewcommand{\insertcustomfootline}{#1}}
+
+\defbeamertemplate{footline}{ibadai-poster}{%
+  \begin{beamercolorbox}[wd=1\paperwidth,ht=0.2\normaltextsize]{separation line foot}
+  \end{beamercolorbox}%
+  \nointerlineskip
+  \begin{beamercolorbox}%
+        [wd=1\paperwidth,sep=0.01\paperwidth,
+	leftskip=0.01\paperwidth,rightskip=0.01\paperwidth]%
+	{footline}
+    \usebeamerfont{footline}%
+    \ifx\insertcustomfootline\@empty%
+      \ifx\insertdate\@empty\today%
+      \else\insertdate\fi%
+      \hfill\LaTeX
+    \else%
+      \insertcustomfootline%
+    \fi
+  \end{beamercolorbox}%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=1\paperwidth,ht=0.2\normaltextsize]{separation line foot}
+  \end{beamercolorbox}%
+}
+
+% Redefine Titlepage 
+%
+% Make a titlepage
+\def\maketitle{%
+  \ifbeamer@inframe\titlepage%
+  \else%
+  \frame[plain]\titlepage
+  \fi
+}
+
+\defbeamertemplate{title page}{ibadai-titlepage}
+{
+  %\vskip0pt
+  \usebeamerfont{normal text}%
+  \begin{beamercolorbox}[wd=1\paperwidth,ht=0.1\normaltextsize]{separation line head}
+  \end{beamercolorbox}%
+  \nointerlineskip
+  \begin{beamercolorbox}%
+        [wd=1\paperwidth,sep=0.04\paperwidth,
+	leftskip=0.01\paperwidth,rightskip=0.01\paperwidth]%
+        {title}%
+    {\usebeamerfont{title}\inserttitle\strut\par}%
+    \ifx\insertsubtitle\@empty%
+    \else%
+      {\usebeamerfont{subtitle}\insertsubtitle\strut\par}%
+    \fi
+  \end{beamercolorbox}
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=1\paperwidth,ht=0.1\normaltextsize]{separation line head}
+  \end{beamercolorbox}%
+  \vspace{0.2\paperheight}
+  \parbox[b][0.25\paperheight]{0.5\textwidth}{%
+    {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\strut\par}
+    \ifx\insertinstitute@empty\vfill%
+    \else%
+      {\usebeamerfont{institute}\usebeamercolor[fg]{normal text}\insertinstitute\strut\par}
+    \fi\vfill
+    \ifx\insertdate@empty%
+      {\usebeamerfont{date}\usebeamercolor[fg]{normal text}\today}\strut\par
+    \else%
+      {\usebeamerfont{date}\usebeamercolor[fg]{normal text}\insertdate}\strut\par
+    \fi
+  }\hfill%
+  \ifx\inserttitlegraphic@empty\null%
+  \else%
+    \adjustbox{max height=0.25\paperheight,%
+               max width=0.25\textwidth,%
+	       keepaspectratio,valign=B}{\inserttitlegraphic}%
+  \fi\par
+}
+
+% Define an alternative layout for the titlepage
+% Custom content on the alternative titlepage is available through:
+\newcommand{\inserttitlepageextra}{}
+\newcommand{\titlepageextra}[1]{\renewcommand{\inserttitlepageextra}{#1}}
+
+\defbeamertemplate{title page}{ibadai-alt-titlepage}{%
+  \begin{beamercolorbox}%
+        [wd=1\paperwidth,sep=0.02\paperwidth,
+	leftskip=0.01\paperwidth,rightskip=0.01\paperwidth]%
+        {use=frametitle,fg=frametitle.bg.bg=frametitle.fg}%
+    \parbox[b][0.16\paperwidth]{0.68\paperwidth}{%
+      \raggedleft
+      {\usebeamerfont{title}\inserttitle\strut\par}%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        {\usebeamerfont{subtitle}\insertsubtitle\strut\par}%
+      \fi
+      {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\strut\par}%
+      \ifx\insertinstitute@empty\vfill%
+      \else%
+        {\usebeamerfont{institute}\usebeamercolor[fg]{normal text}\insertinstitute\strut\par}
+      \fi\vskip0ex % Ignore depth
+    }\hfill%
+    \ifx\inserttitlegraphic\@empty%
+    \else%\hfill%%
+      \adjustbox{max height=0.16\paperwidth,%
+                 max width=0.25\paperwidth,%
+	         keepaspectratio,valign=B}{\inserttitlegraphic}%
+      \fi\par
+  \end{beamercolorbox}
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=1\paperwidth,ht=0.2\normaltextsize]{separation line head}
+  \end{beamercolorbox}
+  \vskip0pt plus 1filll
+  \begin{centering}
+    \inserttitlepageextra\strut\par
+  \end{centering}
+  \vskip0pt plus 1filll
+  \begin{beamercolorbox}[wd=1\paperwidth,ht=0.1\normaltextsize]{separation line foot}
+  \end{beamercolorbox}
+  \nointerlineskip
+  \begin{beamercolorbox}%
+        [wd=1\paperwidth,sep=0.01\paperwidth,
+	leftskip=0.01\paperwidth,rightskip=0.01\paperwidth]%
+        {footline}%
+    \usebeamerfont{footline}%
+    \ifx\insertcustomfootline\@empty%
+      \ifx\insertdate\@empty\today%
+      \else\insertdate\fi%
+      \hfill\LaTeX
+    \else%
+      \insertcustomfootline%
+    \fi
+  \end{beamercolorbox}%
+}
+
+%%%%%
+% Define some boxed environments
+%
+% Provide a new length to know the actual available width
+%
+\newlength{\boxwidth}
+
+%%%
+% The different boxes only differ in color, 
+% the actual code for the boxes should be recycleable.
+% The default is the dark theme defined below
+\providecommand{\blockbegin@ibadai@default}[2]{%
+  \begin{minipage}{\linewidth}
+%  \begin{beamercolorbox}[ht=0.1\normaltextsize]{test}
+%  \end{beamercolorbox}
+  \nointerlineskip
+  \begin{beamercolorbox}[leftskip=0.3\normaltextsize,
+                         colsep=0.2\normaltextsize
+		       ]{#1}%
+    {\usebeamerfont*{#1}\insertblocktitle\strut\par}
+  \end{beamercolorbox}
+%  \nointerlineskip
+%  \begin{beamercolorbox}[ht=0.1\normaltextsize]{test}
+%  \end{beamercolorbox}
+  \nointerlineskip
+  \begin{beamercolorbox}[leftskip=0.5\normaltextsize,
+                         rightskip=0.5\normaltextsize,
+                         colsep=0.2\normaltextsize,
+                         sep=0.5\normaltextsize,
+                         vmode
+		       ]{#2}%
+    \usebeamerfont{#2}%
+  \setlength{\boxwidth}{\linewidth}
+  \addtolength{\boxwidth}{-\leftskip}
+  \addtolength{\boxwidth}{-\rightskip}
+}
+\providecommand{\blockend@ibadai@default}[1]{%
+  \end{beamercolorbox}%
+  \nointerlineskip
+  \begin{beamercolorbox}[ht=0.1\normaltextsize]{#1}
+  \end{beamercolorbox}
+  \end{minipage}\par
+}
+%
+\setbeamercolor{test}{fg=yellow,bg=black}
+% The light theme uses:
+\providecommand{\blockbegin@ibadai@light}[2]{%
+  \begin{minipage}{\linewidth}
+  \begin{beamercolorbox}[ht=0.1\normaltextsize]{#1}
+  \end{beamercolorbox}
+  \nointerlineskip
+  \begin{beamercolorbox}[leftskip=0.3\normaltextsize,
+                         colsep=0.2\normaltextsize
+		       ]{#2}%
+    {\usebeamercolor[bg]{#1}\usebeamerfont*{#2}\insertblocktitle\strut\par}
+  \end{beamercolorbox}
+  \nointerlineskip
+  \begin{beamercolorbox}[ht=0.1\normaltextsize]{#1}
+  \end{beamercolorbox}
+  \nointerlineskip
+  \begin{beamercolorbox}[leftskip=0.5\normaltextsize,
+                         rightskip=0.5\normaltextsize,
+                         colsep=0.2\normaltextsize,
+                         sep=0.5\normaltextsize,
+                         vmode
+		       ]{#2}%
+    \usebeamerfont{#2}%
+  \setlength{\boxwidth}{\linewidth}
+  \addtolength{\boxwidth}{-\leftskip}
+  \addtolength{\boxwidth}{-\rightskip}
+}
+% The end definitions are the same as the defaults
+
+%%%
+% Define a standard block for the dark theme
+% 
+% Ordinary blocks
+\defbeamertemplate{block begin}{ibadai-block-dark}{%
+  \blockbegin@ibadai@default{block title}{block body}
+}
+\defbeamertemplate{block end}{ibadai-block-dark}{%
+  \blockend@ibadai@default{block title}
+}
+%
+% Alerted blocks 
+\defbeamertemplate{block alerted begin}{ibadai-block-dark}{%
+  \blockbegin@ibadai@default{block title alerted}{block body alerted}
+}
+\defbeamertemplate{block alerted end}{ibadai-block-dark}{%
+  \blockend@ibadai@default{block title alerted}
+}
+%
+% Example Blocks
+\defbeamertemplate{block example begin}{ibadai-block-dark}{%
+  \blockbegin@ibadai@default{block title example}{block body}
+}
+\defbeamertemplate{block example end}{ibadai-block-dark}{%
+  \blockend@ibadai@default{block title example}
+}
+%
+
+%%%
+% Define a block for the poster theme
+%
+\defbeamertemplate{block begin}{ibadai-block-poster}{%
+  \blockbegin@ibadai@default{block title}{block body}
+  \begin{minipage}{1\boxwidth}
+}
+\defbeamertemplate{block end}{ibadai-block-poster}{%
+  \end{minipage}
+  \blockend@ibadai@default{block title alerted}
+  \vskip0.5\normaltextsize plus 1fil
+}
+
+%%%
+% Define a standard block for the light theme
+% 
+% Ordinary blocks
+\defbeamertemplate{block begin}{ibadai-block-light}{%
+  \blockbegin@ibadai@light{block title}{block body}
+}
+\defbeamertemplate{block end}{ibadai-block-light}{%
+  \blockend@ibadai@default{block title}
+}
+%
+% Alerted blocks 
+\defbeamertemplate{block alerted begin}{ibadai-block-light}{%
+  \blockbegin@ibadai@light{block title alerted}{block body}
+}
+\defbeamertemplate{block alerted end}{ibadai-block-light}{%
+  \blockend@ibadai@default{block title alerted}
+}
+%
+% Example Blocks
+\defbeamertemplate{block example begin}{ibadai-block-light}{%
+  \blockbegin@ibadai@light{block title example}{block body}
+}
+\defbeamertemplate{block example end}{ibadai-block-light}{%
+  \blockend@ibadai@default{block title example}
+}
+%
+
+
+
+%%%%%
+% Set the values according to the requested switch
+%
+\iftoggle{alternativetitle}{%
+  \setbeamertemplate{title page}[ibadai-alt-titlepage]
+}{%
+  \setbeamertemplate{title page}[ibadai-titlepage]
+}
+\iftoggle{light}{
+  \setbeamertemplate{blocks}[ibadai-block-light]
+}{%
+  \setbeamertemplate{blocks}[ibadai-block-dark]
+}
+% As a default, use empty headline for the presentation 
+% or the poster-template
+\iftoggle{poster}{%
+  \setbeamertemplate{headline}[ibadai-poster]
+  \setbeamertemplate{footline}[ibadai-poster]
+  \setbeamertemplate{frametitle}{}
+  \setbeamertemplate{blocks}[ibadai-block-poster]
+  \setbeamertemplate{bibliography item}[text]
+}{%
+  \setbeamertemplate{headline}[default]
+  \setbeamertemplate{footline}[ibadai]
+  \setbeamertemplate{frametitle}[ibadai-frametitle]
+}
+
+\mode
+<all>

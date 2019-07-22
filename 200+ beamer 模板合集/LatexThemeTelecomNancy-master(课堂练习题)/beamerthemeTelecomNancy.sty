@@ -1,0 +1,295 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Copyright (c) 2014, Adrien Krähenbühl <adrien.krahenbuhl@gmail.com>
+% All rights reserved.
+%
+% Redistribution and use in source and binary forms, with or without modification,
+% are permitted provided that the following conditions are met:
+% 
+% * Redistributions of source code must retain the above copyright notice, this
+%   list of conditions and the following disclaimer.
+% 
+% * Redistributions in binary form must reproduce the above copyright notice, this
+%   list of conditions and the following disclaimer in the documentation and/or
+%   other materials provided with the distribution.
+% 
+% * Neither the name of Adrien Krähenbühl nor the names of its
+%   contributors may be used to endorse or promote products derived from
+%   this software without specific prior written permission.
+% 
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+% ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+% WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+% DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+% ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+% (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+% LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+% ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+% (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+% SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Main beamer theme file of the Telecom Nancy theme.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ProvidesPackage{beamerthemeTelecomNancy}[2014/01/31 Beamer theme for Telecom Nancy, v1.0]%
+
+\RequirePackage{ifthen}%
+\RequirePackage{xcolor}%
+
+% -------------------------------------------------------------------------
+% Options
+
+% Affichage du plan sur deux colonnes
+\newboolean{usetoccolumns}%
+\setboolean{usetoccolumns}{false}%
+\DeclareOptionBeamer{toccolumns}{\setboolean{usetoccolumns}{true}}%
+
+% Nombre de sections dans la première colonne
+\def\tocnbsections{}
+\DeclareOptionBeamer{tocnbsections}{\def\tocnbsections{#1}}%
+
+% Affichage du plan à chaque section
+\newboolean{@nosectiontoc}%
+\setboolean{@nosectiontoc}{false}%
+\DeclareOptionBeamer{nosectiontoc}{\setboolean{@nosectiontoc}{true}}%
+
+% Ajouter de l'espace entre les sections du sommaire
+\newboolean{@addsecspace}%
+\setboolean{@addsecspace}{false}%
+\DeclareOptionBeamer{addsecspace}{\setboolean{@addsecspace}{true}}%
+
+% Ajouter de l'espace entre les sections du sommaire
+\newboolean{@onlysecinheadline}%
+\setboolean{@onlysecinheadline}{false}%
+\DeclareOptionBeamer{onlysecinheadline}{\setboolean{@onlysecinheadline}{true}}%
+
+% Image du logo
+\def\logo{}%
+\DeclareOptionBeamer{logo}{\def\logo{#1}}%
+
+% Taille du logo
+\def\logoheight{}%
+\DeclareOptionBeamer{logoheight}{\def\logoheight{#1}}%
+
+% Fond 1ere page
+\def\backgroundtitlepage{}%
+\DeclareOptionBeamer{backgroundtitlepage}{\def\backgroundtitlepage{#1}}%
+
+% Couleur principale
+\def\firstcolor{gray}%
+\DeclareOptionBeamer{firstcolor}{\def\firstcolor{#1}}%
+
+% Couleur secondaire
+\def\secondcolor{red}%
+\DeclareOptionBeamer{secondcolor}{\def\secondcolor{#1}}%
+
+\ProcessOptionsBeamer%
+
+% -------------------------------------------------------------------------
+
+\mode<presentation>%
+
+% -------------------------------------------------------------------------
+% Tailles
+
+\newlength{\slidemargin}%
+\setlength{\slidemargin}{5mm}%
+
+\newlength{\textmargin}%
+\setlength{\textmargin}{2.\slidemargin}%
+
+\setbeamersize{text margin left=\textmargin}%
+\setbeamersize{text margin right=\textmargin}%
+
+\newlength{\contentwidth}%
+\setlength{\contentwidth}{\textwidth}%
+
+\newlength{\slidewidth}%
+\setlength{\slidewidth}{\textwidth}%
+\addtolength{\slidewidth}{\textmargin}%
+% -------------------------------------------------------------------------
+
+
+
+% -------------------------------------------------------------------------
+% Couleurs
+
+\setbeamercolor{palette primary}{use={structure,normal text},fg=\secondcolor,bg=}
+\setbeamercolor{palette secondary}{use={structure,normal text},fg=white,bg=\firstcolor}%
+\setbeamercolor{palette tertiary}{use={structure,normal text},fg=white,bg=\secondcolor}%
+\setbeamercolor{palette quaternary}{use={structure,normal text},fg=\firstcolor,bg=}%
+
+\setbeamercolor{section in head/foot}{parent=palette secondary}%
+\setbeamercolor{title in head/foot}{parent=palette primary}%
+\setbeamercolor{author in head/foot}{parent=palette quaternary}%
+\setbeamercolor{date in head/foot}{parent=palette secondary}%
+
+\setbeamercolor{title}{parent=palette secondary}%
+\setbeamercolor{frametitle}{parent=palette primary}%
+\setbeamercolor{frametitle in toc}{parent=palette quaternary}%
+\setbeamercolor{section in toc}{parent=palette primary}%
+\setbeamercolor{block title}{parent=palette secondary}%
+\setbeamercolor{block title example}{parent=palette tertiary}%
+\setbeamercolor{block title alerted}{parent=palette secondary}%
+\setbeamercolor{block body alerted}{parent=palette secondary}%
+\setbeamercolor{alerted text}{fg=\secondcolor}%
+\setbeamercolor{item}{fg=gray}%
+
+% -------------------------------------------------------------------------
+
+
+
+% -------------------------------------------------------------------------
+% Template des slides
+
+\setbeamertemplate{navigation symbols}{}%
+\setbeamertemplate{title page}[default][sep=0.5em,rounded=true,shadow=true]%
+\setbeamertemplate{headline}%
+{%
+	\hspace{\slidemargin}%
+	\vbox%
+	{%
+		\vspace{-1.1em}%
+		\begin{beamercolorbox}[wd=\slidewidth,ht=1.1em,dp=0em,center,shadow=true,rounded=true]{section in head/foot}%
+			\ifthenelse{\boolean{@onlysecinheadline}}{%
+				\insertsectionnavigationhorizontal{1.05\contentwidth}{\hfill\bfseries}{\hfill}%
+			}{%
+				\insertsubsectionnavigationhorizontal{1.05\contentwidth}{\insertsectionnumber. \insertsectionhead \hfill}{\hfill}%
+			}%
+		\end{beamercolorbox}%
+	}%
+}%
+\setbeamertemplate{frametitle}%
+{%
+	\begin{beamercolorbox}[wd=\slidewidth,ht=1.1em,dt=0em,ignorebg]{frametitle in head/foot}%
+		\insertframetitle%
+	\end{beamercolorbox}%
+}%
+\setbeamertemplate{footline}%
+{%
+	\hbox%
+	{%
+		\hspace{2\slidemargin}%
+		\begin{beamercolorbox}[wd=0.85\slidewidth,ht=1.1em,dp=0.4em,center]{author in head/foot}%
+			\insertshorttitle \quad -- \quad \textit{\insertshortauthor}%
+		\end{beamercolorbox}%
+		\vbox{%
+			\begin{beamercolorbox}[wd=1cm,ht=1.1em,colsep=0.5em,center,rounded=true]{date in head/foot}%
+				\insertframenumber{} / \inserttotalframenumber%
+			\end{beamercolorbox}%
+			\vspace{-1.1em}%
+		}%
+	}%
+}%
+% -------------------------------------------------------------------------
+
+
+
+% -------------------------------------------------------------------------
+% Listes
+
+\setbeamertemplate{itemize item}{\tiny $\bullet$}%
+\setbeamertemplate{description item}{{\bf \insertdescriptionitem}}%
+% -------------------------------------------------------------------------
+
+
+
+% -------------------------------------------------------------------------
+% Blocks
+
+\setbeamertemplate{blocks}[rounded][shadow]%
+% -------------------------------------------------------------------------
+
+
+
+% -------------------------------------------------------------------------
+% Emph
+
+\renewcommand{\emph}[1]{\textbf{\color{\secondcolor}{#1}}}%
+% -------------------------------------------------------------------------
+
+
+
+% -------------------------------------------------------------------------
+% Sommaire
+
+\ifthenelse{\boolean{@addsecspace}}{%
+	\setbeamertemplate{section in toc}{\vskip1em{{\inserttocsectionnumber.} \inserttocsection}}%
+}{%
+	\setbeamertemplate{section in toc}[sections numbered]%
+}%
+
+\newcommand{\frametitleintoc}
+{
+	\frametitle{%
+		\vspace{-0.25cm}%
+		\begin{beamercolorbox}[wd=0.9\slidewidth,left,rounded=true]{frametitle in toc}%
+			{\LARGE \bfseries Plan}%
+		\end{beamercolorbox}%
+	}%
+}
+
+\ifthenelse{\boolean{usetoccolumns}}{%
+	% Counter
+	\newcounter{tocsecondcolumnstart}%
+	\setcounter{tocsecondcolumnstart}{\tocnbsections}%
+	\addtocounter{tocsecondcolumnstart}{1}%
+	% Command
+	\newcommand{\toccontent}[1]{%
+		\frametitleintoc%
+		\begin{columns}[t]%
+			\begin{column}{0.45\textwidth}%
+				\tableofcontents[sections={1-\tocnbsections},#1]%
+			\end{column}%
+			\begin{column}{0.45\textwidth}%
+				\tableofcontents[sections={\thetocsecondcolumnstart-},#1]%
+			\end{column}%
+		\end{columns}%
+	}%
+}{%
+	\newcommand{\toccontent}[1]{%
+		\frametitleintoc
+		\tableofcontents[#1]%
+	}%
+}%
+
+\newcommand{\tocfullcontent}{\toccontent{}}
+\newcommand{\tocsectioncontent}{\toccontent{currentsection}}
+
+\ifthenelse{\boolean{@nosectiontoc}}{%
+}{%
+	\AtBeginSection[]
+	{
+		\begin{frame}[plain]
+			\tocsectioncontent
+		\end{frame}
+	}
+}%
+% -------------------------------------------------------------------------
+
+
+
+% -------------------------------------------------------------------------
+% Arrière plan et logo
+
+\setbeamertemplate{background canvas}{%
+	\ifnum\c@framenumber=1%
+		\ifx\backgroundtitlepage\@empty%
+		\else%
+    		\includegraphics[width=\paperwidth,height=\paperheight]{\backgroundtitlepage}%
+    	\fi%
+	\else%
+		\ifx\logo\@empty%
+		\else%
+			\ifx\logoheight\@empty%
+				\begin{picture}(0,0)\put(5,-270){\includegraphics[height=0.06\paperheight]{\logo}}\end{picture}
+			\else%
+				\begin{picture}(0,0)\put(5,-270){\includegraphics[height=\logoheight]{\logo}}\end{picture}
+			\fi%
+		\fi%
+   \fi%
+}
+% -------------------------------------------------------------------------
+
+\mode<all>

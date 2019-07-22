@@ -1,0 +1,7 @@
+*.aux
+KIOS_CoE_TEMPLATE.nav
+*.out
+*.snm
+*.gz
+*.vrb
+*.toc

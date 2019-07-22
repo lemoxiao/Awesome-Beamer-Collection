@@ -1,0 +1,336 @@
+\mode<presentation>
+
+%-------------------------------------------------------------------------------
+% Themes
+%-------------------------------------------------------------------------------
+
+\useoutertheme{split}
+\useinnertheme{rounded}
+\usefonttheme{structurebold}
+\setbeamerfont{title}{family=\kaishu}
+\setbeamerfont{author}{family=\kaishu}
+\setbeamerfont{date}{family=\kaishu}
+
+%\useoutertheme{shadow}
+
+%-------------------------------------------------------------------------------
+% Templates
+%-------------------------------------------------------------------------------
+
+\beamertemplatenavigationsymbolsempty
+\beamertemplateheadempty
+\beamertemplateshadowblocks
+
+%-------------------------------------------------------------------------------
+% Own templates
+%-------------------------------------------------------------------------------
+\usesectionheadtemplate
+  {\hfill\insertsectionhead}
+  {\hfill\color{fg!50!bg}\insertsectionhead}
+
+% Normal title page.
+\defbeamertemplate*{title page}{simple}[1][]
+{
+    \vfill
+        \vskip7em
+    \begin{centering}
+        
+        \begin{beamercolorbox}[center, rounded=true]{title}
+            \usebeamerfont{title}\inserttitle\par%
+            \ifx\insertsubtitle\@empty%
+            \else%
+                    \vskip-1.25em%
+                    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+            \fi%
+        \end{beamercolorbox}%
+
+        \vskip1em
+
+        \begin{beamercolorbox}[sep=8pt,center,#1]{author}
+            \usebeamerfont{author}\insertauthor
+        \end{beamercolorbox}
+
+        \vskip1em
+
+        {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+        \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
+            \usebeamerfont{date}\insertinstitute
+        \end{beamercolorbox}
+
+        \vskip4em
+        %\vfill
+
+        \begin{beamercolorbox}[sep=8pt,center,#1]{date}
+            \usebeamerfont{date}\insertdate
+            \vskip0.5em
+	    \includegraphics[width=6cm]{sponsor.png}
+        \end{beamercolorbox}
+    \end{centering}
+}
+
+%-------------------------------------------------------------------------------
+% Logo
+%-------------------------------------------------------------------------------
+
+%\logo{\hspace*{0.6\textwidth}\includegraphics[width=1.2cm]{sybila-logo-paper-shaded}\hspace*{0.3cm}}
+
+%-------------------------------------------------------------------------------
+% Colors
+%-------------------------------------------------------------------------------
+
+\setbeamercovered{dynamic}
+
+\setbeamercolor{math text}{fg=brown!40!black}
+\setbeamercolor{title}{bg=white!30!black}
+\setbeamercolor{frametitle}{bg=white!45!black}
+\setbeamercolor{footline}{bg=black,fg=white}
+\setbeamercolor{author in head/foot}{bg=black,fg=white}
+\setbeamercolor{title in head/foot}{bg=white!45!black}
+\setbeamercolor{block title}{bg=white!45!black}
+\setbeamercolor{block title example}{bg=white!45!black}
+\setbeamercolor{block title alerted}{bg=white!15!black}
+
+\colorlet{redshaded}{red!25!bg}
+\colorlet{shaded}{black!25!bg}
+\colorlet{shadedshaded}{black!10!bg}
+\colorlet{blackshaded}{black!40!bg}
+
+\usecolortheme{whale}
+\usecolortheme{orchid}
+
+%-------------------------------------------------------------------------------
+% Fonts
+%-------------------------------------------------------------------------------
+
+\setbeamerfont{block title}{size={}}
+\setbeamerfont{date}{size=\small}
+
+%-------------------------------------------------------------------------------
+% Other
+%-------------------------------------------------------------------------------
+
+\titlegraphic{\includegraphics[width=3cm]{sybila-logo-slide-title-shaded.pdf}}
+%\titlegraphic{\includegraphics[width=6cm]{logo.png}}
+
+\mode
+<all>
+\usepackage[UTF8]{ctex}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{soul}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+% % \tolerance=1000
+\usepackage{amsmath}
+\usepackage{times}  %显示times new roman字体
+\usepackage{mathptmx}
+\usepackage{calc}  %用于tabular表格宽度计算
+\usepackage{array} %用于tabular表格中的前置>和后置符<
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{tcolorbox}
+\usepackage{subfigure}
+\usepackage{tabu}
+\usepackage{tabularx}
+\usepackage{booktabs}  %/toprule
+%字体设置
+\usepackage{lipsum}
+
+
+\newcommand{\gradei}[1]{{\fontspec{SJQY} A}#1}
+\newcommand{\gradeii}[1]{{\fontspec{SJQY} B}#1}
+\newcommand{\gradeiii}[1]{{\fontspec{SJQY} C}#1}
+\tcbuselibrary{listings,theorems}
+
+\renewcommand\refname{参考文献}
+\renewcommand\contentsname{目录}
+\renewcommand{\emph}[1]{\textit{\color{red}#1}}
+\renewcommand\figurename{图}
+\newcommand{\mymarginpar}[1]{\marginpar{\small \kaishu{#1}}}
+\renewcommand{\sectionpage}[1]{
+    \vfill
+      \begin{centering}
+        第\thesection{}章
+         \vskip1em
+        \begin{beamercolorbox}[center, rounded=true]{title}
+            \usebeamerfont{title}\kaishu{#1}\par%
+        \end{beamercolorbox}%
+    \end{centering}
+   \vfill
+}
+
+
+\graphicspath{{figure/}}
+
+%\usefonttheme{professionalfonts}
+\setbeamerfont{frametitle}{family=\rmfamily} 
+\usefonttheme{serif}  %默认情况下，beamer使用无衬线字体，需要特别声明使用衬线字体。 
+
+\tcbuselibrary{skins}
+
+% \newtcolorbox{quotebox}[1]{%
+%    title={#1},
+%    width=0.9\linewidth,
+%    toprule=0.1mm,bottomrule=0.1mm,
+%    leftrule=1mm,rightrule=0.1mm,
+%    arc=0mm,
+%    colframe=green!50!black,colback=green!5!white,
+%    drop lifted shadow=blue,
+   
+% }%
+
+\newtcolorbox{quotebox}[1]{
+   enhanced,
+   colback=red!5!white,
+   colframe=red!75!black,fonttitle=\bfseries,
+   width=0.98\linewidth,
+   toprule=0mm,bottomrule=0mm,
+   leftrule=0mm,rightrule=0mm,
+   arc=0mm,
+   %colframe=green!50!black,colback=green!5!white,
+   colframe=white,colback=green!5!white,
+   borderline west={2pt}{0pt}{green!20!black},
+   after upper={\footnotesize\vskip2em\par\hfill{#1}}
+}
+
+\renewenvironment{quote}[1]{%
+   \begin{center}
+    \begin{quotebox}{#1}
+      \small  \color{green!20!black}
+ }%
+ {% 
+    \end{quotebox}
+   \end{center}
+ }%
+
+
+% \newenvironment{discuss}{%
+%   \begin{center}  \kaishu  \large
+% }%
+% {%
+%   \end{center}
+% }
+\newtcbox{\para}{on line,arc=1pt,colback=gray!10,colframe=gray!20,boxsep=0pt,outer arc=1pt,boxrule=0.5pt,left=1pt,right=1pt,top=1pt,bottom=1pt,colupper=black}
+
+
+\setbeamertemplate{frametitle continuation}[from second][\small \color{gray!50} 续页-\insertcontinuationcount ]
+
+\tcbuselibrary{skins}
+
+\newtcolorbox{msgbox}{
+   enhanced,
+   bicolor,
+   sidebyside,
+   arc=1mm,
+   lefthand width=3.8mm,
+   left=2mm,
+   colback=gray!10,
+   colbacklower=white,
+   colframe=gray!70,fonttitle=\bfseries,
+   width=0.9\linewidth,
+   toprule=0.1mm,bottomrule=0.1mm,
+   leftrule=0.1mm,rightrule=0.1mm,
+   sidebyside align=center,
+   halign upper=center,
+   valign upper=center
+}
+
+\newenvironment{discuss}{%
+   \begin{center}
+    \begin{msgbox}     
+     \includegraphics[width=1.8em]{discuss.png}
+     \tcblower
+ }%
+ {% 
+    \end{msgbox}
+   \end{center}
+ }%
+
+
+\newcommand{\email}[1]{%
+     \begin{center} 
+    \begin{msgbox}
+     \includegraphics[height=1em]{email.png}
+     \tcblower
+     \color{green!10!black}
+     #1
+    \end{msgbox}
+    \end{center}
+ }%
+
+\newenvironment{homework}{%
+    \begin{center}
+    \begin{msgbox}     
+     \includegraphics[width=1.6em]{homework.png}
+     \tcblower
+     \heiti
+  }%
+ {% 
+    \end{msgbox}
+   \end{center}
+ }%
+
+\renewenvironment{note}{%
+    \begin{center}
+    \begin{msgbox}     
+     \includegraphics[width=1.6em]{note.png}
+     \tcblower
+  }%
+ {% 
+    \end{msgbox}
+   \end{center}
+ }%
+ 
+\newenvironment{calcu}{%
+    \begin{center}
+    \begin{msgbox}
+     \includegraphics[width=1.6em]{calculator.png}
+     \tcblower
+     \heiti
+  }%
+ {% 
+    \end{msgbox}
+   \end{center}
+ }%
+
+
+% \setbeamertemplate{footline}
+% {
+%    \begin{tcolorbox}[bicolor,colback=black,after skip=0pt,arc=0pt,height=2em,boxsep=0pt,boxrule=0pt,width=\textwidth,colupper=white,collower=gray!10!white,colbacklower=gray!80!black,valign upper=center,sidebyside]
+%     \hfill \insertshortauthor  \tcblower
+%      \insertshorttitle \hfill \insertpagenumber
+%   \end{tcolorbox}
+% }
+
+\setbeamertemplate{footline}
+{%
+  \leavevmode%
+  \hbox{\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle  \hfill \textcolor{white}{\insertpagenumber}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+%\setbeamercolor{frametitle}{bg=white,fg=black}
+
+%\setbeamertemplate{frametitle}
+%{%
+%  \leavevmode%
+%  \hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=3ex, dp=1.125ex,leftskip=.3cm ,rightskip=.3cm]{frametitle}%
+  %\hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{frametitle}%
+%  \insertframetitle
+%   \end{beamercolorbox}%
+% }%
+%  \vskip0pt%
+%}
+

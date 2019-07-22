@@ -1,0 +1,98 @@
+\ProvidesPackage{beamercolorthemeru}[2016/09/26]
+
+% Copyright 2003 by Till Tantau   <tantau@users.sourceforge.net>
+%       and 2007 by Frédéric Haziza <daz@it.uu.se>
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+
+%% ------------------------------------------------------
+%% Outer theme colors
+%% ------------------------------------------------------
+
+%% Info taken from:
+%% http://info.uu.se/profil.nsf/sidor/farger.id41.html
+\definecolor{runormalred}{RGB}{227,0,11}
+\definecolor{rudarkred}{RGB}{143,32,17}
+\definecolor{rured}{RGB}{190,49,26}
+\definecolor{rulightgrey}{RGB}{230,230,230}
+\definecolor{rumidgrey}{RGB}{190,190,190}
+\definecolor{rudarkgrey}{RGB}{130,130,130}
+
+\ifbeamer@grey%
+%\usecolortheme[RGB={190,190,190}]{structure}
+\error{Not implemented yet. Use red}
+\else%
+\usecolortheme[RGB={190,49,26}]{structure}
+\fi%
+
+%% ------------------------------------------------------
+%% Inner theme colors
+%% ------------------------------------------------------
+\usecolortheme{orchid}
+
+%% ------------------------------------------------------
+%% Beamer mode
+%% ------------------------------------------------------
+\mode
+<beamer>
+
+\setbeamercolor*{title}{fg=rured,bg=white}
+
+\setbeamercolor{date in head/foot}{fg=white,bg=rured}
+\setbeamercolor{page number in head/foot}{use=structure,fg=black,bg=white}
+\setbeamercolor{author in head/foot}{fg=black,bg=white}
+\setbeamercolor{institute in head/foot}{fg=black,bg=white}
+
+\setbeamercolor*{sidebar}{use=structure,bg=structure.fg}
+\setbeamercolor*{sidebar canvas right}{use=sidebar,bg=sidebar.bg,fg=sidebar.bg}
+
+\setbeamercolor*{palette sidebar primary}{use=structure,fg=structure.fg!10}
+\setbeamercolor*{palette sidebar secondary}{fg=white}
+\setbeamercolor*{palette sidebar tertiary}{use=structure,fg=structure.fg!50}
+\setbeamercolor*{palette sidebar quaternary}{fg=white}
+
+\setbeamercolor*{section in sidebar}{use=sidebar,bg=white,fg=sidebar.bg}
+\setbeamercolor*{subsection in sidebar}{parent=section in sidebar}%use=sidebar,bg=white,fg=sidebar.bg}
+\setbeamercolor*{subsubsection in sidebar}{parent=subsection in sidebar}%use=sidebar,bg=white,fg=sidebar.bg}
+
+%\setbeamercolor*{title in head/foot}{bg=white,fg=uudarkgrey}
+\setbeamercolor*{section in head/foot}{bg=white,fg=rudarkgrey}
+\setbeamercolor*{subsection in head/foot}{bg=white,fg=rudarkgrey}
+
+
+%% ------------------------------------------------------
+%% Handout mode
+%% ------------------------------------------------------
+\mode
+<handout>
+
+\usecolortheme{whale}
+\setbeamercolor*{title}{fg=rured,bg=white}
+\setbeamercolor{title in head/foot}{fg=black,bg=white}
+
+%% ------------------------------------------------------
+%% Trans mode
+%% ------------------------------------------------------
+\mode
+<trans>
+
+%\usecolortheme{whale}
+\setbeamercolor*{title}{fg=black,bg=white}
+\setbeamercolor*{subtitle}{fg=black,bg=white}
+\setbeamercolor{frametitle}{fg=black,bg=white}
+\setbeamercolor{framesubtitle}{fg=black,bg=white}
+
+\mode
+<all>
+
+\setbeamercolor*{block title alerted}{bg=black,fg=white}
+
+%% Background logo
+\setbeamercolor{logo}{bg=rured}
+
+%% Button
+\setbeamercolor{button}{fg=black,bg=yellow}
+\setbeamercolor{button border}{fg=black,bg=rured}
+% the foreground of this color is used to render the border of buttons

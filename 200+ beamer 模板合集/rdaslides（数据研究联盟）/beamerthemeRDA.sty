@@ -1,0 +1,242 @@
+%%
+%% This is file `beamerthemeRDA.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% rdaslides.dtx  (with options: `theme')
+%% 
+%% ----------------------------------------------------------------
+%% The rdaslides class: Research Data Alliance presentations
+%% Author:  Alex Ball
+%% E-mail:  a.j.ball@bath.ac.uk
+%% License: Released under the LaTeX Project Public License v1.3c or later
+%% See:     http://www.latex-project.org/lppl.txt
+%% ----------------------------------------------------------------
+%% 
+\def\Version{2016/08/18 v3.0}
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesPackage{beamerthemeRDA}
+    [\Version\space Beamer theme for Research Data Alliance presentations]
+\RequirePackage{etoolbox, calc}
+
+\setbeamerfont{frametitle}{size=\LARGE}
+\setbeamerfont{framesubtitle}{size=\large}
+\setbeamerfont{headline}{size=\LARGE}
+\setbeamerfont{footline}{size=\scriptsize}
+\setbeamerfont{alerted text}{series=\bfseries}
+\RequirePackage{rdacolors}
+\setbeamercolor{normal text}{bg=white,fg=black}
+\setbeamercolor{alerted text}{fg=rdagreen}
+\setbeamercolor{example text}{fg=rdagrey}
+\setbeamercolor{structure}{fg=rdabrown}
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{subtitle}{fg=white}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{institute}{fg=white}
+\setbeamercolor{date}{fg=white}
+\setbeamercolor{frametitle}{bg=,fg=rdagreen}
+\setbeamercolor{headline}{parent=frametitle}
+\setbeamercolor{footline}{bg=,fg=rdabrown}
+\setbeamercolor{progress}{bg=rdalightyellow,fg=rdamidbrown}
+
+\newtoggle{titlepage}
+\newtoggle{bgpicture}\toggletrue{bgpicture}
+\newcommand{\bgpicture}{rda-bg-normal}
+\define@key{beamerframe}{background}[rda-bg-normal]{%
+  \gdef\bgpicture{#1}\toggletrue{bgpicture}%
+}
+\define@key{beamerframe}{nobackground}[true]{%
+  \togglefalse{bgpicture}%
+}
+\setbeamertemplate{background}{%
+  \iftoggle{bgpicture}{%
+    \includegraphics[width=\paperwidth,height=\paperheight]{\bgpicture}%
+  }{}%
+}
+\preto\beamer@reseteecodes{\setkeys{beamerframe}{background}\togglefalse{titlepage}}
+\defbeamertemplate*{headline}{RDA headline}{%
+  \iftoggle{titlepage}{
+    \parindent \z@
+    \leftskip \z@ \@plus 1fil \@minus \textwidth
+    \rightskip\leftskip
+    \parfillskip \z@skip
+    \begin{minipage}[b][24mm][c]{\paperwidth - 6mm}
+      \ifdefvoid{\rdaGroupLogo}{}{\parbox[c]{16mm}{\rdaGroupLogo}}%
+      \hfill
+      \ifdefvoid{\rdaGroupName}{}{%
+        \parbox[c]{42mm}{%
+          \raggedleft\rdaGroupName
+          \ifdefvoid{\rdaGroupType}{}{\par\smallskip{\small\textsc{\rdaGroupType}}}%
+          \par
+        }%
+      }%
+    \end{minipage}\par
+  }{}%
+}
+\defbeamertemplate*{frametitle}{RDA theme}{%
+  \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  \iftoggle{titlepage}{}{%
+    \@tempdima=\textwidth%
+    \advance\@tempdima by\beamer@leftmargin%
+    \advance\@tempdima by\beamer@rightmargin%
+    \begin{beamercolorbox}[sep=0.3cm,wd=\the\@tempdima,dp=6mm]{frametitle}
+      \usebeamerfont{frametitle}%
+      \vbox{}\vskip-1ex%
+      \strut\insertframetitle\strut\par%
+      {%
+        \ifdefvoid{\insertframesubtitle}{}{%
+          \usebeamerfont{framesubtitle}%
+          \usebeamercolor[fg]{framesubtitle}%
+          \insertframesubtitle\strut\par
+        }%
+      }%
+      \vskip-1ex%
+      \if@tempswa\else\vskip-.3cm\fi%
+    \end{beamercolorbox}%
+  }%
+}
+
+\RequirePackage{tikz}
+\defbeamertemplate*{progress}{charge}{%
+  \raisebox{2.7mm}[0pt][0pt]{%
+    %\usebeamercolor{progress}%
+    \begin{tikzpicture}[line join=round,baseline=1mm]
+      \pgfmathparse{equal(\inserttotalframenumber,1)}%
+      \ifnum1=\pgfmathresult
+        \def\PerCentComplete{12}%
+      \else
+        \pgfmathqparse{12pt * ((\insertframenumber pt - 1pt) / (\inserttotalframenumber pt - 1pt))}%
+        \let\PerCentComplete\pgfmathresult
+      \fi
+      \draw[fg,fill=bg] (0mm,0mm) rectangle (12mm,1.35mm);
+      \filldraw[fg] (0mm,0mm) rectangle (\PerCentComplete mm,1.35mm);
+    \end{tikzpicture}%
+  }%
+}
+\defbeamertemplate{progress}{fraction}{%
+  \insertframenumber\slash\inserttotalframenumber
+}
+\defbeamertemplate{progress}{number}{%
+  \insertframenumber%
+}
+\setbeamertemplate{footline}{%
+  \vbox to 8mm{%
+    \vfil
+    \makebox[0pt][l]{%
+      \iftoggle{titlepage}{%
+        \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+      }{}%
+    }%
+    \hfill
+    \parbox{0.5\paperwidth}{\centering
+      \usebeamerfont{footline}%
+      \iftoggle{titlepage}{\usebeamercolor[fg]{date}}{\usebeamercolor[fg]{footline}}%
+      \ifdefvoid{\inserthashtag}{}{\inserthashtag}\strut\par
+    }%
+    \hfill
+    \makebox[0pt][r]{%
+      \iftoggle{titlepage}{%
+        \parbox{18mm}{\raisebox{2mm}{%
+          \ifdefvoid{\licenseLogo}{}{%
+            \ifdefvoid{\licenseUrl}{\licenseLogo}{\href{\licenseUrl}{\licenseLogo}}%
+          }%
+        }}%
+        \hspace*{3mm}%
+        \global\togglefalse{titlepage}%
+      }{%
+        \usebeamertemplate*{progress}%
+        \hspace*{26mm}%
+      }%
+    }%
+    \par
+    \vfil
+  }%
+}
+
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{frametitle continuation}{%
+  (\insertcontinuationcount)%
+}
+
+\mode<presentation>{\def\beamer@andinst{\quad}}
+\providetoggle{isodate}
+\AtBeginDocument{%
+  \@ifpackageloaded{isodate}{\toggletrue{isodate}}{\togglefalse{isodate}}%
+}
+\setbeamertemplate{title page}{%
+  \global\toggletrue{titlepage}%
+  \setkeys{beamerframe}{background=rda-bg-title1}%
+  \vbox to 24mm{}%
+  \begin{minipage}[b][32mm][c]{\textwidth}
+    \vspace*{\stretch{1}}%
+    \begin{beamercolorbox}[sep=0pt,center]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifdefvoid{\insertsubtitle}{}{%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      }%
+    \end{beamercolorbox}%
+    \vfill
+    \begin{beamercolorbox}[sep=0pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \vfill
+    \begin{beamercolorbox}[sep=0pt,center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \vspace*{\stretch{1}}%
+  \end{minipage}
+  \par\vspace*{2mm}
+  \begin{minipage}[b][10mm][c]{\textwidth}
+    \begin{beamercolorbox}[sep=0pt,center]{date}
+      \usebeamerfont{date}%
+      \ifdefvoid{\insertoccasion}{}{\insertoccasion\\}%
+      \iftoggle{isodate}{\printdate{\insertdate}}{\insertdate}
+    \end{beamercolorbox}
+  \end{minipage}
+  \vspace*{2mm}
+}
+
+\mode<presentation>{%
+  \newcommand{\finale}[1][\empty]{%
+    \global\toggletrue{titlepage}%
+    \setkeys{beamerframe}{background=rda-bg-title2}%
+    \vbox to 24mm{}%
+    \begin{minipage}[b][32mm][s]{\textwidth}
+      \vspace*{\stretch{1}}%
+      \begin{beamercolorbox}[sep=0pt,center]{title}
+        \usebeamerfont{title}Thank you for your attention\par%
+      \end{beamercolorbox}%
+      \ifdefvoid{\insertauthorurl}{}{%
+        \vfill
+        \begin{beamercolorbox}[sep=0pt,center]{institute}
+          \usebeamerfont{institute}\insertauthor: \url{\insertauthorurl}\par%
+        \end{beamercolorbox}%
+      }%
+      \ifdefvoid{\rdaGroupUrl}{}{%
+        \vfill
+        \begin{beamercolorbox}[sep=0pt,center]{institute}
+          \usebeamerfont{institute}%
+          \ifdefvoid{\rdaGroupName}{}{\rdaGroupName
+            \ifdefvoid{\rdaGroupType}{}{ \rdaGroupType}:
+          }\url{\rdaGroupUrl}\par%
+        \end{beamercolorbox}%
+      }%
+      \ifx\empty#1
+      \else
+        \vfill
+        \begin{beamercolorbox}[sep=0pt,center]{institute}
+          \usebeamerfont{institute}#1\par%
+        \end{beamercolorbox}%
+      \fi
+      \vspace*{\stretch{1}}%
+    \end{minipage}
+    \vspace*{15mm}
+  }
+}
+%% 
+%% Copyright (C) 2016 Alex Ball <a.j.ball@bath.ac.uk>
+%%
+%% End of file `beamerthemeRDA.sty'.

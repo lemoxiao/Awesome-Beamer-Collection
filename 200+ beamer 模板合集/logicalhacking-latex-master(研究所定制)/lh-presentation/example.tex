@@ -1,0 +1,192 @@
+%\documentclass[aspectratio=169,classification=confidential]{lh-presentation}
+\documentclass[inverse,aspectratio=169,classification=confidential]{lh-presentation}
+\usepackage[utf8]{inputenc}
+
+\title{A Beamer-theme for LogicalHacking.com}
+\subtitle{Example presentation}
+\institute[The University of Sheffield]
+{Department of Computer Science, The University of Sheffield, Sheffield, UK}
+  \author[A.D. Brucker] {%
+    \href{http://www.brucker.uk/}{Achim D. Brucker}\\
+    \texttt{\footnotesize\href{mailto:"Achim D. Brucker"
+        <a.brucker@sheffield.ac.uk>}{a.brucker@sheffield.ac.uk}
+      \hspace{.6cm}
+      \url{http://www.brucker.uk/}}
+    }
+\titlevisual{visuals/lh-title-visual-code-dark}
+
+\contactauthor{Dr. Achim D. Brucker}
+\contactemail{a.brucker@sheffield.ac.uk}
+\contacttwitter{adbrucker}
+\contactlinkedin{https://de.linkedin.com/in/adbrucker/}
+\contactwww{https://www.brucker.ch/}
+\contactblog{https://logicalhacking.com/blog/}
+
+\DeclareTextCommand{\nobreakspace}{T1}{\leavevmode\nobreak\ }
+
+\begin{document}
+\begin{frame}[plain]
+  \maketitle
+\end{frame}
+
+\AgendaFrame
+
+\section{Introduction}
+\subsection{A few example slides}
+\frame{\sectionpage}
+%\begin{frame}[classification={public-cc-by}]
+\begin{frame}[classification={confidential}]
+  \frametitle{A standard slide}
+  \framesubtitle{With a frame subtitle}
+  \begin{itemize}
+  \item Only first word of slide title \ldots
+    \begin{itemize}
+    \item  And a second level 
+      \begin{itemize}
+      \item  Officially, a third level should be avoided
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+  \[ x = \sum_{i=0}^{-\infty}\sqrt{-i}\]
+\begin{itemize}
+\item rm: {\rmfamily The quick {\mdseries brown fox} \emph{jumps over} \textbf{the lazy's doc back}}
+\item sf: {\sffamily The quick {\mdseries brown fox} \emph{jumps over} \textbf{the lazy's doc back}}
+\item tt: {\ttfamily The quick {\mdseries brown fox} \emph{jumps over} \textbf{the lazy's doc back}}
+\item {\Huge Huge} {\huge huge} {\Large Large} {\large large} {\normalsize normal} {\small small} 
+      {\footnotesize footnote} {\scriptsize scriptsize} {\tiny tiny}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Block Examples}
+\begin{block}{Regular Block}
+The \alert{quick} \textbf{brown} \emph{fox} \ldots
+\end{block}
+\begin{alertblock}{Alert Block}
+The \alert{quick} \textbf{brown} \emph{fox} \ldots
+\end{alertblock}
+\begin{exampleblock}{Example Block}
+The \alert{quick} \textbf{brown} \emph{fox} \ldots
+\end{exampleblock}
+\begin{quotebox}
+The \alert{quick} \textbf{brown} \emph{fox} \ldots
+\end{quotebox}
+
+\end{frame}
+
+\begin{frame}
+A Frame without Title \ldots
+
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+asdf asdf af 
+\end{frame}
+
+\section{Conclusion}
+\subsection{Concluding remarks}
+
+\frame{\sectionpage}
+
+\begin{frame}[plain,classification=confidential]
+  \frametitle{A plain slide}
+  \framesubtitle{With a frame subtitle}
+
+
+  \begin{itemize}
+  \item Only first word of slide title \ldots
+    \begin{itemize}
+    \item  And a second level 
+      \begin{itemize}
+      \item  Officially, a third level should be avoided
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+  \[ x = \sum_{i=0}^{-\infty}\sqrt{-i}\]
+\end{frame}
+
+\ThanksFrame
+\CopyrightFrame
+\PartFrame[white][lhMagentaDark]{New Chapter}
+
+\section{Another Section}
+\frame{\sectionpage}
+\begin{frame}
+\frametitle{Conclusion}
+\end{frame}
+
+
+\end{document}

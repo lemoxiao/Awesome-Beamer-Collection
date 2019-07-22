@@ -1,0 +1,115 @@
+\section{BibTeX}
+\begin{frame}
+\frametitle{BibTeX}
+\framesubtitle{Add On For \LaTeX}
+\begin{exampleblock}{New packages in this section}
+\begin{itemize}
+\item natbib
+\end{itemize}
+\end{exampleblock}
+
+\begin{block}{New commands in this section}
+\begin{itemize}
+%\item \color{nounibaredI}\textbackslash renewcommand\color{black}\{\color{nounibaredI}\textbackslash refname\color{black}\}\{...\}
+\item \color{nounibaredI}\textbackslash cite\color{black}\{Author2014\}
+\item \color{nounibaredI}\textbackslash bibliographystyle\color{black}\{alpha$\mid$abbrv$\mid$natdin$\mid$apa$\mid$etc.\}
+\item \color{nounibaredI}\textbackslash bibliography\color{black}\{literature.bib\}
+%\item \color{nounibaredI}\textbackslash addcontentsline\color{black}\{toc\}\{section\}\{\color{nounibaredI}\textbackslash refname\color{black}\}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{BibTeX And \LaTeX ~In Combiantion}
+\textbf{Advantages:}
+\begin{itemize}
+\item List of literature is saved in an extra \texttt{.bib}-file, independent from the document.
+\item Save data in BibTeX -format. Here you can distinguish the type of source, e.g. with \color{nounibaredI}$@$book\color{black},~\color{nounibaredI}$@$article\color{black}~usw.
+\item Wide range of quoting styles
+\item \textbf{Automated creation of the list of literature (LOL), corresponding to the style}
+\item Inclusion of an entry in the LOL only if the source is mentioned in the text
+\end{itemize}
+\textbf{Disadvantages:}
+\begin{itemize}
+\item The creation of a LOL with special demands is potentially complicated
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{BibTeX And \LaTeX ~In Combination}
+\framesubtitle{BibTeX -files}
+\begin{columns}
+\begin{column}{0.52\textwidth}
+\textbf{Example entry:}\\[1em]
+
+\color{nounibaredI}$@$book\color{black}\{Culik93,\\
+\color{nounibaredI}title\color{black} = \{Die Welt der Pinguine\},\\
+\color{nounibaredI}author\color{black} = \{B.M. Culik and R. P. Wilson\},\\
+\color{nounibaredI}publisher\color{black} = \{\{BLV\}M"unchen\},\\
+\color{nounibaredI}year\color{black} = \{1993\}\\
+\}
+\end{column}
+\begin{column}{0.55\textwidth}
+\textbf{Explanation of entry:}
+\begin{itemize}
+\item \color{nounibaredI}$@$book\color{black}~- Specification of the type of source, here a book
+\item Culik93 - Definition of an unique reference key
+\item \color{nounibaredI}author\color{black}~- Author of the book
+\item \color{nounibaredI}title\color{black}~- Title of the book
+\item \color{nounibaredI}publisher\color{black}~- Publisher
+\item \color{nounibaredI}year\color{black}~- Year of publication
+\end{itemize}
+\end{column}
+\end{columns}
+\begin{alertblock}{Attention: Consider order for compiling!}
+(1) pdflatex (2) bibtex (3) pdflatex (4) pdflatex
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{BibTeX And \LaTeX ~In Combination}
+\framesubtitle{Overview Over Commands}
+\begin{itemize}
+
+\item \color{nounibaredI}\textbackslash cite\color{black}\{Culik93\} \hfill Cite a BibTeX entry\\
+
+\item \color{nounibaredI}\textbackslash bibliographystyle\color{black}\{alphadin\} \hfill Select the LOL style \glqq \texttt{alphadin}\grqq\\
+
+\item \color{nounibaredI}\textbackslash bibliography\color{black}\{bibliography.bib\} \hfill Sepcify the  BibTeX -file\\
+
+\item \color{nounibaredI}\textbackslash usepackage\color{black}\{natbib\} \hfill Necessary for quotation style \texttt{natdin}\\
+%\item \color{nounibaredI}\textbackslash renewcommand\color{black}\{\color{nounibaredI}\textbackslash refname\color{black}\}\newline \{Literaturverzeichnis\} \hfill Anpassung des Namens von Standard Literatur auf Literaturverzeichnis
+
+%\item \color{nounibaredI}\textbackslash addcontentsline\color{black}\{toc\}\{section\}\newline \{\color{nounibaredI}\textbackslash refname\color{black}\} \hfill Aufnahme des LVZ ins Inhaltsverzeichnis
+
+\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{BibTeX And \LaTeX ~In Combination}
+\framesubtitle{Examples For Styles}
+\image{\textwidth}{image/alpha.png}{Alpha Quotation Style}{img:alpha}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{BibTeX And \LaTeX ~In Combination}
+\framesubtitle{Examples For Styles cont'd}
+\image{\textwidth}{image/IEEEtran.png}{IEEEtran Quotation Style}{img:ieeetran}
+\end{frame}
+
+\begin{frame}
+\frametitle{BibTeX And \LaTeX ~In Combination}
+\framesubtitle{Examples For Styles cont'd}
+\image{\textwidth}{image/natdin.png}{Natdin Quotation Style}{img:natdin}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{BibTeX And \LaTeX ~In Combination}
+\framesubtitle{Examples For Styles cont'd}
+\image{\textwidth}{image/apa.png}{Apa Quotation Style}{img:apa}
+\end{frame}

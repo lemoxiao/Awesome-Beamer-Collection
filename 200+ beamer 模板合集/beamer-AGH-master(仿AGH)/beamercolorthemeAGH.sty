@@ -1,0 +1,94 @@
+\ProvidesPackage{beamercolorthemeAGH}[2017/04/03]
+% Beamer theme by Stanisław Polak <polak[aT]icsr[Dot]agh[DoT]edu[DoT]pl
+%                 http://www.icsr.agh.edu.pl/~polak/
+% Jan. 2017
+% Home page: https://github.com/polaksta/beamer-AGH
+%
+% based on the LaTeX-Beamer theme "CambridgeUS":
+% Copyright 2004 by Madhusudan Singh <madhusudan.singh@gmail.com>
+%
+%% beamercolorthemeAGH.sty
+%% Copyright 2017 Stanisław Polak
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is Stanisław Polak.
+%
+% This work consists of the files beamercolorthemeAGH.sty
+% and beamerthemeAGH.sty.
+
+\DeclareOptionBeamer{dark}{
+	% Check if level of darkness was given by a user
+	\ifthenelse{\equal{#1}{}}%
+	{
+		\def\AGH@darknesslevel{50} %if the level was not given, set it to 50
+	}
+	{
+		\def\AGH@darknesslevel{#1} %else set it to the value given by the user 
+	}
+	\ifthenelse{\AGH@darknesslevel < 50} %set the gray color level 
+	{
+		\pgfmathsetmacro{\AGH@graylevel}{100 - \AGH@darknesslevel}
+	}
+	{
+		\pgfmathsetmacro{\AGH@graylevel}{\AGH@darknesslevel}
+	}
+	\pgfmathsetmacro{\AGH@blockbodydarknesslevel}{\AGH@darknesslevel + 10}
+}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\definecolor{AGH@black}{RGB}{30,30,30}
+\definecolor{AGH@red}{RGB}{167,25,48}
+\definecolor{AGH@green}{RGB}{0,105,60} 
+
+\ifAGH@dark%
+	\colorlet{AGH@white}{white!90} 
+	\colorlet{AGH@main}{AGH@black!\AGH@darknesslevel} 
+	\colorlet{AGH@gray}{gray!\AGH@graylevel} 
+\else
+	\definecolor{AGH@white}{RGB}{255,255,255} 
+	\colorlet{AGH@main}{AGH@white} 
+	\colorlet{AGH@gray}{gray} 
+\fi
+\setbeamercolor{palette primary}{fg=AGH@white,bg=AGH@red}
+\setbeamercolor{palette secondary}{fg=AGH@white,bg=AGH@black}
+\setbeamercolor{palette tertiary}{fg=AGH@white,bg=AGH@green}
+\setbeamercolor{structure}{fg=AGH@green,bg=AGH@main}
+\setbeamercolor{item}{fg=AGH@green!90,bg=AGH@main}
+\setbeamercolor{background canvas}{bg=AGH@main}
+\ifAGH@dark%
+	\setbeamercolor{titlelike}{fg=AGH@black,bg=AGH@white}
+	\setbeamercolor{navigation symbols}{fg=AGH@white, bg=AGH@green}
+	\setbeamercolor{bibliography entry author}{fg=AGH@green,bg=blue!90!AGH@black}
+	\setbeamercolor{institute}{fg=AGH@white,bg=AGH@main}
+	\setbeamercolor{author}{fg=AGH@white,bg=AGH@main}
+	\setbeamercolor{date}{fg=AGH@white,bg=AGH@main}
+	\setbeamercolor{normal text}{fg=AGH@white,bg=AGH@main}
+	\setbeamercolor{block title}{fg=AGH@black,bg=normal text.fg!60}
+	\setbeamercolor{block body}{fg=AGH@white,bg=AGH@black!\AGH@blockbodydarknesslevel}
+	\setbeamercolor{block title alerted}{fg=alerted text.fg,bg=alerted text.fg!10}
+	\setbeamercolor{block body alerted}{bg=AGH@red!\AGH@blockbodydarknesslevel}
+	\setbeamercolor{block title example}{fg=example text.fg,bg=example text.fg!10}
+	\setbeamercolor{block body example}{bg=AGH@green!\AGH@blockbodydarknesslevel}
+\else
+	\setbeamercolor{titlelike}{parent=palette secondary}
+	\setbeamercolor{navigation symbols}{fg=AGH@black, bg=AGH@green}
+	\setbeamercolor{bibliography entry author}{use=structure.fg=fg.stucture,bg=blue!50!AGH@white}
+	\setbeamercolor{block title}{fg=AGH@main,bg=AGH@black!80!bg}
+	\setbeamercolor{block body}{fg=normal text.fg,bg=normal text.fg!10!bg}
+	\setbeamercolor{block title alerted}{fg=AGH@main,bg=AGH@red!80!bg}
+	\setbeamercolor{block body alerted}{fg=normal text.fg,bg=alerted text.fg!10!bg}
+	\setbeamercolor{block title example}{fg=AGH@main,bg=AGH@green!80!bg}
+	\setbeamercolor{block body example}{fg=normal text.fg,bg=example text.fg!10!bg}
+\fi
+\mode<all>

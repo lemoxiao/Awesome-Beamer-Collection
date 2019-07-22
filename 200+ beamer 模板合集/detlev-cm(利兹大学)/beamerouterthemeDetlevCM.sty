@@ -1,0 +1,177 @@
+% Copyright 2013 Detlev Conrad Mielczarek
+% Based on previous work by Herbert Voss (FU Berlin Theme) and Beamer Templates
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+\ProvidesPackage{beamerouterthemeDetlevCM}[2015/09/02 v 1.01 (dcm) http://detlevcm.eu]
+
+\mode<presentation>
+
+\setlength\textwidth{\paperwidth}
+\addtolength\textwidth{-30pt}
+\setbeamersize{text margin left=15pt,text margin right=15pt}
+
+\definecolor{GreyBox}{gray}{0.6}
+
+% From FU Theme - defining image sizes
+\newlength\FU@image@width\setlength\FU@image@width{\textwidth}
+%\newlength\FU@image@height\setlength\FU@image@height{2.5cm}
+\newlength\FU@image@height\setlength\FU@image@height{0.222\textwidth} % define height as relative for 3:2 photographs
+\newlength\FU@rule\setlength\FU@rule{0.6pt}
+%
+
+% The logo for the top right corner
+\pgfdeclareimage[height=2em]{logo}{LogoTop.png}
+
+% 3 images as decoration
+\pgfdeclareimage[height=\the\FU@image@height]{Image1}{Wing.png}
+\pgfdeclareimage[height=\the\FU@image@height]{Image2}{SAS-CRJ900.png}
+\pgfdeclareimage[height=\the\FU@image@height]{Image3}{WingSunrise.png}
+
+
+
+\newlength\titlevsep\setlength\titlevsep{2mm}
+
+
+
+\setbeamercolor{section in head/foot}{parent=palette tertiary}
+\setbeamercolor{subsection in head/foot}{parent=palette secondary}
+\setbeamercolor{author in head/foot}{parent=section in head/foot}
+\setbeamercolor{title in head/foot}{parent=section in head/foot}
+\setbeamercolor{date in head/foot}{parent=section in head/foot}
+
+
+
+% Define the headline
+\defbeamertemplate*{headline}{Leeds theme}
+{%
+  \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+  \end{beamercolorbox}
+%
+  \begin{beamercolorbox}{section in head/foot}
+    \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+  \end{beamercolorbox}%
+}
+
+
+
+% Define the footline
+\defbeamertemplate*{footline}{Leeds}
+{%
+	 \leavevmode%
+	  \hbox{%
+	  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+	    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\beamer@ifempty\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+	  \end{beamercolorbox}%
+	  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+	    \usebeamerfont{title in head/foot}\insertshorttitle
+	  \end{beamercolorbox}%
+	  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+	    \usebeamerfont{date in head/foot}%\insertshortdate{}\hspace*{2em}
+	    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+	  \end{beamercolorbox}
+	}%
+	\vskip0pt%
+}
+
+
+
+% Frame title
+\defbeamertemplate*{frametitle}{Leeds}
+{%
+	\begin{beamercolorbox}[leftskip=15pt,rightskip=15pt,wd=\paperwidth]{section in head/foot}
+	{%
+		\usebeamerfont*{frametitle}
+		\usebeamercolor[fg]{frametitle}
+		\raisebox{0.3em}{\insertframetitle} % http://www.personal.ceu.hu/tex/spacebox.htm#raisebox
+	 }
+		\hfill
+		\pgfuseimage{logo}
+		\vspace{0.1em}
+	\end{beamercolorbox}
+}
+
+
+
+% Sidebar - Switched off
+\setbeamertemplate*{sidebar left}{}
+\setbeamertemplate*{sidebar right}{}
+\setbeamertemplate*{sidebar canvas left}{}
+\setbeamertemplate*{sidebar canvas right}{}
+
+
+
+\def\beamer@fteright{\vskip0.35cm\advance\leftskip by 1.7cm\advance\rightskip by1.7cm}
+
+
+
+
+% From FU theme
+% Frame title continuations, FU
+\defbeamertemplate*{frametitle continuation}{FU}{\insertcontinuationcountroman}
+
+
+
+\mode
+<all>
+{
+  \renewcommand\titlegraphic[2][]{%
+    \edef\inserttitlegraphic{%
+      \ifx\relax#2\relax\else
+        \noexpand\includegraphics[height=\FU@image@height,width=\the\numexpr\textwidth-\wd\FU@box\relax sp,
+          aspectratio=false,#1]{#2}%
+      \fi}%
+    }%
+  \titlegraphic{}
+}
+
+\mode
+<all>
+
+\newcommand\fachbereich[1]{\def\insertfachbereich{#1}}
+\fachbereich{}%
+
+\defbeamertemplate*{title page}{Leeds}{%
+\vspace{-0.52em}
+\begin{beamercolorbox}[leftskip=15pt,rightskip=15pt,wd=\paperwidth]{section in head/foot}
+	\usebeamerfont*{frametitle}
+	\usebeamercolor[bg]{frametitle}
+%	\raisebox{0.3em}{DetlevCM Theme}
+	\raisebox{0.3em}{~}
+	\hfill\pgfuseimage{logo}
+	\vspace{0.1em}
+\end{beamercolorbox}
+  \par
+  \begingroup\fboxsep=0pt
+\colorbox{GreyBox}{%
+\makebox[\textwidth][l]{%
+\rule{0pt}{\FU@image@height}%
+\pgfuseimage{Image1}
+\pgfuseimage{Image2}
+\pgfuseimage{Image3}
+\inserttitlegraphic}%
+}
+
+  \endgroup
+  \par\vfill
+{\usebeamerfont{title}\usebeamercolor[bg]{frametitle}\inserttitle}\\[\titlevsep]
+  \ifx\insertsubtitle\@empty\else\vskip0.25em%
+    {\usebeamerfont{subtitle}\insertsubtitle\par}%
+  \fi%
+  \par\vfill
+  \begin{beamercolorbox}[sep=0pt]{author}
+    {\usebeamerfont{author}\insertauthor}\\
+    {\usebeamerfont{institute}\insertinstitute}
+  \end{beamercolorbox}
+  \par\vfill
+  {\usebeamerfont{date}\usebeamercolor*[fg]{date}\insertdate
+  }\par\vfill~\vspace*{-\fill}}
+
+\endinput
+
+
+
+\mode <all>

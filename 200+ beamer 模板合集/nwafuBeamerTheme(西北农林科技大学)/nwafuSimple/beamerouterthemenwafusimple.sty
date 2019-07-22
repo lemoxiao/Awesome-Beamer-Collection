@@ -1,0 +1,204 @@
+% 这是nwafu(西北农林科技大学)简单主题的颜色主题.
+% 版权(c) 2015-2019, 信息工程学院 耿楠<nangeng@nwafu.edu.cn>
+%
+% 本主题基于丹麦奥尔堡大学（Aalborg University）的AAU Beamer主题
+% 有关这一主题的详情请参考：https://github.com/jkjaer/aauLatexTemplates
+%
+% 这是一个免费代码：发布和修改该代码，请遵守最新版的自由软件联盟发布
+% 的GNU通用公共协议
+%
+% 期望这一代码对你有用，但值得注意的是，我不对任何后续问题进行维护，
+% 请参考<http://www.gnu.org/licenses/>查看最新的协议内容。
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerouterthemenwafusimple}[2019/06/24 The nwafu Simple Beamer Theme]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 载入需要的宏包
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{tikz}
+\usetikzlibrary{external}
+\RequirePackage{calc}
+\RequirePackage{fp}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 主题选项和定义
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%theme 选项
+% 进度条/环选项
+\def\beamer@progressfixedCircCnt{fixedCircCnt} % 固定环计数器
+\def\beamer@progressmovCircCnt{movCircCnt} % 移动环计数器
+\def\beamer@progresscorner{corner} % 右下角计数器
+%\def\beamer@progressmovCnt{movCnt} % 
+\def\beamer@progressstyle{fixedCircCnt} % 参数默认值
+\DeclareOptionBeamer{progressstyle}{\def\beamer@progressstyle{#1}}
+\DeclareOptionBeamer{rotationcw}{\def\beamer@rotationcw{true}}
+\DeclareOptionBeamer{shownavsym}{\def\beamer@shownavsym{true}}
+\ProcessOptionsBeamer
+
+% 设置页眉高度为帧标题高度的1.3倍
+\newlength{\beamer@height}
+\usebeamerfont{frametitle} % 使用帧标题字体
+\setlength{\beamer@height}{1.5\baselineskip}
+% 恢复字体
+\reset@font
+% logo的半径
+\newlength{\beamer@logoradius}
+\setlength{\beamer@logoradius}{0.6\beamer@height/2}
+% 边框的宽度
+\newlength{\beamer@borderwidth}
+\setlength{\beamer@borderwidth}{1.6mm}
+% logo框架边框的内部半径
+\newlength{\beamer@logoinnerradius}
+\setlength{\beamer@logoinnerradius}{1.1\beamer@logoradius}
+% logo框架边框的外部半径
+\newlength{\beamer@logoouterradius}
+\setlength{\beamer@logoouterradius}{\beamer@logoinnerradius+\beamer@borderwidth}
+% 计数器半径
+\newlength{\beamer@counterradius}
+\setlength{\beamer@counterradius}{\beamer@logoinnerradius/2+\beamer@logoouterradius/2+1.2pt}
+% 详细设计
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% beamer特殊选项
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation>%参考前四个模式(beamer,handout,second and trans).也就是说，除article外的所有模式
+{
+  \ifbeamercolorempty[fg]{nwafusimple}{%
+    % 如果没有定义颜色，则定义nwafusimple颜色(也许是因为没有载入颜色主题)
+    \setbeamercolor{nwafusimple}{use={structure,palette sidebar primary},fg=palette sidebar primary.fg,bg=structure.fg}
+  }{%
+    % nwafu页眉已定义了，不需要做任何事情
+  }
+ 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % 模板
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % 页眉
+  \setbeamertemplate{headline}{%
+    %\begin{beamercolorbox}[wd=1.0\paperwidth,ht=2.05ex,dp=0.3ex,left]{headfoot}%
+    %    \usebeamerfont{section in head/foot}\hspace*{3.5ex}%
+    %    \insertshortauthor\ |\ %
+    %            \insertshorttitle%
+    %\end{beamercolorbox}%
+    \nwafuheaderbackground%
+  }
+  
+  % 帧标题
+  \setbeamertemplate{frametitle}{%
+    \begin{minipage}[c][\beamer@height][c]{\textwidth-1.5\beamer@logoouterradius}
+      \hspace*{-2ex}{\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\insertframetitle}
+      \ |\ {\usebeamercolor[fg]{framesubtitle}\usebeamerfont{frametitle}\insertframesubtitle\par}%
+    \end{minipage}
+  }
+  
+  \ifx\beamer@shownavsym\undefined% 如果未定义导航条参数
+    \setbeamertemplate{navigation symbols}{%
+      % 禁用导航条
+    }
+  \fi
+
+  %\setbeamertemplate{footline}{%
+  %  \begin{beamercolorbox}[wd=1.0\paperwidth,ht=2.25ex,dp=1ex,left]{headfoot}%
+  %      \usebeamerfont{section in head/foot}\hspace*{3.5ex}%
+  %      \insertshortauthor\ |\ %
+  %              \insertshorttitle%
+  %  \end{beamercolorbox}%
+  %}
+
+  % 设置页脚
+  \ifx\beamer@progressstyle\beamer@progresscorner% 在右下角显示计数值
+    %\setbeamertemplate{footline}[frame number]
+    \setbeamertemplate{footline}
+    {
+      \leavevmode%
+      \hbox{%
+        \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{frametitle}%{author in head/foot}%
+            \usebeamerfont{author in head/foot}\insertauthor{}%(\insertshortauthor{})
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{frametitle}%{title in head/foot}%
+            \usebeamerfont{title in head/foot}\insertshorttitle{}
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{frametitle}%{date in head/foot}%
+            \usebeamerfont{date in head/foot}\insertshortinstitute{}\hspace*{2em}
+            \insertframenumber{}/\inserttotalframenumber{}\hspace*{2ex}
+        \end{beamercolorbox}}%
+        \vskip0pt%
+    }
+  \else
+    \setbeamertemplate{footline}
+    {
+      \leavevmode%
+      \hbox{%
+        \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{frametitle}%{author in head/foot}%
+            \usebeamerfont{author in head/foot}\insertauthor{}%(\insertshortauthor{})
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{frametitle}%{title in head/foot}%
+            \usebeamerfont{title in head/foot}\insertshorttitle{}
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{frametitle}%{date in head/foot}%
+            \usebeamerfont{date in head/foot}\insertshortinstitute{}\hspace*{2em}
+        \end{beamercolorbox}}%
+        \vskip0pt%
+    }
+  \fi
+}% 完成beamer特殊选项
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 主题中要用到的宏
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 页眉背景
+\newcommand{\nwafuheaderbackground}[0]{%
+  \tikzexternaldisable
+  \begin{tikzpicture}[overlay]
+    \coordinate (UL) at (0,0); % 幻灯片左上角坐标
+    \coordinate (HLR) at (\paperwidth,-\beamer@height); % 页眉右下角
+    \coordinate (logopos) at ([shift={(-\beamer@logoouterradius-\beamer@borderwidth,0.5\beamer@height)}] HLR);% logo坐标
+    % 绘制页眉背景，圆和logo
+    {\usebeamercolor{nwafusimple}%
+      \usebeamercolor{normal text}%
+      % 绘制页眉蓝色矩形背景
+      \draw[draw=none,fill=nwafusimple.bg] (UL) rectangle (HLR);
+      % 绘制外圆
+      \fill[fill=nwafusimple.fg] (logopos) circle (\beamer@logoouterradius);
+      % 绘制内圆
+      \fill[fill=nwafusimple.fg] (logopos) circle (\beamer@logoinnerradius);
+      % 放置学校
+      \ifx\beamer@progressstyle\beamer@progresscorner% 在右下角显示计数值
+        \node at (logopos) {\includegraphics[width=3.2\beamer@logoradius]{nwafulogo/circle}};
+      \else
+        \node at (logopos) {\includegraphics[width=3.0\beamer@logoradius]{nwafulogo/circle}};
+      \fi
+
+      %% 绘制进度圆/条
+      \ifx\beamer@progressstyle\beamer@progressfixedCircCnt% 使用固定计数的圆形计数器
+        % 计算位置
+        \ifx\beamer@rotationcw\undefined% 逆时针方向
+          \FPeval\progress{360*\insertframenumber/\inserttotalframenumber}
+        \else% 顺时针方向
+          \FPeval\progress{(-360*\insertframenumber/\inserttotalframenumber)}
+        \fi
+        % 绘制圆弧
+        \draw[color=nwafusimple.bg,line width=0.3*\beamer@borderwidth] ([xshift=\beamer@counterradius] logopos) arc[radius=\beamer@counterradius, start angle=0, end angle=\progress];
+        \fill[fill=nwafusimple.bg] ([shift={(\progress:\beamer@counterradius)}] logopos) circle (0.15\beamer@borderwidth);
+        % 放置当前帧计数值
+        \node[fill=normal text.bg,draw=nwafusimple.fg,thick,circle,minimum width=2*\beamer@borderwidth] at ([xshift=\beamer@counterradius]logopos) {{\usebeamercolor[fg]{normal text}\insertframenumber}};
+      \fi
+      
+      \ifx\beamer@progressstyle\beamer@progressmovCircCnt% 使用移动计数的圆形计数器
+        % 绘制当前总帧数
+        \ifx\beamer@rotationcw\undefined% 逆时针方向
+          \FPeval\progress{360*\insertframenumber/\inserttotalframenumber}
+        \else% 顺时针方向
+          \FPeval\progress{(-360*\insertframenumber/\inserttotalframenumber)}
+        \fi
+        % 绘制圆弧
+        \draw[color=nwafusimple.bg,line width=0.3*\beamer@borderwidth] ([xshift=\beamer@counterradius] logopos) arc (0:\progress:\beamer@counterradius);
+        % 绘制当前总帧数
+        \node[fill=normal text.bg,draw=nwafusimple.fg,circle,thick,minimum width=2*\beamer@borderwidth] at ([xshift=\beamer@counterradius] logopos) {{\usebeamercolor[fg]{normal text}\inserttotalframenumber}};
+        % 放置当前帧计数值
+        \node[fill=normal text.bg,draw=nwafusimple.fg,circle,thick,minimum width=2*\beamer@borderwidth] at ([shift={(\progress:\beamer@counterradius)}] logopos) {{\usebeamercolor[fg]{normal text}\insertframenumber}};
+      \fi
+    }
+  \end{tikzpicture}%
+  \tikzexternalenable
+}
+\mode<all>

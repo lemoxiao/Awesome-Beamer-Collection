@@ -1,0 +1,302 @@
+
+\ProvidesPackage{beamerthememanc}[2016/01/08]
+
+\mode<presentation>
+
+\usepackage{kvoptions}
+
+% Process options
+\DeclareBoolOption{fullfootline}
+\DeclareBoolOption{brightbackground}
+\DeclareStringOption{background}
+\DeclareStringOption[522795]{primaryColor}
+\DeclareStringOption[E1D2F8]{primaryLightColor}
+\ProcessKeyvalOptions*
+
+% Table of contents
+\useoutertheme[subsection=false,shadow]{miniframes}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+
+% Itemize
+%\setbeamertemplate{itemize item}{→}
+%\setbeamertemplate{itemize subitem}{→}
+%\setbeamertemplate{itemize subsubitem}{→}
+\setbeamertemplate{itemize item}{\textbullet}
+\setbeamertemplate{itemize subitem}{\textbullet}
+\setbeamertemplate{itemize subsubitem}{\textbullet}
+\setlength{\parskip}{0.5em}
+
+% Colors
+\colorlet{manDarkGrey}{black!90!white}
+\definecolor{manPrimary}{HTML}{\beamerthememanc@primaryColor}
+\definecolor{manPrimaryLight}{HTML}{\beamerthememanc@primaryLightColor}
+\colorlet{manSecondary}{yellow!70!red}
+
+\setbeamercolor{palette1}{fg=white, bg=manPrimary}
+\setbeamercolor{palette2}{fg=manDarkGrey,bg=white}
+\setbeamercolor{palette3}{fg=manDarkGrey,bg=manSecondary}
+\setbeamercolor{palette4}{fg=manDarkGrey,bg=white}
+\setbeamercolor{palette5}{fg=manDarkGrey,bg=manPrimaryLight}
+
+\setbeamercolor{normal text}{fg=manDarkGrey}
+\setbeamercolor{math text}{parent=normal text}
+\setbeamercolor{structure}{fg=manPrimary}
+\setbeamercolor{alert1}{fg=white,bg=manSecondary}
+\setbeamercolor{title page}{parent=palette1}
+\setbeamercolor{title}{parent=palette1}
+\setbeamercolor{subtitle}{parent=palette1}
+\setbeamercolor{author}{parent=palette1}
+\setbeamercolor{institute}{parent=palette1}
+\setbeamercolor{date}{parent=palette1}
+\setbeamercolor{frametitle}{fg=white,bg=manPrimary}
+\setbeamercolor{block title}{parent=palette1}
+\setbeamercolor{block body}{parent=palette2}
+\setbeamercolor{block title example}{parent=palette3}
+\setbeamercolor{block body example}{parent=palette4}
+
+% Title graphic
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1pt}
+\setlength{\TPVertModule}{1pt}
+
+% Tikz
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{backgrounds}
+
+% Fonts
+\usepackage{microtype}
+
+\usepackage{fontspec}
+\usefonttheme{professionalfonts}
+\usepackage{unicode-math}
+\newfontfamily\SemiBold[
+  BoldFont={Fira Sans Bold},
+  ItalicFont={Fira Sans SemiBold Italic},
+  BoldItalicFont={Fira Sans Bold Italic},
+]{Fira Sans SemiBold}
+\newfontfamily\Light[
+  BoldFont={Fira Sans Book},
+  ItalicFont={Fira Sans Light Italic},
+  BoldItalicFont={Fira Sans Book Italic},
+]{Fira Sans Light}
+\newfontfamily\ExtraLight[
+  BoldFont={Fira Sans Light},
+  ItalicFont={Fira Sans ExtraLight Italic},
+  BoldItalicFont={Fira Sans Light Italic},
+]{Fira Sans ExtraLight}
+\newfontfamily\Regular{Fira Sans Book}
+\newfontfamily\Bold{Fira Sans Bold}
+\setsansfont[
+  BoldFont={Fira Sans Bold},
+  ItalicFont={Fira Sans Book Italic},
+  BoldItalicFont={Fira Sans Bold Italic},
+]{Fira Sans Light}
+\newfontfamily\Display{Open Sans Condensed Bold}
+\setmonofont[
+  Scale=MatchLowercase,
+]{Fira Mono}
+\setmathfont{Latin Modern Math}
+
+% Boxes
+\usepackage{tcolorbox}
+
+\setbeamerfont{title}{family=\Display,size=\fontsize{40}{45}}
+\setbeamerfont{subtitle}{family=\Light,size=\fontsize{14}{16}}
+\setbeamerfont{quote}{family=\Regular,size=\fontsize{12}{14}}
+\setbeamerfont{large text}{family=\ExtraLight,size=\fontsize{26}{30}}
+\setbeamerfont{date}{family=\Light,size=\fontsize{12}{14}}
+\setbeamerfont{author}{family=\SemiBold,size=\fontsize{12}{14}}
+\setbeamerfont{institute}{family=\Light,size=\fontsize{12}{14}}
+\setbeamerfont{section title}{size=\LARGE}
+\setbeamerfont{frametitle}{family=\Regular,size=\Large,shape=\scshape}
+\setbeamerfont{block title}{family=\Regular,size=\large}
+\setbeamerfont{caption name}{family=\Regular}
+\setbeamerfont{pagenumber}{family=\Regular,size=\fontsize{12}{14}}
+
+% replace beamer blocks with tcolorboxes
+\newtcolorbox{myblock}[2][]{
+  leftright skip=2mm,
+  before skip=5mm,
+  after skip=5mm,
+  boxrule=2pt,
+  sharp corners,
+  fonttitle=\usebeamerfont{block title},
+  fontupper=\usebeamerfont{block body},
+  fontlower=\usebeamerfont{block body},
+  boxsep=.5mm,
+  lefttitle=2mm,
+  adjusted title={#2},
+  #1,
+}
+
+\renewenvironment{block}[2][]{%
+  \usebeamercolor{block body}%
+  \usebeamercolor{block title}%
+  \tcbset{%
+    colback=block body.bg,
+    colframe=block title.bg,
+    coltext=block body.fg,
+    colbacktitle=block title.bg,
+    coltitle=block title.fg,
+  }%
+  \begin{myblock}[#1]{#2}
+}{%
+  \par
+  \end{myblock}
+}
+\renewenvironment{alertblock}[2][]{%
+  \usebeamercolor{block body alerted}
+  \usebeamercolor{block title alerted}
+  \tcbset{%
+    colback=block body alerted.bg,
+    colframe=block title alerted.bg,
+    coltext=block body.fg,
+    colbacktitle=block title alerted.bg,
+    coltitle=block title alerted.fg ,
+  }%
+  \begin{myblock}[#1]{#2}
+}{%
+  \par
+  \end{myblock}
+}
+\renewenvironment{exampleblock}[2][]{%
+  \usebeamercolor{block body example}
+  \usebeamercolor{block title example}
+  \tcbset{%
+    colback=block body example.bg,
+    colframe=block title example.bg,
+    coltext=block body.fg,
+    colbacktitle=block title example.bg,
+    coltitle=block title example.fg ,
+  }%
+  \begin{myblock}[#1]{#2}
+}{%
+  \end{myblock}
+}
+
+% Titlepage
+\def\titlepage{\usebeamertemplate{title page}}
+\setbeamertemplate{title page}
+{%
+  \ifthenelse{\equal{\beamerthememanc@background}{}}{%
+    \tikz[
+        overlay,
+        remember picture,
+        show background rectangle,
+        background rectangle/.style={fill=manPrimary},
+    ]{}%
+  }{%
+    \tikz[
+        overlay,
+        remember picture,
+        show background rectangle,
+        background rectangle/.style={fill=black},
+    ] \node[opacity=0.65,at=(current page.center)] {
+      \includegraphics[height=\paperheight,width=\paperwidth]{\beamerthememanc@background}
+    };%
+  }%
+  \begin{minipage}[t][\paperheight]{\textwidth}
+    \vspace{7em}
+    \centering
+    \ifx\inserttitle\@empty%
+    \else%
+        {\usebeamercolor[fg]{title}\usebeamerfont{title}\setbeamercolor{math text}{parent=palette1}\inserttitle\par}%
+    \fi%
+    \vspace{0.5em}
+    \ifx\insertsubtitle\@empty%
+    \else%
+      {\usebeamercolor[fg]{subtitle}\usebeamerfont{subtitle}\insertsubtitle\par}%
+    \fi%
+    \vspace{3.25em}
+    \ifx\insertauthor\@empty%
+    \else%
+      {\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor\par}%
+    \fi%
+    \ifx\insertinstitute\@empty%
+    \else%
+      {\usebeamercolor[fg]{institute}\usebeamerfont{institute}\insertinstitute\par}%
+    \fi% 
+    \vspace{3.25em}
+    \ifx\insertdate\@empty%
+    \else%
+      {\usebeamercolor[fg]{date}\usebeamerfont{date}\insertdate\par}%
+    \fi% 
+    \vspace{2em}
+  \end{minipage}%
+  \begin{textblock}{1}(15,15)
+    \inserttitlegraphic
+  \end{textblock}
+}
+
+% Frametitle
+\setbeamertemplate{frametitle}
+{%
+\nointerlineskip % This one's tricky
+\begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,rightskip=0.3cm,ht=2.2ex,dp=0.9ex]{frametitle}
+  \usebeamerfont{frametitle}{\setbeamercolor{math text}{parent=palette1}\insertframetitle}%
+\end{beamercolorbox}
+}
+
+% Footline
+\usenavigationsymbolstemplate{}
+\setbeamertemplate{footline}
+{%
+\leavevmode%
+\ifbeamerthememanc@fullfootline%
+  \begin{beamercolorbox}[wd=.2\paperwidth, ht=1.8em, dp=1em, left, leftskip=1em]{normal text}%
+  \insertshortauthor%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.6\paperwidth, ht=1.8em, dp=1em, center]{}%
+  \insertshorttitle%
+  \end{beamercolorbox}%
+\else%
+  \hfill
+\fi%
+\begin{beamercolorbox}[wd=.2\paperwidth, ht=1.8em, dp=1em, right, rightskip=1em]{}%
+  \usebeamerfont{pagenumber}\insertframenumber{}\kern-1pt/\kern-1pt\inserttotalframenumber%
+\end{beamercolorbox}%
+}
+
+% Blocks
+\setbeamertemplate{block begin}
+{%
+  \setbeamercolor{item}{parent=block body}
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[sep=.5ex,ht=3.1ex,dp=0.4ex,leftskip=0.2cm,rightskip=0.5ex]{block title}%
+    \usebeamerfont*{block title}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  {\nointerlineskip\vskip-0.5pt}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.4ex,leftskip=0.5ex,rightskip=0.5ex,vmode]{block body}%
+}
+\setbeamertemplate{block end}
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+% Captions
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}  % get rid of 'figure:' under figures
+\captionsetup[subfigure]{labelformat=empty}  % and subfigures
+\captionsetup[table]{labelformat=empty}  % same for tables
+
+% Headline
+\setbeamertemplate{headline}{}
+
+% Footnotes
+% We don't need a footnoterule
+\renewcommand{\footnoterule}{}
+
+% Environments
+% Environment for a plain frame with dark background
+\newenvironment{darkframe}[1][]{%
+\setbeamercolor{background canvas}{bg=manPrimary}%
+\setbeamercolor{normal text}{fg=white}%
+\usebeamercolor[fg]{normal text}
+\begin{frame}[plain,#1]{}%
+}
+{\end{frame}}
+
+\mode
+<all>

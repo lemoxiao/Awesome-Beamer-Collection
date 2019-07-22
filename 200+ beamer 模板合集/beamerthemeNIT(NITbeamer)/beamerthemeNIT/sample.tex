@@ -1,0 +1,101 @@
+\documentclass[10pt,dvipdfmx,m,compress]{beamer}
+
+%\hypersetup{pdfpagemode=FullScreen}
+\beamertemplatenavigationsymbolsempty
+\usetheme{NIT}
+\DeclareGraphicsExtensions{.jpg,.eps,.png,.pdf,.mps,.gif}
+
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{color}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\footnotesize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% color definitions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{NITMainColor}{RGB}{255,130,0}
+\definecolor{NITReverseColor}{RGB}{240,240,240}
+\definecolor{NITgray}{RGB}{190,190,190}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% title page definition %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamercovered{transparent}
+\setbeamerfont{author}{family=\rmfamily}
+
+\author[Ryo KOBAYASHI]{Ryo KOBAYASHI}
+\title[NIT Theme]{NIT Theme}
+\institute{Department of Scientific and Engineering Simulation,\\
+Nagoya Insititute of Technology}
+\date[\today]{\today}
+\titlegraphic{\includegraphics[height=1.5cm]{NIT_Logo.eps}}
+
+% table of contents depth
+\setcounter{tocdepth}{2}
+
+\begin{document}
+\begin{frame}[plain,b]
+ \titlepage
+\end{frame}
+
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{NIT_bg.eps}}
+\frame{\frametitle{Outline}\tableofcontents}
+
+ \section{Installation}
+  \subsection{How to use this theme?}
+  \begin{frame}{What is the NIT?}
+   \begin{columns}
+    \begin{column}{.4\textwidth}
+     \begin{figure}[h]
+      \begin{center}
+       \includegraphics[keepaspectratio,width=.8\textwidth]{NIT_logo.eps}
+       \caption{The logo of NIT.}
+      \end{center}
+     \end{figure}
+    \end{column}
+    %
+    \begin{column}{.6\textwidth}
+     \begin{itemize}
+      \item NIT is the acronym of \structure{\itshape Nagoya Institute of Technology}.
+      \item The author is \structure{\itshape Ryo KOBAYASHI}, who is an assistant professor at NIT.
+      \item Please contact to the author by e-mailing to \structure{\itshape ryo.kbys[at]gmail.com}.
+            \vspace{1zw}
+      \item This theme is not {\itshape Nagoya} (the city name where NIT exists),
+            because there might be somebody who wants to make own theme in other institute in Nagoya.
+     \end{itemize}
+    \end{column}
+   \end{columns}
+  \end{frame}
+
+  \begin{frame}{How to use this theme?}
+   \begin{enumerate}
+    \item Put beamer*NIT.sty and NIT*eps files to the place where the environment TEXINPUTS looks for.
+    \item Call this theme by puting \listinline{\textbackslash{}usetheme\{NIT\}} in the preamble.
+    \item Copy preambles of this source file to your own source file, especially color definitions are important for how it looks.
+    \item Add ``compress'' to the option of beamer documentclass to keep the headline height fixed even if there are several subsections.
+    \item After the title frame, put usebackgroundtemplate and specify {\itshape NIT\_bg.eps} as a background image.
+   \end{enumerate}
+  \end{frame}
+
+ \section{Customization}
+  \subsection{How to change logo images?} % subtitles are not used in this layout but still required for the header outline bullets
+  \begin{frame}{How to change background and logo images?}
+   \begin{itemize}
+    \item The background and logo images are NIT\_bg.eps and NIT\_logo.eps, respectively.
+    \item Modifying those EPS images results directly in how it looks.
+    \item Title bar in each frame is included in the NIT\_bg.eps. Thus if you want to change frametitle, modify the NIT\_bg.eps file.
+   \end{itemize}
+  \end{frame}
+  
+  \subsection{How to customize colors?}
+  \begin{frame}{How to customize the main color?}
+   \begin{itemize}
+    \item Change color definition at the preamble, {\itshape NITMainColor}.
+    \item Modify the background image, {\itshape NIT\_bg.eps}, to change the color of the bottom of the frametitle banner.
+   \end{itemize}
+  \end{frame}
+
+\end{document}

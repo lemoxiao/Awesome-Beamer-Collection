@@ -1,0 +1,78 @@
+% !TeX program = pdflatex
+% !TeX TXS-program:compile = txs:///pdflatex/
+% !TeX TS-program = pdflatex
+% !TeX TXS-program:bibliography = txs:///biber
+% !BIB program = biber
+
+
+
+
+\pagenumbering{roman}
+
+\makeatletter
+\renewcommand*{\maketitle}{%
+	%\begin{titlepage}
+	\thispagestyle{bullshitheader}
+	\pdfbookmark[1]{Front page}{frontpage}
+	\begin{center}\selectlanguage{USenglish}\large\mbox{}
+
+		\vfill
+
+		{\LARGE\bfseries\@title\par}
+
+		\vfill%\vspace{3\baselineskip}
+
+		{\Large Term Paper}
+
+		\vspace{1.5\baselineskip}
+
+		for the Seminar
+
+		\vspace{1.5\baselineskip}
+
+		\textbf{``\seminartitle''}
+
+		\vspace{1.5\baselineskip}
+
+		Class Instructor:
+
+		\advisorname
+
+		\vspace{1.5\baselineskip}
+
+		Department of Economics
+
+		University of Bonn
+
+		\vfill%\vspace{2\baselineskip}
+
+		Submitted on \submittedon\ by
+
+		\vspace{\baselineskip}
+
+		{\Large \@author}
+
+		\vspace{1\baselineskip}
+
+		E-Mail: \email{\studentemail}
+
+		Matriculation Number: \studentID
+
+		\vfill
+	\end{center}
+	%\end{titlepage}
+	\clearpage
+}
+\makeatother
+
+\maketitle
+
+{
+	\setlength{\baselineskip}{1.25\origbaselineskip}
+	\pdfbookmark[1]{\contentsname}{toc}
+	\tableofcontents
+}
+
+\clearpage
+
+\pagenumbering{arabic}

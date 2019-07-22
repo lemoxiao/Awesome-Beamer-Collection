@@ -1,0 +1,63 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lipsum, lmodern}
+\usetheme{Klope} % or Median, or Metro, or PraterStreet, or Milano
+
+\author{Author Name}
+\title{Beamer presentation}
+\institute{Pázmány Péter Catholic University}
+\date{\today}
+
+\begin{document}
+\frame{\maketitle}
+\begin{frame}{Table of contents}
+	\tableofcontents
+\end{frame}
+
+\section{Introduction}
+\begin{frame}{Itemize}
+\begin{itemize}
+\item Here you can see an itemization
+\begin{itemize}
+\item It has items
+\begin{itemize}
+\item The items are below each other
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Enumerate}
+\begin{enumerate}
+\item Here you can see an enumeration
+\item It has items
+\item The items are numbered
+\end{enumerate}
+\[
+	f(x)=\sum_{i=0}^\infty \frac{f^{(i)}(x_0)}{i!}(x-x_0)^i
+\]
+\end{frame}
+
+\begin{frame}{Theorems and environments}
+\begin{theorem}[Sample theorem]
+This presentation is essentially useless.
+\end{theorem}
+\begin{proof}
+This proof is essentially incorrect.
+\end{proof}
+\end{frame}
+
+\begin{frame}{Example slide with Title}
+\begin{example}
+Major problem.
+\end{example}
+\begin{solution}
+Minor nuisance.
+\end{solution}
+\end{frame}
+
+\begin{frame}[plain]{Plain frame with title}
+\lipsum[1]
+\end{frame}
+\end{document}

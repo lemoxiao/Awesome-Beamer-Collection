@@ -1,0 +1,356 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%                                                                %
+%%%%% Document Class                                                 %
+%%%%%                                                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{beamer}
+
+%%%%% Package loading
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{listings}
+
+
+%%%%% IIS theme-specific settings.
+\usetheme[%
+% waferpng %% Use the PNG version of the wafer image on the title slide (increases file size!).
+]{iis}
+
+%% (Optional) Scale the wafer image on the title page.
+\setwaferwidth{0.5} % In percent of the \linewidth (default: 0.5)
+\setwaferleft{0.0}  % In centimeter from the top-left corner of the slide (default: 0.0)
+\setwafertop{5.8}   % In centimeter from the top-left corner of the slide (default: 5.8)
+
+%% (Optional) Change the margin of the text on the slides (default =
+%% 2em). Note that we currently do not adapt the indentation of the
+%% frametitle accordingly.
+% \setbeamersize{text margin left=1em, text margin right=1em}
+
+%% You may change the appearance of the navigation symbols (shown at
+%% the bottom right of each slide) using any of the following lines.
+% \setbeamertemplate{navigation symbols}{} %% Disable navigation symbols
+% \setbeamertemplate{navigation symbols}[vertical] %% Vertically organize the navigation symbols.
+% \setbeamertemplate{navigation symbols}[only frame symbol] %% Only show frame symbols
+
+
+%%%%% Settings, specific only for this presentation.
+\newcommand\latexcls[1]{\textsf{#1}}
+\newcommand\latexsty[1]{\textsf{#1}}
+
+%% A listing style for LaTeX/TeX code (note that the colors being used
+%% are defined in the iis beamer template).
+\lstdefinestyle{latexcodestyle}{
+  basicstyle        = \ttfamily,              %% The basic font style to be used for the code
+  keywordstyle      = \color{eth4}\bfseries,  %% The keyword style
+  language          = {[LaTeX]TeX},           %% The language of the code
+  texcsstyle        = *\color{eth7}\bfseries, %% Style of LaTeX/TeX-specific code
+  moretexcs         = {usetheme},             %% Additional LaTeX/TeX-specifc keywords
+  morekeywords      = {iis},                  %% Other keywords
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%                                                                %
+%%%%% Document Settings                                              %
+%%%%%                                                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\textbf{\texttt{iis}} -- The \LaTeX{} \latexcls{beamer} Theme of the Integrated Systems Laboratory}
+\subtitle{An easy to use template}
+\date{Zurich, May 2015}
+
+%% Determine the authors of the work.
+\author[%
+  Doe %% Used for the footline.
+]{%
+  \textbf{Michael Muehlberghuber}%% The author giving the presentation.
+  %% Any further authors should come in here.
+}
+
+\institute[%
+  Integrated Systems Laboratory%% The short version of the institute will be used for the footer.
+]{Integrated Systems Laboratory}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%                                                                %
+%%%%% Document Start                                                 %
+%%%%%                                                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+\begin{frame}[%
+  plain, %% We do not want to have headers and footers on the title page.
+  noframenumbering, %% Do not consider the title page for frame numbers.
+]
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}[%
+  fragile %% Required to use the listings-specific commands.
+]
+\frametitle{Introduction and Requirements}
+%
+This presentation serves as a basic introduction to the \LaTeX{}
+\latexcls{beamer} theme of the Integrated Systems Laboratory
+(IIS). Its main requirements are listed in the follwing: \vfill
+%
+  \begin{itemize}
+  \item An easy to use \latexcls{beamer} theme, which can be activated
+    by adding \lstinline[style=latexcodestyle]!\usetheme{iis}! to a
+    \latexcls{beamer} document. \vfill
+  \item Make use of the corporate design (CD) colors and other design
+    elements (e.g., logos) of ETH
+    Zurich.\footnote{\url{https://www1.ethz.ch/hk/docs/corporate_design}}
+    \vfill
+  \item Create a minimalistic header and footer in order to make most of
+    the slide space available for the actual content. \vfill
+  \item Provide some pre-defined commands, which adhere to the CD of
+    ETH Zurich.
+  \end{itemize}
+\end{frame}
+
+\subsection{Usage}
+
+\begin{frame}[%
+  fragile %% Required to use the listings-specific commands.
+]
+  \frametitle{Usage}
+  \vfill
+  \begin{block}{\textbf{Usage at the Integrated Systems Laboratory}}<1->
+    In order to use this \latexcls{beamer} theme at the IIS, you only
+    need to add the following line to the preamble of your document:
+    \lstinline[style=latexcodestyle]!\usetheme{iis}! 
+  \end{block}
+  %
+  \begin{block}{\textbf{External usage}}<2->
+    %
+    In order to use this \latexcls{beamer} theme on your personal
+    laptop or another arbitrary workstation, in addition to the above
+    line, you need to make sure that the following files are readable
+    for your \LaTeX{} distribution (e.g., in the directory where your
+    \LaTeX{} source document lies):
+    %
+    \begin{center}
+    \footnotesize
+    \begin{minipage}[b]{0.45\linewidth}
+      \begin{itemize}\itemsep0pt
+      \item \texttt{beamerthemeiis.sty}
+      \item \texttt{beamerouterthemeiis.sty}
+      \item \texttt{beamerinnerthemeiis.sty}
+      \item \texttt{beamercolorthemeiis.sty}
+      \item \texttt{beamerfontthemeiis.sty}
+      \end{itemize}
+    \end{minipage} \hfill
+    \begin{minipage}[b]{0.45\linewidth}
+      \begin{itemize}\itemsep0pt
+      \item \texttt{eth\_logo.pdf}
+      \item \texttt{eth\_logo\_neg.pdf}
+      \item \texttt{wafer.jpg}
+      \item \texttt{wafer.png}
+      \end{itemize}
+    \end{minipage} \hfill
+    \end{center}
+  \end{block}
+
+\end{frame}
+
+
+\section{Examples}
+\subsection{Itemize and Enumerate Environments}
+
+\begin{frame}
+\frametitle{Examples}
+\framesubtitle{Itemize and Enumerate Environments}
+  % 
+  \vfill
+  \begin{itemize}
+  \item<1-> First \texttt{itemize} entry
+  \item<2-> Second \texttt{itemize} entry
+  \item<3-|alert@3> Third \texttt{itemize} entry
+    \begin{itemize}
+    \item<4-> First \texttt{itemize} subentry
+    \item<5-|alert@5> Second \texttt{itemize} subentry
+    \end{itemize}
+  \item<6-> Fourth \texttt{itemize} entry
+  \end{itemize}
+  %
+  \vfill
+  \vfill
+  \begin{enumerate}
+  \item<7-> First \texttt{enumerate} entry
+  \item<8-|alert@8> Second \texttt{enumerate} entry
+  \item<9-> Third \texttt{enumerate} entry
+    \begin{enumerate}
+    \item<10-> First \texttt{enumerate} subentry
+    \item<11-> Second \texttt{enumerate} subentry
+    \end{enumerate}
+  \item<12-> Fourth \texttt{enumerate} entry
+  \end{enumerate}
+  \vfill
+\end{frame}
+
+\subsection{Description Environment}
+
+\begin{frame}
+\frametitle{Examples}
+\framesubtitle{Description Environment}
+  % 
+  \vfill
+  %
+  Per default, the labels of the \texttt{description} environment are
+  right aligned, as shown in the two examples below:
+  \setbeamersize{description width of=Second:}
+  \begin{description}
+  \item[First:] First \texttt{description} entry
+  \item[Second:] Second \texttt{description} entry
+  \end{description}
+  \setbeamersize{description width=5cm}
+  \begin{description}
+  \item[First:] First \texttt{description} entry
+  \item[Second:] Second \texttt{description} entry
+  \end{description}
+  \vfill
+  \vfill
+  We also provide a command for left-aligned description labels:
+  \setbeamertemplate{description item}[align left]
+  \setbeamersize{description width of=Second:}
+  \begin{description}
+  \item[First:] First \texttt{description} entry
+  \item[Second:] Second \texttt{description} entry
+  \end{description}
+  \vfill
+\end{frame}
+
+\subsection{Boxes}
+
+\begin{frame}
+  \frametitle{Examples}
+  \framesubtitle{Boxes}
+  \vfill
+  \begin{block}{\textbf{The header of a \texttt{block}}}<1->
+    The body of a \texttt{block}
+  \end{block}
+  \vfill
+  \begin{exampleblock}{\textbf{The header of an \texttt{exampleblock}}}<2->
+    The body of an \texttt{exampleblock}
+  \end{exampleblock}
+  \vfill
+  \begin{alertblock}{\textbf{The header of an \texttt{alertbox}}}<3->
+    The body of an \texttt{alertbox}
+  \end{alertblock}
+  \vfill
+  \begin{beamerboxesrounded}[width=\linewidth,shadow=true]{\textbf{The header of a \texttt{beamerboxesrounded}}}
+    The body of a \texttt{beamerboxesrounded}
+  \end{beamerboxesrounded}
+  \vfill
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Examples}
+  \framesubtitle{Boxes cont'd}
+  \vfill
+  \begin{block}<only@1>{\textbf{The header of a \texttt{block}}}
+    The body of a \texttt{block}
+  \end{block}
+    \begin{block}<only@2->{\textbf{The header of another \texttt{block}}}
+    The body of another \texttt{block}
+  \end{block}
+  \vfill
+  \begin{alertblock}<visible@3->{\textbf{The header of an \texttt{alertbox}}}
+    The body of an \texttt{alertbox}
+  \end{alertblock}
+  \vfill
+  \begin{exampleblock}<visible@2->{\textbf{The header of an \texttt{exampleblock}}}
+    The body of an \texttt{exampleblock}
+  \end{exampleblock}
+  \vfill
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Examples}
+  \framesubtitle{Theorems and Proofs}
+  \vfill
+  \begin{theorem}<1->
+    There exists an infinite set.
+  \end{theorem}
+  \vfill
+  \begin{proof}<2->
+    This follows from the axiom of infinity.
+  \end{proof}
+  \vfill
+  \begin{example}<3->[Natural Numbers]
+    The set of natural numbers is infinite.
+  \end{example}
+  \vfill
+\end{frame}
+
+
+\section{Customization}
+
+\begin{frame}
+  \frametitle{Customize the Titlepage}
+  \begin{itemize}
+  \item How to change the position of the wafer image.
+  \item When should I use the PNG version of the wafer image on the
+    title page?
+  \end{itemize}
+\end{frame}
+
+
+\section{Backup Slides}
+
+\begin{frame}
+  \frametitle{Backup Slides}
+  \begin{itemize}
+  \item Describe how to use backup slides.
+  \end{itemize}
+\end{frame}
+
+
+\section{FAQ}
+
+\begin{frame}
+  \frametitle{FAQ}
+  \framesubtitle{Basics}
+  \begin{itemize}
+  \item Where did you get the color composition for this theme from?
+  \item Why don't we use the standard \LaTeX{} \latexsty{beamer}
+    template provided by
+    ETH
+    Zurich?\footnote{\url{https://www1.ethz.ch/hk/docs/corporate_design/buero}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{FAQ}
+  \framesubtitle{Collaborations}
+  \begin{itemize}
+  \item Describe how to create title pages for collaborations.
+  \end{itemize}
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%                                                                %
+%%%%% Document End                                                   %
+%%%%%                                                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+

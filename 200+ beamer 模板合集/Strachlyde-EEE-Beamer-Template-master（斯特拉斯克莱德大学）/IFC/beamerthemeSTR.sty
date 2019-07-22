@@ -1,0 +1,152 @@
+% \LaTeX beamer theme with Institute for Future Cities layout
+% author: Xavier Bellekens <xavier.bellekens@strath.ac.uk>
+% credits : https://github.com/satta/zbh-beamer-theme
+
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeSTR}[2010/02/06 STR beamer theme]
+\RequirePackage{ifthen}
+\RequirePackage[scaled=.75]{helvet}
+
+\newcommand{\headertext}{
+ }
+
+%\newcommand{\addresstext}{
+%  University of Strathclyde\\
+%  Institute for Future Cities (TIC)\\
+%  Technology and Innovation Centre\\ Glasgow, Scotland\\ [2mm]
+%  http://www.strath.ac.uk/
+%} 
+
+\def\backgroundfile{vorlage_IFC}
+\newboolean{@use1610}
+\setboolean{@use1610}{false}
+\newboolean{@use169}
+\setboolean{@use169}{false}
+\newlength{\@headerdist}
+\setlength{\@headerdist}{5mm}
+
+
+\DeclareOption{1610}{
+  \def\backgroundfile{strath_uni_16_10}
+  \setboolean{@use1610}{true}
+}
+
+\DeclareOption{169}{
+  \def\backgroundfile{strath_uni_16_9}
+  \setboolean{@use169}{true}
+}
+
+\ProcessOptions
+
+
+
+\ifthenelse{\boolean{@use1610}}{ }
+
+\ifthenelse{\boolean{@use169}}{
+  \ifthenelse{\boolean{@use1610}}{
+   \PackageError{STRbeamertheme}{Options '1610' and '169' are mutually exclusive.}{}%
+  } { }
+}
+
+\mode<presentation>
+
+\setbeamerfont{author}{size=\large}
+\setbeamerfont{date}{size=\large}
+\setbeamerfont{example text}{series=\bfseries}
+\setbeamerfont{section}{series=\bfseries}
+\setbeamercolor{structure}{fg=black}
+\setbeamercolor{title}{fg=black}
+\setbeamerfont{title}{series=\bfseries}
+
+% disable navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% frame
+\setbeamercolor{frametitle}{fg=white}
+\setbeamerfont{frametitle}{series=\mdseries,size=\large}
+\setbeamerfont{framesubtitle}{series=\mdseries,size=\large}
+\setbeamertemplate{frametitle}
+{
+  \ifbeamer@plainframe
+  \else
+    \textbf{\insertframetitle}
+    \vspace{.25cm}
+  \fi
+}
+
+% headline
+\setbeamercolor{headline}{fg=white}
+\setbeamertemplate{headline}{
+  \ifbeamer@plainframe
+  \else
+    \ifthenelse{\boolean{@use1610}}{
+      \vspace{9.5mm}
+      \leavevmode\tiny%
+      \hspace*{12.25cm}
+    }{
+      \ifthenelse{\boolean{@use169}}{
+        \vspace{7mm}
+        \leavevmode\tiny%
+        \hspace*{12.35cm}
+      }{
+        \vspace{1.5cm}
+        \leavevmode
+        \hspace*{7.80cm}
+      }
+    }
+    \begin{minipage}[b]{2cm}
+      \flushright
+      \headertext
+    \end{minipage}
+    \normalsize
+  \fi
+}
+
+% title page with Strathclyde Logo
+\setbeamertemplate{title page}{
+  \vspace{\@headerdist}
+  \centerline{
+  \textbf{\LARGE{\inserttitle}}}
+%
+%  \textbf{\large{\insertsubtitle}}
+%  \vfill
+%  \begin{columns}
+%  \begin{column}{.45\textwidth}
+%    \textbf{\insertauthor}\\[3mm]
+%    \scriptsize
+%    \addresstext
+%  \end{column}
+%  \begin{column}{.45\textwidth}
+    \centerline{
+      \pgfimage[height=5cm]{IFC}}
+%  \end{column}
+%  \end{columns}
+%  \normalsize
+}
+
+% footer with name, date and page numbers
+\setbeamercolor{footline}{fg=gray}
+\setbeamertemplate{footline}{
+  \ifbeamer@plainframe
+  \else
+    \leavevmode\tiny%
+    \hspace*{1cm}%
+    \makebox[6cm][l]{\insertauthor}%
+    \makebox[4cm][l]{\insertdate}%
+      \hfill\insertframenumber/\inserttotalframenumber\hspace{5mm}%
+    \vspace{3mm}%
+  \fi
+}
+
+% use Strathclyde slide layout template
+\setbeamertemplate{background} {
+  \ifbeamer@plainframe
+  \else
+    \includegraphics[width=\paperwidth,height=\paperheight]{\backgroundfile}
+  \fi
+}
+
+\mode
+<all>
+  

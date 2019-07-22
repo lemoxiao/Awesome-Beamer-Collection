@@ -1,0 +1,860 @@
+%!TEX program = PdfLatex
+\documentclass[newPxFont,sthlmFooter]{beamer}
+\usetheme{sthlm}
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%        LOADING PACKAGES
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\usepackage[UTF8,space]{ctex}
+% 
+% Note: If you use ctex package to support chinese, please go to ctex.sty to comment the line 
+% "\ctex_hypersetup:n { colorlinks = ture }"  or set "colorlinks = false". Else you will see an ugly
+% toc, too ugly!!!   2015/12/12  by hongxing xia (xiahongxing@gmail.com)
+
+
+\usepackage{chronology}
+
+\renewcommand{\event}[3][e]{%
+  \pgfmathsetlength\xstop{(#2-\theyearstart)*\unit}%
+  \ifx #1e%
+    \draw[fill=black,draw=none,opacity=0.5]%
+      (\xstop, 0) circle (.2\unit)%
+      node[opacity=1,rotate=45,right=.2\unit] {#3};%
+  \else%
+    \pgfmathsetlength\xstart{(#1-\theyearstart)*\unit}%
+    \draw[fill=black,draw=none,opacity=0.5,rounded corners=.1\unit]%
+      (\xstart,-.1\unit) rectangle%
+      node[opacity=1,rotate=45,right=.2\unit] {#3} (\xstop,.1\unit);%
+  \fi}%
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%        BEAMER OPTIONS
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+%\setbeameroption{show notes}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%	PRESENTATION INFORMATION
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\title{随机几何在无线网络中的应用}
+\subtitle{Application of Stochastic Geometry in Wireless Networks}
+%\date{\small{\jobname}}
+%\date{\today}
+
+\author{\textbf{夏洪星}}
+\institute{\small{xiahongxing@gmail.com}}
+
+\date{\today}
+
+%\institute{ 西安电子科技大学 }
+
+\hypersetup{
+pdfauthor = {},
+pdfsubject = {},
+pdfkeywords = {},
+pdfmoddate= {D:\pdfdate},
+pdfcreator = {}
+}
+
+\begin{document}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%	TITLE PAGE
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\maketitle
+
+%\begin{frame}[plain]
+%	\titlepage
+%\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%	TABLE OF CONTENTS: OVERVIEW
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\section*{sthlm主题信息}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME:
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[c]{sthlm主题信息}
+
+{本主题修改自斯德哥尔摩stads国际学校的beamer主题}。
+
+\vspace{1em}
+
+\begin{alertblock}{字体所有权警告！}
+本主题所使用的Stockholms stad字体所有权并没有获得公共许可。 
+\end{alertblock}
+
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME:
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[c]{声明}
+sthlm主题用于支持斯德哥尔摩Stad学校的教学任务。 \\
+
+\vspace{1em}
+
+\begin{alertblock}{编译问题警告！}
+作者本人并不保证本主题在阁下的工作环境中无错误或警告地通过编译。 \\
+\vspace{1em}
+事实上，本人强烈建议您使用mtheme主题来代替sthlm主题。
+\end{alertblock}
+
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME:
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[c]{sthlm 基于 HSRM \& mTheme 主题构建}
+\vspace{-1cm}
+\begin{center}\begin{chronology}[2]{2012}{2018}{0.85\textwidth}
+\event[\decimaldate{1}{1}{2013}]{\decimaldate{22}{9}{2013}}{hsrm theme}
+\event[\decimaldate{22}{9}{2013}]{\decimaldate{22}{8}{2014}}{sthlm based on hsrm}
+\event[\decimaldate{22}{8}{2014}]{\decimaldate{27}{4}{2015}}{branding sthlm for Stockholms stad}
+\event[\decimaldate{27}{4}{2015}]{\decimaldate{30}{8}{2015}}{\cRed{sthlm based on hsrm \& mTheme}}
+\end{chronology}
+\end{center}
+
+
+sthlm主题依赖于Benjamin Weiss的 \alert{HSRM} 主题和 Matthias Vogelgesang 的\alert{mTheme}主题.
+
+\end{frame}
+
+\section*{概要}
+\begin{frame}{目录}
+% For longer presentations use hideallsubsections option
+\tableofcontents[hideallsubsections]
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%	SECTION: BACKGROUND
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\section{引言}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: What is Beamer?
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}{Beamer是啥?}
+
+\centerline {Beamer是用于生成漂亮演示文档的LaTex类.}
+
+\begin{block}{sthlm Beamer 主题:}
+\begin{itemize}
+	\item 使用utf8编码方式输入 $\dfrac{dy}{\cos(\theta)}=5x^4+x_0+\sqrt{5}$
+	\item 使用pdfLaTex编译 $\sqrt{4}+ \sqrt[3]{4}+66$
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%	SECTION: UPDATESS
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\section{更新日志}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME:
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[c]{0.6版更新日志}
+\alert{NeW} in version 0.6
+
+\begin{itemize}
+	\item \texttt{beamerthemesthlm.sty}
+	\begin{itemize}
+		\item 从header中去掉日志
+		\item 去掉垂直列对齐支持
+		\item 去掉列表包主持
+		\item 加入PxFont选项使用如下字体:
+		\begin{itemize}
+			\item newpxtext
+			\item newpxmath
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%	SECTION: STRUCTURE
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\section{颜色}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME:
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[containsverbatim,c]{颜色样式文件}
+
+The sthlm theme style file \texttt{beamerthemesthlm.sty} references the \texttt{beamercolorthemesthlm.sty} file for the theme colors.
+
+\vspace{1em}
+
+\begin{block}{Note:}
+The original sthlm color theme can now be used in place of Stockholm Stads color palette by including \newline \lstinline!\usecolortheme{sthlmv42}! in the preamble.
+\end{block}
+
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME:
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[c]{主配色方案}
+
+\begin{columns}[c]
+
+%	Color Box: Dark Grey
+\begin{column}{0.23\textwidth}
+\setbeamercolor{boxsthlmDarkGrey}{bg=\cnDarkGrey,fg=white}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmDarkGrey}
+\centering
+	\texttt{DarkGrey}\\
+	\vspace{1em}
+	\tiny{RGB:  51, 51 , 51} \\
+	\tiny{hex: \#333333}
+\end{beamercolorbox}
+
+\vspace{3em}
+
+%	Color Box: Grey
+\setbeamercolor{boxsthlmGrey}{bg=\cnGrey,fg=sthlmDarkGrey}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmGrey}
+\centering
+	\texttt{Grey}\\
+	\vspace{1em}
+	\tiny{RGB:  245,243,238} \\
+	\tiny{hex: \#f5f3ee}
+\end{beamercolorbox}
+
+\end{column}
+
+\begin{column}{0.23\textwidth}
+
+%	Color Box: Blue
+\setbeamercolor{boxsthlmBlue}{bg=\cnBlue,fg=white}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmBlue}
+\centering
+	\texttt{Blue}\\
+	\vspace{1em}
+	\tiny{RGB:  0,110,191} \\
+	\tiny{hex: \#006ebf}
+\end{beamercolorbox}
+
+\vspace{3em}
+
+%	Color Box: Light Blue
+\setbeamercolor{boxsthlmLightBlue}{bg=\cnLightBlue,fg=sthlmDarkGrey}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmLightBlue}
+\centering
+	\texttt{Light Blue}\\
+	\vspace{1em}
+	\tiny{RGB:  214,237,252} \\
+	\tiny{hex: \#d6edfc}
+\end{beamercolorbox}
+\end{column}
+
+\begin{column}{0.23\textwidth}
+
+%	Color Box: Red
+\setbeamercolor{boxsthlmRed}{bg=\cnRed,fg=white}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmRed}
+\centering
+	\texttt{Red}\\
+	\vspace{1em}
+	\tiny{RGB:  196,0,100} \\
+	\tiny{hex: \#c40064}
+\end{beamercolorbox}
+
+\vspace{3em}
+
+%	Color Box: Light Red
+\setbeamercolor{boxsthlmLightRed}{bg=\cnLightRed,fg=sthlmDarkGrey}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmLightRed}
+\centering
+	\texttt{Light Red}\\
+	\vspace{1em}
+	\tiny{RGB:  254,222,237} \\
+	\tiny{hex: \#fedeed}
+\end{beamercolorbox}
+\end{column}
+
+
+\begin{column}{0.23\textwidth}
+%	Color Box: Green
+\setbeamercolor{boxsthlmGreen}{bg=\cnGreen,fg=white}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmGreen}
+\centering
+	\texttt{Green}\\
+	\vspace{1em}
+	\tiny{RGB:  0,134,127} \\
+	\tiny{hex: \#00867f}
+\end{beamercolorbox}
+
+\vspace{3em}
+
+%	Color Box: Light Green
+\setbeamercolor{boxsthlmLightGreen}{bg=\cnLightGreen,fg=sthlmDarkGrey}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmLightGreen}
+\centering
+	\texttt{Light Green}\\
+	\vspace{1em}
+	\tiny{RGB:  0,134,127} \\
+	\tiny{hex: \#d5f7f4}
+\end{beamercolorbox}
+\end{column}
+\end{columns}
+
+
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	Secondary Colors:
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[c]{候选配色方案}
+
+\begin{columns}[c]
+
+%	Color Box: Orange
+\begin{column}{0.23\textwidth}
+\setbeamercolor{boxsthlmOrange}{bg=\cnOrange,fg=white}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmOrange}
+\centering
+	\texttt{Orange}\\
+	\vspace{1em}
+	\tiny{RGB:  221,74,44} \\
+	\tiny{hex: \#dd4a2c}
+\end{beamercolorbox}
+
+\vspace{3em}
+
+%	Color Box: Light Orange
+\setbeamercolor{boxsthlmLightOrange}{bg=\cnLightOrange,fg=sthlmDarkGrey}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmLightOrange}
+\centering
+	\texttt{Light Orange}\\
+	\vspace{1em}
+	\tiny{RGB:  255,215,210} \\
+	\tiny{hex: \#ffd7d2}
+\end{beamercolorbox}
+
+\end{column}
+
+%	Color Box: Purple
+\begin{column}{0.23\textwidth}
+\setbeamercolor{boxsthlmPurple}{bg=\cnPurple,fg=white}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmPurple}
+\centering
+	\texttt{Purple}\\
+	\vspace{1em}
+	\tiny{RGB:  93,35,125} \\
+	\tiny{hex: \#5d237d}
+\end{beamercolorbox}
+
+\vspace{3em}
+
+%	Color Box: Light Purple
+\setbeamercolor{boxsthlmLightPurple}{bg=\cnLightPurple,fg=sthlmDarkGrey}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmLightPurple}
+\centering
+	\texttt{Light Purple}\\
+	\vspace{1em}
+	\tiny{RGB:  241,230,252} \\
+	\tiny{hex: \#f1e6fc}
+\end{beamercolorbox}
+\end{column}
+
+\begin{column}{0.23\textwidth}
+
+%	Color Box: Yellow
+\setbeamercolor{boxsthlmYellow}{bg=\cnYellow,fg=white}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmYellow}
+\centering
+	\texttt{Yellow}\\
+	\vspace{1em}
+	\tiny{RGB:  252,191,10} \\
+	\tiny{hex: \#fcbf0a}
+\end{beamercolorbox}
+
+\vspace{3em}
+
+%	Color Box: BLANK
+\setbeamercolor{boxsthlmBlank}{bg=\cnGrey, fg=\cnGrey}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmBlank}
+\centering
+	\texttt{Yellow}\\
+	\vspace{1em}
+	\tiny{RGB} \\
+	\tiny{hex}
+\end{beamercolorbox}
+\end{column}
+
+
+\begin{column}{0.23\textwidth}
+%	Color Box: issr Blue
+\setbeamercolor{boxsthlmissrBlue}{bg=issrBlue,fg=white}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmissrBlue}
+\centering
+	\texttt{ISSR Blue}\\
+	\vspace{1em}
+	\tiny{RGB:  0,111,174} \\
+	\tiny{hex: \#0066cc}
+\end{beamercolorbox}
+
+\vspace{3em}
+
+%	Color Box: issr Grey
+\setbeamercolor{boxsthlmissrGrey}{bg=issrGrey,fg=sthlmDarkGrey}
+\begin{beamercolorbox}[wd=\linewidth,ht=10ex,dp=3ex]{boxsthlmissrGrey}
+\centering
+	\texttt{ISSR Grey}\\
+	\vspace{1em}
+	\tiny{RGB:  167,169,172} \\
+	\tiny{hex: \#999999}
+\end{beamercolorbox}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Theme Package Requirements
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[containsverbatim]{所需要的主题包}
+
+This theme requires that the following packages are installed:
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item \lstinline!{beamer}!
+\item \lstinline!{calc}!
+\item \lstinline!{eso-pic}!
+\item \lstinline![utf8]{inputenc}!
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item \lstinline!{listings}!
+\item \lstinline!{pgf}!
+\item \lstinline!{xcolor}!
+\end{itemize}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Theme Package Requirements
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\begingroup
+\setbeamercolor{background canvas}{bg=\cnLightRed}
+\begin{frame}[containsverbatim]{帧背景颜色}
+
+You can change the color of a frame background by placing the frame within a group:
+
+\begin{sthlmLatex}
+
+\begingroup
+\setbeamercolor{background canvas}{bg=sthlmLightRed}
+\begin{frame}
+	% Your frame content goes here
+\end{frame}
+\endgroup
+\end{sthlmLatex}
+
+\end{frame}
+\endgroup
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Theme Package Requirements
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\begingroup
+\setbeamercolor{background canvas}{bg=sthlmBlue}
+\begin{frame}[plain,containsverbatim]
+
+也许你只是需要一个空白的蓝色底页面，毛门贴！
+
+\begin{sthlmLatex}
+
+\begingroup
+\setbeamercolor{background canvas}{bg=sthlmBlue}
+\begin[plain]{frame}
+	% Your frame content goes here
+\end{frame}
+\endgroup
+\end{sthlmLatex}
+
+\end{frame}
+\endgroup
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Theme Fonts
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[containsverbatim]{主题字体}
+
+To use the newpx fonts option you need the following packages:
+
+\begin{itemize}
+	\item \verb|{newpxtext}|
+	\item \verb|{newpxmath}|
+	\item \verb|[T1]{fontenc}|
+\end{itemize}
+
+To enable the \verb|newpxtext| and \verb|newpxmath| fonts include the \alert{PxFont} class option.\\
+
+\begin{itemize}
+	\item \verb|\documentclass[compress,PxFont]{beamer}|
+\end{itemize}
+
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Theme Options
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}{Theme Options}
+\begin{table}[]
+	\begin{tabularx}{\linewidth}{l>{\raggedright}X}
+		\toprule
+		\textbf{Option}			& \textbf{Description} \tabularnewline
+		\midrule
+		\texttt{noprogressbar} & Frame Title progress bar will be suppressed \tabularnewline
+		\texttt{nosectionpages} & Section pages will be suppressed.\tabularnewline
+		\texttt{nopagenumbers} & Page Numbers will be suppresed \tabularnewline
+		\texttt{newPxFont} & newpxtext and newpxtext fonts will be used (pdfLaTeX) \tabularnewline
+		\texttt{sthlmStadFont} & Proprietary Stockholms Stad fonts will be used (XeTeX) \tabularnewline
+		\bottomrule
+	\end{tabularx}
+	\label{tab:options}
+\end{table}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Blocks
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[containsverbatim]{Blocks}
+
+\begin{block}{Block Title Here}
+	\begin{itemize}
+		\item point 1
+		\item point 2
+	\end{itemize}
+\end{block}
+\begin{verbatim}
+\begin{block}{Block Title Here}
+    \begin{itemize}
+        \item point 1
+        \item point 2
+    \end{itemize}
+\end{block}
+\end{verbatim}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Additional Blocks
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[containsverbatim]{额外的块}
+\begin{alertblock}{Alert Block}
+	Highlight important information.
+\end{alertblock}
+\begin{itemize}
+    \item one
+    \item two
+\end{itemize}
+
+\begin{sthlmLatex}
+\begin{alertblock}{Alert Block}
+Highlight important information.
+\end{alertblock}
+\end{sthlmLatex}
+
+
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Additional Blocks
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[containsverbatim]{Additional Blocks}
+
+\begin{exampleblock}{Example Block}
+	Examples can be good.
+\end{exampleblock}
+\begin{verbatim}
+\begin{exampleblock}{Example Block}
+    Examples can be good
+\end{exampleblock}
+\end{verbatim}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Blocks
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[containsverbatim]{自定义块}
+\begingroup
+\setbeamercolor{block title}{fg=white, bg=sthlmPurple}
+\setbeamercolor{block body}{bg=sthlmLightPurple}
+\begin{block}{Purple customization}
+	Using the theme colors to generate colored blocks.
+\end{block}
+\endgroup
+\begin{verbatim}
+\begingroup
+\setbeamercolor{block title}{fg=white, bg=sthlmPurple}
+\setbeamercolor{block body}{bg=sthlmLightPurple}
+\begin{block}{Custom Blocks}
+    Using the theme colors to generate colored blocks.
+\end{block}
+\endgroup
+\end{verbatim}
+\end{frame}
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%	SECTION: ADDITIONAL FEATURES
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\section{特点}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Images
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}{带版权信息的图片}
+	\begin{figure}
+		\centering
+		\includegraphicscopyright[width=0.75\linewidth]{photo.jpg}{版权属于 \href{http://netzlemming.deviantart.com/}{Netzlemming}, \href{http://creativecommons.org/licenses/by-nc/3.0/}{CC BY-NC 3.0 License}}
+	\end{figure}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Tables
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}{表格}
+\begin{table}[]
+	\caption{ 窗函数选择及其性质 }
+	\begin{tabular}[]{lrrr}
+		\toprule
+		\textbf{Window}			& \multicolumn{1}{c}{\textbf{First side lobe}}
+		                    & \multicolumn{1}{c}{\textbf{3\,dB bandwidth}}
+		                    & \multicolumn{1}{c}{\textbf{Roll-off}} \\
+		\midrule
+		Rectangular				& 13.2\,dB	& 0.886\,Hz/bin	& 6\,dB/oct		\\[0.25em]
+		Triangular				& 26.4\,dB	& 1.276\,Hz/bin	& 12\,dB/oct	\\[0.25em]
+		Hann					& 31.0\,dB	& 1.442\,Hz/bin	& 18\,dB/oct	\\[0.25em]
+		Hamming					& 41.0\,dB	& 1.300\,Hz/bin	& 6\,dB/oct		\\
+		\bottomrule
+	\end{tabular}
+	\label{tab:WindowFunctions}
+\end{table}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Formulas
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}{方程}
+\begin{block}{傅里叶积分}
+\[
+F(\textrm{j}\omega) = \displaystyle \int \limits_{-\infty}^{\infty} \! f(t)\cdot\textrm{e}^{-\textrm{j}\omega t}  \, \mathrm{d} x
+\]
+\end{block}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: PGFPlots
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}{PGFPlots Bar 画图示例}
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+		\begin{axis}[
+		    ybar,
+		    enlarge x limits=0.15,
+		    legend style={at={(-.5,0.5)},
+		      anchor=north,legend columns=1},
+		    ylabel={\% 学生比例},
+		    symbolic x coords={A, B, C, D, E, F, DNF},
+		    xtick=data,
+		     bar width=2mm,
+		     width=0.7\textwidth
+		    ]
+		    \legend{2012, 2013};
+		    % Spring 2012 results
+			\addplot[fill=sthlmGrey]  coordinates {(A,0) (B,0) (C,3.85) (D,23.07) (E,43.31) (F,30.77) (DNF,0.00)};
+			% Spring 2013 results
+			\addplot[fill=sthlmBlue]   coordinates {(A,0) (B,3.70) (C,22.22) (D,22.22) (E,40.74) (F,3.70) (DNF,7.41)};
+		\end{axis}
+		\end{tikzpicture}
+		\caption{ 去年的兼容性提高情况 }
+		\end{figure}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%	SECTION: TUTORIAL
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\section{教程}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Presentation Structure
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[containsverbatim]{演示结构}
+
+A section page will be generated and the section name included in the presentation header for each section of the presentation with the current section being emphasized.  If you include subsections in your presentation, then a small block will appear under the section name in the header for each frame.  Once a frame has been viewed it will turn green.
+
+It's worth noting that a frame can make up multiple slides.
+
+\begin{verbatim}
+\section{Main Section}
+\subsection{Main Subsection}
+\begin{frame}
+\frametitle{Presentation Stucture}
+% Frame Contents Here
+\end{frame}
+\end{verbatim}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Table of Contents
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[containsverbatim]{目录}
+包含演示的节标题
+\begin{verbatim}
+\maketitle
+\end{verbatim}
+对于较长的演示，请使用紧凑的内容目录。
+\begin{verbatim}
+\begin{frame}{Overview}
+    \tableofcontents[hideallsubsections]
+\end{frame}
+\end{verbatim}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Quotations
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}[containsverbatim]{引用}
+任何时候您都可以用定义来高亮文本:
+\begin{itemize}
+	\item \alert{这尤其重要！}
+\end{itemize}
+
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Notes
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}{笔记}
+
+您可以用不同的方法来呈现您的演示.
+
+\begin{itemize}
+\item Splitshow (Mac OS X)\\\url{https://code.google.com/p/splitshow/}
+\item pdf-presenter (Windows)\\\url{https://code.google.com/p/pdf-presenter/}
+\end{itemize}
+\end{frame}
+
+\note{
+Let me include a note for this particular slide.
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	FRAME: Multiple Columns
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}{多列}
+\begin{columns}
+\begin{column}{.48\linewidth}
+		这是第一列的内容.
+\end{column}
+\begin{column}{.48\linewidth}
+		\begin{itemize}
+        	\item 要点一
+        	\item 要点二
+		\end{itemize}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{参考文献}
+	\begin{thebibliography}{10}
+
+	\beamertemplatebookbibitems
+	\bibitem{Oppenheim2009}
+	Alan V. Oppenheim
+	\newblock Discrete - Time Signal Processing
+	\newblock Prentice Hall Press, 2009
+
+	\beamertemplatearticlebibitems
+	\bibitem{EBU2011}
+	European Broadcasting Union
+	\newblock Specification of the Broadcast Wave Format (BWF)
+	\newblock 2011
+
+  \end{thebibliography}
+\end{frame}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%
+%	SECTION: Conclusion
+%
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\begin{frame}{关于}
+
+This sthlm beamer theme is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.\\
+
+If you have any questions or comments
+\begin{itemize}
+	\item \url{mark@hendryolson.com}
+\end{itemize}
+\end{frame}
+\end{document}

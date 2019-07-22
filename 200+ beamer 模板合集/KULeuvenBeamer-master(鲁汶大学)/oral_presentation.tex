@@ -1,0 +1,161 @@
+\documentclass[11pt,t]{beamer}
+
+% packages
+\usepackage[english]{babel}
+%\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[backend=biber]{biblatex}
+
+
+\input{tex/commands}
+
+\addbibresource{literature.bib}   % bibtex file
+
+
+\mode<presentation> {\usetheme{kuleuven}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Title of the presentation can be very long without any problems, even longer should be possible.}
+\subtitle{subtitle}
+\author{Author1\inst{1} \and Author2\inst{2}}
+\institute{
+	\inst{1}Institute 1 \and
+	\inst{2}Institute 2
+}
+\date{Februari 2, 2016}
+%pdf metadata
+	\subject{KU Leuven's LaTeX template for oral presentation}
+	\keywords{KU Leuven, LaTeX template, beamer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% title page
+	{
+	\setbeamertemplate{footline}{}
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Outline}
+	\vskip 5mm
+	\hfill	{\large \parbox{.95\textwidth}{\tableofcontents[hideallsubsections]}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Slides with text only}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Itemize and enumerate}
+	\begin{itemize}
+		\item First item
+			\begin{itemize}
+				\item first subitem
+				\item second subitem
+			\end{itemize}
+		\item Second item
+			\begin{itemize}
+				\item first subitem
+				\item second subitem
+			\end{itemize}
+	\end{itemize}
+	
+	\begin{enumerate}
+		\item First item
+			\begin{itemize}
+				\item first subitem
+				\item second subitem
+			\end{itemize}
+		\item Second item
+			\begin{enumerate}
+				\item first subitem
+				\item second subitem
+			\end{enumerate}
+	\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Double--column slide}
+	\begin{columns}[t]
+		\begin{column}{.5\textwidth}
+			This is the top of the first column.	
+		\end{column}
+		\begin{column}{.5\textwidth}
+			This is the top of the second column.
+		\end{column}
+	\end{columns}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Fancy text and equations}
+	\begin{center}
+		\begin{kulbox}{Box title}
+			This is a kulbox
+		\end{kulbox}
+		\begin{kulbox}{}
+			This is a kulbox without a title
+		\end{kulbox}
+	\end{center}
+	\begin{theorem}
+		There exists an infinite set.
+	\end{theorem}
+	\begin{proof}
+		This follows from the axiom of infinity.
+	\end{proof}
+	\vspace{4mm}
+	\begin{equation}
+		M \ddot{q} + \mathsf{\Phi}_{q}^T \lambda = Q
+	\end{equation}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Slides with graphics and text}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Graphics and text side by side}
+	\fboxsep=0pt
+	\noindent%
+	\begin{minipage}[b]{0.39\linewidth}
+		\centering
+		\includegraphics[width=.5\textwidth,natwidth=265,natheight=314]{fig/Tux.png}
+	\end{minipage}%
+	\hfill%	
+	\begin{minipage}[b]{0.59\linewidth}
+		Some text about the figure here or some other things
+		\begin{itemize}
+			\item first subitem
+			\item second subitem
+		\end{itemize}
+	\end{minipage}%
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Figures with caption}
+	\begin{figure}
+		\centering
+		\includegraphics[width=.5\textheight,natwidth=265,natheight=314]{fig/Tux.png}
+		\caption{An illustrative caption for the figure}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Overlayed graphics}
+	\begin{textblock}{4}(1,2)
+		\includegraphics[width=4cm,natwidth=265,natheight=314]{fig/Tux.png}
+    \end{textblock}
+    \begin{textblock}{4}(4,3)
+		\includegraphics[width=4cm,natwidth=265,natheight=314]{fig/Tux.png}
+    \end{textblock}
+    \begin{textblock}{4}(7,4)
+		\includegraphics[width=4cm,natwidth=265,natheight=314]{fig/Tux.png}
+    \end{textblock}
+    \begin{textblock}{4}(10,5)
+		\includegraphics[width=4cm,natwidth=265,natheight=314]{fig/Tux.png}
+    \end{textblock}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Further reading}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Further reading}
+	\begin{itemize}
+		\item BEAMER class user guide \footfullcite{Beamer2013}
+	\end{itemize}
+\end{frame}
+
+\end{document}

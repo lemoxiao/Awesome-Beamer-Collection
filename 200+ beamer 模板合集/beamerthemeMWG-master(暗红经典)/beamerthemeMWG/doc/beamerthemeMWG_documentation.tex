@@ -1,0 +1,332 @@
+%%	This is file 'beamerthemeMWG_documentation.tex', Version 2017-07-31
+%%	Copyright 2017 Sebastian Friedl <sfr682k@t-online.de>
+%% 
+%%	This work may be distributed and/or modified under the conditions of the LaTeX Project
+%%	Public License, either version 1.3c of this license or (at your option) any later version.
+%%	The latest version of this license is available at
+%%		http://www.latex-project.org/lppl.txt
+%%	and version 1.3c or later is part of all distributions of LaTeX version 2008-05-04 or later.
+%%
+%%	This work has the LPPL maintenace status 'maintained'.
+%%	The current maintainer of this work is Sebastian Friedl.
+%%
+%%	This work consists of the files beamerthemeMWG.sty and beamerthemeMWG_documentation.tex
+%%
+%%	---------------------------------------------------------------------------------------------------------------------------------------------
+%%
+%%	The MWG beamer theme is considered as a beamertheme suitable for every possible use.
+%%	It uses the red color and the logo of the Markgräfin Wilhelmine Gymnasium, Bayreuth.
+%%
+%%	I created the theme for personal use while being student there.
+%%
+%%	The MWG logo has been converted to a path from a *.png file with Inkscape and exported to TikZ code using the tikz-export library
+%%	(https://github.com/kjellmf/svg2tikz).
+%%	Due to the complexity of the logo, the TikZ source got quite huge; therefore, it takes a bit long to compile it.
+%%
+%%	---------------------------------------------------------------------------------------------------------------------------------------------
+%%
+%%	Please report bugs and other problems as well as suggestions for improvements to my email address (sfr682k@t-online.de).
+%%
+%%	---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+% !TeX spellcheck = en_US
+
+% !TeX document-id = {b3b4668f-f5d8-4010-ac4e-2eb3098d15f4}
+% !TeX TXS-program:compile=txs:///pdflatex/[--shell-escape]
+
+\documentclass[11pt]{ltxdoc}
+\usepackage[utf8]{inputenc}
+
+\usepackage[english]{babel}
+
+\usepackage{amsmath,amssymb}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{hologo}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage{pgf}
+\usepackage{ragged2e}
+\usepackage{textcomp}
+\usepackage{tikz}
+
+\usepackage[charter]{mathdesign}
+\usepackage[osf]{XCharter}
+\usepackage[osf, scale=.92]{roboto}
+\usepackage[defaultmono, scale=.9]{droidmono}
+
+\parindent 0pt
+
+% The color of the MWG logo
+\definecolor{MWGRed}{RGB}{100,29,27}
+
+\usepackage[left=4.50cm,right=2.75cm,top=3.25cm,bottom=2.75cm,nohead]{geometry}
+
+\hyphenation{con-fi-gu-ra-tion ge-ne-ral ge-ne-ra-ted wri-ting}
+
+\title{The MWG \LaTeX\ beamer theme}
+\author{Sebastian Friedl \\ \href{mailto:sfr682k@t-online.de}{\texttt{sfr682k@t-online.de}}}
+\date{July 31, 2017}
+
+\hypersetup{pdftitle={The MWG \LaTeX\ beamer theme},pdfauthor={Sebastian Friedl}}
+
+\begin{document}
+	\maketitle
+	\thispagestyle{empty}
+	
+
+	\begin{center} \itshape
+		Dedicated to my teachers and fellow students in year 11 \\[1.25\smallskipamount]
+		They showed me the beauty of \LaTeX \\
+		as well as the several flaws of MS Office documents
+	\end{center}
+	
+	\medskip
+	\begin{abstract}
+		\hspace{-1.5em}%
+		The MWG beamer theme is considered as a beamertheme suitable for every possible use. It uses the red color and the logo of the Markgräfin Wilhelmine Gymnasium, Bayreuth.
+	\end{abstract}
+	
+
+	\tableofcontents
+
+	\clearpage
+	
+	\subsection*{Important note}
+	\addcontentsline{toc}{subsection}{Important note}
+	Since the MWG logo included in the footline by default consists of a Ti\textit{k}Z source approximately 5\,850~lines long, presentations may compile very long time. This can be very nasty, especially during the process of creating the presentation. \\
+	You can avoid this by passing the \texttt{draft} option which removes the logo \emph{temporary}. \\
+	Besides that, many theme options applicable may \emph{permanently} remove or replace the logo. See section \ref{themeoptions} for further details.
+	
+	
+	\subsection*{Dependencies and other requirements}
+	\addcontentsline{toc}{subsection}{Dependencies and other requirements}
+	The MWG theme requires \LaTeXe\ and -- in addition to the ones requested by the \texttt{beamer} class -- following packages:
+	
+	\medskip
+	\DescribeMacro{appendixnumberbeamer}
+	A simple solution for appendix frames not being calculated into the total number of frames
+	
+	\medskip
+	\DescribeMacro{etoolbox}
+	Provides access on \hologo{eTeX} primitives
+	
+    \medskip
+	\DescribeMacro{tikz}
+    The frontend to \texttt{pgf} used for drawing background and logo
+	
+	
+	\subsection*{Call for cooperation}
+	\addcontentsline{toc}{subsection}{Call for cooperation}
+	Please report bugs and other problems as well as suggestions for improvements to my email address (\href{mailto:sfr682k@t-online.de}{\texttt{sfr682k@t-online.de}}).
+	
+	
+	\subsection*{Style sample}
+	\addcontentsline{toc}{subsection}{Style sample}
+	\begin{figure} \centering
+		\pgfimage[width=0.465\textwidth,page=1]{sample-beamer-presentation_MWG}~~~\pgfimage[width=0.465\textwidth,page=2]{sample-beamer-presentation_MWG} \\[.5em]
+		\pgfimage[width=0.465\textwidth,page=3]{sample-beamer-presentation_MWG}~~~\pgfimage[width=0.465\textwidth,page=4]{sample-beamer-presentation_MWG} \\[.5em]
+		\pgfimage[width=0.465\textwidth,page=5]{sample-beamer-presentation_MWG}~~~\pgfimage[width=0.465\textwidth,page=6]{sample-beamer-presentation_MWG} \\[.5em]
+		\pgfimage[width=0.465\textwidth,page=7]{sample-beamer-presentation_MWG}~~~\pgfimage[width=0.465\textwidth,page=8]{sample-beamer-presentation_MWG}
+		
+		\caption{Style sample of the MWG theme}
+		\label{stylesample}
+	\end{figure}
+	
+	The style sample shown in figure \ref{stylesample} was made using the sample presentation \enquote{Writing presentations in \LaTeX\ beamer?} created by Sebastian Friedl\footnote{Source available on \href{https://github.com/SFr682k/sample-latex-beamer-presentation}{GitHub} (\textit{WTFPL})}.
+	
+	
+	\subsection*{License}
+	\begin{small}
+		\addcontentsline{toc}{subsection}{License}
+		\textcopyright\ 2017 Sebastian Friedl
+		
+		\smallskip
+		This work may be distributed and/or modified under the conditions of the \LaTeX\ Project Public License, either version 1.3c of this license or (at your option) any later version.
+		
+		\smallskip
+		The latest version of this license is available at \url{http://www.latex-project.org/lppl.txt} and version 1.3c or later is part of all distributions of \LaTeX\ version 2008-05-04 or later.
+	
+		\smallskip
+		This work has the LPPL maintenace status 'maintained'. The current maintainer of this work is Sebastian Friedl. \\
+		This work consists of the following files:
+		\begin{itemize} \itemsep 0pt
+			\item \texttt{beamerthemeMWG.sty} and
+			\item \texttt{beamerthemeMWG\_documentation.tex}
+		\end{itemize}
+	\end{small}
+	
+	\clearpage
+	
+	
+	
+	
+	% BEGIN OF DOCUMENTATION PART
+	
+	\section{Using the theme}
+	For using the theme you have to copy the file \texttt{beamerthemeMWG.sty} into the folder containing the master file of your presentation. Advanced users may also install the style file on their local system. \par
+	After that, simply use the command \mintinline{LaTeX}{\usetheme{MWG}} to set the theme used in your presentation to the MWG theme.
+
+	
+	\section{Theme options}				\label{themeoptions}
+	Passing some options to the theme influences the way it behaves. \\
+	Syntax: \ \ \mintinline{LaTeX}{\usetheme[<option1>, <option2>, ...]{MWG}}
+	
+	\subsubsection*{Available options:}
+	\DescribeMacro{nologo}
+	No logos will be shown anywhere on the frame
+		
+	\medskip
+	\DescribeMacro{draft}
+	Prevents placement of the logo in the footline but keeps reserving the space. \\
+	In contrast to the \texttt{draft} option of the \texttt{beamer} class, the other contents of the frame still stay the same and remain displayed.
+    
+    \medskip
+    \DescribeMacro{externallogo}
+    Removes the logo from the footline and the logo specified with the \mintinline{LaTeX}{\logo} command will be shown on the right--hand side directly above the footline
+    
+    \medskip
+	\DescribeMacro{nosmallcaps}
+    Apply this option if the used fonts don't provide a small caps shape
+    
+    \medskip
+    \DescribeMacro{notoc}
+    This option prevents the navigation being placed in the headline, resulting in an empty headline. Use the \texttt{noheadline} option for removing the complete headline.
+    
+    \medskip
+    \DescribeMacro{noheadline}
+    Removes the headline
+    
+    \medskip
+	\DescribeMacro{smallfootline}
+    Uses a footline half the size of the default footline
+
+
+	\section{Features}
+	There are some features allowing configuration and personalization of the MWG theme as well as easier writing the presentation's source.
+	
+	\subsection{Title graphic}
+	The theme is capable of showing a graphic on the title-- and other structure frames. The title graphic used by the theme is declared with \mintinline{LaTeX}{\titlegraphic{<graphic>}}, where \texttt{<graphic>} represents a command like \mintinline{LaTeX}{\includegraphics} used for loading the title graphic itself.
+	
+	\smallskip
+	\textit{Note:} \\
+	The title and structure frames will have a slightly different layout when a title graphic is defined
+	
+	
+	\subsection{Structure frames}
+	When using the MWG theme there will be a separation frame generated when the \mintinline{LaTeX}{\appendix} command is set. \\
+	In addition to that, other structure frames may be inserted -- this can happen either manually or automatically.
+	
+	\subsubsection*{Manual insertion of structure frames}
+	\mintinline{LaTeX}{\partframe} -- a frame showing the current part \\
+	\mintinline{LaTeX}{\sectionframe} -- a frame showing the current section \\
+	\mintinline{LaTeX}{\subsectionframe} -- a frame showing the current section and subsection
+	
+	\medskip
+	The commands can be used inside as well as outside a frame. \\
+	If a command is used \textit{inside} a frame this frame will be used; please note that the elements of the structure frame may cover the other content placed in this frame. \\
+	If a command is used \textit{outside} a frame the theme will generate one; this frame won't be calculated into the total number of frames and there won't be a frame number shown in the footline.
+	
+	
+	\subsubsection*{Automatically insertion of structure frames}
+	Commands activating automatically insertion: \\[\smallskipamount]\nopagebreak
+	\begin{tabular}{rl}
+		part frames & \mintinline{LaTeX}{\activatepartframes} \\
+		section frames & \mintinline{LaTeX}{\activatesectionframes} \\
+		subsection frames & \mintinline{LaTeX}{\activatesubsectionframes}
+	\end{tabular}
+	
+	\bigskip
+	Commands deactivating automatically insertion: \\[\smallskipamount]\nopagebreak
+	\begin{tabular}{rl}
+		part frames & \mintinline{LaTeX}{\deactivatepartframes} \\
+		section frames & \mintinline{LaTeX}{\deactivatesectionframes} \\
+		subsection frames & \mintinline{LaTeX}{\deactivatesubsectionframes}
+	\end{tabular}
+	
+	\bigskip
+	It is recommended to deactivate the automatically insertion of part frames before using the \mintinline{LaTex}{\appendix} command; otherwise there will be two separation frames generated.
+	
+	
+	\section{Appropriate fonts}
+	Many elements of the MWG theme use the \textsc{small caps} font shape. \\
+	This can lead to some unwanted results \textit{(like sans--serif text mixed up with serif small caps)} when the default \LaTeX\ document font, Computer Modern is used. \\
+	On the other hand, the theme does not require any font packages, since there may be some problems with engines like \hologo{XeLaTeX} or \hologo{LuaLaTeX}. \\
+	Therefore, you should load some font packages on your own.
+	
+	\smallskip
+	In following, recommended combinations are listed. \\
+	For this documentation, the Charter \& \textsf{Roboto} combination is used.
+	
+	
+	\subsection{Font combinations using \LaTeX\ packages}
+	\raggedleft
+	\paragraph*{Charter \& Roboto} \hfill
+	\textit{supports:} \LaTeX, \hologo{pdfLaTeX}, $\sqrt{math}$ \nopagebreak\vspace{-.75em}
+	\begin{minted}[gobble=2, tabsize=4]{LaTeX}
+		\usepackage[charter]{mathdesign}
+		\usepackage[osf]{XCharter}
+		\usepackage[osf,scale=.92]{roboto}
+		\renewcommand{\familydefault}{\sfdefault}
+	\end{minted}
+	
+	\paragraph*{Charter \& Droid Sans} \hfill
+	\textit{supports:} \LaTeX, \hologo{pdfLaTeX}, \hologo{XeLaTeX}, \hologo{LuaLaTeX}, $\sqrt{math}$ \\
+	\textit{doesn't support:} \textsc{\textsf{sans--serif smallcaps}} \nopagebreak\vspace{-2em}
+	\begin{minted}[gobble=2, tabsize=4]{LaTeX}
+		\usepackage[charter]{mathdesign}
+		\usepackage[scale=.85,defaultsans]{droidsans}
+	\end{minted}
+	
+	\paragraph*{Utopia \& Source Sans Pro} \hfill
+	\textit{supports:} \LaTeX, \hologo{pdfLaTeX}, $\sqrt{math}$ \\
+	\textit{doesn't support:} \textsc{\textsf{sans--serif smallcaps}} \nopagebreak\vspace{-2em}
+	\begin{minted}[gobble=2, tabsize=4]{LaTeX}
+		\usepackage[utopia]{mathdesign}
+		\usepackage[scale=.95]{sourcesanspro}	
+	\end{minted}
+	
+	\paragraph*{Times \& Helvetica} \hfill
+	\textit{supports:} \LaTeX, \hologo{pdfLaTeX}, \hologo{XeLaTeX}, \hologo{LuaLaTeX}, $\sqrt{math}$ \nopagebreak\vspace{-.75em}
+	\begin{minted}[gobble=2, tabsize=4]{LaTeX}
+		\usepackage[slantedGreek]{mathptmx}
+		\usepackage[scaled=.92]{helvet}
+	\end{minted}
+
+	
+	\justifying
+	\subsection{Font combinations for \hologo{XeLaTeX} and \hologo{LuaLaTeX} using \texttt{fontspec}}
+	Please check whether these fonts are installed on your local system before using this font combinations.
+	The \texttt{fontspec} and \texttt{unicode-math} packages both require the document being compiled with \hologo{XeLaTeX} or \hologo{LuaLaTeX}.
+	
+	\raggedleft
+	\paragraph*{Cambria, Calibri \& Consolas} \hfill
+	\textit{supports:} \hologo{XeLaTeX}, \hologo{LuaLaTeX}, $\sqrt{math}$ \nopagebreak\vspace{-.75em}
+	\begin{minted}[gobble=2, tabsize=4]{LaTeX}
+		\usepackage{fontspec}
+		\usepackage{unicode-math}
+		\setmainfont{Cambria}
+		\setmathfont{Cambria Math}
+		\setsansfont[Scale=MatchLowercase]{Calibri}
+		\setmonofont[Scale=MatchLowercase]{Consolas}
+	\end{minted}
+	\vspace{-.75em}
+	Load the fonts with the \texttt{Numbers=OldStyle} option to obtain old style figures  \hfill \hspace{.01pt}
+	
+	\paragraph*{Constantia, Corbel \& Consolas} \hfill
+	\textit{supports:} \hologo{XeLaTeX}, \hologo{LuaLaTeX} \nopagebreak\vspace{-.75em}
+	\begin{minted}[gobble=2, tabsize=4]{LaTeX}
+		\usepackage{fontspec}
+		\setmainfont{Constantia}
+		\setsansfont[Scale=MatchLowercase]{Corbel}
+		\setmonofont[Numbers=OldStyle,Scale=MatchLowercase]{Consolas}
+	\end{minted}
+	
+	
+	\justifying
+	\vfill
+	\thispagestyle{empty}
+	\listoffigures
+\end{document}

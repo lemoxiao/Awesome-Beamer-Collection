@@ -1,0 +1,112 @@
+\documentclass{beamer}
+
+\usetheme[menuwidth={0.3\paperwidth}]{erlangen}
+\setbeamercovered{transparent=20}
+
+\begin{document}
+
+\title[FAU Beamer Theme]{Beamer Presentation Example} 
+\subtitle{Theme for the Technical Faculty}
+\author{Alexander Zhou} 
+\date{\today} 
+\institute{FAU Technical Faculty\\ 
+  \vspace{-0.2em}{\small Separation Science \& Technology} }
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+
+\begin{frame}{Table of contents}
+  \tableofcontents
+\end{frame}
+
+
+\section{Example} 
+\begin{frame}{Title} 
+  This is an example.
+\end{frame}
+
+
+\section{Lists} 
+\subsection{Itemize}
+
+\begin{frame}{Itemize}
+  \begin{itemize}
+    \item Lorem ; \pause
+    \item Ipsum ;
+    \item Dolor : \pause
+      \begin{itemize}
+        \item Lorem,
+        \item Ipsum ;
+      \end{itemize}
+    \item Sit amet.
+  \end{itemize} 
+\end{frame}
+
+
+\subsection{Enumerate}
+\begin{frame}{Enumerate}
+\begin{columns}
+  \begin{column}{0.49\paperwidth}
+      \begin{enumerate}
+        \item Lorem ;
+        \item<2-> Ipsum ;
+        \item<2-> Dolor ;
+        \item<2-> Sit amet.
+      \end{enumerate}
+  \end{column}
+
+  \begin{column}{0.49\paperwidth}
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur 
+    ultricies, dui ac luctus pellentesque, nunc dui lobortis lorem, nec 
+    porta mauris massa vel ante. Maecenas justo nisl, sodales quis 
+    placerat nec, convallis mollis magna. Curabitur blandit elementum 
+    elit et euismod. In et purus nisl, ac elementum orci.
+  \end{column}
+\end{columns}
+
+\end{frame}
+
+\section{Blocs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{}
+    \sectionframe{Blocks \\ \textit{Lorem ipsum dolor sit amet}}
+\end{frame}
+
+\begin{frame}{Block}
+  \begin{block}{Aliquam quis eros}
+
+    Aliquam quis eros nec risus mattis porttitor ac eget justo. 
+    Aliquam lacinia condimentum tempus. Nulla metus magna, feugiat 
+    id faucibus ut, commodo et justo. Aliquam tincidunt purus vitae 
+    lacus dictum in placerat purus mollis. 
+
+  \end{block}
+\end{frame}
+
+\begin{frame}{Example block}
+  \begin{exampleblock}{Nulla cursus vehicula cursus}
+
+
+    Nulla cursus vehicula cursus. Suspendisse ac enim eget purus 
+    tincidunt eleifend et et purus. Suspendisse ultricies viverra 
+    sodales. Proin non congue risus. Maecenas vel ornare sem. Ut 
+    laoreet nibh tempor felis suscipit dignissim. Aliquam urna 
+    eros, sagittis interdum ultrices sed, venenatis eu nisl.
+
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Alert block}
+  \begin{alertblock}{Quisque vehicula pretium arcu}
+
+    Quisque vehicula pretium arcu, eget bibendum arcu iaculis sit amet. 
+    Proin facilisis sollicitudin magna, et varius lorem euismod ornare. 
+    Fusce lobortis dignissim tempor. Mauris augue tortor, elementum non 
+    lobortis vel, interdum vitae augue.
+
+  \end{alertblock}
+\end{frame}
+
+\end{document}

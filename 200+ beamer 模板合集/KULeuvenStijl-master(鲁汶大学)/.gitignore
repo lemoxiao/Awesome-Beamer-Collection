@@ -1,0 +1,9 @@
+# LaTeX compilation artifacts #
+###############################
+*.aux
+*.log
+*.out
+*.nav
+*.synctex.gz
+*.toc
+*.snm

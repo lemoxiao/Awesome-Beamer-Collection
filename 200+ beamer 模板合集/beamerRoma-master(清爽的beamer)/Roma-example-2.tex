@@ -1,0 +1,105 @@
+\documentclass{beamer}
+\usepackage[italian]{babel}
+
+% To typeset with pdflatex decomment the following 2 lines
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+% To typeset with lualatex decomment the following line
+\usepackage{fontspec}
+
+\usepackage{appendixnumberbeamer}
+
+\hypersetup{pdfpagemode=FullScreen}
+
+\title[Tesi complicata]{Tesi complicata sui Particelloni di Rubinenstein}
+\subtitle[Tesi Magistrale]{Tesi Magistrale in Fisica - Fisica delle Merendine}
+\author[Mario]{Mario Rossi - \texttt{mariorossi@roma.edu} \\
+relatore: Prof. Dario Lampa}
+\date{01 ottobre 2012}
+%\institute[Roma]{Università di Roma}
+\institute[Sapienza Università di Roma]{
+  Dipartimento di Fisica\\
+  Sapienza Università di Roma}
+
+% PDF information catalog
+\subject{Tesi Magistrale in Fisica - Fisica delle Merendine}
+
+\usetheme[pageofpages=of, % default - any character is good: di, /
+          titleline=true, % default - other choice: false
+          ]{Roma}
+
+\theoremstyle{definition}
+\newtheorem{definizione}{Definizione}
+
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}
+
+\begin{document}
+\titlepageframe % use this command to create the titlepage
+
+\section*{Indice}
+\begin{frame}
+  \frametitle{Indice}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+\section[Numeri casuali]{Generazione di Numeri casuali}
+\begin{frame}
+  \frametitle{Sequenze aleatorie}
+  \begin{block}{Che cos’è un numero casuale?}
+    Il problema è mal posto. Esistono le \alert{sequenze} di numeri aleatori!
+  \end{block}
+  \begin{block}{Sequenze di numeri casuali}
+    \begin{itemize}
+	  \item veramente casuali
+      \item pseudo-casuali
+      \item quasi-casuali
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\section[Test]{Test statistici}
+\begin{frame}
+  \frametitle{Perché sono stati sviluppati?}
+  \begin{block}{Una sequenza pseudo-casuale}
+    \begin{itemize}
+      \item deve seguire la distribuzione desiderata
+      \item deve essere non correlata
+    \end{itemize}
+  \end{block}
+  \begin{block}{Problemi}
+    \begin{itemize}
+      \item distribuzione non conforme a quella attesa
+      \item sequenza fortemente correlata
+      \item clustering dimensionale
+    \end{itemize}  
+  \end{block}
+\end{frame}
+
+\section*{Conclusioni}
+\begin{frame}
+  \frametitle{Conclusioni}
+  \begin{block}{Questo tema è}
+    \begin{itemize}
+      \item bello
+      \item semplice
+      \item leggibile
+      \item da finire
+      \item per la Sapienza
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\appendix
+\section{\appendixname}
+\frame{\tableofcontents}
+
+\subsection{Additional material}
+\frame{Details}
+\frame{Text omitted in main talk.}
+
+\subsection{Even more additional material}
+\frame{More details}
+
+\end{document}

@@ -1,0 +1,86 @@
+% Copyright 2014
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+
+\mode<presentation>
+
+
+\setbeamertemplate{blocks}[square]
+
+\setbeamertemplate{items}[circle]
+
+\RequirePackage{tikz}
+
+\newlength{\fillout@height@fraction}
+\newlength{\fillout@height@bottom}
+
+\newlength{\titlepage@titleitems@xfraction}
+\newlength{\titlepage@titleitems@yfraction}
+%\newlength{\titlepage@title@xfraction}
+%\newlength{\titlepage@subtitle@xfraction}
+
+
+% Height of paper in the upstream presentation is 19.04cm,
+% while height of the fillout is 17.3cm,  which corresponds to 0.908 ~ 0.91
+\setlength{\fillout@height@fraction}{0.91\paperheight}
+\setlength{\fillout@height@bottom}{0\paperheight}
+
+\setlength{\titlepage@titleitems@xfraction}{0.2\paperwidth}
+\setlength{\titlepage@titleitems@yfraction}{0.5\paperheight}
+
+
+
+
+
+% Title page
+\defbeamertemplate*{title page}{kuleuven title page}[1][]
+{ 
+\begin{tikzpicture}
+	\useasboundingbox (0,0) rectangle(\paperwidth,\paperheight);
+	\node (titlebox) [anchor=west] at (\titlepage@titleitems@xfraction, \titlepage@titleitems@yfraction) {%
+		\begin{minipage}{0.7\paperwidth}
+		\begin{beamercolorbox}{title}
+      			\usebeamerfont{title}\inserttitle
+		\end{beamercolorbox}
+		%
+		\vspace*{1cm}		
+		\begin{beamercolorbox}{author}
+			\vspace{1cm}
+      			\usebeamerfont{author}\insertauthor
+		\end{beamercolorbox}
+		%		
+		\begin{beamercolorbox}{date}
+			\vspace{1cm}
+      			\usebeamerfont{date}\insertdate\par
+		\end{beamercolorbox}
+		\end{minipage}
+	};
+	\node (sleutel) [anchor=east] at (\titlepage@titleitems@xfraction, \titlepage@titleitems@yfraction) {\pgfuseimage{KULeuvenSleutel}};
+\end{tikzpicture}
+}
+
+\setbeamertemplate{background}{
+\begin{tikzpicture}
+	\useasboundingbox (0,0) rectangle(\paperwidth,\paperheight);
+	\ifnumgreater{\thepage}{1}{%
+		\relax
+		% Background for a regular frame
+		\fill[white,opacity=1] (0,0) rectangle(\paperwidth,\paperheight);
+		\ifbeamer@sleutel
+			\node[anchor=south west,inner sep=0] at (0,0.03\paperwidth) {\pgfuseimage{KULeuvenSleutelLicht}};
+		\fi
+	}{%
+		% Variations on title page
+		\relax
+		\fill[color=KULeuvenFill] (0,\fillout@height@bottom) rectangle (\paperwidth,\fillout@height@fraction);
+		\node[anchor=west,inner sep=0] at (0.03\paperwidth,\fillout@height@fraction) {\pgfuseimage{KULeuvenLogo}};
+   	}
+\end{tikzpicture}
+}
+
+
+
+\mode<all>

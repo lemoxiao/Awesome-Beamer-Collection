@@ -1,0 +1,43 @@
+% 这是nwafu(西北农林科技大学)简单主题的颜色主题.
+% 版权(c) 2015-2019, 信息工程学院 耿楠<nangeng@nwafu.edu.cn>
+%
+% 本主题基于丹麦奥尔堡大学（Aalborg University）的AAU Beamer主题
+% 有关这一主题的详情请参考：https://github.com/jkjaer/aauLatexTemplates
+%
+% 这是一个免费代码：发布和修改该代码，请遵守最新版的自由软件联盟发布
+% 的GNU通用公共协议
+%
+% 期望这一代码对你有用，但值得注意的是，我不对任何后续问题进行维护，
+% 请参考<http://www.gnu.org/licenses/>查看最新的协议内容。
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemenwafusimple}[2019/06/24 The nwafu Simple Beamer Theme]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 主题选项和定义
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% beamer特殊选项
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation>%参考前四个模式(beamer,handout,second and trans).也就是说，除article外的所有模式
+{
+  \definecolor{beamer@barcolor}{RGB}{194,193,204}% 淡蓝色
+  \definecolor{beamer@headercolor}{RGB}{33,26,82}% 深蓝色
+  \definecolor{beamer@normaltextcolor}{RGB}{0,0,0}% 黑色
+  %\definecolor{beamer@normaltextcolor}{RGB}{84,97,110}% 灰蓝色
+% If you want to use the old colours in the theme with the new logo, do the following
+% a) uncomment the two lines below and comment out line 31, 31, and 42
+%  \definecolor{beamer@barcolor}{rgb}{0.55,0.79,0.94}% old light blue
+%  \definecolor{beamer@headercolor}{rgb}{0.00,0.41,0.66}% old dark blue
+% b) open the nwafu_logo_new.eps-file and/or the nwafu_logo_new_circle.eps-file in a text editor
+%  and change line 69 to
+%  0 105 168 rG
+% c) convert the eps-file to a pdf-file. This can be done by running
+%  epstopdf nwafu_logo_new.eps
+  \setbeamercolor{structure}{fg=beamer@headercolor}
+  \setbeamercolor{normal text}{fg=beamer@normaltextcolor}
+  \setbeamercolor{frametitle}{fg=white,bg=beamer@headercolor}
+  \setbeamercolor{nwafusimple}{fg=beamer@barcolor,bg=beamer@headercolor}
+}%end of beamer specific options
+
+\mode<all>

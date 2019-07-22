@@ -1,0 +1,161 @@
+\newcommand{\lang}{english}
+
+\ifdefined\ishandout
+\newcommand{\handoutmode}{handout}
+\else
+\newcommand{\handoutmode}{}
+\fi
+
+\documentclass[10pt,
+\lang ,
+\handoutmode ,
+compress
+]{beamer}
+
+
+\usepackage{ifthen}
+
+\newcommand{\unibastring}{\ifthenelse{\equal{\lang}{ngerman}}{University of Bamberg}{University of Bamberg}}
+
+\input{config/commands}
+
+
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{fancyquotes}}
+  {\signed{\usebox\mybox}\end{fancyquotes}}
+
+
+\input{config/hyphenation}
+
+\setbeamertemplate{caption}[numbered]
+%\numberwithin{figure}{section}
+\begin{document}
+
+\frame{\titlepage}
+
+\AtBeginSection[]
+{
+  \frame<handout:0>
+  {
+    \frametitle{Outline}
+    \begin{multicols}{2}
+    \tableofcontents[currentsection,hideallsubsections]
+    \end{multicols}
+  }
+}
+
+%\AtBeginSubsection[]
+%{
+%  \frame<handout:0>
+%  {
+%    \frametitle{Outline}
+%    \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=hide]
+%  }
+%}
+
+%\AtBeginSubsubsection[]
+%{
+%  \frame<handout:0>
+%  {
+%    \frametitle{Outline}
+%    \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+%  }
+%}
+
+\newcommand<>{\highlighton}[1]{%
+  \alt#2{\structure{#1}}{{#1}}
+}
+
+\newcommand{\icon}[1]{\pgfimage[height=1em]{#1}}
+
+\begin{frame}
+\frametitle{About this tutorial}
+%\begin{block}{"Uber dieses Tutorium}
+\begin{itemize}
+\item Powered by Prof.\,Dr.\,Udo Krieger
+\item Version 9.2
+\item Changed to \LaTeX -Beamer and extended by Linus Dietz
+\item English Version by Valentin Barth
+\item Original slide set by\begin{itemize}
+\item Marcel Grossmann
+\item Steffen Illig
+\item Martin Sticht
+\item Michael Timpelan
+\end{itemize}
+\item ca. 2500 LOC (Lines of Code)
+\end{itemize}
+%\end{block}
+\end{frame}
+
+\begin{frame}{\contentsname}
+    \frametitle{Outline}
+\begin{multicols}{2}
+\tableofcontents[hideallsubsections]
+\end{multicols}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Content starts here %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{content/spielwiese}
+\input{content/introduction}
+\input{content/task1}
+\input{content/packages}
+\input{content/footnotes}
+\input{content/task2}
+\input{content/graphics}
+\input{content/referenzen}
+\input{content/task3}
+\input{content/formulas}
+\input{content/tabellen}
+\input{content/enumerate}
+\input{content/task4}
+\input{content/distributed}
+\input{content/task5}
+\input{content/bibtex}
+%\input{content/beamerclass}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% References          %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section*{}
+%\begin{frame}[allowframebreaks]{References}
+%\def\newblock{\hskip .11em plus .33em minus .07em}
+%\scriptsize
+%\bibliographystyle{IEEEtran}
+%\bibliography{literature/bib}
+%\normalsize
+%\end{frame}
+
+
+
+
+%% Last frame
+\frame{
+  \vspace{2cm}
+  {\huge Questions ?}
+
+  \vspace{20mm}
+  \nocite*
+  \vspace{0mm}
+  
+  \begin{flushright}
+  
+  Fachschaft WIAI
+  
+    \structure{\footnotesize{\href{mailto:fachschaft.wiai@uni-bamberg.de}{fachschaft.wiai@uni-bamberg.de}}}
+  
+  \end{flushright}
+  
+}
+
+
+\end{document}

@@ -1,0 +1,65 @@
+\documentclass[10pt]{beamer}
+
+\usepackage{ubuntubeamer}
+
+% Setting presentation language
+% valid options are "English" and "German".
+% Default is English.
+% Note: You must remove *.aux and *.toc after changing the language!
+%\SetLanguage{English}
+\SetLanguage{German}
+
+% Style of the title page
+% There are only Versions One and Two.
+%\UseTitleVersionOne
+\UseTitleVersionTwo
+
+% Do you want to use the some images on
+% the first and last page?
+% valid Values: true and false
+% Default is true
+\UseImages{true}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Defining presentation title and everything else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Presentation title}
+\subtitle{Presentation subtitle}
+\author[J. Smith]{John Smith}
+\date[01.01.2014]{1. Januar 2014}
+\mail{john.smith@ubuntu.com}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Here starts the document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% First frame with the title of the presentation
+\titleframe
+
+% Frame with table of content (optional)
+\tocframe[hideallsubsections]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Some section}
+
+\begin{frame}
+\frametitle{Frame title}
+Some text:
+\begin{itemize}
+\item Point 1
+\item Point 2
+\item Point 3
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Last frame with copyright information
+\signatureframe
+
+\end{document}
+

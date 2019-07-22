@@ -1,0 +1,226 @@
+%&latex
+
+\documentclass[xcolor={dvipsnames},hyperref={breaklinks=true}%,mathserif
+,10pt]{beamer} 
+
+
+\usepackage{amsmath,amssymb,amsthm,amssymb}
+\usepackage{mathtools}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[croatian]{babel} %% Use your language here
+\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+\usepackage[scaled]{uarial}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage[T1]{fontenc}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage{time}
+\usepackage{extarrows}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{framed}
+\usepackage[tracking=true,kerning=true,spacing=true,babel=true]{microtype}
+\usepackage{tikz, datetime, textpos}
+\usepackage{wasysym}
+\usepackage[export]{adjustbox}
+
+\definecolor{gray}{RGB}{147,162,153}
+\definecolor{red}{RGB}{210,83,60}
+\definecolor{purple}{RGB}{87,87,110}
+\definecolor{flatblue}{RGB}{0, 82, 156}
+
+\colorlet{shadecolor}{white}
+
+\DeclareMathAlphabet{\xcal}{OMS}{cmsy}{m}{n}
+\newcommand{\Lie}{\xcal{L}}
+\newcommand{\bigo}{\xcal{O}}
+
+
+
+\usecolortheme[named=flatblue]{structure} 
+\usetheme{Rochester}
+
+\setbeamertemplate{navigation symbols}{}
+%% itemize and enumerate objects
+\setbeamercolor{item projected}{bg=gray}
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent}
+\setbeamercolor{block title}{fg=gray}
+\setbeamercolor{local structure}{fg=gray}
+\setbeamertemplate{itemize items}[circle]
+
+%% TOC adjustments
+
+\setbeamercolor{section in toc}{fg=red}
+\setbeamertemplate{sections/subsections in toc}[sections numbered]
+
+%% Nice equation font
+\usefonttheme{professionalfonts} 
+
+%% Gray headline with white line
+\setbeamertemplate{headline}
+{\hspace*{-0.5cm}{
+		\begin{tikzpicture}
+		\draw[white,line width=0.12cm] (-1,6) -- (14,6);
+		\draw[gray,line width=0.51cm] (-1,6.31) -- (14,6.31);
+		\end{tikzpicture}
+	}}
+	
+	%% Headeing font size
+	\newcommand\Fontvi{\fontsize{24}{28.8}\selectfont}
+	
+	%% Front
+	\setbeamertemplate{title page}
+	{\vspace*{0.5cm}
+		\begin{center}
+			{\Huge \textcolor{red}{MYSTERIES\vspace*{2mm} IN OUR LIVES }}
+		\end{center}
+		\begin{center}
+			{\Large \textcolor{red}{Diploma thesis}}
+		\end{center}
+		\begin{center}
+			\textcolor{purple}{Autor: dingo\_d}\qquad\textcolor{purple}{Mentor: Professor Saul Croaker}
+		\end{center}
+		\vspace*{-5mm}
+		\begin{center}
+			{\small\textcolor{purple}{The Department of Mysteries,\\ Level 9, Ministry of Magic, London, Whitehall, England, Great Britain}}
+		\end{center}
+		\begin{center}
+			{\small \textcolor{purple}{October 2015.}}
+		\end{center}
+		\hspace*{8cm}\
+		\begin{center}
+			{\small \textcolor{purple}{FOR YOUR EYES ONLY!}}
+		\end{center}
+			\includegraphics[width=0.25\textwidth, right]{logo.eps}
+		
+	}
+	
+	
+	
+	\begin{document}
+		
+		\frame{\maketitle}
+		
+		
+		\begin{frame}
+			\vspace*{1.0cm}{\Fontvi \textcolor{red}{Table of contents}}\vspace*{2mm}
+			\tableofcontents
+		\end{frame}
+		
+		\section{Uvod}
+		
+		\begingroup
+		\setbeamercolor{background canvas}{bg=red}
+		\begin{frame}
+			\vspace{2.6 cm}
+			\Huge \textcolor{white}{1.ABOUT\hspace*{0.1cm} DoM}\vspace*{-0.3cm}
+			\hspace*{-0.2cm}\textcolor{white}{\rule{1.\textwidth}{0.025cm}}
+			\Large {\textcolor{white}{A short hystory of Department of Mysteries}}
+		\end{frame}
+		\endgroup
+		
+		\begin{frame}
+			\vspace*{-1.5cm}{\Fontvi \textcolor{red}{Introduction}}\vspace*{2mm}
+			\begin{itemize}
+				\item Founded in 1672 or before
+				\item Carries out confidential research
+				\item Essential mysteries like: love, space, thought, time, death
+				\item Non-essential: the function of the rubber duck
+			\end{itemize}
+		\end{frame}
+		
+		\begin{frame}
+			\begin{itemize}
+				\item Founded around 1672 (its actuall date of foundation is a mistery)
+				\item 1830 - Minister Ottaline Gambol established commitees for the study of Muggle brainpower
+				\item 1835. - 1841 Minister Radolphus Lestrange wanted to close it down - but was ignored
+				\item 1890s - Department of Mysteries conducted first time-travel experiments
+				\item 1899 - Time travel experiments are discontinued because Unspeakable Eloise Mintumble traveled back in time and interfered with the past 
+				\item Catastrophic results
+			\end{itemize}
+		\end{frame}
+		
+		\section{Recent history}
+		
+		\begingroup
+		\setbeamercolor{background canvas}{bg=red}
+		\begin{frame}
+			\vspace{2.6 cm}
+			\Huge \textcolor{white}{2.RECENT\hspace*{0.1cm} HISTORY}\vspace*{-0.3cm}
+			\hspace*{-0.2cm}\textcolor{white}{\rule{1.\textwidth}{0.025cm}}
+			\Large {\textcolor{white}{Department of Mysteries after \\ and during major wizarding wars}}
+		\end{frame}
+		\endgroup
+		
+		\begin{frame}
+			\vspace*{-1.0cm}{\Fontvi \textcolor{red}{First Wizarding War}}\vspace*{2mm}
+			\begin{itemize}
+				\item 1970-1981 ...
+			\end{itemize}
+		\end{frame}
+		
+		
+		\begin{frame}
+			\begin{itemize}
+				\item Ok, enough of mysteries
+				\item You can put an equation if you wish
+				\begin{equation*}
+				Q_\xi[g,\bar{g}]=\int_{\partial\Sigma}k_\xi[h,\bar{g}]
+				\end{equation*}
+				\begin{equation*}
+				\begin{split}
+				k_\xi[h,\bar{g}]=&k^{[\nu\mu]}_\xi[h,\bar{g}](d^{n-2}x)_{\nu\mu}\\[2.5mm]
+				(d^{n-p}x)_{\mu_1\ldots\mu_p}:=&\frac{1}{p!(n-p)!}\epsilon_{\mu_1\ldots\mu_n}dx^{\mu_p+1}\wedge\ldots\wedge dx^{\mu_n}\\[2.5mm]
+				k_\xi^{[\nu\mu]}[h,\bar{g}]=&-\frac{\sqrt{-\bar{g}}}{16\pi}\left[\bar{D}^\nu(h\xi^\mu)+\bar{D}_\sigma(h^{\mu\sigma}\xi^\nu)+\bar{D}^\mu(h^{\nu\sigma}\xi_\sigma)+\right.\\[2mm]
+				+&\frac{3}{2}h\bar{D}^\mu\xi^\nu+\frac{3}{2}h^{\sigma\mu}\bar{D}^\nu\xi_\sigma+\frac{3}{2}h^{\nu\sigma}\bar{D}_\sigma\xi^\mu-(\mu\leftrightarrow\nu)\left.\right]
+				\end{split}
+				\end{equation*}
+			\end{itemize}
+		\end{frame}
+		
+		\section{Conclusion}
+		
+		\begingroup
+		\setbeamercolor{background canvas}{bg=red}
+		\begin{frame}
+			\vspace{2.6 cm}
+			\Huge \textcolor{white}{3.CONCLUSION}\vspace*{-0.3cm}
+			\hspace*{-0.2cm}\textcolor{white}{\rule{1.\textwidth}{0.025cm}}
+			\Large {\textcolor{white}{Afterword}}
+		\end{frame}
+		\endgroup
+		
+		
+		\begin{frame}
+			\vspace*{-1.0cm}{\Fontvi \textcolor{red}{Conclusion}}\vspace*{2mm}
+			\begin{itemize}
+				\item You can use this as you wish
+				\item If you want to improve it, I would be glad if you did that and suggest the edit
+				\item Hope you find it useful as I did
+			\end{itemize}
+		\end{frame}
+		
+		\begin{frame}[allowframebreaks]
+			\nocite{*}
+			\bibliographystyle{unsrt}
+			\bibliography{mybib}
+		\end{frame}
+		
+		
+		\begingroup
+		\setbeamercolor{background canvas}{bg=red}
+		\begin{frame}
+			\begin{center}
+				\Huge \textcolor{white}{THANK YOU FOR \\ LISTENING}
+			\end{center}
+		\end{frame}
+		\endgroup
+		
+		
+		
+	\end{document}

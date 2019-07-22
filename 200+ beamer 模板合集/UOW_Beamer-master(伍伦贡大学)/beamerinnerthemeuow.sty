@@ -1,0 +1,325 @@
+%% This is file `beamerinnerthemeuow.sty',
+%% 2014-01-07 (cc) tmgriffiths Version 1.0
+%%
+%% Copyright (CC BY-NC-SA 4.0 Int) 2015 by T. M. Griffiths
+%% under the creative commons licence, attribution, non-comercial, share alike
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License version 1.3c
+%% http://www.latex-project.org/lppl/lppl-1-3c.txt
+%%
+%%--------------------------------------------------------------------------------
+%% These Packages essentially port the UOW powerpoint templates over to Beamer, 
+%% a LaTeX class for presentations. Inspiration for parts of this theme (where 
+%% design decision had to be made) and guidance on the implementation of the 
+%% pgfkeys were taken from the metropolis by Matthias Vogelgesang et al., of which 
+%% the author of this package is a contributor.
+%% 
+%% Created by Thomas M. Griffiths (tmg994[at]uowmail[dot]edu[dot]au) 2015-07-23 
+%% Version 1.0 2015-07-23 tmgriffiths       
+%%--------------------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeuow}
+   [2015/07/23 A Beamer Inner Theme That Matches the UOW Branding Guidelines V 1.0 (cc) tmgriffiths]
+\RequirePackage{calc}
+\RequirePackage{textcase}
+\RequirePackage{pgfkeys}
+\ifxetex
+   \RequirePackage{microtype}
+\else
+   \RequirePackage[tracking=true]{microtype}
+      \newcommand{\allcapsspacing}[1]{\textls*[50]{#1}}%
+      \newcommand{\allcaps}[1]{\allcapsspacing{\MakeTextUppercase{#1}}}%
+\fi
+
+\newlength\beamerleftmargin
+\setlength\beamerleftmargin{\Gm@lmargin}
+\newlength\beamerrightmargin
+\setlength\beamerrightmargin{\Gm@rmargin}
+
+\pgfkeys{
+  /UOWtheme/inner/sectionpage/.cd,
+    .is choice,
+    none/.code=\@UOW@sectionpage@none,
+    progressbar/.code=\@UOW@sectionpage@progressbar,
+}
+
+\newcommand{\@UOWtheme@inner@defaults}{
+   \pgfkeys{/UOWtheme/inner/.cd,
+      sectionpage=progressbar,
+   }
+}
+
+\setbeamertemplate{title page}{
+\begin{minipage}[t][\paperheight][t]{\@UOWsmallrectangle@width-\beamerleftmargin}
+% The basic implimentation here is taken from the metropolis theme by Matthias Vogelgesang,
+% of which the author is a contributor
+% If the user has set a titlegraphic, we set it in a zero-height box so
+% it doesn't change the position of other elements.
+\ifx\inserttitlegraphic\@empty\else{%
+   \vbox to 0pt {
+      \vspace*{2em}
+      \usebeamercolor[fg]{titlegraphic}%
+      \inserttitlegraphic%
+   }%
+   \nointerlineskip%
+}
+\fi
+\vfill%
+% We set the title and subtitle, but only if they are defined by the user.
+% If \subtitle is empty, for example, it won't leave a blank space on the
+% title slide.
+\vspace*{0.12\paperheight}
+\ifx
+   \inserttitle\@empty
+\else{%
+   \raggedright%
+   \linespread{1.0}%
+   \usebeamerfont{title}%
+   \usebeamercolor[fg]{title}%
+   \ifxetex%
+      \MakeTextUppercase{\inserttitle}%
+   \else%
+      \allcaps{\inserttitle}%
+   \fi%
+   \par%
+}
+\fi
+\ifx\insertsubtitle\@empty
+\else{%
+   \usebeamerfont{subtitle}%
+   \usebeamercolor[fg]{subtitle}%
+   \insertsubtitle%
+   \par%
+   \vspace*{1em}
+}
+\fi
+%   The date and institute are set after the author, again provided they are
+%   nonempty. Note that the default date in \LaTeX{} is \today, not \empty.
+\ifx\insertdate\@empty\else{%
+   \usebeamerfont{date}%
+   \usebeamercolor[fg]{date}%
+   \insertdate%
+   \par%
+}
+\fi
+%   Like the title and subtitle, we display the author only when it is defined.
+%   But beamer's definition of \insertauthor is always nonempty, so we have
+%   to test another macro initialized by \author{...} to see if the user has
+%   defined an author. This solution was suggested by Enrico Gregorio in an
+%   answer to \href{https://tex.stackexchange.com/questions/241306/}{this
+%   Stack Exchange question}.
+\vfill
+\ifx\beamer@shortauthor\@empty\else{%
+   \usebeamerfont{author}%
+   \usebeamercolor[fg]{author}%
+   \insertauthor%
+   \par%
+   \vspace{0.25em}
+}
+\fi
+\ifx\insertinstitute\@empty\else{%
+   \usebeamerfont{institute}%
+   \usebeamercolor[fg]{institute}%
+   \insertinstitute%
+   \par%
+   \vspace*{0.25em}
+}
+\fi
+\vspace*{\@UOWlargerectangle@height}
+\end{minipage}
+}
+
+% If \maketitle is given inside a \frame{}, cool. If not, put it in one.
+\def\maketitle{%
+   \ifbeamer@inframe
+      \titlepage
+   \else
+      \frame[plain]{\titlepage}
+   \fi
+}
+\def\titlepage{%
+   \usebeamertemplate{title page}
+}
+
+%% Section slides.
+% To make the \MakeLowercase and \MakeUppercase macros work in the
+% sectiontitle we have to patch \sectionentry and \beamer@section. This
+% solution was suggested by Enrico Gregorio in an answer to
+% \href{http://tex.stackexchange.com/questions/112526/}{this StackExchange
+% question}. ---See mtheme.
+%
+% Also, the \ifxetex statements need to be outside the \patchcmd. Odd - Tom 
+% (TODO Incorportate into metropolis theme (tmgriffiths letterspacing corrections fork)
+
+\ifxetex
+   \patchcmd{\sectionentry}
+      {\def\insertsectionhead{#2}}
+      {\def\insertsectionhead{\MakeTextUppercase{#2}}}
+      {}
+      {\PackageError{beamerinnerthememetropolis}{Patching section title failed.}}
+   \patchcmd{\beamer@section}
+      {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
+      {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{\MakeTextUppercase{#1}}}}
+      {}
+      {\PackageError{beamerinnerthememetropolis}{Patching section title failed.}}
+\else
+   \patchcmd{\sectionentry}
+      {\def\insertsectionhead{#2}}
+      {\def\insertsectionhead{\allcaps{#2}}}
+      {}
+      {\PackageError{beamerinnerthememetropolis}{Patching section title failed.}}
+   \patchcmd{\beamer@section}
+      {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
+      {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{\allcaps{#1}}}}
+      {}
+      {\PackageError{beamerinnerthememetropolis}{Patching section title failed.}}
+\fi
+
+% Section titlepage slides
+\newcommand{\@UOW@sectionpage@none}{
+   \AtBeginSection{
+      % intenionally empty
+   }
+}
+
+\defbeamertemplate{section page}{progressbar}{
+   \centering
+   \begin{minipage}{0.66\paperwidth}
+      \usebeamercolor[fg]{section title}%
+      \usebeamerfont{section title}%
+      \insertsectionhead\\[-0.66em]%
+      \usebeamertemplate*{progress bar in section page}\\%
+   \end{minipage}
+   \par
+}
+
+% If \section{} is given inside a \frame{}, cool. If not, put it in one.
+\newcommand{\@UOW@sectionpage@progressbar}{
+   \setbeamertemplate{section page}[progressbar]
+   \AtBeginSection{
+      \ifbeamer@inframe
+         \sectionpage
+      \else
+         \frame[plain,c]{\sectionpage}
+      \fi
+   }
+}
+
+\newlength{\@UOW@progressonsectionpage}
+\setbeamertemplate{progress bar in section page}{
+   \setlength{\@UOW@progressonsectionpage}{%
+      \textwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+   }%
+   \begin{tikzpicture}
+      \filldraw[color=UOWgrey!25,] (0,0) rectangle (\textwidth, 1pt);
+      \filldraw[color=\@UOWtheme@color,] (0,0) rectangle (\@UOW@progressonsectionpage, 1pt);
+   \end{tikzpicture}%
+}
+
+% Blocks.
+
+% Regular block environment
+\setbeamertemplate{block begin}{%
+   \begin{beamercolorbox}[%
+      ht=2.4ex,
+      dp=1ex,
+      leftskip=1ex,
+      rightskip=1ex,%
+      ]{block title}
+      \usebeamerfont*{block title}%
+      \ifxetex%
+         \MakeTextUppercase{\insertblocktitle}%
+      \else%
+         \allcaps{\insertblocktitle}%
+      \fi%
+   \end{beamercolorbox}%
+   \vspace*{-1pt}
+   \usebeamerfont{block body}%
+   \begin{beamercolorbox}[%
+      dp=1ex,
+      leftskip=1ex,
+      rightskip=1ex,
+      vmode]{block body}%
+}%
+\setbeamertemplate{block end}{%
+   \end{beamercolorbox}%
+}%
+
+% Alerted block environment
+\setbeamertemplate{block alerted begin}{%
+   \begin{beamercolorbox}[%
+      ht=2.4ex,
+      dp=1ex,
+      leftskip=1ex,
+      rightskip=1ex,%
+      ]{block title alerted}%
+      \usebeamerfont*{block title alerted}%
+      \ifxetex%
+         \MakeTextUppercase{\insertblocktitle}%
+      \else%
+         \allcaps{\insertblocktitle}%
+      \fi%
+   \end{beamercolorbox}%
+   \vspace*{-1pt}
+   \begin{beamercolorbox}[%
+      dp=1ex,
+      leftskip=1ex,
+      rightskip=1ex,
+      vmode]{block body alerted}%
+   }
+\setbeamertemplate{block alerted end}{%
+   \end{beamercolorbox}%
+   }
+
+% Example block environment
+\setbeamertemplate{block example begin}{%
+   \begin{beamercolorbox}[%
+      ht=2.4ex,
+      dp=1ex,
+      leftskip=1ex,
+      rightskip=1ex,%
+      ]{block title example}%
+      \usebeamerfont*{block title example}%
+      \ifxetex%
+         \MakeTextUppercase{\insertblocktitle}%
+      \else%
+         \allcaps{\insertblocktitle}%
+      \fi%
+   \end{beamercolorbox}%
+   \vspace*{-1pt}
+   \begin{beamercolorbox}[%
+      dp=1ex,
+      leftskip=1ex,
+      rightskip=1ex,
+      vmode]{block body example}%
+   }
+\setbeamertemplate{block example end}{%
+   \end{beamercolorbox}%
+   }
+
+% Textblock settings
+\setlength{\parskip}{0.5em}
+\linespread{1.15}
+
+% Bullet point styles
+\setbeamertemplate{itemize items}{\textbullet}
+
+% Captions
+\setbeamertemplate{caption label separator}{: }
+\setbeamertemplate{caption}[numbered]
+
+% Footnotes
+\setbeamertemplate{footnote}{%
+   \parindent 0em\noindent%
+   \raggedright
+   \scriptsize
+   \usebeamercolor{footnote}\hbox to 0.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
+}
+\addtobeamertemplate{footnote}{\advance\hsize-1.5cm}{\vspace{6pt}}
+
+\@UOWtheme@inner@defaults
+
+\mode<all>

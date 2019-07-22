@@ -1,0 +1,182 @@
+% Copyright 2003 by Till Tantau     <tantau@users.sourceforge.net>
+%       and 2007 by Frédéric Haziza <daz@it.uu.se>
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+
+%% -------------------------------------------------------------------
+%% Defining the sidebar theme. Used as default too
+%% -------------------------------------------------------------------
+
+%% Section at top?
+\newif\ifbeamer@subsectionsattop
+\beamer@subsectionsattopfalse
+\DeclareOptionBeamer{subsectionsattop}{\beamer@subsectionsattoptrue}
+
+\newif\ifbeamer@sectionpathattop
+\beamer@sectionpathattopfalse
+\DeclareOptionBeamer{sectionpathattop}{\beamer@sectionpathattoptrue}
+
+%% Processing the options
+
+\DeclareOptionBeamer{hideothersubsections}{\PassOptionsToPackage{hideothersubsections=#1}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{hideallsubsections}{\PassOptionsToPackage{hideallsubsections=#1}{beamerouterthemesidebar}}
+\ProcessOptionsBeamer
+
+\useoutertheme{sidebar}
+\useinnertheme[shadow=true]{rounded} %\useinnertheme{rounded}
+
+\newdimen\beamer@mydim%
+\beamer@mydim=\paperwidth%
+\advance\beamer@mydim by-\beamer@sidebarwidth%
+
+%% =============================================================
+%% Redefining the head, with the RU logo
+\defbeamertemplate*{headline}{ru theme}
+{%
+  \begin{beamercolorbox}[wd=\beamer@sidebarwidth]{logo}
+    \usebeamercolor[bg]{logo}%
+    \vrule width\beamer@sidebarwidth height \beamer@headheight%
+    \hskip-\beamer@sidebarwidth%
+    \hbox to \beamer@sidebarwidth{\hss\vbox to%
+      \beamer@headheight{\vss\hbox{\color{fg}%
+          \ifbeamer@mylogo%
+          %% Should be the image file, not the include command
+          \pgfimage[width=\beamer@sidebarwidth,height=\beamer@headheight]{\insertlogo}%
+          \else%
+          \pgfimage[height=0.85\beamer@headheight]{radboud_logo}%uulogo_red160}%
+          \fi%
+        }\vss}\hss}%
+  \end{beamercolorbox}%
+  \vskip-\beamer@headheight%
+  \hskip\beamer@sidebarwidth%
+  %% If we want the subsections at the top
+  \ifbeamer@subsectionsattop
+  \insertsubsectionnavigationhorizontal{\beamer@mydim}{}{\hskip0pt plus1filll}
+  \vskip2ex%
+  \else
+  %% If we want the shorttitle>section>subsection at the top; 2ex high
+  \ifbeamer@sectionpathattop
+  \begin{beamercolorbox}[wd=\beamer@mydim,ht=2ex,dp=1ex,leftskip=1ex]{section in head/foot}%
+    {\usebeamerfont{title in head/foot}\usebeamercolor{title in head/foot}%
+      \insertshorttitle\strut}%
+    {\usebeamerfont{section in head/foot}\usebeamercolor{section in head/foot}%
+      \hspace*{1ex}\insertgotosymbol%~
+      \insertsectionhead}%
+    \ifx\insertsubsectionhead\@empty%
+    \else%
+    {\usebeamerfont{subsection in head/foot}\usebeamercolor{subsection in head/foot}
+      \insertgotosymbol%\hspace*{1ex}
+      \insertsubsectionhead}
+    \fi%
+  \end{beamercolorbox}%
+  \else%
+  \vskip2ex%
+  \fi%
+  \fi%
+}
+
+%% =============================================================
+\ifbeamer@subsectionsattop
+%% Redefining the look and feel of the (sub)sections
+\defbeamertemplate*{subsection in head/foot}{ru theme}
+{%
+  \underline{\insertsubsectionhead}
+}
+%% FIXME: shading not properly working
+\defbeamertemplate*{subsection in head/foot shaded}{ru theme}
+{%
+  \setbeamertemplate{subsection in head/foot shaded}[default][20]
+  \insertsubsectionhead
+}
+\fi
+
+%% =============================================================
+\newdimen\beamer@mytitleheight%
+\beamer@mytitleheight=\beamer@headheight%
+%\ifbeamer@sectionattop\advance\beamer@mytitleheight by-2ex\fi
+\advance\beamer@mytitleheight by-2ex%
+%% Strange way to code, but seems to work, so I keep the hack
+
+%% FIXME: Should not be there
+\setbeamercolor*{frametitle}{parent=title}
+%\setbeamercolor*{frametitle}{parent=title,fg=uured,bg=white}
+
+%% Redefining the frametitle
+\defbeamertemplate*{frametitle}{ru theme}
+{%
+  \nointerlineskip%
+  \vbox to \beamer@mytitleheight{%
+    \leftskip=-\beamer@leftmargin%
+    \advance\leftskip by0.3cm%
+    \rightskip=-\beamer@rightmargin%
+    \advance\rightskip by0.3cm plus1fil%
+    %% Roulement de tambour: here comes the title
+    \vfil%
+    % I don't want to use any \strut here
+    {\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\insertframetitle\par}%
+    {\usebeamercolor[fg]{framesubtitle}\usebeamerfont{framesubtitle}\insertframesubtitle\par}%
+%     \vbox{}%
+%     \vskip-1.5em%
+    \vfil%
+    %% Adding the bar
+    {\hrule width 0.6\paperwidth}%
+  }%
+}%
+
+
+%% =============================================================
+%% Sidebar
+
+%% Vertical shading
+%\setbeamertemplate{sidebar canvas left}[vertical shading]
+%[top=uured,bottom=structure.bg]
+
+\defbeamertemplate*{sidebar left}{ru theme}
+{%
+  \vskip\beamer@headheight%
+  \vskip4em%
+  \insertverticalnavigation{\beamer@sidebarwidth}%
+  \vfill%
+}%
+
+%% =============================================================
+%% Progression bar on the right
+\ifbeamer@progressbar
+\usepackage{calc}
+\setbeamersize{sidebar width right=2pt}
+\newlength{\myprogbarlength}
+\defbeamertemplate*{sidebar canvas right}{ru theme}
+{%
+  \vskip-2ex%starting at the top of the paper
+  \setlength{\myprogbarlength}{\paperheight*(\insertframenumber)/(\inserttotalframenumber)}
+  \usebeamercolor[bg]{sidebar canvas right}
+  {\hrule width 2pt height \myprogbarlength}
+}
+\fi
+
+%% =============================================================
+%% Margins
+%\setbeamersize{text margin left=0.5cm,text margin right=0.5cm}
+
+%% =============================================================
+%% Redefining the footline
+\defbeamertemplate*{footline}{ru theme}
+{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\beamer@sidebarwidth,ht=2ex,dp=1ex,center]{date in head/foot}%
+      \usebeamerfont{date in head/foot}\insertshortdate%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=\beamer@mydim,ht=2ex,dp=1ex,leftskip=1ex,rightskip=1ex]{institute in head/foot}%
+      {\usebeamerfont{institute in head/foot}\insertshortinstitute}%
+      {\ifbeamer@nonumbers\else\hfill%
+        \usebeamerfont{page number in head/foot}%
+        -\ \insertframenumber\ifbeamer@totalnumber/\inserttotalframenumber\fi\ -%
+        \fi}%
+      {\hfill\usebeamerfont{author in head/foot}\insertshortauthor}%
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}

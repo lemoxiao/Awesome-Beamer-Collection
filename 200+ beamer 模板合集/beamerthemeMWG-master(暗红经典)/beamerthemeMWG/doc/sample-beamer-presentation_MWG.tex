@@ -1,0 +1,163 @@
+%%	This is file 'sample-beamer-presentation.tex', Version 2017-08-03
+%%
+%%	The initial version has been written by Sebastian Friedl in 2017 <sfr682k@t-online.de>
+%%	Visit the GitHub repository at https://github.com/SFr682k/sample-latex-beamer-presentation
+%%	It doesn't harm anyone if you do some advertising ... :D
+%% 
+%%	THIS WORK IS LICENSED UNDER THE "DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE"
+%%	PERMISSION IS GRANTED TO DO  E V E R Y T H I N G  WITH THIS WORK.
+%%
+%%	Just a note to authors of LaTeX beamer packages and themes:
+%%	This file is nice to show your package's behavior, how your theme looks like, ... ;)
+%%
+%%	-------------------------------------------------------------------------------------------
+%%
+%%	This file is a sample LaTeX beamer presentation in English language pointing out the main
+%%	advantages of using LaTeX beamer for creating your presentations.
+%%
+%%	Just use this presentation to see how different beamer themes look.	Change them in line 42.
+%%	The default theme is the 'default' theme. :D
+%%
+%%	If the font size is too big for the theme, change it in line 33. Default is 11pt.
+%%
+%%	Maybe you would also like to remove or comment the separation frame generated in line 150.
+%%
+%%	Of course you are allowed to create whole frames :)
+%%
+%%	Have fun with TeXing ;)
+%%
+%%	-------------------------------------------------------------------------------------------
+
+
+% YOU ARE ABLE TO CHANGE THE FONT SIZE HERE, IF NECESSARY
+\documentclass[11pt]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{verbatim}
+
+% SWITCH THE THEME USED FOR THIS PRESENTATION HERE:
+\usetheme{MWG}
+
+\usepackage[charter]{mathdesign}
+\usepackage[osf]{XCharter}
+\usepackage[osf,scale=.92]{roboto}
+\renewcommand{\familydefault}{\sfdefault}
+
+
+\title{Writing presentations in \LaTeX\ beamer?}
+\subtitle{Does this make sense?}
+\author[Sebastian Friedl]{Sebastian Friedl (\href{mailto:sfr682k@t-online.de}{\texttt{sfr682k@t-online.de}})}
+\institute{\itshape Dedicated to both, \LaTeX\ beamer's developers and (possible) users}
+
+\begin{document}
+	\frame{\maketitle}
+	
+	
+	\begin{frame}{Contents}
+		\tableofcontents
+	\end{frame}
+	
+	
+	\section[Why \LaTeX\ beamer?]{Why should I use \LaTeX\ beamer?}
+	\begin{frame}{Why should I use \LaTeX\ beamer?}{A simple argument}
+		\textbf{\color{red} Because it's better!} Ever done stuff like \textbf{this} \dots
+		
+		
+		\vfill
+		\begin{block}{Coulomb's law}
+			It is commonly known that the force $\color{red} F$ interacting between statical electrical particles is described by
+			\begin{equation*}
+				{\color{red} F} = {\color{green!40!black} k_\varepsilon} \frac{\color{blue} q_1 q_2}{{\color{red!50!blue} r}^2}
+			\end{equation*}
+			where $\color{blue} q_1$, $\color{blue} q_2$ represent the signed magnitude of the charges and $\color{red!50!blue} r$ the distance between them.  $\color{green!40!black} k_\varepsilon$ is defined as $\frac{1}{4\pi \varepsilon_0}$.
+		\end{block}
+		\vfill
+		
+		
+		\dots in PowerPoint\footnote{or one of its Open Source alternatives?}? \textbf{IMPOSSIBLE \dots}
+	\end{frame}
+
+	
+	\section{Advantages}
+	\begin{frame}[fragile]{Advantages}
+		\begin{itemize}
+			\item You can use normal \LaTeX\ code
+			\begin{itemize}
+				\item Structure your presentation with \verb|\section| \& Co. and generate a table of contents with \verb|\tableofcontents|
+				%
+				\item Insert formulas like you are used to
+				%
+				\item Useful, presentation specific commands available:
+				\begin{itemize}
+					\item Create overlays (e.~g.~with \verb|\uncover| or \verb|\only|)
+					\item Color blocks and boxes
+				\end{itemize}
+			\end{itemize}
+			%
+			\item Your presentation always looks like the same \dots \\
+			\textbf{on every computer and platform!!} \\
+			Only a program capable of displaying \texttt{.pdf} files in fullscreen mode is required
+		\end{itemize}
+	\end{frame}
+
+
+	\section{Disadvantages}
+	\begin{frame}{Disadvantages}
+		\begin{enumerate}
+			\item \textbf{Big disadvantages:}
+			\textit{There are none!}
+			
+			\item \textbf{\enquote{Real} disadvantages:}
+			\begin{enumerate}
+				\item Some things easily possible in PowerPoint are hard to fulfil and need some \enquote{out of the box}--thinking
+				\item The ugly Computer Modern fonts are used by default
+			\end{enumerate}
+			
+			\item \textbf{No real disadvantages:}
+			\begin{enumerate}
+				\item You can simply mix itemizations and enumerations:
+				\begin{itemize}
+					\item You're getting confused about that?
+					\item It's your problem, not mine \dots
+				\end{itemize}
+				
+				\item You'll have to learn some \LaTeX\ commands if you didn't do so
+				\begin{enumerate}
+					\item \LaTeX\ is an enrichment and capable of (nearly) everything!
+					\item \enquote{Out of the box}--thinking trains your brain!
+				\end{enumerate}				
+			\end{enumerate}
+		\end{enumerate}
+	\end{frame}
+	
+	\section{Conclusion}
+	\begin{frame}{Conclusion}
+		\begin{block}{Switch to \LaTeX!}
+			\LaTeX\ is nearly almighty! You can even typeset sudokus with it \dots
+		\end{block}
+	
+		\begin{exampleblock}{\LaTeX\ doesn't cost a single cent!}
+			Just download the current version of \TeX Live from \href{http://tug.org}{\texttt{tug.org}}
+		\end{exampleblock}
+	
+		\begin{alertblock}{\textbf{Warning!}}
+			Actually, some people are simply too dumb for using \LaTeX\ or recognizing the big advantages of it.
+		\end{alertblock}
+	\end{frame}
+	
+	
+	\appendix
+	
+	% COMMENT THIS FRAME IF THE THEME AUTOMATICALLY PROVIDES A SEPARATION FRAME AT BEGINNING OF THE APPENDIX
+%	\frame[c]{\centering\bfseries\Huge \appendixname}
+	
+	\begin{frame}[fragile]{Appendix frames}
+		For creating appendix frames, just begin an appendix part with the \verb|\appendix| command like you do in other \LaTeX\ documents.
+		
+		\medskip
+		If you don't want appendix frames being counted into the total number of frames you may load the \texttt{appendixnumberbeamer} package in your document's preamble.
+	\end{frame}
+\end{document}

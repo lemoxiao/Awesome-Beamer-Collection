@@ -1,0 +1,187 @@
+\usepackage[absolute,overlay]{textpos}
+\usepackage[skins]{tcolorbox}
+
+\mode<presentation>
+
+%colors
+	\definecolor{blue_kuleuven}{RGB}{17,110,138}					% blue of the university
+	\definecolor{dark_blue_kuleuven}{RGB}{0,64,122}					% darker shade of blue
+	\definecolor{light_blue_kuleuven}{RGB}{82,189,236}				% lighter shade of blue
+	\setbeamercolor{normal text}{fg=dark_blue_kuleuven}				% text color
+	\setbeamercolor{frametitle}{fg=blue_kuleuven!40!light_blue_kuleuven}	% frame title color
+	\setbeamercolor{section in toc}{fg=dark_blue_kuleuven}			% toc (section) color
+	\setbeamercolor{section in toc shaded}{fg=dark_blue_kuleuven}	% toc (shaded section) color
+	\setbeamercolor{item}{fg=dark_blue_kuleuven}					% item color
+	\setbeamercolor{subitem}{fg=dark_blue_kuleuven}					% subitem color
+	\setbeamercolor{subsubitem}{fg=dark_blue_kuleuven}				% subsubitem color
+	\setbeamercolor{text}{bg=blue_kuleuven,fg=white}				% text block color
+	\setbeamercolor{block title}{bg=blue_kuleuven,fg=white}			% block title color
+	\setbeamercolor{block body}{bg=black!20!white,fg=blue_kuleuven}	% block body color
+	
+	%\setbeamercolor{math text}{fg=black}
+	\setbeamercolor{math text displayed}{fg=black}
+	
+	\setbeamercolor{caption name}{fg=black!80!white}
+	\setbeamercolor{caption}{fg=black!80!white}
+
+	\setbeamercolor*{bibliography item}{fg=black!80!white}
+	\setbeamercolor*{bibliography entry title}{fg=black!80!white}
+	\setbeamercolor*{bibliography entry author}{fg=black!80!white}
+	\setbeamercolor*{bibliography entry journal}{fg=black!80!white}
+	\setbeamercolor*{bibliography entry note}{fg=black!80!white}
+
+%fonts
+	\usefonttheme[onlymath]{serif}						% math font
+	\setbeamerfont{frametitle}{size=\bf \large}			% frame title font size
+	\setbeamerfont{enumerate item}{size=\Large}			% item symbol font size
+	\setbeamerfont{footnote}{size=\tiny}				% footnote font size
+
+%inner theme
+	%itemize list
+	\setbeamertemplate{itemize item}[triangle] 			% item symbol
+	\setbeamertemplate{itemize subitem}[circle]			% subitem symbol
+	
+	%enumerate list
+	\setbeamertemplate{enumerate item}[numbered]		% item symbol
+	\setbeamertemplate{enumerate subitem}[numbered]		% item symbol
+	\setbeamerfont{enumerate item}{size=\normalsize}
+	
+	\setbeamertemplate{sections/subsections in toc}[sections numbered]	% toc symbols
+	\setbeamerfont{section in toc}{series=\bf}
+	\setbeamersize{text margin left=5mm,text margin right=5mm} % text margins
+		
+%outer theme
+	\setbeamertemplate{navigation symbols}{} 		% remove the navigation symbols
+	% headline	
+	\setbeamertemplate{frametitle}{
+		\vskip 2mm
+		{
+			\ifnum \thesection=0
+				\insertframetitle
+			\else
+				\thesection~--~\insertframetitle
+			\fi
+		}
+		\vskip 1mm
+		\hrule
+	}
+
+	% footline
+	\setbeamertemplate{footline}{
+		\hspace{-2mm}
+		\vspace{8mm}
+		\begin{textblock*}{1.01\paperwidth}(0mm,0.94\paperheight)
+			\begin{tcolorbox}[
+				arc=0pt,boxrule=0pt,height=0.06\paperheight,width=\paperwidth,
+				coltext=white,skin=bicolor,valign=center,halign=center,
+				interior style={left color=blue_kuleuven!70!white,right color=blue_kuleuven!90!black}
+				]
+				\insertframenumber
+			\end{tcolorbox}
+		\end{textblock*}
+		\begin{textblock*}{1.01\paperwidth}(0.78\paperwidth,0.89\paperheight)
+			\includegraphics[width=0.18\paperwidth]{fig/kuleuven_CMYK_logo}
+		\end{textblock*}
+	}
+		
+	% title page
+	\setbeamertemplate{title page}{
+		\begin{textblock*}{\paperwidth}(0mm,0.10\paperheight)
+			
+			\begin{tcolorbox}[
+				arc=0pt,boxrule=0pt,height=0.90\paperheight,width=\paperwidth,
+				valign=center,halign=center,skin=bicolor,coltext=white,
+				interior style={left color=blue_kuleuven!70!white,right color=blue_kuleuven!90!black}
+				]
+			\end{tcolorbox}
+			%\begin{beamercolorbox}[ht=0.90\paperheight,wd=\paperwidth,center]{block title}
+			%\end{beamercolorbox}
+		\end{textblock*}
+		\begin{textblock*}{0.2\paperwidth}(0.04\paperwidth,0.06\paperheight)
+			\includegraphics[width=0.18\paperwidth]{fig/kuleuven_CMYK_logo}
+		\end{textblock*}			
+		\begin{textblock*}{0.2\paperwidth}(0.06\paperwidth,0.26\paperheight)
+			\includegraphics[width=0.18\paperwidth]{fig/sleutel}
+		\end{textblock*}
+		\begin{textblock*}{0.1\paperwidth}(0.90\paperwidth,0.84\paperheight)
+			\includegraphics[height=0.10\paperheight]{fig/sedes}
+		\end{textblock*}
+		\begin{textblock*}{\paperwidth}(0.32\paperwidth,0.30\paperheight)
+			\begin{tcolorbox}[standard jigsaw,arc=0pt,boxrule=0pt,
+				halign=flush left,width=0.60\paperwidth,
+				left=-1mm,right=-1mm,top=-1mm,bottom=0mm,
+				coltext=white,opacityback=0.0,opacityframe=0.0]
+				{\Large\textbf{\inserttitle}}
+			\end{tcolorbox}
+            \ifx\insertsubtitle\empty
+            \else
+                \begin{tcolorbox}[standard jigsaw,arc=0pt,boxrule=0pt,
+                    halign=flush left,width=0.58\paperwidth,
+                    left=-1mm,right=-1mm,top=-1mm,bottom=0mm,
+                    coltext=white,opacityback=0.0,opacityframe=0.0]
+                    \large\insertsubtitle
+                \end{tcolorbox}
+            \fi
+			\vspace{2mm}
+            \ifx\insertauthor\empty
+            \else
+                \begin{tcolorbox}[standard jigsaw,arc=0pt,boxrule=0pt,
+                    halign=flush left,width=0.58\paperwidth,
+                    left=-1mm,right=-1mm,top=-1mm,bottom=0mm,
+                    coltext=white,opacityback=0.0,opacityframe=0.0]
+                    \insertauthor
+                \end{tcolorbox}
+            \fi
+            \ifx\insertinstitute\empty
+            \else
+                \vspace{-1mm}
+                \begin{tcolorbox}[standard jigsaw,arc=0pt,boxrule=0pt,
+                    halign=flush left,width=0.58\paperwidth,
+                    left=-1mm,right=-1mm,top=-1mm,bottom=0mm,
+                    coltext=white,opacityback=0.0,opacityframe=0.0]
+                    {
+                    \makeatletter
+                    \def\beamer@andinst{\\}
+                    \makeatother
+                    \scriptsize\insertinstitute
+                    }
+                \end{tcolorbox}
+            \fi
+            \ifx\insertdate\empty
+            \else
+                \vspace{1mm}
+                \begin{tcolorbox}[standard jigsaw,arc=0pt,boxrule=0pt,
+                    halign=flush left,width=0.58\paperwidth,height=0.04\paperheight,
+                    left=-1mm,right=-1mm,top=-1mm,bottom=0mm,
+                    coltext=white,opacityback=0.0,opacityframe=0.0]
+                    \insertdate
+                \end{tcolorbox}
+            \fi
+		\end{textblock*}
+	}
+	
+	
+% display toc before each section
+	\AtBeginSection[] {
+		\begin{frame}{Outline}
+    		\vskip 5mm
+			\hfill	{\large\parbox {.95\textwidth}{\tableofcontents[currentsection,hideallsubsections]}}
+		\end{frame}
+		}
+% add numbers to captions
+	\setbeamertemplate{caption}[numbered]
+	
+% bibliography
+	\setbeamertemplate{bibliography item}{[\theenumiv]}
+	\setbeamertemplate{bibliography entry title}{\\}
+	\setbeamertemplate{bibliography entry location}{\\}
+	\setbeamertemplate{bibliography entry note}{\\}
+	
+% custombox	
+	\newtcolorbox{kulbox}[1]{
+		coltext=blue_kuleuven,skin=bicolor,
+		frame style={left color=blue_kuleuven!70!white,right color=blue_kuleuven!90!black},
+  		title=#1
+	}
+\mode
+<all> 

@@ -1,0 +1,383 @@
+%% This is file `beamerouterthemeuow.sty',
+%% 2014-01-07 (cc) tmgriffiths Version 1.0
+%%
+%% Copyright (CC BY-NC-SA 4.0 Int) 2015 by T. M. Griffiths
+%% under the creative commons licence, attribution, non-comercial, share alike
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License version 1.3c
+%% http://www.latex-project.org/lppl/lppl-1-3c.txt
+%%
+%%--------------------------------------------------------------------------------
+%% These Packages essentially port the UOW powerpoint templates over to Beamer, 
+%% a LaTeX class for presentations. Inspiration for parts of this theme (where 
+%% design decision had to be made) and guidance on the implementation of the 
+%% pgfkeys were taken from the metropolis by Matthias Vogelgesang et al., of which 
+%% the author of this package is a contributor.
+%% 
+%% Created by Thomas M. Griffiths (tmg994[at]uowmail[dot]edu[dot]au) 2015-07-23 
+%% Version 1.0 2015-07-23 tmgriffiths       
+%%--------------------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerouterthemeuow}
+   [2015/07/23 A Beamer Outer Theme That Matches the UOW Branding Guidelines V 1.0 (cc) tmgriffiths]
+
+\RequirePackage{pgfopts}
+\RequirePackage{tikz}
+\RequirePackage{calc}
+\RequirePackage{xparse}
+\RequirePackage{etoolbox}
+\RequirePackage{anyfontsize}
+
+\newcommand{\@UOWtheme@outer@defaults}{
+   \pgfkeys{/UOWtheme/outer/.cd,
+      layout=standard,
+      framenumbering=none,
+      titlepage=true,
+   }
+}
+
+% Detection of aspect ration in order to pass on details for various aspect ratios
+% See answer to http://tex.stackexchange.com/questions/123106/detect-aspect-ratio-in-beamer
+\ExplSyntaxOn
+\NewDocumentCommand{\ifaspectratio}{mmm}{%
+   % Recover the option from those passed to the class
+   \keys_set:nf { zunbeltz/beameroptions } { \use:c { opt@beamer.cls } }
+   \str_if_eq:nVTF { #1 } \l_zunbeltz_aspectratio_tl { #2 } { #3 }
+}
+\NewDocumentCommand{\xifaspectratio}{mO{}}{%
+   % Recover the option from those passed to the class
+   \keys_set:nf { zunbeltz/beameroptions } { \use:c { opt@beamer.cls } }
+   \str_case:Vnn \l_zunbeltz_aspectratio_tl { #1 } { #2 }
+}
+% We need to define only one key, the other are treated as `unknown'
+\keys_define:nn { zunbeltz/beameroptions }{%
+   aspectratio .tl_set:N = \l_zunbeltz_aspectratio_tl,
+   aspectratio .initial:n = 43,
+   unknown .code:n = {},
+}
+
+% FIX FOR BUGGY LATEX3 KERNEL UPDATE REMOVE ONCE UPDATED!
+% http://tex.stackexchange.com/questions/256656/latest-miktex-update-breaks-with-fontspec
+\cs_new_eq:NN \str_case:nnn \str_case:nnF
+\cs_new_eq:NN \str_case_x:nnn \str_case_x:nnF
+\cs_new_eq:NN \int_case:nnn \int_case:nnF
+% FIX FOR BUGGY LATEX3 KERNEL UPDATE REMOVE ONCE UPDATED!
+%
+% Generate the variants we need
+\cs_generate_variant:Nn \keys_set:nn { nf }
+\cs_generate_variant:Nn \str_if_eq:nnTF { nV }
+\cs_generate_variant:Nn \str_case:nnn { V }
+\ExplSyntaxOff
+
+% Lengths
+\newlength{\@UOWlargerectangle@height}
+\newlength{\@UOWlargerectangle@width}
+\newlength{\@UOWsmallrectangle@height}
+\newlength{\@UOWsmallrectangle@width}
+\newlength{\@UOWlogo@width}
+\xifaspectratio{
+   {1610}{% HEIGHT = [169]/10*9 | Width = [169]/16*16
+   \setlength{\@UOWlargerectangle@height}{0.1125\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.189\paperwidth}
+   \setlength{\@UOWsmallrectangle@height}{0.054\paperheight}
+   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.189\paperwidth}
+   \setlength{\@UOWlogo@width}{0.149606\paperwidth}   
+   }
+   {169}{% ORIGINALS AND CALCULATED FROM PPT
+   \setlength{\@UOWlargerectangle@height}{0.125\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.189\paperwidth}
+   \setlength{\@UOWsmallrectangle@height}{0.06\paperheight}
+   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.189\paperwidth}
+   \setlength{\@UOWlogo@width}{0.149606\paperwidth}
+   }
+   {149}{% HEIGHT = [169]/9*9 | Width = [169]/14*16
+   \setlength{\@UOWlargerectangle@height}{0.125\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.216\paperwidth}
+   \setlength{\@UOWsmallrectangle@height}{0.06\paperheight}
+   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.216\paperwidth}
+   \setlength{\@UOWlogo@width}{0.171\paperwidth}
+   }
+   {54}{% HEIGHT = [169]/10*9 | Width = [169]/12.50*16
+   \setlength{\@UOWlargerectangle@height}{0.113\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.242\paperwidth}
+   \setlength{\@UOWsmallrectangle@height}{0.054\paperheight}
+   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.242\paperwidth}
+   \setlength{\@UOWlogo@width}{0.192\paperwidth}
+   }
+   {43}{% HEIGHT = [169]/9.60*9 | Width = [169]/12.80*16
+   \setlength{\@UOWlargerectangle@height}{0.117\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.236\paperwidth}
+   \setlength{\@UOWsmallrectangle@height}{0.056\paperheight}
+   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.236\paperwidth}
+   \setlength{\@UOWlogo@width}{0.187\paperwidth}
+   }
+   {32}{% HEIGHT = [169]/9*9 | Width = [169]/13.5*16
+   \setlength{\@UOWlargerectangle@height}{0.125\paperheight}
+   \setlength{\@UOWlargerectangle@width}{0.224\paperwidth}
+   \setlength{\@UOWsmallrectangle@height}{0.06\paperheight}
+   \setlength{\@UOWsmallrectangle@width}{\paperwidth-0.224\paperwidth}
+   \setlength{\@UOWlogo@width}{0.177\paperwidth}
+   }
+}
+
+% Boolean for turning title page on and off.
+\newtoggle{titlepage}
+\pgfkeys{%
+   /UOWtheme/outer/titlepage/.cd,
+      .is choice,
+      false/.code={%
+         \togglefalse{titlepage}%
+         },
+      true/.code={%
+         \toggletrue{titlepage}%
+         },
+      none/.code={%
+         \togglefalse{titlepage}%
+      },
+}
+
+% Backgrounds
+\newcommand{\@UOWtheme@boldbackground}{
+   \begin{tikzpicture}[overlay]
+      \filldraw[color=\@UOWtheme@color,]
+         (0,0) 
+         rectangle (\the\paperwidth, -\the\paperheight);
+      \filldraw[color=white,]
+         (0,-\the\paperheight+\@UOWsmallrectangle@height) 
+         rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight)
+         [path picture={
+         \node[text=black, align=right, anchor=west] at (path picture bounding box.west) {
+         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em} PERSONALISED EXPERIENCES\kern0.1em :\kern0.1em WORLD-CLASS RESULTS}
+         };}
+         ];
+      \filldraw[color=white,]
+         (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+         rectangle (\the\paperwidth, -\the\paperheight)
+         [path picture={
+         \node at (path picture bounding box.center) {
+         \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
+         };}
+         ];
+   \end{tikzpicture}
+}
+
+\newcommand{\@UOWtheme@minimalbackground}{
+   \begin{tikzpicture}[overlay]
+      \filldraw[color=\@UOWtheme@color,]
+         (0,-\the\paperheight+\@UOWsmallrectangle@height) 
+         rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight)
+         [path picture={
+         \node[text=white, align=right, anchor=west] at (path picture bounding box.west) {
+         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em} PERSONALISED EXPERIENCES\kern0.1em :\kern0.1em WORLD-CLASS RESULTS}
+         };}
+         ];
+      \filldraw[color=\@UOWtheme@color,]
+         (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+         rectangle (\the\paperwidth, -\the\paperheight)
+         [path picture={
+         \node at (path picture bounding box.center) {
+         \includegraphics[width=\@UOWlogo@width]{UOW_mono_inverted.pdf}
+         };}
+         ];
+   \end{tikzpicture}
+}
+
+\newcommand{\@UOWtheme@ecobackground}{
+   \begin{tikzpicture}[overlay]
+      \draw[color=white,]
+         (\@UOWsmallrectangle@width,-\the\paperheight+\@UOWlargerectangle@height) 
+         rectangle (\the\paperwidth, -\the\paperheight)
+         [path picture={
+         \node at (path picture bounding box.center) {
+         \includegraphics[width=\@UOWlogo@width]{UOW_mono.pdf}
+         };}
+         ];
+      \filldraw[color=white,]
+         (0,-\the\paperheight+\@UOWsmallrectangle@height) 
+         rectangle (\@UOWsmallrectangle@width+1pt, -\the\paperheight)
+         [path picture={
+         \node[text=black, align=right, anchor=west] at (path picture bounding box.west) {
+         {\sffamily\fontsize{5}{7}\selectfont\hspace{1em} PERSONALISED EXPERIENCES\kern0.1em :\kern0.1em WORLD-CLASS RESULTS}
+         };}
+         ];
+      \draw[thick, color=\@UOWtheme@color,] 
+         (0,-\the\paperheight+\@UOWsmallrectangle@height) --
+         (\@UOWsmallrectangle@width, -\the\paperheight+0.5*\the\@UOWlargerectangle@height) -- 
+         (\@UOWsmallrectangle@width,-\the\paperheight+\the\@UOWlargerectangle@height) --
+         (\the\paperwidth,-\the\paperheight+\@UOWlargerectangle@height);
+   \end{tikzpicture}
+}
+
+% Templates
+\defbeamertemplate{background}{bold}{%
+   \@UOWtheme@boldbackground
+}
+
+\defbeamertemplate{background}{UOWdefault}{
+   \iftoggle{titlepage}{%
+      % true
+      \ifnum\c@framenumber=1%
+         \@UOWtheme@boldbackground
+      \else%
+         \@UOWtheme@minimalbackground
+      \fi%
+   }%
+   {%
+      % false
+      \@UOWtheme@minimalbackground
+   }
+}
+
+\defbeamertemplate{background}{bold plain}{
+   \iftoggle{titlepage}{%
+      % true
+      \ifnum\c@framenumber=1%
+         \@UOWtheme@boldbackground
+      \else%
+         %
+      \fi%
+   }%
+   {%
+      % false
+   }
+}
+
+\defbeamertemplate{background}{minimal title}{
+   \@UOWtheme@minimalbackground
+}
+
+\defbeamertemplate{background}{minimal}{%
+   \iftoggle{titlepage}{%
+      % true
+      \ifnum\c@framenumber=1%
+         \@UOWtheme@minimalbackground
+      \else%
+         %
+      \fi%
+   }%
+   {%
+      % false
+   }
+}
+
+\defbeamertemplate{background}{UOWplain}{%
+%
+}
+
+\defbeamertemplate{background}{eco}{%
+   \@UOWtheme@ecobackground
+}
+
+\defbeamertemplate{background}{ecominimal}{%
+   \iftoggle{titlepage}{%
+      % true
+      \ifnum\c@framenumber=1%
+         \@UOWtheme@ecobackground
+      \else%
+         %
+      \fi%
+   }%
+   {%
+      % false
+   }
+}
+
+\newcommand{\@UOWtheme@framenumberseperator}{/}
+\defbeamertemplate{frame numbering}{none}{}
+\defbeamertemplate{frame numbering}{counter}{
+   \ifnum\c@framenumber=1%
+   %
+   \else
+      \insertframenumber
+   \fi
+}
+\defbeamertemplate{frame numbering}{fraction}{
+   \ifnum\c@framenumber=1%
+   %
+   \else
+   \insertframenumber\@UOWtheme@framenumberseperator\inserttotalframenumber
+   \fi
+}
+
+\newcommand{\@UOWtheme@framenumberfootline}{%
+   \setbeamertemplate{footline}{%
+      %\begin{beamercolorbox}[wd=\textwidth, sep=3ex]{footline}%
+         \hfill
+         \usebeamercolor[fg]{page number in head/foot}
+         \usebeamerfont{page number in head/foot}%
+         \usebeamertemplate*{frame numbering}
+         \hspace{1.5ex}\vspace*{1.5ex}
+      %\end{beamercolorbox}%
+   }
+}
+
+\pgfkeys{%
+   /UOWtheme/outer/framenumbering/.cd,
+      .is choice,
+      none/.code={%
+         \setbeamertemplate{frame numbering}[none]%
+         },
+      counter/.code={%
+         \setbeamertemplate{frame numbering}[counter]%
+         \@UOWtheme@framenumberfootline%
+         },
+      fraction/.code={%
+         \setbeamertemplate{frame numbering}[fraction]%
+         \@UOWtheme@framenumberfootline%
+      },
+}
+
+\pgfkeys{
+   /UOWtheme/outer/layout/.cd,
+      .is choice,
+      minimal/.code={%
+         \setbeamertemplate{background}[minimal]%
+      },
+      minimaltitle/.code={%
+         \setbeamertemplate{background}[minimal title]%
+         \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
+            \advance\footheight by 1.2\@UOWsmallrectangle@height
+            }{}{}
+      },
+      standard/.code={%
+         \setbeamertemplate{background}[UOWdefault]% default already defined by beamer
+         \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
+            \advance\footheight by 1.2\@UOWsmallrectangle@height
+            }{}{}
+      },
+      bold/.code={%
+         \setbeamertemplate{background}[bold]%
+         \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
+            \advance\footheight by 1.2\@UOWsmallrectangle@height
+            }{}{}
+      },
+      boldplain/.code={%
+         \setbeamertemplate{background}[bold plain]%
+      },
+      eco/.code={%
+         \setbeamertemplate{background}[eco]%
+         \patchcmd{\beamer@calculateheadfoot}{\advance\footheight by 4pt}{%
+            \advance\footheight by 1.2\@UOWsmallrectangle@height
+            }{}{}
+      },
+      ecominimal/.code={%
+         \setbeamertemplate{background}[ecominimal]%
+      },
+      plain/.code={%
+         \setbeamertemplate{background}[UOWplain]%
+      },
+}
+
+% No navigation symbols in the bottom corner
+\setbeamertemplate{navigation symbols}{}
+
+
+\addtobeamertemplate{footnote}{\hsize\@UOWsmallrectangle@width}{}
+
+\@UOWtheme@outer@defaults
+\ProcessPgfPackageOptions{/UOWtheme/outer}
+
+\mode<all>

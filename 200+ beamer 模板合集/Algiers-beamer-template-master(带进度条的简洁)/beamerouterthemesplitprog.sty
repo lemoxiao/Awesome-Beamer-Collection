@@ -1,0 +1,216 @@
+% Copyright 2014 by Djalel Benbouzid
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\mode<presentation>
+
+\setbeamercolor{section in head/foot}{parent=palette quaternary}
+\setbeamercolor{subsection in head/foot}{parent=palette primary}
+
+\setbeamercolor{author in head/foot}{parent=section in head/foot}
+\setbeamercolor{title in head/foot}{parent=subsection in head/foot}
+
+
+\usesectionheadtemplate
+  {\hfill\insertsectionhead}
+  {\hfill\color{fg!50!bg}\insertsectionhead}
+
+                                % Head
+\ifbeamer@compress
+
+\defbeamertemplate*{headline}{split theme}
+{%
+  \leavevmode%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex]{section in head/foot}%
+    \insertsectionnavigationhorizontal{.5\paperwidth}{\hskip0pt plus1filll}{}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex]{subsection in head/foot}%
+    \insertsubsectionnavigationhorizontal{.5\paperwidth}{}{\hskip0pt plus1filll}%
+  \end{beamercolorbox}%
+}
+
+\else
+
+\defbeamertemplate*{headline}{split theme}
+{%
+  \leavevmode%
+  \@tempdimb=2.4375ex%
+  \ifnum\beamer@subsectionmax<\beamer@sectionmax%
+    \multiply\@tempdimb by\beamer@sectionmax%
+  \else%
+    \multiply\@tempdimb by\beamer@subsectionmax%
+  \fi%
+  \ifdim\@tempdimb>0pt%
+    \advance\@tempdimb by 1.825ex%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=\@tempdimb]{section in head/foot}%
+      \vbox to\@tempdimb{\vfil\insertsectionnavigation{.5\paperwidth}\vfil}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=\@tempdimb]{subsection in head/foot}%
+      \vbox to\@tempdimb{\vfil\insertsubsectionnavigation{.5\paperwidth}\vfil}%
+    \end{beamercolorbox}%
+  \fi%
+}
+
+\fi
+
+
+%%%% No progress bar
+\newcommand*\oldmacro{}%
+\let\oldmacro\insertshorttitle%
+\renewcommand*\insertshorttitle{%
+  \hfill%\oldmacro\hfill%
+\scriptsize{  \insertframenumber\,/\,\inserttotalframenumber} }
+%%%%%%%%%%%
+
+% \defbeamertemplate*{footline}{split theme}
+% {%
+%   \leavevmode%
+%   \hbox{\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+%     \usebeamerfont{author in head/foot}\insertshortauthor
+%   \end{beamercolorbox}%
+%   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+%     \usebeamerfont{title in head/foot}\insertshorttitle
+%   \end{beamercolorbox}}%
+%   \vskip0pt%
+% }
+
+\usepackage{tikz}
+\usetikzlibrary{calc,shapes.misc}
+%\definecolor{pbgray}{HTML}{000000}% background color for the progress bar 575757
+\definecolor{pbgray}{RGB}{204,54,8}
+\definecolor{pbblue}{HTML}{0A75A8}% color for the progress bar and the circle
+\definecolor{pbred}{RGB}{204,54,8}
+
+% \makeatletter
+% \def\progressbar@progressbar{} % the progress bar
+% \newcount\progressbar@tmpcounta% auxiliary counter
+% \newcount\progressbar@tmpcountb% auxiliary counter
+% \newdimen\progressbar@pbht %progressbar height
+% \newdimen\progressbar@pbwd %progressbar width
+% \newdimen\progressbar@tmpdim % auxiliary dimension
+
+% \progressbar@pbwd=\linewidth
+% \progressbar@pbht=1pt
+
+% % the progress bar
+% \def\progressbar@progressbar{%
+
+%     \progressbar@tmpcounta=\insertframenumber
+%     \progressbar@tmpcountb=\inserttotalframenumber
+%     \progressbar@tmpdim=\progressbar@pbwd
+%     \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+%     \divide\progressbar@tmpdim by \progressbar@tmpcountb
+
+%   \begin{tikzpicture}[very thin]
+%     \draw[pbgray!90,line width=\progressbar@pbht]
+%       (0pt, 0pt) -- ++ (\progressbar@pbwd,0pt);
+%     \draw[draw=none]  (\progressbar@pbwd,0pt) -- ++ (2pt,0pt);
+
+%     \draw[fill=pbgray!90,draw=pbgray] %
+%        ( $ (\progressbar@tmpdim, \progressbar@pbht) + (0,1.5pt) $ ) -- ++(60:3pt) -- ++(180:3pt) ;
+
+%     \node[draw=pbgray!90,text width=3.5em,align=center,inner sep=1pt,
+%       text=pbgray!90,anchor=east] at (0,0) {\insertframenumber/\inserttotalframenumber};
+%   \end{tikzpicture}%
+% }
+
+%%%%%%
+\makeatletter
+\def\progressbar@progressbar{} % the progress bar
+\newcount\progressbar@tmpcounta% auxiliary counter
+\newcount\progressbar@tmpcountb% auxiliary counter
+\newdimen\progressbar@pbht %progressbar height
+\newdimen\progressbar@pbwd %progressbar width
+\newdimen\progressbar@rcircle % radius for the circle
+\newdimen\progressbar@tmpdim % auxiliary dimension
+
+\progressbar@pbwd=\linewidth
+\progressbar@pbht=1pt
+\progressbar@rcircle=2.5pt
+
+% the progress bar
+\def\progressbar@progressbar{%
+
+    \progressbar@tmpcounta=\insertframenumber
+    \progressbar@tmpcountb=\inserttotalframenumber
+    \progressbar@tmpdim=\progressbar@pbwd
+    \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+    \divide\progressbar@tmpdim by \progressbar@tmpcountb
+
+  \begin{tikzpicture}
+    \draw[pbgray!100,line width=\progressbar@pbht]
+      (0pt, 0pt) -- ++ (\progressbar@pbwd,0pt); %(current page.south)
+
+    \filldraw[pbgray!100] %
+      (\the\dimexpr\progressbar@tmpdim-\progressbar@rcircle\relax, .1\progressbar@pbht) circle (\progressbar@rcircle);
+
+    \node[rounded rectangle, fill=pbgray!100, draw=pbgray!100, text width=3.5em, align=center, inner sep=2pt, text=white, anchor=east] at (0,0) %rounded rectangle west arc=none
+    {
+      \fontfamily{kurier}\selectfont{
+      \insertframenumber\ /\ \inserttotalframenumber }
+    };
+  \end{tikzpicture}%
+}
+
+%%%%%%%%%%%%
+
+% \makeatletter
+% \def\progressbar@progressbar{} % the progress bar
+% \newcount\progressbar@tmpcounta% auxiliary counter
+% \newcount\progressbar@tmpcountb% auxiliary counter
+% \newdimen\progressbar@pbht %progressbar height
+% \newdimen\progressbar@pbwd %progressbar width
+% \newdimen\progressbar@tmpdim % auxiliary dimension
+
+% \progressbar@pbwd=\linewidth
+% \progressbar@pbht=.7ex
+
+% % the progress bar
+% \def\progressbar@progressbar{%
+
+%     \progressbar@tmpcounta=\insertframenumber
+%     \progressbar@tmpcountb=\inserttotalframenumber
+%     \progressbar@tmpdim=\progressbar@pbwd
+%     \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+%     \divide\progressbar@tmpdim by \progressbar@tmpcountb
+
+%   \begin{tikzpicture}[rounded corners=2pt,very thin]
+
+%     \shade[top color=pbgray!20,bottom color=pbgray!20,middle color=pbgray!50]
+%       (0pt, 0pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
+
+%       \shade[draw=pbgray,top color=pbgray!50,bottom color=pbgray!50,middle color=pbgray] %
+%         (0pt, 0pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
+
+%     \draw[color=normal text.fg!50]  
+%       (0pt, 0pt) rectangle (\progressbar@pbwd, \progressbar@pbht) 
+%         node[pos=0.5,color=normal text.fg, text=darkred] {\textnormal{%
+%             \fontfamily{kurier}\selectfont{
+%             \insertframenumber\ /\ \inserttotalframenumber
+%             }
+%              % \pgfmathparse{\insertframenumber*100/\inserttotalframenumber}%
+%              % \pgfmathprintnumber[fixed,precision=2]{\pgfmathresult}\,\%%
+%         }%
+%     };
+%   \end{tikzpicture}%
+% }
+
+\addtobeamertemplate{footline}{}
+{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=4ex,center,dp=1ex]{white}%
+    \progressbar@progressbar%
+  \end{beamercolorbox}%
+  % \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+  %   \usebeamerfont{title in head/foot}\insertshorttitle
+  % \end{beamercolorbox}}%
+}
+
+\makeatother
+
+\mode
+<all>

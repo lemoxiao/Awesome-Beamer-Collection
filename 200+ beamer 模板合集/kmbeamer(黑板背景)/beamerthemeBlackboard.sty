@@ -1,0 +1,59 @@
+%% Copyright (c) 2011–2016 Kazuki Maeda <kmaeda@kmaeda.net>
+%%
+%% Distributable under the MIT License:
+%% http://www.opensource.org/licenses/mit-license.php
+%%
+\ProvidesPackage{beamerthemeBlackboard}[2012/12/08 ]
+
+\mode<presentation>
+
+\RequirePackage{kmbeamer_common}
+
+\usecolortheme{Blackboard}
+
+\setbeamersize{text margin left=6mm,text margin right=6mm}
+
+\setbeamerfont{title}{size=\normalsize,series=\bfseries}
+\setbeamerfont{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamerfont{footline}{size*={5}{\z@},series=\bfseries}
+
+\setbeamertemplate{background canvas}{\includegraphics{kmbeamer_bg_Blackboard}}
+\setbeamertemplate{itemize item}{\usebeamercolor[fg]{structure}$\circ$}
+\setbeamertemplate{frametitle}{\boldmath\insertframetitle}
+\setbeamertemplate{headline}{\vspace{4mm}}
+\setbeamertemplate{footline}{
+  \setbox\kmbmr@tmpboxa\hbox{\ifnum\insertsectionnumber>0\boldmath\insertsectionnumber.~\insertsection\fi}
+  \setbox\kmbmr@tmpboxb\hbox{\boldmath\insertframenumber$/$\inserttotalframenumber}
+  \ht\kmbmr@tmpboxa=1mm\dp\kmbmr@tmpboxa=0mm
+  \ht\kmbmr@tmpboxb=1mm\dp\kmbmr@tmpboxb=0mm
+  \vspace{5.2mm}
+  \hspace{4mm}\noindent\box\kmbmr@tmpboxa\hfill\box\kmbmr@tmpboxb\hspace{4mm}
+  \vspace{1.3mm}
+}
+\setbeamertemplate{title page}{
+  \renewcommand\thefootnote{\fnsymbol{footnote}}
+  \setcounter{footnote}{1} % \dagger
+  \vfill
+  \begin{center}
+    \usebeamercolor[fg]{structure}\bfseries\boldmath\inserttitle
+
+    \scriptsize\insertsubtitle
+  \end{center}
+  \vfill
+  \begin{center}
+    \insertauthor\ \ifx\insertinstitute\@empty\else(\insertinstitute)\fi
+  \end{center}
+  \vfill
+  \begin{center}
+    \small\insertdate
+  \end{center}
+  \vfill
+  \renewcommand\thefootnote{\arabic{footnote}}
+  \setcounter{footnote}{0}
+}
+
+\mode
+<all>
+
+\endinput

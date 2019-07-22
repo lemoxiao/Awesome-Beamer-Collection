@@ -1,0 +1,192 @@
+%% Copyright (C) 2016-2017 Achim D. Brucker, https://www.brucker.ch
+%%
+%% License:
+%%   This program can be redistributed and/or modified under the terms
+%%   of the LaTeX Project Public License Distributed from CTAN
+%%   archives in directory macros/latex/base/lppl.txt; either
+%%   version 1 of the License, or any later version.
+%%   OR
+%%   The 2-clause BSD-style license.
+%%
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{lh-base}
+     [2016/11/01 v0.0  Common core of the LogicalHacking.com LaTeX classes.]
+\RequirePackage{ifthen}
+\usepackage{xkeyval}
+\usepackage{xstring}
+\usepackage{etoolbox}
+\usepackage{xcolor}
+
+\usepackage{fontawesome}
+\definecolor{linkedin}{RGB}{24,103,158}
+\definecolor{twitter}{RGB}{29,161,242}
+
+\def\lh@classification@sel@default{5}
+\def\lh@classification@sel{5}
+\newcommand{\lh@CCBYNCND}{\href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{CC BY-NC-ND 4.0}}
+\newcommand{\lh@CCBYND}{\href{https://creativecommons.org/licenses/by-nd/4.0/}{CC BY-ND 4.0}}
+\newcommand{\lh@CCBY}{\href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}}
+\newcommand{\lh@CCzero}{\href{https://creativecommons.org/publicdomain/zero/1.0/}{CC0 1.0}}
+\newcommand{\lh@GFDL}{\href{https://www.gnu.org/licenses/fdl.html}{GFDL 1.3}}
+
+\newcommand{\lh@strictlyconfidential}{Strictly Confidential}
+\newcommand{\lh@confidential}{Confidential}
+\newcommand{\lh@internal}{Internal}
+\newcommand{\lh@customer}{Customer}
+\newcommand{\lh@student}{Student\ifthenelse{\equal{\lh@classification@student@short}{}}%
+{}{~(\lh@classification@student@short)}}
+\newcommand{\lh@public}{Public}
+
+
+\newboolean{lh@slide@strictlyconfidential}\setboolean{lh@slide@strictlyconfidential}{false}
+\newboolean{lh@slide@confidential}\setboolean{lh@slide@confidential}{false}
+\newboolean{lh@slide@internal}\setboolean{lh@slide@internal}{false}
+\newboolean{lh@slide@customer}\setboolean{lh@slide@customer}{false}
+\newboolean{lh@slide@student}\setboolean{lh@slide@student}{false}
+\newboolean{lh@slide@public-cc-by-nc-nd}\setboolean{lh@slide@public-cc-by-nc-nd}{false}
+\newboolean{lh@slide@public-cc-by-nd}\setboolean{lh@slide@public-cc-by-nd}{false}
+\newboolean{lh@slide@public-cc-by}\setboolean{lh@slide@public-cc-by}{false}
+\newboolean{lh@slide@public-cc-zero}\setboolean{lh@slide@public-cc-zero}{false}
+\newboolean{lh@slide@public-gfdl}\setboolean{lh@slide@public-gfdl}{false}
+
+
+
+\newcommand{\classification}{UNDEFINED}
+\define@choicekey*{lh-base.sty}{classification}[\val\nr]%
+{strictly-confidential,confidential,internal,customer,student,public-cc-by-nc-nd,%
+  public-cc-by-nd,public-cc-by,public-cc-zero,public-gfdl}%
+[strictly-confidential]%
+{%
+  \let\lh@classification@sel@default\nr
+}
+
+\ProcessOptionsX\relax
+
+\newcommand{\lh@classification@text}[1]{%
+  \ifcase\number#1\relax% strictly confidential
+    \alert{\lh@strictlyconfidential}%
+  \or% confidential
+    \alert{\lh@confidential}%
+  \or% internal
+    \alert{\lh@internal}%
+  \or% customer
+    \lh@customer%
+  \or% student
+    \lh@student%
+  \or% public
+    \lh@public~(\lh@CCBYNCND)%
+  \or
+    \lh@public~(\lh@CCBYND)%
+  \or
+    \lh@public~(\lh@CCBY)%
+  \or
+    \lh@public~(\lh@CCzero)%
+  \or
+    \lh@public~(\lh@GFDL)%
+  \else
+    UNDEFINED~CLASSIFICATION:~#1%
+  \fi%
+}
+\newcommand{\lh@classification@description}[1]{%
+  \ifcase\number#1\relax% strictly confidential
+    classified ``\emph{\lh@stricltyconfidential}'' and only available
+    to a small number of
+    precisely specified persons. Disclosure to third parties only after a
+    confidentiality agreement has been signed.
+   \or% confidential
+    classified ``\emph{\lh@confidential}'' and only available to members of the Software
+    Assurance \& Security Research Team that are pre-defined by the
+    information owner. Disclosure to third parties only after a
+    confidentiality agreement has been signed.
+  \or% internal
+    classified ``\emph{\lh@internal}'' and only available to staff of the Software
+    Assurance \& Security Research Team  Disclosure to third parties only after a
+    confidentiality agreement has been signed.
+  \or% customer
+    classified ``\emph{\lh@customer}'' and only available to staff
+    of the University of Sheffield and to business partners. Disclosure to third parties only after a
+    confidentiality agreement has been signed.
+  \or% student
+    classified ``\emph{\lh@student}'' and only available to 
+    \ifthenelse{\equal{\lh@classification@student@long}{}}%
+    {staff of the University of Sheffield and to a limited group of students
+      (e.g., that are registered for a specific module) of the  University of Sheffield.}%
+     {students of the University of Sheffield that are registered to the module \lh@classification@student@long.}
+    Disclosure to third parties only after a
+    confidentiality agreement has been signed.
+  \or% public CC BY NC ND
+     licensed under
+    a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
+    International Public License (\lh@CCBYNCND).
+  \or% public CC BY ND
+    licensed under
+    a Creative Commons Attribution-NoDerivatives 4.0
+    International Public License (\lh@CCBYND).
+  \or% public CC BY
+    licensed under
+    a Creative Commons Attribution 4.0
+    International Public License (\lh@CCBY).
+  \or% public CC 0
+    licensed under
+    a \lh@CCzero license: To the extent possible under law, all copyright
+    and related or neighboring rights to the slides marked \lh@CCBY are
+    waived.
+  \or% public GFDL
+    licensed under
+    the \lh@GFDL:\\
+     Permission is granted to copy, distribute and/or modify this document
+    under the terms of the GNU Free Documentation License, Version 1.3
+    or any later version published by the Free Software Foundation;
+    with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+  \fi%
+}
+
+
+
+\let\lh@classification@sel\lh@classification@sel@default%
+\renewcommand{\classification}{\lh@classification@text{\lh@classification@sel}}
+\def\lh@classification{\classification}
+
+
+
+
+\def\lh@contactauthor{\insertshortauthor}
+\newcommand{\contactauthor}[1]{\gdef\lh@contactauthor{#1}}
+\def\lh@contactemail{}
+\newcommand{\contactemail}[1]{\gdef\lh@contactemail{#1}}
+\def\lh@contacttwitter{}
+\newcommand{\contacttwitter}[1]{\gdef\lh@contacttwitter{#1}}
+\def\lh@contactlinkedin{}
+\newcommand{\contactlinkedin}[1]{\gdef\lh@contactlinkedin{#1}}
+\def\lh@contactwww{}
+\newcommand{\contactwww}[1]{\gdef\lh@contactwww{#1}}
+\def\lh@contactblog{}
+\newcommand{\contactblog}[1]{\gdef\lh@contactblog{#1}}
+
+\def\lh@classification@student@short{}
+\newcommand{\lectureshortname}[1]{\gdef\lh@classification@student@short{#1}}
+
+\def\lh@classification@student@long{}
+\newcommand{\lecturelongname}[1]{\gdef\lh@classification@student@long{#1}}
+
+
+
+
+
+
+
+\def\lh@institute@short{}
+\newcommand{\institute}[2][]{\gdef\@publishers{#2}\gdef\lh@institute@short{#1}}
+
+
+
+\institute[The University of Sheffield]{%
+  \textbf{Software Assurance \& Security Research}\\
+  Department of Computer
+  Science, The University of Sheffield, Sheffield, UK\\
+  \hspace{.6cm} \href{https://logicalhacking.com/}{https://logicalhacking.com/}}
+
+
+
+\endinput
+

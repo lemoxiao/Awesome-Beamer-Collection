@@ -1,0 +1,336 @@
+% upb2018-example.tex
+% Max Hoffmann
+% max.hoffmann@math.upb.de
+% Version: 19/12/2018
+
+% ABOUT: This is a very elementary example for the use of the beamer class
+% upb2018 in which the essential functions are presented.
+
+\documentclass[
+	% uncomment, if you want to print your presentation as a handout
+	% with possibly more than one slide per a4page. You can choose
+	% the number of slides printed on one handout-page below in the
+	% options of \usetheme.
+		%handout
+	] {beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usetheme[
+	% choose the color theme of the presentation 
+		cyan % default
+		%orange
+		%green
+		%cassis
+		%blue
+		%red
+	,
+	% uncomment, if you want to use the optional short title instead
+	% of the full title in the header. Note that the short title
+	% is only displayed in one line.
+		shortTitleInHeader
+	,
+		%oneslideonhandout			% one slide per page (landscape)
+		%twoslidesonhandout 		% two slides per page
+		fourslidesonhandout			% four slides per page (landscape) [default]
+]{upb2018}
+
+
+% IMAGES
+% chooose the cropped background image on the titlepage
+\renewcommand{\titleimage}{abb/upbBackground.png}
+
+% use English UPB logo
+\renewcommand{\headerlogo}{abb/upbLogoEN.png}
+% use German UPB logo
+%\renewcommand{\headerlogo}{abb/upbLogoDE.png}
+
+
+
+% GENERAL INFORMATIONS
+\title[SHORTTITLE]{This Could Be The Title Of Your Presentation}
+\subtitle{Subtitle of your presentation}
+\institute{PADERBORN UNIVERSITY} % must be written in capital letters, as this
+								 % command does not work with the automatic
+								 % MakeUppercase.
+\author{Author}
+\date{Place, Time}
+
+
+\begin{document}
+
+% titlepage
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+
+
+\begin{frame}{General Settings 1}
+	The beamer theme \colemph{upb2018} can be used with the command 
+	\begin{center}
+		\texttt{$\backslash$usetheme[<colortheme>]\{upb2018\}}
+	\end{center}
+
+	For the option \texttt{<colortheme>} you can choose out of
+	\texttt{cyan}, \texttt{orange}, \texttt{green}, \texttt{cassis}, \texttt{blue} oder
+	\texttt{red}.
+
+	In addition you can use the option \texttt{shortTitleInHeader} to
+	use the optional short title instead of the full title in the header. Note that
+	the short title is only displayed in one line.
+\end{frame}
+
+
+
+\begin{frame}{General Settings 2}
+	You can change the cropped image on the title page using
+
+	\begin{center}
+		\texttt{$\backslash$renewcommand\{$\backslash$titleimage\}\{<path>\}}.
+	\end{center}
+
+	Note that your image will be cropped automatically.
+
+	\vfill
+
+	In the same way you can change the logo which is used on the title page and
+	in every header:
+	\begin{center}
+		\texttt{$\backslash$renewcommand\{$\backslash$headerlogo\}\{<path>\}}
+	\end{center}
+\end{frame}
+
+
+
+\normalframetitle % from now on use the (default) normal frame title style
+\begin{frame}{This is a frame title written in the usual way. It can also
+be multiline.}
+	For slides with a normal size of the frame title, you can use \texttt{$\backslash$normalframetitle}
+	before \texttt{$\backslash$begin\{frame\}}. In this style, frame titles can
+	also be multiline.
+
+	This style is set by default.
+\end{frame}
+
+
+
+\smallframetitle % from now on use the small frame title style
+\begin{frame}{This is a frame title written in the small, single-line way.}
+	If you want to have a slide with a smaller title, use the command \texttt{$\backslash$smallframetitle} before \texttt{$\backslash$begin\{frame\}}. Note that in this
+	style, frame titles are always single-line. A smaller frame title is useful if more space is needed on the slide.
+
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+	incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+	nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+	incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+	nostrud exercitation ullamco. Lorem ipsum dolor sit amet, consectetur adipiscing
+	elit, sed do eiusmod tempor  incididunt ut labore et dolore magna aliqua.
+\end{frame}
+
+
+
+\normalframetitle
+\begin{frame}{Items}
+	If you use  \texttt{$\backslash$colitem\ldots} instead of
+	\texttt{$\backslash$item\ldots} while you create an item list, the item text
+	will be printed in the color theme of the presentation.
+
+	\vfill
+	\begin{columns}
+		\begin{column}{.45\linewidth}
+			Using \texttt{$\backslash$item \ldots}:
+			\begin{itemize}
+				\item Item 1
+					\begin{itemize}
+						\item Subitem 1
+						\item Subitem 2
+					\end{itemize}
+				\item Item 2
+				\item Item 3
+			\end{itemize}
+		\end{column}
+		\begin{column}{.45\linewidth}
+			Using \texttt{$\backslash$colitem \ldots } at the first level:
+			\begin{itemize}
+				\colitem Item 1
+					\begin{itemize}
+						\item Subitem 1
+						\item Subitem 2
+					\end{itemize}
+				\colitem{Item 2}
+				\colitem{Item 3}
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+
+\begin{frame}{Additional ways to emphasize your text}
+	With the commands \texttt{$\backslash$colemph\{\ldots\}} and
+	\texttt{$\backslash$important\{\ldots\}} you can emphasize parts of your text
+	in the \colemph{color theme} oder in \important{upbred}.
+\end{frame}
+
+
+
+\begin{frame}{Different Types of Blocks}
+	\begin{block}{Normal Block}
+		This is a normal \texttt{block}.
+	\end{block}
+
+	\begin{alertblock}{Alert Block}
+		This is an \texttt{alert block}.
+	\end{alertblock}
+
+	\begin{exampleblock}{Example Block}
+		This is an \texttt{example block}.
+	\end{exampleblock}
+\end{frame}
+
+
+
+\begin{frame}{Mathematics}
+	Mathematical formulas can be used as usual \colemph{inline}, like for example
+	\(a^2+b^2 = c^2\) or in \colemph{display} mode:
+	\[\sum\limits_{k=0}^\infty q^k = \frac{1}{1-q}, \quad \forall q \in ]0,1[.\]
+\end{frame}
+
+
+
+\begin{frame}{Colors}
+	The template provides the colors from the official UPB color scheme:
+
+	\colorbox{upbblue}{\textcolor{white}{\texttt{upbblue}}}
+	\colorbox{upbgray}{\textcolor{white}{\texttt{upbgray}}}
+	\colorbox{upblightgray}{\textcolor{white}{\texttt{upblightgray}}}
+	\colorbox{upbred}{\textcolor{white}{\texttt{upbred}}}
+	\colorbox{upbgreen}{\textcolor{white}{\texttt{upbgreen}}}
+	\colorbox{upbcyan}{\textcolor{white}{\texttt{upbcyan}}}
+	\colorbox{upborange}{\textcolor{white}{\texttt{upborange}}}
+	\colorbox{upbcassis}{\textcolor{white}{\texttt{upbcassis}}}
+	\colorbox{upblightblue}{\textcolor{white}{\texttt{upblightblue}}}
+\end{frame}
+
+
+
+\begin{frame}{Colored Tables 1}
+	This template provides a number of useful commands to create colored tables as
+	suggested in the official UPB Powerpoint template.
+	\begin{itemize}
+		\item Use \texttt{$\backslash$thmL\{<width>\}, $\backslash$thmC\{width\}} and
+			\texttt{$\backslash$thmR\{width\}} as colum types for creating columns in
+			the theme color. The argument is the column width. By L,C,R the
+			alignments are distinguished.
+
+		\item In the same way you can use \texttt{$\backslash$lthmL\{width\},
+			$\backslash$lthmC\{width\}} and \texttt{$\backslash$lthmR\{width\}}.
+			Different from the first type, a lighter version of the theme is used here.
+
+		\item Use \texttt{$\backslash$whiterules} in order to have a white line
+			color in your table\\
+			(use \texttt{$\backslash$normalrules} for the default line color).
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Colored Table 1 -- Example}
+	A table in the theme color:
+
+	\begin{center}
+		\whiterules
+		\begin{tabular}{\thmC{3cm} | \lthmC{3cm} | \thmC{3cm}}
+			Dog & Tiger & Eagle\\
+			\hline
+			Elephant & Horse & Cat
+		\end{tabular}
+	\end{center}
+
+	\vfill
+	A normal table:
+
+	\begin{center}
+		\normalrules
+		\begin{tabular}{p{3cm} | p{3cm} | p{3cm}}
+			Dog & Tiger & Eagle\\
+			\hline
+			Elephant & Horse & Cat
+		\end{tabular}
+	\end{center}
+\end{frame}
+
+
+
+\begin{frame}{Colored Table 2}
+	You can also use any other color from the UPB color scheme for a colored table:
+	\begin{itemize}
+		\item use \texttt{$\backslash$L\{<width>\}\{<color>\}},
+			\texttt{$\backslash$C\{<width>\}\{<color>\}} or 
+			\texttt{$\backslash$R\{<width>\}\{<color>\}}, where \texttt{<color>} is
+			one of the provided UPB-colors which were presented above.
+
+		\item for a lighter version of the colors, you can use
+			\texttt{$\backslash$lL\{<width>\}\{<color>\}},
+			\texttt{$\backslash$lC\{<width>\}\{<color>\}} or 
+			\texttt{$\backslash$lR\{<width>\}\{<color>\}}.
+	\end{itemize}
+
+	\vfill
+
+	To color a complete row or cell, you can use \texttt{$\backslash$rowcolor\{<color>\}}
+	or \texttt{$\backslash$cellcolor\{<color>\}}.
+\end{frame}
+
+
+
+\begin{frame}{Colored Table 2 -- Example}
+	A colored table:
+	\begin{center}
+	\whiterules
+		\begin{tabular}{\L{3cm}{upbgreen} | \C{3cm}{upborange} | \lR{3cm}{upbcassis}}
+			Dog & Tiger & \cellcolor{upbred}Eagle\\
+			\hline
+
+			Elephant & Horse & Cat\\
+			\hline
+
+			\rowcolor{upbcyan}
+			Lion & Penguin & Dove\\
+			\hline
+
+			Deer & \cellcolor{upbred} Dugong & Turtle
+		\end{tabular}
+	\end{center}
+\end{frame}
+
+
+
+\smallframetitle
+\begin{frame}{Picture and The End}
+	Of course, it is also possible to use images in the presentation.
+
+	\vfill
+
+	\begin{columns}
+		\begin{column}{.5\linewidth}
+			\begin{figure}
+				\includegraphics[width=.7\linewidth]{abb/upbBackground.png}
+				\caption{This is an imported image with a caption.}
+				\label{abb:image}
+			\end{figure}
+		\end{column}
+		\begin{column}{.5\linewidth}
+			\LARGE \centering
+			\colemph{Thank you} for your attention.
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+
+\end{document}

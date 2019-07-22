@@ -1,0 +1,30 @@
+\mode<presentation>
+
+\setbeamertemplate{background}{
+    {\includegraphics[width=\paperwidth,height=\paperheight]{fondo.png}}
+}
+
+% Title page
+\defbeamertemplate*{title page}{cenditel}[1][]
+{ 
+    \vskip1.5cm
+    \begin{beamercolorbox}[wd=12cm,leftskip=1cm,sep=8pt,#1]{title page header}
+      \usebeamerfont{title}\inserttitle
+    \end{beamercolorbox}
+    \vskip-0.4cm
+    \begin{beamercolorbox}[wd=12cm,leftskip=1cm,sep=8pt,#1]{subtitle page header}
+      \usebeamerfont{subtitle}\insertsubtitle
+    \end{beamercolorbox}    
+    \vskip0.75cm
+    \begin{beamercolorbox}[wd=12cm,leftskip=2cm,#1]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+     \vskip0.2cm
+    \begin{beamercolorbox}[wd=12cm,leftskip=2cm,#1]{date}
+      \usebeamerfont{author}\insertdate
+    \end{beamercolorbox}
+  \vfill
+}
+
+\mode
+<all>

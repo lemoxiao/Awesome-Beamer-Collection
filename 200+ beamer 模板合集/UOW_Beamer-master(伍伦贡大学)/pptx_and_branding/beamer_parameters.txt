@@ -1,0 +1,49 @@
+Page sizes for beamer aspect ratios
+
+Ratio    Option   Width(cm)   Height(cm)
+16:10    1610     16.00       10.00
+16:9     169      16.00        9.00
+14:9     149      14.00        9.00
+5:4      54       12.50       10.00
+4:3      43       12.80        9.60
+3:2      32       13.50        9.00
+
+Logo dimensions in PPT 16:9
+1.13cm x 3.8cm  % 0.2\paperwidth
+paperwidth = 25.4cm paperheight = 14.3cm
+
+Beamer dimensions (cm) for all slides (just using ppt 16:9 for calculation)
+logo = 3.8/25.4*16 = 2.39370078740157480304 cm 2.39
+logo = 1.13/14.3*9 = 0.71118881118881118873 cm 0.71
+
+
+Detect ratio option given to the document class
+See answer to http://tex.stackexchange.com/questions/123106/detect-aspect-ratio-in-beamer
+
+\RequirePackage{xparse}
+\ExplSyntaxOn
+\NewDocumentCommand{\ifaspectratio}{mmm}
+ {
+  % Recover the option from those passed to the class
+  \keys_set:nf { zunbeltz/beameroptions } { \use:c { opt@beamer.cls } }
+  \str_if_eq:nVTF { #1 } \l_zunbeltz_aspectratio_tl { #2 } { #3 }
+ }
+\NewDocumentCommand{\xifaspectratio}{mO{}}
+ {
+  % Recover the option from those passed to the class
+  \keys_set:nf { zunbeltz/beameroptions } { \use:c { opt@beamer.cls } }
+  \str_case:Vnn \l_zunbeltz_aspectratio_tl { #1 } { #2 }
+ }
+% We need to define only one key, the other are treated as `unknown'
+\keys_define:nn { zunbeltz/beameroptions }
+ {
+  aspectratio .tl_set:N = \l_zunbeltz_aspectratio_tl,
+  aspectratio .initial:n = 43,
+  unknown .code:n = {},
+ }
+
+% Generate the variants we need
+\cs_generate_variant:Nn \keys_set:nn { nf }
+\cs_generate_variant:Nn \str_if_eq:nnTF { nV }
+\cs_generate_variant:Nn \str_case:nnn { V }
+\ExplSyntaxOff

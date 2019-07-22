@@ -1,0 +1,88 @@
+% the sample slide is created with 16:9 aspect ratio
+\documentclass[aspectratio=169]{beamer}
+
+% remove the options if you do not want to have them
+\usetheme[
+	background=saarland,
+	logo=uds
+]{saarland}
+
+% the background and logo are in the images directory
+\graphicspath{{images/}}
+
+% information for the title page
+\author{Kailash Budhathoki}
+\title{Saarland Beamer Theme}
+\subtitle{An unofficial theme for Saarland University}
+\institute{Max Planck Institute for Informatics and Saarland University}
+\date{\today}
+
+\begin{document}
+	% use plain option to remove the page number from the title slide
+	\begin{frame}[plain]
+		\titlepage
+	\end{frame}
+	
+	\begin{frame}{Willkommen im Saarland!}
+	Saarland is a German state in the dynamic border triangle of Germany, France and Luxembourg. 
+		\begin{itemize}
+			\item Gro{\ss}es, \textit{big}
+				\begin{itemize}
+					\item I am a subitem
+				\end{itemize}
+			\item Studieren. Forschen. Gr{\"u}nden.	
+			\item \textbf{this is a bold text}
+			\item \alert{this is an alert}
+			\item italics is not supported at the moment (i am working on the hack)
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{Blocks}
+		\framesubtitle{This is a subtitle}
+		\begin{block}{Standard Block}
+			This is a standard block.
+		\end{block}
+		
+		\begin{exampleblock}{Example Block}
+			This is an example block.
+		\end{exampleblock}
+		
+		\begin{alertblock}{Alert Block}
+			This is an alert block.
+		\end{alertblock}
+	\end{frame}
+	
+	\begin{frame}{Math}
+		Mathematics is the queen of sciences and arithmetic is the queen of mathematics.
+		\begin{align*}
+			\Pr(Y \geq 120) &= \Pr\left(Y-n\mu \geq 120-n\mu \right)\\
+			&= \Pr\left( \frac{Y-n\mu }{\sqrt{n}\sigma} \geq \frac{120-n\mu }{\sqrt{n}\sigma} \right)\\
+			&=\Pr\left( Z \geq \frac{120-n\mu }{\sqrt{n}\sigma} \right)\\
+			&=\Pr\left( Z \geq \frac{120-100 \cdot 1 }{10 \cdot 1} \right)\\
+			&=\Pr\left( Z \geq 2\right)
+		\end{align*}
+	\end{frame}
+
+	\begin{frame}{Two Columns}
+		We can also add two columns in the slides.
+		\begin{columns}[t]
+			\begin{column}[T]{0.4\textwidth}
+				This is the first column. In this column, we can also add a block for instance.
+				\vspace{1em}
+				\begin{block}{Block}
+					I am a block in a column.
+				\end{block}
+			\end{column}
+			\begin{column}[T]{0.4\textwidth}
+				\begin{itemize}
+					\item In this column,
+					\item we just add the
+					\item bullet points.
+				\end{itemize}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	\begin{frame}{Acknowledgements}
+		This theme is inspired by Flip theme (creator: Flip Tanedo). The official beamer user guide was also very handy during the development.
+	\end{frame}
+\end{document}

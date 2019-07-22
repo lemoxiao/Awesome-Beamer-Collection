@@ -1,0 +1,16 @@
+# Latex auxiliar files
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.blg
+*.snm
+*.toc
+*.nav
+*.tex.backup
+
+# Bibtex
+*.bbl
+*.blg
+*.bak
+*.bib.bak

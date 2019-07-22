@@ -1,0 +1,120 @@
+\section{Enumerations}
+\begin{frame}
+\frametitle{Enumerations}
+
+\begin{block}{New commands in this section}
+\begin{itemize}
+\item \color{unibablueI}\textbackslash begin\color{black}\{itemize\} \ldots \color{unibablueI}\textbackslash end\color{black}\{itemize\} 
+\item \color{unibablueI}\textbackslash begin\color{black}\{enumerate\} \ldots \color{unibablueI}\textbackslash end\color{black}\{enumerate\} 
+\item \color{nounibaredI}\textbackslash item\color{black}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Enumerations}
+\framesubtitle{Bulleted List}
+
+\begin{columns}
+\begin{column}{.5\textwidth}
+\begin{ttfamily}
+\input{content/listings/itemize1_escaped.tex}
+\end{ttfamily}
+\end{column}
+\begin{column}{.5\textwidth}
+\begin{itemize}
+\item first bullet item
+\item second bullet item
+\item third bullet item
+\item last  bullet item
+\end{itemize}
+\end{column}
+\end{columns}
+\bigskip
+
+The particular bullet items are indicated in the „itemize“-environment with the command \begin{ttfamily}\color{nounibaredI}\textbackslash item\color{black}\end{ttfamily}.
+\end{frame}
+
+\begin{frame}
+\frametitle{Enumerations}
+\framesubtitle{Interlacing}
+
+\begin{columns}
+\begin{column}{.5\textwidth}
+\begin{ttfamily}
+\input{content/listings/itemize2_escaped.tex}
+\end{ttfamily}
+\end{column}
+\begin{column}{.5\textwidth}
+\begin{itemize}
+\item first bullet item
+\item second bullet item
+\begin{itemize}
+\item first subitem
+\item second subitem
+\end{itemize}
+\item third bullet item
+\item last bullet item
+\end{itemize}
+\end{column}
+\end{columns}
+\bigskip
+In this way, subitems can be interlaced in maximal four layers.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Enumerations}
+\framesubtitle{Numerations}
+
+\begin{columns}
+\begin{column}{.5\textwidth}
+\begin{ttfamily}
+\input{content/listings/enumerate1_escaped.tex}
+\end{ttfamily}
+\end{column}
+\begin{column}{.5\textwidth}
+\begin{enumerate}
+\item first bullet item
+\begin{enumerate}
+\item first subitem
+\item second subitem
+\end{enumerate}
+\item second bullet item
+\item and so forth
+\end{enumerate}
+\end{column}
+\end{columns}
+\bigskip
+Again, the particular bullet items are indicated with the command \begin{ttfamily}\color{nounibaredI}\textbackslash item\color{black}\end{ttfamily}. 
+Again there are four layers for interlacing.
+\end{frame}
+
+\begin{frame}
+\frametitle{Mixed Enumerations?}
+\framesubtitle{Of Course!}
+
+\begin{columns}
+\begin{column}{.5\textwidth}
+\begin{ttfamily}
+\input{content/listings/enumerate2_escaped.tex}
+\end{ttfamily}
+\end{column}
+\begin{column}{.5\textwidth}
+\begin{enumerate}
+\item first bullet item
+\item \begin{itemize}
+\item first subitem
+\item second subitem
+\end{itemize}
+\item third bullet item
+\begin{enumerate}
+\item I matter, too!
+\end{enumerate}
+\item and so forth
+\end{enumerate}
+\end{column}
+\end{columns}
+\bigskip
+You can customize the symblos with \color{nounibaredI}\textbackslash item\color{nounibagreenI}[]\color{black}. 
+\end{frame}

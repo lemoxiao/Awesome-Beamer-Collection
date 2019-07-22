@@ -1,0 +1,80 @@
+\documentclass[t, pdftex]{beamer}  
+%Use Cockrell School Theme.  Optional department name.  Must %ecape, i.e. use 
+%backslash, to preserve spaces.  The default is ``Cockrell School of Engineering''
+%\usetheme[]{cockrell}                 
+%\usetheme[dept=Aerospace\ Engineering\ and\ Engineering\ Mechanics]{cockrell}                 
+%\usetheme[dept=Biomedical\ Engineering]{cockrell}                 
+%\usetheme[dept=Chemical\ Engineering]{cockrell}                 
+%\usetheme[dept=Civil,\ Architectural\ and\ Environmental\ Engineering]{cockrell}                 
+%\usetheme[dept=Electrical\ and\ Computer\ Engineering]{cockrell}                 
+%\usetheme[dept=Mechanical\ Engineering]{cockrell}                 
+%\usetheme[dept=Materials\ Science\ and\ Engineering]{cockrell}                 
+\usetheme[dept=Petroleum\ and\ Geosystems\ Engineering]{cockrell}                 
+
+% Add preamble packages here
+%\usepackage{etex}
+%\usepackage[bigfiles]{media9}
+%\graphicspath{{./figs/}}
+
+%Enable cancelto in math
+\usepackage{cancel}
+\renewcommand{\CancelColor}{\color{utorange}}
+
+%Add bibliography file location for citiation
+\bibliography{example.bib}
+
+
+\title{A Catchy Title}
+\subtitle{Subtitle}
+\author{UT Engineer}
+\institute{Special Event}
+\date{\today}
+
+
+\begin{document}
+
+%Creates title frame from title, subtitle, author, institute, and date above
+\titleframe
+
+%Supports table of contents
+\frame{\frametitle{Outline}\tableofcontents}
+
+%Section commands will define what's shown in TOC
+\section{First Slide}
+
+%First frame
+\begin{frame}
+    \frametitle{Cockrell School Beamer Presentation Template}
+
+    \begin{itemize}
+        %Support for external hyperlinks as shown
+        \item Conforms to \href{http://www.engr.utexas.edu/communications/visualguidelines}{Cockrell School Visual Style Guide}
+        \begin{itemize}
+            \item Exact color palette
+            \item Opensans fonts
+        \end{itemize}
+        \item Easily change department names in title bar
+        %Citations can use \footcite or \cite commands
+        \item Convenient citation system \footcite{knuth1989} \cite{lamport1986}
+        \begin{itemize}
+            \item Full citation with active hyperlinks to DOI upon first citation.
+            \item See next slide for repeated citation behavior
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Second Slide}
+\begin{frame}[c]
+    \frametitle{Other features}
+    \TeX\ \cite{knuth1989} and \LaTeX\ \cite{lamport1986} are great for equations
+    \begin{block}{An equation block}
+        \[ \vec{F} = m \vec{a} \]
+    \end{block}
+    \begin{itemize}
+        \item Second instance of citations use short citation hyperlinked to original.
+    \end{itemize}
+\end{frame}
+
+
+\lastframe%
+\end{document}

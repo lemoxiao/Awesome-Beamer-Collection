@@ -1,0 +1,106 @@
+% Copyright (c) 2013-15 Stephane GALLAND <galland@arakhne.org>
+%
+% UTBM logo and name are registered and owned by the
+% "Universite de Technology of Belfort-Montbeliard".
+%
+% LE2I logo and name are registered and owned by the
+% "Universite de Bourgogne".
+%
+% CNRS logo and name are registered and owned by the
+% "Centre National de la Recherche Scientifique".
+% 
+% This program is free library; you can redistribute it and/or modify
+% it under the terms of the GNU Lesser General Public License as
+% published by the Free Software Foundation; either version 3 of the
+% License, or any later version.
+%
+% This library is distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+% Lesser General Public License for more details.
+%
+% You should have received a copy of the GNU Lesser General Public
+% License along with this library; see the file COPYING.  If not,
+% write to the Free Software Foundation, Inc., 59 Temple Place - Suite
+% 330, Boston, MA 02111-1307, USA.
+%
+\ProvidesPackage{beamerinnerthemeLE2IUTBM}
+   [2015/09/21 Beamer Inner 'LE2I at UTBM' Theme]
+
+\DeclareOptionBeamer{language}{\gdef\beamer@innertheme@leiiutbm@lang{#1}}
+%\ExecuteOptionsBeamer{left}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\useinnertheme{rectangles}
+
+\global\let\footnoterule\relax % no rule for footnotes
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+% Issue #16: The size of the block title must follow the size of the enclosing context.
+\setbeamerfont{block title}{size={}}
+
+% Create the style for the pseudo-code or programs
+\defbeamertemplate*{code basic style}{default}{%
+	\tiny%
+}
+\defbeamertemplate*{code inline style}{default}{%
+	\normalcolor%
+}
+\defbeamertemplate*{code identifier style}{default}{%
+	\ttfamily%
+}
+\defbeamertemplate*{code keyword style}{default}{%
+	\bfseries%
+}
+
+
+% Redefine the style for definition blocks
+\newenvironment<>{definitionblock}[1]{%
+	\begin{actionenv}#2%
+		\def\insertblocktitle{#1}%
+		\par%
+		\usebeamertemplate{block begin definition}%
+}{%
+	\par%
+	\usebeamertemplate{block end definition}%
+	\end{actionenv}
+}
+
+\gdef\th@definition{%
+	\normalfont % body font
+	\def\inserttheoremblockenv{definitionblock}
+}
+
+\setbeamertemplate{theorem begin}{%
+  \begin{\inserttheoremblockenv}%
+    {%
+		\ifthenelse{\equal{\inserttheoremblockenv}{definitionblock}}{%
+			\ifx\inserttheoremaddition\@empty%
+				\inserttheoremname%
+			\else%
+				\inserttheoremaddition%
+			\fi%
+		}{%
+			\inserttheoremname%
+			\ifx\inserttheoremaddition\@empty\else\ (\inserttheoremaddition)\fi%
+		}%
+    }%
+}
+
+\defbeamertemplate*{block begin definition}{default}{%
+  \par\vskip\medskipamount%
+  \begin{beamerboxesrounded}[upper=block title definition,lower=block body definition,shadow=true]%
+    {\raggedright\usebeamerfont*{block title definition}\insertblocktitle}%
+    \raggedright%
+    \usebeamerfont{block body definition}%
+}
+
+\defbeamertemplate*{block end definition}{default}{%
+	\end{beamerboxesrounded}\vskip\smallskipamount%
+}
+
+\mode
+<all>

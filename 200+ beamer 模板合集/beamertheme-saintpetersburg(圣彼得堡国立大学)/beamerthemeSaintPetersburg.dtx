@@ -1,0 +1,374 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2017 by Ivan Gankevich <igankevich@ya.ru>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+% \iffalse
+%<*package>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeSaintPetersburg}[2017/11/20 SaintPetersburg Beamer theme]
+%</package>
+% \fi
+% \CheckSum{0}
+% \StopEventually{}
+% \iffalse
+%<*package>
+% \fi
+% \subsection{SaintPetersburg theme}
+% Define theme options.
+%    \begin{macrocode}
+\newif\if@spbuPoster
+\newif\if@spbuLogo
+\@spbuPosterfalse
+\@spbuLogotrue
+\DeclareOption{poster}{\@spbuPostertrue}
+\DeclareOption{nologo}{\@spbuLogofalse}
+\ProcessOptions
+%    \end{macrocode}
+
+% Load corresponding font theme.
+%    \begin{macrocode}
+\mode<presentation>
+
+\usefonttheme{SaintPetersburg}
+%    \end{macrocode}
+
+% Define slide background template.
+%    \begin{macrocode}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\makeatletter%
+\usebackgroundtemplate{%
+	\ifnum\thepage=1\relax%
+		\hspace{\beamer@leftmargin}%
+		\begin{beamercolorbox}[wd=\paperwidth,ht=\paperheight,dp=0pt]{background canvas}%
+			\begin{tikzpicture}[remember picture,overlay]%
+				% background CoA
+				\node[anchor=south east,opacity=0.1] at (current page.south east) {%
+					\IfFileExists{\detokenize{CoA_Medium.eps}}%
+						{\includegraphics[width=0.7\paperwidth,trim=0 55 10 0,clip]{CoA_Medium.eps}}%
+						{}
+				};%
+			\end{tikzpicture}%
+    	\end{beamercolorbox}%
+	\else%
+		\usebeamercolor[bg]{background canvas}\rule{\paperwidth}{\paperheight}%
+	\fi%
+} 
+\makeatother%
+%    \end{macrocode}
+
+% Define helper macro to insert a field using theme colors and font.
+%    \begin{macrocode}
+\newcommand*{\spbuInsertField}[1]{%
+\usebeamerfont{#1}%
+\usebeamercolor[fg]{#1}%
+\expandafter\relax\csname insert#1\endcsname%
+\par%
+}
+%    \end{macrocode}
+
+% Show every field on the title page.
+%    \begin{macrocode}
+\setbeamertemplate{title page}{%
+	\centering%
+	\vspace{0.2\textheight}\spbuInsertField{title}%
+	\vskip0.5\baselineskip\ifx\insertsubtitle\empty\else%
+		\spbuInsertField{subtitle}%
+	\fi%
+	\vskip\baselineskip\spbuInsertField{author}%
+	\vfill\spbuInsertField{institute}%
+	\vfill\inserttitlegraphic%
+	\vfill\spbuInsertField{date}%
+}
+%    \end{macrocode}
+
+% Show simple frame title without a background.
+%    \begin{macrocode}
+\setbeamertemplate{frametitle}{%
+	\spbuInsertField{frametitle}
+	\ifx\insertframesubtitle\empty\else%
+		\spbuInsertField{framesubtitle}
+	\fi%
+}
+%    \end{macrocode}
+
+% Disable navigation symbols.
+%    \begin{macrocode}
+\setbeamertemplate{navigation symbols}{}
+\beamertemplatenavigationsymbolsempty
+%    \end{macrocode}
+
+% Set black-on-white speaker notes
+%    \begin{macrocode}
+\setbeamertemplate{note page}{%
+	% TODO fix textwidth
+	\begin{minipage}{0.85\paperwidth}%
+		\spbuInsertField{note}%
+	\end{minipage}%
+}
+%    \end{macrocode}
+
+% Define block environment. Here and in al other blocks we use
+% \texttt{flushright} to properly align columns inside blocks.
+%    \begin{macrocode}
+\setbeamertemplate{block begin}{
+	\vspace{-\baselineskip}%
+	\begin{flushright}
+		\begin{beamercolorbox}[colsep*=.75ex]{block title}%
+			\usebeamerfont*{block title}\insertblocktitle
+		\end{beamercolorbox}%
+		{\parskip0pt\nointerlineskip\par}%
+		\usebeamerfont{block body}%
+		\begin{beamercolorbox}[colsep*=.75ex,vmode]{block body}%
+}
+\setbeamertemplate{block end}{
+		\end{beamercolorbox}
+	\end{flushright}
+}
+%    \end{macrocode}
+
+% Define alert block environment.
+%    \begin{macrocode}
+\setbeamertemplate{block alerted begin}{
+	\vspace{-\baselineskip}%
+	\begin{flushright}
+		\begin{beamercolorbox}[colsep*=.75ex]{block title alerted}%
+			\usebeamerfont*{block title alerted}\insertblocktitle
+		\end{beamercolorbox}%
+		{\parskip0pt\nointerlineskip\par}%
+		\usebeamerfont{block body alerted}%
+		\begin{beamercolorbox}[colsep*=.75ex,vmode]{block body alerted}%
+}
+\setbeamertemplate{block alerted end}{
+		\end{beamercolorbox}
+	\end{flushright}
+}
+%    \end{macrocode}
+
+% Define example block environment.
+%    \begin{macrocode}
+\setbeamertemplate{block example begin}{
+	\vspace{-\baselineskip}%
+	\begin{flushright}
+		\begin{beamercolorbox}[colsep*=.75ex]{block title example}%
+			\usebeamerfont*{block title example}\insertblocktitle
+		\end{beamercolorbox}%
+		{\parskip0pt\nointerlineskip\par}%
+		\usebeamerfont{block body example}%
+		\begin{beamercolorbox}[colsep*=.75ex,vmode]{block body example}%
+}
+\setbeamertemplate{block example end}{
+		\end{beamercolorbox}
+	\end{flushright}
+}
+%    \end{macrocode}
+
+% Define QED symbol
+%    \begin{macrocode}
+\setbeamertemplate{qed symbol}{$\blacksquare$}
+%    \end{macrocode}
+
+% Theorem/corollary etc. and proof environments are simply blocks.
+%    \begin{macrocode}
+\setbeamertemplate{theorem begin}{%
+	\inserttheoremheadfont%
+	\begin{\inserttheoremblockenv}{%
+		\inserttheoremname%
+		\ifx\inserttheoremaddition\empty\else\ (\inserttheoremaddition)\fi%
+	}%
+}
+\setbeamertemplate{theorem end}{\end{\inserttheoremblockenv}}
+
+\setbeamertemplate{proof begin}{%
+	\inserttheoremheadfont%
+	\begin{\inserttheoremblockenv}{%
+		\proofname%
+	}%
+}
+\setbeamertemplate{proof end}{\end{\inserttheoremblockenv}}
+%    \end{macrocode}
+
+% Remove bibliography item marker.
+%    \begin{macrocode}
+\setbeamertemplate{bibliography item}{}
+%    \end{macrocode}
+
+% Define abstract template (mainly for poster).
+%    \begin{macrocode}
+\setbeamertemplate{abstract title}{%
+\usebeamerfont{abstract title}%
+\usebeamercolor[fg]{abstract title}%
+\abstractname.%
+}
+%    \end{macrocode}
+
+
+% Define additional poster templates.
+%    \begin{macrocode}
+\makeatletter%
+\if@spbuPoster%
+%    \end{macrocode}
+
+% Make abstract text justified.
+%    \begin{macrocode}
+\setbeamertemplate{abstract begin}{%
+\begin{minipage}{\linewidth}%
+\justifying%
+}
+\setbeamertemplate{abstract end}{%
+\end{minipage}%
+}
+%    \end{macrocode}
+
+% Define a commands for the logo on the right hand side.
+%    \begin{macrocode}
+\newcommand*{\othergraphic}[1]{\gdef\@othergraphic{#1}}%
+\newcommand*{\@othergraphic}[1]{}%
+\newcommand*{\insertothergraphic}{\@othergraphic{}}%
+%    \end{macrocode}
+
+% Define a command for each headline column width.
+% Left column width.
+%    \begin{macrocode}
+\newcommand*{\leftcolumnwidth}[1]{\gdef\@leftcolumnwidth{#1}}%
+\newcommand*{\@leftcolumnwidth}[1]{.2\linewidth}%
+\newcommand*{\insertleftcolumnwidth}{\@leftcolumnwidth{}}%
+%    \end{macrocode}
+
+% Right column width.
+%    \begin{macrocode}
+\newcommand*{\rightcolumnwidth}[1]{\gdef\@rightcolumnwidth{#1}}%
+\newcommand*{\@rightcolumnwidth}[1]{.2\linewidth}%
+\newcommand*{\insertrightcolumnwidth}{\@rightcolumnwidth{}}%
+%    \end{macrocode}
+
+% Middle column width.
+%    \begin{macrocode}
+\newcommand*{\middlecolumnwidth}[1]{\gdef\@middlecolumnwidth{#1}}%
+\newcommand*{\@middlecolumnwidth}[1]{.6\linewidth}%
+\newcommand*{\insertmiddlecolumnwidth}{\@middlecolumnwidth{}}%
+%    \end{macrocode}
+
+% Define headline template with three columns: left and right are for logos
+% and a large middle column for the title and the authors.
+%    \begin{macrocode}
+\setbeamertemplate{headline}{%
+	\vskip2cm%
+	\begin{columns}%
+		\begin{column}{\insertleftcolumnwidth}%
+			\centering%
+			\inserttitlegraphic%
+		\end{column}%
+		\begin{column}{\insertmiddlecolumnwidth}%
+			\centering%
+			{\usebeamercolor[fg]{title in head/foot}\textbf{\huge{\inserttitle}}}%
+			\vskip 1.5cm%
+			{\usebeamercolor{author in head/foot}\Large{\insertauthor}}%
+			\vskip\baselineskip%
+			{\usebeamercolor{institute in head/foot}\large{\insertinstitute}}%
+			\vskip2cm%
+		\end{column}%
+		\begin{column}{\insertrightcolumnwidth}%
+			\centering%
+			\insertothergraphic%
+		\end{column}%
+		\vspace{1cm}%
+	\end{columns}%
+}
+%    \end{macrocode}
+
+% Define footline template with a horizontal line and a short title.
+%    \begin{macrocode}
+\setbeamertemplate{footline}{
+	\vskip2cm%
+	\begin{center}%
+		\begin{minipage}[c][3cm][c]{0.95\textwidth}%
+			\centering%
+			\begin{flushleft}%
+				\vskip-1cm%
+				\begin{tikzpicture}[remember picture,overlay]%
+					\fill [spbuTerracotta] (0,0) rectangle (\textwidth,0.1cm);%
+				\end{tikzpicture}%
+			\end{flushleft}%
+			\vskip1cm%
+			{\usebeamercolor{normal text}\textbf{\large{\insertshorttitle}}}%
+		\end{minipage}%
+	\end{center}%
+	\vskip1cm%
+}
+%    \end{macrocode}
+
+% Define section and subsection commands.
+%    \begin{macrocode}
+\renewcommand{\section}[1]{%
+\vskip\baselineskip%
+\begin{center}%
+{\textcolor{spbuTerracotta}{\textbf{\Large #1}}}%
+\vskip0.4\baselineskip%
+\end{center}%
+\justifying%
+\setlength{\parindent}{1.5cm}%
+}
+
+\renewcommand{\subsection}[1]{%
+\vskip0.8\baselineskip%
+\begin{center}%
+{\textcolor{spbuTerracotta}{\textbf{\textsl{\large #1}}}}%
+\vskip0.3\baselineskip%
+\end{center}%
+\justifying%
+\setlength{\parindent}{1.5cm}%
+}
+%    \end{macrocode}
+
+% Set numbered bibliography.
+%    \begin{macrocode}
+\setbeamertemplate{bibliography item}[text]
+%    \end{macrocode}
+
+% End of poster-specific definitions.
+%    \begin{macrocode}
+\fi%
+\makeatother%
+%    \end{macrocode}
+
+% Load corresponding color theme.
+%    \begin{macrocode}
+\usecolortheme{SaintPetersburg}
+%    \end{macrocode}
+
+% Provide string translations to Russian.
+%    \begin{macrocode}
+\newtranslation[to=russian]{Part}{Часть}
+\newtranslation[to=russian]{Section}{Раздел}
+\newtranslation[to=russian]{Subsection}{Подраздел}
+\newtranslation[to=russian]{Theorem}{Теорема}
+\newtranslation[to=russian]{Proof}{Доказательство}
+\newtranslation[to=russian]{Corollary}{Следствие}
+\newtranslation[to=russian]{Definition}{Определение}
+\newtranslation[to=russian]{Definitions}{Определения}
+\newtranslation[to=russian]{Fact}{Утверждение}
+\newtranslation[to=russian]{Lemma}{Лемма}
+\newtranslation[to=russian]{Example}{Пример}
+\newtranslation[to=russian]{Examples}{Примеры}
+
+\mode<all>
+%    \end{macrocode}
+
+% \iffalse
+%</package>
+% \fi
+% \Finale
+\endinput

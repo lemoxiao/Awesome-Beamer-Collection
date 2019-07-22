@@ -1,0 +1,270 @@
+% !TEX encoding = UTF-8 Unicode
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{custom}[12/10/2017 version 0.30 The Luo Yu Package]
+% https://en.wikibooks.org/wiki/LaTeX/Creating_Packages
+
+%% Import packages for ALL classes
+\RequirePackage{adjustbox}
+\RequirePackage{algorithm,algpseudocode}
+\RequirePackage{amsmath,amssymb,amsthm}	
+\RequirePackage{booktabs}
+\RequirePackage{bbm}
+\RequirePackage{caption}
+\RequirePackage{color}
+\RequirePackage{geometry}
+%2017-11-20: hyperref used to be here
+\RequirePackage{graphicx}
+\RequirePackage{pdfpages}	
+\RequirePackage{soul} % @l16cn (4/26/17): for highlight
+    \soulregister\cite7 %2017-08-30: highlight \cite and other mbox
+    \soulregister\ref7
+    \soulregister\eqref7
+    \soulregister\gls7
+    \soulregister\pageref7
+\RequirePackage{thmtools}
+\RequirePackage{tikz,tikz-qtree} % shape tools
+	% tikz preferences
+	\usetikzlibrary{trees,shapes,arrows,fit}
+    \tikzset{
+      invisible/.style={opacity=0},
+      visible on/.style={alt={#1{}{invisible}}},
+      alt/.code args={<#1>#2#3}{%
+        \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}
+      }
+    }
+\RequirePackage{topcapt}
+\RequirePackage{verbatim}
+\RequirePackage{ifthen}
+\RequirePackage{xifthen}
+
+%% 'hidegraphics' option: hide graphics for faster compilation
+\newcommand{\vecfig}[1]{\begin{adjustbox}{max width = \linewidth}\input{#1}\end{adjustbox}} %17-07-20
+\DeclareOption{hidegraphics}{
+%  	\renewcommand{\includegraphics}[2][]{[hidden figure]}
+	\setkeys{Gin}{draft=true} % 2017-08-12
+	\renewcommand{\includepdf}[2][]{[hidden pdf]}
+	\renewcommand{\vecfig}[1]{} %2017-07-20
+}
+\DeclareOption{nopic}{
+	\setkeys{Gin}{draft=true} % 2017-08-12
+	\renewcommand{\includepdf}[2][]{[hidden pdf]}
+	\renewcommand{\vecfig}[1]{} %2017-07-20
+}
+
+% 2017-08-12
+\DeclareOption{nohl}{
+	\renewcommand\hl[1]{#1} % activate to remove highlights
+}
+
+% 2017-07-20
+\newcommand{\draftopt}{nostamp}
+\DeclareOption{draft}{
+	\renewcommand{\draftopt}{}
+	}
+
+\ProcessOptions\relax
+%% Different classes @l16cn (4/6/2017): easier to load packages based on class
+\newboolean{beamer_class}
+	\@ifclassloaded{beamer}{\setboolean{beamer_class}{true}}{\setboolean{beamer_class}{false}}
+\newboolean{book_class}
+	\@ifclassloaded{book}{\setboolean{book_class}{true}}{\setboolean{book_class}{false}}
+\newboolean{report_class}
+	\@ifclassloaded{report}{\setboolean{report_class}{true}}{\setboolean{report_class}{false}}
+\newboolean{ieee_class}
+	\@ifclassloaded{IEEEtran}{\setboolean{ieee_class}{true}}{\setboolean{ieee_class}{false}}	
+\newboolean{resume_class}
+	\@ifclassloaded{resume}{\setboolean{resume_class}{true}}{\setboolean{resume_class}{false}}		
+\newboolean{letter_class}
+	\@ifclassloaded{letter}{\setboolean{letter_class}{true}}{\setboolean{letter_class}{false}}			
+
+% 2017-07-20
+\RequirePackage[\draftopt]{draftwatermark}\SetWatermarkText{Confidential}
+
+%%%%% No hyperref for LETTER or RESUME %%%%% 2017-11-28
+\ifthenelse{\NOT\boolean{resume_class} \AND \NOT\boolean{letter_class}}{
+    \RequirePackage{hyperref} %@l16cn (4/27/17): Enable hyperref before glossaries
+}{}
+
+%%%%% RESUME %%%%% introduced on 2017-11-20
+\ifthenelse{\boolean{resume_class}}
+{
+	%2017-11-20: add citation to resume class without the bibliography in the end
+    \usepackage{bibentry}
+    \nobibliography*
+}{
+	%2017-11-20: for all other classes, use hyperref (conflict with bibentry) and engure it is imported before glossaries
+    % @l16cn (2017-10-10): moved glossaries out of NON-BEAMER block
+    % @l16cn (4/24/2017): moved glossaries inside this chunk
+    \RequirePackage[acronyms,toc,indexonlyfirst]{glossaries} % @l16cn (4/3/2017): print glossary, acronyms, and notation @l16cn (4/11/2017): added ``indexonlyfirst''
+    	\setacronymstyle{long-short}
+    	\newglossary[nlg]{notation}{not}{ntn}{Notation}
+
+}
+		
+%%%%% BEAMER %%%%%
+\ifthenelse{\boolean{beamer_class}}
+{
+	\RequirePackage{appendixnumberbeamer}
+
+	\newcommand{\highlight}[1]{\colorbox{yellow}{$\displaystyle #1$}}
+	\newcommand{\highlighttxt}[1]{\colorbox{yellow}{#1}}
+
+	\renewcommand{\hl}[1]{\highlight{#1}}
+	\newcommand{\hltxt}[1]{\highlighttxt{#1}}
+
+	\newcommand<>{\hlonly}[1]{{\only#2\hl{#1}}} % highlight on slide <#2> only
+	\newcommand<>{\hlonlytxt}[1]{{\only#2\hltxt{#1}}} % highlight on slide <#2> only
+}{}
+
+%%%%% REPORT or BOOK %%%%%
+\ifthenelse{\boolean{report_class} \OR \boolean{book_class}}{
+	\RequirePackage[titletoc]{appendix} % @l16cn (1/24): titletoc shows Appendix A, Appendix B, ...	   
+	\RequirePackage{longtable} % for notation
+	\RequirePackage[]{lscape} % @l16cn (1/26): use "pdftex" option to rotate landscape pages CW 90 deg, otherwise, every page will be in portrait mode, regardless of the text orientation
+	\RequirePackage{mfirstuc} % uppercase the first letter of a word
+	\RequirePackage[section]{placeins} % confine floats within the section where they are declared
+	
+    \theoremstyle{plain}
+    \newtheorem{theorem}{Theorem}[chapter]
+    \theoremstyle{definition}
+    \newtheorem{definition}[theorem]{Definition}
+    \newtheorem{assumption}[theorem]{Assumption}
+    \newtheorem{lemma}[theorem]{Lemma}
+    \newtheorem{conjecture}[theorem]{Conjecture}
+	\renewcommand{\listtheoremname}{List of Theorems and Definitions} 
+}{
+	%@l16cn (2017-10-10): Beamer seems to already include the theorem command
+	\ifthenelse{\NOT \boolean{beamer_class}}{
+        %@l16cn (5/4/17): Added for other classes
+        \theoremstyle{plain}
+        \newtheorem{theorem}{Theorem}
+        \theoremstyle{definition}
+        \newtheorem{definition}{Definition}
+        \newtheorem{assumption}{Assumption}
+        \newtheorem{lemma}{Lemma}
+        \newtheorem{conjecture}{Conjecture}	
+	}{}
+}
+
+%%%%% BOOK %%%%%
+\ifthenelse{\boolean{book_class}}
+{
+%	\RequirePackage{hyperref}
+	\RequirePackage[round]{natbib} % @l16cn (4/3/2017): for bibliography	
+}{}
+
+%%%%% JOURNAL %%%%%
+\ifthenelse{\boolean{ieee_class}} % @l16cn (4/6/2017)
+{
+%	\RequirePackage{array}
+	\RequirePackage{cite}
+	\RequirePackage{cuted}
+		\setlength\stripsep{3pt plus 1pt minus 1pt}
+%	\RequirePackage{dblfloatfix}
+%	\RequirePackage{fixltx2e}
+%	\RequirePackage{stfloats}
+	\RequirePackage{url}
+}{}
+
+%% Math shortcuts @l16cn (4/10/17): added \ensuremath so $\bx$ and \bx both would work
+\def\d{\ensuremath\mathrm{d}} %@l16cn (4/24/17)
+\def\bx{\ensuremath{\mathbf{x}}}
+\def\bv{\ensuremath{\mathbf{v}}}
+\def\bz{\ensuremath{\mathbf{z}}}
+\def\by{\ensuremath{\mathbf{y}}}
+\def\bfomega{\ensuremath{\boldsymbol{\omega}}}
+\newcommand{\diag}[1]{\ensuremath{\operatorname{diag}\big(#1\big)}}
+\def\mse{\ensuremath{\mathrm{MSE}}} %@l16cn 2017-07-05
+\def\rmse{\ensuremath{\operatorname{RMSE}}} %@l16cn (6/7/17)
+\newcommand{\norm}[1]{\ensuremath{\left\Vert #1 \right\Vert}}
+\def\ones{\ensuremath{\mathbf{1}}}
+\newcommand{\E}[1]{\ensuremath{\mathbb{E}{\big[#1\big]}}} %@l16cn (4/24/17)
+\newcommand{\mr}[1]{\mathrm{#1}} %@l16cn 2017-07-04
+
+%% Glossary shortcuts
+\newcommand{\sr}{soft regulation}
+\newcommand{\Sr}{Soft regulation}
+\newcommand{\SR}{Soft Regulation}
+
+\newcommand{\sfk}{soft feedback}
+\newcommand{\Sfk}{Soft feedback}
+\newcommand{\SFk}{Soft Feedback}
+
+\newcommand{\mac}{MACISTS}
+\newcommand{\Mac}{MACISTS}
+\newcommand{\MAC}{MACISTS}
+
+\newcommand{\mturk}{Amazon Mechanical Turk}
+
+\newcommand{\crit}{{\color{blue}Both the {\bf type of feedback} and {\bf its influence} are critical}}
+
+%% Macros
+\newcommand{\define}[2]{{\em #1}\footnote{{\em \makefirstuc{#1}}: #2}}
+
+\newcommand{\code}[1]{
+%	\pagestyle{empty}
+	\begin{singlespace}
+		\begin{scriptsize}
+			\verbatiminput{#1}
+		\end{scriptsize}
+	\end{singlespace}
+	}
+	
+\def\red#1{\textcolor{red}{#1}} % 2017-08-12
+\newcommand{\ins}[1]{\input{#1}\unskip} % 2017-12-10
+
+\newcommand{\al}[1]{\begin{equation}\begin{aligned} #1 \end{aligned}\end{equation}}
+\newcommand{\eq}[1]{\begin{equation} #1 \end{equation}}
+
+%@l16cn (4/26/17): rename \caps to \captioncopy to avoid conflicts with ``soul'' package
+\newcommand{\captioncopy}[2]{\caption[#1]{{\bf #1}.~#2}} 
+\newcommand{\xcaption}[2][]{%
+	\ifthenelse{\isempty{#1}}{%
+		\captioncopy{#2}{}
+	}{%
+		\captioncopy{#1}{#2}
+	}
+}
+
+%% Referencing shortcuts (updated)
+% e.g., \asx{as_label} => Assumption 1.1 (p. 1)
+% \asx[,]{as_label} => Assumption 1.1, p. 1
+\ifthenelse{\boolean{book_class} \OR \boolean{report_class}} %@l16cn (4/12/17)
+{
+	\newcommand{\fig}[1]{Figure~\ref{#1}}
+	\newcommand{\figp}[1]{(Figure~\ref{#1})}
+}{}
+
+
+
+\ifthenelse{\boolean{report_class}}
+{
+	\newcommand{\algx}[2][]{\ifthenelse{\isempty{#1}}
+    	{Algorithm~\ref{#2} (p.~\pageref{#2})}
+    	{Algorithm~\ref{#2}, p.~\pageref{#2}}}
+    \newcommand{\appx}[2][]{\ifthenelse{\isempty{#1}}
+    	{Appendix~\ref{#2} (p.~\pageref{#2})}
+    	{Appendix~\ref{#2}, p.~\pageref{#2}}}
+    \newcommand{\asx}[2][]{\ifthenelse{\isempty{#1}}
+    	{Assumption~\ref{#2} (p.~\pageref{#2})}
+    	{Assumption~\ref{#2}, p.~\pageref{#2}}}
+    \newcommand{\defx}[2][]{\ifthenelse{\isempty{#1}}
+    	{Definition~\ref{#2} (p.~\pageref{#2})}
+    	{Definition~\ref{#2}, p.~\pageref{#2}}}	
+    \newcommand{\figx}[2][]{\ifthenelse{\isempty{#1}}
+    	{Fig.~\ref{#2} (p.~\pageref{#2})}
+    	{Fig.~\ref{#2}, p.~\pageref{#2}}}		
+    \newcommand{\secx}[2][]{\ifthenelse{\isempty{#1}}
+    	{Section~\ref{#2} (p.~\pageref{#2})}
+    	{Section~\ref{#2}, p.~\pageref{#2}}}
+    \newcommand{\tabx}[2][]{\ifthenelse{\isempty{#1}}
+    	{Table~\ref{#2} (p.~\pageref{#2})}
+    	{Table~\ref{#2}, p.~\pageref{#2}}}	
+    \newcommand{\thmx}[2][]{\ifthenelse{\isempty{#1}}
+    	{Theorem~\ref{#2} (p.~\pageref{#2})}
+    	{Theorem~\ref{#2}, p.~\pageref{#2}}}
+    \newcommand{\secref}[1]{\paragraph{\ref{#1}~\nameref{#1} (p.~\pageref{#1})}}	
+	
+}{}
+
+\endinput	

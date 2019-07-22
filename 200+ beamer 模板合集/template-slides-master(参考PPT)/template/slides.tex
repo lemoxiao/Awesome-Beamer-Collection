@@ -1,0 +1,414 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Udesc presentation using Execushares
+% LaTeX Template
+% Version 1.0 (2017-12-22)
+%
+% Authors: Jackson Antonio do Prado Lima 
+% 		  <jacksonpradolima at gmail dot com>
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+
+\usetheme[colortheme=green]{Udesc}
+
+\usepackage{blindtext}
+\usepackage{moresize}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{booktabs}
+
+\usepackage[ruled,onelanguage]{algorithm2e}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\bibliography{refs}
+
+\title{Consultas simples para recuperação de informações em SQL}
+\author{Jackson Antonio do Prado Lima (jacksonpradolima at gmail dot com)}
+\date{13 de dezembro de 2017}
+
+\subtitle{\tiny{CEPLAN, São Bento do Sul, Brasil}}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+	\frame{\titlepage}
+
+	%Agenda
+	\begin{frame}		
+		\frametitle{Contents}
+		\begin{enumerate}
+			\item O que foi visto na última aula?  \\
+			\item Consultas simples em SQL \\
+			\item O que teremos na próxima aula? \\
+			\item Exercícios  \\
+		\end{enumerate}
+	\end{frame}
+
+	\startprogressbar
+	
+	%Sections
+	\section{O que foi visto na última aula?}
+		\begin{frame}
+			\frametitle{Na última aula}
+			\begin{enumerate}
+				\item O que é SQL (\textit{Structured Query Language})
+				\begin{itemize}
+					\item Uma linguagem de BD
+					\item Instruções para definições de dados, consultas e atualizações
+				\end{itemize}
+				\item Comandos de DDL (\textit{Data Definition Language}) da SQL para criação, modificação, remoção de tabelas e seus atributos, além dos tipos de dados básicos em SQL
+				\item Comandos de DML (\textit{Data Manipulation Language}) da SQL para inserção, atualização e deleção de tuplas das tabelas 
+			\end{enumerate}
+		\end{frame}
+
+		\section{Consultas simples em SQL}
+			\begin{frame}{Contexto}
+				\begin{itemize}
+					\item Alguns autores costumam denominar como DQL (\textit{Data Query Language})
+					\item Instrução básica de recuperação de informações do BD: \textbf{SELECT}
+				\end{itemize}
+			\end{frame}
+		
+			\begin{frame}[fragile]{SELECT-FROM-WHERE}
+				\begin{block}{Forma básica}
+							{\ttfamily
+							SELECT <lista atributos>\\
+							FROM <lista tabelas>\\
+							WHERE <condição>
+							}
+				\end{block}
+				\noindent onde:
+				\begin{itemize}
+					\item \textbf{lista atributos} é uma lista de nomes de atributo cujos valores devem ser recuperados pela consulta.
+					\item \textbf{lista tabelas} é uma lista dos nomes de relação exigidos para processar a consulta.
+					\item \textbf{condição} é uma expressão condicional (booleana) que identifica as tuplas a serem recuperadas pela consulta.
+				\end{itemize}
+			\end{frame}
+
+			\begin{frame}[fragile]{SELECT-FROM-WHERE}
+				\begin{block}{\textbf{PRODUTO}}
+					\begin{table}
+						\begin{tabular}{|c|l|c|c|c|}
+							\toprule
+							\textbf{id} & \textbf{pnome} & \textbf{preco} & \textbf{categoria} & \textbf{quantidade} \\ \midrule
+							     1      & lapis          &     19.99      &     papelaria      &         30          \\ \midrule
+							     2      & lapiseira      &     29.99      &     papelaria      &         55          \\ \midrule
+							     3      & camera         &     103.99     &     fotografia     &         10          \\ \midrule
+							     4      & televisao      &     203.99     &    eletronicos     &         15          \\ \bottomrule
+						\end{tabular}
+					\end{table}
+				\end{block}
+			\end{frame}
+		
+			\begin{frame}[fragile]{SELECT-FROM-WHERE}
+				\begin{block}{Exemplo 1}
+					{\ttfamily
+						SELECT *\\
+						FROM Produto
+					}
+				\end{block}
+				\begin{table}
+					\begin{tabular}{|c|l|c|c|c|}
+						\toprule
+						\textbf{id} & \textbf{pnome} & \textbf{preco} & \textbf{categoria} & \textbf{quantidade} \\ \midrule
+						1      & lapis          &     19.99      &     papelaria      &         30          \\ \midrule
+						2      & lapiseira      &     29.99      &     papelaria      &         55          \\ \midrule
+						3      & camera         &     103.99     &     fotografia     &         10          \\ \midrule
+						4      & televisao      &     203.99     &    eletronicos     &         15          \\ \bottomrule
+					\end{tabular}
+				\end{table}
+			\end{frame}
+			
+			\begin{frame}[fragile]{SELECT-FROM-WHERE}
+				\begin{block}{Exemplo 2}
+					{\ttfamily
+						SELECT *\\
+						FROM Produto\\
+						WHERE categoria = ``papelaria''
+					}
+				\end{block}
+				\begin{table}
+					\begin{tabular}{|c|l|c|c|c|}
+						\toprule
+						\textbf{id} & \textbf{pnome} & \textbf{preco} & \textbf{categoria} & \textbf{quantidade} \\ \midrule
+						     1      & lapis          &     19.99      &     papelaria      &         30          \\ \midrule
+						     2      & lapiseira      &     29.99      &     papelaria      &         55          \\ \bottomrule
+					\end{tabular}
+				\end{table}
+			\end{frame}
+		
+			\begin{frame}[fragile]{SELECT-FROM-WHERE}
+				\begin{block}{Exemplo 3}
+					{\ttfamily
+						SELECT *\\
+						FROM Produto\\
+						WHERE preco > 100
+					}
+				\end{block}
+				\begin{table}
+						\begin{tabular}{|c|l|c|c|c|}
+							\toprule
+							\textbf{id} & \textbf{pnome} & \textbf{preco} & \textbf{categoria} & \textbf{quantidade} \\ \midrule
+							     3      & camera         &     103.99     &     fotografia     &         10          \\ \midrule
+							     4      & televisao      &     203.99     &    eletronicos     &         15          \\ \bottomrule
+						\end{tabular}
+				\end{table}
+			\end{frame}
+	
+			\begin{frame}{Eliminação de Duplicações}
+				Devido a não haver eliminação de duplicatas no \textbf{SELECT} utilizamos o \textbf{DISTINCT}.
+				\BlankLine
+				\begin{columns}[c]
+					\begin{column}[c]{.48\textwidth}	
+						{\ttfamily
+							SELECT DISTINCT categoria\\
+							FROM Produto\\
+						}
+						
+						\begin{table}
+							\begin{tabular}{|c|}
+								\toprule
+								\textbf{categoria} \\ \midrule
+								    papelaria      \\ \midrule
+								    fotografia     \\ \midrule
+								   eletronicos     \\ \bottomrule
+							\end{tabular}
+						\end{table}
+					\end{column}
+			
+					\begin{column}[c]{.48\textwidth}	\\
+						{\ttfamily
+							SELECT categoria\\
+							FROM Produto\\
+						}
+						
+						\begin{table}
+							\begin{tabular}{|c|}
+								\toprule
+								\textbf{categoria} \\ \midrule
+								    papelaria      \\ \midrule
+								    papelaria      \\ \midrule
+								    fotografia     \\ \midrule
+								   eletronicos     \\ \bottomrule
+							\end{tabular}
+						\end{table}
+					\end{column}
+				\end{columns}
+			\end{frame}
+	
+	
+			\begin{frame}{Ordenação do Resultado}
+				\begin{itemize}
+					\item A ordenação é ascendente a não ser que a palavra \textbf{DESC} seja especificada.
+					\item No caso de igualdade no primeiro atributo da cláusula \textbf{ORDER BY}, o segundo atributo é utilizado e assim por diante.
+				\end{itemize}
+			
+				{\ttfamily
+					SELECT pnome, preco, quantidade\\
+					FROM Produto\\
+					WHERE categoria=``papelaria'' AND preco > 50\\
+					ORDER BY preco DESC, pnome ASC
+				}
+			\end{frame}
+	
+			\begin{frame}{Exercício de fixação}
+				\begin{enumerate}
+					\item O resultado ao aplicar a consulta: {\ttfamily SELECT categoria FROM Produto ORDER BY categoria}
+					\item O resultado ao aplicar a consulta: {\ttfamily SELECT DISTINCT categoria FROM Produto ORDER BY categoria DESC}
+				\end{enumerate}
+			
+%				\BlankLine\BlankLine
+%				\textcolor{red}{\texttt{*Entregar no final da aula =D}}
+			\end{frame}
+	
+			\begin{frame}{Facilidades na projeção dos resultados}
+				\BlankLine\BlankLine
+				\begin{itemize}
+					\item Uso de aritmética nas consultas (+, - , *, /)
+					\item Renomeação
+				\end{itemize}
+				
+				\begin{block}{Exemplo}
+					{\ttfamily
+						SELECT pnome AS Nome, (preco*quantidade) AS Total\\
+						FROM Produto\\
+					}
+				\end{block}
+				\begin{table}
+					\begin{tabular}{|l|c|}
+						\toprule
+						\textbf{Nome} & \textbf{Total} \\ \midrule
+						lapis         &     599.7      \\ \midrule
+						lapiseira     &    1649.45     \\ \midrule
+						camera        &     1039.9     \\ \midrule
+						televisao     &    3059.85     \\ \bottomrule
+					\end{tabular}
+				\end{table}
+			\end{frame}
+			
+			\begin{frame}{Funções de agregação}
+				\BlankLine\BlankLine
+				SQL dá suporte a diversas operações de agregação:
+				\begin{itemize}
+					\item \textbf{SUM}: soma dos valores de um atributo
+					\item \textbf{MIN}: valor mínimo de um atributo
+					\item \textbf{MAX}: valor máximo de um atributo
+					\item \textbf{AVG}: média dos valores de um atributo
+					\item \textbf{COUNT}: contagem de ocorrências [de um atributo]
+				\end{itemize}
+
+				Observações:
+				\begin{itemize}
+					\item Com exceção de \textbf{COUNT}, todas as outras operações de agregação aplicam-se a um único atributo.
+					\item \textbf{COUNT} não conta valores nulos.
+				\end{itemize}			
+			\end{frame}
+		
+			\begin{frame}{Funções de agregação}
+				\begin{block}{Exemplo}
+					{\ttfamily
+						SELECT COUNT(pnome) AS count\_nome, MIN(preco) AS min\_preco, MAX(preco) AS max\_preco, AVG(quantidade) AS avg\_qtd, SUM(quantidade), sum\_qtd\\
+						FROM Produto\\
+					}
+				\end{block}
+				\begin{table}
+					\begin{tabular}{|c|c|c|c|c|}
+						\toprule
+						\textbf{count\_nome} & \textbf{min\_preco} & \textbf{max\_preco} & \textbf{avg\_qtd} & \textbf{sum\_qtd} \\ \midrule
+						         4           &        19.99        &       203.99        &       27.5        &        110        \\ \bottomrule
+					\end{tabular}
+				\end{table}
+			\end{frame}
+		
+			\begin{frame}{Funções de agregação}
+				\begin{block}{Exemplo com \textbf{DISTINCT}}
+					{\ttfamily
+						SELECT COUNT(DISTINCT pnome) AS count\_nome\\
+						FROM Produto\\
+					}
+				\end{block}
+			\end{frame}
+		
+			\begin{frame}{Incrementando a cláusula WHERE}
+				\begin{itemize}
+					\item Busca por padrões: \textbf{\textit{Cláusula} [NOT] LIKE}
+					\item Teste de existência de valores nulos: \textbf{\textit{Cláusula} IS [NOT] NULL}
+					\item Busca por intervalos de valores: \textbf{\textit{Cláusula} [NOT] BETWEEN valor1 AND valor2}
+					\item Teste de pertinência elemento-conjunto: \textbf{\textit{\textit{Cláusula} [NOT] IN}}
+				\end{itemize}
+			\end{frame}
+		
+			\begin{frame}{Incrementando a cláusula WHERE}
+			
+				\textbf{LIKE} pode ser traduzido como uma busca em um atributo que ``contém'', ``começa'' ou ``termina'' com um padrão, onde:
+			
+				\begin{itemize}
+					\item \% = qualquer sequência de caracteres
+					\item \_ = um único carácter
+				\end{itemize}
+				
+				Entretanto, não é possível testar padrões em atributos DATETIME.
+				
+				\begin{block}{Exemplo}
+					{\ttfamily
+						SELECT pnome\\
+						FROM Produto\\
+						WHERE pnome LIKE ``p\%'' OR pnome LIKE ``\_a\%'' OR pnome LIKE ``\%p\%'' OR pnome LIKE ``\%a''
+					}
+				\end{block}
+			\end{frame}
+			
+			\begin{frame}{Incrementando a cláusula WHERE}
+			\BlankLine\BlankLine
+				\begin{block}{Exemplo valores não nulos}
+					{\ttfamily
+						SELECT pnome\\
+						FROM Produto\\
+						WHERE pnome IS NOT NULL
+					}
+				\end{block}
+	
+				\begin{block}{Exemplo intervalo de valores}
+					{\ttfamily
+						SELECT pnome\\
+						FROM Produto\\
+						WHERE quantidade BETWEEN 10 and 100
+					}
+				\end{block}
+			
+				\begin{block}{Exemplo pertinência elemento-conjunto}
+					{\ttfamily
+						SELECT pnome\\
+						FROM Produto\\
+						WHERE id IN (1,3)
+					}
+				\end{block}
+			\end{frame}
+		\section{O que teremos na próxima aula?}
+			\begin{frame}{\textit{The complex queries are coming...}}
+				\begin{itemize}
+					\item Consultas com mais de uma tabela: Junções em SQL
+					\begin{itemize}
+						\item União, Interseção, Diferença
+						\item Subconsultas
+						\item INTERSECT, EXCEPT e EXISTS
+					\end{itemize}
+					\item Agrupamento
+						\begin{itemize}
+							\item GROUP BY
+							\item HAVING
+						\end{itemize}
+					\item Aula prática no laboratório
+					\item Trabalho com entrega de relatório
+				\end{itemize}
+			\end{frame}
+		\section{Exercícios}
+			\begin{frame}{Exercícios para entrega}
+				Entregar até a próxima aula a Lista de exercícios 4.
+				
+%				\begin{enumerate}
+%					\item Encontre os produtos japoneses.
+%					\item Encontre apenas as camisetas e ordene-ás por origem.
+%					\item Encontre a camiseta de maior valor.
+%					\item Encontre os produtos de id 1, 3 e 5.
+%					\item Encontre o valor total gasto em produtos.
+%					\item Encontre os produtos de origem japonesa com preço menor que $ 50.00 $.
+%				\end{enumerate}
+%				\BlankLine\BlankLine
+%				Para responder as questões acima \textbf{utilize} a tabela do próximo slide.
+			\end{frame}
+%			\begin{frame}{Exercícios para entrega}
+%				\begin{block}{\textbf{Produto}}
+%					\begin{table}
+%						\begin{tabular}{|c|c|l|l|c|}
+%							\toprule
+%							\textbf{idproduto} & \textbf{idvendedor} & \textbf{produto} & \textbf{origem} & \textbf{preco} \\ \midrule
+%							        1          & 5                   &     Camiseta     &      Japão      & 39.99          \\ \midrule
+%							        2          & 10                  &     Teclado      &      China      & 29.99          \\ \midrule
+%							        3          & 101                 &     Monitor      &     Brasil      & 109.99         \\ \midrule
+%							        4          & 5                   &     Bermuda      &      Japão      & 59.99          \\ \midrule
+%							        5          & 2                   &     Camiseta     &    Portugal     & 29.99          \\ \bottomrule
+%						\end{tabular}
+%					\end{table}
+%				\end{block}
+%		\end{frame}
+		\section{Bibliografia}
+			\begin{frame}
+				\frametitle{Bibliografia}
+				\textbf{Básica:}\\
+				ELMASRI, Ramez, NAVATHE, Shamkant B. Sistemas de banco de dados. 6 ed., 2011. Cap 4.
+				
+				\textcolor{ExecusharesGrey}{\small\hspace{1em} Total de exemplares disponíveis: 9 (CEPLAN), 10 (CCT), 2 (CEAVI). }
+				
+				\BlankLine\BlankLine
+				\textbf{Leitura:}\\
+				Capítulo 3, “Simple Queries” do livro \textbf{SQL
+				for Web Nerds}, de Philip Greenspun
+				\url{http://philip.greenspun.com/sql/}
+			\end{frame}
+		
+		\frame{\acknowledgmentpage}
+
+\end{document}

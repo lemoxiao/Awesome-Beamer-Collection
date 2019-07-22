@@ -1,0 +1,944 @@
+%% % -*- coding: utf-8 -*-
+% Copyright 2003--2007 by Till Tantau
+% Copyright 2010 by Vedran Mileti\'c
+% Copyright 2011 by Vedran Mileti\'c, Joseph Wright
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+%% 此文件实现了 Beamer 的各种覆盖效果，主要参考文档 \S9。
+\ProvidesPackageRCS $Header: /Users/joseph/Documents/LaTeX/beamer/base/beamerbaseoverlay.sty,v f6bd5e3805da 2013/12/25 18:41:14 joseph $
+
+%
+%
+% Basic overlay commands
+%
+%
+
+\long\def\beamer@ifnextcharospec#1#2{%
+  \def\reserved@a{#1}%
+  \def\reserved@b{#2}%
+  \futurelet\@let@token\beamer@ifnch}
+\def\beamer@ifnch{%
+  \ifx\@let@token<%
+    \let\reserved@c\reserved@a%
+  \else%
+    \let\reserved@c\reserved@b%
+  \fi%
+  \reserved@c}
+
+%% \cs{beamer@masterdecode} 在 \sty{beamerbasedecode} 中定义，依据覆盖指令中是否包含当前 slide 编号，
+%% 分别将 \cs{beamer@donow} 设定为 \cs{beamer@doifinframe} 或者 \cs{beamer@doifnotinframe}。\par
+%%     \cs{only} 命令的覆盖指令（overlay specification）可以放在前面或者后面。
+%
+% \only
+%
+\def\only{\@ifnextchar<{\beamer@only}{\beamer@@only}}
+\long\def\beamer@only<#1>#2{%
+  \def\beamer@doifnotinframe{}\def\beamer@doifinframe{#2}%
+  {\beamer@masterdecode{#1}}\beamer@donow}
+\long\def\beamer@@only#1{\beamer@ifnextcharospec{\beamer@@@only{#1}}{#1}}
+\long\def\beamer@@@only#1<#2>{%
+  \def\beamer@doifnotinframe{}\def\beamer@doifinframe{#1}%
+  {\beamer@masterdecode{#2}}\beamer@donow}
+
+%% \cs{alt} 命令的覆盖指令同样可以放在最前面或者最后面。
+%
+% \alt and \altenv
+%
+\def\alt{\@ifnextchar<{\beamer@alt}{\beamer@alttwo}}
+\long\def\beamer@alttwo#1#2{\beamer@ifnextcharospec{\beamer@altget{#1}{#2}}{#1}}
+\long\def\beamer@altget#1#2<#3>{%
+  \def\beamer@doifnotinframe{#2}\def\beamer@doifinframe{#1}%
+  {\beamer@masterdecode{#3}}\beamer@donow}
+\long\def\beamer@alt<#1>#2#3{%
+  \def\beamer@doifnotinframe{#3}\def\beamer@doifinframe{#2}%
+  {\beamer@masterdecode{#1}}\beamer@donow}
+
+
+\def\altenv{\@ifnextchar<{\beamer@altenv}{\beamer@@@altenv}}
+\def\beamer@altenv<#1>{\beamer@@altenv{<#1>}}
+\long\def\beamer@@@altenv#1#2#3#4{\beamer@ifnextcharospec{\beamer@altenvsort{#1}{#2}{#3}{#4}}{\beamer@@altenv{}{#1}{#2}{#3}{#4}}}
+\long\def\beamer@altenvsort#1#2#3#4<#5>{\beamer@@altenv{<#5>}{#1}{#2}{#3}{#4}}
+\long\def\beamer@@altenv#1#2#3#4#5{\alt#1{\long\def\beamer@eoenv{#3}#2}{\long\def\beamer@eoenv{#5}#4}}
+\def\endaltenv{\beamer@eoenv}
+
+%
+% \action and actionenv
+%
+\def\beamer@plus{+}
+
+\def\action{\@ifnextchar<{\beamer@parsedaction}{\expandafter\beamer@parsedaction\beamer@defaultospec}}
+\long\def\beamer@parsedaction<#1>#2{%
+  \def\beamer@doifnotinframe{}\def\beamer@doifinframe{}%
+  {{\beamer@masterdecode{#1}}}%
+  \ifx\beamer@decodefound\beamer@plus%
+    \long\def\beamer@todo{#2}%
+  \else%
+    \expandafter\long\expandafter\def\expandafter\beamer@todo%
+    \expandafter{\expandafter\uncover\expandafter<\expandafter a\expandafter l\expandafter l\expandafter:\beamer@decodefound>{#2}}%
+  \fi%
+  \expandafter\beamer@processactions\beamer@decaction{}%
+  \beamer@todo}
+
+\def\beamer@processactions#1{%
+  \beamer@ifempty{#1}{}{%
+    \expandafter\beamer@@processactions\expandafter{\beamer@todo}#1}}
+\long\def\beamer@@processactions#1#2<#3>{%
+  \expandafter\long\expandafter\def\expandafter\beamer@todo\expandafter{%
+    \csname#2\endcsname<all:#3>{#1}}%
+  \beamer@processactions}
+
+\def\actionenv{\beamer@ifnextcharospec{\beamer@parsedactionenv}{\expandafter\beamer@parsedactionenv\beamer@defaultospec}}
+\def\beamer@parsedactionenv<#1>{%
+  \def\beamer@doifnotinframe{}\def\beamer@doifinframe{}%
+  {{\beamer@masterdecode{#1}}}%
+  \ifx\beamer@decodefound\beamer@plus%
+    \def\beamer@todobegin{}%
+    \def\beamer@todoend{}%
+  \else%
+    \edef\beamer@todobegin{\noexpand\begin{uncoverenv}<all:\beamer@decodefound>}%
+    \def\beamer@todoend{\end{uncoverenv}}%
+  \fi%
+  \expandafter\beamer@processactionsbegin\beamer@decaction{}%
+  \expandafter\beamer@processactionsend\beamer@decaction{}%
+  \beamer@todobegin}
+\def\endactionenv{\beamer@todoend}
+
+\def\beamer@processactionsbegin#1{%
+  \beamer@ifempty{#1}{}{%
+    \expandafter\beamer@@processactionsbegin\expandafter{\beamer@todobegin}#1}}
+\long\def\beamer@@processactionsbegin#1#2<#3>{%
+  \def\beamer@todobegin{\begin{#2env}<all:#3>#1}%
+  \beamer@processactionsbegin}
+
+
+\def\beamer@processactionsend#1{%
+  \beamer@ifempty{#1}{}{%
+    \expandafter\beamer@@processactionsend\expandafter{\beamer@todoend}#1}}
+\long\def\beamer@@processactionsend#1#2<#3>{%
+  \def\beamer@todoend{#1\end{#2env}}%
+  \beamer@processactionsend}
+
+
+\def\beamer@defaultospec{<*>}
+\def\beamer@emptyospec{<*>}
+
+%
+% \temporal
+%
+\long\def\temporal<#1>#2#3#4{% past, present, future
+  \def\beamer@doifnotinframe{\beamer@picked}\def\beamer@doifinframe{#3}%
+  {\beamer@masterdecode{#1}%
+   \ifbeamer@localanotherslide\gdef\beamer@picked{#2}\else\gdef\beamer@picked{#4}\fi}\beamer@donow}
+
+
+%
+% \newoverlaycommand
+%
+\def\beameroriginal#1{\csname @orig\string#1\endcsname}
+
+
+\newcount\beamer@argscount
+
+%% 重新定义 \cs{newenvironment} 和 \cs{renewenvironment}, 若后面有 |<>|，则可以包含覆盖指令，
+%% 且覆盖指令作为最后一个参数；否则保持原定义。
+%
+% newenvironment extension
+%
+\let\beamer@orignewenvironment=\newenvironment
+
+\def\newenvironment{\@ifnextchar<{\beamer@newenv}{\beamer@orignewenvironment}}
+\def\beamer@newenv<>{\@star@or@long\beamer@new@environment}
+\def\beamer@new@environment#1{\@ifnextchar[{\beamer@@newenv{#1}}{\beamer@newenvnoopt{#1}{0}}}
+\def\beamer@@newenv#1[#2]{\@ifnextchar[{\beamer@newenvopt{#1}{#2}}{\beamer@newenvnoopt{#1}{#2}}}
+\long\def\beamer@newenvnoopt#1#2#3#4{%
+  \expandafter\newcommand\expandafter<\expandafter>\csname#1\endcsname[#2]{#3}%
+  \expandafter\long\expandafter\def\csname end#1\endcsname{#4}%
+}
+\long\def\beamer@newenvopt#1#2[#3]#4#5{%
+  \expandafter\newcommand\expandafter<\expandafter>\csname#1\endcsname[#2][#3]{#4}%
+  \expandafter\long\expandafter\def\csname end#1\endcsname{#5}%
+}
+
+
+\let\beamer@origrenewenvironment=\renewenvironment
+
+\def\renewenvironment{\@ifnextchar<{\beamer@renewenv}{\beamer@origrenewenvironment}}
+\def\beamer@renewenv<>#1{%
+  \edef\beamer@do{\csname original#1\endcsname=\expandafter\noexpand\csname#1\endcsname}
+  \expandafter\let\beamer@do%
+  \edef\beamer@do{\csname endoriginal#1\endcsname=\expandafter\noexpand\csname end#1\endcsname}
+  \expandafter\let\beamer@do%
+  \newenvironment<>{#1}}
+
+
+%% 重新定义 \cs{newcommand} 和 \cs{renewcommand}, 如果后面有 |<>|，则可以包含覆盖指令，
+%% 且覆盖指令作为最后一个参数；否则保持原定义。
+%
+% newcommand extension
+%
+\let\beamer@orignewcommand=\newcommand
+
+\def\newcommand{\@ifnextchar<{\beamer@newcom}{\beamer@orignewcommand}}
+\def\beamer@newcom<>{\@star@or@long\beamer@new@command}
+\def\beamer@new@command#1{\@ifnextchar[{\beamer@@newcom{#1}}{\beamer@newcomnoopt{#1}{0}}}
+\def\beamer@@newcom#1[#2]{\@ifnextchar[{\beamer@newcomopt{#1}{#2}}{\beamer@newcomnoopt{#1}{#2}}}
+\long\def\beamer@newcomnoopt#1#2#3{%
+  \ifnum#2=0\relax%
+    \expandafter\def\expandafter#1\expandafter{\expandafter\beamer@sortzero\expandafter{\csname beamerx@\string#1\endcsname}}%
+  \else
+    \expandafter\def\expandafter#1\expandafter{\expandafter\beamer@sort\expandafter{\csname beamerx@\string#1\endcsname}{#2}}%
+  \fi%
+  \beamer@argscount=#2\relax%
+  \advance\beamer@argscount by 1\relax%
+  \expandafter\newcommand\csname beamerx@\string#1\endcsname[\beamer@argscount]{#3}%
+}
+\long\def\beamer@newcomopt#1#2[#3]#4{%
+  \expandafter\def\expandafter#1\expandafter{\expandafter\beamer@presort\expandafter{\csname beamerx@\string#1\endcsname}{#2}{#3}}%
+  \beamer@argscount=#2\relax%
+  \advance\beamer@argscount by 1\relax%
+  \expandafter\newcommand\csname beamerx@\string#1\endcsname[\beamer@argscount]{#4}%
+}
+
+\let\beamer@origrenewcommand=\renewcommand
+
+\def\renewcommand{\@ifnextchar<{\beamer@renewcom}{\beamer@origrenewcommand}}
+\def\beamer@renewcom<>#1{%
+  \expandafter\def\expandafter\beamer@name\expandafter{\csname @orig\string#1\endcsname}%
+  \expandafter\let\beamer@name=#1\relax%
+  \expandafter\let\csname beamerx@\string#1\endcsname\@undefined
+  \newcommand<>#1}
+
+
+\long\def\beamer@presort#1#2#3{%
+  \long\def\beamer@todo{#1}%
+  \def\beamer@ospec{}%
+  \beamer@argscount=#2\relax%
+  \beamer@prechecka{#3}}
+\long\def\beamer@prechecka#1{\@ifnextchar<{\beamer@preget{#1}}{\beamer@precheckb{#1}}}
+\long\def\beamer@preget#1<#2>{\def\beamer@ospec{<#2>}\beamer@precheckb{#1}}
+\long\def\beamer@precheckb#1{\@ifnextchar[{\beamer@pregetb}{\beamer@pregetb[{#1}]}}
+\long\def\beamer@pregetb[#1]{%
+  \expandafter\long\expandafter\def\expandafter\beamer@todo\expandafter{\beamer@todo{#1}}%
+  \advance\beamer@argscount by-1\relax%
+  \beamer@parseargs%
+}
+
+\def\beamer@sortzero#1{\beamer@ifnextcharospec{\beamer@sortzeroread{#1}}{#1{}}}
+\def\beamer@sortzeroread#1<#2>{#1{<#2>}}
+
+
+\def\beamer@sort#1#2{%
+  \long\def\beamer@todo{#1}%
+  \def\beamer@ospec{}%
+  \beamer@argscount=#2\relax%
+  \beamer@parseargs}
+
+\def\beamer@parseargs{%
+  \ifnum\beamer@argscount=0\relax%
+    \let\next=\beamer@finalargscheck%
+  \else%
+    \let\next=\beamer@lookforarg%
+  \fi%
+  \next}
+\def\beamer@lookforarg{%
+  \@ifnextchar<\beamer@foundspec\beamer@readarg}
+\def\beamer@foundspec<#1>{%
+  \def\beamer@ospec{<#1>}%
+  \beamer@lookforarg}
+\long\def\beamer@readarg#1{%
+  \expandafter\long\expandafter\def\expandafter\beamer@todo\expandafter{\beamer@todo{#1}}%
+  \advance\beamer@argscount by-1\relax%
+  \beamer@parseargs%
+}
+
+\def\beamer@finalargscheck{\beamer@ifnextcharospec\beamer@finalspec\beamer@finalnospec}
+\def\beamer@finalspec<#1>{\def\beamer@ospec{<#1>}\beamer@finalnospec}
+\def\beamer@finalnospec{%
+  \expandafter\beamer@todo\expandafter{\beamer@ospec}}
+
+
+
+
+\mode
+<presentation>
+
+
+%% 将参数前面的水平或竖直 |skip| 移动到参数后面。
+% commands for smuggling skips past
+
+\newskip\beamer@lastskipcover
+\def\beamer@smuggle#1{%
+  {}%
+  \beamer@lastskipcover=\lastskip%
+  \edef\beamer@lastskiptext{\the\lastskip}%
+  \ifx\beamer@lastskiptext\beamer@zeropt\else%
+  \ifvmode\unskip\fi\ifhmode\unskip\fi\fi%
+  #1%
+  \ifx\beamer@lastskiptext\beamer@zeropt\else%
+  \ifvmode\vskip\beamer@lastskipcover\fi\ifhmode\hskip\beamer@lastskipcover\fi\fi%
+}
+
+
+%% \cs{uncover}、\cs{onslide}（不含 \cs{onslide+} 和 \cs{onslide*}）和 \cs{pause} 命令的实现方式。
+%% 被覆盖内容的显示样式由 \cs{setbeamercovered} 命令确定，见文档 \S17.6。\par
+%%     \cs{uncover} 命令是可以嵌套的，嵌套深度记录在 \cs{beamer@coveringdepth} 中。
+%% 对于简单的覆盖效果，我们假定 \cs{uncover} 命令没有嵌套：这样下面的简单文档
+%% \begin{verbatim}
+%% \setbeamercovered{highly dynamic}
+%% \begin{frame}
+%% one\uncover<2->{two}\uncover<3->{three}
+%% \end{frame}
+%% \end{verbatim}
+%% 展开后的第一个 slide 约略等于
+%% \begin{verbatim}
+%% \begin{beamer@frameslide}
+%% one
+%% %
+%% \let\beamer@oldcolorhook\beamer@colorhook
+%% \xdef\beamer@colorhook{!15!bg\beamer@colorhook}\color{.}
+%% two
+%% \let\beamer@colorhook\beamer@oldcolorhook
+%% %
+%% \let\beamer@oldcolorhook\beamer@colorhook
+%% \xdef\beamer@colorhook{!10!bg\beamer@colorhook}\color{.}
+%% three
+%% \let\beamer@colorhook\beamer@oldcolorhook
+%% \end{beamer@frameslide}
+%% \end{verbatim}
+%% 从下面的代码 |\newcolormixin\beamer@colorhook| 可以看到，\cs{beamer@colorhook} 是一个混色。
+%% 混色功能在 \pkg{pgf} 中包含的 \pkg{xxcolor} 宏包中定义，参考 \pkg{pgf} 文档 \S86。
+%% 添加混色（例如 |!25!white|）后，每次用 \cs{color} 命令切换颜色时，都会将该混色添加到所选用颜色后面，
+%% 从而改变了实际得到的颜色。|bg| 是 \cls{beamer} 的背景色，因此用 |!15!bg| 混色将让文本颜色很接近背景色。\par
+%% 虽然用 |colormixin| 很容易改变文本的颜色，但从外部插入的图片的颜色却不会跟着变化。
+%% \cls{Beamer} 利用 \cs{pgfuseimage} 的 \cs{pgfalternateextension} 功能（见 \pkg{pgf} 文档 \S106.3），
+%% 可以根据当前覆盖透明度载入不同的图片，比如本来是载入 |some.png| 的，将改为载入 |some.15opaque.png|。
+%
+% Uncovering management
+%
+\def\beamer@actions#1#2{%
+  \gdef\beamer@do{#1%
+    \expandafter\gdef\csname beamer@doafter%
+    \the\beamer@coveringdepth\endcsname{#2}}}
+
+\def\beamer@startcovered{%
+  \beamer@smuggle{%
+  \global\advance\beamer@coveringdepth by 1\relax%
+  \beamer@actions{\pgfsys@begininvisible\aftergroup\beamer@@spacingcover}{%
+     \pgfsys@endinvisible\aftergroup\beamer@@spacingcover%
+     }%
+  \def\opaqueness<##1>##2{%
+    \only<##1>{%
+      \beamer@actions{%
+        \expandafter\xdef\csname beamer@oldcolorhook%
+        \the\beamer@coveringdepth\endcsname{\beamer@colorhook}%
+        \expandafter\xdef\csname beamer@oldpgfextension%
+        \the\beamer@coveringdepth\endcsname{\beamer@pgfextension}%
+        {\globalcolorstrue\colorlet{beamer@freeze\the\beamer@coveringdepth}{bg}}%
+        \xdef\beamer@colorhook{!##2!beamer@freeze%
+          \the\beamer@coveringdepth\beamer@colorhook}%
+        \gdef\beamer@pgfextension{!##2opaque}%
+        \color{.}%
+      }%
+      {%
+        \xdef\beamer@colorhook{\csname beamer@oldcolorhook%
+          \the\beamer@coveringdepth\endcsname}%
+        \xdef\beamer@pgfextension{\csname beamer@oldpgfextension%
+          \the\beamer@coveringdepth\endcsname}%
+        \color{.}%
+      }}}%
+%% \sty{beamerbasedecode} 定义的 \cs{beamer@minimum} 仅在这里用到。
+%% 由于 \cs{opaqueness} 命令的覆盖指令是相对值，这里在编组中临时修改 \cs{beamer@slideinframe}，
+%% 以让该命令得到正确的效果。
+  \ifnum\beamer@slideinframe<\beamer@minimum%ok, at beginning
+  {%
+    \beamer@saveanother%
+    \advance\beamer@minimum by-\beamer@slideinframe%
+    \beamer@slideinframe=\beamer@minimum%
+    \beamer@uncoverbeforeactions%
+    \beamer@restoreanother%
+  }%
+  \else%
+  {%
+    \beamer@saveanother%
+    \advance\beamer@slideinframe by-\beamer@minimum%
+    \beamer@uncoverafteractions%
+    \beamer@restoreanother%
+  }%
+  \fi%
+  \beamer@do%
+  }%
+}
+\def\beamer@endcovered{%
+  \beamer@smuggle{%
+  \csname beamer@doafter\the\beamer@coveringdepth\endcsname%
+  \global\advance\beamer@coveringdepth by -1\relax%
+  }%
+}%
+
+
+\define@key{beamer@mixin}{still covered}{\def\beamer@uncoverbeforeactions{\ignorespaces#1}}
+\define@key{beamer@mixin}{again covered}{\def\beamer@uncoverafteractions{\ignorespaces#1}}
+
+\define@key{beamer@mixin}{invisible}[]{%
+  \def\beamer@uncoverbeforeactions{\ignorespaces}
+  \def\beamer@uncoverafteractions{\ignorespaces}}
+
+\define@key{beamer@mixin}{transparent}[15]{%
+  \def\beamer@uncoverbeforeactions{\ignorespaces\opaqueness<1->{#1}}
+  \def\beamer@uncoverafteractions{\ignorespaces\opaqueness<1->{#1}}}
+
+\define@key{beamer@mixin}{dynamic}[]{%
+  \def\beamer@uncoverbeforeactions{\ignorespaces\opaqueness<1-2>{10}\opaqueness<3->{5}}
+  \def\beamer@uncoverafteractions{\ignorespaces\opaqueness<1-2>{10}\opaqueness<3->{5}}}
+
+\define@key{beamer@mixin}{highly dynamic}[]{%
+  \def\beamer@uncoverbeforeactions{\ignorespaces\opaqueness<1>{15}\opaqueness<2>{10}\opaqueness<3>{5}\opaqueness<4->{2}}
+  \def\beamer@uncoverafteractions{\ignorespaces\opaqueness<1>{15}\opaqueness<2>{10}\opaqueness<3>{5}\opaqueness<4->{2}}}
+
+
+\def\setbeamercovered#1{%
+  \setkeys{beamer@mixin}{invisible}%
+  \setkeys{beamer@mixin}{#1}}
+
+\setbeamercovered{invisible}
+
+\newcolormixin\beamer@colorhook
+
+\def\pgfalternateextension{\colorcurrentmixin\beamer@pgfextension}
+
+\def\beamer@colorhook{}
+\def\beamer@pgfextension{}
+
+\beamer@coveringdepth=0\relax
+
+
+\mode
+<article>
+{
+  \let\setbeamercovered=\@gobble
+}
+
+
+
+
+%
+% Pausing
+%
+
+%% \env{beamer@framepauses} 是 \env{beamer@frameslide} 环境的主体部分。
+%% \cs{beamer@endpause} 的内容可以由覆盖命令设置。
+\newenvironment{beamer@framepauses}%internal
+{%
+  \global\c@beamerpauses=1\relax%
+  \gdef\beamer@endpause{}%
+}
+{\beamer@endpause}
+
+%% \cs{pause} 实际上是包装好的 \cs{onslide} 命令。
+\newcommand{\beamer@@pause}[1][]{%
+  \beamer@ifempty{#1}%
+    {\global\advance\c@beamerpauses by1\relax}%
+    {\global\c@beamerpauses=#1\relax}%
+  \onslide<\c@beamerpauses->\relax%
+}
+
+\mode
+<all>
+{
+  \AtBeginDocument
+  {
+    \let\beamer@musixpause=\pause
+    \let\pause=\beamer@@pause
+
+    \let\beamer@music=\music
+    \def\music{\let\beamerpause=\pause\let\pause\beamer@musixpause\beamer@music}
+  }
+}
+
+
+
+%% 依据文档 \S9.3，\cs{onslide} 命令有多种形式，其中带花括号参数的三种形式分别为
+%% \begin{enumerate}
+%%   \item |\onslide<overlay specification>{text}|，它等同于 |\uncover<overlay specification>{text}|；
+%%   \item |\onslide+<overlay specification>{text}|，它等同于 |\visible<overlay specification>{text}|；
+%%   \item |\onslide*<overlay specification>{text}|，它等同于 |\only<overlay specification>{text}|。
+%% \end{enumerate}
+%% 另外还有两种不带花括号参数的形式：\cs{onslide} 和 \cs{onslide+}。
+\mode
+<all>
+{
+  \def\onslide{\@ifstar{\only}{\@ifnextchar+{\expandafter\beamer@visibleonslide\@gobble}{\beamer@mainonslide}}}
+
+  \newcommand<>{\beamer@visibleonslide}{%
+    \@ifnextchar\bgroup
+    {\visible#1}%
+    {\beamer@noargsvisibleonslide#1}}
+
+  \newcommand<>{\beamer@mainonslide}{%
+    \@ifnextchar\bgroup%
+    {\uncover#1}%
+    {\beamer@noargsonslide#1}%
+  }
+}
+
+%% 不带花括号参数 \cs{onslide} 命令。其实现原理见前面 \cs{beamer@startcovered} 处的注释。
+\newcommand<>{\beamer@noargsonslide}{%
+  \beamer@endpause%
+  \alt#1%
+  {\beamer@spacingcover\gdef\beamer@endpause{\beamer@spacingcover}}%
+  {\beamer@startcovered\gdef\beamer@endpause{\beamer@endcovered}}%
+}
+
+%% 不带花括号参数的 \cs{onslide+} 命令。其实现原理见后面 \cs{beamer@begininvisible} 处的注释。
+\newcommand<>{\beamer@noargsvisibleonslide}{%
+  \beamer@endpause%
+  \alt#1%
+  {\beamer@spacingcover\gdef\beamer@endpause{\beamer@spacingcover}}%
+  {\beamer@begininvisible\gdef\beamer@endpause{\beamer@endinvisible}}%
+}
+
+\mode
+<article>
+{
+  \newcommand\beamer@@pause[1][]{}
+  \newcommand<>{\beamer@noargsonslide}{}
+  \newcommand<>{\beamer@noargsvisibleonslide}{}
+}
+
+
+
+
+%
+% Make item overlays
+%
+
+\let\beamer@origitem=\item
+\def\beamer@callorigitem{\@ifnextchar[\beamer@@callorigitem{\beamer@origitem\kern0pt\ignorespaces}}
+\def\beamer@@callorigitem[#1]{\beamer@origitem[{#1}]\kern0pt\ignorespaces}
+
+\def\item{%
+  \@ifnextchar\relax\beamer@origitem{%
+  \ifhmode%
+    \unskip\unskip\par%
+  \fi%
+  \beamer@closeitem\gdef\beamer@closeitem{}%
+  \@ifnextchar<{\beamer@parseitem}{\beamer@itemcheckopt}}}
+\def\beamer@itemcheckopt{\@ifnextchar[{\beamer@itemcheckopta}{%
+    \ifx\beamer@defaultospec\beamer@emptyospec%
+      \let\next=\beamer@callorigitem%
+    \else%
+      \let\next=\beamer@defaultparse%
+    \fi%
+    \next%
+  }}
+\def\beamer@defaultparse{\expandafter\beamer@parseitem\beamer@defaultospec}
+\long\def\beamer@itemcheckopta[#1]{\@ifnextchar<{\beamer@itemreverse[{#1}]}{%
+    \ifx\beamer@defaultospec\beamer@emptyospec%
+      \let\next=\beamer@callorigitem%
+    \else%
+      \let\next=\beamer@defaultparse%
+    \fi%
+    \next[{#1}]}}
+\long\def\beamer@itemreverse[#1]<#2>{\beamer@parseitem<#2>[{#1}]}
+
+\def\beamer@parseitem<#1>{%
+  \gdef\beamer@closeitem{%
+    %% Handle empty item as LaTeX would do
+    \if@inlabel\indent\par\fi
+    \end{actionenv}%
+    %% Local change inside actionenv should survive, and should be
+    %% always false
+    \@noparitemfalse}%
+\begin{actionenv}<#1>\beamer@callorigitem}
+
+
+\def\beamerdefaultoverlayspecification#1{%
+  \beamer@ifempty{#1}%
+  {%
+    \def\beamer@gdefaultospec{<*>}%
+    \def\beamer@defaultospec{<*>}}%
+  {%
+    \def\beamer@gdefaultospec{#1}%
+    \def\beamer@defaultospec{#1}%
+  }%
+}
+\beamerdefaultoverlayspecification{}
+
+
+\newcount\beamer@trivlistdepth
+\beamer@trivlistdepth=0\relax
+
+\let\beamer@orig@trivlist=\@trivlist
+\def\@trivlist{%
+  \global\advance\beamer@trivlistdepth by1\relax%
+  \expandafter\global\expandafter\let\csname beamer@closeitem\the\beamer@trivlistdepth\endcsname=\beamer@closeitem%
+  \gdef\beamer@closeitem{}%
+  \beamer@orig@trivlist%
+  }
+\let\beamer@origendtrivlist=\endtrivlist
+\def\endtrivlist{%
+  \beamer@closeitem%
+  \expandafter\global\expandafter\let\expandafter\beamer@closeitem\expandafter=\csname
+  beamer@closeitem\the\beamer@trivlistdepth\endcsname%
+  \global\advance\beamer@trivlistdepth by-1\relax%
+  \beamer@origendtrivlist}
+
+\def\beamer@closeitem{}
+
+\let\beamer@list=\list
+\let\beamer@@trivlist=\@trivlist
+
+
+\mode
+<article>
+{
+  \AtBeginDocument{%
+    \let\beamer@origitem=\item
+    \def\item{\@ifnextchar<\beamer@@item\beamer@item}
+    \def\beamer@@item<#1>{\beamer@item}
+    \def\beamer@item{\@ifnextchar[\beamer@@@item\beamer@origitem}
+    \def\beamer@@@item[#1]{\@ifnextchar<{\beamer@@@@item[{#1}]}{\beamer@origitem[{#1}]}}
+    \def\beamer@@@@item[#1]<#2>{\beamer@origitem[{#1}]}
+  }
+}
+
+
+
+%
+% Overlay commands
+%
+
+
+\mode
+<all>
+{
+  \newcommand\beamer@gobbleoptional[2][]{}
+  \newcommand\beamer@gobbleoptionalinsp[2][]{\ignorespaces}
+}
+
+%% 为使 \cls{Beamer} 覆盖命令在编组结束后能够继续生效，这里使用了 \cs{aftergroup} 命令。
+\def\beamer@@spacingcover{\beamer@smuggle{\pgfsys@begininvisible\pgfsys@endinvisible}}
+\def\beamer@spacingcover{\beamer@@spacingcover\aftergroup\beamer@@spacingcover}
+
+\def\beamer@begininvisible{\beamer@smuggle{\pgfsys@begininvisible\aftergroup\beamer@@spacingcover}}
+\def\beamer@endinvisible{\beamer@smuggle{\pgfsys@endinvisible\aftergroup\beamer@@spacingcover}}
+
+\long\def\beamer@fakeinvisible#1{\beamer@spacingcover#1\beamer@spacingcover}
+\long\def\beamer@makecovered#1{\beamer@startcovered#1\beamer@endcovered}
+\long\def\beamer@reallymakeinvisible#1{\beamer@begininvisible#1\beamer@endinvisible}
+
+%% \cs{onslide} 和 \cs{uncover} 命令的实现在 \cs{beamer@startcovered} 处已经分析。
+%% 这里只分析 \cs{onslide+} 和 \cs{visible} 命令。实际上它们主要用到 \pkg{pgf}
+%% 提供的 \cs{pgfsys@begininvisible} 和 \cs{pgfsys@endinvisible} 命令（见 \pkg{pgf} 文档 \S115.13）。
+%% 对于下面的简单文档
+%% \begin{verbatim}
+%% \begin{frame}
+%% \onslide+<1>One\onslide+<2>Two
+%% \end{frame}
+%% \end{verbatim}
+%% 展开的结果约略等于
+%% \begin{verbatim}
+%% % slide 1
+%% \begin{beamer@frameslide}
+%% \pgfsys@begininvisible\pgfsys@endinvisible
+%% One
+%% \pgfsys@begininvisible\pgfsys@endinvisible
+%% \pgfsys@begininvisible
+%% Two
+%% \pgfsys@endinvisible
+%% \end{beamer@frameslide}
+%% % slide 2
+%% \begin{beamer@frameslide}
+%% \pgfsys@begininvisible
+%% One
+%% \pgfsys@endinvisible
+%% \pgfsys@begininvisible\pgfsys@endinvisible
+%% Two
+%% \pgfsys@begininvisible\pgfsys@endinvisible
+%% \end{beamer@frameslide}
+%% \end{verbatim}
+%% 经测试，未与 \cs{pgfsys@begininvisible} 配对使用的 \cs{pgfsys@endinvisible} 将得到错误的结果。
+%% 因此这里（即上面的 \cs{beamer@@spacingcover} 的定义中）在取消隐藏内容时需要同时使用这两个命令。\par
+%%     实际上，从 \textsf{pgfsys.code.tex} 文件中可以看到，这两个命令定义为对画布作变换：
+%% \begin{verbatim}
+%% \def\pgfsys@begininvisible{\pgfsys@transformcm{1}{0}{0}{1}{2000bp}{2000bp}}
+%% \def\pgfsys@endinvisible{\pgfsys@transformcm{1}{0}{0}{1}{-2000bp}{-2000bp}}
+%% \end{verbatim}
+%% 其中的线性变换矩阵为单位矩阵，因此只有后面的平移变换有效。结果是将画布移动到页面之外或者移动回来%
+%% （\cs{pgfsys@transformcm} 命令的说明见 \pkg{pgf} 文档 \S115.3）。因此两者必须配对使用。\par
+%%     实际上，\pkg{pgf} 的变换命令在正文中也能使用，未必得在 \env{pgfpicture} 环境中使用。
+%% 因此，\pkg{beamer} 的 \cs{visible} 才会是有效的。
+\newcommand{\uncover}{\alt{\beamer@fakeinvisible}{\beamer@makecovered}}
+\newcommand{\visible}{\alt{\beamer@fakeinvisible}{\beamer@reallymakeinvisible}}
+\newcommand{\invisible}{\alt{\beamer@reallymakeinvisible}{\beamer@fakeinvisible}}
+\newenvironment{visibleenv}{\begin{altenv}{\beamer@spacingcover}{\beamer@spacingcover}{\beamer@begininvisible}{\beamer@endinvisible}}{\end{altenv}}
+\newenvironment{invisibleenv}{\begin{altenv}{\beamer@begininvisible}{\beamer@endinvisible}{\beamer@spacingcover}{\beamer@spacingcover}}{\end{altenv}}
+\newenvironment{uncoverenv}{\begin{altenv}{\beamer@spacingcover}{\beamer@spacingcover}{\beamer@startcovered}{\beamer@endcovered}}{\end{altenv}}
+\newenvironment{onlyenv}{\begin{altenv}{}{}{\begingroup\setbox0=\vbox\bgroup}{\egroup\endgroup}}{\end{altenv}}
+\renewcommand<>{\color}{\alt#1{\beameroriginal{\color}}{\beamer@gobbleoptionalinsp}}
+
+\mode
+<article>
+{
+  \newcommand{\uncover}{\alt{\@firstofone}{\@gobble}}
+  \newcommand{\visible}{\alt{\@firstofone}{\@gobble}}
+  \newcommand{\invisible}{\alt{\@gobble}{\@firstofone}}
+  \newenvironment{onlyenv}{\begin{altenv}{}{}{\begingroup\setbox0=\vbox\bgroup}{\egroup\endgroup}}{\end{altenv}}
+  \newenvironment{uncoverenv}{\begin{altenv}{}{}{\begingroup\setbox0=\vbox\bgroup}{\egroup\endgroup}}{\end{altenv}}
+  \newenvironment{visibleenv}{\begin{altenv}{}{}{\begingroup\setbox0=\vbox\bgroup}{\egroup\endgroup}}{\end{altenv}}
+  \newenvironment{invisibleenv}{\begin{altenv}{\begingroup\setbox0=\vbox\bgroup}{\egroup\endgroup}{}{}}{\end{altenv}}
+
+  \AtBeginDocument{
+    % These have to be done late...
+    \renewcommand<>{\color}{\alt#1{\beameroriginal{\color}}{\beamer@gobbleoptionalinsp}}
+  }
+}
+
+\mode
+<all>
+{
+  \renewcommand<>{\textbf}{\only#1{\beameroriginal{\textbf}}}
+  \renewcommand<>{\textit}{\only#1{\beameroriginal{\textit}}}
+  \renewcommand<>{\textsl}{\only#1{\beameroriginal{\textsl}}}
+  \renewcommand<>{\textsf}{\only#1{\beameroriginal{\textsf}}}
+  \renewcommand<>{\textrm}{\only#1{\beameroriginal{\textrm}}}
+}
+
+\renewcommand<>{\hypertarget}[2]{\only#3{\beameroriginal{\hypertarget}{#1}{#2}}}
+\renewcommand<>{\hyperlink}[2]{\only#3{\beameroriginal{\hyperlink}{#1}{#2}}}
+
+\mode
+<article>
+{
+  \g@addto@macro\beamer@lastminutepatches{
+    % These have to be done late...
+    \renewcommand<>{\hypertarget}[2]{\only#3{\beameroriginal{\hypertarget}{#1}{#2}}}
+    \renewcommand<>{\hyperlink}[2]{\only#3{\beameroriginal{\hyperlink}{#1}{#2}}}
+  }
+}
+
+
+
+\newcommand<>{\emph}[1]{{\only#2{\itshape}#1}}
+
+\mode
+<article>
+{
+  \renewcommand<>{\emph}{\only#1{\beameroriginal\emph}}
+}
+
+
+
+%
+% Insert area
+%
+\newenvironment{overlayarea}[2]{%
+  \beamer@animht=#1\relax%
+  \beamer@animwd=#2\relax%
+  \setbox\beamer@areabox=\vbox to#2\bgroup%
+  \strut\begin{minipage}[t]{#1}%
+  % Make the minipage behave like the main part of the slide
+  \normalfont
+  \raggedright
+  }
+  {%
+  \end{minipage}\vfil%
+  \egroup%
+  \wd\beamer@areabox=\beamer@animht%
+  \ht\beamer@areabox=\beamer@animwd%
+  \dp\beamer@areabox=0pt%
+  \box\beamer@areabox%
+}
+
+\mode
+<article>
+{
+  \newenvironment{overlayarea}[2]{}{}% no effect
+}
+
+
+\newenvironment{overprint}[1][\textwidth]{%
+  \let\beamer@noargsonslide=\beamer@onslide%
+  \let\beamer@noargsvisibleonslide=\beamer@onslide%
+  \beamer@animht=0pt%
+  \beamer@animdp=0pt%
+  \beamer@animwd=#1\relax%
+  \setbox\beamer@animcurrent=\box\beamer@animshowbox% makes animshowbox empty
+  \setbox\beamer@animcurrent=\hbox{}%
+  \def\beamer@endaction{}%
+}{%
+  \beamer@endaction%
+  \ifvoid\beamer@animshowbox\setbox\beamer@animshowbox=\hbox{}\fi%
+  \ht\beamer@animshowbox=\beamer@animht%
+  \dp\beamer@animshowbox=\beamer@animdp%
+  \wd\beamer@animshowbox=\beamer@animwd%
+  \box\beamer@animshowbox%
+}
+
+\def\beamer@onslide<#1>{%
+  \beamer@endaction%
+  \alt<#1>{%
+    \ifvoid\beamer@animshowbox\else\ClassError{beamer}{Overprints may not overlap}{}\fi%
+    \def\beamer@endaction{%
+    \end{minipage}%
+    \egroup%
+      \ifdim\beamer@animht<\ht\beamer@animcurrent\beamer@animht=\ht\beamer@animcurrent\fi%
+      \ifdim\beamer@animdp<\dp\beamer@animcurrent\beamer@animdp=\dp\beamer@animcurrent\fi%
+      \setbox\beamer@animshowbox=\copy\beamer@animcurrent}
+  }%
+  {\def\beamer@endaction{%
+    \end{minipage}%
+    \egroup%
+      \ifdim\beamer@animht<\ht\beamer@animcurrent\beamer@animht=\ht\beamer@animcurrent\fi%
+      \ifdim\beamer@animdp<\dp\beamer@animcurrent\beamer@animdp=\dp\beamer@animcurrent\fi}%
+  }%
+  \setbox\beamer@animcurrent=\vbox\bgroup\begin{minipage}[t]{\beamer@animwd}%
+}
+
+\mode
+<article>
+{
+  \newenvironment{overprint}[1][]%
+  {%
+    \let\beamer@noargsonslide=\beamer@onslide%
+    \let\beamer@noargsvisibleonslide=\beamer@onslide%
+    \begin{onlyenv}}
+    {\end{onlyenv}}
+
+  \def\beamer@onslide<#1>{\end{onlyenv}\begin{onlyenv}<#1>}
+}
+
+
+%
+% Transitions - DISTRACTING and to be used with CARE!!!!
+%
+
+\define@key{beamertrans}{direction}{\def\beamer@transdir{ /Di #1 }}
+\define@key{beamertrans}{duration}{\def\beamer@dur{ /D #1 }}
+
+\newcommand\beamer@dotrans[2][]{%
+  \def\beamer@transdir{}%
+  \def\beamer@dur{}%
+  \setkeys{beamertrans}{#1}%
+  \edef\beamer@temp{{pdfpagetransition={#2 \beamer@transdir\space\beamer@dur}}}
+  \expandafter\hypersetup\beamer@temp}
+
+\mode
+<article>
+{
+  \newcommand\beamer@dotrans[2][]{}
+}
+
+\mode
+<all>
+{
+  \newcommand<>{\transblindshorizontal}[1][]{\only#2{\beamer@dotrans[{#1}]{Blinds /Dm /H}}}
+  \newcommand<>{\transblindsvertical}[1][]{\only#2{\beamer@dotrans[{#1}]{Blinds /Dm /V}}}
+  \newcommand<>{\transboxin}[1][]{\only#2{\beamer@dotrans[{#1}]{Box /M /I}}}
+  \newcommand<>{\transboxout}[1][]{\only#2{\beamer@dotrans[{#1}]{Box /M /O}}}
+  \newcommand<>{\transcover}[1][]{\only#2{\beamer@dotrans[{#1}]{Cover}}}
+  \newcommand<>{\transdissolve}[1][]{\only#2{\beamer@dotrans[{#1}]{Dissolve}}}
+  \newcommand<>{\transfade}[1][]{\only#2{\beamer@dotrans[{#1}]{Fade}}}
+  \newcommand<>{\transglitter}[1][]{\only#2{\beamer@dotrans[{#1}]{Glitter}}}
+  \newcommand<>{\transpush}[1][]{\only#2{\beamer@dotrans[{#1}]{Push}}}
+  \newcommand<>{\transreplace}[1][]{\only#2{\beamer@dotrans[{#1}]{Replace}}}
+  \newcommand<>{\transsplitverticalin}[1][]{\only#2{\beamer@dotrans[{#1}]{Split /Dm /V /M /I}}}
+  \newcommand<>{\transsplitverticalout}[1][]{\only#2{\beamer@dotrans[{#1}]{Split /Dm /V /M /O}}}
+  \newcommand<>{\transsplithorizontalin}[1][]{\only#2{\beamer@dotrans[{#1}]{Split /Dm /H /M /I}}}
+  \newcommand<>{\transsplithorizontalout}[1][]{\only#2{\beamer@dotrans[{#1}]{Split /Dm /H /M /O}}}
+  \newcommand<>{\transuncover}[1][]{\only#2{\beamer@dotrans[{#1}]{Uncover}}}
+  \newcommand<>{\transwipe}[1][]{\only#2{\beamer@dotrans[{#1}]{Wipe}}}
+}
+
+\newcommand<>{\transduration}[1]{\only#2{\hypersetup{pdfpageduration={#1}}}}
+
+\mode
+<article>
+{
+  \newcommand<>{\transduration}[1]{}
+}
+
+
+%
+% Animation macros
+%
+
+\def\animate<#1>{\transduration<#1| handout:0| trans:0>{0}}
+\def\animatevalue<#1-#2>#3#4#5{%
+  \only<#1-#2>{}% enforce these frames
+  \ifnum\beamer@slideinframe<#1\relax%
+    #3=#4\relax%
+  \else%
+    \ifnum\beamer@slideinframe<#2\relax%
+      #3=#4\relax%
+      #3=-#3\relax%
+      \advance#3 by#5\relax%
+      \beamer@animationtempa=#2\relax%
+      \advance\beamer@animationtempa by-#1%
+      \ifnum\beamer@animationtempa>0%
+        \divide#3 by\beamer@animationtempa%
+      \fi%
+      \beamer@animationtempa=\beamer@slideinframe%
+      \advance\beamer@animationtempa by-#1%
+      \multiply#3 by\beamer@animationtempa%
+      \advance#3 by#4%
+    \else
+      #3=#5\relax%
+    \fi%
+  \fi%
+}
+
+\mode
+<article>
+{
+  \def\animate<#1>{}
+  \def\animatevalue<#1-#2>#3#4#5{#3=#4\relax}
+}
+
+
+
+%
+% Labels in overlays
+%
+\g@addto@macro\beamer@lastminutepatches{%
+  \let\beamer@origlabel\label
+  \def\label{\@ifnextchar<{\beamer@label}{\beamer@label<1>}}
+
+  \let\beamer@origlabel@in@display\label@in@display
+  \def\label@in@display{\@ifnextchar<{\beamer@label@in@display}{\beamer@label@in@display<1>}}
+}
+
+\def\beamer@label<#1>#2{\alt<#1>{\beamer@origlabel{#2}\beamer@nameslide{#2}}{\beamer@dummynameslide}}
+\def\beamer@label@in@display<#1>#2{\alt<#1>{\beamer@origlabel@in@display{#2}\beamer@nameslide{#2}}{\beamer@dummynameslide}}
+
+\mode
+<article>
+{
+  \g@addto@macro\beamer@lastminutepatches{
+    % Has to be done late...
+    \renewcommand<>{\label}{\alt#1{\beameroriginal{\label}}{\@gobble}}
+    \renewcommand<>{\label@in@display}{\alt#1{\beameroriginal{\label@in@display}}{\@gobble}}
+  }
+}
+
+\AtBeginDocument
+{
+  \let\beamer@origref=\ref
+  \def\ref{%
+    \@ifstar
+      {\beamer@origref}
+      {\beamer@ref}%
+  }
+  \long\def\beamer@ref#1{%
+    \hyperlink{#1}{\beamer@origref{#1}}%
+  }
+}
+
+\mode
+<all>

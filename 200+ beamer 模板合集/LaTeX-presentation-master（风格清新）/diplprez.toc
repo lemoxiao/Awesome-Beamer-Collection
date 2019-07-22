@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {croatian}
+\beamer@sectionintoc {1}{Uvod}{3}{0}{1}
+\beamer@sectionintoc {2}{Recent history}{6}{0}{2}
+\beamer@sectionintoc {3}{Conclusion}{9}{0}{3}

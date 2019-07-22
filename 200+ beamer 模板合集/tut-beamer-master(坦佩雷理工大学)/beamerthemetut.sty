@@ -1,0 +1,769 @@
+% `beamerthemetut.sty' provides a beamer theme more or less compliant
+% with the TUT PowerPoint slides.
+% Newest versions available under https://github.com/tvalimaki/tut-beamer
+%
+% The theme is based on the work of Benjamin Weiss that can be found on
+% https://github.com/hsrmbeamertheme/hsrmbeamertheme
+%
+% Author: Tuomas Välimäki (18 November 2014)
+%         tuomas.s.valimaki@tut.fi
+%
+% This file may be distributed and/or modified under the GNU Public License.
+% http://www.gnu.org/licenses/gpl-3.0.en.html
+
+\ProvidesPackage{beamerthemetut}
+
+\RequirePackage{arev}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{tikz}
+\RequirePackage{xpatch}
+\RequirePackage{silence}
+
+% Style options
+\newif\if@doSectionPage
+\@doSectionPagefalse
+\DeclareOption{sectionpages}{\@doSectionPagetrue}
+\newif\if@languageFinnish
+\@languageFinnishfalse
+\DeclareOption{finnish}{\@languageFinnishtrue}
+\ProcessOptions
+\beamer@compresstrue
+
+\mode<presentation>
+%---------------------------------------------------------------------
+% TOC
+%---------------------------------------------------------------------
+\useoutertheme[subsection=false,shadow]{miniframes}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[square]
+
+%---------------------------------------------------------------------
+% Custom commands
+%---------------------------------------------------------------------
+\newcommand{\rightTextArrow}{$\rightarrow$}
+
+%---------------------------------------------------------------------
+% Itemize
+%---------------------------------------------------------------------
+\setbeamertemplate{itemize item}{\rightTextArrow}
+\setbeamertemplate{itemize subitem}{\rightTextArrow}
+\setbeamertemplate{itemize subsubitem}{\rightTextArrow}
+
+\setlength{\parskip}{0.5em}
+
+%---------------------------------------------------------------------
+% Colors
+%---------------------------------------------------------------------
+% Primary presentation colors
+\definecolor{WarmGreyDark}{RGB}{70,65,60}
+\definecolor{WarmGreyLight}{RGB}{170,165,160}
+% Primary colors specified in TUT graphical guidelines
+\definecolor{TUTGrey}{RGB}{225,225,225}
+\definecolor{TUTBlue}{RGB}{70,200,255}
+\definecolor{TUTGreen}{RGB}{180,220,0}
+% Secondary colors specified in TUT graphical guidelines
+\definecolor{TUTsecOrange}{RGB}{234,103,12}
+\definecolor{TUTsecRed}{RGB}{203,0,58}
+\definecolor{TUTsecPink}{RGB}{226,0,120}
+\definecolor{TUTsecPlum}{RGB}{132,28,128}
+\definecolor{TUTsecGreen}{RGB}{0,120,44}
+\definecolor{TUTsecPetrol}{RGB}{0,152,172}
+\definecolor{TUTsecBlue}{RGB}{0,127,197}
+\definecolor{TUTsecDarkblue}{RGB}{0,65,121}
+\definecolor{TUTsecDarkred}{RGB}{132,9,43} % TUT-foundation color
+
+% Palettes
+\setbeamercolor{palette primary}{fg=WarmGreyDark,bg=TUTBlue}
+\setbeamercolor{palette secondary}{fg=WarmGreyDark,bg=TUTGreen}
+\setbeamercolor{palette tertiary}{fg=WarmGreyDark,bg=TUTGrey}
+\setbeamercolor{palette quaternary}{fg=white,bg=TUTsecGreen}
+\setbeamercolor{palette frametitle}{fg=WarmGreyDark}
+% General
+\setbeamercolor{normal text}{fg=WarmGreyDark}
+\setbeamercolor{structure}{fg=TUTsecBlue}
+\setbeamercolor{alerted text}{fg=TUTsecRed}
+\setbeamercolor{example text}{fg=TUTsecGreen}
+\setbeamercolor{copyright text}{fg=WarmGreyLight}
+% Titlepage
+\setbeamercolor{title}{parent=normal text}
+\setbeamercolor{subtitle}{parent=normal text}
+\setbeamercolor{date}{parent=palette primary}
+\setbeamercolor{author}{parent=palette primary}
+\setbeamercolor{email}{parent=palette primary}
+\setbeamercolor{institute}{parent=palette primary}
+% TOC
+\setbeamercolor{section in toc}{parent=normal text}
+% Content
+\setbeamercolor{frametitle}{parent=palette frametitle}
+% Blocks
+\setbeamercolor{block title}{use=palette primary,bg=palette primary.bg!50!black,fg=white}
+\setbeamercolor{block body}{parent=palette primary}
+\setbeamercolor{block title example}{parent=palette quaternary}
+\setbeamercolor{block body example}{parent=palette secondary}
+\setbeamercolor{block title alerted}{fg=white, bg=TUTsecDarkred}
+\setbeamercolor{block body alerted}{fg=white, bg=TUTsecRed}
+% Notes
+\setbeamercolor{note page}{fg=WarmGreyDark,bg=white}
+\setbeamercolor{note title}{use=palette secondary,fg=white,bg=palette secondary.bg}
+\setbeamercolor{note date}{parent=note title}
+% Page Number
+\setbeamercolor{page number in head/foot}{fg=WarmGreyDark, bg={}}
+% Bibliography
+\setbeamercolor{bibliography entry author}{fg=WarmGreyDark}
+\setbeamercolor{bibliography entry note}{use=bibliography entry author,fg=bibliography entry author.fg!50!white}
+
+%---------------------------------------------------------------------
+% Fonts
+%---------------------------------------------------------------------
+% General
+\renewcommand\UrlFont{\rmfamily\bfseries}
+% Titlepage
+\setbeamerfont{title}{size=\fontsize{20.74}{20.74}}
+\setbeamerfont{subtitle}{size=\fontsize{12}{14}}
+\setbeamerfont{date}{size=\fontsize{8}{10}}
+\setbeamerfont{author}{size=\fontsize{12}{15}}
+\setbeamerfont{institute}{size=\fontsize{8}{10}}
+\setbeamerfont{email}{size=\fontsize{8}{10}}
+% Section
+\setbeamerfont{section title}{size=\LARGE}
+% Content
+\setbeamerfont{frametitle}{size=\large}
+\setbeamerfont{copyright text}{size=\tiny}
+\setbeamerfont{block title}{series=\bfseries,size=\large}
+\setbeamerfont{block title alerted}{series=\bfseries,size=\large}
+\setbeamerfont{alerted text}{series=\bfseries}
+\setbeamerfont{description item}{series=\bfseries}
+% Captions
+\setbeamerfont{caption name}{series=\bfseries}
+% Footnotes
+\renewcommand{\footnotesize}{\tiny}
+
+%---------------------------------------------------------------------
+% Background
+%---------------------------------------------------------------------
+% Define a macro to draw the TUT gear
+\newcommand\tutgear[2][fill=black]{%
+\begin{tikzpicture}[y = #2,x = #2]
+\path[nonzero rule, inner sep=0pt, outer sep=0pt, #1]%
+  (-0.03871,  0.26461) .. controls (-0.13550,  0.25062) and (-0.21553,  0.18492) .. (-0.24979,  0.09646) --
+  ( 0.24980,  0.09646) .. controls ( 0.21579,  0.18423) and ( 0.13675,  0.24959) .. ( 0.04099,  0.26428) --
+  ( 0.04093,  0.49830) -- ( 0.09697,  0.49061) --
+  ( 0.10735,  0.37796) .. controls ( 0.13032,  0.37146) and ( 0.15242,  0.36295) .. ( 0.17347,  0.35260) --
+  ( 0.25668,  0.42940) -- ( 0.30253,  0.39851) --
+  ( 0.26236,  0.29263) .. controls ( 0.28336,  0.27384) and ( 0.30231,  0.25284) .. ( 0.31887,  0.22998) --
+  ( 0.42851,  0.25879) -- ( 0.45447,  0.21004) --
+  ( 0.36929,  0.13544) .. controls ( 0.37889,  0.10934) and ( 0.38581,  0.08194) .. ( 0.38968,  0.05358) --
+  ( 0.50000,  0.02761) -- ( 0.50000, -0.02761) --
+  ( 0.38968, -0.05357) .. controls ( 0.38581, -0.08194) and ( 0.37889, -0.10934) .. ( 0.36929, -0.13544) --
+  ( 0.45447, -0.21002) -- ( 0.42851, -0.25880) --
+  ( 0.31887, -0.22999) .. controls ( 0.30231, -0.25284) and ( 0.28336, -0.27383) .. ( 0.26236, -0.29261) --
+  ( 0.30253, -0.39852) -- ( 0.25668, -0.42940) --
+  ( 0.17347, -0.35260) .. controls ( 0.15242, -0.36295) and ( 0.13032, -0.37147) .. ( 0.10735, -0.37796) --
+  ( 0.09697, -0.49061) -- ( 0.04093, -0.49830) --
+  ( 0.04102, -0.26426) .. controls ( 0.13907, -0.24921) and ( 0.21958, -0.18104) .. ( 0.25217, -0.09010) --
+  (-0.25217, -0.09010) .. controls (-0.21934, -0.18175) and (-0.13784, -0.25027) .. (-0.03875, -0.26461) --
+  (-0.03835, -0.49830) -- (-0.09697, -0.49061) --
+  (-0.10736, -0.37796) .. controls (-0.13032, -0.37146) and (-0.15243, -0.36295) .. (-0.17347, -0.35259) --
+  (-0.25669, -0.42940) -- (-0.30253, -0.39852) --
+  (-0.26237, -0.29261) .. controls (-0.28337, -0.27383) and (-0.30232, -0.25284) .. (-0.31887, -0.22999) --
+  (-0.42850, -0.25880) -- (-0.45447, -0.21002) --
+  (-0.36931, -0.13544) .. controls (-0.37891, -0.10932) and (-0.38580, -0.08194) .. (-0.38969, -0.05357) --
+  (-0.50000, -0.02761) -- (-0.50000,  0.02761) --
+  (-0.38969,  0.05358) .. controls (-0.38580,  0.08194) and (-0.37891,  0.10933) .. (-0.36931,  0.13544) --
+  (-0.45447,  0.21004) -- (-0.42850,  0.25879) --
+  (-0.31887,  0.22998) .. controls (-0.30232,  0.25284) and (-0.28337,  0.27384) .. (-0.26237,  0.29263) --
+  (-0.30253,  0.39851) -- (-0.25669,  0.42940) --
+  (-0.17347,  0.35260) .. controls (-0.15243,  0.36295) and (-0.13032,  0.37146) .. (-0.10736,  0.37796) --
+  (-0.09697,  0.49061) -- (-0.03835,  0.49830) -- (-0.03871,  0.26461) -- cycle;
+\end{tikzpicture}}
+
+% Define a macro for writing the text in the TUT logo
+\newcommand\tuttext[2][fill=black]{%
+\begin{tikzpicture}[y=#2, x=#2, inner sep=0pt, outer sep=0pt]
+\if@languageFinnish
+    \path[nonzero rule, #1] (104.7450,33.4578) -- (107.6970,33.4578) --
+    (107.6970,47.2207) -- (111.4370,47.2207) -- (111.4370,49.0000) --
+    (101.0060,49.0000) -- (101.0060,47.2207) -- (104.7450,47.2207) --
+    (104.7450,33.4578);
+  \path[nonzero rule, #1] (121.0570,46.3871) -- (121.1030,46.3871) --
+    (123.1970,39.5176) -- (118.9170,39.5176) -- (121.0570,46.3871) --
+    (121.0570,46.3871) -- cycle(114.3890,33.4578) -- (117.0020,33.4578) --
+    (118.3980,37.8730) -- (123.6920,37.8730) -- (125.0440,33.4578) --
+    (128.1750,33.4578) -- (122.7700,49.0000) -- (119.7500,49.0000) --
+    (114.3890,33.4578) -- (114.3890,33.4578);
+  \path[nonzero rule, #1] (133.2220,33.4578) -- (135.4070,33.4578) --
+    (135.4070,46.4551) -- (135.4530,46.4551) -- (140.0260,33.4578) --
+    (142.2780,33.4578) -- (146.8520,46.7699) -- (146.8960,46.7699) --
+    (146.8960,33.4578) -- (149.5100,33.4578) -- (149.5100,49.0000) --
+    (145.7710,49.0000) -- (141.4000,36.3184) -- (141.3550,36.3184) --
+    (136.8720,49.0000) -- (133.2220,49.0000) -- (133.2220,33.4578);
+  \path[nonzero rule, #1] (159.1760,47.3559) -- (159.9190,47.3559) ..
+    controls (162.0140,47.3559) and (163.1400,46.8828) .. (163.1400,44.7207) ..
+    controls (163.1400,42.2203) and (161.6090,41.8598) .. (159.9190,41.8598) --
+    (159.1760,41.8598) -- (159.1760,47.3559) -- cycle(156.2250,33.4578) --
+    (159.1760,33.4578) -- (159.1760,40.2148) -- (159.9190,40.2148) .. controls
+    (162.3750,40.2148) and (166.0920,40.5762) .. (166.0920,44.6980) .. controls
+    (166.0920,48.2793) and (163.5230,49.0000) .. (159.9190,49.0000) --
+    (156.2250,49.0000) -- (156.2250,33.4578);
+  \path[nonzero rule, #1] (171.2710,33.4578) -- (180.5520,33.4578) --
+    (180.5520,35.3273) -- (174.2220,35.3273) -- (174.2220,40.6660) --
+    (180.0340,40.6660) -- (180.0340,42.4453) -- (174.2220,42.4453) --
+    (174.2220,47.2207) -- (180.3490,47.2207) -- (180.3490,49.0000) --
+    (171.2710,49.0000) -- (171.2710,33.4578);
+  \path[nonzero rule, #1] (189.3130,47.3559) -- (189.8990,47.3559) ..
+    controls (191.7240,47.3559) and (193.4810,47.1980) .. (193.4810,44.7207) ..
+    controls (193.4810,42.4453) and (191.9940,41.9047) .. (189.8990,41.9047) --
+    (189.3130,41.9047) -- (189.3130,47.3559) -- cycle(186.3620,33.4578) --
+    (189.3130,33.4578) -- (189.3130,40.2605) -- (190.2370,40.2605) .. controls
+    (192.5570,40.2605) and (192.9850,39.2246) .. (193.5480,36.3867) --
+    (194.1120,33.4578) -- (197.0630,33.4578) -- (196.1840,37.5801) .. controls
+    (195.8010,39.3816) and (195.4860,40.8684) .. (193.1880,41.2969) --
+    (193.1880,41.3418) .. controls (194.5850,41.7023) and (196.4320,42.5355) ..
+    (196.4320,44.9453) .. controls (196.4320,48.4820) and (193.3460,49.0000) ..
+    (189.8990,49.0000) -- (186.3620,49.0000) -- (186.3620,33.4578);
+  \path[nonzero rule, #1] (202.6740,33.4578) -- (211.9550,33.4578) --
+    (211.9550,35.3273) -- (205.6250,35.3273) -- (205.6250,40.6660) --
+    (211.4380,40.6660) -- (211.4380,42.4453) -- (205.6250,42.4453) --
+    (205.6250,47.2207) -- (211.7530,47.2207) -- (211.7530,49.0000) --
+    (202.6740,49.0000) -- (202.6740,33.4578);
+  \path[nonzero rule, #1] (217.7430,33.4578) -- (227.0240,33.4578) --
+    (227.0240,35.3273) -- (220.6940,35.3273) -- (220.6940,40.6660) --
+    (226.5060,40.6660) -- (226.5060,42.4453) -- (220.6940,42.4453) --
+    (220.6940,47.2207) -- (226.8210,47.2207) -- (226.8210,49.0000) --
+    (217.7430,49.0000) -- (217.7430,33.4578);
+  \path[nonzero rule, #1] (232.8340,33.4578) -- (235.2440,33.4578) --
+    (235.2440,45.5535) -- (235.2900,45.5535) -- (241.5970,33.4578) --
+    (244.5260,33.4578) -- (244.5260,49.0000) -- (242.1150,49.0000) --
+    (242.1150,37.4680) -- (242.0700,37.4680) -- (236.0550,49.0000) --
+    (232.8340,49.0000) -- (232.8340,33.4578);
+  \path[nonzero rule, #1] (263.3900,33.4578) -- (266.3410,33.4578) --
+    (266.3410,47.2207) -- (270.0810,47.2207) -- (270.0810,49.0000) --
+    (259.6500,49.0000) -- (259.6500,47.2207) -- (263.3900,47.2207) --
+    (263.3900,33.4578);
+  \path[nonzero rule, #1] (275.1060,33.4578) -- (284.3870,33.4578) --
+    (284.3870,35.3273) -- (278.0570,35.3273) -- (278.0570,40.6660) --
+    (283.8690,40.6660) -- (283.8690,42.4453) -- (278.0570,42.4453) --
+    (278.0570,47.2207) -- (284.1850,47.2207) -- (284.1850,49.0000) --
+    (275.1060,49.0000) -- (275.1060,33.4578);
+  \path[nonzero rule, #1] (290.1970,33.4578) -- (293.1480,33.4578) --
+    (293.1480,40.9816) -- (293.1930,40.9816) -- (298.2850,33.4578) --
+    (301.8900,33.4578) -- (295.7390,41.9949) -- (301.3030,49.0000) --
+    (298.1940,49.0000) -- (293.1930,42.2426) -- (293.1480,42.2426) --
+    (293.1480,49.0000) -- (290.1970,49.0000) -- (290.1970,33.4578);
+  \path[nonzero rule, #1] (306.9360,33.4578) -- (309.3460,33.4578) --
+    (309.3460,45.5535) -- (309.3910,45.5535) -- (315.6980,33.4578) --
+    (318.6270,33.4578) -- (318.6270,49.0000) -- (316.2170,49.0000) --
+    (316.2170,37.4680) -- (316.1710,37.4680) -- (310.1560,49.0000) --
+    (306.9360,49.0000) -- (306.9360,33.4578);
+  \path[nonzero rule, #1] (325.3220,33.4578) -- (328.2740,33.4578) --
+    (328.2740,49.0000) -- (325.3220,49.0000) -- (325.3220,33.4578);
+  \path[nonzero rule, #1] (334.9860,33.4578) -- (343.7490,33.4578) --
+    (343.7490,35.3273) -- (337.9380,35.3273) -- (337.9380,49.0000) --
+    (334.9860,49.0000) -- (334.9860,33.4578);
+  \path[nonzero rule, #1] (348.7960,33.4578) -- (357.5610,33.4578) --
+    (357.5610,35.3273) -- (351.7470,35.3273) -- (351.7470,49.0000) --
+    (348.7960,49.0000) -- (348.7960,33.4578);
+  \path[nonzero rule, #1] (362.5840,33.4578) -- (365.5360,33.4578) --
+    (365.5360,49.0000) -- (362.5840,49.0000) -- (362.5840,33.4578);
+  \path[nonzero rule, #1] (372.2480,33.4578) -- (374.6580,33.4578) --
+    (374.6580,45.5535) -- (374.7030,45.5535) -- (381.0120,33.4578) --
+    (383.9390,33.4578) -- (383.9390,49.0000) -- (381.5290,49.0000) --
+    (381.5290,37.4680) -- (381.4840,37.4680) -- (375.4690,49.0000) --
+    (372.2480,49.0000) -- (372.2480,33.4578);
+  \path[nonzero rule, #1] (390.6350,33.4578) -- (399.9170,33.4578) --
+    (399.9170,35.3273) -- (393.5860,35.3273) -- (393.5860,40.6660) --
+    (399.3990,40.6660) -- (399.3990,42.4453) -- (393.5860,42.4453) --
+    (393.5860,47.2207) -- (399.7140,47.2207) -- (399.7140,49.0000) --
+    (390.6350,49.0000) -- (390.6350,33.4578);
+  \path[nonzero rule, #1] (405.7280,33.4578) -- (408.1370,33.4578) --
+    (408.1370,45.5535) -- (408.1830,45.5535) -- (414.4900,33.4578) --
+    (417.4190,33.4578) -- (417.4190,49.0000) -- (415.0080,49.0000) --
+    (415.0080,37.4680) -- (414.9630,37.4680) -- (408.9480,49.0000) --
+    (405.7280,49.0000) -- (405.7280,33.4578);
+  \path[nonzero rule, #1] (437.0040,33.4578) -- (439.9550,33.4578) --
+    (439.9550,40.7336) -- (445.0460,49.0000) -- (442.2070,49.0000) --
+    (438.8290,43.3020) -- (435.5630,49.0000) -- (432.1600,49.0000) --
+    (437.0040,40.7336) -- (437.0040,33.4578);
+  \path[nonzero rule, #1] (449.7080,33.4578) -- (458.4710,33.4578) --
+    (458.4710,35.3273) -- (452.6590,35.3273) -- (452.6590,49.0000) --
+    (449.7080,49.0000) -- (449.7080,33.4578);
+  \path[nonzero rule, #1] (463.4960,33.4578) -- (466.4470,33.4578) --
+    (466.4470,49.0000) -- (463.4960,49.0000) -- (463.4960,33.4578);
+  \path[nonzero rule, #1] (475.6370,41.2289) .. controls
+    (475.6370,45.1484) and (476.5620,47.7613) .. (479.0180,47.7613) .. controls
+    (481.4730,47.7613) and (482.3960,45.1484) .. (482.3960,41.2289) .. controls
+    (482.3960,37.3105) and (481.4730,34.6973) .. (479.0180,34.6973) .. controls
+    (476.5620,34.6973) and (475.6370,37.3105) .. (475.6370,41.2289) --
+    (475.6370,41.2289) -- cycle(479.0180,33.2109) .. controls (483.5670,33.2109)
+    and (485.5050,36.4766) .. (485.5050,41.2289) .. controls (485.5050,45.9820)
+    and (483.5670,49.2480) .. (479.0180,49.2480) .. controls (474.4440,49.2480)
+    and (472.5290,45.9820) .. (472.5290,41.2289) .. controls (472.5290,36.4766)
+    and (474.4440,33.2109) .. (479.0180,33.2109) -- (479.0180,33.2109);
+  \path[nonzero rule, #1] (494.5210,47.3559) -- (495.2650,47.3559) ..
+    controls (497.3590,47.3559) and (498.4860,46.8828) .. (498.4860,44.7207) ..
+    controls (498.4860,42.2203) and (496.9540,41.8598) .. (495.2650,41.8598) --
+    (494.5210,41.8598) -- (494.5210,47.3559) -- cycle(491.5700,33.4578) --
+    (494.5210,33.4578) -- (494.5210,40.2148) -- (495.2650,40.2148) .. controls
+    (497.7210,40.2148) and (501.4380,40.5762) .. (501.4380,44.6980) .. controls
+    (501.4380,48.2793) and (498.8690,49.0000) .. (495.2650,49.0000) --
+    (491.5700,49.0000) -- (491.5700,33.4578);
+  \path[nonzero rule, #1] (506.6160,33.4578) -- (509.5670,33.4578) --
+    (509.5670,49.0000) -- (506.6160,49.0000) -- (506.6160,33.4578);
+  \path[nonzero rule, #1] (524.5240,48.8199) .. controls
+    (523.9380,48.9324) and (522.2940,49.2480) .. (520.6490,49.2480) .. controls
+    (517.2930,49.2480) and (515.4010,47.7387) .. (515.4010,45.2383) .. controls
+    (515.4010,40.3281) and (522.7680,40.3953) .. (522.7680,36.8816) .. controls
+    (522.7680,35.4180) and (521.3250,34.9902) .. (520.3340,34.9902) .. controls
+    (518.5770,34.9902) and (516.8420,35.9133) .. (515.6480,36.6563) --
+    (515.6480,33.9082) .. controls (516.2120,33.7512) and (517.9910,33.2109) ..
+    (519.8610,33.2109) .. controls (523.1950,33.2109) and (525.7190,34.4492) ..
+    (525.7190,37.8281) .. controls (525.7190,42.6480) and (518.1260,42.8285) ..
+    (518.1260,45.8691) .. controls (518.1260,46.8379) and (519.0050,47.4684) ..
+    (520.2440,47.4684) .. controls (522.0460,47.4684) and (523.9830,46.6801) ..
+    (524.5240,46.4102) -- (524.5240,48.8199);
+  \path[nonzero rule, #1] (533.4200,33.4578) -- (536.3720,33.4578) --
+    (536.3720,47.2207) -- (540.1110,47.2207) -- (540.1110,49.0000) --
+    (529.6820,49.0000) -- (529.6820,47.2207) -- (533.4200,47.2207) --
+    (533.4200,33.4578);
+  \path[nonzero rule, #1] (547.2090,41.2289) .. controls
+    (547.2090,45.1484) and (548.1330,47.7613) .. (550.5870,47.7613) .. controls
+    (553.0430,47.7613) and (553.9670,45.1484) .. (553.9670,41.2289) .. controls
+    (553.9670,37.3105) and (553.0430,34.6973) .. (550.5870,34.6973) .. controls
+    (548.1330,34.6973) and (547.2090,37.3105) .. (547.2090,41.2289) --
+    (547.2090,41.2289) -- cycle(550.5870,33.2109) .. controls (555.1390,33.2109)
+    and (557.0760,36.4766) .. (557.0760,41.2289) .. controls (557.0760,45.9820)
+    and (555.1390,49.2480) .. (550.5870,49.2480) .. controls (546.0150,49.2480)
+    and (544.1010,45.9820) .. (544.1010,41.2289) .. controls (544.1010,36.4766)
+    and (546.0150,33.2109) .. (550.5870,33.2109) -- (550.5870,33.2109);
+\else
+  \path[nonzero rule, #1] (103.7620,33.7031) -- (106.6740,33.7031) --
+    (106.6740,47.2836) -- (110.3650,47.2836) -- (110.3650,49.0395) --
+    (100.0720,49.0395) -- (100.0720,47.2836) -- (103.7620,47.2836) --
+    (103.7620,33.7031);
+  \path[nonzero rule, #1] (118.9100,46.4609) -- (118.9540,46.4609) --
+    (121.0220,39.6816) -- (116.7990,39.6816) -- (118.9100,46.4609) --
+    (118.9100,46.4609) -- cycle(112.3300,33.7031) -- (114.9090,33.7031) --
+    (116.2870,38.0594) -- (121.5110,38.0594) -- (122.8450,33.7031) --
+    (125.9350,33.7031) -- (120.6000,49.0395) -- (117.6210,49.0395) --
+    (112.3300,33.7031) -- (112.3300,33.7031);
+  \path[nonzero rule, #1] (129.9680,33.7031) -- (132.1240,33.7031) --
+    (132.1240,46.5277) -- (132.1680,46.5277) -- (136.6810,33.7031) --
+    (138.9040,33.7031) -- (143.4160,46.8387) -- (143.4610,46.8387) --
+    (143.4610,33.7031) -- (146.0400,33.7031) -- (146.0400,49.0395) --
+    (142.3500,49.0395) -- (138.0370,36.5254) -- (137.9930,36.5254) --
+    (133.5690,49.0395) -- (129.9680,49.0395) -- (129.9680,33.7031);
+  \path[nonzero rule, #1] (154.6310,47.4164) -- (155.3640,47.4164) ..
+    controls (157.4310,47.4164) and (158.5430,46.9500) .. (158.5430,44.8164) ..
+    controls (158.5430,42.3496) and (157.0310,41.9938) .. (155.3640,41.9938) --
+    (154.6310,41.9938) -- (154.6310,47.4164) -- cycle(151.7190,33.7031) --
+    (154.6310,33.7031) -- (154.6310,40.3711) -- (155.3640,40.3711) .. controls
+    (157.7870,40.3711) and (161.4550,40.7266) .. (161.4550,44.7945) .. controls
+    (161.4550,48.3281) and (158.9210,49.0395) .. (155.3640,49.0395) --
+    (151.7190,49.0395) -- (151.7190,33.7031);
+  \path[nonzero rule, #1] (165.6180,33.7031) -- (174.7770,33.7031) --
+    (174.7770,35.5477) -- (168.5300,35.5477) -- (168.5300,40.8152) --
+    (174.2660,40.8152) -- (174.2660,42.5711) -- (168.5300,42.5711) --
+    (168.5300,47.2836) -- (174.5770,47.2836) -- (174.5770,49.0395) --
+    (165.6180,49.0395) -- (165.6180,33.7031);
+  \path[nonzero rule, #1] (182.4750,47.4164) -- (183.0530,47.4164) ..
+    controls (184.8530,47.4164) and (186.5880,47.2617) .. (186.5880,44.8164) ..
+    controls (186.5880,42.5711) and (185.1210,42.0379) .. (183.0530,42.0379) --
+    (182.4750,42.0379) -- (182.4750,47.4164) -- cycle(179.5630,33.7031) --
+    (182.4750,33.7031) -- (182.4750,40.4148) -- (183.3870,40.4148) .. controls
+    (185.6760,40.4148) and (186.0990,39.3926) .. (186.6550,36.5926) --
+    (187.2100,33.7031) -- (190.1220,33.7031) -- (189.2550,37.7695) .. controls
+    (188.8770,39.5488) and (188.5660,41.0156) .. (186.2990,41.4379) --
+    (186.2990,41.4820) .. controls (187.6770,41.8379) and (189.5000,42.6602) ..
+    (189.5000,45.0387) .. controls (189.5000,48.5281) and (186.4540,49.0395) ..
+    (183.0530,49.0395) -- (179.5630,49.0395) -- (179.5630,33.7031);
+  \path[nonzero rule, #1] (194.7120,33.7031) -- (203.8710,33.7031) --
+    (203.8710,35.5477) -- (197.6240,35.5477) -- (197.6240,40.8152) --
+    (203.3590,40.8152) -- (203.3590,42.5711) -- (197.6240,42.5711) --
+    (197.6240,47.2836) -- (203.6710,47.2836) -- (203.6710,49.0395) --
+    (194.7120,49.0395) -- (194.7120,33.7031);
+  \path[nonzero rule, #1] (228.5630,49.0395) -- (225.6510,49.0395) --
+    (225.6510,38.9266) .. controls (225.6510,36.5254) and (225.3400,34.9246) ..
+    (222.9840,34.9246) .. controls (220.7610,34.9246) and (220.3820,36.5254) ..
+    (220.3820,38.9266) -- (220.3820,49.0395) -- (217.4710,49.0395) --
+    (217.4710,38.9266) .. controls (217.4710,36.1914) and (218.0480,33.4590) ..
+    (222.9840,33.4590) .. controls (227.9860,33.4590) and (228.5630,36.1914) ..
+    (228.5630,38.9266) -- (228.5630,49.0395);
+  \path[nonzero rule, #1] (234.0430,33.7031) -- (236.4210,33.7031) --
+    (236.4210,45.6387) -- (236.4660,45.6387) -- (242.6900,33.7031) --
+    (245.5800,33.7031) -- (245.5800,49.0395) -- (243.2010,49.0395) --
+    (243.2010,37.6590) -- (243.1570,37.6590) -- (237.2220,49.0395) --
+    (234.0430,49.0395) -- (234.0430,33.7031);
+  \path[nonzero rule, #1] (251.2400,33.7031) -- (254.1520,33.7031) --
+    (254.1520,49.0395) -- (251.2400,49.0395) -- (251.2400,33.7031);
+  \path[nonzero rule, #1] (263.0290,33.7031) -- (266.0300,33.7031) --
+    (271.3430,49.0395) -- (268.7640,49.0395) -- (264.7850,37.2148) --
+    (264.7400,37.2148) -- (260.8280,49.0395) -- (257.8040,49.0395) --
+    (263.0290,33.7031) -- (263.0290,33.7031);
+  \path[nonzero rule, #1] (274.9760,33.7031) -- (284.1350,33.7031) --
+    (284.1350,35.5477) -- (277.8890,35.5477) -- (277.8890,40.8152) --
+    (283.6240,40.8152) -- (283.6240,42.5711) -- (277.8890,42.5711) --
+    (277.8890,47.2836) -- (283.9350,47.2836) -- (283.9350,49.0395) --
+    (274.9760,49.0395) -- (274.9760,33.7031);
+  \path[nonzero rule, #1] (291.8330,47.4164) -- (292.4110,47.4164) ..
+    controls (294.2120,47.4164) and (295.9460,47.2617) .. (295.9460,44.8164) ..
+    controls (295.9460,42.5711) and (294.4780,42.0379) .. (292.4110,42.0379) --
+    (291.8330,42.0379) -- (291.8330,47.4164) -- cycle(288.9210,33.7031) --
+    (291.8330,33.7031) -- (291.8330,40.4148) -- (292.7440,40.4148) .. controls
+    (295.0340,40.4148) and (295.4560,39.3926) .. (296.0120,36.5926) --
+    (296.5680,33.7031) -- (299.4790,33.7031) -- (298.6130,37.7695) .. controls
+    (298.2350,39.5488) and (297.9240,41.0156) .. (295.6560,41.4379) --
+    (295.6560,41.4820) .. controls (297.0340,41.8379) and (298.8580,42.6602) ..
+    (298.8580,45.0387) .. controls (298.8580,48.5281) and (295.8120,49.0395) ..
+    (292.4110,49.0395) -- (288.9210,49.0395) -- (288.9210,33.7031);
+  \path[nonzero rule, #1] (312.2280,48.8613) .. controls
+    (311.6490,48.9730) and (310.0270,49.2836) .. (308.4040,49.2836) .. controls
+    (305.0920,49.2836) and (303.2240,47.7949) .. (303.2240,45.3277) .. controls
+    (303.2240,40.4824) and (310.4940,40.5488) .. (310.4940,37.0820) .. controls
+    (310.4940,35.6367) and (309.0710,35.2148) .. (308.0930,35.2148) .. controls
+    (306.3590,35.2148) and (304.6470,36.1258) .. (303.4700,36.8594) --
+    (303.4700,34.1484) .. controls (304.0250,33.9922) and (305.7810,33.4590) ..
+    (307.6260,33.4590) .. controls (310.9160,33.4590) and (313.4060,34.6805) ..
+    (313.4060,38.0145) .. controls (313.4060,42.7715) and (305.9150,42.9496) ..
+    (305.9150,45.9500) .. controls (305.9150,46.9063) and (306.7820,47.5281) ..
+    (308.0040,47.5281) .. controls (309.7820,47.5281) and (311.6940,46.7500) ..
+    (312.2280,46.4832) -- (312.2280,48.8613);
+  \path[nonzero rule, #1] (317.9920,33.7031) -- (320.9040,33.7031) --
+    (320.9040,49.0395) -- (317.9920,49.0395) -- (317.9920,33.7031);
+  \path[nonzero rule, #1] (328.6250,33.7031) -- (331.5360,33.7031) --
+    (331.5360,47.2836) -- (335.2280,47.2836) -- (335.2280,49.0395) --
+    (324.9350,49.0395) -- (324.9350,47.2836) -- (328.6250,47.2836) --
+    (328.6250,33.7031);
+  \path[nonzero rule, #1] (342.0160,33.7031) -- (344.9290,33.7031) --
+    (344.9290,40.8816) -- (349.9520,49.0395) -- (347.1520,49.0395) --
+    (343.8170,43.4160) -- (340.5940,49.0395) -- (337.2370,49.0395) --
+    (342.0160,40.8816) -- (342.0160,33.7031);
+  \path[nonzero rule, #1] (365.0430,41.3715) .. controls
+    (365.0430,45.2383) and (365.9540,47.8172) .. (368.3780,47.8172) .. controls
+    (370.8000,47.8172) and (371.7120,45.2383) .. (371.7120,41.3715) .. controls
+    (371.7120,37.5027) and (370.8000,34.9246) .. (368.3780,34.9246) .. controls
+    (365.9540,34.9246) and (365.0430,37.5027) .. (365.0430,41.3715) --
+    (365.0430,41.3715) -- cycle(368.3780,33.4590) .. controls (372.8680,33.4590)
+    and (374.7790,36.6805) .. (374.7790,41.3715) .. controls (374.7790,46.0609)
+    and (372.8680,49.2836) .. (368.3780,49.2836) .. controls (363.8650,49.2836)
+    and (361.9760,46.0609) .. (361.9760,41.3715) .. controls (361.9760,36.6805)
+    and (363.8650,33.4590) .. (368.3780,33.4590) -- (368.3780,33.4590);
+  \path[nonzero rule, #1] (379.7950,33.7031) -- (382.7070,33.7031) --
+    (382.7070,40.8152) -- (388.1530,40.8152) -- (388.1530,42.5711) --
+    (382.7070,42.5711) -- (382.7070,47.2836) -- (388.4640,47.2836) --
+    (388.4640,49.0395) -- (379.7950,49.0395) -- (379.7950,33.7031);
+  \path[nonzero rule, #1] (403.9580,33.7031) -- (406.8710,33.7031) --
+    (406.8710,47.2836) -- (410.5600,47.2836) -- (410.5600,49.0395) --
+    (400.2690,49.0395) -- (400.2690,47.2836) -- (403.9580,47.2836) --
+    (403.9580,33.7031);
+  \path[nonzero rule, #1] (414.5710,33.7031) -- (423.7290,33.7031) --
+    (423.7290,35.5477) -- (417.4830,35.5477) -- (417.4830,40.8152) --
+    (423.2190,40.8152) -- (423.2190,42.5711) -- (417.4830,42.5711) --
+    (417.4830,47.2836) -- (423.5300,47.2836) -- (423.5300,49.0395) --
+    (414.5710,49.0395) -- (414.5710,33.7031);
+  \path[nonzero rule, #1] (438.8970,36.8145) .. controls
+    (438.3410,36.3926) and (437.0300,35.3035) .. (435.0960,35.3035) .. controls
+    (431.0060,35.3035) and (430.9380,40.3711) .. (430.9380,42.1488) .. controls
+    (430.9380,44.1941) and (431.3830,47.8172) .. (433.9620,47.8172) .. controls
+    (435.8300,47.8172) and (436.2070,46.0609) .. (436.2070,44.8609) --
+    (439.5210,44.8609) .. controls (439.5210,47.5496) and (437.7630,49.2836) ..
+    (434.1400,49.2836) .. controls (429.4940,49.2836) and (427.8710,45.7273) ..
+    (427.8710,41.6605) .. controls (427.8710,37.3262) and (429.7170,33.4590) ..
+    (434.5620,33.4590) .. controls (436.4070,33.4590) and (437.9190,34.0359) ..
+    (438.8970,34.4141) -- (438.8970,36.8145);
+  \path[nonzero rule, #1] (443.6870,33.7031) -- (446.5990,33.7031) --
+    (446.5990,40.8594) -- (451.9350,40.8594) -- (451.9350,33.7031) --
+    (454.8460,33.7031) -- (454.8460,49.0395) -- (451.9350,49.0395) --
+    (451.9350,42.6160) -- (446.5990,42.6160) -- (446.5990,49.0395) --
+    (443.6870,49.0395) -- (443.6870,33.7031);
+  \path[nonzero rule, #1] (460.5040,33.7031) -- (462.8830,33.7031) --
+    (462.8830,45.6387) -- (462.9280,45.6387) -- (469.1520,33.7031) --
+    (472.0420,33.7031) -- (472.0420,49.0395) -- (469.6630,49.0395) --
+    (469.6630,37.6590) -- (469.6190,37.6590) -- (463.6840,49.0395) --
+    (460.5040,49.0395) -- (460.5040,33.7031);
+  \path[nonzero rule, #1] (480.1690,41.3715) .. controls
+    (480.1690,45.2383) and (481.0810,47.8172) .. (483.5040,47.8172) .. controls
+    (485.9260,47.8172) and (486.8380,45.2383) .. (486.8380,41.3715) .. controls
+    (486.8380,37.5027) and (485.9260,34.9246) .. (483.5040,34.9246) .. controls
+    (481.0810,34.9246) and (480.1690,37.5027) .. (480.1690,41.3715) --
+    (480.1690,41.3715) -- cycle(483.5040,33.4590) .. controls (487.9940,33.4590)
+    and (489.9060,36.6805) .. (489.9060,41.3715) .. controls (489.9060,46.0609)
+    and (487.9940,49.2836) .. (483.5040,49.2836) .. controls (478.9910,49.2836)
+    and (477.1010,46.0609) .. (477.1010,41.3715) .. controls (477.1010,36.6805)
+    and (478.9910,33.4590) .. (483.5040,33.4590) -- (483.5040,33.4590);
+  \path[nonzero rule, #1] (494.9430,33.7031) -- (503.5910,33.7031) --
+    (503.5910,35.5477) -- (497.8540,35.5477) -- (497.8540,49.0395) --
+    (494.9430,49.0395) -- (494.9430,33.7031);
+  \path[nonzero rule, #1] (510.0690,41.3715) .. controls
+    (510.0690,45.2383) and (510.9810,47.8172) .. (513.4040,47.8172) .. controls
+    (515.8270,47.8172) and (516.7380,45.2383) .. (516.7380,41.3715) .. controls
+    (516.7380,37.5027) and (515.8270,34.9246) .. (513.4040,34.9246) .. controls
+    (510.9810,34.9246) and (510.0690,37.5027) .. (510.0690,41.3715) --
+    (510.0690,41.3715) -- cycle(513.4040,33.4590) .. controls (517.8940,33.4590)
+    and (519.8050,36.6805) .. (519.8050,41.3715) .. controls (519.8050,46.0609)
+    and (517.8940,49.2836) .. (513.4040,49.2836) .. controls (508.8920,49.2836)
+    and (507.0010,46.0609) .. (507.0010,41.3715) .. controls (507.0010,36.6805)
+    and (508.8920,33.4590) .. (513.4040,33.4590) -- (513.4040,33.4590);
+  \path[nonzero rule, #1] (536.0030,42.7270) -- (530.3340,42.7270) --
+    (530.3340,40.8816) -- (533.0900,40.8816) -- (533.0900,35.5477) .. controls
+    (532.8460,35.2371) and (532.1560,34.9246) .. (531.2900,34.9246) .. controls
+    (527.9780,34.9246) and (527.2880,38.0594) .. (527.2880,41.7488) .. controls
+    (527.2880,43.7938) and (527.2880,47.8172) .. (530.4010,47.8172) .. controls
+    (532.5350,47.8172) and (532.6460,45.9277) .. (532.7120,45.0172) --
+    (535.8690,45.0172) .. controls (535.8690,47.9508) and (533.7330,49.2836) ..
+    (530.4010,49.2836) .. controls (525.6660,49.2836) and (524.2200,46.0164) ..
+    (524.2200,41.5047) .. controls (524.2200,37.0137) and (526.2210,33.4590) ..
+    (531.0450,33.4590) .. controls (533.1570,33.4590) and (534.8460,34.1922) ..
+    (536.0030,34.8809) -- (536.0030,42.7270);
+  \path[nonzero rule, #1] (543.9940,33.7031) -- (546.9060,33.7031) --
+    (546.9060,40.8816) -- (551.9300,49.0395) -- (549.1290,49.0395) --
+    (545.7940,43.4160) -- (542.5720,49.0395) -- (539.2140,49.0395) --
+    (543.9940,40.8816) -- (543.9940,33.7031);
+\fi
+\end{tikzpicture}
+}
+
+% A macro to combine the two
+\newlength{\gearsize}
+
+\newcommand\tutlogo[2][fill=black]{%
+\setlength{\gearsize}{#2}%
+\begin{tikzpicture}[outer sep=0pt,inner sep=0pt]
+    \node (gear) {\tutgear[#1]{\gearsize}};
+    \node[right of=gear,anchor=west,node distance=0.71885\gearsize] {\tuttext[#1]{0.01246\gearsize}};
+\end{tikzpicture}}
+
+% Title page background
+\newcommand\TitleBgImage{%
+\begin{tikzpicture}[overlay,remember picture,inner sep=0pt,outer sep=0pt]
+% colored upper side beam
+\usebeamercolor{palette secondary}
+\path[fill=bg,nonzero rule]
+    ([yshift=0.45\paperheight] current page.south west) -- +(0,0.47\paperheight) -- +(0.0626\paperheight,0.4614\paperheight) -- +(0.0626\paperheight,0) -- cycle;
+% colored bottom half of page
+\usebeamercolor{palette primary}
+\path[fill=bg,nonzero rule]
+    (current page.south west) -- ++(0,0.5544\paperheight) -- +(\paperwidth,0) -- (current page.south east) -- cycle;
+% gear-half
+\node at ([xshift=-0.047\paperheight]current page.south west) [anchor=center] {\tutgear[fill=white]{1.13\paperheight}};
+% TUT logo
+\node at ([shift={(\Gm@lmargin,-0.0626\paperheight)}] current page.north west) [anchor=west] {\tutlogo{0.0626\paperheight}};
+% additional logo if specified by user
+\node at ([shift={(-0.0313\paperheight,-0.0313\paperheight)}] current page.north east) [anchor=north east] {\insertlogo};
+\end{tikzpicture}
+}
+
+% Frame background
+\newcommand\FrameBgImage{%
+\begin{tikzpicture}[overlay,remember picture]
+% colored upper side beam
+\usebeamercolor{palette secondary}
+\path[fill=bg,nonzero rule]
+    ([yshift=0.45\paperheight] current page.south west) -- +(0,0.47\paperheight) -- +(0.0626\paperheight,0.4614\paperheight) -- +(0.0626\paperheight,0) -- cycle;
+% colored lower side beam
+\usebeamercolor{palette primary}
+\path[fill=bg,nonzero rule]
+    (current page.south west) -- +(0,0.47\paperheight) -- +(0.0626\paperheight,0.4614\paperheight) -- +(0.0626\paperheight,0) -- cycle;
+\end{tikzpicture}
+}
+
+\newcommand\BgImage{\FrameBgImage}
+\usebackgroundtemplate{\BgImage}
+
+% remove logo from its default position on right sidebar
+\setbeamertemplate{sidebar right}{default}
+{}
+
+%---------------------------------------------------------------------
+% Titlepage
+%---------------------------------------------------------------------
+% Email field
+\newtoks\email
+
+% Titlepage structure
+\def\maketitle{\ifbeamer@inframe\titlepage\else
+\begingroup\renewcommand\BgImage{\TitleBgImage}\frame[plain]{\titlepage}
+\endgroup\fi}
+\def\titlepage{\usebeamertemplate{title page}}
+\setbeamertemplate{title page}
+{
+	\begin{minipage}[t][.42\paperheight][b]{\textwidth}
+	\centering
+	\ifx\inserttitle\@empty%
+	\else%
+		{\usebeamerfont{title}\usebeamercolor[fg]{title}\MakeUppercase{\inserttitle}\par}%
+	\fi%
+	\ifx\insertsubtitle\@empty%
+	\else%
+		{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+	\fi%
+	\end{minipage}
+  \begin{minipage}[c][.18\paperheight]{\textwidth}
+  \centering
+  \ifx\insertdate\@empty%
+  \else%
+    {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}%
+  \fi%
+  \end{minipage}
+	\vfill
+	\begin{minipage}[b][.35\paperheight]{\textwidth}
+	\centering
+	\ifx\insertauthor\@empty%
+	\else%
+		{\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
+	\fi%
+	\ifx\the\email\@empty%
+	\else%
+	  \vspace*{2mm}
+	  {\usebeamerfont{email}\usebeamercolor[fg]{email}\href{mailto:\the\email}{\the\email}\par}
+	\fi%
+	\vfill
+	\ifx\insertinstitute\@empty%
+	\else%
+		{\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
+	\fi%
+	\vspace*{10mm}
+	\end{minipage}
+}
+
+%---------------------------------------------------------------------
+% Sectionpages
+%---------------------------------------------------------------------
+\if@doSectionPage
+% Insert frame with current outline at beginning of sections
+\AtBeginSection[]
+{
+\begingroup
+\begin{frame}{\contentsname}
+\tableofcontents[current]
+\end{frame}
+\endgroup
+}
+\fi
+
+%---------------------------------------------------------------------
+% Frametitle
+%---------------------------------------------------------------------
+\setbeamertemplate{frametitle}
+{
+\vspace*{1mm}
+\usebeamerfont{frametitle}\MakeUppercase{\insertframetitle}
+\ifx\insertframesubtitle\empty
+\else
+  --- \insertframesubtitle
+\fi
+}
+
+%---------------------------------------------------------------------
+% Footline
+%---------------------------------------------------------------------
+\usenavigationsymbolstemplate{}
+\setbeamertemplate{footline}%
+{%
+\leavevmode%
+\begin{beamercolorbox}[wd=0.5\paperwidth,ht=0.0726\paperheight,dp=0.01\paperheight,leftskip=\Gm@lmargin]{page number in head/foot}%
+\tutlogo{0.0626\paperheight}
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=0.5\paperwidth,ht=0.0726\paperheight,dp=0.01\paperheight,right,rightskip=0.4cm]{page number in head/foot}%
+\usebeamerfont{page number in head/foot}%
+\insertframenumber\vspace{2ex}%
+\end{beamercolorbox}
+}%
+
+%---------------------------------------------------------------------
+% Captions
+%---------------------------------------------------------------------
+\setbeamertemplate{caption label separator}{: }
+
+%---------------------------------------------------------------------
+% Blocks
+%---------------------------------------------------------------------
+\setbeamertemplate{block begin}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex]{block title}
+    \usebeamerfont*{block title}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  {\nointerlineskip\vskip-0.5pt}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex,vmode]{block body}%
+}
+\setbeamertemplate{block end}
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+\setbeamertemplate{block alerted begin}
+{
+  \setbeamercolor{local structure}{use=block title alerted,fg=block title alerted.bg}
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex]{block title alerted}
+    \usebeamerfont*{block title alerted}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  {\nointerlineskip\vskip-0.5pt}%
+  \usebeamerfont{block body alerted}%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex,vmode]{block body alerted}%
+}
+\setbeamertemplate{block alerted end}
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+\setbeamertemplate{block example begin}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex]{block title example}
+    \usebeamerfont*{block title example}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  {\nointerlineskip\vskip-0.5pt}%
+  \usebeamerfont{block body example}%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex,vmode]{block body example}%
+}
+\setbeamertemplate{block example end}
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+%---------------------------------------------------------------------
+% Images
+%---------------------------------------------------------------------
+\newbox\mytempbox
+\newdimen\mytempdimen
+
+% Image with copyright information
+\newcommand\includegraphicscopyright[3][]{%
+  \leavevmode\vbox{\vskip3pt\raggedright\setbox\mytempbox=\hbox{\includegraphics[#1]{#2}}%
+    \mytempdimen=\wd\mytempbox\box\mytempbox\par\vskip1pt%
+    \usebeamerfont{copyright text}{\usebeamercolor[fg]{copyright text}{\vbox{\hsize=\mytempdimen#3}}}\vskip3pt%
+}}
+
+%---------------------------------------------------------------------
+% Bibliography
+%---------------------------------------------------------------------
+\AtEndPreamble{%
+\@ifpackageloaded{biblatex}{%
+  \WarningFilter{biblatex}{Patching footnotes failed}
+  \defbibheading{bibliography}[\bibname]{}
+
+  \setbeamertemplate{bibliography item}{%
+    \ifboolexpr{ test {\ifentrytype{book}} or test {\ifentrytype{mvbook}}
+      or test {\ifentrytype{collection}} or test {\ifentrytype{mvcollection}}
+      or test {\ifentrytype{reference}} or test {\ifentrytype{mvreference}} }
+      {\setbeamertemplate{bibliography item}[book]}
+      {\ifentrytype{online}
+         {\setbeamertemplate{bibliography item}[online]}
+         {\setbeamertemplate{bibliography item}[article]}}%
+    \usebeamertemplate{bibliography item}}
+
+  \defbibenvironment{bibliography}
+    {\list{}
+       {\settowidth{\labelwidth}{\usebeamertemplate{bibliography item}}%
+        \setlength{\leftmargin}{\labelwidth}%
+        \setlength{\labelsep}{\biblabelsep}%
+        \addtolength{\leftmargin}{\labelsep}%
+        \setlength{\itemsep}{\bibitemsep}%
+        \setlength{\parsep}{\bibparsep}}}
+    {\endlist}
+    {\item}
+  }{}
+}
+
+\mode
+<all>

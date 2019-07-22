@@ -1,0 +1,24 @@
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+\begin{frame}\frametitle{A trivial Set Cover algorithm}
+\begin{algorithm}[H]\footnotesize
+        \Input{A set cover instance $({\cal S,U})$ and a variable ${\cal S}_{\rm dom}$.}
+        \Output{A minimum set cover of $({\cal S,U})$.}
+\If{${\cal S}=\emptyset$}{
+\Return $\emptyset$\;
+}
+Let $S \in {\cal{S}}$ be a set of maximum cardinality\;
+${\cal{C}}_1 = \{S\}\cup {\tt MSC}(\{S'\backslash S \mid S' \in{\cal S}\backslash \{S\}\}, {\cal U}\backslash S )$\;
+${\cal{C}}_2 = {\tt MSC}({\cal S}\backslash \{S\},{\cal U})$\;
+${\cal S}_{\rm dom} \leftarrow \emptyset$\;
+\If{${\cal U} \subseteq {\cal C}_1$}{
+${\cal S}_{\rm dom} \leftarrow {\cal C}_1$\;
+\If{${\cal U} \subseteq {\cal C}_2$}{
+\If{$|{\cal C}_2| < |{\cal C}_1|$}{
+${\cal S}_{\rm dom} \leftarrow {\cal C}_2$\;
+}
+}
+}
+\Return ${\cal S}_{\rm dom}$\;
+\caption{{\tt MSC}$({\cal S,U})$}
+\end{algorithm}
+\end{frame}

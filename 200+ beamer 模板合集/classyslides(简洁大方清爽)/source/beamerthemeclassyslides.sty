@@ -1,0 +1,705 @@
+%
+% A minimalistic LaTeX Beamer theme. 
+%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{classycv}[2017/02/26 package for creation of classy slides using beamer]
+
+%!%!%!%!%!%!%!%!%
+%! dependencies %
+%!%!%!%!%!%!%!%!%
+
+%! font style
+\RequirePackage{color}
+%! verbatim code
+\RequirePackage{listings, lstautogobble}
+\RequirePackage{tikz}
+\RequirePackage{pdftexcmds}
+\RequirePackage{graphicx}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{bera, cmbright, lato, inconsolata}
+\RequirePackage[breakwords]{truncate}
+
+%
+%! commands
+%
+
+%
+%! Boolean variables.
+%
+
+%! Toggles on every `\emph` use.
+\newif\ifemph
+	\emphfalse
+
+%
+%! Font commands 
+%
+
+%! Font family selection commands. 
+\renewcommand{\rmdefault}{lmr}
+\renewcommand{\sfdefault}{cmbr}
+\renewcommand{\ttdefault}{zi4}
+\newcommand{\inconsolatafamily}{\fontfamily{zi4}\selectfont}
+\newcommand{\cmrfamily}{\fontfamily{cmr}\selectfont}
+\newcommand{\lmrfamily}{\fontfamily{lmr}\selectfont}
+\newcommand{\cmbrfamily}{\fontfamily{cmbr}\selectfont}
+\newcommand{\berafamily}{\fontfamily{fve}\selectfont}
+
+%
+%! Formatting commands.
+%
+
+%! Redefine `\emph` to highlight text with colored underline color.
+\renewcommand<>{\emph}[1]{%
+	%! Are we within an `\emph` block?
+	\ifemph%
+		%! Yes: toggle emph flag and toggle color back to foreground. Before exiting revert emph flag to original state.
+		\emphfalse
+		\bgroup\color{fg}#1\egroup%
+		\emphtrue
+	\else%
+		%! No: toggle emph flag and toggle color to highlight-color. Before exiting revert emph flag to original state.
+		\emphtrue%
+		\bgroup\color{highlight-color}\underline{\color{fg}#1}\egroup%
+		\emphfalse%
+	\fi%
+}
+
+%
+%! tikz commands
+%
+
+%
+%! Declare pgf layers for z-level in tikz pictures
+%!ref: http://tex.stackexchange.com/a/20426
+%
+\pgfdeclarelayer{back}
+\pgfdeclarelayer{front}
+\pgfsetlayers{back,main,front}
+
+%! Define tikz keys for layering.
+%!ref: http://tex.stackexchange.com/a/20426
+\makeatletter
+\pgfkeys{%
+  /tikz/on layer/.code={
+    \pgfonlayer{#1}\begingroup
+    \aftergroup\endpgfonlayer
+    \aftergroup\endgroup
+  },
+  /tikz/node on layer/.code={
+    \gdef\node@@on@layer{%
+      \setbox\tikz@tempbox=\hbox\bgroup\pgfonlayer{#1}\unhbox\tikz@tempbox\endpgfonlayer\egroup}
+    \aftergroup\node@on@layer
+  },
+  /tikz/end node on layer/.code={
+    \endpgfonlayer\endgroup\endgroup}}
+
+\def\node@on@layer{\aftergroup\node@@on@layer}
+
+%
+%! tcolorbox environments
+%
+
+%! Code listings with simple customization options (target language for listing and title for tcolorbox)
+\newtcblisting{Code}[2][]{%
+	enhanced%
+	, colback=white!0%
+	, boxsep=8pt%
+	, top=0pt%
+	, right=0pt%
+	, bottom=0pt%
+	, left=0pt%
+	, boxrule=0.25pt%
+	, colframe=medium-gray%
+	, colbacktitle=accent-color%
+	, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
+	, listing only%
+	, listing options={%
+		breaklines=true%
+		, autogobble%
+		, tabsize=2%
+		, aboveskip=0pt%
+		, belowskip=0pt%
+		, xleftmargin=0pt%
+		, xrightmargin=0pt%
+		, framesep=0pt%
+		, framerule=0pt%
+		, rulesep=0pt%
+		, framexrightmargin=0pt%
+		, framexleftmargin=0pt%		
+		, numbersep=0pt%
+		, language=#2%
+	}%
+	, title={#1}%
+}
+
+%! Code listings with full customization options for the listing and tcolorbox environments
+\newtcblisting{Code*}[2][]{%
+	enhanced%
+	, colback=white!0%
+	, boxsep=8pt%
+	, top=0pt%
+	, right=0pt%
+	, bottom=0pt%
+	, left=0pt%
+	, boxrule=0.25pt%
+	, colframe=medium-gray%
+	, colbacktitle=accent-color%
+	, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
+	, listing only%
+	, listing options={%
+		breaklines=true%
+		, autogobble%
+		, tabsize=2%
+		, aboveskip=0pt%
+		, belowskip=0pt%
+		, framesep=0pt%
+		, rulesep=0pt%
+		, framexrightmargin=0pt%
+		, framexleftmargin=0pt%	
+		, xleftmargin=0pt%
+		, xrightmargin=0pt%
+		, numbersep=0pt%
+		, #2%
+	}%
+	, #1%
+}
+
+%	
+%! beamer commands
+%
+
+%! Content page flag.
+\newif\ifcontentpage\contentpagefalse
+
+%
+%! Counters for current frame count and total frame count.
+%
+\newcounter{@@frames}
+\newcounter{@@total}
+
+\makeatother
+
+%
+%! Environments.
+%
+
+\newenvironment<>{Block}[2][]{%
+	\bgroup%
+	\tcbset{%
+		enhanced%
+		, left=0pt%
+		, bottom=0pt%
+		, right=0pt%
+		, top=0pt%
+		, boxsep=8pt%
+		, leftrule=0pt%
+		, bottomrule=0pt%
+		, rightrule=0pt%
+		, toprule=0pt%
+		, boxrule=0.25pt%
+		, colbacktitle=accent-color%
+		, coltitle=nearly-white%
+		, colback=bg%
+		, coltext=fg%
+		, colframe=medium-gray%
+%		, fonttitle=\rmfamily%
+%		, fontupper=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
+%		, fontlower=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
+		, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
+		, segmentation style={draw=medium-gray, line width=0.25pt}%
+		, title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
+		, #1
+	}%
+	\begin{tcolorbox}%
+	\usebeamerfont{block}
+}{%
+	\end{tcolorbox}%
+	\egroup%
+}
+
+\renewenvironment<>{theorem}[1][]{
+	\bgroup%
+	\tcbset{%
+		enhanced%
+		, left=0pt%
+		, bottom=0pt%
+		, right=0pt%
+		, top=0pt%
+		, boxsep=8pt%
+		, leftrule=0pt%
+		, bottomrule=0pt%
+		, rightrule=0pt%
+		, toprule=0pt%
+		, boxrule=0.25pt%
+		, colbacktitle=accent-color%
+		, coltitle=nearly-white%
+		, colback=bg%
+		, coltext=fg%
+		, colframe=medium-gray%
+%		, fonttitle=\rmfamily%
+%		, fontupper=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
+%		, fontlower=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
+		, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}%
+		, segmentation style={draw=medium-gray, line width=0.25pt}%
+		, title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}Theorem}%
+		, #1%
+	}%
+	\begin{tcolorbox}%
+	\usebeamerfont{block}
+}{%
+	\end{tcolorbox}%
+	\egroup%
+}
+
+\renewenvironment<>{definition}[1][]{
+	\bgroup%
+	\tcbset{%
+		enhanced%
+		, left=0pt%
+		, bottom=0pt%
+		, right=0pt%
+		, top=0pt%
+		, boxsep=8pt%
+		, leftrule=0pt%
+		, bottomrule=0pt%
+		, rightrule=0pt%
+		, toprule=0pt%
+		, boxrule=0.25pt%
+		, colbacktitle=accent-color%
+		, coltitle=nearly-white%
+		, colback=bg%
+		, coltext=fg%
+		, colframe=medium-gray%
+%		, fonttitle=\rmfamily%
+%		, fontupper=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
+%		, fontlower=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
+		, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}%
+		, segmentation style={draw=medium-gray, line width=0.25pt}%
+		, title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}Definition}%
+		, #1%
+	}%
+	\begin{tcolorbox}%
+	\usebeamerfont{block}
+}{%
+	\end{tcolorbox}%
+	\egroup%
+}
+
+\renewenvironment<>{example}[1][]{
+	\bgroup%
+	\tcbset{%
+		enhanced%
+		, left=0pt%
+		, bottom=0pt%
+		, right=0pt%
+		, top=0pt%
+		, boxsep=8pt%
+		, leftrule=0pt%
+		, bottomrule=0pt%
+		, rightrule=0pt%
+		, toprule=0pt%
+		, boxrule=0.25pt%
+		, colbacktitle=accent-color%
+		, coltitle=nearly-white%
+		, colback=bg%
+		, coltext=fg%
+		, colframe=medium-gray%
+%		, fonttitle=\rmfamily%
+%		, fontupper=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
+%		, fontlower=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
+		, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}%
+		, segmentation style={draw=medium-gray, line width=0.25pt}%
+		, title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}Example}%
+		, #1%
+	}%
+	\begin{tcolorbox}%
+	\usebeamerfont{block}
+}{%
+	\end{tcolorbox}%
+	\egroup%
+}
+
+%!%!%!%!%!%!%
+% settings  %
+%!%!%!%!%!%!%
+
+%
+%! color definitions
+%
+\definecolor{nearly-black}{RGB}{10, 10, 10}
+\definecolor{nearly-white}{RGB}{245, 245, 245}
+\definecolor{light-gray}{RGB}{200, 200, 200}
+\definecolor{medium-gray}{RGB}{127, 127, 127}
+\definecolor{dark-gray}{RGB}{55, 55, 55}
+\definecolor{accent-color}{RGB}{5, 125, 185}
+\definecolor{highlight-color}{RGB}{5, 185, 245}
+
+%! disable link coloring
+\hypersetup{colorlinks=false}
+
+%! tikz settings
+\usetikzlibrary{positioning, shapes.arrows, shapes.misc, fadings, calc, shadows.blur, patterns}
+\tikzfading[name=fade right, left color=transparent!0, right color=transparent!100]
+\tikzfading[name=fade left, left color=transparent!100, right color=transparent!0]
+    
+%
+%! listings settings
+%
+
+%
+%! tcolorbox settings
+%
+\tcbuselibrary{skins}
+\tcbuselibrary{listings}
+
+%
+%! beamer settings
+%
+
+%! set up on top of the default theme, infolines and circles
+\usetheme{default}
+\useoutertheme{infolines}
+\useinnertheme{circles}
+
+%
+%! Set beamer fonts for various components.
+%
+\setbeamerfont{normal text}{family=\cmbrfamily}
+\setbeamerfont{title}{family=\berafamily, size=\Huge}
+\setbeamerfont{subtitle}{family=\berafamily, size=\Large}
+\setbeamerfont{author}{family=\flafamily, size=\small, series=\fontseries{l}\selectfont}
+\setbeamerfont{institute}{family=\flafamily, size=\small, series=\fontseries{l}\selectfont}
+\setbeamerfont{date}{family=\flafamily, size=\small, series=\fontseries{l}\selectfont}
+\setbeamerfont{frametitle}{family=\berafamily}
+\setbeamerfont{frametitle with subtitle}{family=\berafamily, size=\large}
+\setbeamerfont{framesubtitle}{family=\berafamily, size=\scriptsize}
+\setbeamerfont{section in head/foot}{family=\berafamily, size=\scriptsize}
+\setbeamerfont{section in section page}{family=\berafamily, size=\Huge}
+\setbeamerfont{section in toc}{family=\flafamily, series=\bfseries}
+\setbeamerfont{subsection in toc}{family=\flafamily, series=\fontseries{l}\selectfont}
+\setbeamerfont{subsection in section page}{family=\berafamily, size=\Large}
+\setbeamerfont{subsection in head/foot}{family=\berafamily, size=\scriptsize}
+\setbeamerfont{headline}{family=\berafamily, size=\Large}
+\setbeamerfont{footline}{family=\berafamily, size=\tiny}
+\setbeamerfont{block}{parent=normal text}
+\setbeamerfont{block title}{family=\flafamily, series=\fontseries{l}\selectfont}
+\setbeamerfont{caption}{family=\berafamily}
+\setbeamerfont{caption name}{series=\bfseries}
+\setbeamerfont{enumerate item}{family=\flafamily, size=\scriptsize}
+%! Bibliography item fonts.
+\setbeamerfont{bibliography item}{family=\flafamily}
+
+%
+%! Set beamer colors for various components.
+%
+\setbeamercolor{normal text}{fg=black, bg=white!0}
+\setbeamercolor{alerted text}{fg=highlight-color, bg=white!0}
+\setbeamercolor{title page}{fg=nearly-black}
+\setbeamercolor{title}{fg=nearly-black}
+\setbeamercolor{subtitle}{fg=nearly-black}
+\setbeamercolor{author}{fg=medium-gray}
+\setbeamercolor{date}{fg=light-gray}
+\setbeamercolor{frametitle}{fg=accent-color, bg=white!0}
+\setbeamercolor{framesubtitle}{fg=accent-color, bg=white!0}
+\setbeamercolor{headline}{fg=nearly-white, bg=dark-gray}
+\setbeamercolor{footline}{bg=dark-gray, fg=nearly-white}
+\setbeamercolor{section in head/foot}{bg=light-gray, fg=accent-color}
+\setbeamercolor{subsection in head/foot}{bg=light-gray, fg=accent-color}
+\setbeamercolor{section in section page}{fg=nearly-black}
+\setbeamercolor{section page}{fg=accent-color}
+\setbeamercolor{subsection in section page}{fg=nearly-black}
+\setbeamercolor{section in toc}{fg=nearly-black}
+\setbeamercolor{subsection in toc}{fg=nearly-black}
+\setbeamercolor{block}{bg=nearly-white, fg=nearly-black}
+\setbeamercolor{block title}{bg=accent-color, fg=white}
+\setbeamercolor{item projected}{bg=medium-gray}
+\setbeamercolor{itemize item}{bg=accent-color}
+\setbeamercolor{itemize subitem}{fg=accent-color}
+\setbeamercolor{itemize subsubitem}{fg=accent-color}
+\setbeamercolor{enumerate item}{bg=accent-color, fg=accent-color}
+\setbeamercolor{enumerate subitem}{bg=accent-color, fg=accent-color}
+\setbeamercolor{enumerate subsubitem}{fg=accent-color}
+\setbeamercolor{caption name}{fg=accent-color}
+\setbeamercolor*{bibliography item}{fg=accent-color}
+\setbeamercolor*{bibliography entry author}{fg=nearly-black}
+\setbeamercolor*{bibliography entry title}{fg=accent-color}
+\setbeamercolor*{bibliography entry journal}{fg=nearly-black}
+\setbeamercolor*{bibliography entry location}{fg=nearly-black}
+\setbeamercolor*{bibliography entry note}{fg=nearly-black}
+
+%
+%! Template definitions.
+%
+
+%! Frametitle continuation
+\setbeamertemplate{frametitle continuation}{%
+}
+
+%! Redefine top level enumerate style.
+\defbeamertemplate{enumerate item}{my enumerate item}[1][]{%
+	\tikz[baseline=(text.base)]{\node[minimum width=1.5em, minimum height=1.5em, inner sep=2pt, outer sep=0pt, draw=bg] (text) {\color{fg}\insertenumlabel}}%
+}
+\setbeamertemplate{enumerate item}[my enumerate item]
+
+\defbeamertemplate{enumerate subitem}{my enumerate subitem}[1][]{%
+	\bgroup%
+	\color{fg}\insertsubenumlabel%
+	\egroup%
+}
+\setbeamertemplate{enumerate subitem}[my enumerate subitem]
+
+%! Use circle top level itemize style.
+\defbeamertemplate{itemize item}{my itemize item}[1][]{%
+	\tikz[baseline=(text.south)]{\node[minimum width=0.5em, minimum height=0.5em, inner sep=0pt, outer sep=0pt, draw=bg, circle] (text) {}}%
+}
+\setbeamertemplate{itemize item}[my itemize item]
+
+%! Use em dash for second itemize level
+\setbeamertemplate{itemize subitem}{---}
+
+%
+%!ref http://tex.stackexchange.com/a/111466
+%!ref http://latex-community.org/forum/viewtopic.php?f=47&t=9387
+%!ref http://tex.stackexchange.com/questions/46908/arithmetic-overflow-error-using-custom-theme-in-pdflatex (progressbar width calculation)
+%
+\setbeamersize{text margin left=0.5cm,text margin right=0.5cm} 
+
+\makeatletter
+
+\defbeamertemplate{headline}{my headline}[1][]{%
+	\bgroup%
+	%! Is this the first page?
+	\ifnum\thepage=1\relax
+		%! Yes: put a blank headline area.
+		\begin{beamercolorbox}[wd=\paperwidth, ht=1cm]{}%
+		\end{beamercolorbox}
+	\else%
+		%! Calculate progress bar width
+		\setcounter{@@frames}{\insertframenumber}%
+		\setcounter{@@total}{\inserttotalframenumber}%
+		\addtocounter{@@frames}{-1}%
+		\addtocounter{@@total}{-1}%
+		\ifnum\the@@total=0%
+			\dimen0=\paperwidth%
+		\else%
+			\dimen0=\paperwidth%
+			\divide\dimen0 by 100%
+			\multiply\dimen0 by \the@@frames%
+			\divide\dimen0 by \the@@total%
+			%! This equals `<paperwidth>/100 * (<frames> - 1) / (<total> - 1) * 100`
+			\multiply\dimen 0 by 100%
+		\fi%
+		\edef\progressbarwidth{\the\dimen0}%
+		%! Is this a content page?
+		\ifcontentpage
+			%! Yes: draw the frame.
+			\begin{beamercolorbox}[wd=\paperwidth, ht=1cm]{headline}%
+				\begin{tikzpicture}%
+        	        \draw[draw=none, use as bounding box] (0,0) rectangle (\paperwidth, 1cm);%
+					%! Draw the progress bar.
+					\draw[on layer=back, draw=none, fill=accent-color!25] (0, 1cm) rectangle (\paperwidth, 0.90cm);%
+					\draw[on layer=main, draw=none, fill=accent-color] (0, 1cm) rectangle (\progressbarwidth, 0.90cm);%
+					%! Is the frame subtitle empty?
+					\ifnum\pdf@strcmp{\@empty}{\insertframesubtitle}=\z@%
+						%! Yes: draw a big frame title.
+						\node[outer sep=0pt, inner sep=0pt, minimum height=0.90cm, below right=0.10cm and 12pt of current bounding box.north west] {%
+							\usebeamercolor{frametitle}\usebeamerfont{frametitle}\truncate{\linewidth}{%
+								\insertframetitle%
+								%! In case of a split frame, append the frame partition number.
+								\ifnum\insertcontinuationcount=0\else~(\insertcontinuationcount)\fi%
+							}%
+						};%
+					\else%
+						%! Yes: draw a split frame title and frame subtitle.
+						\node[outer sep=0pt, inner sep=0pt, minimum height=0.50cm, below right=0.10cm and 12pt of current bounding box.north west] (title) {%
+							\usebeamercolor{frametitle}\usebeamerfont{frametitle with subtitle}\truncate{\linewidth}{%
+								\insertframetitle%
+							}%
+						};%
+						\node[outer sep=0pt, inner sep=0pt, minimum height=0.40cm, below right=0pt and 0pt of title.south west]{%
+							\usebeamercolor{framesubtitle}\usebeamerfont{framesubtitle}\truncate{\linewidth}{%
+								\insertframesubtitle%
+								%! In case of a split frame, append the frame partition number.
+								\ifnum\insertcontinuationcount=0\else~(\insertcontinuationcount)\fi%
+							}%
+						};%
+					\fi%
+				\end{tikzpicture}%
+			\end{beamercolorbox}%
+		\else%
+			%! No: draw the progress bar but not title.
+			\begin{beamercolorbox}[wd=\paperwidth, ht=1cm]{}%
+				\begin{tikzpicture}%
+        	        \draw[draw=none, use as bounding box] (0,0) rectangle (\paperwidth, 1cm);%
+					%! Draw the progress bar.
+					\draw[on layer=back, draw=none, fill=accent-color!25] (0, 1cm) rectangle (\paperwidth, 0.90cm);%
+					\draw[on layer=main, draw=none, fill=accent-color] (0, 1cm) rectangle (\progressbarwidth, 0.90cm);%
+				\end{tikzpicture}%
+			\end{beamercolorbox}%
+		\fi%
+	\fi%		
+	\egroup%
+}
+\setbeamertemplate{headline}[my headline]
+
+\defbeamertemplate{footline}{my footline}[1][0]{%
+	\bgroup%
+		%! Is this the first page?
+		\ifnum\thepage=1\relax
+			%! Yes: empty footline.
+			\begin{beamercolorbox}[ht=0.5cm]{}%
+			\end{beamercolorbox}%			
+		\else%
+			%! No: is this a content page?
+			\ifcontentpage%
+				%! Yes: non-empty footline.
+				\begin{beamercolorbox}[ht=\dimexpr0.5cm]{footline}%
+    				\begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=\dimexpr0.5cm, wd=0.20\paperwidth, left]{}%
+ 	  					\usebeamerfont{footline}\truncate{\dimexpr0.20\paperwidth-0.165cm}{\insertshortauthor}%
+	    			\end{beamercolorbox}%
+		    		\begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=\dimexpr0.5cm, wd=0.60\paperwidth, center]{}%
+    					\usebeamerfont{footline}\truncate{\dimexpr0.20\paperwidth-0.165cm}{\inserttitle}%
+    				\end{beamercolorbox}%
+    				\begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=\dimexpr0.5cm, wd=0.20\paperwidth, right]{}%
+	    				\usebeamerfont{headline/footline}%
+		    				\truncate{\dimexpr0.20\paperwidth-0.165cm}{\insertdate}%
+    				\end{beamercolorbox}%
+				\end{beamercolorbox}%
+			%! No: empty footline
+			\else%
+			\fi%
+		\fi%
+	\egroup%
+}
+\setbeamertemplate{footline}[my footline]
+
+\defbeamertemplate{title page}{my title page}[1][0]{%
+	\begingroup\noindent%
+	\begin{beamercolorbox}{title page}
+			\vskip2em%
+			\begin{beamercolorbox}[sep=0.10cm, center]{}%
+				\usebeamerfont{title}\inserttitle\par%
+			\end{beamercolorbox}\par%
+			\tikz{%
+				\fill[nearly-black] rectangle (\linewidth, 1pt);%
+			}%
+			\vskip0.5cm\par%
+			\begin{beamercolorbox}[sep=0.10cm, center]{}%
+        	    \ifx\insertsubtitle\@empty\relax\else{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}\fi%			
+			\end{beamercolorbox}\par%
+			\vskip0.25cm\relax%
+    		\begin{beamercolorbox}[sep=0.20cm, center]{}%
+	            \ifx\insertinstitute\@empty\relax\else{\usebeamerfont{institute}\usebeamercolor{institute}\insertinstitute}\\\fi%
+            	{\usebeamerfont{author}\usebeamercolor{author}\insertauthor}\\%
+				\ifx\insertdate\@empty\relax\else{\usebeamerfont{date}\usebeamercolor{date}\insertdate}\\\fi%
+                \ifx\inserttitlegraphic\@empty\relax\else{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}\fi%
+			\end{beamercolorbox}\par%
+	\end{beamercolorbox}
+	\endgroup}
+\setbeamertemplate{title page}[my title page]
+
+%%
+%!deprecated
+%%
+\defbeamertemplate*{part page}{my part page}[1][]{%
+	\begingroup\noindent%
+		%! use a combination of `\makebox` and `\minipage` for centered content
+		\makebox[\textwidth][c]{
+		\begin{minipage}[c]{0.85\paperwidth}%
+			\begin{beamercolorbox}[sep=1em, left]{part name}%
+		    	{\usebeamerfont{part name}\usebeamercolor[fg]{part name}\partname~\insertromanpartnumber}%
+			\end{beamercolorbox}\par%
+			\tikz{%
+				\fill[accent-color, path fading=fade left] (0, 0) rectangle (0.5\linewidth, 0.25em);%
+				\fill[accent-color, path fading=fade right] (0.5\linewidth, 0) rectangle (\linewidth, 0.25em);}%
+			\vskip0.25cm\par%
+    		\begin{beamercolorbox}[sep=1em, left]{part title}%
+				{\usebeamerfont{part title}\insertpart}\par%
+			\end{beamercolorbox}\par%
+			\end{minipage}}%
+			\endgroup}
+\setbeamertemplate{part page}[my part page]
+
+\defbeamertemplate*{section page}{my section page}[1][]{%
+	\begingroup\noindent%
+		%! use a combination of `\makebox` and `\minipage` for centered content
+		\makebox[\textwidth][c]{
+		\begin{minipage}[c]{0.85\paperwidth}%
+			\vskip2em%
+			\begin{beamercolorbox}[sep=0.10cm, center]{section in section page}%
+				\usebeamerfont{section in section page}\usebeamercolor{section in section page}\insertsectionnumber.~\insertsection\par%
+			\end{beamercolorbox}\par%
+			%! Optional subtitle
+			\ifx\insertsubsection\@empty\relax%
+			\else
+				\tikz{%
+					\fill[nearly-black] (0, 0) rectangle (\linewidth, 1pt);%
+				}%
+				\vskip0.25cm\par%
+    			\begin{beamercolorbox}[sep=0.20cm, center]{subsection in section page}%
+					\usebeamerfont{subsection in section page}\usebeamercolor{subsection in section page}\insertsectionnumber.\insertsubsectionnumber~~\insertsubsection\par%
+				\end{beamercolorbox}\par%
+			\fi
+		\end{minipage}}%
+	\endgroup}
+\setbeamertemplate{section page}[my section page]
+
+\defbeamertemplate*{frametitle}{my frametitle}[1][left]{%
+  \begingroup\ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  \@tempdima=\textwidth%
+  \advance\@tempdima by\beamer@leftmargin%
+  \advance\@tempdima by\beamer@rightmargin%
+	\vskip1em\relax%
+  \begin{beamercolorbox}[#1, wd=\the\@tempdima]{frametitle}%
+  	\hskip\beamer@leftmargin%
+	\relax{\usebeamerfont{frametitle}\usebeamercolor{frametitle}\insertframetitle}%
+	\ifx\insertframesubtitle\@empty\else{~(\usebeamerfont{frametitle}\usebeamercolor{frametitle}\insertframesubtitle)}\fi%
+  \end{beamercolorbox}\endgroup}
+\setbeamertemplate{frametitle}{}
+
+%
+%!ref http://tex.stackexchange.com/a/68084
+%
+\iffalse
+\setbeamertemplate{bibliography item}{%
+  \ifboolexpr{ test {\ifentrytype{book}} or test {\ifentrytype{mvbook}}
+    or test {\ifentrytype{collection}} or test {\ifentrytype{mvcollection}}
+    or test {\ifentrytype{reference}} or test {\ifentrytype{mvreference}} }
+    {\setbeamertemplate{bibliography item}[book]}
+    {\ifentrytype{online}
+       {\setbeamertemplate{bibliography item}[online]}
+       {\setbeamertemplate{bibliography item}[article]}}%
+  \usebeamertemplate{bibliography item}}
+\fi
+
+%
+%! Remove navigation symbols  
+%
+\setbeamertemplate{navigation symbols}{}
+
+%
+%! Simple toc entries
+%!ref: http://tex.stackexchange.com/a/69721
+%
+\setbeamertemplate{section in toc}{{\usebeamerfont{section in toc}\usebeamercolor{section in toc}\inserttocsectionnumber.~\inserttocsection}\par}
+\setbeamertemplate{subsection in toc}{\hskip1em\relax\usebeamerfont{subsection in toc}\usebeamercolor{subsection in toc}\inserttocsectionnumber.\inserttocsubsectionnumber.~\inserttocsubsection\par}
+
+%
+%! remove icon from reference item
+%!ref: http://tex.stackexchange.com/a/124271
+%
+
+\iffalse
+\setbeamertemplate{bibliography item}{%
+	\usebeamercolor{bibliography item}%
+	{\color{fg}\insertbiblabel}%
+}
+
+\setbeamertemplate{bibliography entry author}{%
+	\usebeamerfont{bibliography entry author}%
+}
+\fi
+\setbeamertemplate{bibliography item}[text]
+
+\makeatother

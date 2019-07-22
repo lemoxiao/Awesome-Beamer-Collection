@@ -1,0 +1,189 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\let\Tiny=\tiny
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+\title{There Is No Largest Prime Number}
+\date[ISPN ’80]{27th International Symposium of Prime Numbers}
+\author[Euclid]{Euclid of Alexandria \texttt{euclid@alexandria.edu}}
+
+\usetheme{kios}
+
+\definecolor{red}{rgb}{0.8235,0.1294,0.2039}
+\definecolor{kiosorange}{rgb}{0.9686,0.5765,0.1137}
+\definecolor{kiosgray}{rgb}{0.5020,0.5098,0.5216}
+\definecolor{kiosyellow}{rgb}{0.9725,0.9216,0.12552}
+\setbeamercolor{part name}{fg=kiosorange}
+\setbeamercolor{part title}{fg=red}
+\setbeamercolor{button}{use=local structure,bg=kiosorange,fg=red}
+\setbeamercolor{button border}{use=button,fg=button.bg}
+
+\begin{document}
+\setbeamertemplate{navigation symbols}{}
+\begin{frame}
+\titlepage
+\end{frame}
+\setbeamertemplate{navigation symbols}[default]
+
+
+\begin{frame}
+\frametitle{There Is No Largest Prime Number} 
+\framesubtitle{The proof uses \textit{reductio ad absurdum}.} 
+\begin{theorem}
+There is no largest prime number.  \end{theorem} 
+\begin{enumerate} 
+\item<1-| alert@1> Suppose $p$ were the largest prime number. 
+\item<2-> Let $q$ be the product of the first $p$ numbers. 
+\item<3-> Then $q+1$ is not divisible by any of them. 
+\item<1-> But $q + 1$ is \color{KIOSred}greater\color{KIOSgray}\ than $1$, thus divisible by some prime
+number not in the first $p$ numbers.
+
+\end{enumerate}
+
+\begin{itemize}
+	\item one
+	\item two \begin{itemize}
+		\item three
+		\item four
+	\end{itemize}
+\end{itemize} 
+\end{frame}
+
+%Acknowledge early and correctly
+\begin{frame} 
+\frametitle{Acknowledgments}
+	\begin{columns}
+		\begin{column}{7cm}
+		This work has been partially funded by
+			\begin{itemize}
+			\item \textit{Cyprus Research Promotion Foundation}
+			\item \textit{University of Cyprus}
+			\end{itemize}
+		With the collaboration of
+			\begin{itemize}
+			\item \textit{ACB}
+			\item \textit{CDF}
+			\end{itemize}		
+		\end{column}	
+		\begin{column}{3cm}
+
+			\begin{figure}
+			\includegraphics[totalheight=1.5cm]{./figures/ucylogo.pdf} 
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+
+%Presentation Outline. I do it manually
+\begin{frame}{Outline}
+	\begin{itemize}
+	\item Introduction
+	\item ...
+	\item Conclusions
+\end{itemize}	
+\end{frame}
+
+% First part: Introduction
+\part{Introduction}
+\frame{\partpage}
+%
+
+%
+\begin{frame}[fragile]{Introduction}{Alerts and Code}
+\begin{itemize}
+\item Basic structure: part, section, subsection, subsubsection.
+\item \verb+\alert{Highlight}+ for word \alert{Highlight}
+\end{itemize}
+Enter code using 
+\begin{itemize}
+\item  \verb+\begin{frame}[fragile]{...}{...}+
+\item \verb+\begin{verbatim} ...paste code... \end{verbatim}+
+\end{itemize}
+\end{frame}	
+
+\begin{frame}[fragile]{Introduction}
+\begin{center}Centered text!\end{center}
+\begin{itemize}
+    \item \verb+\begin{center}...\end{center}+ 
+\end{itemize}
+\end{frame}	
+
+\begin{frame}[fragile]{Introduction}{Pauses}
+\begin{verbatim}
+    \begin{enumerate}
+        \item First bullet\pause
+        \item Second bullet\pause
+        \item Third bullet
+    \end{enumerate}
+\end{verbatim}
+    \begin{enumerate}
+        \item First bullet\pause
+        \item Second bullet\pause
+        \item Third bullet
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Introduction}{Overlays (4 in 1)!} 
+\begin{itemize}
+		\item \alert{Alert on all slides}
+		\item \alert<2>{Alert on slide 2}
+		\item \alert<3>{Alert on slide 3}
+		\item \alert<1,3>{Alert on slides 1 and 3}
+		\item \alert<-2,4>{Alert on slides 1,2 and 4}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Introduction}{2 columns}
+\begin{columns}
+\column{.5\textwidth}
+Left column. You can add anything in here!
+\column{.5\textwidth}
+Right column. You can add anything in here!
+\end{columns}
+\end{frame}
+
+\part{Blocks}
+\frame{\partpage}
+
+\begin{frame}[fragile]{Introduction}{Blocks}
+\begin{verbatim}
+\begin{block}{Block title}
+The project contributions could be written here!
+\end{block}
+\end{verbatim}
+\begin{block}{Block title}
+The project contributions could be written here!
+\end{block}
+\end{frame}
+%
+
+\begin{frame}[fragile]{Introduction}{2-column block}
+\begin{columns}
+\column{.5\textwidth}
+\begin{block}{Block title}
+Left column. You can add anything in here!
+\end{block}
+\column{.5\textwidth}
+\begin{block}{Block title}
+Right column. You can add anything in here!
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Introduction}{Figures}
+\begin{itemize}
+	\item \verb+\usepackage{graphicx}+
+	\item jpg, png, pdf, eps, ps
+\end{itemize}
+\includegraphics[height=3cm]{./figures/ucylogo.pdf}
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+      Thank you!
+    \end{center}
+  \end{frame}
+
+\end{document}

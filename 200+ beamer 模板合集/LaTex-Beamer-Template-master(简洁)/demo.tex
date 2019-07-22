@@ -1,0 +1,145 @@
+\input{style/template.tex}
+\usepackage{style/pdfpc-commands}
+\usepackage{style/tuilmenau}
+%\usepackage{style/clear}
+%\setDualView
+
+ 
+\title{Vortragstitel}
+\subtitle{Vortragsuntertitel}
+\author{Author}
+\institute[Technische Universität Ilmenau]{%
+	Fakultät für Elektrotechnik und Informationstechnik}
+\date{\today}
+\setDualView
+\titlegraphic{\includegraphics[scale=0.6]{style/images/logo_tui.eps}}
+
+\begin{document}
+\frame{\titlepage}%Titelfolie
+
+\frame{\frametitle{Inhalt}\tableofcontents[part=1]}%Folie mit Inhaltsverzeichnis
+
+\part{Main Part}
+
+\section{Einführung}
+\begin{frame}
+\frametitle{Folie mit Bild und Text nebeneinander}
+\vskip5mm
+ \begin{columns}
+    \column{6cm}
+ 	  \includegraphics[width=6.0cm]{style/images/master_background}
+     \column{5cm}
+      \vspace{-1cm}%Vertikale Position der Stichpunkte (an Bild anpassen!)
+	\begin{itemize}
+		 \itemsep1.2em
+      	 \item Stichpunkt
+      	 \item Stichpunkt
+       	 \item Stichpunkt
+     	 \item Stichpunkt
+     \end{itemize}
+ \end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Folie mit Text}
+	\vskip5mm
+	\vspace{-0.4cm}%Vertikale Position der Stichpunkte (an Bild anpassen!)
+	\begin{itemize}
+		\itemsep1.2em
+		\item Stichpunkt
+		\item Beispiel für eine ToDo Liste:
+		\begin{itemize}
+			\itemsep1.2em
+			\item[\done] Erledigtes Problem
+			\item[\wontfix] Das Problem wird nicht gelöst
+			\item[\open] Das Problem ist noch offen
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\section{Experimentelles}
+\begin{frame}
+\frametitle{Folie mit Bild und Text untereinander}
+%\footnotesize{Elementarzelle}
+\begin{tabbing}
+	Text: \qquad \= Text mit tabbing\\
+	\> Test Test Test\\
+\end{tabbing}
+	\vskip5mm
+	\begin{columns}
+		\column{12cm}
+		\centering
+		\includegraphics[width=5.0cm]{style/images/master_background}\\
+	\end{columns}
+\end{frame}
+
+\section{Ergebnisse}
+\begin{frame}
+\frametitle{Folie mit Bild und Text nebeneinander}
+	\begin{columns}
+		\column{6cm}
+		\vskip5mm
+		\includegraphics[width=6.0cm]{style/images/master_background}\\
+		\vskip5mm
+    	\column{5cm}
+
+		\begin{itemize}
+		 \itemsep1.2em
+		 \item Stichpunkt
+      	 \item Stichpunkt
+       	 \item Stichpunkt
+     	 \item Stichpunkt
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+
+\section{Video}
+\frame{
+	\frametitle{Example 2}
+	
+	A video using the \textbf{commands from \texttt{pdfpc-commands}} is on this slide.  The video is set to start at 1 seconds and end at 9 seconds.
+	\note{test}
+	\vspace{20pt}
+	
+	\inlineMovie[loop&autostart&start=1&stop=9]{bigbunny_100.mp4}{bigbunny_100.jpg}{height=0.7\textheight}
+}
+
+\section{Diskussion}
+\begin{frame}
+\frametitle{Folie mit Bild und Text nebeneinander}
+\begin{columns}
+    \column{6cm}
+    \vskip5mm
+ 	    \includegraphics[width=6.0cm]{style/images/master_background}
+    \vskip5mm
+    \column{5cm}
+    \vspace{0cm}
+	\begin{itemize}
+	 	 \itemsep1.2em
+   		 \item Stichpunkt
+      	 \item Stichpunkt
+       	 \item Stichpunkt
+     	 \item Stichpunkt
+       	\end{itemize}
+ \end{columns}
+\end{frame}
+
+\begin{frame}[c]
+\frametitle{}
+\vskip5mm
+\begin{columns}
+    \column{12cm}
+ 	\centering
+ 	\vspace{0.5cm}
+ 	\begin{center}
+ 		\huge{Vielen Dank!}
+ 	\end{center}
+ \end{columns}
+\end{frame}
+
+
+%arg1: frame title / arg2: bibstyle / arg3: bibtex file
+\insertReferenceFrame{Referenzen}{deIEEEtran}{MyReferences.bib}
+
+\end{document}

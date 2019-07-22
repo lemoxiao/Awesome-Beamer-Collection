@@ -1,0 +1,20 @@
+\DeclareOptionBeamer{shadow}[true]{\def\beamer@themerounded@shadow{#1}}
+\ExecuteOptionsBeamer{shadow=false}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+% \setbeamertemplate{blocks}[ball]
+% \setbeamertemplate{items}[ball]
+% \setbeamertemplate{sections/subsections in toc}[ball]
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{items}[default]
+\setbeamertemplate{sections/subsections in toc}[circle]
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+\setbeamertemplate{part page}[default][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+
+
+
+
+
+\mode<all>

@@ -1,0 +1,32 @@
+\frametitle{Song Books with Guitar Tabs}
+\vskip-.55\textheight
+\begin{guitar}
+\rmfamily\smallchords\def\chordsize{.5em}
+\renewcommand\yoff{2}
+\renewcommand\xoff{0}
+\renewcommand\namefont{\footnotesize\sffamily}
+\renewcommand\normalsiz{1.1}
+\renewcommand\topfretsiz{1.2pt}
+\newcommand{\CMaj}{\chord{t}{n,p3,p2,n,p1,n}{C}}
+\newcommand{\Amin}{\chord{t}{n,n,p2,p2,p1,n}{Am}}
+\newcommand{\FMaj}{\chord{t}{n,n,p3,p2,p1,p1}{F}}
+\newcommand{\GMaj}{\chord{t}{p3,p2,n,n,n,p3}{G}}
+Country [\CMaj]road, take me [\GMaj]home, to the [\Amin]place I be[\FMaj]long.
+West Vir[\CMaj]ginia, mountain [\GMaj]momma, take me [\FMaj]home, country [\CMaj]road.
+\end{guitar}
+
+\begin{beamerboxesrounded}{}
+\vskip-1em
+\begin{lstlisting}[moretexcs={chord,CMaj,Amin,FMaj,GMaj},
+emph={gchords,guitar},
+basicstyle=\ttfamily\small]
+\usepackage{gchords,guitar}
+...
+\begin{guitar}
+\newcommand{\CMaj}{\chord{t}{n,p3,p2,n,p1,n}{C}}
+\newcommand{\Amin}...
+Country [\CMaj]road, take me [\GMaj]home, ...
+\end{guitar}
+\end{lstlisting}
+\vspace{-1em}
+\end{beamerboxesrounded}

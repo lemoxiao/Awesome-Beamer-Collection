@@ -1,0 +1,302 @@
+%% % -*- coding: utf-8 -*-
+% Copyright 2003--2007 by Till Tantau
+% Copyright 2010 by Vedran Mileti\'c
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+%% 此文件用于解码 Beamer 的覆盖指令（overlay specification），主要参考文档 \S9 特别是 \S9.6。
+\ProvidesPackageRCS $Header: /Users/joseph/Documents/LaTeX/beamer/base/beamerbasedecode.sty,v efa082c6111d 2010/05/01 11:27:03 rivanvx $
+
+%% \cs{beamer@slideinframe} 表示当前在 frame 的第几个 slide。
+%% \cs{beamer@minimum} 表示覆盖指令中的最小的 slide 编号。
+%% \cs{ifbeamer@anotherslide} 用于表示后面是否还有 slide，
+%% 即在覆盖指令中是否还有大于 \cs{beamer@slideinframe} 的编号。
+%% 而 \cs{ifbeamer@localanotherslide} 与 \cs{ifbeamer@anotherslide} 的值总相同，
+%% 而且最后总变成全局条件（见 \cs{beamer@masterdecode} 宏），因此可以忽略它。
+\newcount\beamer@slideinframe
+\newcount\beamer@minimum
+\newif\ifbeamer@anotherslide
+\newif\ifbeamer@localanotherslide
+
+\newif\ifbeamer@plusencountered
+
+%
+%
+% Empty test
+%
+%
+\long\def\beamer@ifempty#1{\beamer@xifempty#1@@..\@nil}
+\long\def\beamer@xifempty#1#2@#3#4#5\@nil{%
+  \ifx#3#4\expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi}
+\let\beamer@ifnextchar=\@ifnextchar
+
+%% Beamer 的覆盖指令（overlay specification）可以有连续多个，它们之间用 \verb*.| . 隔开。
+%% 每个覆盖指令实际上由四部分内容组成：
+%% \begin{enumerate}
+%%   \item 模式指令（mode specification），比如 |beamer:3-5|。
+%%   \item 动作指令（action specification），比如 |alert@3-5|。
+%%   \item 递增指令（incremental specification），比如 |+-5| 和 |.-5|。
+%%   \item 编号指令（number specification），比如 |1,3-5,2-,-7|。
+%% \end{enumerate}
+%% 其中编号指令是基本指令，必须存在；而前面三部分内容是对它的扩展，可以不存在。
+%% 当然这四部分内容可以都存在，比如 |beamer:alert@+-5,2-| 也是有效的。
+%% 但注意要按这里的先后顺序给出，因为下面的代码是按照此顺序解码覆盖指令的。\par
+%%    \cs{beamer@masterdecode} 是解码命令的主要入口，它设定好 \cs{catcode} 后调用 \cs{beamer@decode} 开始解码。
+%% \cs{beamer@decode} 将用 \verb*.| . 隔开的覆盖指令分开，对每个覆盖指令按下述流程解码：
+%% \begin{enumerate}
+%%   \item \cs{beamer@decodefind}：解码模式指令
+%%   \item \cs{beameratdecodeaction}：解码动作指令
+%%   \item \cs{beamer@decodeplus}：解码递增指令 |+|
+%%   \item \cs{beamer@decodedot}：解码递增指令 |.|
+%%   \item \cs{beamer@@decode}：解码编号指令
+%% \end{enumerate}
+%% 解码时位于 |box0| 中，但这个 |box0| 后面不会用到，它仅用于避免将解码留下的内容排版出来。
+\def\beamer@stoptexts{| stop:0| }
+{
+   \catcode`\|=13
+   \catcode`\:=13
+   \catcode`\,=13
+   \catcode`\.=13
+   \catcode`\+=13
+   \catcode`\-=13
+   \catcode`\(=13
+   \catcode`\)=13
+   \catcode`\ =13
+\gdef\beamer@masterdecode#1{% must be called within a group
+\ifnum\catcode`\|=13\edef|{\string|}\fi%
+\ifnum\catcode`\:=13\edef:{\string:}\fi%
+\ifnum\catcode`\,=13\edef,{\string,}\fi%
+\ifnum\catcode`\.=13\edef.{\string.}\fi%
+\ifnum\catcode`\+=13\edef+{\string+}\fi%
+\ifnum\catcode`\-=13\edef-{\string-}\fi%
+\ifnum\catcode`\(=13\edef({\string(}\fi%
+\ifnum\catcode`\)=13\edef){\string)}\fi%
+\ifnum\catcode`\ =13\edef {\string }\fi%
+\edef\beamer@@@temp{#1\beamer@stoptexts}%
+\beamer@localanotherslidefalse%
+\setbox0=\hbox{%
+\expandafter\beamer@decode\beamer@@@temp%
+\ifbeamer@localanotherslide\global\beamer@localanotherslidetrue\fi}%
+}%
+}
+
+% Sets dowhat to doif, if \beamer@slideinframe is in the specified
+% interval. Example: 5-7,-3,9,11,13- would mean pages
+% 1,2,3,5,6,7,9,11,13,14,15,16,...
+%
+% As a side effect, \@another is called whenever the there is a number
+% in the list that is larger than the current serialnumber
+
+\def\beamer@allsign{*}
+
+%% 实际解码命令的开始之处，这里先把多个覆盖指令分开。
+\def\beamer@decode{%
+  \beamer@plusencounteredfalse%
+  \global\beamer@minimum=10000\relax%
+  \gdef\beamer@decaction{}%
+  \gdef\beamer@decactionrev{}%
+  \global\let\beamer@decodefound=\beamer@allsign%
+  \beamer@@decodefind}
+\def\beamer@@decodefind#1|{%
+  \beamer@ifnextchar\@undefined% get rid of spaces
+  {\beamer@@@decodefind#1:|}{\beamer@@@decodefind#1:|}}
+\def\beamer@@@decodefind#1:#2|{%
+  \beamer@ifempty{#2}%
+  {\beamer@decodefind beamer:#1:}%
+  {\beamer@decodefind #1:#2}}
+
+
+%% 解码模式指令，比如 |article:2-4|。从上面可以看到，模式未指定时默认为 |beamer|。
+%% 将得到的模式保存在 \cs{beamer@ovmode} 宏。（ovmode 表示 overlay mode）。
+%% 在这里也依次调用 \cs{beameratdecodeaction}、\cs{beamer@decodeplus}、\cs{beamer@decodedot}。
+\def\beamer@default{default}
+\def\beamer@articlemode{article}
+\def\beamer@secondmode{second}
+\def\beamer@beamermode{beamer}
+\def\beamer@presentationmode{presentation}
+\def\beamer@modeall{all}
+\def\beamer@ovmodestop{stop}
+\def\beamer@decodefind#1:#2:{%
+  \def\beamer@ovmode{#1}%
+  \beameratdecodeaction{#2}%
+  \expandafter\futurelet\expandafter\next\expandafter\beamer@checkcat\beamer@spec:%
+  \expandafter\beamer@decodeplus\beamer@spec+:%
+  \expandafter\beamer@decodedot\beamer@spec.:%
+  \ifx\beamer@ovmode\beamer@ovmodestop%
+    \expandafter\beamer@@decode\beamer@decodefound,!%
+    \let\beamer@next=\relax%
+    \ifbeamer@plusencountered\global\advance\c@beamerpauses by1\relax\fi%
+  \else
+    \ifx\beamer@ovmode\beamer@currentmode%
+      \beamer@@decodefound%
+    \else%
+      \ifx\beamer@ovmode\beamer@modeall%
+        \beamer@@decodefound%
+      \else%
+        \ifx\beamer@ovmode\beamer@presentationmode%
+          \ifx\beamer@currentmode\beamer@articlemode%
+          \else%
+            \beamer@@decodefound%
+          \fi%
+        \else%
+          \ifx\beamer@ovmode\beamer@beamermode%
+            \ifx\beamer@currentmode\beamer@secondmode%
+              \beamer@@decodefound%
+            \fi%
+          \fi%
+        \fi%
+      \fi%
+    \fi%
+    \let\beamer@next=\beamer@@decodefind%
+  \fi%
+ \beamer@next}
+
+\def\beamer@checkcat#1:{%
+  \ifcat\next a%
+    \gdef\beamer@ovmode{#1}%
+    \ifx\beamer@decodefound\beamer@allsign
+      \gdef\beamer@decodefound{0}%
+    \fi%
+    \gdef\beamer@spec{1-}%
+  \fi%
+  }
+
+\def\beamer@@decodefound{%
+  \ifx\beamer@action\beamer@default%
+    \expandafter\gdef\expandafter\beamer@decodefound\expandafter{\beamer@spec}%
+  \else
+    \xdef\beamer@decaction{\beamer@decaction{\beamer@action<\beamer@spec>}}
+    \xdef\beamer@decactionrev{{\beamer@action}\beamer@decactionrev}
+  \fi}
+\def\beamer@currentaction{default}
+
+%% 解码动作指令，所得结果保存在 \cs{beamer@action} 和 \cs{beamer@spec} 中。
+%% 比如对于指令 |alert@1-3|，\cs{beamer@action} 将等于 |alert|，\cs{beamer@spec} 将等于 |1-3|。
+%% 这些指令不能用于 \env{frame} 环境，但可用于 \cs{item} 命令。
+%% 例如 \verb|\item<alert@1-3> text| 等同于 \verb|\begin{alertenv}\item<1-3> text\end{alertenv}|。
+{
+\makeatother
+\gdef\beameratdecodeaction#1{%
+  \beameratdecodeactionb#1@:}
+\gdef\beameratdecodeactionb#1@#2:{%
+  \beameratdecodeactionc{#1}{#2}}
+\gdef\beameratgetridofat#1@{%
+  \gdef\beameratspec{#1}%
+}
+}
+
+\def\beameratdecodeactionc#1#2{%
+  \gdef\beamer@spec{#2}%
+  \ifx\beamer@spec\@empty%
+    \xdef\beamer@spec{#1}%
+    \gdef\beamer@action{default}%
+  \else%
+    \xdef\beamer@action{#1}%
+    \beameratgetridofat#2%
+    \xdef\beamer@spec{\beameratspec}
+  \fi%
+}
+
+%% 解码递增指令 |+|，比如 |+-| 或 |+-5|。指令中的每个 |+| 将被替换为计数器 |beamerpauses| 的当前值，
+%% 之后该计数器的值将增加 1（见 \cs{beamer@decodefind} 宏）。相关地，\cs{pause} 命令也会增加该计数器的值。
+\def\beamer@decodeplus{%
+  \def\beamer@spec{}\beamer@@decodeplus}
+\def\beamer@@decodeplus#1+#2:{%
+  \edef\beamer@spec{\beamer@spec#1}% everything up to first +
+  \beamer@ifempty{#2}{}
+  {% ok, check if followed by number:
+    \beamer@plusencounteredtrue%
+    \beamer@@@decodeplus#2:}}
+\def\beamer@@@decodeplus{%
+  \beamer@ifnextchar({\beamer@relnumber}{\beamer@relnumber(0)}}
+\def\beamer@relnumber(#1){%
+  \beamer@plusencounteredtrue%
+  \beamer@tempcount=#1\relax
+  \advance\beamer@tempcount by\c@beamerpauses\relax%
+  \edef\beamer@spec{\beamer@spec\the\beamer@tempcount}%
+  \beamer@@decodeplus}
+
+%% 解码递增指令 |.|，比如 |.-| 或 |.-5|。指令中的每个 |.| 将被替换为计数器 |beamerpauses| 的当前值减 1，
+%% 而且之后该计数器的值不会改变。
+\def\beamer@decodedot{%
+  \def\beamer@spec{}\beamer@@decodedot}
+\def\beamer@@decodedot#1.#2:{%
+  \edef\beamer@spec{\beamer@spec#1}% everything up to first .
+  \beamer@ifempty{#2}{}{\beamer@@@decodedot#2:}}
+\def\beamer@@@decodedot{%
+  \beamer@ifnextchar({\beamer@relnumberdot}{\beamer@relnumberdot(0)}}
+\def\beamer@relnumberdot(#1){%
+  \beamer@tempcount=#1\relax
+  \advance\beamer@tempcount by\c@beamerpauses\relax%
+  \advance\beamer@tempcount by-1\relax%
+  \edef\beamer@spec{\beamer@spec\the\beamer@tempcount}%
+  \beamer@@decodedot}
+
+%% 解码编号指令，比如 |5-7,-3,9,11,13-|。首先，判断当前的 \cs{beamer@slideinframe} 是否包含在内。
+%% 若是，则设定 \cs{beamer@donow} 等于 \cs{beamer@doifinframe}；若否，则它等于 \cs{beamer@doifnotinframe}。
+%% 其次，判断是否还有比 \cs{beamer@slideinframe} 大的编号，并相应的设定 \cs{ifbeamer@anotherslide}。\par
+%%     从 \sty{beamerbaseframe} 的 \cs{beamer@frame} 命令和 \cs{beamer@doseveralframes} 命令可以看出，
+%% 在调用 \cs{beamer@masterdecode} 之前一般需要先将 \cs{ifbeamer@anotherslide} 设定为 |false|，
+%% 并且重新设定 \cs{beamer@doifnotinframe} 和 \cs{beamer@doifinframe} 为接下来要执行的操作。\par
+%%     这里设定的 \cs{beamer@minimum}，仅在 \sty{beamerbaseoverlay} 的 \cs{beamer@startcovered} 命令中用到。
+\def\beamer@doifnotinframe{}
+\def\beamer@@decode{%
+  \beamer@ifnextchar!%
+  {\beamer@decodeend}%
+  {%
+    \beamer@ifnextchar*%
+    {\beamer@decodeall}{%
+      \beamer@ifnextchar-%
+      {\beamer@decodeuntil}%
+      {\beamer@decodenumber}}}}
+\def\beamer@decodeend!{}
+\def\beamer@decodeall*,{%
+  \ifnum1<\beamer@minimum\global\beamer@minimum=1\fi%
+  \ifnum1>\beamer@slideinframe%
+  \global\beamer@anotherslidetrue%
+  \beamer@localanotherslidetrue%
+  \fi%
+  \gdef\beamer@doifnotinframe{\beamer@doifinframe}\beamer@@decode}
+\def\beamer@decodeuntil-#1,{%
+  \ifnum1<\beamer@minimum\global\beamer@minimum=1\fi%
+  \ifnum#1>\beamer@slideinframe\global\beamer@anotherslidetrue\beamer@localanotherslidetrue\fi%
+  \ifnum\beamer@slideinframe>#1\else\gdef\beamer@doifnotinframe{\beamer@doifinframe}\fi%
+  \beamer@@decode}
+\def\beamer@decodenumber#1{%
+  \beamer@ifnextchar,%
+  {\beamer@decodeone{#1}}%
+  {\beamer@ifnextchar-%
+    {\beamer@decodenumberto{#1}}%
+    {\beamer@decodegobble{#1}}}}
+\def\beamer@decodegobble#1#2{%
+  \beamer@decodenumber{#1#2}}
+\def\beamer@decodenumberto#1-{
+  \beamer@ifnextchar,%
+  {\beamer@decodeto{#1}}%
+  {\beamer@decodebetween{#1}}}
+\def\beamer@decodeto#1,{%
+  \ifnum#1<\beamer@minimum\global\beamer@minimum=#1\fi%
+  \ifnum#1>\beamer@slideinframe\global\beamer@anotherslidetrue\beamer@localanotherslidetrue\fi%
+  \ifnum#1>\beamer@slideinframe\else\gdef\beamer@doifnotinframe{\beamer@doifinframe}\fi%
+  \beamer@@decode}
+\def\beamer@decodebetween#1#2,{%
+  \ifnum#1<\beamer@minimum\global\beamer@minimum=#1\fi%
+  \ifnum#1>\beamer@slideinframe\global\beamer@anotherslidetrue\beamer@localanotherslidetrue\fi%
+  \ifnum#2>\beamer@slideinframe\global\beamer@anotherslidetrue\beamer@localanotherslidetrue\fi%
+  \ifnum#1>\beamer@slideinframe\else\ifnum#2<\beamer@slideinframe\else\gdef\beamer@doifnotinframe{\beamer@doifinframe}\fi\fi%
+  \beamer@@decode}
+\def\beamer@decodeone#1,{%
+  \ifnum#1<\beamer@minimum\global\beamer@minimum=#1\fi%
+  \ifnum#1>\beamer@slideinframe\global\beamer@anotherslidetrue\beamer@localanotherslidetrue\fi%
+  \ifnum#1=\beamer@slideinframe\gdef\beamer@doifnotinframe{\beamer@doifinframe}\fi%
+  \beamer@@decode}
+
+\def\beamer@donow{\beamer@doifnotinframe}
+
+\def\beamer@saveanother{\let\beamer@savedif=\ifbeamer@anotherslide}
+\def\beamer@restoreanother{\global\let\ifbeamer@anotherslide=\beamer@savedif}

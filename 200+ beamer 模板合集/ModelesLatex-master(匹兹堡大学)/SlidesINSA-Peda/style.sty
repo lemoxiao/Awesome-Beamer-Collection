@@ -1,0 +1,40 @@
+\usepackage[utf8]{inputenc} 
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}%
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{beamerfoils} 
+\usepackage{lmodern}
+%\PrerenderUnicode{é}
+
+%\usetheme[compress]{Ilmenau} 
+%\useoutertheme{smoothbars}
+
+\usetheme{progressbar}
+\progressbaroptions{frametitle=normal,titlepage=normal}
+
+%\useoutertheme{smoothbars}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Plan}
+    \tableofcontents[currentsection,hideothersubsections]
+  \end{frame}
+}
+
+% \AtBeginSection[]
+% {
+% \frame{
+% \begin{beamercolorbox}[center,rounded=true,dp=1ex]{author in head/foot}
+% 	\huge{\insertsection}
+% \end{beamercolorbox}
+% }
+% }
+
+\pgfdeclareimage[height=0.4cm]{Logo}{logo} \logo{ \pgfuseimage{Logo} }
+
+%\definecolor{green}{rgb}{0.000000, 0.800000, 0.000000} \setbeamercolor{alerted text}{fg=blue} 
+
+

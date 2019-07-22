@@ -1,0 +1,44 @@
+%% Copyright (c) 2011–2016 Kazuki Maeda <nwafuaeda@nwafuaeda.net>
+%%
+%% Distributable under the MIT License:
+%% http://www.opensource.org/licenses/mit-license.php
+%%
+\ProvidesPackage{nwafubeamer_common}[2012/04/20 ]
+
+\newbox\nwafubmr@tmpboxa
+\newbox\nwafubmr@tmpboxb
+\newbox\nwafubmr@tmpboxc
+
+\usefonttheme{professionalfonts}
+
+\setbeamertemplate{sections/subsections in toc}[sections numbered]{}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{qed symbol}{}
+
+\newcommand\ifratio[3]{%
+\ifnum#1=169%
+    \ifdim\beamer@paperwidth=16.00cm\relax%
+        \ifdim\beamer@paperheight=9.00cm\relax%
+            #2%
+        \else%
+            #3%
+        \fi%
+    \else%
+        #3%
+    \fi%
+\else%
+    \ifnum#1=43%
+        \ifdim\beamer@paperwidth=12.80cm\relax%
+            \ifdim\beamer@paperheight=9.60cm\relax%
+                #2%
+            \else%
+                #3%
+            \fi%
+        \else%
+            #3%
+        \fi%
+    \fi%
+\fi%
+}
+
+\endinput

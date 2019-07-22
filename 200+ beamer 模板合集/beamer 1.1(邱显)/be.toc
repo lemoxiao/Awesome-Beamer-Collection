@@ -1,0 +1,9 @@
+\beamer@endinputifotherversion {3.24pt}
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@sectionintoc {2}{Outline}{8}{0}{2}
+\beamer@sectionintoc {3}{Cooperative games}{12}{0}{3}
+\beamer@sectionintoc {4}{The uniform bin packing game}{17}{0}{4}
+\beamer@sectionintoc {5}{Integrality gap}{28}{0}{5}
+\beamer@sectionintoc {6}{Frac. packing}{36}{0}{6}
+\beamer@sectionintoc {7}{The non-uniform bin packing game}{40}{0}{7}
+\beamer@sectionintoc {8}{Open questions}{49}{0}{8}

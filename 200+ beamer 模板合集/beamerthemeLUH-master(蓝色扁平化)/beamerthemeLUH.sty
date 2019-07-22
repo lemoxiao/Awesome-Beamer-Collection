@@ -1,0 +1,89 @@
+
+\mode<presentation>
+
+% Requirement
+\RequirePackage{tikz}
+
+
+% Parameters
+\newlength{\LUHBorder} % Distance between logo and edge of paper
+\newlength{\LUHFooterHeight}
+\newlength{\LUHFooterHeightTitle}
+\newlength{\LUHLogoHeight}
+
+\LUHBorder=0.3cm
+\LUHLogoHeight=0.65cm % Will be larger on the title page
+\LUHFooterHeight=1.8\LUHBorder
+\LUHFooterHeightTitle=1.4\LUHFooterHeight
+
+%\logo{\tikz \node}
+
+% Settings
+\useinnertheme{LUH}
+\useoutertheme{LUH}
+\usecolortheme{LUH}
+
+% Specify an image (TeX commands) to be displayed on
+% the title page. Most likely this will be something like:
+% \includegraphics[width=\paperwidth]{some-filename}
+\newcommand{\titleimage}[1]{%
+  \setbeamertemplate{title image}{#1}%
+}
+
+% Specify the uni logo as TeX commands (e.g. \includegraphics).
+\newcommand{\unilogo}[1]{
+  \setbeamertemplate{university logo}{#1}%
+}
+
+
+
+\defbeamertemplate*{title image}{LUH}[1][]{%
+  \begin{tikzpicture}
+    \node[
+      fill=LUHblue, text=white,
+      text centered, text width=0.5\paperwidth,
+      minimum height=0.5\paperheight,
+      font=\scriptsize
+    ] {
+      Use \texttt{\textbackslash titleimage\{something\}}
+      to place your image here, e.g.:\\[2em]
+      \texttt{\textbackslash titleimage\{\string\includegraphics{}
+      [width=0.6\string\paperwidth]\{my-photo\}\}}
+    };
+  \end{tikzpicture}
+}
+
+\defbeamertemplate*{university logo}{LUH}[1][]{%
+  \begin{tikzpicture}
+    \node[
+      fill=LUHblue, text=white,
+      text badly centered, text width=4\LUHLogoHeight,
+      minimum height=\LUHLogoHeight,
+      inner sep=2pt
+    ] {
+    	\fontsize{0.22\LUHLogoHeight}{0.5\LUHLogoHeight}\selectfont
+      The LUH logo is copyrighted, so you must include it
+      manually  using the \texttt{\string\unilogo\{\}} command.
+    };
+  \end{tikzpicture}
+}
+
+\defbeamertemplate*{logo}{LUH}[1][]{%
+  \begin{tikzpicture}
+    \node[
+      fill=LUHblue, text=white,
+      text badly centered, text width=3\LUHLogoHeight,
+      minimum height=\LUHLogoHeight,
+      inner sep=2pt
+    ] {
+    	\fontsize{0.22\LUHLogoHeight}{0.5\LUHLogoHeight}\selectfont
+      Insert your department logo here using the
+      \texttt{\string\logo\{\}} command.
+    };
+  \end{tikzpicture}
+}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[default]
+
+\mode<all>

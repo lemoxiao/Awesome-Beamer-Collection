@@ -1,0 +1,129 @@
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeCVC.sty,v 1.0 2009/10/04 23:00:00 David Exp $
+
+% Copyright 2010 by David Aldavert <aldavert@cvc.uab.cat>
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 3.
+
+\RequirePackage{pstricks}
+\RequirePackage{pst-grad}
+\RequirePackage{tikz}
+
+% Define a new empty variable which contains the background filename used in the title slide.
+\def\cvc@titlebackgroundfile{}
+% Declare a new empty variable which contains the background filename used for frametitle slides (all frames except the title).
+\def\cvc@framebackgroundfile{}
+% Set the parameters of beamer to retrieve the filenames specified by the user.
+\DeclareOptionBeamer{titlebackgroundfile}{\def\cvc@titlebackgroundfile{#1}}
+\DeclareOptionBeamer{framebackgroundfile}{\def\cvc@framebackgroundfile{#1}}
+
+% Defines new commands to specifies the background files for the title and frame slides.
+\newcommand\titlebackgroundfile[1]{\def\cvc@titlebackgroundfile{#1}}
+\newcommand\framebackgroundfile[1]{\def\cvc@framebackgroundfile{#1}}
+
+% Define auxiliar colors to draw a gradient when the background image is not present.
+\definecolor{gradienttopcolor}{rgb}{0.55, 0.14, 0.18}
+\definecolor{gradientmiddlecolor}{rgb}{0.95, 0.86, 0.86}
+\definecolor{gradientbottomcolor}{rgb}{0.87, 0.76, 0.76}
+
+\mode<presentation>
+
+% Sets the background of each slide
+\defbeamertemplate*{background}{CVC}{
+    % Background image for the frametitle (rest of the slides) pages.
+    \ifnum\thepage>1
+        \ifx\cvc@framebackgroundfile\@empty
+        \begin{tikzpicture}
+            \shade[top color=gradienttopcolor, bottom color=gradientmiddlecolor] (current page.north west) rectangle +(\paperwidth,-0.25\paperheight);
+            \shade[top color=gradientmiddlecolor, bottom color=gradientbottomcolor] (current page.south east) rectangle +(-\paperwidth,0.75\paperheight);
+        \end{tikzpicture}
+        \else
+        \includegraphics[width=\the\paperwidth,height=\the\paperheight]{\cvc@framebackgroundfile}
+        \fi
+    % Background image for the title page.
+    \else
+        \ifx\cvc@titlebackgroundfile\@empty
+        \begin{pspicture}(\paperwidth,\paperheight)
+        \begin{tikzpicture}
+            \shade[top color=gradienttopcolor, bottom color=gradientmiddlecolor] (current page.north west) rectangle +(\paperwidth,-0.25\paperheight);
+            \shade[top color=gradientmiddlecolor, bottom color=gradientbottomcolor] (current page.south east) rectangle +(-\paperwidth,0.75\paperheight);
+        \end{tikzpicture}
+        \end{pspicture}
+        \else
+        \includegraphics[width=\the\paperwidth,height=\the\paperheight]{\cvc@titlebackgroundfile}
+        \fi
+    \fi
+}
+
+%% Define the style of the title page.
+\defbeamertemplate*{title page}{CVC}[1][center]{%
+\edef
+\parbox{0.95\the\textwidth}{
+\begin{center}
+    \vfill
+    % Insert the presentation title
+    {\usebeamerfont{title}\usebeamercolor[fg]{frametitle}\inserttitle}
+    % Check if the subtitle exists ...
+    \ifx\insertsubtitle\@empty\\[\baselineskip]
+    % ... and if it exists, insert it.
+    \else{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}\\\fi
+    % Check if the autor is defined.
+    \ifx\insertauthor\@empty\\[\baselineskip]
+    % and insert it if exists.
+    \else{\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor}\\\fi
+    % Check if the institute is defined.
+    \ifx\insertinstitute\@empty\\[\baselineskip]
+    % and insert it if exists.
+    \else{\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute}\\\fi
+    % Check if the date is defined.
+    \ifx\insertdate\@empty\\[\baselineskip]
+    % and insert it if exists.
+    \else{\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate}\\\fi
+\end{center}}
+%
+}
+
+%% Define the style of the rest of the slides.
+\defbeamertemplate*{frametitle}{CVC}[1][left]{%
+    % Insert the frame title
+    \begin{beamercolorbox}[sep=0.6cm,#1,wd=\the\textwidth]{frametitle}
+        \strut
+        {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\strut\par}
+        % Insert the frame subtitle if defined
+        {
+            \ifx\insertframesubtitle\@empty%
+            \else%
+            {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitile}\insertsubtitle\strut\par}
+            \fi
+        }
+    \end{beamercolorbox}
+}
+
+%% DISABLE THE NAVIGATION SYMBOLS
+\defbeamertemplate*{navigation symbols}{CVC}{}
+
+\defbeamertemplate*{headline}{CVC}
+{
+    \begin{beamercolorbox}{section in head/foot}%
+        \ifnum\thepage>1%
+            \vskip2pt\insertnavigation{\paperwidth}\vskip2pt%
+        \fi%
+    \end{beamercolorbox}%
+}
+
+\defbeamertemplate*{footline}{miniframes theme}
+{%
+    \begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[wd=0.98\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil,right]{title in head/foot}%
+        \ifnum\thepage=1\else{\usebeamerfont{title in head/foot}\usebeamercolor[fg]{title in head/foot}\insertshorttitle}\fi%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=0.98\paperwidth,ht=2.5ex,dp=2.225ex,leftskip=.3cm,rightskip=.3cm plus1fil,right]{author in head/foot}%
+        \ifnum\thepage=1\else{\leavevmode{\usebeamerfont{author in head/foot}\usebeamercolor[fg]{author in head/foot}\insertshortauthor}}\fi%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+    \end{beamercolorbox}
+}
+
+\mode
+<all>

@@ -1,0 +1,383 @@
+%============================================================================================%
+%		UNOFFICIAL UNIVERSITY OF CHICAGO BEAMER THEME
+%============================================================================================%
+%
+% 	Created by: Michael Kirker (http://michaelkirker.net)
+%
+%	The latest version of this theme is hosted at the Github repository https://github.com/michaelkirker/Unofficial-UChicago-Beamer-Theme
+%
+%	I have created this theme by cobbling together many snippets of code that I have picked up over the years from various sources online, and by simple
+%	tinkering. Therefore I am unable to fully credit all original sources.
+%
+% 	Some of the main sources:
+% 		https://tex.stackexchange.com/
+% 		http://programming-r-pro-bro.blogspot.com/2011/11/create-your-own-beamer-template.html
+% 		http://dcwww.camd.dtu.dk/~schiotz/comp/LatexTips/LatexTips.html
+%
+%============================================================================================%
+
+
+
+%============================================================================================%
+% 		Packages that will be used
+%============================================================================================%
+\usepackage{xcolor}				% Create custom colours
+\usepackage[overlay]{textpos} 			% Position logo in each slide header
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usetikzlibrary{shadings}
+%\usepackage{transparent}
+
+
+
+
+	
+
+%============================================================================================%
+% 		Change some global settings
+%============================================================================================%
+
+% Make hidden upcoming elements in a slide semi-transparent rather than completely invisible
+
+\mode<presentation>{
+		\setbeamercovered{transparent}
+		}
+
+
+% Specify baseline theme from which we will build off
+
+\usetheme{Madrid}
+
+
+% Remove the navigation symbols from the lower right corner of each slide
+	
+\beamertemplatenavigationsymbolsempty
+	
+
+
+%============================================================================================%
+%		Define colors
+%============================================================================================%
+% taken from http://communications.uchicago.edu/identity/color-palette
+
+% Signature Color Palette
+	\definecolor{ChicagoMaroon}{RGB}{128,0,0}
+	\definecolor{ChicagoDarkGray}{RGB}{118,118,118}
+	\definecolor{ChicagoLightGray}{RGB}{214,214,206}
+
+% Secondary Color Palette
+	\definecolor{ChicagoRed}{RGB}{143,57,49}
+	\definecolor{ChicagoOrange}{RGB}{193,102,34}
+	\definecolor{ChicagoLightGreen}{RGB}{138,157,69}
+	\definecolor{ChicagoDarkGreen}{RGB}{101,109,51}	
+	\definecolor{ChicagoBlue}{RGB}{21,95,131}
+	\definecolor{ChicagoBlueLight}{RGB}{91,150,173}
+	\definecolor{ChicagoBlueDark}{RGB}{21,67,95}
+	\definecolor{ChicagoViolet}{RGB}{53,14,32}
+		
+% Colors for the Shading
+	\definecolor{RedShade1}{RGB}{138,0,0} % Colors taken from UChicago Powerpoint slides
+	\definecolor{RedShade2}{RGB}{68,0,0}
+		
+
+\setbeamercolor*{frametitle}{fg=white}
+
+\setbeamercolor*{title}{use=structure,fg=white,bg=ChicagoMaroon}
+
+
+%============================================================================================%
+%		Assign colors
+%============================================================================================%
+
+% Specify base color of the presentation
+	\usecolortheme[named=ChicagoDarkGray]{structure}
+
+% Specify other specific colors
+	\setbeamercolor{block title alerted}{fg=white,bg=ChicagoBlue}
+	\setbeamercolor{block body alerted}{bg=ChicagoBlueLight!50!white}
+	
+	\setbeamercolor{block title}{bg=ChicagoMaroon,fg=white}
+	\setbeamercolor{block body}{bg=ChicagoLightGray}
+	
+	\setbeamercolor{block title example}{bg=ChicagoDarkGreen,fg=white}
+	\setbeamercolor{block body example}{bg=ChicagoLightGreen,fg=white}
+
+	\setbeamercolor{author in head/foot}{bg=ChicagoMaroon,fg=white}
+ 	\setbeamercolor{title in head/foot}{bg=ChicagoDarkGray,fg=white}
+ 	\setbeamercolor{date in head/foot}{bg=ChicagoMaroon,fg=white}
+ 	\setbeamercolor{date in head/foot}{bg=ChicagoLightGray,fg=ChicagoMaroon}
+ 		
+ \setbeamertemplate{headline}{
+ \begin{beamercolorbox}{section in head/foot} \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+ \end{beamercolorbox}}
+ 		
+ 		
+
+%============================================================================================%
+%		Theme the blocks
+%============================================================================================%
+
+% Use sharp right angle corners rather than the rounded corners
+\setbeamertemplate{blocks}[default]
+
+
+		
+%============================================================================================%
+%		Adjust fonts
+%============================================================================================%		
+
+% Here we are using default fonts
+\usefonttheme{professionalfonts}
+
+
+% Font for the presentation title
+%\setbeamerfont{title}{size = \huge}
+
+% Font of the frame titles
+%\setbeamerfont{frametitle}{size = \Large}
+
+
+
+%============================================================================================%
+%		Inner theme
+%============================================================================================%	
+%%%%%%
+% Here we am using the rounded theme for the overall "feel" of the presentation. You can change the specific details by editing that particular option as we have done below.
+\useinnertheme{rounded}
+
+
+\setbeamercolor{button}{bg=ChicagoLightGray,fg=white}
+
+
+%============================================================================================%
+%		Create slide title bar
+%============================================================================================%
+% Slide title bar features a blend of reds and a watermark of the shield logo on the right hand side
+
+% Create Shading:
+
+\colorlet{titleleft}{RedShade1}
+\colorlet{titleright}{RedShade2}
+
+\makeatletter
+\pgfdeclarehorizontalshading[titleleft,titleright]{beamer@frametitleshade}{\paperheight}{%
+  color(0pt)=(titleleft);
+  %color(0.5\paperwidth)=(titleleft);
+  color(\paperwidth)=(titleright)}
+
+\defbeamertemplate*{frametitle}{horizontal shading}
+{%
+  \nointerlineskip%
+  %\vskip-2pt%
+  \hbox{\leavevmode
+    \advance\beamer@leftmargin by -12bp%
+    \advance\beamer@rightmargin by -12bp%
+    \beamer@tempdim=\textwidth%
+    \advance\beamer@tempdim by \beamer@leftmargin%
+    \advance\beamer@tempdim by \beamer@rightmargin%
+    \hskip-\Gm@lmargin\hbox{%
+      \setbox\beamer@tempbox=\hbox{\begin{minipage}[b]{\paperwidth}%
+          \vbox{}\vskip-.75ex%
+          \leftskip0.3cm%
+          \rightskip0.3cm plus1fil\leavevmode
+          \insertframetitle%
+          \ifx\insertframesubtitle\@empty%
+            \strut\par%
+          \else
+            \par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
+          \fi%
+          \nointerlineskip
+          \vbox{}%
+          \end{minipage}}%
+      \beamer@tempdim=\ht\beamer@tempbox%
+      \advance\beamer@tempdim by 2pt%
+      \begin{pgfpicture}{0pt}{0pt}{\paperwidth}{\beamer@tempdim}
+        \usebeamercolor{frametitle right}
+        \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}}
+        \pgfusepath{clip}
+        \pgftext[left,base]{\pgfuseshading{beamer@frametitleshade}}
+      \end{pgfpicture}
+      \hskip-\paperwidth%
+      \box\beamer@tempbox%
+    }%
+    \hskip-\Gm@rmargin%
+  }%
+    \vskip-2pt
+}
+\makeatother
+
+
+% Add shield logo
+
+
+\addtobeamertemplate{frametitle}{}{%
+	\begin{textblock*}{1.2em}[1,1](0.97\paperwidth,0mm)
+	\includegraphics[height=1.1em,width=1.1em,keepaspectratio]{graphics/shield_title.png}
+	\end{textblock*}
+}
+
+
+
+%============================================================================================%
+% 		Customise enumerates and itemized lists
+%============================================================================================%
+
+% Enumerated lists:
+%---------------------
+
+\setbeamertemplate{enumerate items}[default] 	% Use numbers (e.g. "1.")
+
+\setbeamercolor*{enumerate item}{fg=ChicagoMaroon}
+\setbeamercolor*{enumerate subitem}{fg=ChicagoMaroon}
+\setbeamercolor*{enumerate subsubitem}{fg=ChicagoMaroon}
+
+
+
+% Itemized lists:
+%---------------------
+
+% Create "shield" shape (Cant remember where I found this code)
+
+\newcommand\shield{ \tikz [baseline] \path [fill=ChicagoMaroon] (0,1.3ex) -- (0,0.56ex) arc [radius=0.5ex, start angle=-180, end angle=0] -- (1ex,1.3ex) -- cycle ;  }
+
+\defbeamertemplate{itemize item}{image}{\shield}
+\defbeamertemplate{itemize subitem}{image}{\shield}
+\defbeamertemplate{itemize subsubitem}{image}{\shield}
+
+\setbeamertemplate{itemize item}[image]
+\setbeamertemplate{itemize subitem}[image]
+\setbeamertemplate{itemize subsubitem}[image]
+
+% Use ChicagoMaroon color when the user defines their own itemize marker
+\setbeamercolor*{itemize item}{fg=ChicagoMaroon}
+\setbeamercolor*{itemize subitem}{fg=ChicagoMaroon}
+\setbeamercolor*{itemize subsubitem}{fg=ChicagoMaroon}
+
+
+
+% Space out itemized items a bit more
+%---------------------
+
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{\itemsep}
+\addtolength{\wideitemsep}{0.25em}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+
+
+%============================================================================================%
+%		Create title slide
+%============================================================================================%
+
+% Customize the text layout:
+
+\setbeamerfont{title}{size=\huge}
+\defbeamertemplate*{title page}{customized}[1][]
+{
+  \usebeamerfont{title}\usebeamercolor[white]{title}\inserttitle\par
+  \usebeamerfont{subtitle}\usebeamercolor[white]{subtitle}\insertsubtitle\par
+  \bigskip
+  \bigskip
+  \bigskip
+  \bigskip
+  \centering
+  \usebeamerfont{author}\insertauthor\par
+  \smallskip
+  \usebeamerfont{institute}\insertinstitute\par
+  \bigskip
+  \usebeamerfont{date}\insertdate\par
+  \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+
+}
+
+
+% Create title slide background
+
+\newcommand\BackgroundShaded{%
+\setbeamertemplate{background}{%
+\begin{tikzpicture}[every node/.style={inner sep=0,outer sep=0}]
+    \shade [left color=RedShade1,right color=RedShade2]
+      (0,0) rectangle (\paperwidth,\paperheight);
+      \node [above left] (russell) at (\paperwidth,0) %(10,3.5)
+    {\includegraphics[height=.8\paperheight]{graphics/shield_background}};
+  \end{tikzpicture}
+}}
+
+
+
+\renewcommand\maketitle{
+	{\BackgroundShaded
+	\begin{frame}
+	\titlepage
+	\end{frame}
+	}
+}
+
+
+
+
+
+%============================================================================================%
+% 		Customize \tableofcontent
+%============================================================================================%
+% Simplier design. Maroon bold numbers, and black text
+
+\setbeamerfont{section number projected}{series=\bfseries,size=\normalsize}
+\setbeamercolor{section number projected}{bg=white,fg=ChicagoMaroon}
+\setbeamertemplate{sections/subsections in toc}[square]
+\setbeamercolor{section in toc}{fg=black}
+\setbeamercolor{subsection in toc}{fg=black}
+  		
+
+
+%============================================================================================%
+% 		Dont  count appendix slides in the number of total slides displayed on lower right corner of each slide.
+%============================================================================================%
+
+\makeatletter
+
+\let\appendixtotalframenumber\empty
+\def\mainend{-1}
+\let\appendixorig\appendix
+
+\def\appendix{
+  \edef\mainend{\theframenumber}
+  \immediate\write\@auxout{\string\global\string\@namedef{mainendframenumber}{\mainend}}
+  \appendixorig
+  \def\inserttotalframenumber{\appendixtotalframenumber}%
+  \setcounter{framenumber}{0}
+}
+
+\def\pageatend{
+  \edef\appendixend{\theframenumber}
+  \ifnum\mainend>0%
+  \immediate\write\@auxout{\string\global\string\@namedef{appendixtotalframenumber}{\appendixend}}%
+  \immediate\write\@auxout{\string\global\string\@namedef{inserttotalframenumber}{\mainend}}%
+  \immediate\write\@auxout{\string\@writefile{nav}{\noexpand \headcommand {%
+        \noexpand \def\noexpand \inserttotalframenumber{\mainend}}}}%
+  \immediate\write\@auxout{\string\@writefile{nav}{\noexpand \headcommand {%
+        \noexpand \def\noexpand \appendixtotalframenumber{\appendixend}}}}%
+  \else
+  \fi
+}
+
+
+\AtEndDocument{\pageatend}
+\makeatother
+
+
+
+
+%============================================================================================%
+% 		Fix the coloring of items in a ToC
+%============================================================================================%
+\setbeamerfont{section number projected}{%
+  series=\bfseries,size=\normalsize}
+\setbeamercolor{section number projected}{bg=white,fg=ChicagoMaroon}
+\setbeamertemplate{sections/subsections in toc}[square]
+\setbeamercolor{section in toc}{fg=black}
+\setbeamercolor{subsection in toc}{fg=black}

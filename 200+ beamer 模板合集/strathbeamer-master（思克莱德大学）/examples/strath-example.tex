@@ -1,0 +1,201 @@
+% ----------------------------------------------------------------------
+% Date: April 4th, 2016
+% Author: Roberto Metere
+% Project: Beamer template for Strathclyde University
+%
+% Copyright (C) 2016 Roberto Metere
+% ----------------------------------------------------------------------
+%
+\documentclass[slidestop,compress,9pt]{beamer}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+% \usepackage{strathclyde}
+% \usepackage[tech, colour]{strathclyde}
+\usepackage[sci, strathbg]{strathclyde}
+% \usepackage[eng]{strathclyde}
+% \usepackage[hass]{strathclyde}
+% \usepackage[bus]{strathclyde}
+\usepackage{listings}
+
+% Listings
+\definecolor{cident}{rgb}{0,0.33,0.42}
+\definecolor{ckeyw}{rgb}{0,0,0.8}
+\definecolor{ccomm}{rgb}{0,0.8,0}
+\definecolor{cstr}{rgb}{0.8,0,0}
+
+\lstset{language=[LaTeX]{TeX},
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\color{ckeyw}\bfseries,
+  identifierstyle=\color{cident}\bfseries,
+  commentstyle=\color{ccomm},
+  stringstyle=\color{cstr},
+  showstringspaces=false,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2,
+%   numbers=left,
+%   stepnumber=1,
+%   firstnumber=1,
+%   numberfirstline=true,
+  }
+
+\title[Shorttitle]{\textbf{Title... \\ long title new line}}
+\subtitle{Subtitle}
+\author[Shortauthor]{Author \\ \small email: \href{mailto:author@strath.ac.uk}{author@strath.ac.uk}}
+\institute{Department of blabla, University of Strathclyde}
+\date[Oct 26]{October 26, 1982}
+\strathsetidentity{Department of}{Computer \& Information Sciences}
+
+\setlength{\frametitlemargin}{1mm}
+
+\begin{document}
+% ==============================================================
+%                         --- Welcome frame
+% ==============================================================
+\begin{frame}[plain]
+\maketitle
+\end{frame}
+
+
+
+% ==============================================================
+%                         --- TOC
+% ==============================================================
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+
+
+% ==============================================================
+%                         --- Section 1
+% ==============================================================
+\section{Section1}
+\begin{frame}[fragile]
+\frametitle{slide title}
+You may need to add some space after the frame title
+\begin{lstlisting}
+\setlength{\frametitlemargin}{10mm}
+\end{lstlisting}
+
+\vskip 3mm
+Using an empty frametitle or not using it, you will need to add initial space by yourself.
+To have an ``empty'' frametitle you can use
+\begin{lstlisting}
+\emptyframetitle
+\end{lstlisting}
+or (more portable)
+\begin{lstlisting}
+\frametitle{\strut}
+\end{lstlisting}
+\end{frame}
+
+\subsubsection{Section1-2-1}
+\begin{frame}[fragile]
+\noframetitle
+If you do not want any titles in a frame, you can use
+\begin{lstlisting}
+\noframetitle
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\noframetitle[0mm]
+Using 
+\begin{lstlisting}
+\noframetitle[0mm]
+\end{lstlisting}
+
+\vskip 10mm
+As above, you may want to use the same command with a length to specify where (vertically) the text should begin.
+\end{frame}
+
+\begin{frame}[fragile]
+\framesingletitle{Single title}
+If you need just a simple title you can use
+\begin{lstlisting}
+\framesingletitle{your title}
+\end{lstlisting}
+
+\vskip 10mm
+You may want to use the same command with a length to specify where (vertically) the title should begin.
+\begin{lstlisting}
+\framesingletitle[0mm]{your title}
+\end{lstlisting}
+\end{frame}
+
+\subsection{Section1-1}
+\begin{frame}
+\frametitle{slide title}
+Additional blocks
+\begin{itemize}
+  \item termblock
+  \item problock
+  \item conblock
+  \item yellowblock
+  \item blueblock
+\end{itemize}
+\end{frame}
+
+\subsection{Section1-2}
+\subsubsection{Section1-2-1}
+\begin{frame}
+\frametitle{slide title}
+Bla bla bla...
+\end{frame}
+
+\subsection{Section1-3}
+\begin{frame}
+\frametitle{slide title}
+Bla bla bla...
+\end{frame}
+
+
+
+% ==============================================================
+%                         --- Section 2
+% ==============================================================
+\section{Section2}
+\begin{frame}
+\frametitle{slide title}
+Bla bla bla...
+\end{frame}
+
+\subsection{Section2-1}
+\begin{frame}
+\frametitle{slide title}
+Bla bla bla...
+\end{frame}
+
+\subsection{Section2-2}
+\begin{frame}
+\frametitle{slide title}
+Bla bla bla...
+\end{frame}
+
+
+% ==============================================================
+%                         --- THE END
+% ==============================================================
+\begin{frame}
+\noframetitle
+\vskip 20mm
+
+\begin{center}
+{\Huge {\color{slidetitles} \textbf The END}}
+
+
+\begin{minipage}{0.8\textwidth}
+  \quotesentence{%
+  ``quotation'' [author]
+  }
+\end{minipage}
+\end{center}
+\end{frame}
+
+
+
+
+
+% -------------------------------------------------------------
+\end{document}

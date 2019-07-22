@@ -1,0 +1,72 @@
+\documentclass{beamer}
+
+\usetheme{ihs}
+\usepackage{amsmath}
+\usepackage[style=authoryear]{biblatex}
+\addbibresource{example.bib}
+
+\begin{document}
+
+\title[Short title]{Example for the IHS \LaTeX\ \textsc{beamer} slide template file}
+\author[Tam\'as]{Tam\'as K.~Papp}
+\institute[IHS]{IHS, Vienna}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Frame title}
+
+  Itemized list:
+
+  \begin{itemize}
+  \item squre bullet points\dots
+  \item \dots are nice!
+  \item \alert{alert text}
+  \end{itemize}
+
+  \bigskip
+  
+  Enumerate:
+
+  \begin{enumerate}
+  \item first
+  \item second
+  \item third
+  \end{enumerate}
+
+  Logos with and without text:
+  \begin{center}
+    \IHSlogotext[height=2em] \hspace{2em} \IHSlogo[height=2em]
+  \end{center}
+
+  \hyperlink{frame:math}{Reference} to other frame. \\
+  Citing example \textcite{till17:_beamer}
+
+\end{frame}
+
+\begin{frame}
+  \label{frame:math}
+  This frame does not have a title.  But it has math:
+  \begin{equation*}
+    a^2+b^2=c^2 \qquad \frac{\hat\pi}{\bar\pi}
+  \end{equation*}
+
+  \begin{block}{Block title}
+    \begin{itemize}
+    \item test bullet point1
+    \item test bullet point2
+    \item \alert{alert in block}
+    \end{itemize}
+  \end{block}
+
+  \bigskip
+
+  \begin{block}{Bibliography}
+    \printbibliography
+  \end{block}
+  
+\end{frame}
+
+\end{document}

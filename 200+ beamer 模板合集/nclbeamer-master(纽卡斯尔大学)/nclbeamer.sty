@@ -1,0 +1,564 @@
+% ----------------------------------------------------------------------
+% Date: September 23th, 2016
+% Author: Roberto Metere
+% Project: Beamer template for Newcastle University
+%
+% Copyright (C) 2016 Roberto Metere
+% ----------------------------------------------------------------------
+%
+\mode<presentation>
+\usepackage{minibox}
+\usepackage{varwidth}
+\usepackage{etoolbox}
+\usepackage{tikz}
+% \usepackage{fontspec} % Needs xelatex (not pdflatex)
+\usepackage{amssymb}
+
+% Tikz libraries
+\usetikzlibrary{backgrounds,fit,positioning,calc}
+
+% Block transparency
+\newcommand{\setblockbodyopacity}[1]{\def\blockbodyopacity{#1}}
+
+% Official font
+% \setmainfont{Arial} % fontspec package
+% \renewcommand{\familydefault}{\sfdefault} % use with helvet for Arial-like font
+\renewcommand{\rmdefault}{phv} % Arial
+\renewcommand{\sfdefault}{phv} % Arial
+
+% Default font size % scrextend
+% \changefontsizes{9pt}
+
+% Official colours
+\definecolor{nclblue}{RGB}{0,63,114}
+\definecolor{nclred}{RGB}{198,12,48}
+
+% Default [main]
+\newcommand{\incolour}{}
+\newcommand{\tabtype}{main}
+\newcommand{\fsize}[1]{\fontsize{#1}{#1}}
+
+\colorlet{nclsubidcolour}{nclred}
+\colorlet{nclidcolour}{nclblue}
+\colorlet{nclstrongcolour}{nclblue}
+\colorlet{ncllightcolour}{nclred}
+
+\newcommand{\nclsubid}{School of}
+\newcommand{\nclid}{Computing}
+\newcommand{\nclsetidentity}[2]{
+  \renewcommand{\nclsubid}{#1}
+  \renewcommand{\nclid}{#2}
+}
+
+\colorlet{slidetitle}{nclblue}
+\colorlet{slidetitles}{nclred}
+\colorlet{quotesentence}{nclblue}
+\definecolor{canvascolor}{rgb}{1.0, 1.0, 1.0}
+\colorlet{blockexfg}{white}
+\colorlet{blockexbg}{ncllightcolour}
+
+% Workaround for renewenvironment issues
+\long\def\beamer@newenvnoopt#1#2#3#4{%
+  \expandafter\renewcommand\expandafter<\expandafter>\csname#1\endcsname[#2]{#3}%<- here
+  \expandafter\long\expandafter\def\csname end#1\endcsname{#4}%
+}
+\long\def\beamer@newenvopt#1#2[#3]#4#5{%
+  \expandafter\renewcommand\expandafter<\expandafter>\csname#1\endcsname[#2][#3]{#4}%<- here
+  \expandafter\long\expandafter\def\csname end#1\endcsname{#5}%
+}
+
+% Distance between title and content
+\newlength{\frametitlemargin}
+\setlength{\frametitlemargin}{0mm}
+
+\newlength{\blockbottommargin}
+\setlength{\blockbottommargin}{2mm}
+\newlength{\blocktopmargin}
+\setlength{\blocktopmargin}{0mm}
+
+\newcommand{\noframetitle}[1][-9mm]{\vskip #1}
+\newcommand{\framesingletitle}[2][16mm]{{\vskip #1}\noindent{\begin{center}\color{slidetitles} {\Huge \textbf #2}\end{center}}{\vskip 2mm}{\vskip \frametitlemargin}}
+\newcommand{\emptyframetitle}{\frametitle{\strut}}
+
+% To gain partially transparent blocks
+\ifx\blockbodyopacity\@empty\else
+  \def\blockbodyopacity{1}
+\fi
+\newlength{\blockheightcorr}
+\setlength{\blockheightcorr}{-3.16mm}
+\newlength{\blockwidthcorr}
+\setlength{\blockwidthcorr}{2.48mm}
+\newlength{\blockyshcorr}
+\setlength{\blockyshcorr}{-0.53mm}
+\newenvironment{blockminipage}[2]{%
+\colorlet{bodycolour}{#1}%
+\newcommand{\bodyopacity}{#2}%
+\begin{tikzpicture}[every node/.style={inner sep=0,outer sep=0}]%
+\node [text width=\textwidth] (childblock) \bgroup%
+\begin{minipage}{\textwidth}%
+}{%
+\end{minipage}%
+\egroup;%
+\begin{scope}[on background layer]
+  \path
+  let
+    \p{n}=(childblock.north),
+    \p{s}=(childblock.south),
+    \p{w}=(childblock.west),
+    \p{e}=(childblock.east),
+    \n{h}={\y{n}-\y{s}+(\blockheightcorr)},
+    \n{w}={\x{e}-\x{w}+\blockwidthcorr}
+  in
+  node [rectangle, draw=none, fill=bodycolour, yshift=\blockyshcorr, fill opacity=\bodyopacity, overlay, anchor=center, minimum width=\n{w}, minimum height=\n{h}] {};
+\end{scope}
+\end{tikzpicture}%
+}
+
+\renewenvironment<>{block}[1]{%
+  \vskip \blocktopmargin%
+  \begin{blockminipage}{black!20!white}{\blockbodyopacity}%
+  \begin{actionenv}#2%
+    \def\insertblocktitle{#1}%
+    \par%
+    \mode<presentation>{%
+      \setbeamercolor{block title}{fg=white,bg=white!50!black}
+      \if\blockbodyopacity1
+        \setbeamercolor{block body}{fg=black,bg=white!90!black}
+      \else
+        \setbeamercolor{block body}{fg=black,bg=}
+      \fi
+      \setbeamercolor{itemize item}{fg=white!50!black}
+      \setbeamertemplate{itemize item}[triangle]
+      \setbeamercolor{local structure}{fg=block title.bg}}%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}\vskip \blockbottommargin%
+  \end{blockminipage}%
+  }
+
+\renewenvironment<>{exampleblock}[1]{%
+  \vskip \blocktopmargin%
+  \begin{blockminipage}{green!40!white}{\blockbodyopacity}%
+  \begin{actionenv}#2%
+    \def\insertblocktitle{#1}%
+    \par%
+    \mode<presentation>{%
+      \setbeamercolor{block title example}{fg=white,bg=green!65!black}
+      \if\blockbodyopacity1
+        \setbeamercolor{block body example}{fg=black,bg=green!10!white}
+      \else
+        \setbeamercolor{block body example}{fg=black,bg=}
+      \fi
+      \setbeamercolor{itemize item}{fg=green!65!black}
+      \setbeamertemplate{itemize item}[triangle]
+      \setbeamercolor{local structure example}{use=block title,%
+          fg=block title.bg}}%
+    \usebeamertemplate{block example begin}}
+  {\par%
+    \usebeamertemplate{block example end}%
+  \end{actionenv}\vskip \blockbottommargin%
+  \end{blockminipage}}
+
+\renewenvironment<>{alertblock}[1]{%
+  \vskip \blocktopmargin%
+  \begin{blockminipage}{nclred!40!white}{\blockbodyopacity}%
+  \begin{actionenv}#2%
+    \def\insertblocktitle{#1}%
+    \par%
+    \mode<presentation>{%
+      \setbeamercolor{block title alerted}{fg=white,bg=nclred}
+      \if\blockbodyopacity1
+        \setbeamercolor{block body alerted}{fg=black,bg=nclred!10!white}
+      \else
+        \setbeamercolor{block body alerted}{fg=black,bg=}
+      \fi
+      \setbeamercolor{itemize item}{fg=nclred!75!black}
+      \setbeamertemplate{itemize item}[triangle]
+      \setbeamercolor{local structure}{use=block title,%
+          fg=block title.bg}}%
+    \usebeamertemplate{block alerted begin}%
+  }{\par%
+    \usebeamertemplate{block alerted end}%
+  \end{actionenv}\vskip \blockbottommargin%
+  \end{blockminipage}}
+    
+% A few enviroments
+\newenvironment<>{termblock}[1]{%
+  \vskip \blocktopmargin%
+  \begin{blockminipage}{black}{\blockbodyopacity}%
+  \begin{actionenv}#2%
+      \def\insertblocktitle{#1}%
+      \par%
+      \mode<presentation>{%
+        \setbeamercolor{block title}{fg=green!80!black,bg=black}
+        \if\blockbodyopacity1
+          \setbeamercolor{block body}{fg=white,bg=white!20!black}
+        \else
+          \setbeamercolor{block body}{fg=white,bg=}
+        \fi
+        \setbeamercolor{itemize item}{fg=orange!80!black}
+        \setbeamertemplate{itemize item}[triangle]
+     }%
+      \usebeamertemplate{block begin}}
+    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
+    
+\newenvironment<>{problock}[1]{%
+  \vskip \blocktopmargin%
+  \begin{blockminipage}{green!3!white}{\blockbodyopacity}%
+  \begin{actionenv} #2%
+      \def\insertblocktitle{#1}%
+      \par%
+      \mode<presentation>{%
+        \setbeamercolor{block title}{fg=green!80!black,bg=green!5!white}
+        \if\blockbodyopacity1
+          \setbeamercolor{block body}{fg=black,bg=green!1!white}
+        \else
+          \setbeamercolor{block body}{fg=black,bg=}
+        \fi
+        \setbeamercolor{itemize item}{fg=green!80!black}
+        \setbeamertemplate{itemize item}[triangle]
+     }%
+      \usebeamertemplate{block begin}}
+    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
+    
+\newenvironment<>{conblock}[1]{%
+  \vskip \blocktopmargin%
+  \begin{blockminipage}{red!3!white}{\blockbodyopacity}%
+  \begin{actionenv} #2%
+      \def\insertblocktitle{#1}%
+      \par%
+      \mode<presentation>{%
+        \setbeamercolor{block title}{fg=red!80!black,bg=red!5!white}
+        \if\blockbodyopacity1
+          \setbeamercolor{block body}{fg=black,bg=red!1!white}
+        \else
+          \setbeamercolor{block body}{fg=black,bg=}
+        \fi
+        \setbeamercolor{itemize item}{fg=red!80!black}
+        \setbeamertemplate{itemize item}[triangle]
+     }%
+      \usebeamertemplate{block begin}}
+    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
+    
+\newenvironment<>{yellowblock}[1]{%
+  \vskip \blocktopmargin%
+  \begin{blockminipage}{yellow!40!white}{\blockbodyopacity}%
+  \begin{actionenv} #2%
+      \def\insertblocktitle{#1}%
+      \par%
+      \mode<presentation>{%
+        \setbeamercolor{block title}{fg=yellow!20!black,bg=yellow!60!white}
+        \if\blockbodyopacity1
+          \setbeamercolor{block body}{fg=black,bg=yellow!25!white}
+        \else
+          \setbeamercolor{block body}{fg=black,bg=}
+        \fi
+        \setbeamercolor{itemize item}{fg=yellow!90!black}
+        \setbeamertemplate{itemize item}[triangle]
+     }%
+      \usebeamertemplate{block begin}}
+    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
+    
+\newenvironment<>{blueblock}[1]{%
+  \vskip \blocktopmargin%
+  \begin{blockminipage}{nclblue!40!white}{\blockbodyopacity}%
+  \begin{actionenv} #2%
+      \def\insertblocktitle{#1}%
+      \par%
+      \mode<presentation>{%
+        \setbeamercolor{block title}{fg=white,bg=nclblue}
+        \if\blockbodyopacity1
+          \setbeamercolor{block body}{fg=black,bg=nclblue!20!white}
+        \else
+          \setbeamercolor{block body}{fg=black,bg=}
+        \fi
+        \setbeamercolor{itemize item}{fg=nclblue}
+        \setbeamertemplate{itemize item}[triangle]
+     }%
+      \usebeamertemplate{block begin}}
+    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
+    
+\setbeamertemplate{blocks}[default]
+
+\setbeamerfont{block title}{size=\normalsize\rule{0mm}{\f@size pt}\strut\ifx\insertblocktitle\@empty{\vspace{-2mm}\vspace{-\f@size pt}}\fi}
+\setbeamercolor{block title}{fg=white,bg=nclblue}
+\setbeamercolor{block body}{fg=black,bg=nclblue!20!white}
+
+\setbeamercolor{block title example}{fg=white,bg=green}
+\setbeamercolor{block body example}{fg=black,bg=green!20!white}
+
+\setbeamercolor{block title alerted}{fg=white,bg=nclred}
+\setbeamercolor{block body alerted}{fg=black,bg=nclred!20!white}
+
+% Title-Command
+\newcommand{\fcbox}[2]{{\fcolorbox{#1}{#1}{#2}}}
+
+\newcommand{\insertncltab}[1]{
+  \begin{tikzpicture}[remember picture, overlay]
+    \node [anchor=north east, inner sep=0] at ([xshift=-0.056\paperwidth, yshift=-3mm]current page.north east)
+      {\pgfuseimage{#1}};
+  \end{tikzpicture}
+}
+
+\newcommand{\insertnclidentity}{
+  \begin{tikzpicture}[remember picture, overlay]
+    \fsize{1.7mm}
+    \color{nclblue}
+    \node [anchor=north east, inner sep=0]  at ([xshift=-0.054\paperwidth, yshift=-12mm]current page.north east)
+      { \begin{minipage}{17.5mm}%
+          \begin{hyphenrules}{nohyphenation}%
+            \textbf{{\nclsubid} {\nclid}}
+          \end{hyphenrules}%
+        \end{minipage}%
+      };
+  \end{tikzpicture}
+}
+
+\newcommand{\insertnclidentityfaculty}{
+  \begin{tikzpicture}[remember picture, overlay]
+    \node [anchor=south west, inner sep=0]  at ([xshift=0.056\paperwidth, yshift=0.05\paperheight]current page.south west)
+      {
+        \def\thisblockfontheight{2.5mm}
+        \fboxrule=0pt
+        \fboxsep=0.8mm
+        \fsize{\thisblockfontheight}
+        \color{white}
+        \ifx\nclsubid\@empty\else\fcbox{nclred}{
+          \textbf{\rule{0mm}{\thisblockfontheight}\strut\nclsubid}
+        }\fi\fcbox{nclidcolour}{
+          \textbf{\rule{0mm}{\thisblockfontheight}\strut\nclid\ }
+        }%
+      };
+  \end{tikzpicture}
+}
+
+% Unknown option
+\DeclareOption*{
+  \PackageWarning{nclbeamer}{Unknown option '\CurrentOption'}
+}
+
+% Clear canvas
+\def\whitebg{1}
+\DeclareOption{nclbg}{
+\def\whitebg{0}
+}
+
+% Coloured logo
+\DeclareOption{colour}{
+\renewcommand{\incolour}{_colour}
+}
+\DeclareOption{color}{
+\renewcommand{\incolour}{_colour}
+}
+
+% MAIN/CORPORATE (default)
+\DeclareOption{main}{}
+
+% TECH colours
+% \DeclareOption{tech}{
+% \renewcommand{\tabtype}{tech}
+% 
+% \colorlet{nclstrongcolour}{nclblue}
+% \colorlet{ncllightcolour}{nclbluelight}
+% \colorlet{nclidcolour}{nclblue}
+% \colorlet{slidetitle}{nclblue}
+% \colorlet{slidetitles}{nclbluelight}
+% }
+
+% -- end of options
+\ProcessOptions\relax
+
+% TAB - Synced width and height (NCL title relates to it)
+\pgfdeclareimage[interpolate=true,width=24.7500433333mm, height=8.13044666667mm]{ncl_tab}{nclbeamer/ncl_logo.pdf}
+\pgfdeclareimage[interpolate=true,width=24.7500433333mm, height=8.13044666667mm]{ncl_tab_institute}{nclbeamer/ncl_logo_institute.pdf}
+% \pgfdeclareimage[interpolate=true,width=0.136\paperwidth, height=20mm]{ncl_tab}{nclbeamer/ncl_tab_\tabtype\incolour.pdf}
+
+% Cover
+\pgfdeclareimage[interpolate=true,width=\paperwidth]{bottomtitle}{nclbeamer/cover.pdf}
+
+
+% Removes nav in pages
+\usenavigationsymbolstemplate{}
+
+
+\setbeamercolor{section name}{fg=slidetitle}
+\setbeamercolor{section in toc}{fg=slidetitle}
+\setbeamercolor{subsection name}{fg=slidetitle}
+\setbeamercolor{subsection in toc}{}
+
+
+% Table of content
+\let\oldtoc\tableofcontents
+\renewcommand{\tableofcontents}{
+  \begin{minipage}{\textwidth}
+    \vskip 20mm
+    \vskip 2mm
+    \oldtoc
+  \end{minipage}
+}
+
+
+\newcommand{\quotesentence}[2][1em]{\vskip #1 \begin{minipage}{\textwidth}\begin{center} \color{quotesentence} \textbf{\LARGE #2} \end{center}\end{minipage}}
+
+\newcommand{\logobg}{
+  \begin{tikzpicture}[remember picture, overlay]
+    \node [anchor=south east, inner sep=0pt]  at (current page.south east)
+      {\pgfuseimage{bottomtitle} };
+  \end{tikzpicture}
+}
+
+\setbeamercolor{background canvas}{bg=canvascolor}
+\setbeamertemplate{background}{
+  \ifnumequal{\whitebg}{1}{}{
+    \ifnumequal{\c@framenumber}{1}{%
+      % First frame
+      \logobg
+    }{%
+      \ifnumequal{\c@framenumber}{\inserttotalframenumber}{
+        % Last frame
+        \logobg
+      }{%
+        % Other frames
+        \logobg
+      }
+    }%
+  }
+}
+
+\setbeamertemplate{title page}
+{
+  \insertncltab{ncl_tab}
+  \insertnclidentityfaculty
+  \begin{center}
+    \vskip 20mm
+    {
+      \fboxrule=0pt
+      \fboxsep=1mm
+      \fcbox{nclstrongcolour}{
+        \begin{minipage}[b][\height][b]{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+          \vspace{2mm}
+          \centering
+            { \usebeamerfont{title}\LARGE\color{white}\textbf{\inserttitle} }
+          \ifx\insertsubtitle\@empty
+          \else
+            \vskip 2mm
+            \fcbox{ncllightcolour}{
+              \begin{minipage}{\dimexpr\textwidth-6\fboxsep-6\fboxrule\relax}
+              \centering
+                { \usebeamerfont{subtitle}\color{white}\rule{0mm}{\f@size pt}\strut\insertsubtitle }
+              \end{minipage}
+            } % fcbox
+          \fi
+          \vspace{1mm}
+        \end{minipage}
+      } % fcbox
+    }
+    \vskip 4mm
+    {
+      \fboxrule=0pt
+      \fboxsep=1mm
+%       \fcbox{ncllightcolour}{
+        \begin{minipage}[b][\height][b]{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+          \vspace{2mm}
+          \centering
+          \ifx\insertauthor\@empty
+          \else
+            { \usebeamerfont{author}\large\color{black}{\insertauthor} }
+          \fi
+          \ifx\insertinstitute\@empty
+          \else
+            \vskip 2mm
+%             \fcbox{white}{
+              \begin{minipage}{\dimexpr\textwidth-6\fboxsep-6\fboxrule\relax}
+              \centering
+                { \usebeamerfont{author}\small\color{black}\rule{0mm}{\f@size pt}\insertinstitute }
+              \end{minipage}
+%             } % fcbox
+          \fi
+          \vspace{1mm}
+        \end{minipage}
+%       } % fcbox
+    }
+    \ifx\insertdate\@empty
+    \else
+      \begin{tikzpicture}[remember picture, overlay]
+        \node [anchor=south east, inner sep=0pt]  at ([yshift=3mm, xshift=-3mm]current page.south east)
+          { \small\color{nclblue}\insertdate };
+      \end{tikzpicture}
+    \fi
+  \end{center}
+}
+
+
+\setbeamercolor{headline}{fg=white}
+\setbeamertemplate{headline}{
+  \insertncltab{ncl_tab_institute}
+  \insertnclidentity
+  \vskip 16mm%
+  \begin{center}%
+    \ifx\insertframetitle\@empty
+      \parbox[t]{0.9\paperwidth}{\strut\color{nclred}\dotfill}%
+      \vskip 5mm
+      \parbox[t]{0.9\paperwidth}{\strut}%
+    \else
+      \parbox[t]{0.9\paperwidth}{\strut\color{nclred}\dotfill}%
+      \vskip 2mm
+      \parbox[t]{0.9\paperwidth}{\strut\color{nclred}\dotfill}%
+    \fi
+  \end{center}
+}
+
+\setbeamercolor{frametitle}{fg=slidetitle}
+\setbeamertemplate{frametitle}{
+  \vskip -23mm
+  \begin{minipage}[t][5.5mm][t]{0.75\textwidth}
+  \footnotesize\strut$\bullet\ $\insertsection
+  {
+  \color{slidetitles}
+  \ifx\insertsubsection\@empty
+  \else
+    {\\$\circ\ $\scriptsize\insertsubsection}
+    \ifx\insertsubsubsection\@empty
+    \else
+      {\\$-\ $\scriptsize\insertsubsubsection}
+    \fi
+  \fi
+  \vskip 1mm
+%   \noindent\hrule
+  }
+  \end{minipage}
+  \vskip 7.5mm
+    \noindent \textbf{\color{nclblue}\normalsize\strut\insertframetitle}
+  \vskip -2mm
+  \vskip \frametitlemargin
+}
+
+\setbeamercolor{footline}{fg=nclblue}
+\setbeamertemplate{footline}{
+  \centering\parbox[t]{0.9\paperwidth}{\color{nclred}\dotfill}
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{}%
+      \hspace*{2ex} \insertshortauthor
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
+      \insertshorttitle\ - \insertshortdate
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{}%
+      of \inserttotalframenumber \hspace*{2ex}
+    \end{beamercolorbox}
+  }%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[nclred,anchor=south east, inner sep=0pt, yshift=-1mm, xshift=-14mm] (0,0) rectangle (7mm,5mm);
+    \node [anchor=south east, inner sep=0pt]  at ([yshift=-0.3mm, xshift=-9.7mm]current page.south east)
+      { \makebox[0.5mm]{\color{white!91!nclred}\large\bfseries\strut\insertframenumber{}} };
+  \end{tikzpicture}
+  \vskip0pt%
+}
+
+% Additional stuff
+\newcommand{\code}[1]{{\lstset{basicstyle=\large\ttfamily}\lstinline!#1!}}
+
+\mode
+<all>

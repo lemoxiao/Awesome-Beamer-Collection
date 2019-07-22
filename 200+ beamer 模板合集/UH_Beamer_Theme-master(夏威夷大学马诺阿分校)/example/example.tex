@@ -1,0 +1,84 @@
+% Adapted from Gelugor theme example by:
+% LIM Lian Tze <liantze@gmail.com>, 2011
+% http://liantze.penguinattack.org/latextypesetting
+
+\documentclass{beamer}
+\usetheme{UH}
+
+%% Use any fonts you like.
+%\usepackage{helvet}
+
+\title{A Beamer Theme for UH M\={a}noa}
+\subtitle{A subtitle}
+\author{First Last}
+\date{\today}
+\institute{\url{firstlast123@hawaii.edu}}
+
+%% Adjust your address/title page text with the \address command
+%\renewcommand{\address}
+%{
+%	Field Robotics Lab\\
+%	310 Holmes Hall\\
+%	UH M\={a}noa\\
+%}
+
+%% Uncomment to change the pic on the title frame
+%% Sizing and placement currently only look good with landscape orientation, not portrait
+%\renewcommand{\titlepic}{some_other_title_frame_image}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\section{Introduction}
+\begin{frame}
+\frametitle{Frame \#1}
+\framesubtitle{Some points}
+\begin{itemize}
+\item Point one
+	\begin{itemize}
+	\item subpoint one
+	\item subpoint two
+	\end{itemize}
+\item Point two
+	\begin{enumerate}
+	\item Number one
+	\end{enumerate}
+\item Point three
+	\begin{description}
+	\item[Topic] Some point about the topic 
+	\end{description}
+\end{itemize}
+\end{frame}
+
+\subsection{Text}
+\begin{frame}
+\frametitle{Frame \#2}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+\end{frame}
+
+\subsection{Blocks}
+\begin{frame}
+\frametitle{Blocks}
+\begin{definition}[Greetings]
+Hello World
+\end{definition}
+
+\begin{theorem}[Fermat's Last Theorem]
+$a^n + b^n = c^n, n \leq 2$
+\end{theorem}
+
+\begin{alertblock}{Alert Block}
+Errors!
+\end{alertblock}
+
+\begin{exampleblock}{Example Block}
+An example of something.
+\end{exampleblock}
+
+\end{frame}
+
+\end{document}

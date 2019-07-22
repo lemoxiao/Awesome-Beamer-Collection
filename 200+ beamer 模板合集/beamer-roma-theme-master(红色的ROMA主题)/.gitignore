@@ -1,0 +1,12 @@
+.*~$
+
+syntax: glob
+*.swp
+
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb

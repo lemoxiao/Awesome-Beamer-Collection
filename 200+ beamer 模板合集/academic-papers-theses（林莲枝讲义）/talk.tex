@@ -1,0 +1,215 @@
+\RequirePackage{silence}
+\WarningFilter{hyperref}{Token not allowed}
+\WarningFilter{microtype}{tracking amount}
+\WarningFilter{chessfss}{\comment already}
+
+% LaTeX: More Than Just Academic Papers and Journals
+%
+% Copyright Lim Lian Tze 2011-2016 (liantze@gmail.com) 
+% Beamer presentation slides for a talk at the Malaysian Open Source Conference 
+% 2011 (MOSC 2011 http://www.mosc.my/)
+%
+% http://liantze.penguinattack.org/latextypesetting.html
+%
+% This work is licensed under a Creative Commons Attribution-NonCommercial-
+% ShareAlike 3.0 Unported License (http://creativecommons.org/licenses/by-nc-sa/3.0/).
+%
+
+%\pdfminorversion=5
+%\pdfobjcompresslevel=3 
+%\pdfcompresslevel=9
+
+% Full presentation (with overlays, animated bullet items etc)
+% \documentclass[xcolor={x11names,svgnames,dvipsnames}]{beamer}
+
+% Transparency mode (no overlays)
+\documentclass[xcolor={x11names,svgnames,dvipsnames},trans]{beamer}
+
+% n-up handout mode
+% \documentclass[xcolor={x11names,svgnames,dvipsnames},handout]{beamer}
+
+\usepackage{pgfpages}
+\usepackage{qrcode}
+
+\usepackage[british]{babel}
+
+%% Glossy pretty look for the presentation and transparency (w/o overlays and animations) versions!
+\mode<beamer|trans>{
+\useoutertheme[glossy]{wuerzburg}
+\useinnertheme[shadow,outline]{chamfered}
+\usecolortheme{shark}
+}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle continuation}[from second][(cont'd)]
+\usefonttheme[stillsansseriftext,stillsansserifsmall]{serif}
+
+%% Save up on ink for the 4-up handouts
+\mode<handout>{
+\useoutertheme{wuerzburg}
+\useinnertheme[outline]{chamfered}
+%\pgfpagesuselayout{4 on 1}[a4paper, landscape, border shrink=10mm]
+\pgfpagesuselayout{2 on 1}[a4paper, border shrink=10mm]
+\pgfpageslogicalpageoptions{1}{border code=\pgfstroke}
+\pgfpageslogicalpageoptions{2}{border code=\pgfstroke}
+%\pgfpageslogicalpageoptions{3}{border code=\pgfstroke}
+%\pgfpageslogicalpageoptions{4}{border code=\pgfstroke}
+\setbeamercolor{structure}{fg=black}
+\setbeamercolor{alerted text}{fg=black}
+}
+
+\mode<presentation>{\AtBeginSection[]{%
+\begin{frame}
+\frametitle{Contents}
+\tableofcontents[currentsection]
+\end{frame}}}
+
+\usepackage[T1,safe]{tipa}
+\usepackage{microtype}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage[scaled=.77]{beramono}
+\SetTracking{encoding=*}{-39}
+
+\usepackage{relsize,tabularx}
+\usepackage{hologo,textcomp}
+\usepackage{comment}
+\usepackage[skaknew]{chessboard,skak}
+\usepackage{multicol,booktabs}
+\usepackage{listings}
+\lstset{upquote,keepspaces=true,columns=spaceflexible,
+basicstyle=\ttfamily\scriptsize,%
+breaklines=true,breakindent=0pt,xleftmargin=0pt, xrightmargin=6pt,%
+language=[LaTeX]TeX, texcsstyle=*\bfseries\color{Maroon}, commentstyle=\sffamily\itshape\smaller\color{SeaGreen4},
+emphstyle=\bfseries\color{RoyalBlue3},escapechar={:},
+emphstyle={[2]{\bfseries\color{Sienna2}}},
+postbreak=\mbox{{\smaller\color{gray}$\hookrightarrow$}}
+}
+
+\mode<handout>{
+   \lstset{
+   texcsstyle=*\bfseries, commentstyle=\sffamily\itshape\smaller,
+   emphstyle=\bfseries,escapechar={:},
+   emphstyle={[2]{\bfseries}},
+   emphstyle={[3]{\bfseries}},
+   postbreak=\mbox{{\smaller$\hookrightarrow$}}
+   }
+}
+
+\makeatletter
+\lst@CCPutMacro\lst@ProcessOther {"2D}{\lst@ttfamily{-{}}{-{}}}
+\@empty\z@\@empty
+\makeatother
+
+
+\usepackage{tikz}
+\usepackage{pgfgantt}
+\usetikzlibrary{shapes,arrows,positioning,matrix,chains,fit}
+\usetikzlibrary{backgrounds}
+
+\usepackage{multicol,multirow}
+\usepackage[version=3]{mhchem}
+\usepackage{chemfig}
+\usepackage{expex,qtree}
+\usepackage{texshade}
+\usepackage[detect-all]{siunitx}
+\usepackage[siunitx]{circuitikz}
+\usepackage{smartdiagram}
+\usepackage{bytefield}
+% \usepackage{pstricks,pst-barcode}
+% \usepackage{auto-pst-pdf}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\usepackage{cwpuzzle}
+\usepackage{gchords,guitar}
+\usepackage{spreadtab}
+\usepackage{ccicons}
+\usepackage{marvosym}
+\usepackage{upgreek}
+\usepackage{adforn}
+% \ifpdf
+\pdfmapfile{+webo.map}
+% \fi
+\newcommand{\wb}[1]{{\usefont{U}{webo}{xl}{n}#1}}
+\usepackage{bookmark}
+
+\setlength\fboxsep{0pt}
+
+\author[LianTze Lim (Ph.D.)]{\texorpdfstring{LianTze Lim (Ph.D.)
+(\url{liantze@gmail.com})\\\url{http://liantze.penguinattack.org}}{LianTze Lim (Ph.D.)}}
+\title{\LaTeX: More Than Just Academic Papers and Theses}
+\subtitle{\texorpdfstring{(\textsc{first presented at mosc}\oldstylenums{2011})\\%
+\hrulefill\ \adforn{57}\thickspace\wb{m}\thickspace\adforn{29}\ \hrulefill}{First Presented at MOSC 2011; some modifications since}}
+\date[\ccbyncsa]{\ccbyncsa\ (Yes, you can reuse this deck \Smiley)}
+\titlegraphic{\includegraphics[width=.3\textwidth]{TFZsuperellipse-crop}\\\tiny Illustration by Duane Bibby}
+
+\hypersetup{%
+pdfauthor={LianTze Lim}, %% the "author" field from above includes garbage code...
+pdfkeywords={latex,features,publicity,preview}
+}
+
+\begin{document}
+\begin{frame}[plain]
+\maketitle
+\end{frame}
+
+\begin{frame}
+\frametitle{Contents}
+\tableofcontents
+\end{frame}
+
+
+\include{intro}
+\include{document}
+\include{domain}
+
+\section{Wrapping Up}
+
+\begin{frame}
+\frametitle{Summary}
+\begin{itemize}
+\item<+-> \LaTeX
+	\begin {itemize}
+	\item a document preparation system
+	\item professional quality typesetting output
+	\end{itemize}
+\item<+-> Output artefacts
+	\begin{itemize}
+	\item Academic: papers, theses, books
+	\item Dedicated document types
+	\item Domain-specific material
+	\end{itemize}
+\item<+-> Usage scenario
+	\begin{itemize}
+	\item Direct authoring
+	\item Automatic generation (via scripts etc)
+	\item As back-end of other applications
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=.6\textwidth]{multiling-TQ}
+
+\bigskip 
+\begin{tabular}{cl}
+\multirow{2}{*}{\huge Questions?} & \url{liantze@gmail.com}, \url{support@overleaf.com}\\
+& \url{http://tex.stackexchange.com}\\
+\end{tabular}
+
+% {\huge Questions?\par}\vskip1em
+% {\large\url{liantze@gmail.com}
+% \\\url{support@overleaf.com}
+% \\\url{http://liantze.penguinattack.org}
+% \\\url{http://latex-my.blogspot.com}
+% \par}
+\end{frame}
+
+\begin{frame}
+\frametitle{Want to download this deck?}
+\centering
+\qrcode[height=.5\textheight]{https://www.overleaf.com/read/cyfvvyfrpmyn}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,43 @@
+%% Based on Frankfurt theme
+\useoutertheme[subsection=false]{smoothbars}
+\useinnertheme[shadow=true]{rounded}
+
+%\setbeamerfont{block title}{size={}}
+
+\defbeamertemplate*{sidebar right}{ru theme}
+{%
+  \vfill%
+%
+  \begin{picture}(0,0)%
+    \setlength{\unitlength}{1cm}% default
+    \protect\put(0,0){%
+      \begin{picture}(6,6)(4,6)%
+	\pgfimage[width=0.7\paperwidth]{radboud_logo}%
+      \end{picture}%
+    }%
+  \end{picture}%
+  \vskip2pt%
+  %% No navigation
+  %\llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+  %\hskip0.1cm
+  %\vskip2pt%
+}
+
+
+\setbeamertemplate{footline}{
+  \begin{beamercolorbox}[ignorebg,wd=\paperwidth,ht=2.25ex,dp=1ex,leftskip=.1cm,rightskip=.1cm plus1fill]{title in head/foot}%
+    %% Page number?
+    \ifbeamer@nonumbers%
+    \else
+    \usebeamerfont{page number in head/foot}%
+    \tikz[baseline=(X.base)] \node [ellipse,draw,inner ysep=0.5pt,inner xsep=2pt] (X) {%
+      \insertframenumber\ifbeamer@totalnumber/\inserttotalframenumber\fi};
+    \fi%
+    \usebeamerfont{title in head/foot}%
+    \insertshortdate{~\color{red}|}~\insertshorttitle%
+    \ifx\insertsubtitle\@empty%
+    \else%
+    ~(\usebeamerfont{subtitle in head/foot}\insertsubtitle)%
+    \fi%
+  \end{beamercolorbox}
+}

@@ -1,0 +1,46 @@
+\documentclass[aspectratio=43]{beamer}
+\usepackage[english]{babel}
+\input{chapters/preamble}
+\title{My Presentation} %->->->->-> Check hyperref title <-<-<-<-<-
+\subtitle{And Some Things About It}
+\author[J. Doe]{John Doe}
+\institute[IFUSP]{
+    Institute of Physics%
+    \\%
+    University of São Paulo%
+} %You can change the Institution if you are from somewhere else
+\date{February 31, 2019}
+%\logo{\includegraphics[width= 0.2\textwidth]{images/a-logo.png}}
+
+\begin{document}
+    
+    \frame{\titlepage}
+    
+    \begin{frame}{Summary}
+        \tableofcontents
+    \end{frame}
+    
+    \input{chapters/a-silly-idea.tex} %You can put the frames directly into the presentation, but using the input command and writing them in separate .tex files might be more organized
+    
+    \input{chapters/playing-around.tex}
+    
+    \input{chapters/fourier-playground.tex}
+    
+    \section*{Acknowledgments} %You can remove this if you do not want to use it
+        \begin{frame}{Acknowledgments}
+            The author is extremely thankful to Prof. Antônio F. R. T. Piza for the short, yet wonderful, conversations about this seminar.
+        \end{frame}
+    
+    \section*{References} %You can remove this if you do not want to use it
+        \nocite{Djairo} \nocite{PhilPanof} \nocite{Fleming} \nocite{Shankar}
+        \begin{frame}{References}
+            \printbibliography
+        \end{frame}
+
+    \section{}
+    \begin{frame}{}
+        \centering
+            \Huge\bfseries
+        \textcolor{orange}{The End}
+    \end{frame}
+\end{document}

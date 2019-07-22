@@ -1,0 +1,59 @@
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/inner/beamerinnerthemedefault.sty,v 1.16 2004/10/28 16:42:54 tantau Exp $
+
+% Copyright 2003 by Till Tantau <tantau@users.sourceforge.net>
+%
+% Changed 2008 by Stefan Karg <stefonline@arcor.de>
+% This Theme is based on the default theme.
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+\mode<presentation>
+
+%titlepage of the presentation
+
+\defbeamertemplate*{title page}{Weingarten}[1][]
+{
+ %\colorbox{gymi_rot}{\makebox[0.8\paperwidth]{\textcolor{weiss}{\inserttitle}}}
+
+ \vbox{}
+  \vfill
+  \begin{centering}
+    \begin{beamercolorbox}[sep=0.6cm,center,#1,rounded=true]{title}
+	     
+	\usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+	\vspace{0.1cm}
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,left,#1,rounded=true]{author date}
+      \usebeamerfont{author}\insertauthor \\ \vspace{0.3 cm}
+	\insertinstitute
+    \end{beamercolorbox}
+	\vspace{0.3cm}
+    \begin{beamercolorbox}[sep=0.1cm,rounded=true,center]{author date}
+	\textbf{\insertdate}
+    \end{beamercolorbox}
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+  \end{centering}
+  \vfill
+  
+}
+
+
+% (sub-)section in toc: Weingarten
+% Adds a trangle to every section entry
+\defbeamertemplate*{section in toc}{Weingarten}
+{$\blacktriangleright$~\inserttocsection}
+
+\defbeamertemplate*{subsection in toc}{Weingarten}
+{\vspace{2pt}\leavevmode\leftskip=1.5em$\blacktriangleright$~\inserttocsubsection\par}
+
+
+
+\mode
+<all>

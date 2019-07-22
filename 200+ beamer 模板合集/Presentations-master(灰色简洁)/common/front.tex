@@ -1,0 +1,105 @@
+\usetheme{default}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{pgf}
+\usepackage{color}
+\usepackage[frenchb]{babel}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+\usefonttheme{default}
+\usepackage{DejaVuSans}
+%\usepackage[sfdefault]{FiraSans} %% option 'sfdefault' activates Fira Sans as the default text font
+\usepackage[T1]{fontenc}
+\renewcommand*\oldstylenums[1]{{\firaoldstyle #1}}
+
+
+\setbeamertemplate{navigation symbols}{} %remove navigation symbols
+
+\author{Cédric Jeanneret (aka \href{https://www.twitter.com/SwissTengu}{@SwissTengu})}
+\institute{\href{https://www.ethack.org/}{EthACK.org}}
+\date{\today}
+
+\definecolor{linecolor}{HTML}{4d4c4c}
+
+\setbeamercolor{linecolor}{fg=white,bg=linecolor}
+
+\setbeamertemplate{headline} {
+	\begin{beamercolorbox}[wd=\paperwidth,dp=8pt,ht=12pt,leftskip=.29cm,rightskip=.29cm]{linecolor}
+	\hfill
+	\hypersetup{
+		colorlinks=true,
+		linkcolor=white,
+		urlcolor=white,
+	}
+	\insertinstitute
+	\end{beamercolorbox}%
+}
+
+\setbeamertemplate{footline}{%
+	\begin{beamercolorbox}[wd=\paperwidth,dp=9pt,ht=0.4cm,leftskip=.29cm,rightskip=.3cm]{linecolor}
+	\pgfputat{\pgfxy(0.455,-0.315)}{\pgfbox[center,base]{\includegraphics[width=1.5cm]{../common/logo_537.png}}}
+	\hfill
+	\inserttitle
+	\end{beamercolorbox}%
+}
+
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	urlcolor=blue,
+	pdfborderstyle={/S/U/W 1},
+	pdfborder=0 0 1,
+	linkbordercolor={0 0 0},
+	urlbordercolor={0 0 0},
+}
+
+
+\begin{document}
+
+{
+\setbeamertemplate{footline}{%
+	\begin{beamercolorbox}[wd=\paperwidth,dp=8pt,ht=12pt,leftskip=.29cm,rightskip=.3cm]{linecolor}
+	\hfill
+	\inserttitle
+	\end{beamercolorbox}%
+}
+
+% center first slide — not a title, but almost
+{
+\centering
+\begin{frame}
+
+EthACK
+\vspace{0.5cm}
+
+The Swiss Privacy Basecamp 
+\vspace{0.5cm}
+
+\includegraphics[width=4cm]{../common/logo_537.png}
+
+\end{frame}
+}
+}
+
+\begin{frame}{EthACK ?}
+\begin{itemize}
+	\item Éthique
+	\item État
+	\item ACKnowledgement (reconnaissance)
+	\item Hacking (éthique, évidemment)
+	\item …
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Pourquoi ?}
+\begin{itemize}
+	\item Notre gouvernement ne s'intéresse pas (ou peu) au sujet
+	\item Les sociétés privées nous fichent à notre insu
+	\item Personne ne sait où sont leurs données, qui les traitent, à quoi elles servent
+\end{itemize}
+\end{frame}

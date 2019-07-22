@@ -1,0 +1,21 @@
+# ignore files generated during compiling
+*.[oa]
+# except library link
+!lib.a
+# and the special files in Mac
+.DS_Store
+# compiling files
+*.log
+*.blg
+*.bbl
+*.aux
+*.ilg
+*.lof
+*.lot
+*.nlo
+*.nls
+*.out
+*.toc
+*.nav
+*.snm
+#

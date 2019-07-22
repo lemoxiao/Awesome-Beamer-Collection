@@ -1,0 +1,74 @@
+\documentclass[8pt]{beamer}
+
+\usetheme{uha}
+
+\usepackage[french,english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Titre de la présentation}
+\subtitle{Sous-titre}
+\date{Date d'aujourd'hui}
+\author{Auteur de la présentation}
+\institute{Université de Haute Alsace}
+
+\begin{document}
+
+% Title page 
+\begin{frame}[plain, noframenumbering]
+	\titlepage
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}[fragile]{beamer UHA}
+	
+	Le thème beamer uha s'inspire du thème Metropolis qui lui même s'inspire du thème HSRM de Benjamin Weiss.
+
+	Le thème se charge de la manière suivante :
+
+	\begin{verbatim}
+	\documentclass[8pt]{beamer}
+	\usetheme{uha}
+	\end{verbatim}
+\end{frame}
+
+
+\section{Les éléments}
+
+\begin{frame}{Les listes}
+	Une liste
+	\begin{itemize}
+		\item Premier
+		\item Second
+		\item Troisième
+	\end{itemize}
+
+	Une énumération
+	\begin{enumerate}
+		\item Premier
+		\item Second
+		\item Troisième
+	\end{enumerate}
+
+	Une description
+	\begin{description}
+		\item [UHA] Université de Haute Alsace
+	\end{description}
+\end{frame}
+
+\begin{frame}{Les blocks}
+	\begin{exampleblock}{Exemple}
+		Un exemple
+	\end{exampleblock}
+	\begin{alertblock}{Exemple}
+		Une alerte
+	\end{alertblock}
+	\begin{block}{Exemple}
+		Un block
+	\end{block}
+\end{frame}
+\end{document}

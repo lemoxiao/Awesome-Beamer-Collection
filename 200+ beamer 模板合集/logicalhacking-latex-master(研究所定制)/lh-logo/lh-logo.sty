@@ -1,0 +1,57 @@
+%% Copyright (C) 2016 Achim D. Brucker, https://www.brucker.ch
+%%
+%% License:
+%%   This program can be redistributed and/or modified under the terms
+%%   of the LaTeX Project Public License Distributed from CTAN
+%%   archives in directory macros/latex/base/lppl.txt; either
+%%   version 1 of the License, or any later version.
+%%   OR
+%%   The 2-clause BSD-style license.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{lh-logo}
+   [2016/09/10 v0.0 The LogicalHacking Logo.]
+\RequirePackage{graphicx}
+\RequirePackage{ifthen}
+\RequirePackage{xcolor}
+
+\ProcessOptions\relax
+
+\definecolor{lhWhite}        {RGB}{248,248,248}
+\definecolor{lhBlack}        {RGB}{  8,  8,  8}
+%
+\definecolor{lhOrange}       {RGB}{243,107, 33}
+\definecolor{lhGreen}        {RGB}{ 65,242, 34}
+\definecolor{lhCyan}         {RGB}{ 34,169,242}
+\definecolor{lhMagenta}      {RGB}{211, 34,242}
+\definecolor{lhGold}         {RGB}{242,211, 34}
+%
+\definecolor{lhOrangeMedium} {RGB}{156, 69, 22}
+\definecolor{lhGreenMedium}  {RGB}{ 42,156, 22}
+\definecolor{lhCyanMedium}   {RGB}{ 22,109,156}
+\definecolor{lhMagentaMedium}{RGB}{135, 22,156}
+\definecolor{lhGoldMedium}   {RGB}{156,135, 22}
+%
+\definecolor{lhOrangeDark}   {RGB}{ 71, 31, 10}
+\definecolor{lhGreenDark}    {RGB}{ 19, 71, 10}
+\definecolor{lhCyanDark}     {RGB}{ 10, 50, 71}
+\definecolor{lhMagentaDark}  {RGB}{ 62, 10, 71}
+\definecolor{lhGoldDark}     {RGB}{ 51, 86, 28}
+%
+\definecolor{lhLightGray}    {RGB}{204,204,204}
+\definecolor{lhDarkGray}     {RGB}{ 68, 68, 68}
+
+
+
+\newcommand{\lhLogoLight}[1][]{\includegraphics[#1]{logo/logicalhacking-large}}
+\newcommand{\lhMediumLogoLight}[1][]{\includegraphics[#1]{logo/logicalhacking-medium}}
+\newcommand{\lhSmallLogoLight}[1][]{\includegraphics[#1]{logo/logicalhacking-small}}
+
+\newcommand{\lhcomLogoLight}[1][]{\includegraphics[#1]{logo/logicalhacking_com-large}}
+
+\newcommand{\lhLogoDark}[1][]{\includegraphics[#1]{logo/logicalhacking-large-inverse}}
+\newcommand{\lhMediumLogoDark}[1][]{\includegraphics[#1]{logo/logicalhacking-medium-inverse}}
+\newcommand{\lhSmallLogoDark}[1][]{\includegraphics[#1]{logo/logicalhacking-small-inverse}}
+
+\newcommand{\lhcomLogoDark}[1][]{\includegraphics[#1]{logo/logicalhacking_com-large-inverse}}
+
+\endinput

@@ -1,0 +1,8 @@
+%Overlays
+\bgroup%
+\begin{tikzpicture}%
+\node<1-> (X) {\includegraphics[width=275.72208em]{layerexample_layer1}};%
+\node<2> (X) {\includegraphics[width=275.72208em]{layerexample_layer2}};%
+\node<3> (X) {\includegraphics[width=275.72208em]{layerexample_layer3}};%
+\end{tikzpicture}%
+\egroup%

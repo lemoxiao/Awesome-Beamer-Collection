@@ -1,0 +1,126 @@
+
+% Inofficial Vienna University of Technology - Computer Vision Lab LaTeX template
+% Author: Christopher Pramerdorfer
+
+\mode<presentation>
+
+\RequirePackage{tikz}
+
+\definecolor{tuwcvl_inf_red}{rgb}{0.929,0.098,0.141}
+
+\definecolor{tuwcvl_bg_border}{rgb}{0.6,0.6,0.6}
+\definecolor{tuwcvl_bg_bg}{rgb}{0.92,0.92,0.92}
+\definecolor{tuwcvl_bg_bglight}{rgb}{0.95,0.95,0.95}
+
+\definecolor{tuwcvl_text}{rgb}{0.1,0.1,0.1}
+\definecolor{tuwcvl_textlight}{rgb}{0.4,0.4,0.4}
+
+\setbeamercolor{normal text}{fg=tuwcvl_text, bg=}
+\setbeamercolor{section in toc}{parent={normal text}}
+\setbeamercolor{subsection in toc}{parent={normal text}}
+\setbeamercolor{item}{fg=tuwcvl_inf_red}
+\setbeamercolor{frametitle}{parent={normal text}}
+\setbeamercolor{block title}{parent={normal text}}
+\setbeamercolor{block body}{parent={normal text}}
+\setbeamercolor{block title example}{parent={normal text}}
+\setbeamercolor{block body example}{parent={normal text}}
+\setbeamercolor{logo}{parent={normal text}}
+\setbeamercolor{subtitle}{parent={normal text}}
+\setbeamercolor{title in head/foot}{fg=tuwcvl_textlight}
+\setbeamercolor{author in head/foot}{fg=tuwcvl_textlight}
+\setbeamercolor{institute in head/foot}{fg=tuwcvl_textlight}
+\setbeamercolor{date in head/foot}{fg=tuwcvl_textlight}
+\setbeamercolor{headline}{parent={normal text}}
+\setbeamercolor{caption name}{fg=tuwcvl_inf_red}
+
+\setbeamercolor{bibliography entry title}{fg=tuwcvl_text}
+\setbeamercolor{bibliography entry author}{fg=tuwcvl_text}
+\setbeamercolor{bibliography entry location}{fg=tuwcvl_text}
+\setbeamercolor{bibliography entry note}{fg=tuwcvl_text}
+
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+\setbeamertemplate{itemize/enumerate body begin}{\normalsize}
+\setbeamertemplate{itemize/enumerate subbody begin}{\normalsize}
+
+\setbeamertemplate{caption}[numbered]
+\setbeamerfont{caption}{size=\scriptsize}
+\setbeamertemplate{blocks}[rounded][shadow=true] 
+
+\beamertemplatenavigationsymbolsempty 
+
+\setbeamertemplate{background} {
+  \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    \ifnum\thepage>1\relax
+      \draw [thick,draw=none,fill=tuwcvl_inf_red] (-1,\the\paperheight+1) to (\the\paperwidth+1,\the\paperheight+1) to (\the\paperwidth+1,0.85*\the\paperheight) to (0.35*\the\paperwidth,0.85*\the\paperheight) to[out=180,in=2.5] (-1,0.81*\the\paperheight);
+
+      \draw [thick,draw=tuwcvl_bg_border,fill=tuwcvl_bg_bg] (-1,\the\paperheight+1) to (\the\paperwidth+1,\the\paperheight+1) to (\the\paperwidth+1,0.85*\the\paperheight) to (0.35*\the\paperwidth,0.85*\the\paperheight) to[out=180,in=10] (-1,0.81*\the\paperheight);
+
+      \draw [thick,draw=none,fill=tuwcvl_bg_bglight] (-1,0.5) to (0.65*\the\paperwidth,0.5) to[out=0,in=0] (\the\paperwidth+1,1.25) to (\the\paperwidth+1,-1) to (-1,-1);
+
+      \draw [thick,draw=tuwcvl_bg_border,fill=tuwcvl_bg_bg] (-1,0.5) to (0.65*\the\paperwidth,0.5) to[out=0,in=0] (\the\paperwidth+1,1) to (\the\paperwidth+1,-1) to (-1,-1);
+
+      \node[inner sep=0pt] at (0.93*\the\paperwidth,0.35) {\includegraphics[width=1.5cm]{tuwcvl.png}};
+    \else
+      \draw [draw=none,fill=tuwcvl_bg_bglight] (-0.1,0.75*\the\paperheight) to (0.55*\the\paperwidth,0.75*\the\paperheight) to[out=0,in=16] (\the\paperwidth,0.85*\the\paperheight) to (\the\paperwidth,0.5*\the\paperheight) to (0.45*\the\paperwidth,0.5*\the\paperheight) to[out=180,in=0] (-0.1,0.38*\the\paperheight) to (0,0.75*\the\paperheight);
+
+      \draw [draw=none,fill=tuwcvl_inf_red] (-0.1,0.75*\the\paperheight) to (0.55*\the\paperwidth,0.75*\the\paperheight) to[out=0,in=5] (\the\paperwidth,0.85*\the\paperheight) to (\the\paperwidth,0.5*\the\paperheight) to (0.45*\the\paperwidth,0.5*\the\paperheight) to[out=180,in=3] (-0.1,0.4*\the\paperheight) to (0,0.75*\the\paperheight);
+
+      \draw [thick,draw=tuwcvl_bg_border,fill=tuwcvl_bg_bg] (-0.1,0.75*\the\paperheight) to (0.55*\the\paperwidth,0.75*\the\paperheight) to[out=0,in=0] (\the\paperwidth+1,0.85*\the\paperheight) to (\the\paperwidth+1,0.5*\the\paperheight) to (0.45*\the\paperwidth,0.5*\the\paperheight) to[out=180,in=10] (-0.1,0.41*\the\paperheight) to (-0.1,0.75*\the\paperheight);
+
+      \node[inner sep=0pt] at (1.7,0.805*\the\paperheight) {\includegraphics[width=3cm]{tuwcvl.png}};
+    \fi
+  \end{tikzpicture}
+}
+
+\setbeamertemplate{title page}
+{
+  \begin{tikzpicture}[remember picture,overlay]
+  \ifx\insertsubtitle\@empty
+  \node at ([yshift=-3.6cm]current page.north){\usebeamerfont{title}\inserttitle};
+  \else
+  \node at ([yshift=-3.3cm]current page.north){\usebeamerfont{title}\inserttitle};
+  \node at ([yshift=-3.94cm]current page.north){\usebeamerfont{subtitle}\insertsubtitle};
+  \fi
+  \node at ([yshift=1.0cm]current page.south){\usebeamerfont{author}\insertauthor};
+  \node at ([yshift=0.5cm]current page.south){\usebeamerfont{institute}\insertinstitute};
+  \end{tikzpicture}
+}
+
+\setbeamertemplate{frametitle}
+{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.4cm]{frametitle} 
+  \begin{tikzpicture}
+  \useasboundingbox(0,0) rectangle(\the\paperwidth,1.4);
+  \ifx\insertframesubtitle\@empty%
+    {\node[anchor=west,font=\Large] at (0.25,0.7){\insertframetitle};}
+  \else
+    {\node[anchor=west,font=\Large] at (0.25,0.9){\insertframetitle};
+    \node[anchor=west,font=\small] at (0.6,0.45){\insertframesubtitle};}
+  \fi
+  \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+\setbeamertemplate{footline}
+{
+  \ifnum\thepage>1
+    \leavevmode
+      \hbox{
+      \begin{beamercolorbox}[wd=\paperwidth,ht=1em,left]{title in head/foot}
+        \usebeamerfont{title in head/foot}\hspace{1em}\insertshorttitle\ --\ Slide \insertframenumber{}/\inserttotalframenumber
+              \vspace{1em}
+      \end{beamercolorbox}}
+  \fi
+}
+
+% biblatex
+
+\renewbibmacro{in:}{}
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{\mkbibemph{#1}} 
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{journaltitle}{#1} 
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{booktitle}{#1}
+\setlength\bibitemsep{5pt}
+
+\mode<all>

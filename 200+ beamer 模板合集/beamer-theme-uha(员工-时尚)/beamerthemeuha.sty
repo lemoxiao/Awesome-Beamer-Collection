@@ -1,0 +1,30 @@
+% Name : beamerfontthemeuha.sty
+% Author : Sébastien Bindel <sébastien.bindel@uha.fr>
+
+%--------------------------------------------------------------
+% Mandatory part
+%--------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeuha}[2018/10/22 uha theme]
+
+
+%--------------------------------------------------------------
+% Loaded packages
+%--------------------------------------------------------------
+\RequirePackage{graphicx}
+\RequirePackage{array}
+\RequirePackage{booktabs}
+\RequirePackage{tikz}
+\usetikzlibrary{positioning,shapes,decorations.pathreplacing,chains,calc,backgrounds,shadows.blur,mindmap,trees,decorations.text,fadings}
+
+%--------------------------------------------------------------
+% include themes
+%--------------------------------------------------------------
+\useinnertheme{uha}
+\useoutertheme{uha}
+\usecolortheme{uha}
+\usefonttheme{uha}
+
+% Remove navigation menu
+\setbeamertemplate{navigation symbols}{}
+

@@ -1,0 +1,72 @@
+% Copyright 2014
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+
+% -----------------------------------------------------------------------------
+% Options
+% -----------------------------------------------------------------------------
+
+
+\newif\ifbeamer@sleutel
+\newif\ifbeamer@nologo
+\newif\ifbeamer@nonav
+\newif\ifbeamer@framenumber
+\newif\ifbeamer@totalframenumber
+
+
+
+% Set defaults
+\beamer@sleutelfalse
+\beamer@nologofalse
+\beamer@framenumberfalse
+\beamer@totalframenumberfalse
+\beamer@nonavfalse
+
+\DeclareOptionBeamer{sleutel}{\beamer@sleuteltrue}
+\DeclareOptionBeamer{nologo}{\beamer@nologotrue}
+\DeclareOptionBeamer{nonav}{\beamer@nonavtrue}
+\DeclareOptionBeamer{framenumber}{\beamer@framenumbertrue}
+\DeclareOptionBeamer{totalframenumber}{\beamer@totalframenumbertrue}
+
+\ProcessOptionsBeamer
+% -----------------------------------------------------------------------------
+% Dependencies
+% -----------------------------------------------------------------------------
+\RequirePackage{calc}
+\RequirePackage{etoolbox}
+
+\mode<presentation>
+
+% 
+% Prepare and load artwork
+%
+\newlength{\logo@width}
+\newlength{\sleutel@width}
+\newlength{\sleutelback@width}
+%
+\setlength{\logo@width}{2cm}
+\setlength{\sleutel@width}{2.5cm}
+\setlength{\sleutelback@width}{5cm}
+%
+\pgfdeclareimage[width=\logo@width]{KULeuvenLogo}{images/kuleuven_CMYK_logo.pdf}
+\pgfdeclareimage[width=\sleutel@width]{KULeuvenSleutel}{images/sleutel.png}
+\pgfdeclareimage[width=\sleutelback@width]{KULeuvenSleutelLicht}{images/sleutelLicht.png}
+\pgfdeclareimage[width=\sleutelback@width]{KULeuvenSleutelDonker}{images/sleutelDonker.png}
+
+%
+% Apply the themes
+%
+\useinnertheme{KULeuvenStijl}
+\usefonttheme {KULeuvenStijl}
+\usecolortheme{KULeuvenStijl}
+\useoutertheme{KULeuvenStijl}
+
+\ifbeamer@nonav%
+\setbeamertemplate{navigation symbols}{}
+\fi 
+
+
+\mode<all>

@@ -1,0 +1,4 @@
+\beamer@endinputifotherversion {3.33pt}
+\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{Text}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Blocks}{4}{0}{1}

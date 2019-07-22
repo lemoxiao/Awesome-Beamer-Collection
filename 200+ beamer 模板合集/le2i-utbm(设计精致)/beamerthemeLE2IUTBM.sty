@@ -1,0 +1,70 @@
+% Copyright (c) 2014-15 Stephane GALLAND <galland@arakhne.org>
+%
+% UTBM logo and name are registered and owned by the
+% "Universite de Technology of Belfort-Montbeliard".
+%
+% LE2I logo and name are registered and owned by the
+% "Universite de Bourgogne".
+%
+% CNRS logo and name are registered and owned by the
+% "Centre National de la Recherche Scientifique".
+% 
+% This program is free library; you can redistribute it and/or modify
+% it under the terms of the GNU Lesser General Public License as
+% published by the Free Software Foundation; either version 3 of the
+% License, or any later version.
+%
+% This library is distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+% Lesser General Public License for more details.
+%
+% You should have received a copy of the GNU Lesser General Public
+% License along with this library; see the file COPYING.  If not,
+% write to the Free Software Foundation, Inc., 59 Temple Place - Suite
+% 330, Boston, MA 02111-1307, USA.
+%
+\ProvidesPackage{beamerthemeLE2IUTBM}
+   [2015/09/01 Beamer 'LE2I at UTBM' Theme]
+
+\RequirePackage{ifthen}
+
+\newboolean{beamer@theme@leiiutbm@hascovers}
+\setboolean{beamer@theme@leiiutbm@hascovers}{true}
+
+\gdef\beamer@theme@leiiutbm@lang{Java}
+
+\DeclareOptionBeamer{language}{\gdef\beamer@theme@leiiutbm@lang{#1}}
+\DeclareOptionBeamer{nocover}{\setboolean{beamer@theme@leiiutbm@hascovers}{false}}
+%\ExecuteOptionsBeamer{left}
+\ProcessOptionsBeamer
+
+\RequirePackage{beamerbasethemeLE2IUTBM}
+
+\mode<presentation>
+
+\usefonttheme{LE2IUTBM}
+\usecolortheme{LE2IUTBM}
+\useinnertheme[language=\beamer@theme@leiiutbm@lang]{LE2IUTBM}
+\useoutertheme{LE2IUTBM}
+
+\setbeamercovered{dynamic}
+
+\AtBeginDocument{
+	\ifthenelse{\boolean{beamer@theme@leiiutbm@hascovers}}{%
+		\usebackgroundtemplate{} % do not put a background here because of a rendering bug of beamer. See "title page" template insteed.
+		\frame{\maketitle}
+	}{}
+	\usebackgroundtemplate{\ifbeamer@plainframe\else\beamer@theme@leiiutbm@outer@background\fi}
+	\setbeamertemplate{footline}{\beamer@theme@leiiutbm@outer@footline}
+}
+
+\AtEndDocument{%
+	\ifthenelse{\boolean{beamer@theme@leiiutbm@hascovers}}{%
+		\beamer@theme@leiiutbm@thanksslide%
+	}{}
+}
+
+
+\mode
+<all>

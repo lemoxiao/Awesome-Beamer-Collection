@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.20pt}
+\beamer@sectionintoc {1}{Installation}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{How to use this theme?}{3}{0}{1}
+\beamer@sectionintoc {2}{Customization}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{How to change logo images?}{5}{0}{2}
+\beamer@subsectionintoc {2}{2}{How to customize colors?}{6}{0}{2}

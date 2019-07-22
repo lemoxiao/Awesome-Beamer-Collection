@@ -1,0 +1,63 @@
+%!TEX root = presentazionelancia.tex
+\section{Implementation}
+\begin{frame}
+\frametitle{Implementation}
+To achieve performance and storage efficiency Fb have implemented some optimizations to servers.  
+\end{frame}
+
+\begin{frame}[c]\frametitle{Caching Servers}
+\begin{itemize}
+	\item Memory is partitioned into arenas by association type
+	\begin{itemize}
+		\item This mitigates the issues of poorly behaved association types
+		\item They can also change the lifetime for important associations
+	\end{itemize}
+	\item Small items with fixed size have a lot of pointer overhead
+	\begin{itemize}
+		\item stored separately
+		\item Used for association counts
+	\end{itemize}
+\end{itemize}    
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{MySql Mapping}
+    We divided the space of objects and associations into \emph{shards}. Each \emph{shard}:
+    \begin{itemize}
+    	\item is assigned to a logical DB
+    	\item there is a table for objects and a table for associations
+    	\item all field of object are serialized in a single \verb!data! column
+    	\item object of different size can be stored in the same column
+    \end{itemize}
+Exceptions:
+\begin{itemize}
+	\item Some object can benefit from being stored in a different table
+	\item Associations counts are stored in a separate table
+\end{itemize}
+\end{frame}
+
+\begin{frame}[c]\frametitle{Cache Sharding}
+    Shards are mapped to chache server using consistent hashing (like dynamo)
+
+    This can lead to \emph{imbalances}, so TAO use shard cloning to rebalance the load
+
+    There are also \emph{popular object} that can be queried a lot more often than others.
+
+    TAO says to the clients to cache them these objects
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{High-Degree Objects}
+    Some object have a lot of associations (remember there were a limit of 6000?)
+    \begin{itemize}
+    	\item TAO can't cache all associations list
+    	\item Requests will always end to Db
+    \end{itemize}
+    so
+    \begin{itemize}
+    	\item For \verb!assoc_count!, the edge direction is chosen using the lower degree between source and destination object
+    	\item For \verb!assoc_get! query, only associations whose time~ >~ object's ~creation~ time
+    \end{itemize}
+
+
+
+
+\end{frame}

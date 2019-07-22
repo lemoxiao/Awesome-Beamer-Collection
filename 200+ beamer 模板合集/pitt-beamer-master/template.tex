@@ -1,0 +1,93 @@
+\documentclass{beamer}
+
+\usetheme{Pitt}
+
+\title{Pitt Beamer Template}
+\subtitle{This is an optional subtitle}
+%\date{}
+\author[Zac Yu]{Zac Yu (\texttt{zac.yu@pitt.edu})}
+\institute{Carnegie Mellon University}
+
+\begin{document}
+\maketitle
+
+\section{Styles}
+
+\begin{frame}
+	\frametitle{Slide title}
+	\framesubtitle{Slide subtitle (optional)}
+
+	This is a sample page that showcases some styles of the theme.\break
+	
+	\begin{itemize}
+		\item Some bullets
+		\begin{itemize}
+			\item Some sub bullet
+			\item Another sub bullet
+		\end{itemize}
+		\item And another buller
+	\end{itemize}
+
+	\begin{enumerate}
+		\item Some numbering
+		\begin{enumerate}
+			\item Some sub numbering
+			\item Another sub numbering
+		\end{enumerate}
+		\item And another numbering
+	\end{enumerate}
+\end{frame}
+
+\subsection{Blocks}
+
+\begin{frame}
+	\frametitle{We can use blocks}
+
+	\begin{block}{A general block}
+		Blocks can have any type of text including math $e^{i\pi}-1=0$.
+	\end{block}
+
+	\begin{theorem}
+		And this is a theorem.
+	\end{theorem}
+
+	\begin{proof}
+		And this is a proof. Note that the previously theorem is now perfectly proven to be true in all cases.
+	\end{proof}
+
+	\begin{definition}
+		This is a definition of a new concept.
+	\end{definition}
+\end{frame}
+
+\subsection{Columns}
+
+\begin{frame}
+	\frametitle{Columns should work perfectly too}
+
+	\begin{columns}[onlytextwidth,t]
+		\column{0.5\textwidth}
+			First column text here
+
+			\only<1>{And overlays should work well also.}
+			\only<2>{With text appearing and disappearing!}
+		\column{0.5\textwidth}
+			Second column here\footnote{Footnotes are also supported!}.
+	\end{columns}
+\end{frame}
+
+\section{About}
+
+\begin{frame}
+	\frametitle{About This Template}
+	
+	This unofficial Pitt beamer template is based on the (unofficial) CMU beamer theme created by Paulo Casanova and released freely on his website (\url{http://www.cs.cmu.edu/~pcasanov/}).\break
+	
+	The title page design is inspired by that of lecture slides released by Dr. Nicholas Farnan (\texttt{nlf4@pitt.edu}).\break
+	
+	{\large \textbf{Disclaimer}\break}
+	
+	The ``University of Pittsburgh'' name and its logo are trademarks of the University. When using this template, it is \textit{your} responsibility to ensure everything is legal.
+\end{frame}
+
+\end{document}

@@ -1,0 +1,230 @@
+%-------------------------------------------------------------------------------
+% Outer theme file
+%
+% This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
+% International License. To view a copy of this license, visit
+% http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative
+% Commons, PO Box 1866, Mountain View, CA 94042, USA.
+% Copyright (C) 2017 Oliver Reiche <oliver.reiche@fau.de>
+%-------------------------------------------------------------------------------
+
+\mode<presentation>
+
+
+% FAU Corporate Identity defines "rooms" (of height 16.3cm)
+%   - first room is headline
+%   - second room is first sidebar strip
+%   - third room is second sidebar strip
+\pgfmathsetmacro\fauroomheight{\factor*16.3}
+
+% Margins
+\pgfmathsetmacro{\fauinnersep}{\factor*2.13}
+\pgfmathsetmacro{\fauleftmargin}{\factor*3.65+\fauinnersep}
+\pgfmathsetmacro{\faurightmargin}{\fauinnersep}
+\setbeamersize{text margin left=\fauleftmargin cm,%
+               text margin right=\faurightmargin cm}
+
+% Disable navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Headline %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlength\fauheadwidth
+\newlength\faulogowidth
+\newlength\faulogosize
+\newlength\faulogoarea
+\newlength\faulogosep
+\newlength\beamerlogowidth
+\setbeamertemplate{headline}{%
+  \pgfmathsetmacro\faulogoposx{\factor*49.26}
+  \pgfmathsetmacro\faulogoposy{\factor*4.45}
+
+  \ifbeamer@headtitle
+    \pgfmathsetmacro\fauheadheight{\fauroomheight}
+    \pgfmathsetmacro\fauheadtopmargin{0}
+    \pgfmathsetmacro\fauheadleftmargin{\factor*3.65}
+    \setlength{\fauheadwidth}{\faulogoposx cm}
+    \def\titleboxvalign{bottom}
+  \else
+    \pgfmathsetmacro\fauheadheight{2*\fauroomheight}
+    \pgfmathsetmacro\fauheadtopmargin{\fauroomheight-\fauleftmargin+\factor*3.65}
+    \pgfmathsetmacro\fauheadleftmargin{\fauleftmargin}
+    \setlength{\fauheadwidth}{\paperwidth}
+    \def\titleboxvalign{top}
+  \fi
+
+  \addtolength{\fauheadwidth}{-\fauheadleftmargin cm}
+  \addtolength{\fauheadwidth}{-\fauheadleftmargin cm}
+
+  \begin{pgfpicture}{0cm}{0cm}{\paperwidth}{\fauheadheight cm}
+    \setlength{\faulogowidth}{\logowidth cm}
+    \setlength{\faulogosep}{6em}
+    \setlength{\beamerlogowidth}{0pt}
+    \ifbeamer@headtitle\ifdefined\beamer@@tmpl@logo%
+      \settowidth{\faulogosize}{\insertlogo}
+      \addtolength{\faulogosize}{\faulogosep}
+      \addtolength{\faulogosize}{\faulogowidth}
+
+      \setlength{\faulogoarea}{\paperwidth}
+      \addtolength{\faulogoarea}{-\faulogoposx cm}
+      \addtolength{\faulogoarea}{-\faurightmargin cm}
+
+      \pgfmathsetmacro\scalefactor{\faulogoarea/\faulogosize}
+      \settowidth{\beamerlogowidth}{\scalebox{\scalefactor}{\insertlogo}}
+      \addtolength{\beamerlogowidth}{\scalefactor\faulogosep}
+    \fi\fi
+    % Put logo
+    \pgfputat{\pgfpoint{\faulogoposx cm+\beamerlogowidth}
+                       {\fauheadheight cm-\faulogoposy cm}}{%
+      \pgfbox[left,top]{%
+        \ifnum\beamerlogowidth>0%
+          \scalebox{\scalefactor}{%
+            \pgfuseimage{faulogo}%
+          }
+        \else%
+          \pgfuseimage{faulogo}%
+        \fi
+      }
+    }
+    % Put additional headline logo
+    \ifdefined\beamer@@tmpl@logo%
+      \pgfputat{\pgfpoint{\faulogoposx cm+\beamerlogowidth}
+                         {\fauheadheight cm-\faulogoposy cm}}{%
+        \pgfbox[right,top]{%
+          \ifbeamer@headtitle%
+            \scalebox{\scalefactor}{%
+              \insertlogo%
+              \hspace{\faulogosep}
+            }
+          \else%
+            \insertlogo%
+            \hspace{\faulogosep}
+          \fi
+        }
+      }
+    \fi
+    \ifbeamer@titlebg%
+      \pgfputat{\pgfpoint{0cm}{\fauroomheight cm}}{%
+        \color{maincolor}
+        \pgfrect[fill]{\pgfpoint{\factor*3.65cm}{0cm}}
+                      {\pgfpoint{\paperwidth-\factor*3.65cm}{-\factor*16.1cm}}
+        \color{white}
+        \pgfrect[fill]{\pgfpoint{\factor*3.60cm}{-\factor*16.1cm}}
+                      {\pgfpoint{\paperwidth-\factor*3.60cm}{-\factor*0.2cm}}
+      }
+    \fi
+    % Place title, subtitle, and author
+    \pgfputat{\pgfpoint{\fauheadleftmargin cm}%
+                       {\fauheadtopmargin cm}}{%
+			\pgfbox[left,\titleboxvalign]{%
+        \parbox{\fauheadwidth}{%
+          \large\raggedright% avoid justification
+          \usebeamercolor[fg]{titlelike}%
+          {\bfseries\insertauthor\\[.5ex]}%
+          \ifx\insertinstitute\empty\else%
+            \insertinstitute\\[1ex]%
+          \fi
+          {\usebeamerfont{title}%
+           \usebeamercolor[fg]{title}%
+           \inserttitle\\[.5ex]}
+          \ifx\insertsubtitle\empty\else%
+            {\usebeamerfont{subtitle}%
+             \insertsubtitle\\[1ex]}
+          \fi
+        }
+      }%
+    }%
+  \end{pgfpicture}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Headline End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sidebar left %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{sidebar left}{%
+  \ifbeamer@headtitle%
+    \def\canvasheight{\paperheight-\fauroomheight cm}% height minus headline
+  \else%
+    \def\canvasheight{\paperheight-2*\fauroomheight cm}% height minus headline
+  \fi%
+  \begin{pgfpicture}{0cm}{0cm}{\factor*3.4cm}{\canvasheight}
+    \color{maincolor}
+    \pgfrect[fill]{\pgfpoint{0cm}{\paperheight-\fauroomheight cm}}%
+                  {\pgfpoint{\factor*3.4cm}{-\factor*16.1cm}}
+
+    \color{boxcolor1}
+    \pgfrect[fill]{\pgfpoint{0cm}{\paperheight-\factor*32.6cm}}%
+                  {\pgfpoint{\factor*3.4cm}{-\factor*3.6cm}}
+
+    \color{boxcolor2}
+    \pgfrect[fill]{\pgfpoint{0cm}{\paperheight-\factor*35.8cm}}%
+                  {\pgfpoint{\factor*3.4cm}{-\factor*3.6cm}}
+
+    \color{boxcolor3}
+    \pgfrect[fill]{\pgfpoint{0cm}{\paperheight-\factor*39.0cm}}%
+                  {\pgfpoint{\factor*3.4cm}{-\factor*3.6cm}}
+
+    \color{boxcolor4}
+    \pgfrect[fill]{\pgfpoint{0cm}{\paperheight-\factor*42.2cm}}%
+                  {\pgfpoint{\factor*3.4cm}{-\factor*3.6cm}}
+
+    \color{boxcolor5}
+    \pgfrect[fill]{\pgfpoint{0cm}{\paperheight-\factor*45.5cm}}%
+                  {\pgfpoint{\factor*3.4cm}{-\factor*3.2cm}}
+  \end{pgfpicture}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sidebar left end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sidebar right %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{sidebar right}{} % Hide default beamer logo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sidebar right end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Background %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{background}{%
+  \begin{pgfpicture}{0cm}{0cm}{\paperwidth}{\paperheight}
+    \ifbeamer@outline
+      \def\strokewidth{\factor*2.25pt}
+      \def\drawtype{stroke}
+      \color{faublue}
+    \else
+      \def\strokewidth{0pt}
+      \def\drawtype{fill}
+      \ifbeamer@basecolor
+        \color{basecolor}
+      \fi
+      \ifbeamer@instcolor
+        \color{instcolor}
+      \fi
+    \fi
+    \pgfsetlinewidth{\strokewidth}
+    \pgfrect[\drawtype]{\pgfpoint{\factor*3.65cm}
+                                 {\paperheight-\factor*16.31cm}}
+                       {\pgfpoint{\paperwidth-\factor*3.65cm+\strokewidth}
+                                 {-\factor*97.86cm}}
+  \end{pgfpicture}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Background end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Footline %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\footline}[1]{\def\footlinetext{#1}}
+\setbeamertemplate{footline}{%
+  \def\canvasheight{\paperheight-\factor*115.8cm}
+  \begin{pgfpicture}{0cm}{0cm}{\paperwidth}{\canvasheight}
+    \usebeamercolor[fg]{footline}
+    \pgfputat{\pgfpoint{\factor*3.85cm}{\paperheight-\factor*115.8cm}}{%
+      \pgfbox[left,top]{%
+        \parbox[c]{\textwidth}{%
+          \normalsize%
+          \footlinetext
+        }
+      }
+    }
+  \end{pgfpicture}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Footline end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\mode
+<all>

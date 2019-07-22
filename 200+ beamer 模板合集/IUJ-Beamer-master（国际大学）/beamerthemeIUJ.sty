@@ -1,0 +1,67 @@
+% Beamer theme for the International University of Japan, ver. 0.01 (2016-10-04)
+% Copyright 2016 by Yuki Yanai <yanai@iuj.ac.jp>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% ver 0.01 2016-10-04 YY
+
+
+\ProvidesPackage{beamerthemeIUJ}[10/04/2016]
+\def\beamerKobe@version{0.01}
+
+\mode<presentation>
+
+\newif\ifbeamer@nonav
+\newif\ifbeamer@nologo
+\newif\ifbeamer@simplefoot
+
+\beamer@nonavfalse
+\beamer@nologofalse
+\beamer@simplefootfalse
+
+\DeclareOptionBeamer{nonav}{\beamer@nonavtrue}
+\DeclareOptionBeamer{nologo}{\beamer@nologotrue}
+\DeclareOptionBeamer{simplefoot}{\beamer@simplefoottrue}
+
+\ProcessOptionsBeamer
+\useinnertheme{rounded}
+\usecolortheme{hakkaisan}
+\useoutertheme{IUJ}
+\usefonttheme{IUJ}
+
+\ifbeamer@nonav
+  \setbeamertemplate{navigation symbols}{}
+\fi
+
+\ifbeamer@simplefoot
+  \setbeamertemplate{footline}[frame number]
+\fi
+
+\setbeamerfont{block title}{size={}}
+
+\defbeamertemplate*{title page}{customized}[1][]
+{
+   \begin{beamercolorbox}[rounded=true,sep=4pt]{palette primary}
+    \centering
+    \usebeamerfont{title}\inserttitle\par
+    \vspace{4pt}
+    \usebeamerfont{subtitle}\insertsubtitle\par
+   \end{beamercolorbox}
+   \bigskip
+   \begin{center}
+    \usebeamerfont{author}\insertauthor\par
+    \vspace{6pt}
+    \usebeamerfont{institute}\insertinstitute\par
+    \vspace{12pt}    
+    \usebeamerfont{institute}\inserttitlegraphic\par
+    \vspace{8pt}   
+    \usebeamerfont{date}\insertdate\par
+   \end{center} 
+}
+
+
+\mode
+<all>

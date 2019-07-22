@@ -1,0 +1,41 @@
+\mode<presentation>
+
+\usepackage{graphicx}
+\newcommand{\IHSlogo}[1][height=2em]{\includegraphics[#1]{IHS-logo}}
+\newcommand{\IHSlogotext}[1][height=2em]{\includegraphics[#1]{IHS-logo-with-text}}
+
+\usecolortheme{ihs}
+\useinnertheme{rectangles}
+\useoutertheme{infolines}
+\usefonttheme{professionalfonts}
+\usepackage{opensans}
+\usepackage{microtype}
+
+\setbeamertemplate{navigation symbols}{} % no navigation symbols
+\setbeamertemplate{headline}{}
+\setbeamertemplate{frametitle}
+{
+    \nointerlineskip
+    \begin{beamercolorbox}[sep=0.3cm,ht=1.8em,wd=\paperwidth]{frametitle}
+        \vbox{}\vskip-2ex%
+        \strut\insertframetitle\strut
+        \vskip-0.8ex%
+    \end{beamercolorbox}
+}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.90\paperwidth,ht=2.25ex,dp=1ex,left]{palette primary}%
+  ~~\IHSlogo[height=2ex]~~~\usebeamerfont{author in head/foot}\insertshortauthor\expandafter\beamer@ifempty\expandafter{\beamer@shortinstitute}{}{~(\insertshortinstitute)}~---~\usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.10\paperwidth,ht=2.25ex,dp=1ex,right]{palette primary}%
+%    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\mode
+<all>

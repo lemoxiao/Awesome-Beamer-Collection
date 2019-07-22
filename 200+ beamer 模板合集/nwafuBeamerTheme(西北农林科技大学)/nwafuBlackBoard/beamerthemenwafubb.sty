@@ -1,0 +1,100 @@
+% nwafu(西北农林科技大学)Blackboard主题。
+% 版权(c) 2015-2019, 信息工程学院 耿楠<nangeng@nwafu.edu.cn>
+%
+% 该主题修改于kmaed的Blackboard主题：https://github.com/kmaed/kmbeamer
+%
+% 这是一个免费代码：发布和修改该代码，请遵守最新版的自由软件联盟发布
+% 的GNU通用公共协议
+%
+% 期望这一代码对你有用，但值得注意的是，我不对任何后续问题进行维护，
+% 请参考<http://www.gnu.org/licenses/>查看最新的协议内容。
+%%
+\ProvidesPackage{beamerthemenwafubb}[2019/06/25 v2.0.00 The nwafu Blackboard Beamer Theme]
+
+\mode<presentation>
+
+\RequirePackage{nwafubeamer_common}
+
+\usecolortheme{nwafubb}
+
+\setbeamersize{text margin left=6mm,text margin right=6mm}
+
+\setbeamerfont{title}{size=\normalsize,series=\bfseries}
+\setbeamerfont{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamerfont{footline}{size*={5}{\z@},series=\bfseries}
+
+\setbeamertemplate{background canvas}{\ifratio{169}{\includegraphics{nwafulogo/nwafubeamer_bg_bb169}}{\includegraphics{nwafulogo/nwafubeamer_bg_bb43}}}
+\setbeamertemplate{itemize item}{\usebeamercolor[fg]{structure}$\circ$}
+\setbeamertemplate{frametitle}{\boldmath\insertframetitle}
+\setbeamertemplate{headline}{\vspace{2mm}}
+
+% 设置页眉高度为帧标题高度的1.3倍
+\newlength{\beamer@height}%
+\usebeamerfont{frametitle} % 使用帧标题字体
+\setlength{\beamer@height}{1.3\baselineskip}%
+% 恢复字体
+\reset@font%
+
+% 帧标题
+\setbeamertemplate{frametitle}{%
+  \begin{minipage}[c][\beamer@height][c]{\textwidth}%
+    \hspace*{-1ex}{\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\insertframetitle}%
+    \ |\ {\usebeamercolor[fg]{framesubtitle}\usebeamerfont{framesubtitle}\insertframesubtitle}%
+  \end{minipage}%
+}%
+
+% 设置页脚
+\setbeamertemplate{footline}{%
+  \setbox\nwafubmr@tmpboxa\hbox{\ifnum\insertsectionnumber>0\boldmath\insertsectionnumber.~\insertsection\fi}%
+  \setbox\nwafubmr@tmpboxb\hbox{\boldmath\insertshorttitle{}}%
+  \setbox\nwafubmr@tmpboxc\hbox{\boldmath\insertshortinstitute{}\ \insertauthor\ \insertframenumber$/$\inserttotalframenumber}%
+  \ht\nwafubmr@tmpboxa=1mm\dp\nwafubmr@tmpboxa=0mm%
+  \ht\nwafubmr@tmpboxb=1mm\dp\nwafubmr@tmpboxb=0mm%
+  \ht\nwafubmr@tmpboxc=1mm\dp\nwafubmr@tmpboxb=0mm%
+  \vspace{5.2mm}%
+  \hspace{4mm}\noindent\box\nwafubmr@tmpboxa\hfill\box\nwafubmr@tmpboxb\hfill\box\nwafubmr@tmpboxc\hspace{4mm}%
+  \vspace{0.9mm}%
+}%
+
+% 标题页
+\setbeamertemplate{title page}{%
+  \begin{minipage}[c][\textheight][c]{\textwidth}%
+    \vfill%
+    \centering%
+    \begin{beamercolorbox}[wd=\textwidth,center, rounded=true, sep=\baselineskip]{frametitle}%
+      {\usebeamerfont{title}\inserttitle}\vspace*{0.5\baselineskip}%
+
+      {\usebeamerfont{subtitle}\insertsubtitle}%
+    \end{beamercolorbox}\vspace*{\baselineskip}%
+      
+    {\usebeamerfont{author}\insertauthor}\vspace*{0.5\baselineskip}%
+    \vfill%
+    {\usebeamerfont{institute}\insertinstitute\par}%
+    {\inserttitlegraphic \\ \usebeamerfont{institute}中国$\boldsymbol{\cdot}$杨凌}\\[-1.0ex]%
+    {\usebeamerfont{institute}\usebeamerfont{date}\insertdate}\vspace*{-0.5\baselineskip}%
+  \end{minipage}%
+}%
+    
+% 封底页
+\defbeamertemplate{final page}{text}[1]{%
+  \begin{minipage}[c][\textheight][c]{\textwidth}%
+    \centering%
+    \vfill%
+    \begin{beamercolorbox}[wd=\textwidth, center, rounded=true, sep=2\baselineskip]{frametitle}%
+        #1%
+    \end{beamercolorbox}%
+    \vfill%
+    {\usebeamerfont{institute}\insertinstitute\par}%
+    {\inserttitlegraphic \\ \usebeamerfont{institute}中国$\boldsymbol{\cdot}$杨凌}\vspace*{0.1\baselineskip}%
+  \end{minipage}%
+}
+\newcommand{\finalpage}[1]{%
+  \setbeamertemplate{final page}[text]{#1}%
+  \usebeamertemplate{final page}%
+}%
+
+\mode
+<all>
+
+\endinput

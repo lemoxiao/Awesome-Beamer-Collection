@@ -1,0 +1,107 @@
+%!TEX program = xelatex
+\documentclass{beamer}
+
+\usepackage[english]{babel}
+
+\usepackage{graphicx,hyperref,url, materialbeamer}
+\usepackage{braket}
+%\usepackage{euler}
+\usepackage{listings}
+
+
+\graphicspath{ {./figs/} }
+\setbeamercovered{transparent}
+\lstdefinestyle{customsql}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  xleftmargin=\parindent,
+  language=SQL,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+\lstset{escapechar=@,style=customsql}
+
+
+
+\usefonttheme{professionalfonts} % using non standard fonts for beamer
+%\usefonttheme{serif}
+
+% The title of the presentation:
+%  - first a short version which is visible at the bottom of each slide;
+%  - second the full title shown on the title slide;
+\title[Fb Tao]{Facebook Tao}
+
+% Optional: a subtitle to be dispalyed on the title slide
+\subtitle{Distributed Data Store for the Social Graph}
+
+% The author(s) of the presentation:
+%  - again first a short version to be displayed at the bottom;
+%  - next the full list of authors, which may include contact information;
+\author[L. Lancia \& G. Salillari]{
+  L. Lancia, G. Salillari} 
+  
+%\titlegraphic{\includegraphics[width=\textwidth]{atac-logo}}
+
+% The institute:
+%  - to start the name of the university as displayed on the top of each slide
+%    this can be adjusted such that you can also create a Dutch version
+%  - next the institute information as displayed on the title slide
+\institute[Sapienza Università di Roma]{
+Cloud Computing\\
+  Master Degree in Data Science \\
+  Sapienza Università di Roma}
+
+% Add a date and possibly the name of the event to the slides
+%  - again first a short version to be shown at the bottom of each slide
+%  - second the full date and event name for the title slide
+\date[\today]{
+ \today}
+
+
+
+
+\providecommand{\di}{\mathop{}\!\mathrm{d}}
+\providecommand*{\der}[3][]{\frac{d\if?#1?\else^{#1}\fi#2}{d #3\if?#1?\else^{#1}\fi}} 
+ \providecommand*{\pder}[3][]{% 
+    \frac{\partial\if?#1?\else^{#1}\fi#2}{\partial #3\if?#1?\else^{#1}\fi}% 
+  }
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Table of Contents}
+
+  \tableofcontents
+\end{frame}
+
+\input{introduction}
+\input{datamodel}
+\input{architechture}
+\input{implementation}
+\input{consistency}
+\input{workload}
+
+\setbeamercolor{background canvas}{bg=matblue}
+\setbeamercolor{normal text}{fg=white}
+\begin{frame}[plain, b]
+\centering
+\huge \textcolor{white}{Thank You}
+\normalsize
+
+\vspace*{\fill}
+
+ \begin{beamercolorbox}[wd=\paperwidth]{section in head/foot}
+ \centering
+Facebook Tao - A Distributed Data Store for the Social Graph
+\vskip10pt
+\end{beamercolorbox}
+ \end{frame}
+
+\end{document}

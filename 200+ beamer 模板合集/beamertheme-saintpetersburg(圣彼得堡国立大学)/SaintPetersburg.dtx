@@ -1,0 +1,209 @@
+%%
+%% Copyright (C) 2017 by Ivan Gankevich <igankevich@ya.ru>
+%%
+%% This file may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License, either version 1.3c of this license
+%% or (at your option) any later version.  The latest version of this
+%% license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.3c or later is part of all distributions of LaTeX version
+%% 2005/12/01 or later.
+%%
+
+\documentclass{ltxdoc}
+
+\usepackage{xcolor}
+\definecolor{spbuTerracotta}{cmyk}{.08,.91,.92,.33}
+\definecolor{spbuGray}{cmyk}{.21,.11,.09,.22}
+\definecolor{spbuDarkGray2}{HTML}{5F7177}
+\definecolor{spbuWhite1}{RGB}{245,246,245}
+\usepackage[colorlinks=true,
+linkcolor=spbuTerracotta,
+menucolor=spbuTerracotta,
+pagecolor=spbuTerracotta,
+urlcolor=spbuTerracotta]{hyperref}
+\usepackage{listings}
+\lstset{%
+	language=[LaTeX]{TeX},
+	basicstyle=\ttfamily,
+	keywordstyle=\color{spbuTerracotta},
+	commentstyle=\color{spbuGray},
+	stringstyle=\color{spbuDarkGray2},
+	backgroundcolor=\color{spbuWhite1},
+	numbers=none,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	frame=none,
+	breaklines=true,
+	breakatwhitespace=false,
+	morekeywords={usetheme,institute,maketitle,setdefaultlanguage%
+		,titlegraphic,othergraphic,leftcolumnwidth,rightcolumnwidth,%
+		middlecolumnwidth,includegraphics},
+}
+\usepackage{metalogo}
+\usepackage{fontspec}
+\setmainfont[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	Mapping=tex-text
+]{OldStandard}
+\setromanfont[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	Mapping=tex-text
+]{OldStandard}
+\setsansfont[
+	Extension=.ttf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	BoldItalicFont=*-BoldItalic,
+	Mapping=tex-text
+]{OpenSans}
+\setmonofont[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold
+]{FiraMono}
+
+\title{Saint Petersburg: \LaTeX{} Beamer theme for SPbU}
+\author{Ivan Gankevich}
+\date{21 Nov 2017}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+
+A small theme that incorporates university colours and fonts from
+\href{http://pr.spbu.ru/}{the official web-site}.
+
+\subsection{Installation}
+
+On Linux/MacOS clone \href{https://github.com/igankevich/SaintPetersburg}{theme
+repository} and type \verb=make install= to install everything to standard TeX
+Live locations. Alternatively, just copy all \verb=*.sty= files into your
+project directory so that \LaTeX{} can find them.  In order to show
+university's logo in the background of the title slide, you need to download
+its medium size version from
+\href{http://pr.spbu.ru/images/simvolika/logo/CoA_Medium.eps}{the official
+web-site}. 
+
+\subsection{Usage}
+
+Saint Petersburg theme can be compiled by \LaTeX{} or \XeLaTeX{}. Here is the
+minimal working example:
+\begin{lstlisting}
+\documentclass[aspectratio=169]{beamer}
+% add \usepackage{beamerposter} for the poster
+
+% XeTeX
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+% or \setdefaultlanguage{russian}
+
+% LaTeX
+% \usepackage[utf8]{inputenc}
+% \usepackage[english]{babel}
+% or \usepackage[english,russian]{babel}
+
+\usetheme{SaintPetersburg}
+
+\title{Saint Petersburg \LaTeX{} Beamer theme}
+\author{Ivan Gankevich}
+\institute{Saint Petersburg State University}
+\date{21 Nov 2017}
+
+\begin{document}
+\frame{\titlepage}
+\end{document}
+\end{lstlisting}
+
+\noindent An example of poster.
+\begin{lstlisting}
+\documentclass[aspectratio=169]{beamer}
+\usepackage{beamerposter} for the poster
+
+% XeTeX
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+% or \setdefaultlanguage{russian}
+
+% LaTeX
+% \usepackage[utf8]{inputenc}
+% \usepackage[english]{babel}
+% or \usepackage[english,russian]{babel}
+
+\usetheme[poster]{SaintPetersburg}
+
+\title{Saint Petersburg \LaTeX{} Beamer theme}
+\author{Ivan Gankevich}
+\institute{Saint Petersburg State University}
+\date{21 Nov 2017}
+
+\begin{document}
+\frame{\titlepage}
+\end{document}
+\end{lstlisting}
+
+\subsection{Usage}
+
+\subsubsection{Theme options}
+
+\DescribeMacro{nologo} Disables display of the university coat of arms in the
+left top corner of the title page.\vspace{\baselineskip}
+
+\noindent\DescribeMacro{poster} Adapts the theme for poster presentation:
+enables section commands, increases font size and changes default font family
+to serif.
+
+\subsubsection{Theme macros}
+
+\DescribeMacro{\titlegraphic}%
+\DescribeMacro{\othergraphic}%
+Defines a code to include in the left (right) top corner of the poster. The
+following code places SPbU logo in both left and right corners.
+\begin{lstlisting}
+\titlegraphic{%
+	\includegraphics[width=.7\linewidth]{spbu-CoA}}
+\othergraphic{%
+	\includegraphics[width=.7\linewidth]{spbu-CoA}}
+\end{lstlisting}
+Here the width equals to 70\% of the left (right) column width. Any code can be
+specified instead of just including graphics.
+
+\DescribeMacro{\leftcolumnwidth}%
+\DescribeMacro{\rightcolumnwidth}%
+\DescribeMacro{\middlecolumnwidth}%
+Sets left, right, middle column widths repsectively. The right and left columns
+contain logos and the middle column contains the title, authors and institute
+name. In the following example, the widths are set to 20\%, 60\% and 20\%
+fractions of the total line width.
+\begin{lstlisting}
+\leftcolumnwidth{.2\linewidth}
+\middlecolumnwidth{.6\linewidth}
+\rightcolumnwidth{.2\linewidth}
+\end{lstlisting}
+
+\subsection{License}
+
+Saint Petersburg theme is licensed under the terms of the
+\href{https://ctan.org/license/lppl1.3c}{\LaTeX{} Project Public License
+version 1.3c}.
+
+\section{Implementation}
+
+\DocInput{beamercolorthemeSaintPetersburg.dtx}
+\DocInput{beamerfontthemeSaintPetersburg.dtx}
+\DocInput{beamerthemeSaintPetersburg.dtx}
+
+\end{document}

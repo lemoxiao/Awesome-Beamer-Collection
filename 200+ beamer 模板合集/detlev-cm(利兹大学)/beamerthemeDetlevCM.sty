@@ -1,0 +1,43 @@
+% Copyright 2013 Detlev Conrad Mielczarek
+% Based on previous work by Herbert Voss (FU Berlin Theme) and Beamer Templates
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackage{beamerthemeDetlevCM}[2013/12/08 v 1.00 (dcm) http://detlevcm.eu]
+
+\PassOptionsToClass{xcolor=table,covered,hyperref={bookmarks,colorlinks}}{beamer}
+\DeclareOptionBeamer{compress}{\beamer@compresstrue}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+%
+%\usecolortheme{Leeds} % don't force the leeds colour theme - or rather ETII colour theme
+\usefonttheme{DetlevCM}
+\useoutertheme{DetlevCM}
+
+\setbeamertemplate{itemize item}[default]
+\setbeamertemplate{sections/subsections in toc}[ball]
+
+
+\setbeamertemplate{navigation symbols}{}
+\beamerdefaultoverlayspecification{<+-| alert@+>}
+\def\beamer@andinst{\quad }
+
+\setbeamercolor{titlelike}{parent=structure}
+\def\maketitle{
+\ifbeamer@inframe\titlepage\else\frame[t]{\titlepage}\fi%
+
+}
+
+
+% Removes numbers in TOC
+\setbeamertemplate{section in toc}{\hspace*{1em}\inserttocsection}
+
+
+\endinput
+\mode <all>

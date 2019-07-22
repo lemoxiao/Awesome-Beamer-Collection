@@ -1,0 +1,118 @@
+%
+% beamerExample.tex
+% 
+% Copyright 2013 Benjamin Tovar Cisneros <benjamin.tovarcis@gmail.com>
+% 
+% This program is free software; you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation; either version 2 of the License, or
+% (at your option) any later version.
+% 
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this program; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+% MA 02110-1301, USA.
+% 
+% 
+% ******************************************************************************
+% LATEX PARAMETERS
+% ******************************************************************************
+% Tell LaTex that this document is using beamer 
+\documentclass[xcolor=dvipsnames,mathserif]{beamer} 
+% Color theme of the slides 
+% TRY USING DIFFERENT RGB COLORS
+\usecolortheme[RGB={70,130,180}]{structure} 
+% Slides theme 
+% CHECK THIS URL: http://www.math.umbc.edu/~rouben/beamer/quickstart-Z-H-30.html#node_tag_Temp_75
+\usetheme{Dresden} 
+% Links in slides settings
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+%% load source code package
+\usepackage{listings}
+%% Harvard bibliography style
+\usepackage{natbib}
+\bibpunct[:]{(}{)}{;}{a}{}{,}
+% %% hyperreferences inside the slides
+% \usepackage{hyperref}
+% ******************************************************************************
+% SLIDES PARAMETERS
+% ******************************************************************************
+\title{Random \LaTeX{} presentation using the Beamer class}
+\subtitle{as a subtitle, \LaTeX{}  definitely rocks}
+\author{Biotech. Benjamin Tovar Cisneros}
+\institute{Bioinformatics Research Group @ ITESM campus Monterrey}
+\date{\today}
+
+\begin{document}
+% Set background image with the Institution logo
+\usebackgroundtemplate{\includegraphics[width=0.7\textwidth]{images/format/logoTecTransparent2}}
+
+%source code edition parameters
+\lstset{
+   breakatwhitespace=true,
+   language=R,
+   columns=fullflexible,
+   keepspaces=true,
+   breaklines=true,
+   tabsize=3, 
+   showstringspaces=false,
+   extendedchars=true,
+   numbers=left,
+   numberstyle=\tiny,
+   aboveskip=-40pt,
+   frame=leftline,
+   commentstyle=\itshape\color{gray},
+}
+
+% ******************************************************************************
+% PRESENTATION FIRST PAGE
+% ******************************************************************************
+\frame{\titlepage}
+
+% LOAD MYSELF.TEX
+\input{source/myself}
+
+% ******************************************************************************
+% INDEX
+% ******************************************************************************
+\section[Outline]{}
+\frame{\tableofcontents}
+
+% ******************************************************************************
+% LOAD TEX FILES
+% ******************************************************************************
+\input{source/introduction}
+\input{source/addingImages}
+\input{source/citing}
+\input{source/code}
+
+
+% ******************************************************************************
+% LOAD BIBLIOGRAPHY
+% ******************************************************************************
+\begin{frame}[allowframebreaks]{References}
+    \bibliographystyle{elsarticle-harv}
+    \bibliography{bib/bibliography}
+\end{frame}
+
+% ******************************************************************************
+% COMPILATION INSTRUCTIONS | RUN IN A TERMINAL
+% ******************************************************************************
+
+%	pdflatex beamerExample
+%	bibtex beamerExample
+%	pdflatex beamerExample
+%	pdflatex beamerExample
+%	pdflatex beamerExample
+
+%	YES, IT IS NEEDED TO COMPILE THE FILE SEVERAL TIMES BECAUSE
+%	LATEX COMPILES LAYER BY LAYER, AT THE FIRST COMPILATION IT WILL DO SOME
+%	STUFF AND AT THE SECOND COMPILATION WILL DO ANOTHER STUFF AND SO ON.
+
+\end{document}

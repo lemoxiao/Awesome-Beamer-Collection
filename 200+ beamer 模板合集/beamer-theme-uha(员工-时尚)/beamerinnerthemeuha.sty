@@ -1,0 +1,169 @@
+% Name : beamerinnerthemeuha.sty
+% Author : Sébastien Bindel <sebastien.bindel@uha.fr>
+
+%--------------------------------------------------------------
+% Mandatory part
+%--------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeuha}[2018/10/22 uha inner theme]
+
+%--------------------------------------------------------------
+% Paragraph spacing
+%--------------------------------------------------------------
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.1}
+
+%--------------------------------------------------------------
+% Itemize 
+%--------------------------------------------------------------
+\setbeamertemplate{itemize items}{\footnotesize\textbullet}
+
+%--------------------------------------------------------------
+% Description 
+%--------------------------------------------------------------
+\setbeamersize{description width=0.83cm}
+
+%--------------------------------------------------------------
+% Example block environment
+%--------------------------------------------------------------
+\defbeamertemplate*{block example begin}{uha}{
+	\par\vskip\medskipamount%
+	\usebeamercolor{block title example}
+	\begin{tikzpicture}
+		\node [
+			draw=fg,
+			fill=bg,
+			inner sep=2ex,
+			text width=\paperwidth - 2cm - 5ex,
+			minimum width=\paperwidth - 2cm - 1ex,
+			align=left, 
+			rounded corners=1pt,
+			drop shadow={top color=black!50!white,
+				bottom color=black!30!white,
+				shadow xshift=3.5pt,
+				shadow yshift=-3.5pt,
+              rounded corners}
+		] (BOXCONTENT) \bgroup \noindent%
+		\usebeamerfont{beamer body}%
+		\usebeamercolor{block body example}
+	}
+
+	\defbeamertemplate*{block example end}{uha}{
+		\egroup;
+		\usebeamercolor{block title example}
+		\ifx\insertblocktitle\@empty
+		\else%
+			{
+				\node [
+					draw=fg,
+					fill=fg,
+					anchor=west,
+					text=white,
+					rounded corners
+				] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\textbf{\insertblocktitle}};
+			}
+		\fi
+	\end{tikzpicture}
+	\vskip\smallskipamount
+}
+
+%--------------------------------------------------------------
+% Alert block environment
+%-------------------------------------------------------------
+\defbeamertemplate*{block alerted begin}{uha}
+{
+  \par\vskip\medskipamount%
+  \usebeamercolor{block title alerted}
+  \begin{tikzpicture}
+    \node [
+      draw=red!80!black,
+  	  fill=fg,
+	  text=red!80!black,
+	  inner sep=2ex,
+      text width=\paperwidth - 2cm - 5ex,
+      minimum width=\paperwidth - 2cm - 1ex,
+      align=left, 
+	  rounded corners=1pt,
+	  drop shadow={top color=black!50!white,
+				bottom color=black!30!white,
+				shadow xshift=3.5pt,
+				shadow yshift=-3.5pt,
+			rounded corners}
+    ] (BOXCONTENT) \bgroup \noindent%
+    \usebeamerfont{beamer body}%
+    \usebeamercolor{block body alerted}
+}
+
+\defbeamertemplate*{block alerted end}{uha}
+{
+  \egroup;
+  \usebeamercolor{block title alerted}
+  \ifx\insertblocktitle\@empty
+  \else%
+  {
+    \node [
+	  draw=fg,
+      fill=bg,
+      anchor=west,
+      text=white,
+      rounded corners
+  ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\textbf{\insertblocktitle}};
+  }
+  \fi
+  \end{tikzpicture}
+  \vskip\smallskipamount
+}
+
+%--------------------------------------------------------------
+% Block environment
+%-------------------------------------------------------------
+\defbeamertemplate*{block begin}{uha}
+{
+  \par\vskip\medskipamount%
+  \usebeamercolor{block title}
+  \ifx\insertblocktitle\@empty\newcommand{\yskiplength}{1.5ex}
+  \else\newcommand{\yskiplength}{2ex}
+  \fi
+  \begin{tikzpicture}
+    \node [
+      draw=blueUHA2!60!black,
+  	  fill=gray!12!white,
+      inner sep = 1ex,
+      inner ysep = \yskiplength,
+      text width=\paperwidth - 2cm - 5ex,
+      minimum width=\paperwidth - 2cm - 1ex,
+	  rounded corners=1pt,
+	  drop shadow={top color=black!50!white,
+	  bottom color=black!30!white,
+		  shadow xshift=3.5pt,
+		  shadow yshift=-3.5pt,
+              rounded corners },
+    ] (BOXCONTENT) \bgroup%
+    \begin{minipage}{\textwidth}
+    \usebeamerfont{beamer body}%
+    \usebeamercolor{block body}%
+}
+
+\defbeamertemplate*{block end}{uha}
+{
+  \end{minipage}%
+  \egroup;
+  \usebeamercolor{block title}
+  \ifx\insertblocktitle\@empty
+  \else%
+  {
+    \node[
+	  draw=blueUHA2!60!black,
+      fill=blueUHA2!60!black,
+      anchor=west,
+      text=white,
+      rounded corners
+  ] at ([shift={(5pt,0)}]BOXCONTENT.north west) {\textbf{\insertblocktitle}};
+  }
+  \fi
+  \end{tikzpicture}
+  \vskip\smallskipamount
+}
+
+
+

@@ -1,0 +1,15 @@
+
+*.snm
+*.swp
+.gitignore	
+*.aux
+
+*.log
+
+*.nav
+
+*.out
+
+*.gz
+
+*.toc

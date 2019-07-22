@@ -1,0 +1,65 @@
+% Copyright 
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+
+\mode<presentation>
+% -----------------------------------------------------------------------------
+% Color components of the KU Leuven logo
+% -----------------------------------------------------------------------------
+% As read from the EPS file.
+\definecolor{KULeuvenLogoBlue}{RGB}{18,60,117}
+\definecolor{KULeuvenLogoLightBlue}{RGB}{106,194,238}
+
+% -----------------------------------------------------------------------------
+% Color components of the template.
+% -----------------------------------------------------------------------------
+% Unfortunately, the RGB components as read from the PPTX template are somewhat different from these in the KULeuven logo...
+\definecolor{KULeuvenBodyText}{RGB}{18,60,117}
+\definecolor{KULeuvenHeaderText}{RGB}{82,189,236}
+\definecolor{KULeuvenFill}{RGB}{17,110,138}
+% TODO: the PPT presentation defines a gradient of the filling color.
+\definecolor{KULeuvenTitle}{RGB}{255,255,255} 	% white 
+\definecolor{KULeuvenMath}{RGB}{0,0,0} 			% black 
+\definecolor{KULeuvenAlert}{RGB}{255,0,0} 		% plain simple red 
+
+% -----------------------------------------------------------------------------
+% 
+% -----------------------------------------------------------------------------
+\setbeamercolor{normal text}{fg=KULeuvenBodyText}		% body text
+%\setbeamercolor{structure}{fg=KULeuvenBodyText,bg=KULeuvenFill}
+\setbeamercolor{frametitle}{fg=KULeuvenHeaderText}	% frame title
+\setbeamercolor{math text displayed}{fg=black}      	% equations in displaystyle (inlined math inherits from normal text)
+%\setbeamercolor{section in toc}{fg=blue_kuleuven}		%toc (section) color
+\setbeamercolor{frame number in foot}{fg=KULeuvenBodyText}%
+\setbeamercolor{frame number in head}{fg=KULeuvenBodyText}%
+\setbeamercolor{alerted text}{fg=KULeuvenAlert}  % alert color
+% -----------------------------------------------------------------------------
+% Elements of the title page
+% -----------------------------------------------------------------------------
+\setbeamercolor{title}{fg=KULeuvenTitle}
+\setbeamercolor{subtitle}{fg=KULeuvenTitle}
+\setbeamercolor{author}{fg=KULeuvenTitle}
+\setbeamercolor{institute}{fg=KULeuvenTitle}
+\setbeamercolor{date}{fg=KULeuvenTitle}
+
+% -----------------------------------------------------------------------------
+% Itemize and enumerate: all in the same color as the body text.
+% -----------------------------------------------------------------------------
+\setbeamercolor{all items}{fg=KULeuvenBodyText}
+\setbeamercolor{item}{fg=KULeuvenBodyText}
+
+% -----------------------------------------------------------------------------
+% Blocks
+% -----------------------------------------------------------------------------
+\setbeamercolor{block title}{fg=KULeuvenTitle,bg=KULeuvenBodyText}
+\setbeamercolor{block title alerted}{use=block title,fg=KULeuvenAlert}
+\setbeamercolor{block title example}{bg=KULeuvenHeaderText,fg=KULeuvenBodyText}
+\setbeamercolor{block body}{fg=KULeuvenTitle,bg=KULeuvenFill}
+\setbeamercolor{block body alerted}{use=block body}
+\setbeamercolor{block body example}{use=block body}
+
+
+\mode<all>

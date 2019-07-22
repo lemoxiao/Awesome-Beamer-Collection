@@ -1,0 +1,309 @@
+%-------------------------------------------------------------------------
+%
+% Latex-Beamer theme for non-commercial/private use
+%
+% This theme is modified from the theme for
+% the University of Twente, by Jasper Goseling.
+%
+% Author: Xian Qiu
+% Date: Oct 4, 2013
+% Version: 1.1beta
+%
+% ------------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{themexq}
+
+\mode<presentation>
+
+%-------------------------------------------------------------------------
+%%
+%% Loading packages
+%%
+%-------------------------------------------------------------------------
+
+\RequirePackage{tikz}
+\RequirePackage{pgfopts}
+\RequirePackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+ % start everything near the top-left corner
+\textblockorigin{0mm}{0mm}
+
+
+%-------------------------------------------------------------------------
+%
+% new commands
+%
+%-------------------------------------------------------------------------
+\newcommand{\footlineauthor}[1]{\def\insertfootlineauthor{#1}}
+\newcommand{\footlineinstitute}[1]{\def\insertfootlineinstitute{#1}}
+\newcommand{\event}[1]{\def\insertevent{#1}}
+\newcommand{\coauthors}[1]{\def\insertcoauthors{#1}}
+\newcommand{\coauthorstext}[1]{\def\insertcoauthorstext{#1}}
+%%%Here we define text-style logos that are used before text
+\newcommand{\inserttextlogo}[1]{
+  \begin{tikzpicture}
+	 \filldraw[fill = red!45!black] node[shape = rectangle, fill = red!45!black, inner sep = 0.4mm, minimum height = 2ex] {\color{white}{#1}};
+  \end{tikzpicture}
+}
+\newcommand{\footlineleftlogo}[1]{\def\insertfootlineleftlogo{#1}}
+\newcommand{\footlinerightlogo}[1]{\def\insertfootlinerightlogo{#1}}
+
+
+%-------------------------------------------------------------------------
+%
+% Colors defined by ``UT beamer theme".
+%
+%-------------------------------------------------------------------------
+
+\definecolor{utgreen}{RGB}{52, 178, 51}
+\definecolor{utmagenta}{RGB}{207, 0, 114}
+\definecolor{utyellow}{RGB}{254, 209, 0}
+\definecolor{utblue}{RGB}{0, 152, 195}
+\definecolor{utred}{RGB}{220, 12, 48}
+\definecolor{utforest}{RGB}{0, 106, 77}
+\definecolor{utpurple}{RGB}{79, 45, 127}
+\definecolor{utgold}{RGB}{136, 123, 27}
+\definecolor{utnavy}{RGB}{0, 44, 95}
+\definecolor{utgray}{RGB}{97, 82, 88}
+
+% for compatibility
+\definecolor{utlightgreen}{RGB}{52, 178, 51}
+\definecolor{utlightpurple}{RGB}{207, 0, 114}
+\definecolor{utlightyellow}{RGB}{254, 209, 0}
+\definecolor{utlightblue}{RGB}{0, 152, 195}
+\definecolor{utpink}{RGB}{220, 12, 48}
+\definecolor{utdarkgreen}{RGB}{0, 106, 77}
+\definecolor{utdarkpurple}{RGB}{79, 45, 127}
+\definecolor{utdarkyellow}{RGB}{136, 123, 27}
+\definecolor{utdarkblue}{RGB}{0, 44, 95}
+
+%
+\setbeamercolor{structure}{fg=black,bg=white}
+\setbeamercolor{alerted text}{fg=utred}
+
+
+%-------------------------------------------------------------------------
+%
+%Block style
+%
+%-------------------------------------------------------------------------
+
+\setbeamercolor{block title}{use=structure,fg=structure.fg,bg=structure.fg!20!bg}
+\setbeamercolor{block title alerted}{use=alerted text,fg=alerted text.fg,bg=alerted text.fg!20!bg}
+\setbeamercolor{block title example}{use=example text,fg=example text.fg,bg=example text.fg!20!bg}
+
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!50!bg}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!50!bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!50!bg}
+
+
+%-------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------
+%
+%% Fonts
+%
+%-------------------------------------------------------------------------
+
+\ifxetex
+	\setsansfont[Mapping=tex-text,Scale=0.8]{Arial}
+% 	\setsansfont[Mapping=tex-text,Scale=1.0]{Arial Narrow}
+	\newfontfamily\narrowfamily[Mapping=tex-text,Scale=1.0]{Arial Narrow}
+	\setbeamerfont*{frametitle}{family=\narrowfamily,size=\Large}
+	\setbeamerfont*{footline}{family=\narrowfamily,size=\scriptsize}
+	\setbeamerfont*{title}{family=\narrowfamily,size=\Large}
+	\setbeamerfont*{subtitle}{family=\narrowfamily,size=\normalsize}
+	\setbeamerfont*{author}{family=\narrowfamily,size=\normalsize}
+	\setbeamerfont*{institute}{family=\narrowfamily,size=\normalsize}
+	\setbeamerfont*{date}{family=\narrowfamily,size=\normalsize}
+\else
+	\setbeamerfont*{frametitle}{size=\Large}
+	\setbeamerfont*{footline}{size=\scriptsize}
+	\setbeamerfont*{title}{size=\Large}
+	\setbeamerfont*{author}{size=\normalsize}
+	\setbeamerfont*{institute}{size=\normalsize}
+	\setbeamerfont*{date}{size=\normalsize}
+\fi
+
+\setbeamerfont*{alerted text}{series=\bfseries}
+
+%-------------------------------------------------------------------------
+%
+% Inner and outer frames
+%
+%-------------------------------------------------------------------------
+\setbeamertemplate{navigation symbols}{}
+\useinnertheme{default}
+\setbeamertemplate{itemize items}[triangle]
+
+
+%-------------------------------------------------------------------------
+%
+% Frame title
+%
+%-------------------------------------------------------------------------
+\defbeamertemplate*{frametitle}{}{
+\usebeamerfont{frametitle}\vspace{1.5ex}\insertframetitle\\[-.5ex] \rule{\textwidth}{.3pt}%\rlap{\rule{\beamer@rightmargin}{.3pt}}
+} % the rule consists of two parts, the last part does not occupy any space (\rlap) in order not to cause an overfull hbox
+
+%-------------------------------------------------------------------------
+%
+% Footline
+%
+%-------------------------------------------------------------------------
+
+\defbeamertemplate*{footline}{}{
+\begin{beamercolorbox}[ht=2cm,sep=0cm]{fg=black,bg=red}
+\hspace{\beamer@leftmargin}
+\hspace{-4.6ex}
+\hspace*{2ex}
+%%%The logo before footline institute%%%%
+\ifx\insertfootlinerightlogo\undefined
+  \else
+  \inserttextlogo{\insertfootlineleftlogo}
+\fi
+%%%%%%footline institute%%%%%%%
+\insertfootlineinstitute
+\hfill
+%%%The logo before footline author
+\ifx\insertfootlineleftlogo\undefined
+  \else
+  \inserttextlogo{\insertfootlinerightlogo}
+\fi
+%%%footline author%%%%
+\insertfootlineauthor
+\hspace{2ex}
+\insertframenumber/\inserttotalframenumber
+\hspace*{\beamer@rightmargin}
+\vspace*{1.5ex}
+\end{beamercolorbox}
+}
+
+
+
+%-------------------------------------------------------------------------
+%
+% Title page
+%
+%-------------------------------------------------------------------------
+
+\defbeamertemplate*{title page}{xq}
+{
+% \usebeamercolor{
+
+\begin{tikzpicture}[overlay]
+ \filldraw[fill = white!50!gray] (-2,4) rectangle (100,-100);
+ \filldraw[fill = black] (-2,4) rectangle (20,-3);
+\end{tikzpicture}
+
+%--------------------------------
+%title
+%--------------------------------
+\begin{textblock}{115}(10,20)
+\fcolorbox{white!50!black}{black}{\parbox{0.9\textwidth}{
+    \color{white}
+    \vspace*{1ex}
+    \usebeamerfont{title}\inserttitle
+    \vspace*{1ex}
+}}
+\end{textblock}
+
+\vfill
+%--------------------------------
+%event
+%--------------------------------
+\ifx\insertevent\undefined
+  \else
+  \begin{textblock}{115}(10,40)
+  %\fcolorbox{white!50!black}{black}{{
+    \color{white}
+    \usebeamerfont{subtitle}\scriptsize{\insertevent}
+    \color{black}
+  %}}
+  \end{textblock}
+\fi
+
+%--------------------------------
+%author
+%--------------------------------
+\begin{textblock}{115}(10,55)
+\fcolorbox{red!45!black}{red!45!black}{{
+    \color{white}
+    \usebeamerfont{author}\insertauthor
+    \color{black}
+}}
+\begin{tikzpicture}[overlay]
+  \draw[red!45!black] (0,0) -- (10,0);
+\end{tikzpicture}
+\end{textblock}
+
+%--------------------------------
+%institute and date
+%there are two cases:
+%     Case 1: Single author
+%     Case 2: Multiple authors
+%--------------------------------
+\ifx\insertcoauthors\undefined
+  %----------------
+  %Case 1
+  %----------------
+  \begin{textblock}{115}(10,65)
+    %institute
+    \usebeamerfont{institute}\footnotesize{\insertinstitute}\\
+    \vspace{2ex}
+    %date
+    \usebeamerfont{date}\footnotesize{\insertdate}
+  \end{textblock}
+  %----------------
+  %Case 2
+  %----------------
+  \else
+  \begin{textblock}{70}(10,65)
+    %institute
+    \usebeamerfont{institute}\footnotesize{\insertinstitute}\\
+    \vspace{2ex}
+    %date
+    \usebeamerfont{date}\footnotesize{\insertdate}
+  \end{textblock}
+  %some text: joint work with...
+  \ifx\insertcoauthorstext\undefined
+    \else
+	  \begin{textblock}{45}(80,60.2)
+	    \begin{tikzpicture}[overlay]
+	      \filldraw[fill = red!45!black] (0,0) node[shape = rectangle, fill = red!45!black, inner sep = 0.4mm, align = left, minimum height = 1.5ex] {\color{white}\tiny{\insertcoauthorstext}};
+	    \end{tikzpicture}
+	  \end{textblock}
+  \fi
+  \begin{textblock}{30}(80,65)
+    %\color{red!45!black}
+    \usebeamerfont{institute}\footnotesize{\insertcoauthors}
+    \color{black}
+  \end{textblock}
+\fi
+
+}
+
+\setbeamertemplate{title page}[xq]
+
+%-------------------------------------------------------------------------
+%
+%Redefine maketitle
+%to ensure that the titlepage is 'plain'
+%
+%-------------------------------------------------------------------------
+
+\def\maketitle{\ifbeamer@inframe\titlepage\else\frame[plain]{\titlepage}\fi}
+
+
+
+
+%-------------------------------------------------------------------------
+%
+%THE END
+%
+%-------------------------------------------------------------------------
+
+\mode<all> 

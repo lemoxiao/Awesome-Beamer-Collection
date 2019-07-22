@@ -1,0 +1,48 @@
+% Copyright 2008-2013 Michael Knopf <beamerthemeupb@subtree.de>
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `unmaintained'.
+%
+% This work consists of the files beamerthemeupb.sty, beamercolorthemeupb.sty,
+% and beamerouterthemeupb.sty.
+
+% Definition of three main colors: the 'official' blue tone used by the
+% university matching red and green tones.
+\definecolor{upbblue}{rgb}{0,0.145,0.282}
+\definecolor{upbred}{rgb}{0.46, 0.00, 0.00}
+\definecolor{upbgreen}{rgb}{0.00, 0.46, 0.00}
+
+\mode<presentation>
+
+% Colors for text elements.
+\setbeamercolor*{normal text}{fg=black,bg=white}
+\setbeamercolor*{alerted text}{fg=upbred}
+\setbeamercolor*{example text}{fg=upbgreen}
+\setbeamercolor*{structure}{fg=upbblue}
+
+% Colors for section names in the navigaion bar on top.
+\setbeamercolor*{section in head/foot}{fg=upbblue}
+
+% Colors for block text.
+\setbeamercolor*{block title}{fg=black,bg=upbblue!30}
+\setbeamercolor*{block title alerted}{fg=upbred,bg=upbred!30}
+\setbeamercolor*{block title example}{fg=upbgreen,bg=upbgreen!30}
+
+% Colors for blocks.
+\setbeamercolor*{block body}{fg=black,bg=upbblue!15}
+\setbeamercolor*{block body alerted}{fg=black,bg=upbred!15}
+\setbeamercolor*{block body example}{fg=black,bg=upbgreen!15}
+
+% This theme does not use separation lines.
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\mode
+<all>

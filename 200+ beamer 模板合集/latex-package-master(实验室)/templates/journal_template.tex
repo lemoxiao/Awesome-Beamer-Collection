@@ -1,0 +1,34 @@
+\documentclass[journal]{IEEEtran}
+\usepackage[]{l16cn} % \usepackage[nopic,nohl,draft]{l16cn}
+\makenoidxglossaries
+\loadglsentries{definitions}
+
+\begin{document}
+\title{\huge Manuscript Title First Line\\Second Line}
+\author{
+  Author 1, Author 2, and
+  Corresponding Author$^{\ast}$%
+  \thanks{\bf Last updated on~\today{}}
+  \thanks{Author 1, 
+    Affiliation, Email}
+  \thanks{Author 2, 
+    Affiliation, Email}
+  \thanks{Corresponding Author$^{\ast}$
+    (to whom correspondence should be addressed),
+    Affiliation, Email}
+}
+
+\maketitle
+
+\begin{abstract}
+	\input{abstract}
+\end{abstract}
+
+\IEEEpeerreviewmaketitle
+
+\input{text}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

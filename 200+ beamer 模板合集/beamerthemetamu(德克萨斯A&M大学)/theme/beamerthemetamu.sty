@@ -1,0 +1,37 @@
+% Copyright 2017 Alick Zhao <alick9188@gmail.com>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License, version 1.3c or later, and/or
+% 2. under the GNU Public License, version 2 or later.
+%
+% Last modified on: 2017-07-16
+
+\mode<presentation>
+
+\newif\ifbeamer@onlycurpagenum
+\beamer@onlycurpagenumfalse
+\newif\ifbeamer@infolines
+\beamer@infolinesfalse
+\newif\ifbeamer@secheader
+\beamer@secheaderfalse
+\DeclareOptionBeamer{onlycurpagenum}{\beamer@onlycurpagenumtrue}
+\DeclareOptionBeamer{infolines}{\beamer@infolinestrue}
+\DeclareOptionBeamer{secheader}{\beamer@secheadertrue}
+\ProcessOptionsBeamer
+
+%\usetheme[secheader]{Boadilla} % with header and footer
+\useinnertheme{tamu}
+\useoutertheme{tamu}
+\usecolortheme{tamu}
+
+\setbeamercovered{transparent}
+
+% Background picture.
+%\RequirePackage{graphicx} % includegraphics support
+%\usebackgroundtemplate{%
+%\includegraphics[width=\paperwidth,height=\paperheight]{tamu_bg.pdf}%
+%}
+
+\mode
+<all>

@@ -1,0 +1,133 @@
+\pdfminorversion=4
+
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+%\usepackage[spanish]{babel}
+\usepackage[english]{babel}
+
+\usepackage{beamerthemeULoyola}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{blindtext}
+
+%% PRESENTATION CONFIGURATION PARAMETERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titlebackgroundfile{images/plantilla_portada}
+\framebackgroundfile{images/plantilla_slide}
+\definecolor{azulloyola}{HTML}{023E83}
+\definecolor{azulloyolaclaro}{HTML}{9497B9}
+\definecolor{gris}{HTML}{4C4C4C}
+\definecolor{grisclaro}{HTML}{EBEBEB}
+\definecolor{examplefrente}{HTML}{218E58}
+\definecolor{examplefondo}{HTML}{C2D8CD}
+\definecolor{alertfrente}{HTML}{FF0000}
+\definecolor{alertfondo}{HTML}{E7BDBD}
+
+
+\usefonttheme{structurebold}
+\setbeamercolor{author in head/foot}{fg=white}
+\setbeamercolor{title in head/foot}{fg=white}
+\setbeamercolor{section in head/foot}{fg=azulloyola}
+\setbeamercolor{normal text}{fg=gris}
+\setbeamercolor{frametitle}{fg=azulloyola}
+% \setbeamerfont{block title}{size={}}
+\setbeamerfont{author}{size=\footnotesize}
+\setbeamerfont{date}{size=\footnotesize}
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}[triangle]
+\setbeamertemplate{itemize subsubitem}[square]
+\setbeamertemplate{itemize subsubsubitem}[ball]
+\setbeamercolor{itemize item}{fg=azulloyola}
+\setbeamercolor{itemize subitem}{fg=azulloyola}
+\setbeamercolor{itemize subsubitem}{fg=azulloyola}
+\setbeamercolor{itemize subsubsubitem}{fg=azulloyola}
+\setbeamercolor{enumerate item}{fg=azulloyola}
+\setbeamercolor{enumerate subitem}{fg=azulloyola}
+\setbeamercolor{enumerate subsubitem}{fg=azulloyola}
+\setbeamercolor{enumerate subsubsubitem}{fg=azulloyola}
+% \setbeamercolor{alerted text}{fg=azulloyola}
+% \setbeamerfont{alerted text}{series=\bfseries}
+
+\setbeamertemplate{blocks}[shadow=true]
+\setbeamercolor*{block title}{bg=azulloyolaclaro,fg=white}
+\setbeamercolor*{block body}{bg=grisclaro,fg=gris}
+
+\setbeamercolor*{block title example}{bg=examplefrente,fg=white}
+\setbeamercolor*{block body example}{bg=examplefondo,fg=gris}
+
+\setbeamercolor*{block title alerted}{bg=alertfrente,fg=white}
+\setbeamercolor*{block body alerted}{bg=alertfondo,fg=gris}
+
+\usecolortheme[named=azulloyola]{structure}
+
+
+% This command makes that acrobat reader doesn't changes the colors of the slide
+% when there are figures with transparencies.
+\pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%      + Short title.               + Title which appears in the cover.
+%      v                            v
+\title[Short title]{Long title}
+%       + Short author names which appear in the slides.
+%       v
+\author[Author]
+{   % Author names which appear in the cover page.
+    Author\inst{1}
+}
+%          + Short affiliation which appears in the slides.
+%          v
+\institute[ULOYOLA]
+{   % Affiliation information which appears in the cover page.
+    \begin{tabular}{c}
+    \inst{1}Universidad Loyola Andaluc\'ia
+    \end{tabular}
+}
+%     + Short acronym of the conference or date of the presentation.
+%     v
+\date
+{   % Conference name which appears in the cover page.
+	\today
+}
+
+\begin{document}
+% Creates the cover page.
+\frame{\titlepage}
+
+\begin{frame}{Overview}
+\tableofcontents
+\end{frame}
+
+
+
+\section{Introduction}
+\subsection{Subsection}
+
+% 1
+\frame{
+
+\frametitle{Slide 1}
+
+\blindtext
+
+}
+
+% BIBLIOGRAPHY
+%\section*{Bibliography}
+%\begin{frame}[allowframebreaks]
+%	\frametitle{References}
+%    \bibliographystyle{ieeetr}
+%	\bibliography{workshop_bib.bib}
+%\end{frame}
+
+% END
+\section*{END}
+\frame{
+	\frametitle{END}
+\begin{center}
+	\huge THANK YOU
+\end{center}
+}
+
+
+
+\end{document}

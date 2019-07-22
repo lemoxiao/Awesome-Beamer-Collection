@@ -1,0 +1,29 @@
+%\ProvidesPackageRCS $Header: /home/vedranm/bitbucket/beamer/base/themes/color/beamercolorthemedolphin.sty,v d02a7cf4d8ae 2010/06/17 09:11:41 rivanvx $
+
+\mode<presentation>
+
+\definecolor{ihsred}{HTML}{982948}
+%\definecolor{ihslightred}{HTML}{be5b73}
+
+\setbeamercolor{titlelike}{fg=white,bg=ihsred}
+
+\setbeamercolor{structure}{fg=ihsred}
+\setbeamercolor{palette primary}{fg=ihsred}
+
+\setbeamercolor{block title}{fg=white,bg=ihsred}
+\setbeamercolor{block body}{fg=black,bg=white}
+%\setbeamercolor{footline }{fg=black,bg=ihsred!70!white}
+
+\setbeamercolor{alerted text}{fg=ihsred}
+\setbeamercolor{hyperlink}{fg=ihsred}
+
+\hypersetup{
+  colorlinks,
+  allcolors=.,
+  urlcolor=ihsred,
+  citecolor=ihsred,
+}
+
+\renewcommand<>{\hyperlink}[2]{\only#3{\beameroriginal{\hyperlink}{#1}{\color{ihsred}#2}}}
+
+\mode<all>

@@ -1,0 +1,216 @@
+\documentclass[english]{beamer}
+\usepackage{babel}
+
+% Load system fonts Open Sans and Courier (via fontspec)
+% \usepackage{fontspec}
+% \setmainfont{Open Sans}
+% \setsansfont{Open Sans}
+% \setmonofont{Courier}
+
+% Load LaTeX font package 'Helvetica'
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+
+\usepackage{listings}
+
+\usetheme{upb}
+
+\title{Beamer Theme UPB}
+\subtitle{Unofficial Theme of the University of Paderborn}
+\author{Michael Knopf}
+
+
+\lstset{
+	basicstyle=\ttfamily\footnotesize,
+	identifierstyle=\color{upbblue},
+	commentstyle=\itshape\color{upbgreen},
+	frame=leftline,
+	framerule=3pt,
+	rulecolor=\color{upbblue!30},
+	backgroundcolor=\color{upbblue!10},
+	numbers=left,
+	numberstyle=\tiny\bfseries\itshape\color{upbblue},
+	tabsize=2
+}
+
+\begin{document}
+	
+\frame{
+	\maketitle
+}
+
+\section{Introduction}
+
+
+\frame{
+	\frametitle{An Unofficial Theme}
+	
+	This is an unofficial theme of the \emph{University of Paderborn} for the {\LaTeX} Beamer class.
+	
+	\vfill	
+	
+	\begin{block}{Features and Design Goals}
+		\begin{itemize}
+			\item Unobtrusive but modern design
+			\item Compliance with corporate design guidelines
+			\item Good printability
+		\end{itemize}
+	\end{block}
+	
+	\vfill
+	
+	The latest version of the theme is available at:\
+	\url{https://bitbucket.org/jimknopf/beamerthemeupb}
+}
+
+
+
+\section{Usage \& Features}
+\frame[containsverbatim]{
+	\frametitle{Suitable Font Families}
+
+	Examples of suitable {\LaTeX} packages are \texttt{\color{upbgreen}helvet} (\emph{Helvetica}) and \texttt{\color{upbgreen}droid} (available in most modern distributions).
+	
+	\begin{lstlisting}[language=tex]
+% UTF-8 encoding and 'droid' font family
+\usepackage[utf8x]{inputenc}
+\usepackage{droid}
+	\end{lstlisting}
+
+	\vfill
+
+	The \texttt{\color{upbgreen}fontspec} package is a modern alternative that allows the inclusion of system fonts.
+	
+	\begin{lstlisting}[language=tex]
+% Use 'fontspec' to load system fonts
+\usepackage{fontspec}
+\setsansfont{Open Sans}
+\setmonofont{Courier}
+	\end{lstlisting}
+
+
+\vfill
+
+This presentation uses \emph{Open Sans} and \emph{Courier}!
+}
+
+\frame{
+	\frametitle{Additional Color Definitions}
+	Besides the \emph{official} blue of the university there are definitions for matching red and green tones.
+	
+	\begin{center}
+	\tikzstyle{every node} = [circle, minimum size = 2.5cm]
+	\begin{tikzpicture}
+		\draw[use as bounding box, draw=none] (-1.25,1.25) rectangle (7.25,-3.25);
+			\foreach \x/\c in {0/upbred, 3/upbgreen, 6/upbblue} {
+				\foreach \y/\p in {2/20, 1.5/40, 1/60, 0.5/80} {
+					\draw (\x, -\y) node[fill=\c!\p] {};
+				};
+			};
+		
+		\draw (0,0) node[text=white,fill=upbred] {\emph{upbred}};
+		\draw (3,0) node[text=white,fill=upbgreen] {\emph{upbgreen}};
+		\draw (6,0) node[text=white,fill=upbblue] {\emph{upbblue}};
+		
+		\draw (7.15,-4.375) node[rotate=-6,text=upbblue,fill=upbblue!30,minimum size = 1.5cm] {\tiny \textbf{\emph{upbblue!30}}};
+		
+	\end{tikzpicture}
+	
+\end{center}
+}
+
+\logo{\pgfimage[width=3.25cm]{upb_logo}}
+\frame[containsverbatim]{
+	\frametitle{Working Group Logos}
+	
+	Inclusion of a second logo:
+	\begin{itemize}
+		\item Support of the \lstinline[language=tex]$\logo{...}$ command
+		\item Placement in the upper right corner
+	\end{itemize}
+	
+	\vfill
+	
+	Example (used on this slide):
+	\begin{lstlisting}[language=tex]
+% Include external figure as logo
+% (this example includes the university logo twice)
+\logo{\pgfimage[width=3.25cm]{upb_logo.pdf}}
+	\end{lstlisting}
+	
+	\vfill
+	
+	It is not recommended to replace the logo in the footer!
+}
+
+\logo{}
+\frame[containsverbatim]{
+	\frametitle{Sections}
+
+	Sections can be used to indicate the progress of a talk:
+	\begin{itemize}
+		\item The \emph{current} section is highlighted
+		\item Anonymous sections ( \lstinline[language=tex]$\section*{...}$)  and subsections are ignored
+	\end{itemize}
+	
+	\vfill
+	
+	\begin{exampleblock}{Tip}
+		Do not use the  \lstinline[language=tex]$\section{...}$ command before the title page: this way no section will be highlighted at the beginning of your talk!
+	\end{exampleblock}		
+
+}
+
+\section{Template}
+
+\frame[containsverbatim]{
+	\frametitle{Template (I/II)}
+	A simple template using a suitable font family and providing a basic structure (note the use of sections) \dots 
+	
+	\vfill
+	
+	\begin{lstlisting}[language=tex]
+% Beamer presentation (english)
+\documentclass{beamer}
+\usepackage[english]{babel}
+% UTF-8 encoding and LaTeX font package 'helvet'
+\usepackage[utf8x]{inputenc}
+\usepackage{helvet}
+% Use the UPB theme
+\usetheme{upb}
+% If provided the short title is shown in the footer,
+% otherwise the long title is included
+\title[Short Title (optional)]{Long Title}
+\subtitle[Subtitle (optional)]
+\author{My Name}
+\date{\today}
+	\end{lstlisting}
+}
+
+\frame[containsverbatim]{
+	\frametitle{Template (II/II)}
+	\begin{lstlisting}[language=tex, firstnumber=15]
+\begin{document}
+	% Introductionary slide (not assigned to any section)
+	\frame{\maketitle}
+	\frame{
+		\frametitle{Introduction}
+	}
+	% First section with content
+	\section{First Section}
+	\frame{...}
+	\frame{...}
+	% ...
+	% Second section with content
+	\section{Second Section}
+	\frame{...}
+	% ...
+\end{document}
+	\end{lstlisting}
+	
+	\vfill
+	
+	\hfill \dots you need to compile twice to make the section work!
+}
+
+\end{document}

@@ -1,0 +1,43 @@
+% 这是nwafu(西北农林科技大学)简单主题的颜色主题.
+% 版权(c) 2015-2019, 信息工程学院 耿楠<nangeng@nwafu.edu.cn>
+%
+% 本主题基于丹麦奥尔堡大学（Aalborg University）的AAU Beamer主题
+% 有关这一主题的详情请参考：https://github.com/jkjaer/aauLatexTemplates
+%
+% 这是一个免费代码：发布和修改该代码，请遵守最新版的自由软件联盟发布
+% 的GNU通用公共协议
+%
+% 期望这一代码对你有用，但值得注意的是，我不对任何后续问题进行维护，
+% 请参考<http://www.gnu.org/licenses/>查看最新的协议内容。
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemenwafusimple}[2019/06/24 The nwafu Simple Beamer Theme]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Load required packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{tikz}
+\usetikzlibrary{external}
+\RequirePackage{calc}
+\RequirePackage{fp}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theme options and definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%theme options
+\DeclareOptionBeamer{progressstyle}{\PassOptionsToPackage{progressstyle=#1}{beamerouterthemenwafusimple}}
+\DeclareOptionBeamer{rotationcw}{\PassOptionsToPackage{rotationcw}{beamerouterthemenwafusimple}}
+\DeclareOptionBeamer{shownavsym}{\PassOptionsToPackage{shownavsym}{beamerouterthemenwafusimple}}
+\ProcessOptionsBeamer
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%beamer specific options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation>%refers to the first four modes (beamer,handout,second and trans). That is, to all modes except the article mode
+{
+  \usefonttheme{nwafusimple}
+  \useinnertheme{nwafusimple}
+  \useoutertheme{nwafusimple}
+  \usecolortheme{nwafusimple}
+}%end of beamer specific options
+
+\mode<all>

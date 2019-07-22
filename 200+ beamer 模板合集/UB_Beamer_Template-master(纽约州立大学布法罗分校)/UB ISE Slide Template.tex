@@ -1,0 +1,291 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Slides template for UB ISE
+
+% University at Buffalo
+% Department of Industrial and Systems Engineering
+
+% Created by Changhyun Kwon (chkwon@buffalo.edu)
+% April 22, 2015
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[xcolor=dvipsnames, unicode]{beamer} 
+
+
+%%%% Base Theme %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetheme[compress]{Berlin}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%% Color Setting %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usecolortheme[named=NavyBlue]{structure} 
+
+\definecolor{UBblue}{RGB}{4,26,155}
+\definecolor{UBgray}{RGB}{102,102,102}
+
+\definecolor{UBskyblue}{RGB}{128,157,196}
+\definecolor{UBgreen}{RGB}{158,186,41}
+\definecolor{UBorange}{RGB}{229,147,25}
+\definecolor{UBtealblue}{RGB}{89,151,156}
+\definecolor{UBtan}{RGB}{204,190,82}
+\definecolor{UBbrown}{RGB}{105,73,18}
+
+\setbeamercolor{ublogo}{fg=black,bg=UBblue}
+\setbeamercolor{section in head/foot}{fg=white,bg=UBgray}
+
+\setbeamercolor{structure}{fg=UBskyblue,bg=}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%% Footline Setting %%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}{\hspace*{.5cm}\scriptsize{\insertshortauthor \hspace*{70pt} \hfill \insertframenumber/\inserttotalframenumber \hspace*{.5cm}}} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%% Headline Setting %%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{remreset}
+\makeatletter
+\@removefromreset{subsection}{section}
+\makeatother
+\setcounter{subsection}{1}
+
+\setbeamertemplate{headline}{
+	\begin{beamercolorbox}{ublogo}\vskip5pt
+		\hskip10pt
+		\includegraphics[height=0.13in]{UB_left_fomal_name_1line_WHT.pdf}
+		\raisebox{1.3ex}{\fontsize{5}{6}\selectfont\sffamily\color{white} \ \ \textbar \ \ Industrial and Systems Engineering}
+		\vskip5pt
+	\end{beamercolorbox}
+	\begin{beamercolorbox}{section in head/foot}\vskip2pt\insertsectionnavigationhorizontal{\paperwidth}{}{}\vskip2pt\end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%% UB CREST Background %%%%%%%%%%%%%%%%%%%%%%
+\usebackgroundtemplate{%
+\tikz[overlay,remember picture] \node[opacity=0.4, inner sep=0, anchor=south east, at=(current page.south east)] {
+   \includegraphics[height=2in]{ubcrest.png}};
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%% Font Setting %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usefonttheme{structurebold}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\setbeamercovered{transparent}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{natbib}
+\usepackage{booktabs}
+\usepackage{bbold}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes,shadows,arrows}
+%\usepackage{pgfplots}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{proposition}{Proposition}
+\newtheorem{assumption}{Assumption}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% some macros
+\usepackage{etoolbox}
+\makeatletter
+\def\do#1{\@namedef{#1c}{\ensuremath{\mathcal{#1}}}}
+\docsvlist{A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}
+\makeatother
+
+\makeatletter
+\def\do#1{\@namedef{#1b}{\ensuremath{\mathbb{#1}}}}
+\docsvlist{A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}
+\makeatother
+
+\def\minP{\min_{l\in \Pc} }
+\def\sumA{\sum_{(i,j)\in \Ac^l} }
+
+\def\WCVaR{\textsf{WCVaR}}
+\def\CVaR{\textsf{CVaR}}
+\def\VaR{\textsf{VaR}}
+
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\blue}[1]{{\color{blue}#1}}
+\newcommand{\green}[1]{{\color{green!60!black}#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+\title[Short Title]{Presentation Slide Template}
+\author[C Kwon]{Changhyun Kwon}
+\institute[UB ISE]{Department of Industrial \& Systems Engineering\\University at Buffalo, SUNY}
+\date{April 22, 2015}
+
+
+\begin{document}
+
+
+\everymath{\displaystyle}
+
+
+% Title page
+\frame{\titlepage}
+
+
+% Outline
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section[Intro]{Introduction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Slide Title...}
+
+\begin{itemize}
+\item Hello World
+\item Good Morning
+\item Good Night
+\end{itemize}
+
+\begin{itemize}
+\item<1-> Hello \red{World}
+\item<2-> Good \blue{Morning}
+\item<3-> Good \green{Night}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Theorems}
+
+\begin{theorem}
+Hello theorem
+\[
+	\sum_{i=1}^n x_i = 1
+\]
+\end{theorem}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section[Conclusion]{Conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Goodbye}
+
+Good bye world.
+
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Question???}
+\begin{columns}[c]
+\column{1.5in}
+    \includegraphics[height=2in]{question}
+\column{1.5in}
+    Changhyun Kwon\\
+    \texttt{chkwon@buffalo.edu}
+\end{columns}
+\end{frame}
+
+
+%%\begin{frame}[allowframebreaks]{References}
+%\bibliographystyle{ormsv080}
+%\bibliography{PaperReferences}
+%\end{frame}
+
+
+
+\end{document}
+
+
+%
+

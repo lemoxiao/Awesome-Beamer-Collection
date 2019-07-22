@@ -1,0 +1,178 @@
+%% Copyright (C) 2017 Achim D. Brucker, https://www.brucker.ch
+%%
+%% License:
+%%   This program can be redistributed and/or modified under the terms
+%%   of the LaTeX Project Public License Distributed from CTAN
+%%   archives in directory macros/latex/base/lppl.txt; either
+%%   version 1 of the License, or any later version.
+%%   OR
+%%   The 2-clause BSD-style license.
+%%
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{beamerboxeslhframed}
+     [2017/05/01 v0.0  Framed boxes for Beamer.]
+
+\usepackage{ifthen}
+\newboolean{lh@framed@rounded}
+\setboolean{lh@framed@rounded}{false}
+%\setboolean{lh@framed@rounded}{true}
+
+\newlength{\lh@frame@linewidth}
+\setlength{\lh@frame@linewidth}{2pt}
+\newcommand{\setlhframedlinewidth}[1]{\setlength{\lh@frame@linewidth}{#1}}
+
+\newlength{\lh@frame@margin}
+\setlength{\lh@frame@margin}{3pt}
+\newcommand{\setlhframedmargin}[1]{\setlength{\lh@frame@margin}{#1}}
+
+\newlength{\lh@bmb@width}
+
+
+
+\newcommand\beamerboxesframed[2][]{%
+  \global\let\beamer@firstlineitemizeunskip=\relax%
+  \vbox\bgroup%
+  \setkeys{beamerboxes}{upper=block title,lower=block body,width=\textwidth}%
+  \setkeys{beamerboxes}{#1}%
+  {%
+    \usebeamercolor{\bmb@lower}%
+    \globalcolorstrue%
+    \colorlet{lower.bg}{bg}%
+  }%
+  {%
+    \usebeamercolor{\bmb@upper}%
+    \globalcolorstrue%
+    \colorlet{upper.bg}{bg}%
+  }%
+  %
+  % Typeset head
+  %
+\lh@bmb@width=\bmb@width%
+\advance\lh@bmb@width-\lh@frame@margin%
+\advance\lh@bmb@width-\lh@frame@margin%
+  \vskip4bp
+  \setbox\bmb@box=\hbox{#2}%
+  \ifdim\wd\bmb@box=0pt%
+  \relax%
+  \else
+    \setbox\bmb@box=\hbox{%
+    \hspace{\lh@frame@margin}\begin{minipage}[b]{\lh@bmb@width}%
+      \usebeamercolor[fg]{\bmb@upper}%
+        {\vskip\lh@frame@margin}#2{\vspace{\lh@frame@margin}}%
+    \end{minipage}}%
+  \fi%
+  \ifdim\wd\bmb@box=0pt%
+    \setbox\bmb@box=\hbox{}%
+    \ht\bmb@box=0pt%
+    \bmb@prevheight=-4.5pt%
+  \else%
+    \wd\bmb@box=\bmb@width%
+    \bmb@temp=\dp\bmb@box%
+    \ifdim\bmb@temp<1.5pt%
+      \bmb@temp=1.5pt%
+    \fi%
+    \setbox\bmb@box=\hbox{\raise\bmb@temp\hbox{\box\bmb@box}}%
+    \dp\bmb@box=0pt%
+    \bmb@prevheight=\ht\bmb@box%
+  \fi%
+  \bmb@temp=\bmb@width%
+  \bmb@dima=\bmb@temp\advance\bmb@dima by2.2bp%
+  \bmb@dimb=\bmb@temp\advance\bmb@dimb by4bp%
+  \hbox{%
+    \begin{pgfpicture}{0bp}{+-\ht\bmb@box}{0bp}{+-\ht\bmb@box}
+      \pgfsetlinewidth{\lh@frame@linewidth}
+      \ifdim\wd\bmb@box=0pt%
+        \color{lower.bg}%
+      \else%
+        \color{upper.bg}%
+      \fi%
+      \pgfpathqmoveto{-4bp}{-1bp}
+%% <corner>
+\ifthenelse{\boolean{lh@framed@rounded}}{%
+      \pgfpathqcurveto{-4bp}{1.2bp}{-2.2bp}{3bp}{0bp}{3bp}
+}{%
+      \pgfpathlineto{\pgfpoint{-4bp}{3bp}}
+}
+%% </corner>
+      \pgfpathlineto{\pgfpoint{\bmb@temp}{3bp}}
+%% <corner>
+\ifthenelse{\boolean{lh@framed@rounded}}{%
+      \pgfpathcurveto%
+      {\pgfpoint{\bmb@dima}{3bp}}%
+      {\pgfpoint{\bmb@dimb}{1.2bp}}%
+      {\pgfpoint{\bmb@dimb}{-1bp}}%
+}{%
+      \pgfpathlineto{\pgfpoint{\bmb@dimb}{3bp}}
+}
+%% </corner>
+      \bmb@dima=-\ht\bmb@box%
+      \advance\bmb@dima by-2pt%
+      \pgfpathlineto{\pgfpoint{\bmb@dimb}{\bmb@dima}}
+      \pgfpathlineto{\pgfpoint{-4bp}{\bmb@dima}}
+      \pgfpathclose
+      \pgfsetstrokecolor{black}\pgfusepath{stroke, fill}
+    \end{pgfpicture}%
+    \copy\bmb@box%
+  }%
+  \nointerlineskip%
+  \ifdim\wd\bmb@box=0pt
+  \else
+    \vskip2.4pt%
+  \fi%
+  \nointerlineskip%
+  \setbox\bmb@colorbox=\hbox{{\pgfpicturetrue\pgfsetcolor{lower.bg}}}%
+  \setbox\bmb@box=\hbox\bgroup\hspace{\lh@frame@margin}\begin{minipage}[b]{\lh@bmb@width}%
+    \usebeamercolor[fg]{\bmb@lower}%
+    \colorlet{beamerstructure}{upper.bg}%
+    {\smallskip\vskip\lh@frame@margin}%
+    \colorlet{structure}{upper.bg}%
+    %\color{.}%
+}
+
+
+\def\endbeamerboxesframed{%
+  {\vskip\lh@frame@margin}%
+  \end{minipage}\egroup%
+  \wd\bmb@box=\bmb@width%
+  \bmb@temp=\dp\bmb@box%
+  \advance\bmb@temp by\lh@frame@margin%
+  \setbox\bmb@box=\hbox{\raise\bmb@temp\hbox{\box\bmb@box}}%
+  \dp\bmb@box=0pt%
+  \bmb@temp=\wd\bmb@box%
+  \bmb@dima=\bmb@temp\advance\bmb@dima by2.2bp%
+  \bmb@dimb=\bmb@temp\advance\bmb@dimb by4bp%
+  \hbox{%
+    \begin{pgfpicture}{0bp}{0bp}{0bp}{0bp}
+      \pgfsetlinewidth{\lh@frame@linewidth}
+      \unhbox\bmb@colorbox%
+      \pgfpathmoveto{\pgfpoint{-4bp}{\ht\bmb@box}}
+      \pgfpathlineto{\pgfpoint{-4bp}{1bp}}
+%% <corner>
+\ifthenelse{\boolean{lh@framed@rounded}}{%
+     \pgfpathqcurveto{-4bp}{-1.2bp}{-2.2bp}{-3bp}{0bp}{-3bp}
+}{%
+      \pgfpathlineto{\pgfpoint{-4bp}{-3bp}}
+}
+%% </corner>
+      \pgfpathlineto{\pgfpoint{\the\bmb@temp}{-3bp}}
+%% <corner>
+\ifthenelse{\boolean{lh@framed@rounded}}{%
+      \pgfpathcurveto%
+      {\pgfpoint{\the\bmb@dima}{-3bp}}%
+      {\pgfpoint{\the\bmb@dimb}{-1.2bp}}%
+      {\pgfpoint{\the\bmb@dimb}{1bp}}%
+}{%
+      \pgfpathlineto{\pgfpoint{\the\bmb@dimb}{-3bp}}
+}
+%% </corner>
+      {
+      \bmb@dima=\ht\bmb@box%
+      \pgfpathlineto{\pgfpoint{\bmb@dimb}{\bmb@dima}}
+      \pgfsetstrokecolor{black}\pgfusepath{stroke, fill}
+      }
+    \end{pgfpicture}%
+    \box\bmb@box%
+  }%
+  \vskip2bp%
+  \egroup% of \vbox\bgroup
+}

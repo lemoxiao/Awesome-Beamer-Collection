@@ -1,0 +1,132 @@
+\mode<presentation>
+
+\definecolor{iutorange}       {rgb}{.843,.550,.015}
+\definecolor{iutorange2}      {rgb}{.984,.756,.286}
+\definecolor{bleu1}           {rgb}{.816,.867,.933}
+\definecolor{bleu3}           {rgb}{.0,.5451  ,.8}
+\definecolor{bleu2}           {rgb}{.036,.180,.240}
+\definecolor{bleublocktitle}  {rgb}{.102,.521,.741}
+\definecolor{bleuinst}        {rgb}{.380,.752,.913}
+\definecolor{bleu}        {rgb}{.0,.0,.999}
+\definecolor{black}           {rgb}{.000,.000,.000}
+
+
+\useinnertheme[shadow]{rounded}
+\useoutertheme{infolines}  %split
+\usefonttheme[onlysmall]{structurebold}
+\usecolortheme{orchid}
+
+\setbeamercolor{structure}{fg=black}
+
+
+\setbeamercolor{title}{fg=black}
+\setbeamerfont{title}{size=\LARGE} 
+
+\setbeamercolor{section in toc}{fg=bleu2}
+\setbeamerfont{section in toc}{series=\bf,size=\small }
+\setbeamertemplate{section in toc}[circle]
+\setbeamercolor{subsection in toc}{fg=bleu2}
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamerfont{normal text}{size=\scriptsize}
+
+\setbeamersize{text margin left=0.5cm}
+\setbeamersize{text margin right=0.5cm}
+
+%\setbeamercolor*{normal text}{fg=bleu1!70!white,bg=bleu2!05!white}
+\setbeamercolor*{normal text}{fg=black!65}
+\setbeamercolor{alerted text}{fg=red} 
+\setbeamercolor*{section number projected}{fg = white, bg = bleu1}
+\setbeamercolor*{alerted text}{fg=black}
+\setbeamercolor{frametitle}{fg=bleu3}
+\setbeamercolor*{author}{fg=black}
+\setbeamercolor*{institute}{fg=black}
+\setbeamercolor*{date}{fg=black}
+\setbeamercolor*{block title}{fg=bleu3,bg=bleu1} %couleur du texte et du fond dans les titres des blocks %couleur du texte et du fond dans les blocks
+\setbeamercolor*{block body}{fg=black!70,bg=bleu1!60}
+\setbeamercolor{itemize item}{fg=bleu3}
+\setbeamercolor{caption name}{fg=bleu3}
+
+\setbeamercolor{caption}{fg=bleu3}
+\setbeamercolor{itemize subitem}{fg=bleu3}
+\setbeamercolor{section in head/foot}{fg=white,bg=black}
+\setbeamercolor{subsection in head/foot}{fg=white,bg=black}
+
+%% page de titre
+\setbeamertemplate{title page}
+{
+\vskip -\baselineskip
+\vskip 1.75cm
+\hskip 0.5cm
+\begin{minipage}[c]{.9\linewidth}
+    \large\textbf{\color{white}
+\inserttitle}
+\vskip 0.5cm
+\color{bleu1}\normalsize \textbf{par \insertauthor\\ \insertinstitute}\\
+   \end{minipage}
+\vskip 0.40cm}
+
+
+\setbeamercolor{bgcolor}{fg=white,bg=bleu3}
+\setbeamercolor{bgcolor2}{fg=bleu3,bg=bleu1}
+
+\setbeamercolor{bgcolor3}{fg=white,bg=black}
+\setbeamercolor{bgcolor4}{fg=bleu3,bg=white}
+\setbeamertemplate{frametitle}
+{
+\vskip 1em
+\begin{minipage}[t]{0.9\linewidth}
+\vskip 0.5em
+      $\blacktriangleright$ \normalsize\textbf{\insertsection} - \textbf{ \insertsubsection}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.1\linewidth}
+\begin{figure}
+\centering
+\includegraphics[width=3em]{./image/geii.jpg}
+\end{figure}
+\end{minipage}
+\vskip -0.5em
+}
+
+
+
+
+
+
+\setbeamertemplate{blocks}[default] %default=carré, rounded=arrondis
+\setbeamertemplate{itemize item}[triangle]
+
+\setbeamerfont{caption}{size=\scriptsize}
+\setbeamerfont{caption name}{size=\scriptsize}
+\setbeamerfont{block body}{size=\scriptsize} %taille du texte dans les block
+\setbeamerfont{block title}{size=\scriptsize} %taille du texte dans les block
+
+\setbeamertemplate{enumerate item}[circle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamercolor{item projected}{fg=white,bg=bleu1}
+
+
+%head foot
+
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.9\paperwidth,ht=1.1em,dp=1ex,left,ignorebg]{bgcolor2}%
+   \tiny \hspace*{10em}\insertauthor, \insertinstitute,~ \url{www.iut-brest.fr/}
+  \end{beamercolorbox}%
+
+  \begin{beamercolorbox}[wd=.1\paperwidth,ht=1.1em,dp=1ex,center,ignorebg]{bgcolor4}%
+    \small{\insertframenumber{}/\inserttotalframenumber{}}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\setbeamertemplate{headline}
+{
+}
+
+
+\mode
+<all>

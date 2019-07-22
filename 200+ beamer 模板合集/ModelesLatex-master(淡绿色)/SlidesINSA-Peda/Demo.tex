@@ -1,0 +1,82 @@
+\documentclass{beamer}
+\usepackage{style}
+\usepackage[francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\newcommand{\befitem}{\vspace{-0.6cm}}
+\newcommand{\befitemt}{\vspace{-0.5cm}}
+
+\mode<presentation> {
+%\usetheme{Madrid} %% was here
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Short title]{Main title} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{....} % Your name
+\institute{}
+\date{30 mars 2017}
+
+% \AtBeginSection[]
+% {
+% \frame{
+% \begin{beamercolorbox}[center,rounded=true,dp=1ex]{author in head/foot}
+% 	\huge{\insertsection}
+% \end{beamercolorbox}
+% }
+% }
+
+\begin{document}
+
+{\usebackgroundtemplate{\includegraphics[width=\paperwidth]{BMC}}
+\frame{
+\thispagestyle{empty}
+\titlepage}}
+\progressbaroptions{headline=sections}
+\LogoOff{}
+
+%\begin{frame}
+%\titlepage % Print the title page as the first slide
+%\end{frame}
+
+\section{Une section}
+\begin{frame}{Un titre de transparent}
+	\begin{block}{Le bloc}
+        son corps
+	\end{block}
+	
+	\begin{exampleblock}{Un exemple}
+	    L'exemple en lui même
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{titre}	
+	\begin{block}{Titre de bloc}\befitem
+		\begin{itemize}
+		\item des items
+		\end{itemize}
+	\end{block}
+	
+	\begin{exampleblock}{Un exemple}
+        L'exemple en lui même
+	\end{exampleblock}
+\end{frame}
+
+
+{\usebackgroundtemplate{\includegraphics[width=\paperwidth]{BMC}}
+\frame{
+\thispagestyle{empty}
+\titlepage}}
+\progressbaroptions{headline=sections}
+\LogoOff{}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

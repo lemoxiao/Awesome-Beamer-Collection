@@ -1,0 +1,43 @@
+\beamertemplatenavigationsymbolsempty
+\usetheme{AnnArbor}
+\usecolortheme{dolphin}
+\definecolor{back}{RGB}{240,240,240}
+\definecolor{fore}{RGB}{51,51,51}
+\definecolor{title}{RGB}{255,0,90}
+\definecolor{cu-dark}{RGB}{25,58,111}
+\definecolor{cu-light}{RGB}{142,180,227}
+
+\setbeamercolor{frametitle}{fg=cu-dark, bg={}}
+\setbeamercolor{section in head/foot}{fg=back,bg=fore}
+\setbeamercolor{subsection in head/foot}{fg=back,bg=fore}
+\setbeamercolor{author in head/foot}{fg=back,bg=fore}
+\setbeamercolor{title in head/foot}{fg=back,bg=fore}
+\setbeamercolor{date in head/foot}{fg=back,bg=fore}
+\setbeamercolor{titlelike}{fg=cu-dark}
+\setbeamercolor{normal text}{fg=fore,bg=back}
+\setbeamercolor{itemize item}{fg=cu-dark}
+\setbeamercolor{section in toc}{fg=fore}
+\setbeamercolor{section number projected}{bg=cu-dark}
+
+\usefonttheme{serif}
+\usefonttheme{structuresmallcapsserif}
+
+\useinnertheme{rectangles}
+
+\newif\ifplacelogo % create a new conditional
+\placelogotrue % set it to true
+\logo{%
+\ifplacelogo
+  \makebox[\paperwidth - 5px]{%
+  \hspace{0.1 cm}
+    \includegraphics[height=0.5cm]{NewEngineeringBlack}%
+    \hfill\includegraphics[height=1.2cm]{cris}%
+  }%
+\fi  
+}
+%
+%\placelogofalse % place outside \frame environment
+%% subsequent slides no logo
+% 
+%\placelogotrue
+%% subsequent slides with logo

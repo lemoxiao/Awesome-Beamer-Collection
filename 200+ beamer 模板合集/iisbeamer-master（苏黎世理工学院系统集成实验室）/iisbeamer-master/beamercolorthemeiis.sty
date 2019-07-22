@@ -1,0 +1,38 @@
+\mode<presentation>
+
+%% Declare the ETH corporate design colors.
+\definecolor{eth1}{RGB}{31,64,122}
+\definecolor{eth2}{RGB}{72,90,44}
+\definecolor{eth3}{RGB}{18,105,176}
+\definecolor{eth4}{RGB}{114,121,28}
+\definecolor{eth5}{RGB}{145,5,105}
+\definecolor{eth6}{RGB}{111,111,100}
+\definecolor{eth7}{RGB}{168,50,45}
+\definecolor{eth8}{RGB}{0,122,150}
+\definecolor{eth9}{RGB}{149,96,19}
+\definecolor{eth10}{RGB}{140,182,60}
+
+%% Declare the main color of the theme.
+\setbeamercolor*{structure}{fg=eth1}
+
+%% Derive the color palettes for the outer theme from the main color.
+\setbeamercolor{palette primary}{use=structure,fg=white,bg=structure.fg!40!white}
+\setbeamercolor{palette secondary}{use=structure,fg=white,bg=structure.fg!60!white}
+%% Note thet the following color is used for the headers and footers.
+\setbeamercolor{palette tertiary}{use=structure,fg=white,bg=structure.fg!90!white}
+\setbeamercolor{palette quaternary}{fg=white,bg=black}
+
+%% Specify the colors of the standard block.
+\setbeamercolor{block title}{parent=normal text,fg=white,bg=eth1}
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!20!bg}
+\mode<all>
+
+%% Specify the colors of the example block.
+\setbeamercolor{example text}{fg=eth4}
+\setbeamercolor{block title example}{use=example text,fg=white,bg=example text.fg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!20!bg}
+
+%% Specify the colors of the alert box.
+\setbeamercolor{alerted text}{fg=eth7}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!20!bg}

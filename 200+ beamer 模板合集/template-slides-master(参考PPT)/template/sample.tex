@@ -1,0 +1,260 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Udesc presentation using Execushares
+% LaTeX Template
+% Version 1.0 (2017-12-22)
+%
+% Authors: Jackson Antonio do Prado Lima 
+% 		  <jacksonpradolima at gmail dot com>
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%!TEX program = xelatex
+\documentclass[aspectratio=169]{beamer}
+% Set the environment to pt-br
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel} 
+
+%Theme options (allow multiple color):
+
+% Color theme (colortheme): dark (default), blue, green
+% How to use: \usetheme[colortheme=blue]{Udesc}
+
+\usetheme[colortheme=blue]{Udesc}
+
+\usepackage{blindtext}
+\usepackage{moresize}
+
+\usepackage[ruled,onelanguage]{algorithm2e}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\hypersetup{pdfpagemode=FullScreen}
+\bibliography{refs}
+
+\title{Title}
+\author{Jackson Antonio do Prado Lima (jacksonpradolima at gmail dot com) \\  Luís Felipe Bilecki (felipe436 at gmail dot com)}
+\date{\today}
+
+\subtitle{\tiny{CEPLAN, São Bento do Sul, Brasil}}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+	\frame{\titlepage}
+
+	%Agenda
+	\begin{frame}		
+		\frametitle{Contents}
+		\begin{enumerate}
+			\item Introduction \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} The reasoning and background behind this theme}
+			\item Lorem Text  \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Just some Lorem Ipsum for filler}
+			\item Conclusions \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Some closing thoughts}
+		\end{enumerate}
+	\end{frame}
+
+	\startprogressbar
+	
+	%Sections
+	\section{Introduction}
+		\begin{frame}
+			\frametitle{Why Beamer?}
+			\begin{enumerate}
+				\item LaTeX is great!
+				\item Beamer is easy to use!
+				\item Why not?
+			\end{enumerate}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Why Custom Themes?}
+			\begin{itemize}
+				\item The default Beamer themes are outdated and visually displeasing
+				\item There aren't many Beamer themes readily available online
+				\item Making custom Beamer themes is easy!
+			\end{itemize}
+		\end{frame}
+
+	\section{Lorem Ipsum}
+		\begin{frame}
+			\frametitle{Lorem 1}
+			\blindtext
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Lorem 2}
+			\begin{block}{text text text text}
+				text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+			\end{block}
+			\begin{block}{text text text text}
+				text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+			\end{block}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Lorem 3}
+			\vspace{20pt}
+			\begin{block}{text text text text \footfullcite{burkard:98}}
+				\begin{itemize}
+					\item text text text text
+					\item text text text text
+					\item text text text text
+					\item text text text text
+				\end{itemize}
+			\end{block}
+			\begin{block}{text text text text}
+				text text text text \footfullcite{sahni:76} text text text text text text text text text text text text text text text text \footfullcite{brixius:01}
+			\end{block}
+			\footnotevspace
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{Lorem 4}
+			\begin{enumerate}
+				\item text text text text
+				\item text text text text
+				\execusharessubitem{text text text text}
+				\item text text text text
+				\item text text text text
+			\end{enumerate}
+		\end{frame}
+	   \begin{frame}{Lorem 5 }
+			\begin{block}{text text text text}
+				\begin{scriptsize}
+					\begin{equation*}
+					p_{ij}^k =
+					\begin{cases}
+					\dfrac{{{[\tau _{ij}}]^\alpha {[\eta _{ij}}]^\beta }}{{\sum\limits_{l
+								\in \mbox{free}_{k}} {{[\tau _{il}}]^\alpha {[\eta _{il}}]^\beta } }}
+					& \mbox{if } j \in \mbox{free}_{k}\\
+					0 & \mbox{otherwise}\\
+					\end{cases}
+					\end{equation*}
+				\end{scriptsize}
+			\end{block}
+			\begin{itemize}
+				\item \(\alpha \mbox{ and } \beta\) text text text text
+				\item \(\mbox{free}_{k}\) text text text text \(k\)
+			\end{itemize}
+		\end{frame}
+	
+		\begin{frame}{text text text text}
+			\begin{block}{text text text text}
+				\begin{ssmall}
+					\begin{equation*}
+					\label{eq:p_vectors}
+					\setlength\arraycolsep{3pt}
+					D =
+					\begin{bmatrix}
+					0 & 5 & 2 & 4 \\
+					5 & 0 & 1 & 3 \\
+					2 & 1 & 0 & 1 \\
+					4 & 3 & 1 & 0 \\
+					\end{bmatrix}
+					\Rightarrow
+					P_{d} =
+					\begin{bmatrix}
+					11 \\
+					9 \\
+					4 \\
+					8 \\
+					\end{bmatrix}
+					\hspace{15pt}
+					F =
+					\begin{bmatrix}
+					0 & 50 & 60 & 94  \\
+					50 & 0 & 22 & 50  \\
+					60 & 22 & 0 & 44  \\
+					94 & 50 & 44 & 0  \\
+					\end{bmatrix}
+					\Rightarrow
+					P_{f} =
+					\begin{bmatrix}
+					204 \\
+					122 \\
+					126 \\
+					188 \\
+					\end{bmatrix}
+					\end{equation*}
+				\end{ssmall}
+			\end{block}
+			\begin{block}{Lorem 6}
+				\centering
+				\begin{ssmall}
+					\begin{equation*}
+					\label{eq:p_matrix}
+					H = P_{d} * P_{f}' =
+					\begin{bmatrix}
+					2244 & 1342 & 1386 & 2068 \\
+					1836 & 1098 & 1134 & 1692 \\
+					816 &  488 &  504 &  752 \\
+					1632 &  976 & 1008 & 1504 \\
+					\end{bmatrix}
+					\end{equation*}
+					\(\eta_{ij} = 1/H_{ji}\)
+				\end{ssmall}
+			\end{block}
+		\end{frame}
+		\begin{frame}{Hybrid Max-Min Ant System}
+			\begin{block}{Algorithm}
+				\setlength{\interspacetitleruled}{0pt}%
+				\setlength{\algotitleheightrule}{0pt}%
+				\begin{algorithm}[H]
+					\let\emptyset\varnothing
+					\tiny
+					\label{alg:maxmin}
+					\DontPrintSemicolon
+					\SetKwData{A}{ants}
+					\SetKwData{a}{ant}
+					\SetKwData{ib}{iteration-best}
+					\SetKwData{gb}{global-best}
+					\SetKwData{b}{best-ant}
+					\SetKwData{I}{instanceSize}
+					\SetKwData{PM}{pheromone-matrix}
+					\SetKwFunction{C}{ConstructSolution}
+					\SetKwFunction{Cost}{Cost}
+					\SetKwFunction{L}{LocalSearch}
+					\SetKwFunction{P}{UpdatePheromoneMatrix}
+					\SetKwFunction{IPM}{InitializePheromoneMatrix}
+					\SetKwFunction{SB}{SelectBest}
+					\SetKwFunction{UMM}{UpdateMaxMinValues}
+					$m \gets \mbox{number of ants}$\;
+					$\gb \gets \infty$\;
+					$\PM \gets \IPM{}$\;
+					\Repeat{stopping criteria is not met}{%
+						$\ib \gets \infty$\;
+						\For{$k \gets 0$ \KwTo $m$}{
+							$\a \gets \C{}$\;
+							$\a \gets \L{\a}$\;
+							\If{\Cost{\a} $<$ \Cost{\ib}}{%
+								$\ib \gets \a$\;
+							}
+						}
+						\If{\Cost{\ib} $<$ \Cost{\gb}}{%
+							$\gb \gets \ib$\;
+							$\UMM{}$\;
+						}
+						$\b \gets \SB{\gb, \ib}$\;
+						$\P{\b}$\;
+					}
+					\Return \gb
+				\end{algorithm}
+			\end{block}
+		\end{frame}
+		
+	\section{Conclusions}
+		\begin{frame}
+			\frametitle{Closing Thoughts}
+			text text text text text text text text text text text text
+			\begin{itemize}
+				\item text text text text text text text text text text text text
+				\item text text text text text text text text text text text text
+				\item text text text text text text text text text text text text
+				\item Future Works:
+				\begin{itemize}
+					\item text text text text text text text text 
+					\item text text text text text text text text
+				\end{itemize}
+			\end{itemize}
+		\end{frame}
+	
+		\frame{\acknowledgmentpage}
+
+\end{document}

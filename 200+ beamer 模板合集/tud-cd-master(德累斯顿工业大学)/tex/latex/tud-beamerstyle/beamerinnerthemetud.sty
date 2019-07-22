@@ -1,0 +1,39 @@
+\ProvidesPackage{beamerinnerthemetud}[2011/01/17 v1 TU Dresden
+corporate design inner theme]
+\beamertemplatedotitem
+\usesubitemizeitemtemplate{--}
+
+\mode<presentation>
+
+%\useinnertheme[shadow=true]{rounded}
+
+% Faktor zur PPT-Vorlage: / 0,1984375      * 5,04
+\defbeamertemplate*{title page}{tud}{%
+  \usebeamercolor{normal text/titlepage}%
+  \usebeamerfont{normal text/titlepage}%
+    \vfill%
+    {%
+      %\renewcommand\baselinestretch{1}%
+      \usebeamerfont*{title}%
+      \usebeamercolor[fg]{title}%
+      \expandafter\setlength\expandafter\baselineskip{\f@size pt*\ratio{10pt}{10pt}}%
+      \MakeUppercase{\inserttitle}\par%
+    }\vfill%
+    {%
+      \ifx\insertsubtitle\empty
+      \else
+        \usebeamerfont*{subtitle}%
+        \usebeamercolor[fg]{subtitle}%
+        \insertsubtitle
+        \vfill
+      \fi%
+      \usebeamerfont*{author}%
+      \usebeamercolor[fg]{author/titlepage}%
+      \insertauthor
+    }%
+    \vfill\vfill%
+}
+
+\AtBeginDocument{\setbeamertemplate{title page}[tud]}
+
+\mode<all>

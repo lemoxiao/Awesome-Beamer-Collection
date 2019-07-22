@@ -1,0 +1,61 @@
+\mode<presentation>
+
+%% Per default, use the rectangles inner theme in order to use, for
+%% instance, squares in the table of contents and in item
+%% environments.
+\useinnertheme{rectangles}
+
+%% Create some commands for positioning the wafer on the title page.
+\def\@waferwidth{0.5}%
+\newcommand{\setwaferwidth}[1]{\def\@waferwidth{#1}}%
+\let\waferwidth\setwaferwidth%
+%
+\def\@waferleft{0.0}%
+\newcommand{\setwaferleft}[1]{\def\@waferleft{#1}}%
+\let\waferleft\setwaferleft%
+%
+\def\@wafertop{0.0}%
+\newcommand{\setwafertop}[1]{\def\@wafertop{#1}}%
+\let\wafertop\setwafertop%
+%
+% Declare the title page.
+\defbeamertemplate*{title page}{iis}[1][]
+{ 
+  \setbeamertemplate{headline}{}
+  % Align all of the content on the title page to the right.
+  \begin{flushright}
+    % Insert the title.
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}\textbf{\inserttitle}\vskip-0.2cm}%
+    % Insert a horizontal rule.
+    {\textcolor{structure.fg}{\rule{\linewidth}{2pt}}}%
+    % Insert the subtitle (if specified by the user).
+    \ifx\insertsubtitle\@empty\else%
+    {\\\usebeamerfont{subtitle}\usebeamercolor[fg]{title}\textbf{\insertsubtitle}}%
+    \fi%
+    {\\\usebeamerfont{date}{\footnotesize\insertdate}}%
+    \vfill%
+    {\usebeamerfont{author}{\small\insertauthor}}%
+    \vfill%
+    \includegraphics[width=2cm]{./eth_logo}\\%
+    \usebeamerfont{institute}{\insertinstitute}%
+  \end{flushright}
+  %% Place the wafer image (either the PNG version or the JPG version,
+  %% depending on the theme options specified).
+  \begin{textblock}{12.8}(\@waferleft,\@wafertop)%
+    \if@waferpng\includegraphics[width=\@waferwidth\linewidth]{./wafer.png}%
+    \else\includegraphics[width=\@waferwidth\linewidth]{./wafer.jpg}%
+    \fi%
+  \end{textblock}%
+}
+
+%% Make sure the item environmens are left-aligned with the actual
+%% text of a slide.
+\setlength{\leftmargini}{1em}
+\setlength{\leftmarginii}{1.2em}
+
+%% Make sure that all block environments have rounded edges.
+\setbeamertemplate{blocks}[rounded]
+
+\defbeamertemplate{description item}{align left}{\insertdescriptionitem\hfill}
+
+\mode<all>

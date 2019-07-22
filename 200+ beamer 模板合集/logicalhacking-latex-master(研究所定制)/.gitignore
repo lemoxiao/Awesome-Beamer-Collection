@@ -1,0 +1,10 @@
+tuos-logo/logo/*.jpg
+*.aux
+*.log
+auto
+*.out
+*.nav
+*.snm
+*.toc
+*~
+.#*

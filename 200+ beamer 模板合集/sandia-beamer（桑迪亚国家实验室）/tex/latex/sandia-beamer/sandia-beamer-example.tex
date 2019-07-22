@@ -1,0 +1,165 @@
+
+\documentclass{beamer}
+
+
+%
+%  Options list:
+%
+%   strictfont - use Sandia Corporate-specified font (Calibri).  Omit if you don't
+%      care about using Calibri or don't have it installed.
+%   theme - select theme.  Choose from blue,white,sand,left,right.  Try it!
+%   slidenumber - include slide numbers on body slides
+%   slidedate - include date on body slides
+%   titledate - include date on title slide
+%
+
+
+\mode<presentation>
+{
+  \usetheme[strictfont,theme=blue,slidenumber,slidedate]{Sandia}
+}
+
+
+\title{A Wonderful Sample Slidedeck}
+\subtitle{This is the subtitle}
+\author{Patrick M. Widener}
+
+% 
+%  Use this macro to turn on OUO markings and provide the appropriate OUO information
+%  Options include:
+%    exemption - numeric (2-9) indicator of which FOIA exemption this material falls under
+%       The template will supply the text.
+%    nameorg - OUO name and organization, as a string
+%    date - OUO date, defaults to \insertdate
+%    guidance - Any OUO guidance to include on the marking
+%
+%\sandiabeamerMarkOUO{exemption=3,nameorg=Patrick M. Widener (1423)}
+
+%
+% Use this macro to specify the SAND number of your presentation
+%
+\sandiabeamerSANDInfo{number=2014-00000}
+
+\begin{document}
+
+%
+%  Trivia: the content in this sample is from an intro-to-HPC class I taught back in 2011, 
+%  so some of it is dated by this point.  It serves the purpose, though, of filling out 
+%  this sample slidedeck.
+%
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Performance principles}
+
+\begin{frame}
+\frametitle{Performance levels}
+
+\begin{itemize}
+\item Peak performance
+\begin{itemize}
+\item Summ of all speeds of all FP units in system
+\item Theoretical upper bound on performance
+\end{itemize}
+
+\item LINPACK
+\begin{itemize}
+\item The ``Hello World'' of parallel performance codes
+\item Solve Ax=B using Gaussian elimination, highly tuned
+\end{itemize}
+
+\item Gordon Bell Prize-winning application performance
+\begin{itemize}
+\item Right application + right algorithm + right platform + years of
+  effort
+\end{itemize}
+
+\item Average sustained application performance
+\begin{itemize}
+\item What one can reasonably expect for standard applications
+\end{itemize}
+
+\end{itemize}
+
+\begin{beamerboxesrounded}{When reporting performance results, these levels are often confused,
+even in reviewed publications}
+\end{beamerboxesrounded}
+\end{frame}
+
+\begin{frame}
+\frametitle{Performance levels (NERSC-5)}
+
+\begin{itemize}
+\item Peak advertised performance: {\color{red} 100 Tflop/s}
+\item LINPACK (TPP): {\color{red} 84 Tflop/s}
+\item Best climate application: {\color{red} 14 Tflop/s}\\
+WRF code benchmarked in December 2007
+\item Average sustained application performance: {\color{red} ??}\\
+Probably less than 10\% peak
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Logistics}
+
+\begin{itemize}
+
+\item Web page and/or Google group and/or...
+\begin{itemize}
+\item Depends on class composition and preference
+\item Reading list posted this weekend
+\item Round-robin student presentations and group discussion
+\end{itemize}
+
+
+\item Some lecture on certain topics
+
+\item Guest lectures
+
+\item Hands-on
+\begin{itemize}
+\item 3 or 4 programming assignments
+\item First assignment Monday:  warmup / refresh on concurrency /
+  multithreading
+\item CCI cluster hopefully available, CS cluster
+\end{itemize}
+
+\item Term project:  larger scale
+\begin{itemize}
+\item Propose something, or I have a few candidates
+\item Make this effort do double duty if possible
+\item Implementation and performance evaluation
+\item Teams OK if we have enough people and scope is right
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{List of topics}
+
+Subject to change as we go along:
+\begin{itemize}
+\item Architectures: performance characteristics of parallel machines,
+  shared-memory (NUMA, multicore) and distributed memory
+\item Applications: scientific and engineering applications
+\item Decomposition methods - domain, functional, pipelining,
+  divide/conquer
+\item Programming and OS constructs and models (emphasis)
+\item Parallel I/O and storage systems
+\item Interconnection networking
+\item Lightweight Kernels
+\item Virtualization
+\end{itemize}
+
+\end{frame}
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

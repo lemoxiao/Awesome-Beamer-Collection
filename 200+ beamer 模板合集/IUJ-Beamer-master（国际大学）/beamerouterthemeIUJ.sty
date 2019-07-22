@@ -1,0 +1,154 @@
+% Beamer Outer Theme for the International University of Japan (IUJ),
+% ver 0.01 (2016-10-04)
+% Copyright 2016 by Yuki Yanai <yanai@iuj.ac.jp>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% ver 0.01 (2016-10-04) YY
+
+\ProvidesPackage{beamerouterthemeIUJ}[10/04/2016]
+
+\mode<presentation>
+
+%=========================================================%
+% Logo
+%=========================================================%
+\pgfdeclareimage[height=1.8em,interpolate=true]{logomark}{logo/iuj-logo.jpg}
+\pgfdeclareimage[height=3em,interpolate=true]{logolong}{logo/iuj-school-name.png}
+\ifbeamer@nologo
+  \else \titlegraphic{\pgfuseimage{logolong}}
+\fi
+%=========================================================%
+% Colors and Shades
+%=========================================================%
+\setbeamercolor{section in head/foot}{parent=palette tertiary}
+\setbeamercolor{subsection in head/foot}{parent=palette primary}
+\setbeamercolor{author in head/foot}{parent=palette primary}
+\setbeamercolor{title in head/foot}{parent=palette quaternary}
+\setbeamercolor{date in head/foot}{parent=palette primary}
+
+\usesectionheadtemplate
+  {\hfill\insertsectionhead}
+  {\hfill\color{fg!50!bg}\insertsectionhead}
+\pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{
+  color(0pt)=(frametitle.bg);
+  color(\paperwidth)=(frametitle right.bg)}
+\AtBeginDocument{
+  \pgfdeclareverticalshading{beamer@topshade}{\paperwidth}{
+    color(0pt)=(bg);
+    color(4pt)=(black!50!bg)}
+}
+
+%=========================================================%
+% Header
+%=========================================================%
+\newif\ifbeamer@theme@subsection
+\beamer@theme@subsectiontrue
+
+\DeclareOptionBeamer{footline}{\csname beamer@theme@footline@#1\endcsname}
+\DeclareOptionBeamer{subsection}[true]{\csname beamer@theme@subsection#1\endcsname}
+\ProcessOptionsBeamer
+
+\defbeamertemplate*{headline}{IUJ theme}
+{%
+  \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}{section in head/foot}
+    \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+  \end{beamercolorbox}%
+  \ifbeamer@theme@subsection
+    \begin{beamercolorbox}[colsep=1.5pt]{middle separation line head}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,
+      leftskip=.3cm,rightskip=.3cm plus1fil]{subsection in head/foot}
+      \usebeamerfont{subsection in head/foot}\insertsubsectionhead
+    \end{beamercolorbox}%
+  \fi
+  \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+  \end{beamercolorbox}%
+}
+
+%=========================================================%
+% Footer
+%=========================================================%
+\defbeamertemplate*{footline}{IUJ theme}
+{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,sep=0pt,center]{author in head/foot}%
+      \usebeamerfont{author in head/foot}\insertshortauthor~(\insertshortinstitute)
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,sep=0pt,center]{title in head/foot}
+      \usebeamerfont{title in head/foot}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,sep=0pt,center]{date
+     in head/foot}
+      \insertframenumber{}  / \inserttotalframenumber\hspace*{1ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+%=========================================================%
+% Frame Title
+%=========================================================%
+\defbeamertemplate*{frametitle}{IUJ theme}
+{%
+ \nointerlineskip%
+  \hbox{\leavevmode%
+    \advance\beamer@leftmargin by -12bp%
+    \advance\beamer@rightmargin by -12bp%
+    \beamer@tempdim=\paperwidth%
+    \advance\beamer@tempdim by \beamer@leftmargin%
+    \advance\beamer@tempdim by \beamer@rightmargin%
+    \hskip-3em\hbox{%
+      \setbox\beamer@tempbox=\hbox{%
+        \ifbeamer@nologo
+        \begin{minipage}[t]{0.99\paperwidth}%
+         \vbox{}%
+          \vskip0ex%
+          \leftskip0.5cm%
+          \rightskip0.3cm plus1fil\leavevmode%
+          \insertframetitle%
+          \vskip-1.75ex%
+          \vbox{}% 
+        \end{minipage}
+        
+        \else
+      	 \begin{minipage}[t]{0.93\paperwidth}%
+          \vbox{}%
+          \vskip0ex%
+          \leftskip0.5cm%
+          \rightskip0.3cm plus1fil\leavevmode%
+          \insertframetitle%
+          \vskip-1.75ex%
+          \vbox{}%
+         \end{minipage}%
+         \begin{minipage}[t]{0.07\paperwidth}         
+           \vbox to 0pt{\vskip-1mm
+              \pgfuseimage{logomark}
+           \vss}
+         \end{minipage}
+         \fi%
+         }
+     \beamer@tempdim=\ht\beamer@tempbox
+      \advance\beamer@tempdim by 4pt
+      \begin{pgfpicture}{0pt}{0pt}{\paperwidth}{\beamer@tempdim}
+        \usebeamercolor{frametitle right}
+        \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}}
+        \pgfusepath{clip}
+        \pgftext[left,bottom]{\pgfuseshading{beamer@frametitleshade}}
+      \end{pgfpicture}%
+      \hskip-\paperwidth%
+      \box\beamer@tempbox%
+    }%
+    \hskip-\Gm@rmargin%
+  }%
+  \nointerlineskip
+}
+
+\mode
+<all>

@@ -1,0 +1,103 @@
+%% Copyright (C) 2016 Achim D. Brucker, https://www.brucker.ch
+%%
+%% License:
+%%   This program can be redistributed and/or modified under the terms
+%%   of the LaTeX Project Public License Distributed from CTAN
+%%   archives in directory macros/latex/base/lppl.txt; either
+%%   version 1 of the License, or any later version.
+%%   OR
+%%   The 2-clause BSD-style license.
+%%
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{beamerinnerthemelh-poster}
+   [2017/04/14 v0.0  LaTeX poster class implementing the cooperate design of LogicalHacking.com]
+
+\usepackage{transparent}
+\usepackage{tikz}
+\mode<presentation>
+
+\setbeamertemplate{itemize item}{
+  \tikz{
+    \draw[fill=lhOrange,draw=none] (0, 0) rectangle(0.2, 0.2);
+    \draw[fill=lhOrange,draw=none] (0.2, 0.2) rectangle(0.4, 0.4);
+   \draw[fill=lhOrange,draw=none] (0, 0.4) rectangle(0.2, 0.6);
+  }
+}
+\ifthenelse{\boolean{lh@inverse}}{%
+\setbeamertemplate{itemize subitem}{
+  \tikz{
+   \draw[fill=lhLightGray,draw=none] (0, 0) rectangle(0.150, 0.150);
+    \draw[fill=lhLightGray,draw=none] (0.150, 0.150) rectangle(0.3, 0.3);
+   \draw[fill=lhLightGray,draw=none] (0, 0.3) rectangle(0.075, 0.45);
+  }
+}
+\setbeamertemplate{itemize subsubitem}{
+  \tikz{
+    \draw[fill=lhDarkGray,draw=none] (0, 0) rectangle(0.15, 0.15);
+    \draw[fill=lhDarkGray,draw=none] (0.15, 0.15) rectangle(0.3, 0.3);
+    \draw[fill=lhDarkGray,draw=none] (0, 0.3) rectangle(0.15, 0.45);
+  }
+}
+}{%
+\setbeamertemplate{itemize subitem}{
+  \tikz{
+   \draw[fill=lhDarkGray,draw=none] (0, 0) rectangle(0.15, 0.15);
+    \draw[fill=lhDarkGray,draw=none] (0.15, 0.15) rectangle(0.3, 0.3);
+   \draw[fill=lhDarkGray,draw=none] (0, 0.3) rectangle(0.15, 0.45);
+  }
+}
+\setbeamertemplate{itemize subsubitem}{
+  \tikz{
+    \draw[fill=lhLightGray,draw=none] (0, 0) rectangle(0.15, 0.15);
+    \draw[fill=lhLightGray,draw=none] (0.15, 0.15) rectangle(0.3, 0.3);
+    \draw[fill=lhLightGray,draw=none] (0, 0.3) rectangle(0.15, 0.45);
+  }
+}
+}
+
+
+\usepackage{beamerboxeslhframed}
+\setlhframedlinewidth{6pt}
+\setlhframedmargin{12pt}
+
+\defbeamertemplateparent{blocks}[framed]{block begin,block end,%
+  block alerted begin,block alerted end,%
+  block example begin,block example end}[1][]
+{[#1]}
+
+\defbeamertemplate{block begin}{framed}[1][]
+{
+  \par\vskip\bigskipamount%
+  \begin{beamerboxesframed}[upper=block title,lower=block body,#1]%
+    {\raggedright\usebeamerfont*{block title}\insertblocktitle}%
+    \raggedright%
+    \usebeamerfont{block body}%
+}
+\defbeamertemplate{block end}{framed}[1][]
+{\end{beamerboxesframed}\vskip\smallskipamount}
+
+\defbeamertemplate{block alerted begin}{framed}[1][]
+{
+  \par\vskip\bigskipamount%
+  \begin{beamerboxesframed}[upper=block title alerted,lower=block body alerted,#1]%
+    {\raggedright\usebeamerfont*{block title alerted}\insertblocktitle}%
+    \raggedright%
+    \usebeamerfont{block body alerted}%
+}%
+\defbeamertemplate{block alerted end}{framed}[1][]
+{\end{beamerboxesframed}\vskip\smallskipamount}
+
+\defbeamertemplate{block example begin}{framed}[1][]
+{
+  \par\vskip\bigskipamount%
+  \begin{beamerboxesframed}[upper=block title example,lower=block body example,#1]
+    {\raggedright\usebeamerfont*{block title example}\insertblocktitle}%
+    \raggedright%
+    \usebeamerfont{block body alerted}%
+}%
+\defbeamertemplate{block example end}{framed}[1][]
+{\end{beamerboxesframed}\vskip\smallskipamount}
+
+\setbeamertemplate{blocks}[framed]
+
+\mode<all>

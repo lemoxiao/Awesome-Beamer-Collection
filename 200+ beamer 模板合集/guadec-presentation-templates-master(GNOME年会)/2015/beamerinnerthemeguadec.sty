@@ -1,0 +1,57 @@
+\mode<presentation>
+
+\setbeamertemplate{background} {
+  \begin{tikzpicture}
+    \useasboundingbox (0, 0) rectangle(\the\paperwidth,\the\paperheight);
+
+    % Draw the title page
+    \ifnum\thepage=1\relax%
+      % The background
+      \node[inner sep=0pt][anchor=south] at (0.5\paperwidth, 0) {
+        \includegraphics[width=2\paperheight,height=\paperheight,keepaspectratio]{guadec-background}};
+
+      % The footer
+      \node[inner sep=0pt][anchor=south] at (0.5\paperwidth, 6mm) {
+        \includegraphics[height=0.14\paperheight]{guadec-gothenburg-white}};
+      \fill[color=white] (0, 0) rectangle (\the\paperwidth, 6mm);
+
+      % The footer's content
+      \node[anchor=west] at (0, 3mm) {
+        \textcolor{guadecblue}{\tiny{\hskip6mm\insertdate}}};
+      \node[anchor=east] at (\paperwidth, 3mm) {
+        \textcolor{guadecblue}{\tiny{GOTHENBURG\hskip6mm\hfill}}};
+    \fi
+
+    % Draw any other page
+    \ifnum\thepage>1\relax%
+      % The footer
+      \fill[color=guadecblue] (0, 0) rectangle (\the\paperwidth, 6mm);
+
+      % The footer's content
+      \node[anchor=west] at (0, 3mm) {
+        \textcolor{guadeclightgrey}{\tiny{\hskip6mm\insertshorttitle}}};
+      \node[anchor=east] at (\paperwidth, 3mm) {
+        \textcolor{guadeclightgrey}{\tiny{\thepage\hskip6mm\hfill}}};
+    \fi
+  \end{tikzpicture}
+}
+
+% Title page
+\defbeamertemplate*{title page}{guadec}[1][] {
+  \centering
+  \includegraphics[width=0.672\paperheight,height=0.21\paperheight,keepaspectratio]{guadec-logo}
+  \vskip6mm%
+  \hfill
+  \begin{beamercolorbox}[wd=0.66\paperwidth, center, sep=8pt, #1]{title page header}
+    \usebeamerfont{title}\inserttitle\par%
+  \end{beamercolorbox}%
+  \hfill\hfill
+  \vskip6mm%
+  \begin{beamercolorbox}[center]{author}
+    \usebeamerfont{author}\insertauthor%
+  \end{beamercolorbox}
+  \vfill
+}
+
+\mode
+<all>

@@ -1,0 +1,39 @@
+\section{Footnotes}
+
+\begin{frame}
+\frametitle{Footnotes}
+\framesubtitle{Use Of Footnotes}
+\begin{block}{New commands in this section}
+\begin{itemize}
+\item \color{nounibaredI}\textbackslash footnote
+\item \textbackslash footnotemark\color{nounibagreenI}[]\color{black}
+\end{itemize}
+\end{block}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Footnotes}
+\framesubtitle{Commands}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{ttfamily}\scriptsize
+\input{content/listings/footnotes_escaped.tex}
+\end{ttfamily}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{ttfamily}\color{nounibaredI}\textbackslash footnote\color{black}\{footnotetext\}\end{ttfamily} Creates a footnote at this position with
+automatical numbering.
+
+\begin{ttfamily}\color{nounibaredI}\textbackslash footnote\color{nounibagreenI}[number]\color{black}\{footnotetext\}\end{ttfamily} A manual
+numbering is possible, too.
+
+\begin{ttfamily}\color{nounibaredI}\textbackslash footnotemark\color{nounibagreenI}[number]\color{black}\end{ttfamily}
+It is also possible to use a number without a footnotetext.
+\end{column}
+\end{columns}
+\bigskip
+The numbering is automatical and continous, independent of 
+a new page or {\ttfamily section}.
+\end{frame}

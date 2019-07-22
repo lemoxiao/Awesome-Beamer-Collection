@@ -1,0 +1,79 @@
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemeibadai}[2016/12/12]  
+
+%%%%%
+% Required packages to be loaded
+%
+\RequirePackage{xcolor}
+\RequirePackage{etoolbox}
+
+%%%%%
+% Create toggles for options
+%
+\providetoggle{light}
+
+%%%%%
+% List options
+%
+\DeclareOption{light}{\toggletrue{light}}
+\DeclareOption{dark}{\togglefalse{light}}
+\DeclareOption{poster}{\togglefalse{light}}
+\DeclareOption*{\PackageWarning{beamerthemeMito}{Unknown ‘\CurrentOption’}}
+\ExecuteOptions{dark}
+\ProcessOptions\relax
+
+
+
+%%%%%
+% Define colours
+% 
+\definecolor{IbadaiGreen}  {RGB}{002, 068, 030}
+\definecolor{IbadaiRed}    {RGB}{176, 000, 038}
+\definecolor{IbBackgdGrey} {RGB}{144, 144, 136}
+\definecolor{IbBackgdWhite}{RGB}{244, 244, 236}
+\definecolor{IbLgtGreen}   {RGB}{047, 139, 011}
+\definecolor{IbDrkGreen}   {RGB}{024, 083, 011}
+%\definecolor{IbTemplate}   {RGB}{000, 000, 000}
+
+\usecolortheme{default} %fallback
+
+%%%%%
+% Define colours for palettes if used with different theme
+%
+\setbeamercolor*{normal text}{fg=IbadaiGreen,bg=IbBackgdWhite!50!white}
+\setbeamercolor*{structure}{fg=IbadaiRed}
+\setbeamercolor*{alerted text}{use=structure,fg=structure.fg,bg=IbBackgdWhite}
+\setbeamercolor*{example text}{fg=IbLgtGreen,bg=IbBackgdWhite}
+\setbeamercolor*{palette primary}{fg=IbBackgdWhite,bg=IbadaiGreen!70!IbBackgdWhite}
+\setbeamercolor*{palette secondary}{fg=IbBackgdWhite,bg=IbadaiGreen!80!IbBackgdWhite}
+\setbeamercolor*{palette tertiary}{fg=IbBackgdWhite,bg=IbadaiGreen!90!IbBackgdWhite}
+\setbeamercolor*{palette quaternary}{fg=IbBackgdWhite,bg=IbadaiGreen}
+
+\setbeamercolor{section in toc}{fg=IbadaiGreen,bg=IbBackgdWhite}
+\setbeamercolor{item}{use=structure,fg=structure.fg}
+\setbeamercolor{author}{use=structure,fg=structure.fg}
+
+\setbeamercolor*{separation line}{use=structure,bg=structure.fg}
+
+% Define colours for titles, they change according to used option
+\iftoggle{light}{%
+  \setbeamercolor{titlelike}{bg=IbBackgdWhite,fg=IbadaiGreen}
+  \setbeamercolor*{separation line head}{bg=IbadaiGreen}
+}{%
+  \setbeamercolor{titlelike}{parent=palette quaternary}
+  \setbeamercolor*{separation line head}{parent=separation line}
+}
+\setbeamercolor*{separation line foot}{parent=separation line}
+
+\setbeamercolor{block title}{parent=palette quaternary}
+\setbeamercolor{block body}{parent=normal text, use=block title, bg=block title.fg}
+
+\setbeamercolor{block title alerted}{use=structure,fg=IbBackgdWhite,bg=structure.fg}
+\setbeamercolor{block body alerted}{parent=normal text, use=block title alerted, bg=block title alerted.fg!95!block title alerted.bg}
+
+\setbeamercolor{block title example}{use=example text,fg=example text.bg,bg=example text.fg}
+\setbeamercolor{block body example}{parent=normal text, use=block title example, bg=block title example.fg!95!block title example.bg}
+
+\setbeamercolor{footline}{parent=palette quaternary}
+

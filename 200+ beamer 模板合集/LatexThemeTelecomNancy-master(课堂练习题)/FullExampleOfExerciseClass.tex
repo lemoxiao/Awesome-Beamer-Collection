@@ -1,0 +1,44 @@
+\documentclass[headheight=4.5cm,
+			   margin=2cm,
+			   titlewidth=0.6,
+			   sansserif,
+			   firstcolor=color1,
+			   secondcolor=color2,
+			   % logo=myLogo.png,
+			   % footband=myFootBand.png
+			  ]{TelecomNancy}
+
+\definecolor{color1}{RGB}{100, 100, 100}
+\definecolor{color2}{RGB}{220, 0, 0}
+
+\begin{document}
+
+	\coursetitle{Title of course}
+	\courselevel{Course level}
+	\courseyear{Year}
+	
+	\globalinstructions[Optionnal title, ``Global Instructions'' by default]
+	{
+		The global instructions.
+	}
+
+	\nextExercise[This is the first exercise]{
+		You can write here instructions of the first exercise... or nothing.
+	}
+
+		\nextQuestion{First question of the current exercise}
+		\nextQuestion{Second question of the first exercise.}
+
+		\nextInstructions{
+			If you need to add some specific instruction for the next questions of the current exercise.
+		}
+
+		\nextQuestion{Last question of the first exercise.}
+
+	\nextExercise{}
+
+		\nextQuestion{First question of the current exercise}
+		\nextQuestion{Second question of the second exercise.}
+		\nextQuestion{Last question of the second exercise.}
+
+\end{document}

@@ -1,0 +1,15 @@
+Source: cenditel-beamer-template
+Section: misc
+Priority: optional
+Maintainer: David Hernández <david.vzla@gmail.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: https://github.com/davidhdz/cenditel-beamer-template
+Vcs-Git: https://github.com/davidhdz/cenditel-beamer-template.git
+
+Package: cenditel-beamer-template
+Architecture: all
+Depends: ${misc:Depends}, texlive | texlive-base
+Description: CENDITEL Beamer template
+ Beamer template for the Fundacion Centro Nacional de Desarrollo e Investigacion
+ en Tecnologias Libres - CENDITEL

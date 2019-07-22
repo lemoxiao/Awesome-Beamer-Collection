@@ -1,0 +1,27 @@
+% Copyright 2016 by Manuel Coppotelli
+
+\mode<presentation>
+
+% Requirements
+\RequirePackage{calc}
+
+\DeclareOptionBeamer{alternativetitlepage}[true]{\PassOptionsToPackage{alternativetitlepage=#1}{beamerinnerthemespiffy}}
+\DeclareOptionBeamer{titlepagelogo}{\PassOptionsToPackage{titlepagelogo=#1}{beamerinnerthemespiffy}}
+\DeclareOptionBeamer{bullet}{\PassOptionsToPackage{bullet=#1}{beamerinnerthemespiffy}}
+\DeclareOptionBeamer{pageofpages}{\PassOptionsToPackage{pageofpages=#1}{beamerouterthemerunglines}}
+\DeclareOptionBeamer{titleline}[true]{\PassOptionsToPackage{titleline=#1}{beamerouterthemerunglines}}
+\DeclareOptionBeamer{watermark}{\PassOptionsToPackage{watermark=#1}{beamerouterthemerunglines}}
+\DeclareOptionBeamer{watermarkheight}{\PassOptionsToPackage{watermarkheight=#1}{beamerouterthemerunglines}}
+\DeclareOptionBeamer{watermarkheightmult}{\PassOptionsToPackage{watermarkheightmult=#1}{beamerouterthemerunglines}}
+
+\ProcessOptionsBeamer
+
+\useinnertheme{spiffy}
+\useoutertheme{runglines}
+\usecolortheme{sapienza}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded]
+
+\mode
+<all>

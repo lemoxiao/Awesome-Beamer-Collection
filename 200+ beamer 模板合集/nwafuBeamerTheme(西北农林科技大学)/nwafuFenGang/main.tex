@@ -1,0 +1,139 @@
+%\documentclass[fontset = none, t, aspectratio=169]{ctexbeamer}
+\documentclass[fontset = none, t, aspectratio=169]{ctexbeamer}
+
+% 修改自萧山主题的凤岗主题
+\usetheme{nwafufengang}
+
+% 载入需要的宏包
+\input{settings/packages.tex}
+% 进行必要的设置
+\input{settings/format.tex}
+
+% Information
+\title[凤岗主题]{\Large 西北农林科技大学 {\LaTeX}  Beamer 主题}
+
+\subtitle{凤岗主题 V\ 2.0}
+
+\author[N. Geng]{耿楠}
+
+\date{\tosemester} % 也可以使用类似\date[2017/04/20]{\zhdate{2017/04/20}}的
+              % 方式指定时间
+
+\institute[智能媒体]{智能媒体实验室}
+
+\titlegraphic{%
+  \vspace{3.0cm}
+  \qrcode[hyperlink, height=1.6cm]{https://github.com/registor/nwafuBeamerTheme}}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \maketitle
+\end{frame}
+
+\section{简介}
+
+\begin{frame}{简介}{魔改Metropolis主题}
+  \begin{itemize}
+    \item 改了颜色（用了 \texttt{cncolours.sty}）
+    \item 加入 \texttt{pgfornament-han} 汉风纹样元素
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{简介}{为什么叫「凤岗」？}
+  \begin{itemize}
+    \item 以城市名字命名主题，是 Beamer 的一个传统
+    \item 工作在杨凌，北塬上有个地方叫\alert{凤岗}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[plain, standout]
+作为强调的一个\enquote{standout} 页面
+\end{frame}
+
+\section{充版面}
+
+\begin{frame}[allowframebreaks]{区块}{汉风区块结构}
+
+  \begin{block}{Metropolis 走极简风}
+    因此「凤岗」主题也走极简风。
+  \end{block}
+
+  \begin{exampleblock}{Metropolis 走极简风}
+    因此「凤岗」主题也走极简风。
+  \end{exampleblock}
+
+  \begin{alertblock}{Metropolis 走极简风}
+    因此「凤岗」主题也走极简风。
+  \end{alertblock}
+
+  \begin{theorem}[Metropolis 走极简风]
+    因此「凤岗」主题也走极简风。
+  \end{theorem}
+
+  \begin{proof}[Metropolis 走极简风]
+    因此「凤岗」主题也走极简风。
+  \end{proof}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 关于我们 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[关于我们]{关于我们}
+\subsection[联系方式]{联系方式}
+\begin{frame}[fragile]{关于我们}{联系方式}
+  % colour options
+  \definecolor{seplinecolour}{HTML}{357f2d} % green
+  \definecolor{iconcolour}{HTML}{2f3142} % dark
+  \definecolor{textcolour}{HTML}{2f3142} % dark
+  \definecolor{jobtitlecolour}{HTML}{474a65} % light dark
+
+  % define some lengths for internal spacing
+  \newlength{\seplinewidth} \setlength{\seplinewidth}{2cm}
+  \newlength{\seplineheight} \setlength{\seplineheight}{1pt}
+  \newlength{\seplinedistance} \setlength{\seplinedistance}{0.3cm}
+  \begin{center}
+      \begin{tikzpicture}[font=\small]
+      % name
+      \matrix[every node/.style={anchor=center,font=\huge},anchor=center] (name) {
+        \node{耿\hspace{\ccwd}楠}; \\
+        %\node{\color{jobtitlecolour}\normalsize\textit{教授}}; \\
+      };
+      % sep line 1
+      \node[below=0.3\seplinedistance of name] (hl1) {};
+      \draw[line width=\seplineheight,color=seplinecolour] (hl1)++(-\seplinewidth/2,0) -- ++(\seplinewidth,0);
+      % contact info
+      \matrix [below=\seplinedistance of hl1,%
+               column 1/.style={anchor=center,color=iconcolour},%
+               column 2/.style={anchor=west}] (contact) {
+        \node{\faGlobe}; & \node{\url{http://cie.nwsuaf.edu.cn/szdw/}};\\
+        \node{\faBuilding}; & \node{西北农林科技大学信息工程学院计算机科学系};\\ 
+        \node{\faEnvelope}; & \node{nangeng@nwafu.edu.cn; nangeng@qq.com};\\
+        %\node{\faQq}; & \node{970291228};\\
+        %\node{\faPhone}; & \node{15829540966}; \\
+        \node{\faGithub}; & \node{\url{https://github.com/registor/}}; \\
+      };
+      sep line 2
+      \node[below=\seplinedistance of contact] (hl2) {};
+      \draw[line width=\seplineheight,color=seplinecolour] (hl2)++(-\seplinewidth/2,0) -- ++(\seplinewidth,0);
+      % interests
+      \matrix [below=\seplinedistance of hl2,
+         every node/.style={anchor=center,font=\Large}]
+         (interests) {
+        \node{\faCode}; & \node{\faCoffee}; &
+        \node{\faLock}; & \node{\faWrench}; &
+        \node{\faCameraRetro}; \\
+      };
+    \end{tikzpicture}
+  \end{center}    
+\end{frame}
+
+\begin{frame}[plain, standout]
+  感谢聆听！\\
+  欢迎多提宝贵意见和建议
+\end{frame}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

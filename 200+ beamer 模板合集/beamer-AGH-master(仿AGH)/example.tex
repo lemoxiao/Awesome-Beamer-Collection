@@ -1,0 +1,131 @@
+\documentclass[aspectratio=1610,hyperref={pdfpagemode=FullScreen},english]{beamer} %If you want to create Polish presentation, replace 'english' with 'polish'
+\usepackage[utf8]{inputenc}
+%\usepackage{polski} %For Polish language only
+\usepackage{babel}
+\usepackage{listings} %We want to put listings
+\usetheme[parttitle=rightfooter]{AGH} %Show part title in right footer
+\AtBeginPart{\frame{\partpage}} %At begin part: display its name
+\title{AGH Beamer Theme}
+\author{Stanisław Polak\inst{1,2}}
+\date{}
+\institute[AGH]{
+  \inst{1}AGH University of Science and Technology\\al. Mickiewicza 30\\
+30-059 Kraków\\
+Poland 
+\and
+  \inst{2}Second affiliation
+}
+%%%%%%%%%%% Configuration of the listings package %%%%%%%%%%%%%%%%%%%%%%%%%%
+% Source: https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings#Using_the_listings_package
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{green},      % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{cyan},        % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname,                  % show the filename of files included with \lstinputlisting; also try caption instead of title
+                                   %  needed if you want to use UTF-8 Polish chars
+  literate={ą}{{\k{a}}}1
+           {Ą}{{\k{A}}}1
+           {ę}{{\k{e}}}1
+           {Ę}{{\k{E}}}1
+           {ó}{{\'o}}1
+           {Ó}{{\'O}}1
+           {ś}{{\'s}}1
+           {Ś}{{\'S}}1
+           {ł}{{\l{}}}1
+           {Ł}{{\L{}}}1
+           {ż}{{\.z}}1
+           {Ż}{{\.Z}}1
+           {ź}{{\'z}}1
+           {Ź}{{\'Z}}1
+           {ć}{{\'c}}1
+           {Ć}{{\'C}}1
+           {ń}{{\'n}}1
+           {Ń}{{\'N}}1
+}
+%%%%%%%%%%%%%%%%%
+\begin{document}
+  \maketitle
+\part{Examples}
+%%%%%%%%%%%%%%%%
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+%%%%%%%%%%%%%%%%
+\section{Mathematics}
+%%%%%%%%%%%%%%%%
+\begin{frame}{Basic blocks}
+  % Examples from "The beamer class User Guide"
+  \begin{block}{Definition}
+    A \alert{set} consists of elements.
+  \end{block}
+  \begin{exampleblock}{Example}
+    The set $\{1,2,3,5\}$ has four elements.
+  \end{exampleblock}
+  \begin{alertblock}{Wrong Theorem}
+    $1=2$.
+  \end{alertblock}
+\end{frame}
+%%%%%%%%%%%%%%%%
+\begin{frame}{Math environments}
+  \begin{columns}
+    \column{0.5\textwidth} %The first column
+      \structure{Theorems}
+      \begin{theorem}[Pythagorean]
+        $a^{2}+b^{2}=c^{2}$
+      \end{theorem}
+      \ldots
+    \column{0.5\textwidth} %The second column
+      \structure{Proofs}
+      \begin{proof}
+        \ldots
+      \end{proof}
+      \ldots
+  \end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%
+\section{Computer Science}
+\subsection*{Inserting source codes}
+  \begin{frame}[fragile]{Source code}{Appearing step by step}
+    \begin{lstlisting}[language=C++]
+/* The first  program in C++ */  %*\pause*)
+#include <iostream>  %*\pause*)
+using namespace std; %*\pause*)
+void main() 
+{       %*\pause*)
+  cout %*\pause*) << "Hello World!"%*\pause*) << endl; %*\onslide<4->*)
+} %*\onslide*)
+\end{lstlisting}
+\end{frame}
+\appendix
+\begin{frame}{Bibliography}
+  \begin{thebibliography}{9}
+    \setbeamertemplate{bibliography item}[online]
+      \bibitem{wikibook}{Wikibooks \newblock \LaTeX/Source Code Listings \newblock \url{https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings}}
+    \setbeamertemplate{bibliography item}[book]
+      \bibitem{lamport}{Leslie Lamport \newblock LATEX: a document preparation system : user's guide and reference manual \newblock Addison-Wesley Pub. Co., 1994 }
+    \setbeamertemplate{bibliography item}[article]
+      \bibitem{bk1}{Author \newblock Title of the article\newblock Editor, year \newblock Notes}
+  \end{thebibliography}
+\end{frame}
+\end{document}

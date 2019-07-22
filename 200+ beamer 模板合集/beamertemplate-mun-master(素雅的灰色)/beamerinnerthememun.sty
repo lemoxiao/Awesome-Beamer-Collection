@@ -1,0 +1,38 @@
+\mode<presentation>
+
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \fill[color=bg] (0,2) rectangle (\the\paperwidth,\the\paperheight);
+  \fill[color=white] (0,0) node[anchor=south west] {\includegraphics[width=0.2\paperwidth]{img/MUN_Logo_CMYK.pdf} } (2.95,1.9); %rectangle(2.95,1.9);
+  \fill[color=fg] (3.05,0) rectangle(\the\paperwidth,1.9);
+  \ifnum\thepage>1\relax%
+   \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+   \fi
+  \end{tikzpicture}
+}
+
+% Title page
+\defbeamertemplate*{title page}{mun}[1][]
+{ 
+   \vskip2cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=0.5cm,sep=8pt,#1]{title page header}
+      \usebeamerfont{title}\inserttitle\par%
+      \usebeamerfont{subtitle}\insertsubtitle\par%
+    \end{beamercolorbox}%
+    \vskip4.75cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{author}
+      \usebeamerfont{author}\insertauthor%
+    \end{beamercolorbox}
+     \vskip0.2cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{date}
+      \usebeamerfont{author}\insertdate%
+    \end{beamercolorbox}
+  \vfill
+}
+
+%Items
+\setbeamertemplate{items}[square]
+\setbeamertemplate{enumerate items}[default]
+
+\mode<all>

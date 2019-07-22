@@ -1,0 +1,62 @@
+\documentclass[xcolor=dvipsnames,xcolor=svgnames]{beamer}
+\usepackage{tikz}
+\usetheme{BOONTO1}
+
+\title{The First Beamer Theme Developed by Me}
+\author{Sudchai Boonto}
+\institute{A Beamer User\\
+    Thai LaTeX User Group \\
+    }
+
+\conferencetext{Lecture 1 -- Signals}
+
+\graphicspath{{figures/}}
+
+\leftlogo{logo/beamerlogo}
+\leftscale{0.3}
+\rightlogo{logo/beamerlogo}
+\rightscale{0.3}
+
+
+% decoration
+\usetikzlibrary{%
+  decorations.pathmorphing,%
+  shadows%
+}
+
+% ==================================================================================== %
+% box
+\newcommand*{\mybox}[2]{% width, content
+	\par\noindent
+	\begin{tikzpicture}[
+		mynodestyle/.style={rectangle,rounded corners,draw=mydarkgray!40!white,
+											 thick,inner sep=2mm,text justified,top color=mylightblue!30!white,
+											 bottom color=mylightblue,above}]%
+		\node[mynodestyle,at={(0.5*#1+2mm+0.4pt,0)}]{%
+			\begin{minipage}[t]{#1}
+				#2
+			\end{minipage}%
+		};
+	\end{tikzpicture}%	
+	\par\vspace{-1.3em}
+}
+% ==================================================================================== %
+
+\begin{document}
+\begin{frame}
+    \maketitle
+    \thispagestyle{empty}
+\end{frame}
+\begin{frame}
+  \frametitle{A Boonto1 Theme}
+   This theme:
+   \begin{itemize}
+     \item Based on a template of Marius Hofert, Markus Kohm
+     \item Freely use
+     \item Firs use by me
+   \end{itemize}
+   \vspace{1cm}
+   \centering
+   \mybox{0.5\textwidth}{Good Luck!}
+\end{frame}
+\end{document}

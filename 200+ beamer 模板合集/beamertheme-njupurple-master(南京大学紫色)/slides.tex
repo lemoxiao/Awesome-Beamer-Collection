@@ -1,0 +1,286 @@
+\documentclass[xcolor=dvipsnames]{beamer}
+
+\usepackage[log-declarations=false]{xparse}
+\usepackage[quiet]{fontspec}
+
+\usepackage{amsmath}
+\usepackage{pifont}
+
+\usepackage[AutoFakeBold, AutoFakeSlant]{xeCJK}
+
+\setCJKmainfont{SimSun}
+\setCJKmonofont{KaiTi}
+\setCJKsansfont{Microsoft YaHei} % or SimHei
+
+\usepackage{standalone}
+\usepackage{booktabs, threeparttable}
+
+% Allow font size at arbitrary size
+\usepackage{lmodern}
+
+
+\usepackage{tikz}
+% We need lots of libraries...
+\usetikzlibrary{
+  arrows,
+  calc,
+  %fit,
+  %patterns,
+  %plotmarks,
+  shapes.geometric,%
+  shapes.misc,
+  shapes.symbols,
+  %shapes.arrows,
+  %shapes.callouts,
+  %shapes.multipart,
+  %shapes.gates.logic.US,
+  %shapes.gates.logic.IEC,
+  %circuits.logic.US,
+  %circuits.logic.IEC,
+  %circuits.logic.CDH,
+  %circuits.ee.IEC,
+  %datavisualization,
+  %datavisualization.formats.functions,
+  %er,
+  %automata,
+  %backgrounds,
+  %chains,
+  %topaths,
+  %trees,
+  %petri,
+  mindmap,
+  %matrix,
+  %calendar,
+  %folding,
+  %fadings,
+  %shadings,
+  %spy,
+  %through,
+  %turtle,
+  positioning,%
+  %scopes,
+  %decorations.fractals,
+  %decorations.shapes,
+  %decorations.text,
+  decorations.pathmorphing,
+  decorations.pathreplacing,
+  %decorations.footprints,
+  %decorations.markings,
+  %shadows,
+  %lindenmayersystems,
+  %intersections,
+  %fixedpointarithmetic,
+  %fpu,
+  %svg.path,
+  %external,
+}%
+
+\tikzset{
+  textcircledstyle/.style={shape=circle,draw,inner sep=0.5pt}
+}
+\newcommand*\tikzcircled[1]{\tikz[baseline=(char.base)]{\node[textcircledstyle, line width=0.8pt] (char) {#1};}}
+
+\newcommand*{\ttbf}[1]{\texttt{\textbf{#1}}}
+
+%\usepackage{fontenc}
+\usepackage{avant}
+
+
+%\usepackage{mathptmx} % Lucida Bright (SO Version)
+%\usepackage[small]{eulervm} % Euler VM%\usepackage{xeCJK}
+%\usepackage{euler}
+%\usepackage{palatino}
+%\usepackage{eulervm}
+%\usepackage{bookman}
+%\usepackage{chancery}
+%\usepackage{helvet}
+%\usepackage{utopia}
+%\usepackage{charter}
+%\usepackage{pifont}
+
+%\usetheme{Madrid}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+\useinnertheme[shadow]{rounded}
+\useoutertheme{infolines}
+\usecolortheme{default}
+
+% disable section header
+\setbeamertemplate{headline}[default]
+
+\usepackage[EU1,T1]{fontenc}
+
+
+\makeatletter
+
+% Golden bar
+\pgfdeclarehorizontalshading{goldenbar}{0.05cm}%
+{rgb(0cm)=(0.56,0.48,0.06); rgb(\paperwidth)=(0.91,0.79,0.22)}
+
+\pgfdeclareimage[height=0.8cm]{njulogo}{njulogo}
+\pgfdeclareimage[height=0.8cm]{njucslogo}{njucslogo}
+
+
+% Copied from beamethemeouterdefault.sty
+% - add a shaded golden below frame title
+% - add two logo at the beginning
+\defbeamertemplate*{frametitle}{icsatnju}[1][left]
+{
+  \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  \@tempdima=\textwidth%
+  \advance\@tempdima by\beamer@leftmargin%
+  \advance\@tempdima by\beamer@rightmargin%
+  \begin{beamercolorbox}[sep=0.3cm,#1,wd=\the\@tempdima]{frametitle}
+  \usebeamerfont{frametitle}%
+  % paperwidth=12.8cm, left sep=0.3cm
+  \tikz[baseline, overlay] \node [anchor=north east, inner sep=0.1cm, outer sep=0pt] at (12.5cm, 0.3cm) {\pgfuseimage{njulogo}\pgfuseimage{njucslogo}};% by Tiger
+  \vbox{}\vskip-1ex%
+  \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+  \strut\insertframetitle\strut\par%
+  {%
+    \ifx\insertframesubtitle\@empty%
+    \else%
+    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+    \vskip-2pt% less skip when there is subtitle, by Tiger
+    \fi
+  }%
+  \vskip-1ex%
+  \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+  \pgfuseshading{goldenbar}% by Tiger
+  \vskip-.3cm% by Tiger
+  \end{beamercolorbox}%
+}
+
+\makeatother
+
+
+
+\newcommand{\its}[1]{\textit{\structure{#1}}}
+\newcommand{\bfs}[1]{\textbf{\structure{#1}}}
+
+\newcommand{\ita}[1]{\textit{\alert{#1}}}
+\newcommand{\bfa}[1]{\textbf{\alert{#1}}}
+
+
+%\newcommand{\insertdescriptionitem}[1]{\textbf{#1}}
+
+% enumerate item symbol
+%\setbeamertemplate{enumerate items}[square]
+\setbeamertemplate{enumerate item}[square]
+\setbeamertemplate{enumerate subitem}[circle]
+\setbeamertemplate{enumerate subsubitem}[ball]
+
+% see above
+%\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{itemize item}[square]
+\setbeamertemplate{itemize subitem}[triangle]
+\setbeamertemplate{itemize subsubitem}[circle]
+
+
+% symbol in outline
+\setbeamertemplate{sections/subsections in toc}[square]
+\setbeamertemplate{frametitle continuation}[from second]
+
+% list the outline at the beginning of each section
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{大纲}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+% list the outline at the beginning of each section
+\AtBeginSubsection[] % Do nothing for \subsection*
+{
+  \begin{frame}<beamer>
+    \frametitle{大纲}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+% set color
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{example text}{fg=green!50!black}
+
+\definecolor{njupurple}{rgb}{0.40,0,0.40} % use structure theme to change
+\setbeamercolor{structure}{fg=njupurple}
+
+
+% A bug, to support bibliography show
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+
+
+%title
+\title{大数据在科学养猪技术中的应用}
+\author{王小明}
+\institute[CS@NJU]{南京大学计算机科学与技术系}
+\renewcommand{\today}{\number\year 年\number\month 月\number\day 日}
+\date{\today}
+
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+
+
+\begin{document}
+
+\begin{frame}
+  \maketitle
+\end{frame}
+
+\begin{frame}
+  \frametitle{大纲}
+  \tableofcontents
+\end{frame}
+
+\section{举例}
+
+\begin{frame}
+  \frametitle{An example}
+  \begin{enumerate}
+    \item Level 1
+      \begin{enumerate}
+        \item Level 2
+          \begin{enumerate}
+            \item Level 3
+          \end{enumerate}
+      \end{enumerate}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{An example\insertcontinuationtext}
+  \begin{itemize}
+    \item Level 1
+      \begin{itemize}
+        \item Level 2
+          \begin{itemize}
+            \item Level 3
+          \end{itemize}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\section{总结}
+
+\begin{frame}
+  \frametitle{养猪还靠大数据}
+
+
+  \begin{enumerate}
+    \item 大数据大数据
+  \end{enumerate}
+
+\end{frame}
+
+\begin{frame}[c, plain]
+  \begin{center}
+    \Huge{\texttt{\textbf{谢谢！}}}\\[0.5cm]
+    Q\&A
+  \end{center}
+\end{frame}
+
+\end{document}

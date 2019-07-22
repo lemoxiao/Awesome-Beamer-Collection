@@ -1,0 +1,58 @@
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerfontthemeibadai}[2016/12/12]  
+
+\RequirePackage{etoolbox}
+
+\providetoggle{poster}
+
+\DeclareOption{beamer}{\togglefalse{poster}}
+\DeclareOption{poster}{\toggletrue{poster}}
+\DeclareOption*{\PackageWarning{beamerthemeMito}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usefonttheme{default} %fallback
+
+\iftoggle{poster}{%
+  \def\familydefault{\rmdefault}
+  \def\mathfamilydefault{\rmdefault}
+  \setbeamerfont*{title}{size=\huge,series=\bfseries,family=\sffamily}
+  \setbeamerfont*{subtitle}{parent=title,size=\Large,series=\mdseries}
+  \setbeamerfont{author}{parent=title,size=\large}
+  \setbeamerfont{institute}{parent=title,size=\large,series=\mdseries}
+  \setbeamerfont{date}{parent=title,size=\normalsize,series=\mdseries}
+
+  \setbeamerfont{block title}{parent=title,size=\normalsize}
+  \setbeamerfont{block title alerted}{parent=block title}
+
+  \setbeamerfont{caption}{size=\normalsize,series=\mdseries,family=\sffamily}
+  \setbeamerfont{caption name}{parent=caption,series=\bfseries}
+  
+  \setbeamerfont*{footline}{family=\ttfamily,series=\mdseries,size=\normalsize}
+
+  \linespread{1.05}
+}{%
+  \setbeamerfont*{title}{size=\Large,series=\bfseries}
+  \setbeamerfont*{subtitle}{size=\large}
+\setbeamerfont{author}{size=\normalsize,series=\bfseries}
+\setbeamerfont{institute}{size=\normalsize}
+\setbeamerfont{date}{size=\small}
+
+\setbeamerfont{section title}{size=\Large}
+
+\setbeamerfont{block title}{size=\normalsize}
+\setbeamerfont{block title alerted}{size=\normalsize}
+\setbeamerfont{block title example}{size=\normalsize}
+
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{frametitle}{size=\large}
+
+\setbeamerfont{caption}{size=\small}
+\setbeamerfont{caption name}{series=\bfseries}
+
+\setbeamerfont{footline}{series=\tt}
+\linespread{1.15}
+}

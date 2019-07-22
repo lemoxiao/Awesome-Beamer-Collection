@@ -1,0 +1,34 @@
+% 加载宏包
+%===================注意======================%
+% 在调用beamer.cls宏包后，以下宏包将自动调用，
+% 不应单独调用这些宏包，以免发生冲突
+% amsfonts, amsmath, amssymb, amsthm, 
+% enumerate, geometry, graphics, graphicx, 
+% hyperref, url, 
+% ifpdf, keyval, xcolor, xxcolor
+% =============================================%
+
+% 参考文献宏包
+% \usepackage[backend=biber,autolang=hyphen,style=gb7714-2015ay,
+% doi=false,url=false,isbn=false]{biblatex}
+\usepackage[backend=biber,autolang=hyphen,style=gb7714-2015,
+gbtype=true,gbalign=gb7714-2015,
+doi=false,url=false,isbn=false]{biblatex}
+
+% Extra packages for the demo:
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{ragged2e}
+\usepackage{schemabloc}
+
+% 加载需要的宏包
+\usepackage{csquotes}
+
+% 符号字体
+\usepackage{fontawesome5}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main.tex"
+%%% End:
+

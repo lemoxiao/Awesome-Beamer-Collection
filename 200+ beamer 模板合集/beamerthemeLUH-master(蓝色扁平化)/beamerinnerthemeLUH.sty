@@ -1,0 +1,49 @@
+\mode<presentation>
+
+
+
+% Title page
+\defbeamertemplate*{title page}{LUH}[1][]
+{
+  \vspace{.8cm}
+
+  \begin{tikzpicture}[remember picture,overlay, inner sep=0pt]
+    \node[below=2cm, text width=\paperwidth] at (current page.north) {%
+	  \usebeamerfont*{title}%
+	  \begin{beamercolorbox}[wd=\paperwidth,ht=1.3em,dp=.7em, sep=0pt, leftskip=\beamer@leftmargin]{title}
+	    \inserttitle
+	  \end{beamercolorbox}
+    };
+    \node [xshift=-.2pt,yshift=\LUHFooterHeightTitle-.2pt,inner sep=0pt, above right] at (current page.south west)
+      {\scalebox{1.001}{\usebeamertemplate{title image}}};
+  \end{tikzpicture}
+}
+
+% Margins for itemize items
+\setlength\leftmargini{1em}
+\setlength\leftmarginii{1.4em}
+\setlength\leftmarginiii{1.4em}
+
+% Patch enumerate environment to decrease margins for first level.
+\let\enumerateOld=\enumerate
+\let\endenumerateOld=\endenumerate
+\def\enumerate{\begingroup\setlength\leftmargini{1.4em}\enumerateOld}
+\def\endenumerate{\endenumerateOld\endgroup}
+
+
+
+
+\defbeamertemplate*{enumerate}{LUH}{\setlength\leftmargini{2em}}
+\defbeamertemplate*{enumerate item}{LUH}{\hspace{.5em}\insertenumlabel.}
+\defbeamertemplate*{enumerate subitem}{LUH}{\insertsubenumlabel.}
+\defbeamertemplate*{enumerate subsubitem}{LUH}{\insertsubsubenumlabel.}
+
+
+\defbeamertemplate*{itemize item}{LUH}{\tikz[baseline=-.3ex] \fill rectangle (.7ex, .7ex);}
+\defbeamertemplate*{itemize subitem}{LUH}{\tikz[baseline=-.35ex] \fill rectangle (.6ex, .6ex);}
+\defbeamertemplate*{itemize subsubitem}{LUH}{\tikz[baseline=-.4ex] \fill rectangle (.5ex, .5ex);}
+
+
+
+
+\mode<all>

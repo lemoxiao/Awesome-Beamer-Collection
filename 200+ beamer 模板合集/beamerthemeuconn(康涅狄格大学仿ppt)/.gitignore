@@ -1,0 +1,18 @@
+sandbox/
+
+# Mac files
+.DS_Store
+.Icon*
+
+# auxiliary TeX files
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+
+# compressed files
+*.zip
+*.gz

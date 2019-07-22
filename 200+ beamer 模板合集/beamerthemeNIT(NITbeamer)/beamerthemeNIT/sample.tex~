@@ -1,0 +1,75 @@
+\documentclass[10pt,fleqn,dvipdfmx]{beamer}
+
+%\hypersetup{pdfpagemode=FullScreen}
+\beamertemplatenavigationsymbolsempty
+\usetheme{NIT}
+\DeclareGraphicsExtensions{.jpg,.eps,.png,.pdf,.mps,.gif}
+
+%\usepackage[latin1]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage[english]{babel}
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{color}
+%\usepackage{lmodern}
+%\usepackage[3D]{movie15}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% color definitions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{NITMainColor}{RGB}{255,130,0}
+\definecolor{NITReverseColor}{RGB}{240,240,240}
+\definecolor{NITgray}{RGB}{190,190,190}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% title page definition %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamercovered{transparent}
+\setbeamerfont{author}{family=\rmfamily}
+
+% \addtobeamertemplate{frametitle}{
+%  \begin{textblock*}{\paperwidth}(-10pt,0pt)
+%   \includegraphics[width=.9\paperwidth,height=1cm]{NIT_logo.eps}
+%  \end{textblock*}
+% }
+
+\author[Ryo KOBAYASHI]{Ryo KOBAYASHI\\[5pt]\scriptsize{Nagoya Institute of Technology}}
+\title[short title]{long title}
+\institute{conference name\\
+\small{location of the conference, city, country}}
+\date[\today]{\today}
+\titlegraphic{\includegraphics[height=1.5cm]{NIT_Logo.eps}}
+
+% table of contents depth
+\setcounter{tocdepth}{1}
+
+\begin{document}
+\frame[plain]{\titlepage}
+
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{NIT_bg.eps}}
+\part{Main Part}
+\frame{\frametitle{Outline}\tableofcontents}
+
+\section{First section}
+\subsection{FakeTitle1} % subtitles are not used in this layout but still required for the header outline bullets
+\input{frame1}
+\input{frame1}
+
+\begin{frame}{What happens if subtitle exists?}{This is the subtitle!}
+ \structure{What color is this structure?}
+ \begin{enumerate}
+  \item is one.
+  \item is two.
+  \item is three.
+ \end{enumerate}
+\end{frame}
+
+\section{Second section}
+\subsection{FakeTitle1} % subtitles are not used in this layout but still required for the header outline bullets
+\input{frame1}
+\input{frame1}
+
+
+\end{document}

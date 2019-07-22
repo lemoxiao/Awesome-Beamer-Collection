@@ -1,0 +1,92 @@
+%% Copyright (C) 2017 Achim D. Brucker, https://www.brucker.ch
+%%
+%% License:
+%%   This program can be redistributed and/or modified under the terms
+%%   of the LaTeX Project Public License Distributed from CTAN
+%%   archives in directory macros/latex/base/lppl.txt; either
+%%   version 1 of the License, or any later version.
+%%   OR
+%%   The 2-clause BSD-style license.
+%%
+
+\ProvidesPackage{beamerthemelh-poster}
+   [2017/04/14 v0.0  LaTeX poster class implementing the cooperate design of LogicalHacking.com]
+
+\DeclareOptionBeamer{inverse}{\PassOptionsToPackage{inverse}{beamerthemelh-presentation}}
+\ProcessOptionsBeamer\relax
+
+\usetheme{lh-presentation}
+
+\usefonttheme{lh-poster}
+\usecolortheme{lh-poster}
+
+\setbeamertemplate{rhlogo}{}
+\setbeamertemplate{webpage}{www.brucker.ch}
+
+\newlength{\logoheight}
+\newlength{\titleheight}
+\newlength{\headlinewidth}
+\newlength{\rhlogowidth}
+
+\usepackage{calc}
+\setlength{\logoheight}{4cm}%
+\setlength{\rhlogowidth}{0cm}%
+\setlength{\headlinewidth}{.9\paperwidth}%
+
+\mode<presentation>
+
+\setbeamertemplate{headline}{
+  \setlength{\headlinewidth}{\paperwidth-4cm}%
+  \leavevmode%
+  \vskip15mm\hspace{2cm}%
+  \begin{minipage}{\paperwidth}
+    \begin{beamercolorbox}[wd=\headlinewidth]{headline}
+      \begin{minipage}[t][\logoheight+3cm][t]{8cm}
+        \begin{tikzpicture}[overlay,remember picture]
+          \node[anchor=north west,yshift=-3.7cm,xshift=4cm]
+          at (current page.north west) {
+%            \ifthenelse{\boolean{lh@inverse}}{%
+%              \lhLogoLight[height=\logoheight]
+%            }{
+              \lhLogoDark[height=\logoheight]
+%            }
+          };
+        \end{tikzpicture}
+      \end{minipage}%
+      \hfill%
+      \begin{minipage}[t][\logoheight+5cm][t]{\headlinewidth-16cm}
+        \vspace*{\fill}
+        \begin{center}
+          \usebeamercolor[fg]{title}%
+          \usebeamerfont{title}\inserttitle\\[1ex]
+          \usebeamerfont{author}\insertauthor\\[1ex]
+          \usebeamerfont{institute}\insertinstitute\\[1ex]
+          \vspace*{\fill}
+        \end{center}
+      \end{minipage}%
+    \hfill%
+    \begin{minipage}[t][\logoheight+2cm][t]{8cm}
+      \usebeamertemplate*{rhlogo}%
+    \end{minipage}
+  \end{beamercolorbox}
+  \end{minipage}
+}
+
+\setbeamertemplate{block begin}{
+  \vskip.75ex
+  \begin{beamercolorbox}[rounded=false,shadow=true,leftskip=1cm,colsep*=0.75ex]{block title}%
+    \usebeamerfont*{block title}\insertblocktitle
+  \end{beamercolorbox}%
+  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[rounded=false,shadow=false,colsep*=.75ex,sep=.75ex,vmode]{block body}%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+  }
+  \setbeamertemplate{block end}{
+  \end{beamercolorbox}
+}
+
+\useinnertheme{lh-poster}
+
+\mode<all>
+\endinput

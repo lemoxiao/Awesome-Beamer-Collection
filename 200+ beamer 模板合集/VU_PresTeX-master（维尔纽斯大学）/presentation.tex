@@ -1,0 +1,184 @@
+%===============================================================================
+% Purpose:   Template for \LaTeX beamer presentations at Vilnius University
+% Created: Sep 15 2013, Version 1.0 from Mar 17 2013
+% Autor:  Linus Dietz (linus.dietz@uni-bamberg.de), fork of Marcel Grossmann (marcel.grossmann@uni-bamberg.de)
+%===============================================================================
+
+
+%===============================================================================
+% Run pdflatex and bibtex to compile. Use the Makefile for all in once compilation.
+%	Configuration in texmaker:  pdflatex -synctex=1 -interaction=nonstopmode %.tex | bibtex % | pdflatex -synctex=1 -interaction=nonstopmode %.tex | pdflatex -synctex=1 -interaction=nonstopmode %.tex
+% Edit Information in config/metainfo 
+% Choose the language with the following \lang command
+% Options: {english || lithuanian}
+\newcommand{\lang}{lithuanian}
+%===============================================================================
+
+
+\documentclass[11pt,\lang ,%
+%draft,
+%handout,
+compress%
+]{beamer}
+
+\usepackage{ifthen}
+
+\newcommand{\univustring}{\ifthenelse{\equal{\lang}{lithuanian}}{Vilniaus Universitetas}{Vilnius University}}
+
+\input{config/commands}
+
+
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil(#1)%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{fancyquotes}}
+  {\signed{\usebox\mybox}\end{fancyquotes}}
+
+
+\input{config/hyphenation}
+
+\setbeamertemplate{caption}[numbered]
+%\numberwithin{figure}{section}
+\begin{document}
+
+\frame{\titlepage}
+
+\AtBeginSection[]
+{
+  \frame<handout:0>
+  {
+    \frametitle{Outline}
+    \tableofcontents[currentsection,hideallsubsections]
+  }
+}
+
+\AtBeginSubsection[]
+{
+  \frame<handout:0>
+  {
+    \frametitle{Outline}
+    \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=hide]
+  }
+}
+
+\AtBeginSubsubsection[]
+{
+  \frame<handout:0>
+  {
+    \frametitle{Outline}
+    \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+  }
+}
+
+\newcommand<>{\highlighton}[1]{%
+  \alt#2{\structure{#1}}{{#1}}
+}
+
+\newcommand{\icon}[1]{\pgfimage[height=1em]{#1}}
+
+\section*{}
+\begin{frame}{Content}
+\tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Content starts here %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Intro}
+\begin{frame}
+\frametitle{Title}
+\framesubtitle{Subtitle}
+This is a template for presentations in \LaTeX ~beamer. 
+
+A slide can have a title and a subtitle.
+\end{frame}
+
+\section{Basic Commands}
+
+\begin{frame}
+\frametitle{Basic Commands}
+\framesubtitle{\texttt{enumerate} \& \texttt{itemize}}
+If you want a 2 column layout, use the \texttt{multicols} environment:
+\begin{multicols}{2}
+\begin{enumerate}
+\item First
+\item Second
+\item Third
+\end{enumerate}
+\begin{itemize}
+\item This
+\item and
+\item that
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Basic Commands}
+\framesubtitle{Images}
+\image{.4}{logo.png}{Vilnius University Logo}{img:logo}
+
+Images can be included as usual -- or with the \texttt{\textbackslash image} command.
+\end{frame}
+
+\section{Blocks}
+
+\begin{frame}
+\frametitle{Blocks}
+
+\begin{block}{Blocktitle}
+This is a normal block.
+\end{block}
+
+\begin{alertblock}{Alert}
+This is an alert block.
+\end{alertblock}
+
+
+\begin{exampleblock}{Example}
+   This is an example block.
+\end{exampleblock}
+
+\end{frame}
+
+\section{References}
+
+\begin{frame}
+\frametitle{References}
+References can be used with the \texttt{BibTeX} commands  \cite{Knuth.1986}. The list of references  will be shown at the end of the presentation with the preferred style.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%       References      %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{}
+\begin{frame}[allowframebreaks]{References}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+\scriptsize
+\bibliographystyle{alpha}
+\bibliography{literature/bib}
+\normalsize
+\end{frame}
+
+%% Last frame
+\frame{
+  \vspace{2cm}
+ \ifthenelse{\equal{\lang}{lithuanian}}{{\huge Klausimai?}}{\huge Questions ?}
+
+  \vspace{20mm}
+  \nocite*
+  
+  \begin{flushright}  
+    Linus Dietz
+    
+    \structure{\footnotesize{\href{mailto:linus.dietz@uni-bamberg.de}{linus.dietz@uni-bamberg.de}}}
+  \end{flushright}
+}
+
+
+\end{document}

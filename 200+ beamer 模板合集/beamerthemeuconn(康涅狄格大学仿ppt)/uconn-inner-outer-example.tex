@@ -1,0 +1,125 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\useinnertheme{uconn}
+\useoutertheme{uconn}
+%\useoutertheme[footline=authorinstitute,subsection=true]{miniframes}
+%\useoutertheme{sidebar}
+\usecolortheme{default}
+\usefonttheme{default}
+
+\title[Beamer inner and outer themes for UConn]{Beamer inner and outer themes\\ for the University of Connecticut}
+\subtitle{part of a suite of themes}
+\author[Cory Brunson]{Jason Cory Brunson, PhD}
+\institute[UConn Health]{Center for Quantitative Medicine\\ University of Connecticut School of Medicine}
+\date{\today}
+
+\setlength{\parskip}{.5em}
+
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}{Table of contents}
+\tableofcontents
+\end{frame}
+
+
+\section{Layout}
+
+
+\begin{frame}{Background}
+
+The background image is a faded navy blue oak leaf, stored as a PNG. Like the other images used in this theme, it comes from the \href{https://brand.uconn.edu/downloads/logos/}{bulk logos download at UConn Brand Standard}.
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Symbols}
+
+The classic (black) oak leaf is encoded as a symbol \verb|\oakleaf|, and can be used in mathematical environments, e.g.
+\[\oakleaf^{\mathbb{C}}=\oakleaf\otimes_{\mathbb{R}}\mathbb{C}\text,\]
+or in text (\oakleaf).
+
+An inverted-color oak leaf is encoded as \verb|\oakleafbox| (see the slide on claims and proofs).
+
+\end{frame}
+
+
+\section{Environments}
+
+
+\subsection{Text environments}
+
+
+\begin{frame}{Blocks}
+
+\begin{block}{Block}
+This is a text block, formatted as in the {\ttfamily default} template.
+\end{block}
+
+\begin{alertblock}{Alert block}
+This is an alert text block, also formatted by default.
+\end{alertblock}
+
+More may be done in future to customize the block environments. Suggestions are welcome!
+
+\end{frame}
+
+
+\subsection{Mathematical environments}
+
+
+\begin{frame}[fragile]{Definitions and examples}
+
+\begin{definition}
+A {\bfseries definition} block is by default formatted like a text block.
+\end{definition}
+
+Text formatting like \verb|\bfseries| (boldface) can be called within blocks.
+
+\begin{example}
+An \emph{example} is also a block, formatted a bit differently.
+\end{example}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Claim and proof environments}
+
+\begin{theorem}
+Claim blocks, including \verb|lemma|, \verb|theorem|, and \verb|corollary|, use slant-shaped font (\verb|\slshape|) to emphasize their contents.
+\end{theorem}
+
+\begin{proof}
+This proof block shows that the proof-ending symbol has been changed from the customary square to a UConn oak leaf (white inside a black square).
+\end{proof}
+
+\begin{corollary}
+The box oak leaf can also be used inline: \oakleafbox
+\end{corollary}
+
+\end{frame}
+
+
+\section{Thanks}
+
+
+\begin{frame}{Acknowledgments}
+
+The \href{http://tug.ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf}{Beamer class users guide} and Thierry Masson's Beamer \href{http://www.cpt.univ-mrs.fr/~masson/latex/Beamer-appearance-cheat-sheet.pdf}{cheat sheet} were indispensable aides to building this theme, as were several helpful discussions on \href{https://tex.stackexchange.com/}{the \TeX--\LaTeX Stack Exchange}.
+
+See the \href{http://brand.uconn.edu/}{UConn Brand Standards website}, in particular the \href{http://brand.uconn.edu/resources/powerpoint-templates/}{PowerPoint templates}, for more detail on the images and layouts used here.
+
+Please send feedback to Cory at \href{mailto:brunson@uchc.edu}{\tt brunson@uchc.edu}.
+
+\end{frame}
+
+
+\end{document}

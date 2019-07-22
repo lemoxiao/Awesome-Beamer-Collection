@@ -1,0 +1,144 @@
+% 包含ctexbeamer文档类
+\documentclass[xcolor=svgnames, t, aspectratio=169]{ctexbeamer}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 使用nwafusidebar主题
+% 载入主题
+\usetheme[
+%%% 外部主题选项
+%    hidetitle,           % 隐藏边栏中的短标题
+%    hideauthor,          % 隐藏边栏中的作者缩写
+%    hideinstitute,       % 隐藏边栏底部的单位缩写
+%    shownavsym,          % show the navigation symbols
+    width=1.5cm,           % 边栏宽度 (默认是 2 cm)
+%    hideothersubsections,% 除了当前section的subsection隐藏其它所有 subsections
+%    hideallsubsections,  % 隐藏所有 subsections
+    left,               % 边栏位置 (默认在右边)
+%%% 颜色主题选项
+    %lightheaderbg       % 页眉背景颜色
+]{nwafusidebar}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% 载入需要的宏包
+\input{settings/packages.tex}
+% 进行必要的设置
+\input{settings/format.tex}
+
+% 打开PDF后直接全屏
+%\hypersetup{pdfpagemode={FullScreen}}
+
+% 设置标题==================================================
+\title[边栏主题] % (可选，仅当标题过长时使用)
+{西北农林科技大学 {\LaTeX} Beamer 主题}
+
+\subtitle{边栏主题V\ 2.0} % 也可以是一个其它的名字
+\date{\tosemester} % 也可以使用类似\date[2017/04/20]{\zhdate{2017/04/20}}的
+              % 方式指定时间
+
+\author[N. Geng] % (可选，仅当有多个作者时使用)
+{  耿楠}
+
+\institute[
+{\includegraphics[scale=0.01]{nwafulogo/nwafu_logo_cie}}\\ %插入学院 logo
+CS of CIE, NWAFU\\
+Yangling, China ] % 可选项，在每页边栏的底部显示
+{% 显示在标题页
+  \cie
+  
+  % 在此要有一个空行，否则会在大学和国家之间产生额外的空白(I do not
+  % 不知道为什么;( )
+}
+% ==================================================
+
+% 编译控制==================================================设定只输出
+% 选定标签的章节，加快编译速度
+% \includeonlylecture{lec:introduction}
+
+% 设定仅编译的帧，加快编译速度
+% \includeonlyframes{testframe}
+% ==================================================
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%标题页
+{\nwafuwavesbg%
+  \begin{frame}[plain,noframenumbering] % plain选项移除标题页的边栏和页眉
+    \titlepage
+  \end{frame}
+}
+%%%%%%%%%%%%%%%%
+
+% % 目录, 允许分页显示
+% \begin{frame}{目录}{主要内容}%若目录超过一页，可使用[allowframebreaks]参数自动分页
+%   % \scriptsize
+%   \tableofcontents
+% \end{frame}
+% %%%%%%%%%%%%%%%%
+
+% 演示文稿子文件，在contents文件夹中
+%%%%%%%%%%%%%%%%
+\include{contents/ch01}
+%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 关于我们 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[关于我们]{关于我们}
+\subsection[联系方式]{联系方式}
+\begin{frame}[fragile]{关于我们}{联系方式}
+  % colour options
+  \definecolor{seplinecolour}{HTML}{357f2d} % green
+  \definecolor{iconcolour}{HTML}{2f3142} % dark
+  \definecolor{textcolour}{HTML}{2f3142} % dark
+  \definecolor{jobtitlecolour}{HTML}{474a65} % light dark
+
+  % define some lengths for internal spacing
+  \newlength{\seplinewidth} \setlength{\seplinewidth}{2cm}
+  \newlength{\seplineheight} \setlength{\seplineheight}{1pt}
+  \newlength{\seplinedistance} \setlength{\seplinedistance}{0.3cm}
+  \begin{center}
+      \begin{tikzpicture}[font=\small]
+      % name
+      \matrix[every node/.style={anchor=center,font=\huge},anchor=center] (name) {
+        \node{耿\hspace{\ccwd}楠}; \\
+        %\node{\color{jobtitlecolour}\normalsize\textit{教授}}; \\
+      };
+      % sep line 1
+      \node[below=0.3\seplinedistance of name] (hl1) {};
+      \draw[line width=\seplineheight,color=seplinecolour] (hl1)++(-\seplinewidth/2,0) -- ++(\seplinewidth,0);
+      % contact info
+      \matrix [below=\seplinedistance of hl1,%
+               column 1/.style={anchor=center,color=iconcolour},%
+               column 2/.style={anchor=west}] (contact) {
+        \node{\faGlobe}; & \node{\url{http://cie.nwsuaf.edu.cn/szdw/}};\\
+        \node{\faBuilding}; & \node{西北农林科技大学信息工程学院计算机科学系};\\ 
+        \node{\faEnvelope}; & \node{nangeng@nwafu.edu.cn; nangeng@qq.com};\\
+        %\node{\faQq}; & \node{970291228};\\
+        %\node{\faPhone}; & \node{15829540966}; \\
+        \node{\faGithub}; & \node{\url{https://github.com/registor/}}; \\
+      };
+      sep line 2
+      \node[below=\seplinedistance of contact] (hl2) {};
+      \draw[line width=\seplineheight,color=seplinecolour] (hl2)++(-\seplinewidth/2,0) -- ++(\seplinewidth,0);
+      % interests
+      \matrix [below=\seplinedistance of hl2,
+         every node/.style={anchor=center,font=\Large}]
+         (interests) {
+        \node{\faCode}; & \node{\faCoffee}; &
+        \node{\faLock}; & \node{\faWrench}; &
+        \node{\faCameraRetro}; \\
+      };
+    \end{tikzpicture}
+  \end{center}    
+\end{frame}
+
+{\nwafuwavesbg
+  \begin{frame}[plain,noframenumbering]
+    \finalpage{谢谢你使用该{\LaTeX} Beamer主题！\\欢迎多提宝贵意见和建
+      议！}
+  \end{frame}}
+%%%%%%%%%%%%%%%%
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

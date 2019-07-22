@@ -1,0 +1,279 @@
+\documentclass[slideopt,A4,compress]{beamer}
+\usepackage[utf8x]{inputenc}
+\usepackage[french]{babel}
+\usepackage[OT1]{fontenc}
+\usepackage{layout}
+\usetheme{default}
+\useoutertheme{default}
+% Couleurs recherche
+\definecolor{insa}{HTML}{98BF00}
+\definecolor{insa2}{HTML}{BDD671}
+% Couleurs enseignement
+% \definecolor{insa}{rgb}{0,169,192}
+% \definecolor{insa2}{rgb}{104,197,211}
+% \useinnertheme{circles}
+
+% Column snippets (auto compute 2 columns with an easy separation snippet)
+\usepackage{calc}
+\newlength\colonewidth
+\newlength\coltwowidth
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Draft mode
+% Don't draw the background on slides (reduces the
+% compilation time by half... TikZ is awesome but a 
+% bit heavy on the resources ;-) )
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newif\iffinal
+\finaltrue % Sets the backgrounds and stuff
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Automatic item spacing
+% Increases the separating vspace between items, the 
+% default packs too much on a slide
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{enumitem}
+\setitemize{label=\usebeamerfont*{itemize item}%
+  \usebeamercolor[fg]{itemize item}
+  \usebeamertemplate{itemize item}}
+\setlist[itemize]{label=\usebeamerfont*{itemize item}%
+  \usebeamercolor[fg]{itemize item}
+  \usebeamertemplate{itemize item},itemsep=10pt}
+\setlist[itemize,2]{label=\usebeamerfont*{itemize item}%
+  \usebeamercolor[fg]{itemize item}
+  \usebeamertemplate{itemize item},itemsep=6pt,topsep=6pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Variable length block (e.g. captions and stuff)
+% Usage : 
+% \centering or \hspace*{...}
+% \begin{varblock}[optional size, defaults at 0.9\textwidth]{Block title}
+% ...
+% \end{varblock}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ù
+
+\newenvironment<>{varblock}[2][.9\textwidth]{%
+  \setlength{\textwidth}{#1}
+  \begin{minipage}{\textwidth}
+  \begin{actionenv}#3
+  \def\insertblocktitle{#2}
+  \par
+  \usebeamertemplate{block begin}
+}{%
+  \par
+  \usebeamertemplate{block end}
+  \end{actionenv}
+  \end{minipage}
+}
+
+% TikZ stuff
+\usepackage{tikz}
+%% TikZ plots
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepackage{tikz-3dplot}
+\tdplotsetmaincoords{70}{120}
+\pgfplotsset{compat=newest} 
+\pgfplotsset{plot coordinates/math parser=false}
+\newlength\figurewidth
+% TikZ libraries
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{decorations}
+\usetikzlibrary{shadows}
+\usetikzlibrary{calc}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{positioning}
+\tikzstyle{itnode}=[circle,thick,draw]
+\tikzstyle{na} = [baseline=-.5ex]
+\tikzstyle{na2} = [baseline=2ex]
+\tikzstyle{every picture}+=[remember picture]
+% \tikzset{thick}
+
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+
+% Text boxes with absolute positioning
+\usepackage[absolute,showboxes,overlay]{textpos}
+\TPshowboxesfalse
+\textblockorigin{0mm}{0mm}
+
+% Use appendix as complementary slides that do not show in the "total slides"
+\usepackage{appendixnumberbeamer}
+
+% Alternative fonts (Utopia and Helvetica for the small caps)
+% \usepackage{fourier}
+% \usepackage{helvet}
+% Use sans-serif
+\sffamily
+
+%----------- Custom beamer stuff ------------------
+\setbeamertemplate{navigation symbols}{}
+%\setbeamersize{text margin left=0.5cm,text margin right=0.5cm,text margin top=1cm}
+\setbeamersize{text margin left=0.5cm,text margin right=0.5cm}
+% Squared enumerates
+\setbeamertemplate{sections/subsections in toc}[square]
+\setbeamercolor{item}{fg=insa}
+
+% Frametitle overlay
+\setbeamertemplate{frametitle}{\color{insa!50!black} \hspace{5mm} \insertframetitle \vskip-4pt }
+\setbeamerfont{frametitle}{size=\large}
+% Block colors and shape
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamercolor{block title}{fg=white,bg=insa!80!black}
+\setbeamercolor{block body}{fg=black,bg=insa2!50}
+
+% Alerts in black and bold
+\setbeamerfont{alerted text}{series=\bfseries}
+\setbeamercolor{alerted text}{fg=black}
+
+% Smaller subsections in ToC
+\setbeamerfont{subsection in toc}{size=\footnotesize}
+
+% Custom beamer citation command, using the beamer article icon
+\newcommand\insertbeamercitationlabel{\includegraphics[width=2mm]{beamericonarticle.pdf}}
+\newcommand\citeb[2]{
+\nocite{#1} {\footnotesize [\raisebox{-1pt}{\insertbeamercitationlabel}\emph{#2}]}
+}
+
+% Note page
+\setbeameroption{show notes}
+
+% No headline or footline
+\setbeamertemplate{footline}{}
+\setbeamertemplate{headline}{}
+
+% Math commands
+\newcommand{\E}[1]{\mathbb{E}\left[{#1}\right]}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% The customization is below %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\iffinal
+\setbeamertemplate{background canvas}{
+\begin{tikzpicture}
+    \useasboundingbox [fill=insa] (0,0) rectangle (128mm,96mm);
+    \node[trapezium, draw,white,,fill=white,trapezium left angle=70, trapezium right angle=102,minimum height = 58mm,minimum width = 28mm,rounded corners,anchor=south] at (-10mm,21mm) {};
+    \node[trapezium, draw,white,,fill=white,trapezium left angle=78, trapezium right angle=102,minimum height = 58mm,minimum width = 110mm,rounded corners,anchor=south,top color=insa!10,bottom color=white] at (95mm,42mm) {};
+    \fill[white] (130mm,-25mm) ellipse (60mm and 40mm);
+    \node [right] at (11mm,81.5mm) {\scriptsize \bfseries \color{insa2} RECHERCHE};
+    \node [anchor=west,rotate=78,insa!50] at (20mm,20mm) {\tiny INSTITUT NATIONAL DES SCIENCES APPLIQU\'EES DE LYON};
+    \node [right] at (100mm,6mm) {\includegraphics[width=25mm]{insa-couleur2.png}};
+%    \node [right] at (0mm,34mm) {\includegraphics[width=19mm]{logo_universite2.png}};
+    \node [right, opacity=0.5] at (35mm,80mm) {\includegraphics[width=100mm]{bolochon.png}};
+    \node [right,anchor=west] at (4mm,70mm) {\includegraphics[width=20mm]{citi_autrevert.pdf}};
+%    \node [right,anchor=west] at (2mm,52mm) {\includegraphics[width=20mm]{inria_logo.pdf}};
+    \node [right,anchor=west] at (2mm,52mm) {\includegraphics[width=19mm]{logo_universite2.png}};
+    \node [trapezium,trapezium left angle=78,trapezium right angle = 102,anchor=north west,text width = 92mm,text height=12mm,white,fill=insa!70,rounded corners] at (66.8mm,39.8mm) {};
+\end{tikzpicture}
+} 
+\else
+\setbeamertemplate{background canvas}{
+\begin{tikzpicture}
+    \useasboundingbox [fill=insa] (0,0) rectangle (128mm,96mm);
+\end{tikzpicture}
+} 
+\fi
+
+\begin{frame}
+
+
+\begin{textblock*}{10cm}(28mm,58mm)
+{\textcolor{white} {
+%% CUSTOMIZATION :  Titre sur 2 lignes
+{\Large \bfseries \hspace{2mm} A nice title that, at most, is spanning}\\[1mm]
+{\Large \bfseries 2 (!) lines}\\[2mm]
+  %% CUSTOMIZATION : Sous-titre
+   	{\footnotesize \hspace{1.5cm} \emph{Subtitle}} \\
+    {\footnotesize \hspace{2.4cm} \emph{Something better than hspaces may be needed}}
+	}
+  }
+	\end{textblock*}
+\vspace*{-4pt}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%% GENERIC PAGE %%%%%%%%%%%%%%%%%%%%%%%
+
+\iffinal
+\setbeamertemplate{background canvas}{\begin{tikzpicture}
+    \useasboundingbox [fill=insa] (0,0) rectangle (\paperwidth,\paperheight);
+    \fill [white,rounded corners] (0,6mm) rectangle (128mm,87mm); 
+    \node [trapezium,rounded corners,text width=15mm,text height=6mm,text centered,color=insa2!50!black,fill=insa2!50,trapezium left angle=78,trapezium right angle = 102,anchor=south,blur shadow={shadow blur steps=8,shadow blur radius=1mm,shadow xshift=-0pt,shadow yshift=-1pt}] at (121mm,-1mm) {\raisebox{2mm}{\footnotesize \bfseries \insertpagenumber\,/\,\insertpresentationendpage}}; 
+    \node [trapezium,rounded corners,text width=15mm,text height=6mm,text centered, fill=insa2!50,trapezium left angle=102,trapezium right angle = 78,anchor=south,blur shadow={shadow blur steps=8,shadow blur radius=1mm,shadow xshift=-0pt,shadow yshift=-1pt}] at (9mm,-1mm) {\raisebox{1mm}{\includegraphics[width=15mm]{insa-couleur2.png}}};
+    \node [trapezium,rounded corners,text width=115mm,text height=8mm,fill=insa2!50,trapezium left angle=102,trapezium right angle = 102,anchor=south,blur shadow={shadow blur steps=8,shadow blur radius=1mm,shadow xshift=-0pt,shadow yshift=0pt}] at (64mm,88mm) {};
+    %% CUSTOMIZATION : Texte de la ligne du bas
+    \node [insa!40] at (64mm,3mm) {\tiny \textsc{\bfseries Footline}};
+\end{tikzpicture}} 
+\else
+\setbeamertemplate{background canvas}{
+  \begin{tikzpicture}
+    \useasboundingbox [fill=white] (0,0) rectangle (\paperwidth,\paperheight);
+    \node [insa!40] at (64mm,3mm) {\tiny \textsc{\bfseries Footline}};
+    \node [color=insa2!50!black] at (121mm,2mm) {\footnotesize \bfseries \insertpagenumber\,/\,\insertpresentationendpage};
+    \draw[insa] (0,6mm) -- (\paperwidth,6mm);
+    \draw[insa] (0,87mm) -- (\paperwidth,87mm);
+  \end{tikzpicture}
+}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%% Your stuff begins here! %%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Outline of the talk}
+\tableofcontents[hidesubsections]
+\end{frame}
+
+\section{Section 1}
+\subsection{Subsection 1}
+\begin{frame}{\insertsubsectionhead}
+  A dummy frame with stuff in it. \citeb{Beamer2013}{Beamer citation icon is awesome}
+  \begin{itemize}
+  \item Blablabla
+    \begin{itemize}
+      \item \alert{Alert text}
+    \end{itemize}
+  \end{itemize}
+  \begin{block}{Block title}
+  A block
+  \end{block}
+  \centering
+  \begin{varblock}[0.6\textwidth]{Block title}
+  A variable length block
+  \end{varblock}
+\end{frame}
+
+% Insert a "ToC" frame when calling \section{...} with subsections detailed
+\AtBeginSection{
+  \begin{frame}\frametitle{Outline of the talk}
+  \tableofcontents[currentsection,hideothersubsections]
+  \end{frame}
+}
+
+\section{Section 2}
+\subsection{Subsection 2}
+\begin{frame}{\insertsubsectionhead}
+  A dummy frame with stuff in it. \citeb{Beamer2013}{Beamer citation icon is awesome}
+  \begin{itemize}
+  \item Blablabla
+    \begin{itemize}
+      \item \alert{Alert text}
+    \end{itemize}
+  \end{itemize}
+  \begin{block}{Block title}
+  A block
+  \end{block}
+  \centering
+  \begin{varblock}[0.6\textwidth]{Block title}
+  A variable length block
+  \end{varblock}
+\end{frame}
+
+\end{document}
+
+

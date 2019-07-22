@@ -1,0 +1,66 @@
+\mode<presentation>
+
+% Introduce oak leaf math symbols
+% https://tex.stackexchange.com/a/31492
+\newcommand{\oakleaf}{\ensuremath{
+  \mathchoice{\includegraphics[height=1.75ex, trim=0 50 0 0]{images/oak-leaf/oak-leaf-black.png}}
+    {\includegraphics[height=1.5ex, trim=0 50 0 0]{images/oak-leaf/oak-leaf-black.png}}
+    {\includegraphics[height=1.25ex, trim=0 50 0 0]{images/oak-leaf/oak-leaf-black.png}}
+    {\includegraphics[height=.75ex, trim=0 50 0 0]{images/oak-leaf/oak-leaf-black.png}}
+}}
+\newcommand{\oakleafbox}{\ensuremath{
+  \mathchoice{\includegraphics[height=1.75ex]{images/oak-leaf/oak-leaf-white.eps}}
+    {\includegraphics[height=1.5ex]{images/oak-leaf/oak-leaf-white.eps}}
+    {\includegraphics[height=1.25ex]{images/oak-leaf/oak-leaf-white.eps}}
+    {\includegraphics[height=.75ex]{images/oak-leaf/oak-leaf-white.eps}}
+}}
+
+% Suppress all navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Use circle symbols for all bulleted lists
+\setbeamertemplate{items}[circle]
+\setbeamertemplate{sections/subsections in toc}[circle]
+
+% Use oak leaf as QED symbol
+\setbeamertemplate{qed symbol}{\oakleafbox}
+
+% Title page (arguments currently ignored)
+\defbeamertemplate*{title page}{uconn}[1][]
+{
+  \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par
+  \smallskip
+  \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+  \bigskip
+  \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par
+  \smallskip
+  \usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par
+  \medskip
+  \usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par
+}
+
+% Part page (arguments currently ignored)
+\defbeamertemplate*{part page}{uconn}[1][]
+{
+  \usebeamerfont{part name}\usebeamercolor[fg]{part name}\partname~\insertromanpartnumber\par
+  \medskip
+  \usebeamerfont{part title}\insertpart\par
+}
+
+% Section page (arguments currently ignored)
+\defbeamertemplate*{section page}{uconn}[1][]
+{
+  \usebeamerfont{section name}\usebeamercolor[fg]{section name}\sectionname~\insertsectionnumber\par
+  \smallskip
+  \usebeamerfont{section title}\insertsection\par
+}
+
+% Subsection page (arguments currently ignored)
+\defbeamertemplate*{subsection page}{uconn}[1][]
+{
+  \usebeamerfont{subsection name}\usebeamercolor[fg]{subsection name}\subsectionname~\insertsubsectionnumber\par
+  \smallskip
+  \usebeamerfont{subsection title}\insertsubsection\par
+}
+
+\mode<all>

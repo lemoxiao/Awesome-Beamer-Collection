@@ -1,0 +1,5 @@
+#!/bin/bash
+wget http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts
+chmod +x install-getnonfreefonts
+sudo texlua install-getnonfreefonts
+getnonfreefonts --all

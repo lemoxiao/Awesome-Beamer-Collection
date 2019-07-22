@@ -1,0 +1,200 @@
+\ifx\pdfminorversion\undefined\else\pdfminorversion=4\fi
+\documentclass[t]{beamer}
+\usepackage[orientation=portrait,size=a0,scale=1.4]{beamerposter}
+
+% English version FAU Logo
+\usepackage[english]{babel}
+% German version FAU Logo
+%\usepackage[ngerman]{babel}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{scalefnt}
+\usepackage{caption}
+\usepackage[backend=biber,sorting=ydnt,doi=true]{biblatex}
+
+% Options:
+%  - inst:          Institute
+%                     med:      MedFak FAU theme
+%                     nat:      NatFak FAU theme
+%                     phil:     PhilFak FAU theme
+%                     rw:       RWFak FAU theme
+%                     rw-jura:  RWFak FB Jura FAU theme
+%                     rw-wiso:  RWFak FB WISO FAU theme
+%                     tf:       TechFak FAU theme
+%  - headtitle:     Place poster title in headline
+%  - titlebg:       Fill non-headline title background with institute color
+%  - outline:       Draw frame around content
+%  - basecolor:     Fill content background with base FAU color
+%  - instcolor:     Fill content background with institute color
+%  - framedblock:   Draw frame around blocks (optional: set frame width)
+\usetheme[%
+  titlebg,
+  basecolor,
+  %headtitle,
+  %framedblock=3pt
+]{fau}
+
+
+\lstset{%
+  frame=b,
+  captionpos=b,
+  tabsize=2,
+  numbers=left,
+  numbersep=.75em,
+  basicstyle=\ttfamily\lst@ifdisplaystyle\scalefont{.75}\fi,
+  numberstyle=\ttfamily\scalefont{.75},
+  keywordstyle=\bfseries\color{blue},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red},
+  rulecolor=\color{faublue},
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  belowskip=0pt,
+  belowcaptionskip=0pt,
+  abovecaptionskip=0pt,
+  framexbottommargin=0pt,
+  xleftmargin=1.5em
+}
+\DeclareCaptionFormat{listing}{\parbox{\linewidth}{\hspace{1.5em}#1#2#3}}
+\captionsetup[lstlisting]{format=listing}
+
+
+\defbibheading{bibliography}{}
+\addbibresource[label=primary]{references.bib}
+\nocite{*}
+
+
+% Title, authors, and date
+\title{Poster Title}
+\subtitle{Subtitle}
+\author{Oliver Reiche}
+\institute{Hardware/Software Co-Design, Friedrich-Alexander University Erlangen-N\"urnberg}
+\date{\today}
+\footline{www.fau.eu}
+%\logo{\includegraphics[width=.15\paperwidth]{mylogo.png}}
+
+
+\begin{document}
+  \begin{frame}{}
+
+    \vspace{3ex}
+
+    \textcolor{faublue}{\huge Lists}
+
+    \begin{columns}
+      \begin{column}{.5\textwidth}
+
+        \begin{block}{List of Items}
+          \begin{itemize}
+            \item one
+            \item two
+            \item three
+            \item \dots
+          \end{itemize}
+        \end{block}
+
+      \end{column}
+      \begin{column}{.5\textwidth}
+
+        \begin{block}{Numbered List of Items}
+          \begin{enumerate}
+            \item one
+            \item two
+            \item three
+            \item \dots
+          \end{enumerate}
+        \end{block}
+
+      \end{column}
+    \end{columns}
+
+
+    \textcolor{faublue}{\huge Block Alignment}
+
+    \begin{columns}
+      \begin{column}{0.5\textwidth}
+
+        \begin{block}{Large Block}
+          \begin{minipage}[t][8em][t]{\textwidth}
+            Fixed height using minipage
+          \end{minipage}
+        \end{block}
+
+      \end{column}
+      \begin{column}{0.25\textwidth}
+
+        \begin{block}{Small Block}
+          \begin{minipage}[t][8em][t]{\textwidth}
+            Top-aligned,\\
+            fixed height using minipage
+          \end{minipage}
+        \end{block}
+
+      \end{column}
+      \begin{column}{0.25\textwidth}
+
+        \begin{block}{Small Block}
+          Top-aligned,\\
+          flexible height
+        \end{block}
+
+      \end{column}
+    \end{columns}
+
+    \begin{columns}[c]
+      \begin{column}{0.5\textwidth}
+
+        \begin{block}{Large Block}
+          \begin{minipage}[t][8em][t]{\textwidth}
+            Fixed height using minipage
+          \end{minipage}
+        \end{block}
+
+      \end{column}
+      \begin{column}{0.25\textwidth}
+
+        \begin{block}{Small Block}
+          \begin{minipage}[t][8em][t]{\textwidth}
+            Center-aligned,\\
+            fixed height using minipage
+          \end{minipage}
+        \end{block}
+
+      \end{column}
+      \begin{column}{0.25\textwidth}
+
+        \begin{block}{Small Block}
+          Center-aligned,\\
+          flexible height
+        \end{block}
+
+      \end{column}
+    \end{columns}
+
+
+    \textcolor{faublue}{\huge Other}
+
+    \begin{columns}
+      \begin{column}{0.5\textwidth}
+
+        \begin{block}{Listings}
+          \lstinputlisting[language=C++, caption={Hello World}]{helloworld.cpp}
+        \end{block}
+
+      \end{column}
+      \begin{column}{0.5\textwidth}
+
+        \begin{block}{References}
+          \printbibliography
+        \end{block}
+
+      \end{column}
+    \end{columns}
+  \end{frame}
+\end{document}
+

@@ -1,0 +1,259 @@
+\documentclass[UTF8]{beamer}
+\usepackage{ctex}
+\usepackage{fontspec}
+\usepackage{comment}
+\usepackage{xeCJK}
+\setCJKmainfont{KaiTi}
+\setCJKmonofont{KaiTi}
+\setCJKsansfont{Microsoft YaHei}
+\usefonttheme{professionalfonts}
+\usepackage{graphicx}
+\graphicspath{{fig/}} % storage figure in a sub-folder
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{epstopdf}
+\usepackage{bm}
+\usepackage{nkcolor}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{booktabs} % for much better looking tables
+\usepackage{cite} % reference
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+\usepackage{cases} %equation set
+\usepackage{multirow} %use table
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{xcolor}
+\usepackage{capt-of}
+\usepackage{listings}
+\lstset{tabsize=4, keepspaces=true,
+    xleftmargin=2em,xrightmargin=0em, aboveskip=1em,
+    backgroundcolor=\color{gray!20},  % 定义背景颜色
+    frame=none,                       % 表示不要边框
+    extendedchars=false,              % 解决代码跨页时，章节标题，页眉等汉字不显示的问题
+    numberstyle=\ttfamily,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue}\bfseries,
+    breakindent=10pt,
+    identifierstyle=,                 % nothing happens
+    commentstyle=\color{green}\small,  % 注释的设置
+    morecomment=[l][\color{green}]{\#},
+    numbers=left,stepnumber=1,numberstyle=\scriptsize,
+    showstringspaces=false,
+    showspaces=false,
+    flexiblecolumns=true,
+    breaklines=true, breakautoindent=true,breakindent=4em,
+    escapeinside={/*@}{@*/},
+}
+
+\title[Beamer模板]{Beamer模板：\\
+Style of Nankai University}
+\author[李华]{李华\\
+(\url{lihua@163.com})}
+\institute{南开大学XX学院}
+\date{\today}
+
+
+\begin{document}
+%%%%%%%%%% 定理类环境的定义 %%%%%%%%%%
+%% 必须在导入中文环境之后
+\newtheorem{thm}{定理}[section]  % 按 section 编号
+
+\renewcommand{\contentsname}{目录}     % 将Contents改为目录
+\renewcommand{\abstractname}{摘要}     % 将Abstract改为摘要
+\renewcommand{\refname}{参考文献}      % 将References改为参考文献
+\renewcommand{\indexname}{索引}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\renewcommand{\appendixname}{附录}
+\renewcommand{\proofname}{证明}
+\renewcommand{\algorithm}{算法}
+%----------------------------------------------------------------------
+% Title frame
+\begin{frame}[plain]
+\maketitle
+\end{frame}
+
+%----------------------------------------------------------------------
+% Outline frame
+% PLEASE RUN pdflatex TWICE 
+\begin{frame}
+\frametitle{目录}
+\tableofcontents
+\end{frame}
+%%=====================================================================
+% Section I
+\section{框架}
+%----------------------------------------------------------------------
+% Content frame
+\begin{frame}
+\frametitle{框架}
+\framesubtitle{Why I made this beamer style}
+\begin{block}{Demonstration of the use of items and blocks}
+\begin{itemize}
+\item No one has done it.$$e=mc^2$$
+\item I need one.
+\pause \item Share with others.
+\end{itemize}
+\end{block}
+\pause
+\begin{block}{Another block}
+This block appears after a pause. Simply delete the \texttt{\textbackslash pause} command if this animation is not needed. Add the pause command whenever a pause is needed. 
+\end{block}
+\end{frame}
+
+%%=====================================================================
+% Section II
+\section{This is the second section: a two-column slide}
+%----------------------------------------------------------------------
+\begin{frame}
+\frametitle{A Two-column Slide}
+\begin{columns} 
+\begin{column}{0.5\textwidth} 
+\begin{block}{The first column}
+\begin{figure}[htb]
+	\includegraphics[width=2.5cm,height=1.3cm]{nkpurple.png}
+	\caption{插入图片示例}
+	\label{fig1}
+    \end{figure}
+\end{block}
+\end{column}
+\begin{column}{0.5\textwidth} 
+\begin{block}{The second column}
+颜色如图\ref{fig1}，以及 e.g. {\color{red}{red}}, {\color{orange}{orange}}, {\color{blue}{blue}}
+\vspace{9.5em}
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+% do not use enumerate, use description instead, like this:
+\begin{frame}
+    \frametitle{arg}
+    \begin{description}
+        \item[i] first of all
+        \item[ii] besides
+        \item[iii] last but not least
+    \end{description}
+    \begin{equation}
+        \text{e}^{\pi \text{j}} + 1 = 0
+    \end{equation}
+    \begin{itemize}
+        \item first
+        \item second
+    \end{itemize}
+\end{frame}
+
+% 本模板暂时无法对算法提供良好支持，
+% 采用其他方法排版算法
+\begin{frame}[fragile]
+    \begin{table}[!hbp]
+    \centering
+    \begin{tabular}{l}
+    \hline
+    \bf{算法1: Framework} \\
+    \hline
+    {\bfseries Input:} %算法的输入参数：Input   
+    Ensemble of classifiers on former batches, $E_{n-1}$;  \\
+    {\bfseries Output:} %算法的输出：Output  
+    Ensemble of classifiers on the current batch, $E_n$;  \\
+    Extracting the set of reliable positive samples\ $P_n$;   \\
+    \label{ code:fram:extract }%对此行的标记，方便在文中引用算法的某个步骤  
+    $\mathbf{for\ each} i \in [1,9]$ \\
+    \quad initialize a tree $T_{i}$\\  
+    $\mathbf{end\ for}$ \\
+    $\mathbf{return} \quad E_n$; \\ %算法的返回值  
+    \hline
+    \end{tabular}
+    \end{table}
+
+    \begin{comment}
+    \begin{algorithm}[H]
+    \centering     
+    \begin{algorithmic}  
+    \STATE {\bf Input:}  %算法的输入参数：Input   
+    former batches, $E_{n-1}$;  \\
+    \STATE {\bf Output:} %算法的输出：Output  
+    current batch, $E_n$;  \\
+    \STATE my $P_n$;   \\
+    \label{ code:fram:extract }%对此行的标记，方便在文中引用算法的某个步骤  
+    \FOR{each $i \in [1,9]$}  
+    \STATE initialize a tree $T_{i}$ with only a leaf (the root);\  
+    \STATE $T=T \cup T_{i};$\  
+    \ENDFOR 
+    \RETURN $E_n$; %算法的返回值  
+    \end{algorithmic} 
+    \caption{ Framework}   
+    \label{alg2} 
+    \end{algorithm} 
+    \end{comment}
+
+\end{frame}
+
+\begin{frame}
+\begin{table}[!hbp]
+\centering
+\begin{tabular}{c|c}
+	\hline
+	甲 &乙\\
+	\hline
+	11 & 12\\
+	21 & 22\\
+	31 & 32\\
+	\hline
+\end{tabular}
+\caption{插入表格示例}
+\label{tab1}
+\end{table}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{code highlight}
+    \begin{lstlisting}[language=java]
+    public class hello{
+        public static void main(String args[]){
+            System.out.println("hello,world");
+        }
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+    \frametitle{theorem and proof in chinese}
+    \begin{theorem}[L\'{e}vy\index{L\'{e}vy 定理}]
+    令 $F(x),\varphi(t)$ 分别为随机变量 $X$ 的分布函数和特征函数。
+    假定 $F(x)$ 在 $a+h$ 和 $a-h (h>0)$ 处连续，则有
+    \begin{align}
+    \label{Levy theorem}  % 方程的标记可以是专有名词
+    F(a+h)-F(a-h)&=\lim_{T\rightarrow\infty}\frac{1}{\pi}\int^{T}_{-T}\frac{\sin ht}{t}
+    e^{-ita}\varphi(t)dt
+    \end{align}
+    \end{theorem}
+    \begin{proof}
+        略。
+    \end{proof}
+\end{frame}
+
+\begin{frame}
+    \frametitle{reference}
+    \begin{thebibliography}{99} 
+    \bibitem{edwurd} These files are based on Edward Hartley's work
+        (\url{http://www-control.eng.cam.ac.uk/Main/EdwardHartley})
+    \bibitem{beihang} Beamer style of Beihang
+    \end{thebibliography}
+\end{frame}
+
+\begin{frame}
+    \Huge{谢谢大家！}\\
+    \begin{figure}[htb]
+	\includegraphics[width=5cm,height=3cm]{nk_logo.png}
+	\caption{另一个图片示例}
+	\label{fig2}
+    \end{figure}
+\end{frame}
+\end{document}

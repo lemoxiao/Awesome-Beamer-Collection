@@ -1,0 +1,107 @@
+%%
+%% This is file `rdamscwg.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% rdaslides.dtx  (with options: `mscwg')
+%% 
+%% ----------------------------------------------------------------
+%% The rdaslides class: Research Data Alliance presentations
+%% Author:  Alex Ball
+%% E-mail:  a.j.ball@bath.ac.uk
+%% License: Released under the LaTeX Project Public License v1.3c or later
+%% See:     http://www.latex-project.org/lppl.txt
+%% ----------------------------------------------------------------
+%% 
+\def\Version{2016/08/18 v3.0}
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesPackage{rdamscwg}
+    [\Version\space Logo and details of the RDA Metadata Standards Catalog Working Group]
+\RequirePackage{ifthen,calc,keyval}
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.geometric,positioning}
+
+\usepackage{rdacolors}
+
+\newlength{\msdwgl@unit}
+\newlength{\msdwgl@unit@calc}
+\define@key{msdwgl}{height}{%
+  \setlength{\@tempdima}{#1}%
+  \setlength{\@tempdimb}{\@tempdima / \real{59.690}}%
+  \ifthenelse{%
+    \lengthtest{\msdwgl@unit@calc = 0pt}\OR
+    \lengthtest{\@tempdimb < \msdwgl@unit@calc}%
+  }{%
+    \setlength{\msdwgl@unit@calc}{\@tempdimb}%
+  }{}%
+}
+\define@key{msdwgl}{width}{%
+  \setlength{\@tempdima}{#1}%
+  \setlength{\@tempdimb}{\@tempdima / \real{62.091}}%
+  \ifthenelse{%
+    \lengthtest{\msdwgl@unit@calc = 0pt}\OR
+    \lengthtest{\@tempdimb < \msdwgl@unit@calc}%
+  }{%
+    \setlength{\msdwgl@unit@calc}{\@tempdimb}%
+  }{}%
+}
+\define@key{msdwgl}{scale}{%
+  \setlength{\@tempdima}{1pt}%
+  \setlength{\msdwgl@unit@calc}{#1\@tempdima}%
+}
+\newcommand{\msdwgl@line@color}{none}
+\define@key{msdwgl}{outline}[white]{\renewcommand{\msdwgl@line@color}{#1}}
+
+\newcommand{\MSDWGLogo}[1][]{%
+  \bgroup
+  \setkeys{msdwgl}{scale=0,#1}%
+  \ifthenelse{\lengthtest{\msdwgl@unit@calc > 0pt}}{%
+    \setlength{\msdwgl@unit}{\msdwgl@unit@calc}%
+  }{%
+    \setlength{\msdwgl@unit}{1pt}%
+  }%
+  \begin{tikzpicture}
+    [ inner sep = 0pt
+    , outer sep = 0pt
+    , baseline = (text.base)
+    , line width = 0.4pt
+    ]
+  \matrix
+    [ ampersand replacement = \&
+    , nodes =
+      { cylinder
+      , cylinder uses custom fill
+      , cylinder end fill=rdayellow
+      , aspect=1.0
+      , rotate=43
+      , anchor=center
+      , draw=\msdwgl@line@color
+      }
+    , row 1 column 1/.style = {cylinder body fill=rdagreen}
+    , row 1 column 2/.style = {cylinder body fill=rdabrown}
+    , row 2 column 1/.style = {cylinder body fill=rdabrown}
+    , row 2 column 2/.style = {cylinder body fill=rdagreen}
+    , column sep = -3\msdwgl@unit
+    , row sep = -4\msdwgl@unit
+    ]
+    (logo)
+    {
+      \node{\phantom{\rule{4\msdwgl@unit}{20\msdwgl@unit}}}; \&
+      \node{\phantom{\rule{4\msdwgl@unit}{20\msdwgl@unit}}}; \\
+      \node{\phantom{\rule{4\msdwgl@unit}{20\msdwgl@unit}}}; \&
+      \node{\phantom{\rule{4\msdwgl@unit}{20\msdwgl@unit}}}; \\
+    };
+  \node (text) at (logo.center) {\phantom{RDA}};
+  \end{tikzpicture}%
+  \egroup
+}
+
+\def\rdaGroupLogo{\MSDWGLogo[width=\hsize]}
+\def\rdaGroupName{Metadata Standards Catalog}
+\def\rdaGroupType{Working Group}
+\def\rdaGroupUrl{https://rd-alliance.org/groups/metadata-standards-catalog-working-group.html}
+%% 
+%% Copyright (C) 2016 Alex Ball <a.j.ball@bath.ac.uk>
+%%
+%% End of file `rdamscwg.sty'.

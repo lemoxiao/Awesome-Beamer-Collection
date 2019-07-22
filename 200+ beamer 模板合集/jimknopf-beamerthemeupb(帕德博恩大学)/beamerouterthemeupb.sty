@@ -1,0 +1,74 @@
+% Copyright 2008-2013 Michael Knopf <beamerthemeupb@subtree.de>
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `unmaintained'.
+%
+% This work consists of the files beamerthemeupb.sty, beamercolorthemeupb.sty,
+% and beamerouterthemeupb.sty.
+
+\pgfdeclareimage[height=25pt]{pgfupblogo}{upb_logo}
+
+\mode<presentation>
+
+\defbeamertemplate*{headline}{upb theme}
+{  
+	\leavevmode%
+	\begin{tikzpicture}
+		% Use invisible rectangle as bounding box.
+		\draw[draw=none, use as bounding box] (0.0, 0.0) rectangle (\paperwidth, 10pt);
+		% Draw background box with a bleed difference of 5pt.
+		\fill[color=upbblue!30] (-5pt, 15pt) rectangle (\paperwidth + 5pt, 0pt);
+		\fontsize{6pt}{6pt}\fontshape{it}\fontseries{bx}\selectfont
+		\draw (0pt, 5pt) node[anchor= west] {\color{upbblue}\insertsectionnavigationhorizontal{\paperwidth}{}{}};
+	\end{tikzpicture}
+}
+
+
+\defbeamertemplate*{footline}{upb theme}
+{
+	\leavevmode%
+	\begin{tikzpicture}
+		% Use invisible rectangle as bounding box.
+		\draw[draw=none, use as bounding box] (0.0, 0.0) rectangle (\paperwidth, 15pt);
+		% Draw university logo.
+		\draw (4.5pt, 17.15pt) node[anchor=west] {\pgfuseimage{pgfupblogo}};
+		% Draw background boxes with a bleed difference of 5pt.
+		\fill[color=upbblue!30] (0.3 \paperwidth, -5pt) rectangle (\paperwidth + 5pt, 15pt);
+		\fill[color=upbblue] (0.3 \paperwidth, -5pt) rectangle (\paperwidth + 5pt, 5pt);
+		\begin{scope}
+			% Use invisible rectangle as clipping box for text.		
+			% \draw[draw=none, clip] (0.3 \paperwidth, 5pt) rectangle (\paperwidth, 15pt);
+			% Select default bold family with default italic shape.
+			\fontshape{\itdefault}
+			\fontseries{\bfdefault}
+			% Draw small title text.
+			\fontsize{6pt}{6pt}
+			\selectfont
+			\draw (0.3 \paperwidth, 10pt) node[anchor=west] {\color{upbblue}\insertshorttitle};
+			% Draw large framenumber.
+			\fontsize{15pt}{15pt}
+			\selectfont
+			\draw (\paperwidth, 10pt) node[anchor=east] {\color{upbblue}\insertframenumber};
+		\end{scope}		
+	\end{tikzpicture}
+}
+
+\defbeamertemplate*{sidebar right}{upb theme} 
+{ 
+	% Just insert the logo at the upper right corner.
+	\vskip5pt% 
+	\llap{%
+		\insertlogo%
+		\hskip5pt%
+	}% 
+	\vfill%
+}
+
+\mode<all>

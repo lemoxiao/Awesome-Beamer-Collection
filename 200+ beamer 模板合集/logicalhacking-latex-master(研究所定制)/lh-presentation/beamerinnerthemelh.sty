@@ -1,0 +1,128 @@
+%% Copyright (C) 2016 Achim D. Brucker, https://www.brucker.ch
+%%
+%% License:
+%%   This program can be redistributed and/or modified under the terms
+%%   of the LaTeX Project Public License Distributed from CTAN
+%%   archives in directory macros/latex/base/lppl.txt; either
+%%   version 1 of the License, or any later version.
+%%   OR
+%%   The 2-clause BSD-style license.
+%%
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{beamerinnerthemelh}
+     [2016/11/01 v0.0  LaTeX presentation class implementing the cooperate design of LogicalHacking.com]
+
+\usepackage{transparent}
+\usepackage{tikz}
+\mode<presentation>
+
+\newcommand{\vMaxPhantom}{\vphantom{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz}}
+\setbeamertemplate{sections/subsections in toc}[square]
+\setbeamertemplate{items}[square] % [circle]
+
+\setbeamertemplate{itemize item}{
+  \tikz{
+    \draw[fill=lhOrange,draw=none] (0, 0) rectangle(0.1, 0.1);
+    \draw[fill=lhOrange,draw=none] (0.1, 0.1) rectangle(0.2, 0.2);
+   \draw[fill=lhOrange,draw=none] (0, 0.2) rectangle(0.1, 0.3);
+  }
+}
+\ifthenelse{\boolean{lh@inverse}}{%
+\setbeamertemplate{itemize subitem}{
+  \tikz{
+   \draw[fill=lhLightGray,draw=none] (0, 0) rectangle(0.075, 0.075);
+    \draw[fill=lhLightGray,draw=none] (0.075, 0.075) rectangle(0.15, 0.15);
+   \draw[fill=lhLightGray,draw=none] (0, 0.15) rectangle(0.075, 0.225);
+  }
+}
+\setbeamertemplate{itemize subsubitem}{
+  \tikz{
+    \draw[fill=lhDarkGray,draw=none] (0, 0) rectangle(0.075, 0.075);
+    \draw[fill=lhDarkGray,draw=none] (0.075, 0.075) rectangle(0.15, 0.15);
+    \draw[fill=lhDarkGray,draw=none] (0, 0.15) rectangle(0.075, 0.225);
+  }
+}
+}{%
+\setbeamertemplate{itemize subitem}{
+  \tikz{
+   \draw[fill=lhDarkGray,draw=none] (0, 0) rectangle(0.075, 0.075);
+    \draw[fill=lhDarkGray,draw=none] (0.075, 0.075) rectangle(0.15, 0.15);
+   \draw[fill=lhDarkGray,draw=none] (0, 0.15) rectangle(0.075, 0.225);
+  }
+}
+\setbeamertemplate{itemize subsubitem}{
+  \tikz{
+    \draw[fill=lhLightGray,draw=none] (0, 0) rectangle(0.075, 0.075);
+    \draw[fill=lhLightGray,draw=none] (0.075, 0.075) rectangle(0.15, 0.15);
+    \draw[fill=lhLightGray,draw=none] (0, 0.15) rectangle(0.075, 0.225);
+  }
+}
+}
+
+
+\defbeamertemplate*{title page}{lh}[1][]
+{
+  % <background image>
+  \setbox\beamer@tempbox=\vbox to \paperheight {\vfil
+    \hbox to \paperwidth{%
+      \ifx\inserttitlegraphic\@empty%
+      \else%
+      \inserttitlegraphic\hyper@pagetransition\hyper@pageduration%
+      \fi%
+    }%
+    \vfil}%
+    \vbox{\hbox{\hskip-\Gm@lmargin\box\beamer@tempbox\box\@tempboxa}}%
+    \vskip-\paperheight%
+  % </background image>
+  \@tempdima=\paperwidth%
+  \advance\@tempdima by -6mm
+  \advance\@tempdima by 0mm
+  \@tempdimb=\paperheight
+  \advance\@tempdimb by -52mm
+  \mbox{}\vspace{-8mm}
+  \begin{beamercolorbox}[ht=1mm,sep=.1cm,wd=\@tempdima]{titlerule}
+  \end{beamercolorbox}
+  \mbox{}\vspace{-6mm}
+  \begin{beamercolorbox}[ht=4mm,sep=.2cm,wd=\@tempdima]{titlerule}
+  \end{beamercolorbox}
+  \mbox{}\vspace{-5mm}\transparent{.80}\mbox{}%
+  \begin{beamercolorbox}[ht=42mm,sep=.2cm,center,wd=\@tempdima]{titleframe}
+    \vspace{-3mm}%
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+    \ifx\insertsubtitle\@empty%
+      \vskip0.7em%
+      {\usebeamerfont{subtitle}\vMaxPhantom\par}%
+    \else%
+      \vskip0.7em%
+      {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\vMaxPhantom\par}%
+    \fi%
+    \vbox{}
+    \vfill
+     \begin{beamercolorbox}[sep=4pt,center,wd=1.1\@tempdima,#1]{author}
+     \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor
+     \end{beamercolorbox}
+     \begin{beamercolorbox}[sep=4pt,center,wd=1.1\@tempdima,#1]{institute}
+       \usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute
+     \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=4pt,center,wd=1.1\@tempdima,#1]{date}
+      \usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate
+    \end{beamercolorbox}
+  \end{beamercolorbox}
+  \vspace{2mm}
+  \begin{beamercolorbox}[ht=\@tempdimb,wd=\@tempdima,ignorebg]{lhWhite}
+  \end{beamercolorbox}
+    \vspace{1mm}
+  \begin{beamercolorbox}[wd=\@tempdima,ignorebg]{lhWhite}
+    \ifthenelse{\boolean{lh@title@light}}{%
+      \raisebox{-\fboxsep}{{\setlength{\fboxsep}{0pt}\lhcomLogoLight[width=42mm]}}%
+    }{%
+      \raisebox{-\fboxsep}{{\setlength{\fboxsep}{0pt}\lhcomLogoDark[width=42mm]}}%
+    }%
+    \hfill%
+    {\partnerLogo[height=4mm]}%
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[ht=16mm,sep=.2cm,wd=\@tempdima,ignorebg]{titlerule}
+  \end{beamercolorbox}
+}
+
+\mode<all>

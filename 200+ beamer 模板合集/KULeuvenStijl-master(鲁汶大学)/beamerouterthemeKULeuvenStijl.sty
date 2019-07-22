@@ -1,0 +1,26 @@
+% Copyright 2014
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+
+\mode<presentation>
+
+\defbeamertemplate*{footline}{kuleuven theme footer}
+{
+\ifnumgreater{\thepage}{1}{%
+\begin{tikzpicture}
+	\useasboundingbox (0,0) rectangle(\paperwidth,0.08\paperheight);
+		\fill[KULeuvenFill] (0,0) rectangle (\paperwidth,.06\paperheight);
+		\node [anchor=east,inner sep=0,xshift=-0.03\paperwidth,yshift=0.06\paperheight] at (current page.south east) {\pgfuseimage{KULeuvenLogo}};
+	%TODO: title + author + slide number + totalslides
+\end{tikzpicture}
+}{%  on the title page
+\begin{tikzpicture}
+	\useasboundingbox (0,0) rectangle(\paperwidth,0.08\paperheight);
+\end{tikzpicture}
+}
+}
+
+\mode<all>

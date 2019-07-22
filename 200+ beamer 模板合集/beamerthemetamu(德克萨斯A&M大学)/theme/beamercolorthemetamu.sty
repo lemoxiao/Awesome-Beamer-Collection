@@ -1,0 +1,46 @@
+% Copyright 2017 Alick Zhao <alick9188@gmail.com>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License, version 1.3c or later, and/or
+% 2. under the GNU Public License, version 2 or later.
+%
+% Last modified on: 2017-07-16
+
+\mode<presentation>
+
+\usecolortheme[RGB={80,0,0}]{structure}
+\usecolortheme{orchid}
+\ifbeamer@secheader
+  \usecolortheme{dolphin}
+  \else
+  \ifbeamer@infolines
+    \usecolortheme{dolphin}
+  \fi
+\fi
+
+% reset block and item icon color
+\setbeamercolor{block title}{fg=white,bg=beamer@blendedblue!75!black}
+\setbeamercolor{item}{fg=beamer@blendedblue}
+
+% Colors from TAMU brand guide
+% cf. http://brandguide.tamu.edu/downloads/colors/brandColors-RGB.pdf
+%
+% Primary color
+\definecolor{tamumaroon}{RGB}{80,0,0}
+% Support color
+\definecolor{tamugray}{RGB}{51,44,44}
+
+% title page tweak
+\setbeamercolor{author}{fg=tamumaroon}
+\setbeamercolor{date}{fg=tamumaroon}
+\setbeamercolor{institute}{fg=tamumaroon}
+
+% toc tweak
+\setbeamercolor{section in toc}{fg=black,bg=white}
+
+% frametitle tweak
+\setbeamercolor{frametitle}{fg=black}
+
+\mode
+<all>

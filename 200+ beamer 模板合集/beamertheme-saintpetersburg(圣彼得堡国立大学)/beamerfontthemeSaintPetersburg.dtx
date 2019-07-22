@@ -1,0 +1,194 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2017 by Ivan Gankevich <igankevich@ya.ru>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+% \iffalse
+%<*package>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerfontthemeSaintPetersburg}[2017/11/20 Saint Petersburg font theme]
+%</package>
+% \fi
+% \CheckSum{0}
+% \StopEventually{}
+% \iffalse
+%<*package>
+% \fi
+% \subsection{SaintPetersburg font theme}
+% Use Fira Mono as typewriter font and Open Sans as sans serif font.
+%    \begin{macrocode}
+\RequirePackage{FiraMono}
+\RequirePackage{opensans}
+\RequirePackage{ifxetex}
+%    \end{macrocode}
+% Setup fonts using \texttt{fontspec} package.
+%    \begin{macrocode}
+\ifxetex%
+\RequirePackage{fontspec}
+%    \end{macrocode}
+
+% Use serif font for posters and sans serif font for slides.
+%    \begin{macrocode}
+\makeatletter%
+\if@spbuPoster%
+\setmainfont[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	Mapping=tex-text
+]{OldStandard}
+\newfontfamily\cyrillicfont[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	Mapping=tex-text
+]{OldStandard}
+\else%
+\setmainfont[
+	Extension=.ttf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	BoldItalicFont=*-BoldItalic,
+	Mapping=tex-text
+]{OpenSans}
+\newfontfamily\cyrillicfont[
+	Extension=.ttf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	BoldItalicFont=*-BoldItalic,
+	Mapping=tex-text
+]{OpenSans}
+\fi%
+\makeatother%
+%    \end{macrocode}
+% Load other fonts.
+%    \begin{macrocode}
+\setromanfont[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	Mapping=tex-text
+]{OldStandard}
+\setsansfont[
+	Extension=.ttf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	BoldItalicFont=*-BoldItalic,
+	Mapping=tex-text
+]{OpenSans}
+\setmonofont[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold
+]{FiraMono}
+\newfontfamily\cyrillicfontrm[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	Mapping=tex-text
+]{OldStandard}
+\newfontfamily\cyrillicfontsf[
+	Extension=.ttf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	BoldItalicFont=*-BoldItalic,
+	Mapping=tex-text
+]{OpenSans}
+\newfontfamily\cyrillicfonttt[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold
+]{FiraMono}
+\newfontfamily\rmfamily[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	Mapping=tex-text
+]{OldStandard}
+\newfontfamily\sffamily[
+	Extension=.ttf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold,
+	ItalicFont=*-Italic,
+	BoldItalicFont=*-BoldItalic,
+	Mapping=tex-text
+]{OpenSans}
+\newfontfamily\ttfamily[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	BoldFont=*-Bold
+]{FiraMono}
+\fi%
+%    \end{macrocode}
+
+% Define common font styles.
+%    \begin{macrocode}
+\setbeamerfont{note page}{size=\small}
+\setbeamerfont{tiny structure}{family=\sffamily}
+\setbeamerfont{structure}{family=\sffamily}
+\setbeamerfont{section in toc}{family=\sffamily}
+\setbeamerfont{subsection in toc}{family=\sffamily}
+\setbeamerfont{subsubsection in toc}{family=\sffamily}
+\setbeamerfont{block title}{series=\mdseries}
+\setbeamerfont{block body}{series=\mdseries}
+\setbeamerfont{block body example}{series=\mdseries}
+\setbeamerfont{block title alerted}{series=\bfseries}
+\setbeamerfont{abstract}{size=\normalsize}
+\setbeamerfont{title}{size=\Large}
+\setbeamerfont{subtitle}{size=\Large}
+\setbeamerfont{author}{size=\large}
+\usefonttheme{professionalfonts}
+%    \end{macrocode}
+
+% Define poster font styles.
+%    \begin{macrocode}
+\makeatletter%
+\if@spbuPoster%
+%    \end{macrocode}
+
+% Set roman font as the default.
+%    \begin{macrocode}
+\usefonttheme{serif}
+%    \end{macrocode}
+
+% Set small font for bibliography items.
+%    \begin{macrocode}
+\setbeamerfont{bibliography item}{size=\small}
+\setbeamerfont{bibliography entry author}{size=\small}
+%    \end{macrocode}
+
+% Set large font size for headings, blocks and captions.
+%    \begin{macrocode}
+\setbeamerfont{section in head/foot}{series=\bfseries}
+\setbeamerfont{block title}{series=\bfseries}
+\setbeamerfont{block alerted title}{series=\bfseries}
+\setbeamerfont{frametitle}{series=\bfseries,size=\Large}
+\setbeamerfont{caption}{size=\normalsize}
+\setbeamerfont{caption name}{size=\normalsize}
+%    \end{macrocode}
+
+% End of poster font styles.
+%    \begin{macrocode}
+\fi%
+\makeatother%
+%    \end{macrocode}

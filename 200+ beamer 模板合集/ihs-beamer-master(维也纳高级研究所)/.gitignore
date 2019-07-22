@@ -1,0 +1,15 @@
+auto/
+README.html
+example.aux
+example.dvi
+example.log
+example.nav
+example.out
+example.snm
+example.toc
+example.synctex.gz
+example.bib
+example.bbl
+example.bcf
+example.blg
+example.run.xml

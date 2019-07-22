@@ -1,0 +1,188 @@
+% Beamer mtheme
+%
+% Copyright 2014 Matthias Vogelgesang
+% Licensed under CC-BY-SA 4.0 International.
+%
+% The initial template comes from the HSRM beamer theme by Benjamin Weiss, which
+% you can find at https://github.com/hsrmbeamertheme/hsrmbeamertheme.
+%
+
+\ProvidesPackage{beamerthemem}
+
+%{{{ --- Packages ---------------------
+
+\usepackage[no-math]{fontspec}
+\usepackage{etoolbox}
+\usepackage{tikz}
+
+\usetikzlibrary{backgrounds}
+
+\usecolortheme{metropolis}
+\usefonttheme{metropolis}
+
+%}}}
+%{{{ --- Options ----------------------
+
+\newif\if@doSectionPage
+\@doSectionPagefalse
+\DeclareOption{nosectionpages}{\@doSectionPagetrue}
+\ProcessOptions
+
+%}}}
+%{{{ --- Titlepage --------------------
+
+\def\maketitle{\ifbeamer@inframe\titlepage\else\frame[plain]{\titlepage}\fi}
+
+\def\titlepage{\usebeamertemplate{title page}}
+\setbeamertemplate{title page}
+{
+  \begin{minipage}[b][\paperheight]{\textwidth}
+    \vfill
+    \ifx\inserttitle\@empty%
+    \else%
+    {\raggedright\linespread{0.8}\usebeamerfont{title}\usebeamercolor[fg]{title}\scshape\MakeLowercase{\inserttitle}\par}%
+    \vspace*{0.5em}
+    \fi%
+    \ifx\insertsubtitle\@empty%
+    \else%
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+    \vspace*{0.5em}
+    \fi%
+    \begin{tikzpicture}\draw[green!40!blue!100] (0, 0) -- (\textwidth, 0);\end{tikzpicture}%
+    \vspace*{0.5em}
+    \ifx\insertauthor\@empty%
+    \else%
+    {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
+    \vspace*{0.25em}
+    \fi%
+    \ifx\insertdate\@empty%
+    \else%
+    {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}%
+    \fi%
+    \ifx\insertinstitut\@empty%
+    \else%
+    \vspace*{3mm}
+    {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
+    \fi%
+    \vfill
+    \vspace*{5mm}
+  \end{minipage}
+}
+
+%}}}
+%{{{ --- Progressbar ------------------
+
+\makeatletter
+\def\progressbar@progressbar{}  % the progress bar
+\newcount\progressbar@tmpcounta % auxiliary counter
+\newcount\progressbar@tmpcountb % auxiliary counter
+\newdimen\progressbar@pbht      % progressbar height
+\newdimen\progressbar@pbwd      % progressbar width
+\newdimen\progressbar@tmpdim    % auxiliary dimension
+
+\progressbar@pbwd=20em
+\progressbar@pbht=0.5pt
+
+% the progress bar
+\def\progressbar@progressbar{%
+  \progressbar@tmpcounta=\insertframenumber
+  \progressbar@tmpcountb=\inserttotalframenumber
+  \progressbar@tmpdim=\progressbar@pbwd
+  \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+  \divide\progressbar@tmpdim by \progressbar@tmpcountb
+
+  \makebox[\textwidth][c]{
+    \begin{tikzpicture}[tight background]
+
+      \node[anchor=west, white, inner sep=0pt] at (0pt, 0pt) {\insertsectionHEAD};
+
+      \draw[anchor=west, mDarkBrown, fill=mDarkBrown, inner sep=0pt]
+      (2pt, -16pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
+
+      \draw[anchor=west, mMediumBrown, fill=mMediumBrown, inner sep=0pt]
+      (2pt, -16pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
+    \end{tikzpicture}%
+  }
+}
+
+%}}}
+%{{{ --- Commands ---------------------
+
+\newcommand{\insertsectionHEAD}{%
+  \expandafter\insertsectionHEADaux\insertsectionhead}
+  \newcommand{\insertsectionHEADaux}[3]{\textsc{\MakeLowercase{#3}}
+}
+
+\newcommand{\plain}[2]{%
+  \begingroup
+  \setbeamercolor{background canvas}{bg=green!40!blue!100}
+  \begin{frame}{#1}
+    \centering
+    \vfill\vspace{1em}\usebeamerfont{section title}\textcolor{white}{\scshape #2}\vfill
+  \end{frame}
+  \endgroup
+}
+
+%}}}
+%{{{ --- Itemize ----------------------
+\newcommand{\itemBullet}{∙}
+
+\setbeamertemplate{itemize item}{\itemBullet}
+\setbeamertemplate{itemize subitem}{\itemBullet}
+\setbeamertemplate{itemize subsubitem}{\itemBullet}
+\setlength{\parskip}{0.5em}
+
+%}}}
+%{{{ --- Sections ---------------------
+
+\if@doSectionPage\@empty
+\else
+% Insert frame with section title at every section start
+\AtBeginSection[]
+{
+  \begingroup
+  \setbeamercolor{background canvas}{bg=green!40!blue!100}
+  \begin{frame}[plain]
+    \vspace{2em}\usebeamerfont{section title}
+    \progressbar@progressbar%
+  \end{frame}
+  \endgroup
+}
+\fi
+
+%}}}
+%{{{ --- Captions ---------------------
+
+\setbeamertemplate{caption label separator}{: }
+
+%}}}
+%{{{ --- Footline ---------------------
+
+\usenavigationsymbolstemplate{}
+\setbeamertemplate{footline}
+{%
+\begin{beamercolorbox}[wd=\textwidth,ht=3ex,dp=1.5ex,leftskip=0.3cm,rightskip=0.3cm]{structure}%
+\hfill\usebeamerfont{page number in head/foot}%
+\insertframenumber%
+\end{beamercolorbox}%
+}
+
+%}}}
+%{{{ --- Frametitle -------------------
+\setbeamertemplate{frametitle}{%
+\nointerlineskip
+\begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,rightskip=0.3cm,ht=5.5ex,dp=2.0ex]{frametitle}
+  \usebeamerfont{frametitle}\MakeLowercase{\insertframetitle}%
+\end{beamercolorbox}
+}
+%}}}
+
+\mode
+<all>
+
+% {{{ misc
+\let\otp\titlepage
+\renewcommand{\titlepage}{\otp\addtocounter{framenumber}{-1}}
+
+\linespread{1.15}
+%}}}

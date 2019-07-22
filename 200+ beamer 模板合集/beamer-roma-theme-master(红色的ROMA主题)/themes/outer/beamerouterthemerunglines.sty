@@ -1,0 +1,151 @@
+% Copyright 2016 by Manuel Coppotelli
+
+\mode<presentation>
+
+% String used between the current page and the total page count.
+\def\beamer@runglines@pageofpages{/}
+\DeclareOptionBeamer{pageofpages}{\def\beamer@runglines@pageofpages{#1}}
+
+% Show a line below the frame title.
+\DeclareOptionBeamer{titleline}[true]{\def\beamer@runglines@titleline{#1}}
+
+% Image used for the watermark.
+\def\beamer@runglines@watermarkorig{}
+\DeclareOptionBeamer{watermark}{\def\beamer@runglines@watermarkorig{#1}}
+
+% Height of the watermark.
+\def\beamer@runglines@watermarkheight{100px}
+\DeclareOptionBeamer{watermarkheight}{\def\beamer@runglines@watermarkheight{#1}}
+
+% The original image height is watermarkheightmult * watermarkheight.
+\def\beamer@runglines@watermarkheightmult{1}
+\DeclareOptionBeamer{watermarkheightmult}{\def\beamer@runglines@watermarkheightmult{#1}}
+
+\ExecuteOptionsBeamer{titleline=false}
+\ProcessOptionsBeamer
+
+% Enable/disable the watermark.
+\def\watermarkon{%
+  \def\beamer@runglines@watermark{\beamer@runglines@watermarkorig}%
+}
+\def\watermarkoff{\def\beamer@runglines@watermark{}}
+
+%Fix for LaTeX Font Warning Size substitutions
+\let\Tiny=\tiny
+
+% Initially enable the watermark.
+\watermarkon
+
+% Horizontal navigation smoothbars
+\beamer@compresstrue
+
+% Colors.
+\setbeamercolor*{lineup}{parent=palette primary}
+\setbeamercolor*{linebottom}{parent=palette primary}
+\setbeamercolor*{page header}{parent=titlelike}
+
+% Lengths
+\newlength{\headerheight}
+\setlength{\headerheight}{.065\paperheight}
+\newlength{\beamer@runglines@lineup}
+\setlength{\beamer@runglines@lineup}{.03\paperheight}
+\newlength{\beamer@runglines@linebottom}
+\setlength{\beamer@runglines@linebottom}{.05\paperheight}
+
+% The height of the watermark part below the 3 bottom lines.
+\newlength{\beamer@runglines@watermarkheightbottom}
+\addtolength{\beamer@runglines@watermarkheightbottom}{\beamer@runglines@lineup}
+\addtolength{\beamer@runglines@watermarkheightbottom}{\beamer@runglines@linebottom}
+
+% The height of the watermark part over the 3 bottom lines before shrinking.
+\newlength{\beamer@runglines@watermarkheightupperorig}
+\setlength{\beamer@runglines@watermarkheightupperorig}{\beamer@runglines@watermarkheight}
+\addtolength{\beamer@runglines@watermarkheightupperorig}{-\beamer@runglines@watermarkheightbottom}
+\multiply\beamer@runglines@watermarkheightupperorig by \beamer@runglines@watermarkheightmult
+
+% Footer.
+\defbeamertemplate*{footline}{runglines theme}
+{
+  \leavevmode%
+  % First line.
+  \hbox{%
+  \begin{beamercolorbox}[wd=.2\paperwidth,ht=\beamer@runglines@lineup,dp=0pt]{}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.8\paperwidth,ht=\beamer@runglines@lineup,dp=0pt,sep=1pt]{lineup}%
+      \tiny{\hspace*{\fill} \insertshorttitle \hspace*{\fill}}%
+  \end{beamercolorbox}%
+  } %
+  \vskip-.3px%
+  % Second line.
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=\beamer@runglines@linebottom,dp=0pt]{linebottom}%
+  \end{beamercolorbox}%
+  } %
+  % This seems to fix some alignment problems with the watermark. It has to be
+  % always applied if you do not want to see the footer moving up and down when
+  % moving from a page with watermark to a page without or vice versa.
+  \vskip-.5px%
+  % Watermark.
+  \if\beamer@runglines@watermark\@empty\else%
+    \vskip-\beamer@runglines@watermarkheightbottom%
+    \llap{\includegraphics[height=\beamer@runglines@watermarkheightbottom,clip=true,%
+      trim=0pt 0pt 0pt \beamer@runglines@watermarkheightupperorig]{\beamer@runglines@watermark}\hskip-\paperwidth}%
+  \fi%
+}
+
+\defbeamertemplate*{headline}{runglines theme}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=\headerheight,dp=0pt,sep=1pt]{page header}%
+  \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+  \end{beamercolorbox}%
+  } %
+  \vskip0pt%
+}
+
+\defbeamertemplate*{frametitle}{runglines theme}[1][left]
+{
+  \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  \@tempdima=\textwidth%
+  \advance\@tempdima by\beamer@leftmargin%
+  \advance\@tempdima by\beamer@rightmargin%
+  \vbox{}\vskip-.5\beamer@leftmargin%
+  \begin{beamercolorbox}[sep=\beamer@leftmargin,#1,wd=\the\@tempdima]{}
+    \usebeamerfont{frametitle}\usebeamercolor[bg]{framesubtitle}%
+    \vbox{}\vskip0ex%
+    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+    \strut\insertframetitle\strut\par%
+    {%
+      \ifx\insertframesubtitle\@empty%
+      \else%
+      {\usebeamerfont{framesubtitle}\usebeamercolor[bg]{framesubtitle}\insertframesubtitle\strut\par}%
+      \fi
+    }%
+    \vskip-1ex%
+    \if@tempswa\else\vskip-\beamer@leftmargin\fi
+  \end{beamercolorbox}%
+  \def\beamer@runglines@truetext{true}%
+  \ifx\beamer@runglines@titleline\beamer@runglines@truetext%
+    \vskip-.5\beamer@leftmargin%
+    \begin{beamercolorbox}[wd=\textwidth,ht=.1ex,dp=0ex]{lineup}%
+    \end{beamercolorbox}%
+  \fi
+}
+
+% Frame title continuations, default
+\defbeamertemplate*{frametitle continuation}{runglines theme}{(\insertcontinuationcount)}
+
+\defbeamertemplate*{sidebar right}{runglines theme}
+{
+  \vskip.1\beamer@leftmargin%
+  \llap{\insertlogo\hskip.5\beamer@leftmargin}%
+  \vfill%
+  \if\beamer@runglines@watermark\@empty\else%
+  \llap{\includegraphics[height=\beamer@runglines@watermarkheight]{\beamer@runglines@watermark}}%
+  \vskip-\beamer@runglines@watermarkheightbottom%
+  \fi
+}
+
+\mode
+<all>

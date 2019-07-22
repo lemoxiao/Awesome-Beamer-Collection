@@ -1,0 +1,134 @@
+\documentclass[12pt]{beamer}
+
+% Specify theme
+\usetheme{UnofficialUChicago}
+
+
+
+ %\setbeamertemplate{footline}[frame number]{} % Uncomment this line if you want to remove the footer from each slide (and replace it with just the slide number (X/Y) in the bottom right of each slide.
+
+%===============================================================%
+% 				BEGIN YOUR PRESENTATION HERE					%
+%===============================================================%
+
+% Title and author information
+\title[Short title]{Your Presentation Title}
+\author{Your Name}
+\institute[]{University of Chicago}
+\date{\today}
+
+
+%  \usepackage[sfmath]{kpfonts}
+%  \renewcommand*\familydefault{\sfdefault}
+
+%\setbeamerfont{frametitle}{shape=\scshape}
+
+%===============================================================%
+\begin{document}
+%===============================================================%
+
+\maketitle
+
+
+
+%===============================================================%
+\section{Lists}
+%===============================================================%
+
+\begin{frame}{Itemized List}
+
+	Itemized lists are punctuated by little shields
+
+	\begin{itemize}
+		\item Item
+		\item Item
+			\begin{itemize}
+				\item Sub-item
+				\item Sub-item
+			\end{itemize}
+		\item Item
+	\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{Enumerate}
+
+	\begin{enumerate}
+		\item Item
+		\item Item
+			\begin{enumerate}
+				\item Sub-item
+			\end{enumerate}
+	\end{enumerate}
+
+\end{frame}
+
+
+
+%===============================================================%
+\section{Animations}
+%===============================================================%
+
+\begin{frame}{Slide animation}
+
+	Sometimes you want to hide later text/elements of a particular slide to keep the focus on the early part of the slide.
+
+	\bigskip
+
+	\onslide<2>{By having the text shaded out (and not completely missing), your audience can see that you do have some more information that will come shortly.}
+
+\end{frame}
+
+
+
+%===============================================================%
+\section{Blocks}
+%===============================================================%
+
+\begin{frame}{Blocks}
+
+	\begin{block}{Regular Block}
+		Text goes here
+	\end{block}
+
+	\begin{alertblock}{Alert Block}
+		Stands out a bit more
+	\end{alertblock}
+
+	\begin{exampleblock}{Example Block}
+		Also stands out $y=\beta x+ \varepsilon$
+	\end{exampleblock}
+
+\end{frame}
+
+
+
+%===============================================================%
+\appendix
+%===============================================================%
+
+{\BackgroundShaded
+\begin{frame}
+% BLANK FRAME AT THE END
+\end{frame}
+}
+
+
+
+%===============================================================%
+\section{First appendix section}
+%===============================================================%
+
+\begin{frame}{Appendix sample}
+
+	Note that this slide doesnt count towards the total slides shown in the regular presentation
+
+\end{frame}
+
+
+
+%===============================================================%
+\end{document}
+%===============================================================% 

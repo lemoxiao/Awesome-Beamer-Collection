@@ -1,0 +1,21 @@
+\mode<presentation>
+
+% Frame title
+\defbeamertemplate*{frametitle}{guadec}[1][] {
+%  \vskip1cm%
+  \begin{beamercolorbox}[wd=\paperwidth, leftskip=6mm, ht=12mm]{frametitle}
+    \ifx\insertframesubtitle
+      \@empty%
+
+      \insertframetitle
+    \else%
+      \insertframetitle
+
+      \usebeamercolor[fg]{framesubtitle}
+      \usebeamerfont{framesubtitle}
+      \insertframesubtitle
+    \fi
+  \end{beamercolorbox}
+}
+
+\mode<all>

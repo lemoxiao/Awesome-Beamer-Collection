@@ -1,0 +1,127 @@
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+%
+% LaTeX Presentation Template
+%
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% "THE BEER-WARE LICENSE" (Revision 42):
+% Hannes Badertscher (hbaderts@hsr.ch) wrote this file. As long as you retain 
+% this notice you can do whatever you want with this stuff. If we meet some day, 
+% and you think this stuff is worth it, you can buy me a beer in return. 
+% - Hannes Badertscher
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\RequirePackage[l2tabu, orthodox]{nag}    % Warnings for obsolete packages
+\RequirePackage{etex}                     % Load e-TeX engine
+\documentclass[aspectratio=43]{beamer}    % 169 (16:9) or 43 (4:3)
+\usepackage[utf8]{inputenc}               % Always use UTF-8!
+
+\newcommand*{\Title}{A long title}
+\newcommand*{\TitleShort}{Title}
+\newcommand*{\Subtitle}{Subtitle}
+\newcommand*{\Author}{Hannes Badertscher \newline BSc FHO in Electrical Engineering}
+\newcommand*{\AuthorShort}{H.Badertscher}
+\newcommand*{\Topic}{Bereich}
+\newcommand*{\Lang}{en}
+\newcommand*{\Institute}{institutes/ICOM.jpg}
+\newcommand*{\Background}{backgrounds/Titelbild_Abend.jpg}
+\newcommand*{\TocAtSection}{true}
+\newcommand*{\ProgressBar}{false}
+
+\include{header/hsrBeamerTheme}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\begin{document}
+
+\frame[plain]{\titlepage}
+
+\begin{frame}{\contentsname}
+    \tableofcontents
+\end{frame}
+
+\section{First section}
+\begin{frame}{Itemize}
+    \begin{itemize}
+        \item This is an itemize environment
+        \item Nice!
+        \item Even sub-items are possible
+            \begin{itemize}
+                \item Wow
+                    \begin{itemize}
+                        \item such an
+                        \item awesome
+                    \end{itemize}
+                \item presentation!
+            \end{itemize}
+        \item The end.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Enumerate}
+    \begin{enumerate}
+        \item An item
+        \item and another one
+        \item Subitems:
+            \begin{enumerate}
+                \item This
+                    \begin{enumerate}
+                        \item test
+                    \end{enumerate}
+                \item is
+                \item nice
+            \end{enumerate}
+        \item The end.
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Equations}
+    \begin{itemize}
+        \item Here, have an equation:
+            \[
+                \left|\int_{\Omega} Z\, d\mu\,\right| 
+                \leq \int_{\Omega} |\,Z\,|\, d\mu
+            \]
+        \item Or something using \texttt{align}:
+            \begin{align*}
+                S_x &= \frac{\hbar}{2} \begin{pmatrix}
+                0 & 1 \\ 1 & 0 \end{pmatrix} &
+                S_y &= \frac{\hbar}{2} \begin{pmatrix}
+                0 & -i \\ i & 0 \end{pmatrix} &
+                S_z &= \frac{\hbar}{2} \begin{pmatrix}
+                1 & 0 \\ 0 & -1 \end{pmatrix}
+            \end{align*}
+    \end{itemize}
+\end{frame}
+
+
+\section{Second section}
+\begin{frame}{Boxes}
+    \begin{HSRBox}{}
+        Nice framed boxes also exist
+    \end{HSRBox}
+    \begin{HSRBox}{With \dots}
+        or without title.
+    \end{HSRBox}
+\end{frame}
+\begin{frame}{Columns and graphics}
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Multi-col environments should be made using \texttt{columns}!
+                \item \emph{Never} use \texttt{minipage}'s or \texttt{multicols}.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \centering
+            \includegraphics[width=0.8\linewidth]{backgrounds/Titelbild_Sommer.jpg}
+            \captionof{figure}{A sample image. You don't need any floats here, just
+            use \texttt{captionof}.}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\section{Last section}
+\begin{frame}{The End}
+    \centering
+    \LARGE That's all folks!
+\end{frame}
+
+\end{document}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %

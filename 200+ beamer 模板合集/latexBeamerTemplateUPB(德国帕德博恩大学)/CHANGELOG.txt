@@ -1,0 +1,5 @@
+CHANGELOG
+
+version 19/12/2018:
+	implementation of the handout-mode with the option to choose, how many
+	slides are printed on one page.

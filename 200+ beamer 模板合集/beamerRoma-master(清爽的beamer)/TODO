@@ -1,0 +1,7 @@
+Roma Beamer Theme
+
+TODO:
+* Far disegnare lo sfondo solo nella slide del titolo e non in ognuna.
+* Disegnare il footnote come colorbox
+* Risolvere i vari warning di compilazione
+* Disegnare la slide del titolo in maniera dinamica (testo deve partire dalla cima e il rosso deve cominciare quando finisce il testo)

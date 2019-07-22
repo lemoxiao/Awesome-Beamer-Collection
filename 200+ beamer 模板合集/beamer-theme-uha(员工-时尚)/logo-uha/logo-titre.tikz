@@ -1,0 +1,5 @@
+\begin{tikzpicture}
+	\node[draw, white, fill=white, minimum width= 5em, minimum height=5em, rounded corners = 8pt, blur shadow={shadow blur steps=5}] at (0,0) {};
+	\node[inner sep=0pt] (russell) at (0,0) {\includegraphics[scale=0.25]{logo-uha/logo2.png}};
+	\node[inner sep=0pt,scale=0.6] (russell) at (0,-0.5) {\includegraphics[scale=0.22]{logo-uha/logo3.png}};
+\end{tikzpicture}

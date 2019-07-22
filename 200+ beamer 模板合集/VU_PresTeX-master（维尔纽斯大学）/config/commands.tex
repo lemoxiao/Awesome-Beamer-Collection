@@ -1,0 +1,143 @@
+\usepackage{multicol}
+\usepackage{etex}
+\usepackage{stmaryrd}
+\usetheme{VU}
+%\usefonttheme{
+%	default | professionalfonts | serif |
+%	structurebold | structureitalicserif |
+%	structuresmallcapsserif
+%}
+\usefonttheme{professionalfonts}
+%\useinnertheme{
+%	circles | default | inmargin |
+%	rectangles | rounded
+%}
+\useinnertheme{rectangles}
+%\useoutertheme{
+%	default | infolines | miniframes |
+%	shadow | sidebar | smoothbars |
+%	smoothtree | split | tree
+%}
+%\useoutertheme{split}
+\setbeamercovered{transparent}
+
+% Without navigation symbols
+\beamertemplatenavigationsymbolsempty
+
+%% Formatting
+\usepackage{url}
+\usepackage{latexsym}			% fancy symbols
+\usepackage{color}
+%\usepackage{float}
+
+%% Encoding, Symbols
+\usepackage[utf8x]{inputenc}
+\usepackage{lmodern}
+\usepackage{float}
+\usepackage{wasysym}
+\usepackage{ucs}
+
+\input{config/metainfo}
+
+%% Hyperref
+\usepackage{hyperref}
+
+\makeatletter
+\hypersetup{pdftitle={\@title}, pdfauthor={\@author}, linktoc=page, pdfborder={0 0 0 [3 3]}, breaklinks=true, linkbordercolor=unibablueI, menubordercolor=unibablueI, urlbordercolor=unibablueI, citebordercolor=unibablueI, filebordercolor=unibablueI}
+\makeatother
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+
+%% Internationalisation
+\ifthenelse{\equal{\lang}{lithuanian}}{\usepackage[lithuanian]{babel}%
+\usepackage[L7x]{fontenc}}{\usepackage[\lang]{babel}}
+%\mode<presentation>{
+%% XXX without this the number does not appear
+%\AtBeginDocument{\def\figurename{{\scshape Fig.~\thefigure}}}
+%}
+%%\usepackage{abstract}
+
+%% Mathe und Formeln
+\usepackage{calc}
+\usepackage{amsmath}
+\usepackage{amssymb,amsthm,amsfonts}
+\usepackage{dsfont}
+\usepackage[nice]{nicefrac}
+\usepackage{cancel}  
+
+
+
+\usepackage{dirtree}   % tree structures
+
+%%%   For advanced tables   %%
+\usepackage{longtable, colortbl}
+\usepackage{multicol, multirow}
+%
+%%%  For graphics %%
+\usepackage{graphicx}
+\usepackage{pgf}
+\usepackage{tikz}
+%\usepackage{pgfplots}
+\usetikzlibrary{calc,arrows,automata,fit,positioning,trees,backgrounds,shadows,decorations,decorations.markings,decorations.shapes,shapes,patterns,fadings}
+\usepackage[font=footnotesize]{subfig}
+%\usepackage{fp}
+%
+
+%
+%%%   For Bibtex with APA Style (American Psychology Association)   %%
+%\usepackage[numbers]{natbib}
+\usebibitemtemplate{\insertbiblabel}
+
+
+
+%\usepackage[numbered,autolinebreaks,useliterate]{mcode}
+%\usepackage{verbatim}            % include verbatim  (\verbatiminput) standardpaket
+%\usepackage{moreverb} 
+%% PseudoCode
+%\usepackage{algorithm}
+\usepackage{algpseudocode}
+%%\usepackage{algorithmicx}
+%%\floatname{algorithm}{Algorithmus}
+%\algrenewcommand{\algorithmiccomment}[1]{\hskip1em\textcolor{gray!60}{$\rhd$ #1}}
+%%\renewcommand{\listalgorithmname}{Algorithmen}
+%%\def\algorithmautorefname{Algorithmus}
+%
+%%% Code Highlighting
+%\definecolor{mygray}{gray}{.75}
+%\usepackage{listings} 
+%\lstset{numbers=left, numberstyle=\tiny, numbersep=6pt} 
+%\lstset{language=Python}
+%\lstset{classoffset=1, morekeywords={mycontext}, keywordstyle=\color{darkgreen}, classoffset=0, keywordstyle=\color{darkblue}}
+%\lstset{basicstyle=\small, showstringspaces=false, commentstyle=\color{mygray}, breaklines=true, captionpos=b}
+%\renewcommand{\lstlistingname}{Code-Ausschnitt}
+%\renewcommand{\lstlistlistingname}{Code-Ausschnitte}
+%\def\lstlistingautorefname{Code-Ausschnitt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                   COMMAND SETUP                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%#1 Relative width
+%#2 Filename in the ./image directory
+%#3 Caption
+%#4 Label for referencing
+\newcommand{\image}[4]{
+\begin{figure}[H]
+\centering
+\includegraphics[width=#1\textwidth]{image/#2}
+\caption{\footnotesize{#3}}
+\label{#4}
+\end{figure}
+}
+
+% WARNING: Experimantal.
+% #1 videofile in the ./image directory
+% #2 scalefactor
+\newcommand{\video}[2]{%
+\includemovie[text={\includegraphics[scale=#2]{image/#1.png}}, autoplay, mouse=true, repeat=1]{}{}{image/#1.swf}}

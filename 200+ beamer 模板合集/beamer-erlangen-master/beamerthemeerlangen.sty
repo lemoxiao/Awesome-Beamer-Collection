@@ -1,0 +1,157 @@
+\ProvidesPackage{beamerthemeerlangen}[2012/09/01]
+\RequirePackage{tikz}
+\RequirePackage{calc}
+\RequirePackage{appendixnumberbeamer}
+
+\RequirePackage[scriptsize,it]{caption}
+\captionsetup{labelformat=empty,labelsep=none}
+
+\mode<presentation>
+
+%%% variables and options
+\def\beamer@erlangen@value@true{true}
+\def\beamer@erlangen@value@false{false}
+\def\beamer@erlangen@value@empty{}
+
+\def\beamer@erlangen@url{}
+\def\beamer@erlangen@numbering{}
+\def\beamer@erlangen@titlepagelayout{}
+
+\newlength{\beamer@erlangen@menuwidth}
+\newlength{\beamer@erlangen@restofmenuwidth}
+
+\setlength{\beamer@erlangen@menuwidth}{.3\paperwidth}
+
+\DeclareOptionBeamer{url}[{www.techfak.uni-erlangen.de}]{\def\beamer@erlangen@url{#1}}
+\DeclareOptionBeamer{numbering}[true]{\def\beamer@erlangen@numbering{#1}}
+\DeclareOptionBeamer{titlepagelayout}[]{\def\beamer@erlangen@titlepagelayout{#1}}
+\DeclareOptionBeamer{menuwidth}[]{\setlength{\beamer@erlangen@menuwidth}{#1}}
+
+\ProcessOptionsBeamer
+
+\setlength{\beamer@erlangen@restofmenuwidth}{0.95\paperwidth}
+\addtolength\beamer@erlangen@restofmenuwidth{-\beamer@erlangen@menuwidth}
+
+\useinnertheme{circles}
+\useoutertheme{miniframes}
+\usecolortheme{erlangen}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{background canvas}[vertical shading][bottom=white,middle=white!15,top=gray!15]
+
+\setbeamercolor{block body}{bg=}
+
+% TITLE PAGE
+\defbeamertemplate*{title page}{titlepage}
+{
+  \thispagestyle{empty}
+
+  \begin{picture}(0,0)(0,0)
+    \put(-29,-171){\includegraphics[width=1.01\paperwidth]{images/titlepage.pdf}}
+  \end{picture}
+
+  \begin{picture}(0,0)(0,0)
+    \put(10,0){
+        \begin{minipage}{0.9\linewidth}
+        \centering{\LARGE\color{erlangenwhite} \inserttitle\par}
+        \vspace{5mm}
+        \centering{\large\color{erlangenlightgrey} \insertsubtitle\par}
+        \end{minipage}
+    }
+  \end{picture}
+  \begin{picture}(0,0)(0,0)
+    \put(10,-65){
+        \begin{minipage}{0.90\linewidth}
+        \centering{\large\color{erlangenwhite} \insertauthor\par}
+        \end{minipage}
+    }
+  \end{picture}
+  \begin{picture}(0,0)(0,0)
+    \put(10,-127){
+        \begin{minipage}{0.90\linewidth}
+        \centering{\color{erlangenblue} \insertinstitute\par}
+        \end{minipage}
+    }
+  \end{picture}
+
+}
+
+% HEADER
+\defbeamertemplate*{headline}{erlangen}%
+{
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=1em,sep=0.3em]{headerline title}
+    \begin{minipage}{\beamer@erlangen@restofmenuwidth}
+        {\tiny{\bfseries FAU} TECHNISCHE FAKULT\"AT}%
+    \end{minipage}
+    \hspace{0px}
+    \begin{minipage}{\beamer@erlangen@menuwidth}
+      \begin{flushright}
+	    \vspace{4px}
+        \insertsectionnavigationhorizontal{\beamer@erlangen@menuwidth}{}{}
+      \end{flushright}
+    \end{minipage}
+    
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=\paperwidth,sep=1px]{headerline border}
+    \vspace{1px}
+  \end{beamercolorbox}
+}
+
+% FOOTER
+\defbeamertemplate*{footline}{erlangen}
+{
+%\leavevmode%
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=1em,sep=0.2em]{footerline}
+    \insertshorttitle\;--\;\insertshortauthor \hfill %
+    \ifx\beamer@erlangen@numbering\beamer@erlangen@value@false\relax\else
+        \insertframenumber/\inserttotalframenumber %
+    \fi
+  \end{beamercolorbox}  
+}
+
+
+% SECTION LIST
+\usesectionheadtemplate
+{ %active
+  \color{erlangenlyellow} \insertsectionhead
+}
+{ %other
+  \color{erlangenlightgrey} \insertsectionhead
+}
+
+% BACKGROUND IMAGE
+\setbeamertemplate{background}{
+  \ifnum\insertframenumber=1\else
+  \parbox[r][\paperheight]{\paperwidth}{
+    \vfill\hfill
+    \includegraphics[width=30px]{images/watermark.pdf}
+  }
+  \fi
+}
+
+
+\defbeamertemplate*{frametitle}{}
+{
+  \begin{beamercolorbox}[sep=0ex,ht= 2.5ex, wd=\paperwidth]{}
+    \hspace{2ex}\insertframetitle{} \hspace{1ex}\hrulefill %
+  \end{beamercolorbox}%
+}
+
+%
+\newcommand{\sectionframe}[1]
+{
+    \begin{beamercolorbox}[wd=\textwidth]{footerline}
+        \begin{minipage}{\textwidth}
+          \vspace{1em}
+          \centering\Large{\color{white}{#1}}
+          \vspace{1em}
+        \end{minipage}%
+    \end{beamercolorbox}%
+    \nointerlineskip
+    \begin{beamercolorbox}[sep=0ex,ht=2pt, wd=\textwidth]{headerline border}
+    \end{beamercolorbox}%
+}
+%\mode<handout>
+
+\mode
+<all>

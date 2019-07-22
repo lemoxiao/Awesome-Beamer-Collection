@@ -1,0 +1,32 @@
+% Copyright 2007 by Till Tantau
+% Copyright 2012 by Alex Legler
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackage{beamerthemeGentoo}[2014/04/28]
+
+\DeclareOptionBeamer{compress}{\beamer@compresstrue}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\useoutertheme[subsection=false,footline=authorinstitutetitle]{miniframes}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+\useinnertheme{rectangles}
+
+\definecolor{gentoopurple}{HTML}{54487A}
+\definecolor{gentoogreen}{HTML}{46A546}
+
+\usecolortheme[named=gentoopurple]{structure}
+\setbeamercolor{alerted text}{fg=gentoogreen}
+
+\setbeamerfont{block title}{size={}}
+
+\mode
+<all>

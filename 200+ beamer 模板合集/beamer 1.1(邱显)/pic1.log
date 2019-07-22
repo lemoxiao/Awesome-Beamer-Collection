@@ -1,0 +1,20 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.9.22)  27 OCT 2011 15:10
+entering extended mode
+**C:/Documents*and*Settings/Xian*Qiu/My*Documents/My*Dropbox/PhD-Colloquium/pic
+1.tex
+
+("C:/Documents and Settings/Xian Qiu/My Documents/My Dropbox/PhD-Colloquium/pic
+1.tex"
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman, ngerman, german-x-2009-06-19, ngerman-x-2009-06-19, french, loaded.
+
+! LaTeX Error: Environment tikzpicture undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \begin{tikzpicture}
+                       [scale = 0.6]
+? 

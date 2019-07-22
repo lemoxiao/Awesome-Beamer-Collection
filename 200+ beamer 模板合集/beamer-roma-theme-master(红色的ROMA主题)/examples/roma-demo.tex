@@ -1,0 +1,26 @@
+% !TEX encoding = UTF-8
+% !TEX program = pdflatex
+% !TEX spellcheck = en_US
+
+\documentclass{beamer}
+
+\usetheme[
+    pageofpages=of,                 % String used between page counter
+    bullet=circle,                  % Use circles instead of squares for bullets
+    titleline=false,                % Show a line below the frame
+    alternativetitlepage=true,      % Use the fancy title
+    titlepagelogo=logo-sapienza,    % Logo for the first slide
+    watermark=watermark-diag,       % Watermark used in every slide
+    watermarkheight=20px,           % Desired height of the watermark
+    watermarkheightmult=6,          % Watermark image is actually x times bigger
+]{Roma}
+
+\author{Manuel Coppotelli}
+\title{Sapienza theme for \LaTeX{} Beamer}
+\subtitle{Department of Computer, Control and Management Engineering}
+\institute{Engineering in Computer Science \\ Sapienza, University of Rome}
+\date{A. Y. 2015 - 2016}
+
+\begin{document}
+\include{content}
+\end{document}

@@ -1,0 +1,52 @@
+\documentclass[11pt, thmnum, eqsecnum, allcites, dark]{mathbeamer}
+%%%%%%%%%%%%%
+%% Options %%
+%%%%%%%%%%%%%
+%% thmnum: numbered theorems
+%% eqsecumn: number equaiton with section
+%% authoryear: author-year style reference
+%% allcites: output all the reference in bib.bib
+%% dark: use dark color style
+%% light: use light color style
+%% nds: not use the default setting
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%===========================
+% your definitions:
+%===========================
+\input{slides/usrdef}
+
+%===========================
+% your title/name/institute:
+%===========================
+\title[\sc Mean Curvature Flow \& Ricci Flow]{\sc On the Evolution of Mean Curvature Flow\\ with Background Ricci Flow}
+\author{Stu Name}
+\date{\today}
+\institute[USTC]{School of Mathematical Sciences, USTC}
+
+\begin{document}
+%===========================
+% your slides:
+%===========================
+%\frame[t, allowframebreaks]{\tableofcontents\label{contents}}
+\input{slides/main}
+
+%===========================
+% example slides:
+%===========================
+\input{examples/lists}
+\input{examples/columns}
+\input{examples/figures}
+\input{examples/description}
+\input{examples/table}
+\input{examples/blocks}
+\input{examples/definition}
+\input{examples/example}
+\input{examples/theorem}
+\input{examples/hyperlinks}
+
+%===========================
+% bibliography
+%===========================
+%input "slides/bib.bib"
+\end{document}

@@ -1,0 +1,103 @@
+\section{New metrics}
+
+\subsection{New metrics}
+\begin{frame}
+ \frametitle{New metrics}
+ \begin{center}
+  \alert{lot of ARB are about memory leaks.}
+ \end{center}
+ 6 new metrics related to memory usage, the \alert{ARMs}:
+ \vfill
+ \begin{itemize}
+  \item \emph{AllocOps} : Number of instruction about allocation of memory
+   \begin{center}
+    (malloc)
+   \end{center}
+  \item \emph{DeallocOps} : Number of instruction about Deallocation of memory
+   \begin{center}
+    (free)
+   \end{center}
+ \end{itemize}
+\end{frame}
+% We introduce metrics related to memory usage because we noticed that lot of ARB are about memory leaks
+
+\begin{frame}[fragile]
+ \frametitle{New metrics}
+ \begin{itemize}
+  \item \emph{DerefUse} : Number of times a pointer variable is dereferenced to write
+   \begin{exampleblock}{Dereferencing a structure member}
+    \begin{verbatim}typedef struct X { int a; int b; } X;
+X x;
+X* p = &x;
+p->a = 3.14159;\end{verbatim}
+   \end{exampleblock}
+  \item \emph{DerefSet} : Number of times a pointer variable is dereferenced to read
+   \begin{exampleblock}{Dereferencing \texttt{p} and read}
+    \begin{verbatim}printf("%d", p->a);\end{verbatim}
+   \end{exampleblock}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{New metrics}
+ \begin{itemize}
+  \item \emph{UniqueDerefSet} : Same as DerefSet but variable counted one time per file
+  \item \emph{UniqueDerefUse} : Same as DerefUse but variable counted one time per file
+ \end{itemize}
+ \vfill
+\end{frame}
+
+\subsection{Results}
+\begin{frame}
+ \frametitle{Results with new metrics}
+ \framesubtitle{Linux}
+ \begin{center}
+ \begin{tabular}{lrrr}
+  \hspace{0.2cm} Classifier & PD & PF & Bal\\
+  \hline
+  NB & 60.13 & 12.46 & 69.24\\
+  NB + log &  \textbf{92.33} & \textbf{37.09} & 72.28\\
+  NB + ARMs & 58.13 & 11.88 & 68.34\\
+  NB + log + ARMs & \textbf{93.56} & 35.90 & \textbf{73.25}\\
+  \hline
+ \end{tabular}
+ \end{center}
+ \vspace{0.5cm}
+ It decreases PF.
+\end{frame}
+
+\begin{frame}
+ \frametitle{Results with new metrics}
+ \framesubtitle{MySQL}
+ \begin{center}
+ \begin{tabular}{lrrr}
+  \hspace{0.2cm} Classifier & PD & PF & Bal\\
+  \hline
+  NB & 49.14 & 10.46 & 63.02\\
+  NB + log &  \textbf{88.30} & \textbf{34.67} & 73.53\\
+  NB + ARMs & 48.42 & 10.06 & 62.61\\
+  NB + log + ARMs & \textbf{88.37} & 32.99 & \textbf{74.69}\\
+  \hline
+ \end{tabular}
+ \end{center}
+ \vspace{0.5cm}
+ It decreases PF.
+\end{frame}
+
+\begin{frame}
+ \frametitle{Results with new metrics}
+ \framesubtitle{CARDAMOM}
+ \begin{center}
+ \begin{tabular}{lrrr}
+  \hspace{0.2cm} Classifier & PD & PF & Bal\\
+  \hline
+  NB & 0.00 & 7.18 & 29.08\\
+  NB + log & 54.50 & \textbf{25.15} & 53.25\\
+  NB + ARMs & 0.00 & 6.57 & 29.12\\
+  NB + log + ARMs & \textbf{68.00} & 10.22 & \textbf{70.32}\\
+  \hline
+ \end{tabular}
+ \end{center}
+ \vspace{0.5cm}
+ It decreases PF and increases PD. $\Longrightarrow$ \alert{We keep ARMs.}
+\end{frame}

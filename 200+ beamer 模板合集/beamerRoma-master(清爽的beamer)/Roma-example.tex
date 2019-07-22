@@ -1,0 +1,82 @@
+\documentclass{beamer}
+\usepackage[italian]{babel}
+
+% To typeset with pdflatex decomment the following 2 lines
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% To typeset with lualatex decomment the following line
+%\usepackage{fontspec}
+
+\title{I numeri primi sono infiniti}
+\author[Euclide]{Euclide di Roma \\
+\texttt{euclide@roma.edu}}
+\date[VII SINP]{VII Simposio Internazionale sui Numeri Primi}
+\institute[Roma]{Università di Roma}
+
+\usetheme[pageofpages=of, % default - any character is good: di, /
+          titleline=true, % default - other choice: false
+          ]{Roma}
+
+\theoremstyle{definition}
+\newtheorem{definizione}{Definizione}
+
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}
+
+\begin{document}
+\titlepageframe % use this command to create the titlepage
+
+
+\begin{frame}
+  \frametitle{Piano della presentazione}
+  \tableofcontents
+\end{frame}
+
+\AtBeginSection[]
+{
+\begin{frame}<beamer>
+\frametitle{Outline}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\section{Introduzione}
+\begin{frame}
+\frametitle{Che cosa sono i numeri primi?}
+\begin{definizione}
+Un \alert{numero primo} è un intero $>1$ che ha esattamente
+due divisori positivi.
+\end{definizione}
+\end{frame}
+
+\section{L'infinità dei primi}
+\subsection{La dimostrazione}
+\begin{frame}
+\frametitle{I numeri primi sono infiniti}
+\framesubtitle{Ne diamo una dimostrazione diretta}
+\begin{teorema}
+Non esiste un primo maggiore di tutti gli altri.
+\end{teorema}
+\pause
+\begin{proof}
+\begin{enumerate}[<+->]
+\item Sia dato un elenco di primi.
+\item Sia $q$ il loro prodotto.
+\item Allora $q+1$ è divisibile per un primo $p$
+che non compare nell’elenco. \qedhere
+\end{enumerate}
+\end{proof}
+\end{frame}
+\section{Problemi aperti}
+\begin{frame}
+\frametitle{Che cosa c’è ancora da fare?}
+\begin{block}{Problemi risolti}
+Quanti sono i numeri primi?
+\end{block}
+\begin{alertblock}{Problemi aperti}
+Un \alert{numero} pari $>2$ è sempre la somma di due primi?
+\end{alertblock}
+\end{frame}
+
+
+\end{document}

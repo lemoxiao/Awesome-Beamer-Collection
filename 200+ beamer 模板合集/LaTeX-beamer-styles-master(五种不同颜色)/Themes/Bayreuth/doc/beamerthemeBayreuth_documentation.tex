@@ -1,0 +1,156 @@
+%%
+%%	This is file is the documentation for 'beamerthemeBayreuth.sty'
+%%
+%%	The Bayreuth beamer theme a simple, neutral LaTeX beamer theme.
+%%	It uses the blue and green colors of the Bayreuth city logo.
+%%
+%%	THIS THEME IS NOT AN OFFICIAL ONE!!	
+%%
+%%	---------------------------------------------------------------------------
+%%	Copyright 2017 Sebastian Friedl
+%% 
+%%	This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+%%	International License (https://creativecommons.org/licenses/by-sa/4.0/).
+%%
+%%	This means that if you change the theme and re-distribute it, you must re-
+%%	tain the copyright notice header and license it under the same CC-BY-SA
+%%	license.
+%%	This does not affect any presentations that you create with the theme.
+%%
+%%	---------------------------------------------------------------------------
+
+
+% !TeX spellcheck = en_US
+
+% !TeX document-id = {b3b4668f-f5d8-4010-ac4e-2eb3098d15f4}
+% !TeX TXS-program:compile=txs:///pdflatex/[--shell-escape]
+
+\documentclass[12pt,a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+
+\usepackage[english]{babel}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage{pgf}
+
+\usepackage[osf,slantedGreek]{mathpazo}
+\usepackage[osf,scale=.92]{roboto}
+
+\parindent 0pt
+
+\title{The Bayreuth \LaTeX\ beamer theme}
+\author{Sebastian Friedl}
+\date{March 13, 2017}
+
+\hypersetup{pdftitle={The Bayreuth \LaTeX\ beamer theme},pdfauthor={Sebastian Friedl}}
+
+\begin{document}
+	\maketitle
+	\thispagestyle{empty}
+	
+	
+	\section*{Important note}
+	This theme is an unofficial theme. \\
+	It only uses the colors of the Bayreuth city logo.
+	
+		
+	\section*{Dependencies}
+	The Bayreuth theme requires \LaTeXe\ and the following packages:
+	\begin{itemize} \ttfamily
+		\item appendixnumberbeamer
+		\item etoolbox
+		\item calc
+		\item pgfopts
+		\item keyval
+		\item tikz
+	\end{itemize}
+	
+	
+	\section{Using the theme}
+	For using the theme, you have to copy the file \texttt{beamerthemeBayreuth.sty} into the folder containing the master file of your presentation. Advanced users may also install the style file on their local system. \par
+	After that, you use the command \mintinline{LaTeX}{\usetheme{Bayreuth}} to set the theme used in your presentation to the Bayreuth theme.
+
+	
+	\section{Theme options}
+	You can pass some options to the theme which influence how the theme looks. \\
+	Syntax: \ \ \mintinline{LaTeX}{\usetheme[options]{Bayreuth}} \\\vspace{0.5ex}
+	
+	\textbf{Available options:}
+	\begin{itemize}
+		\item \texttt{numbering} \\
+				Influences how the frames are numbered
+				\begin{itemize}
+					\item \texttt{none} \\
+					The frames aren't numbered
+					%
+					\item \texttt{counter} \\
+					The frames are numbered with a simple counter
+					%
+					\item \texttt{fraction}			\hfill \textit{default} \\
+					The frames are numbered with current frame / total frames
+					%
+					\item \texttt{appedix} \\
+					An \enquote{Anhang} remark is shown instead of the frame numbers. \\
+					This setting gets automatically set for frames in the appendix.
+				\end{itemize}
+		%
+		\item \texttt{footline} \\
+				Influences how the footline of the theme looks
+				\begin{itemize}
+					\item \texttt{none} \\
+					No footline is shown
+					%
+					\item \texttt{standard}			\hfill \textit{default} \\
+					The standard footline containing author, title and framenumbers is shown.
+					%
+					\item \texttt{smallcaps} \\
+					The standard footline with small caps font shape
+				\end{itemize}
+		%
+		\item \texttt{titleformat title} \\
+				Influences the style of the presentation title on the title frame
+				\begin{itemize}
+					\item \texttt{regular}			\hfill \textit{default}\\
+					The presentation title is set in normal boldface style
+					%
+					\item \texttt{smallcaps} \\
+					The presentation title is set in boldface and small caps style
+				\end{itemize}
+	\end{itemize}
+
+
+	\section{Style sample}
+	This style sample was made using the sample presentation \enquote{Steine} created by A.~Arzberger and S.~Friedl. \\
+	It is licensed under the \textit{Creative Commons Attribution-ShareAlike 4.0 International} license.
+	\begin{center}
+		\pgfimage[width=0.4\textwidth,page=1]{steine_Bayreuth} \pgfimage[width=0.4\textwidth,page=2]{steine_Bayreuth} \\
+		\pgfimage[width=0.4\textwidth,page=3]{steine_Bayreuth} \pgfimage[width=0.4\textwidth,page=4]{steine_Bayreuth} \\
+		\pgfimage[width=0.4\textwidth,page=5]{steine_Bayreuth} \pgfimage[width=0.4\textwidth,page=6]{steine_Bayreuth} \\
+		\pgfimage[width=0.4\textwidth,page=7]{steine_Bayreuth} \pgfimage[width=0.4\textwidth,page=8]{steine_Bayreuth}
+	\end{center}
+
+	
+	\section{License}
+	The Bayreuth theme is derived work from Matthias Vogelgesang's metropolis beamer theme. Thus, both copyright headers printed below apply.
+	
+	\subsection*{Bayreuth beamer theme}
+	Copyright 2017 Sebastian Friedl \\
+	This work is licensed under a \textit{Creative Commons Attribution-ShareAlike~4.0 International} License (\url{https://creativecommons.org/licenses/by-sa/4.0/}). \\
+	This means that if you change the theme and re-distribute it, you must retain the copyright notice header and license it under the same CC-BY-SA license. \\
+	This does not affect any presentations that you create with the theme.
+	
+	\subsection*{metropolis beamer theme}
+	Copyright 2015 Matthias Vogelgesang and the LaTeX community. A full list of contributors can be found at
+	\begin{center}
+		\url{https://github.com/matze/mtheme/graphs/contributors}
+	\end{center}
+	and the original template was based on the HSRM theme by Benjamin Weiss.
+
+	This work is licensed under a \textit{Creative Commons Attribution-ShareAlike~4.0 International} License (\url{https://creativecommons.org/licenses/by-sa/4.0/}).
+\end{document}

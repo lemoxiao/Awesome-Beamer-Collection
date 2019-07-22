@@ -1,0 +1,202 @@
+\section{Intro} 
+
+\subsection{Scope, Sense and Purpose}
+\begin{frame}[t]
+\frametitle{Introduction}
+\framesubtitle{Sense -- Nonsense -- Madness}
+\bigskip
+\bigskip
+\bigskip
+
+\begin{columns}[t]
+\begin{column}{.3\textwidth}
+\textbf{Useful}\\[3mm]
+\begin{itemize}
+\item Articles
+\item Books
+\item Scientific papers
+\item Applications
+\end{itemize}
+\end{column}
+\begin{column}{.30\textwidth}
+\textbf{Nonsense}\\[3mm]
+\begin{itemize}
+\item Private mail
+\item Invitations to your birthday party
+\item Drink Menu
+\end{itemize}
+\end{column}
+\begin{column}{.3\textwidth}
+\textbf{Madness}\\[3mm]
+\begin{itemize}
+\item Shopping list
+\item Brainstorming
+\item \ldots 
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame} 
+\frametitle{From Code To Document}
+\framesubtitle{No WYSIWYG} 
+\begin{columns}
+\begin{column}{.7\textwidth}
+\image{\textwidth}{image/worddoc.jpg}{\textbf{W}hat \textbf{Y}ou \textbf{S}ee \textbf{I}s \textbf{W}hat \textbf{Y}ou
+\textbf{G}et}{img:worddoc}
+\end{column}
+\begin{column}{.3\textwidth}
+\image{\textwidth}{image/codescreen.png}{\textbf{W}hat \textbf{W}ill \textbf{I} \textbf{G}et?}{img:codescreen}
+%% Compile Animation
+\end{column}
+\end{columns}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Introduction}
+\framesubtitle{Approach}
+\begin{columns}[onlytextwidth]
+\begin{column}{0.40\textwidth}
+\image{.8\textwidth}{image/codescreen.png}{Text File with \LaTeX ~-Code}{img:code}
+\end{column}
+\begin{column}{0.25\textwidth}
+\image{.8\textwidth}{image/miktex.jpg}{Compiler (z.B. MikTeX)}{img:miktex}
+\end{column}
+\begin{column}{0.25\textwidth}
+\image{.6\textwidth}{image/pdflogo.png}{good-looking, legible and printable document}{img:pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------
+
+\subsection{Advantages \& Disadvantages}
+\begin{frame}
+\frametitle{Introduction}
+\framesubtitle{Advantages \& Disadvantages}
+Advantages
+\begin{itemize}
+\item  dynamic directories and references
+\item  automated layouts
+\item  simple distributed work
+\end{itemize}
+Disadvantages
+\begin{itemize}
+\item  What do I get in the end?
+\item  many, partly complex commands
+\end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\subsection{\LaTeX --Compiler}
+\begin{frame}
+\frametitle{Introduction}
+\framesubtitle{\LaTeX - Compiler}
+\begin{columns}[t]
+\begin{column}{.4\textwidth}
+\textbf{Software for Windows:}\\
+\begin{itemize}
+  \item MikTex (http://www.miktex.org)\\
+   2 alternatives: Basic or  Complete
+  \item ProTeXt (http://www.tug.org/protext)\\
+contains MikTex, TeXnicCenter and Ghostscript – simple installation\\
+\end{itemize}
+\end{column}
+\begin{column}{.6\textwidth}
+\textbf{Software for *nix:}
+\begin{itemize}
+  \item TeXLive\\
+Packages for Ubuntu: {\ttfamily texlive-full} is the full meta-package with all necessary packages. Also contains the following:
+\begin{itemize}
+  \item {\ttfamily texlive-base
+  \item texlive-lang-german}
+\end{itemize}
+Installation: {\ttfamily sudo apt-get install texlive-full}
+\item MacOS: MacTeX (http://www.tug.org/mactex/2009)\\
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\subsection{Free Editors}
+
+\subsubsection{*nix}
+\begin{frame}
+\frametitle{Introduction}
+\framesubtitle{Free Editors -- Linus \& MacOS }
+\begin{itemize}
+ \item Kile\footnote{http://kile.sourceforge.net/}\\KDE-program, also usable under Gnome\slash Unity etc.
+ Installation for Debian systemes with {\ttfamily sudo apt-get
+ install kile}.
+  \item Vim \LaTeX -suite (Plugin)\footnote{http://vim-latex.sourceforge.net/}\\
+  Dream for Vim users.
+  \item TexShop (MacOS)\footnote{http://pages.uoregon.edu/koch/texshop/}
+\end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\subsubsection{Windows}
+\begin{frame}
+\frametitle{Introduction}
+\framesubtitle{Free Editors -- Windows}
+\begin{itemize}
+\item TeXnicCenter\footnote{http://www.texniccenter.org/}
+  %\item \ldots
+\end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\subsubsection{Cross-Platform}
+\begin{frame}
+\frametitle{Introduction}
+\framesubtitle{Free Editors -- Cross-Platform}
+\begin{itemize}
+  \item TeXMaker\footnote{http://www.xm1math.net/texmaker}\\
+   Used in this turorial.
+  \item TeXstudio\footnote{http://sourceforge.net/projects/texstudio/?source=dlp}\\
+  Like TeXMaker, but more powerful.
+  \item TeXlipse\footnote{http://texlipse.sourceforge.net/}\\ For advanced users, plugin for
+  Eclipse. Good IDE support, code-completion, autobuilds, version control etc.
+\end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{TeXmaker}
+\framesubtitle{Overview}
+\image{\textwidth}{image/texmaker_overview.png}{Standard window of the Texmaker}{img:texmaker1}
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{TeXmaker}
+\framesubtitle{Synctex}
+\image{\textwidth}{image/synctex.png}{Synctex}{img:synctex}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{My very first \LaTeX -document}
+\begin{block}{New commands:}
+\begin{itemize}
+\item \begin{ttfamily}\color{nounibaredII}\textbackslash documentclass\color{nounibagreenI}\color{black}\{article\}\end{ttfamily}
+\item \begin{ttfamily}\color{unibablueI}\textbackslash begin\color{black}\{document\}\end{ttfamily}
+\item \begin{ttfamily}\color{unibablueI}\textbackslash end\color{black}\{document\}\end{ttfamily}
+\end{itemize}
+\end{block}
+This is all you need for a \LaTeX -document. Let's try!
+
+\end{frame}

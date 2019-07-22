@@ -1,0 +1,41 @@
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/color/beamercolorthemecrane.sty,v 1.8 2004/10/28 17:15:51 tantau Exp $
+
+% Copyright 2003 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+\mode<presentation>
+
+\definecolor{craneorange}{RGB}{252,187,6}
+\definecolor{craneblue}{RGB}{4,6,76}
+
+\definecolor{Weingarten_Red}{RGB}{166,0,0}
+
+
+\setbeamercolor{structure}{fg=Weingarten_Red}
+
+\setbeamercolor{palette primary}{fg=craneblue,bg=Weingarten_Red!70}
+\setbeamercolor{palette secondary}{fg=craneblue,bg=craneorange!80}
+\setbeamercolor{palette tertiary}{fg=craneblue,bg=craneorange!90}
+\setbeamercolor{palette quaternary}{fg=white,bg=Weingarten_Red}
+
+\setbeamercolor{titlelike}{parent=palette quaternary}
+
+\setbeamercolor{author date}{fg=Weingarten_Red,bg=Weingarten_Red!5}
+
+\setbeamercolor{block title}{fg=white,bg=Weingarten_Red}
+\setbeamercolor{block title alerted}{use=alerted text,fg=craneblue,bg=alerted text.fg!75!bg}
+\setbeamercolor{block title example}{use=example text,fg=craneblue,bg=example text.fg!75!bg}
+
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!10!bg}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!25!bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!25!bg}
+
+\setbeamercolor{subsection in toc}{fg=Weingarten_Red!90,bg=white}  
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\mode
+<all>

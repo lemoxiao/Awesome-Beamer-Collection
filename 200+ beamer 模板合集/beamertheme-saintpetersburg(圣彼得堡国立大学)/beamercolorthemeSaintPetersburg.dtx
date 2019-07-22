@@ -1,0 +1,122 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2017 by Ivan Gankevich <igankevich@ya.ru>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+% \iffalse
+%<*package>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemeSaintPetersburg}[2017/11/20 Saint Petersburg color theme]
+%</package>
+% \fi
+% \CheckSum{0}
+% \StopEventually{}
+% \iffalse
+%<*package>
+% \fi
+% \subsection{SaintPetersburg color theme}
+% Define corporate and several additional colours.
+%    \begin{macrocode}
+\definecolor{spbuTerracotta}{cmyk}{.08,.91,.92,.33}
+\definecolor{spbuGray}{cmyk}{.21,.11,.09,.22}
+\definecolor{spbuWhite1}{RGB}{245,246,245}
+\definecolor{spbuWhite2}{RGB}{230,231,230}
+\definecolor{spbuWhite3}{RGB}{217,218,217}
+\definecolor{spbuWhiteRed2}{RGB}{255,231,230}
+\definecolor{spbuWhiteRed3}{RGB}{255,160,160}
+\definecolor{spbuRed}{RGB}{200,40,40}
+\definecolor{spbuDarkGray}{HTML}{404040}
+\definecolor{spbuDarkGray2}{HTML}{5F7177}
+%    \end{macrocode}
+
+% Define base beamer color templates.
+%    \begin{macrocode}
+\setbeamercolor{normal text}{fg=spbuDarkGray,bg=spbuWhite1}
+\setbeamercolor{frametitle}{bg=spbuWhite1,fg=spbuTerracotta}
+\setbeamercolor{title}{bg=spbuWhite1,fg=spbuTerracotta}
+\setbeamercolor{subtitle}{parent=title}
+\setbeamercolor{date}{parent=normal text}
+\setbeamercolor{author}{parent=normal text}
+\setbeamercolor{institute}{parent=normal text}
+\setbeamercolor{background canvas}{parent=normal text}
+\setbeamercolor{background}{parent=background canvas}
+\setbeamercolor{math text}{fg=spbuDarkGray,bg=spbuWhite1}
+\setbeamercolor{item}{parent=normal text}
+\setbeamercolor{block title}{fg=spbuDarkGray,bg=spbuWhite3}
+\setbeamercolor{block body}{fg=spbuDarkGray,bg=spbuWhite2}
+\setbeamercolor{block title alerted}{fg=spbuRed,bg=spbuWhiteRed3}
+\setbeamercolor{block body alerted}{fg=spbuDarkGray,bg=spbuWhiteRed2}
+\setbeamercolor{block title example}{bg=spbuWhite3}
+\setbeamercolor{block body example}{fg=spbuDarkGray,bg=spbuWhite2}
+%    \end{macrocode}
+
+% Define part, section, subsection pages, table of contents page
+% beamer colour templates.
+%    \begin{macrocode}
+\setbeamercolor{section in toc}{parent=normal text}
+\setbeamercolor{part page}{parent=frametitle}
+\setbeamercolor{section page}{parent=frametitle}
+\setbeamercolor{subsection page}{parent=frametitle}
+\setbeamercolor{part title}{parent=frametitle,fg=spbuDarkGray}
+%    \end{macrocode}
+
+% Define background colour template.
+%    \begin{macrocode}
+\beamertemplatesolidbackgroundcolor{spbuWhite1}
+%    \end{macrocode}
+
+% Define bibliography items.
+%    \begin{macrocode}
+\setbeamercolor{bibliography item}{parent=normal text}
+\setbeamercolor*{bibliography entry title}{parent=normal text}
+\setbeamercolor*{bibliography entry author}{parent=normal text}
+\setbeamercolor*{bibliography entry location}{parent=normal text,fg=spbuDarkGray2}
+\setbeamercolor*{bibliography entry journal}{parent=normal text,fg=spbuDarkGray2}
+\setbeamercolor*{bibliography entry note}{parent=normal text}
+%    \end{macrocode}
+
+% Define abstract.
+%    \begin{macrocode}
+\setbeamercolor{abstract title}{parent=frametitle}
+\setbeamercolor{abstract}{parent=normal text}
+%    \end{macrocode}
+
+% Define captions.
+%    \begin{macrocode}
+\setbeamercolor{caption name}{parent=frametitle}
+\setbeamercolor{caption}{parent=normal text}
+%    \end{macrocode}
+
+% Define headline.
+%    \begin{macrocode}
+\setbeamercolor{title in head/foot}{parent=title}
+\setbeamercolor{subtitle in head/foot}{parent=subtitle}
+\setbeamercolor{author in head/foot}{parent=author}
+\setbeamercolor{date in head/foot}{parent=date}
+\setbeamercolor{institute in head/foot}{parent=institute}
+%    \end{macrocode}
+
+% Set white background for printing the poster.
+%    \begin{macrocode}
+\makeatletter%
+\if@spbuPoster%
+\beamertemplatesolidbackgroundcolor{white}
+\fi%
+\makeatother%
+%    \end{macrocode}
+% \iffalse
+%</package>
+% \fi
+% \Finale
+\endinput

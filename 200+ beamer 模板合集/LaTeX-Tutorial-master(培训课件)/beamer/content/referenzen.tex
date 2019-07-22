@@ -1,0 +1,21 @@
+
+\begin{frame}
+\frametitle{References}
+\framesubtitle{Insert graphics – A closer look}
+\begin{tabbing}
+\begin{ttfamily}\color{nounibaredI}\textbackslash label\color{black}\{labelname\}\end{ttfamily} \=This command gives
+a graphic a label. Later in the\\\> text you can use this label to refer to the graphic.\\
+\> This is done using the command
+\begin{ttfamily}\color{nounibaredI}\textbackslash ref\color{black}\{labelname\}\end{ttfamily}.
+\end{tabbing}
+\begin{ttfamily}Tiny Tux is an omnivore. Vegetables or
+chives, nothing is safe from him. (see graphic
+\color{nounibaredI}\textbackslash ref\color{black}\{img:tux1\})\end{ttfamily}\\[3mm]
+\textbf{Result:}\\[3mm]
+\begin{minipage}{\textwidth}\begin{rm}
+Tiny Tux is an omnivore. Vegetables or
+chives, nothing is safe from him. (see graphic
+1)\end{rm} \end{minipage}\\[3mm]
+\textbf{Why labels?}\\
+With those references, you can always refer to the correct graphic, even if there are some more graphics inserted in between.
+\end{frame}

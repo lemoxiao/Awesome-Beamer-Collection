@@ -1,0 +1,7 @@
+# LaTeX by-products
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc

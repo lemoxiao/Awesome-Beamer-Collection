@@ -1,0 +1,15 @@
+*.aux
+*.bak
+*.bbl
+*.blg
+*.synctex.gz
+*.synctex
+*.idx
+*.ilg
+*.ind
+*.log
+*.out
+*.pdf
+*.sav
+*.toc
+*.txt

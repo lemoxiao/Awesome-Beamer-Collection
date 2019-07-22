@@ -1,0 +1,42 @@
+\mode<presentation>
+
+% Frame title
+\defbeamertemplate*{frametitle}{mun}[1][]
+{
+  \vskip1cm%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.5cm]{frametitle} 
+  \begin{tikzpicture}
+  \useasboundingbox[fill=white](0,0) rectangle(\the\paperwidth,1.2);
+  \fill[color=MunRed] (0,0) rectangle(2.95,1.2);
+  \fill[color=bg] (3.05,0) rectangle(\the\paperwidth,1.2);
+  \ifx\insertframesubtitle\@empty%
+      {\node[anchor=west, color=fg ,font=\large] at (3.2,0.61){\insertframetitle};}
+      \else%
+      {\node[anchor= west, color=fg,font=\large] at (3.2,0.81){\insertframetitle};%
+       \node[anchor= west, color=fg,font=\small] at (3.2,0.41){\insertframesubtitle};}%
+  \fi
+  \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+
+%footline
+\defbeamertemplate*{footline}{mun}
+{
+  \ifnum\thepage>1%
+  \leavevmode
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.75ex,dp=1ex,left]{footer}
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.75ex,dp=1ex,center]{footer}
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.75ex,dp=1ex,right]{footer}
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}
+  \fi
+  \vskip2ex%
+}
+
+\mode<all>

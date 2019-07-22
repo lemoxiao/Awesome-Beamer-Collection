@@ -1,0 +1,262 @@
+\ProvidesPackage{beamerthemeAGH}[2017/04/02]
+% Beamer theme by Stanisław Polak <polak[aT]icsr[DoT]agh[DoT]edu[DoT]pl
+%                 http://www.icsr.agh.edu.pl/~polak/
+% Jan. 2017 
+% Home page: https://github.com/polaksta/beamer-AGH
+%
+% based on the LaTeX-Beamer theme "CambridgeUS":
+% Copyright 2004 by Madhusudan Singh <madhusudan.singh@gmail.com>
+%
+%% beamerthemeAGH.sty
+%% Copyright 2017 Stanisław Polak
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is Stanisław Polak.
+%
+% This work consists of the files beamerthemeAGH.sty
+% and beamercolorthemeAGH.sty.
+
+\RequirePackage{tikz}[2015/08/07]
+\RequirePackage{ifthen}
+\usetikzlibrary{positioning}
+
+\newif\ifAGH@dark
+\AGH@darkfalse %Default, do not use dark version
+\DeclareOptionBeamer{dark}{
+	\AGH@darktrue %Use dark version if option 'dark' was given
+	\PassOptionsToPackage{dark=#1}{beamercolorthemeAGH} %Pass information about the level of darkness to the 'beamercolorthemeAGH.sty' file
+}
+\DeclareOptionBeamer{parttitle}{\def\AGH@parttitle{#1}} %Option 'parttitle' specifies where part title should be displayed, values:
+                                                        % 'leftfooter' - in left footer, instead of author's name
+							% 'rightfooter' - in right footer, instead of date
+\ProcessOptionsBeamer
+
+\newdimen\coloredlinesskip %Distance between lines
+\newdimen\leftedgeskip     %Distance between left edge of slide and lines
+\coloredlinesskip=2mm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation>
+\useinnertheme[shadow=\ifAGH@dark false\else true\fi]{rounded}
+\useoutertheme{infolines}
+\usecolortheme{AGH}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\AtBeginDocument{%
+	\typeout{..................................................................}
+	\typeout{You are using the AGH beamer theme created by Stanislaw Polak}
+	\typeout{Version: 1.3.2, Apr 2017}
+	\typeout{..................................................................}
+	\ifdefined\AGH@parttitle
+		%Display part title
+		\ifthenelse{\equal{\AGH@parttitle}{leftfooter}}{\def\beamer@shortauthor{\insertpart}\def\beamer@shortinstitute{}}{} %In left footer (instead of author's name and institute name) 
+		\ifthenelse{\equal{\AGH@parttitle}{rightfooter}}{\def\beamer@shortdate{\insertpart}}{} %In right footer (instead of date)
+	\fi
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzstyle{every picture}+=[remember picture]
+\tikzset { %Tikz code generated from SVG by 'svg2tikz' tool
+        %%%%%%%%%
+        %AGH logo
+	%%%%%%%%%
+	logo/.pic= { 
+		\begin{scope}[cm={{1.25,0.0,0.0,-1.25,(0.0,190.12419)}}]
+  			\begin{scope}[shift={(-221.07081,-349.03133)}]
+				\ifAGH@dark
+					\colorlet{AGH@red}{AGH@white}
+					\colorlet{AGH@green}{AGH@white}
+					\colorlet{AGH@black}{AGH@white}
+				\fi
+      				\path[fill=AGH@black,nonzero rule] (275.7680,371.8140) -- (271.5220,371.8140) --
+        				(273.6160,378.1640) -- (275.7680,371.8140) -- cycle(278.3160,364.2940) --
+ 		       			(283.6090,364.2940) .. controls (283.6090,364.2940) and (277.7520,380.7630) ..
+       	 				(277.7500,380.7670) .. controls (277.0920,382.6190) and (275.6740,382.9040) ..
+        				(275.2190,382.9040) -- (270.1040,382.9040) .. controls (270.8890,382.2640) and
+        				(271.1610,381.8450) .. (271.1610,381.2020) .. controls (271.1610,380.8120) and
+        				(271.0740,380.5130) .. (270.6470,379.2500) -- (265.5830,364.2930) --
+        				(269.0420,364.2930) -- (270.5720,368.9330) -- (276.7450,368.9330) --
+        				(278.3160,364.2940) -- cycle;
+      				\path[fill=AGH@black,nonzero rule] (299.7730,366.9310) -- (299.7730,372.8670) ..
+        				controls (299.7730,374.0030) and (299.5320,374.5840) .. (298.7260,375.3030) --
+        				(302.5480,375.3020) .. controls (303.7290,375.3020) and (304.7410,374.3450) ..
+        				(304.7410,373.1370) -- (304.7410,364.7120) .. controls (302.8740,364.1630) and
+        				(300.9800,363.8610) .. (299.2520,363.8610) .. controls (292.6360,363.8610) and
+        				(288.4420,367.7200) .. (288.4420,373.4290) .. controls (288.4420,379.0020) and
+        				(292.6450,383.3450) .. (299.3430,383.3450) .. controls (300.8670,383.3450) and
+        				(302.3140,383.0780) .. (303.6270,382.6030) -- (303.6270,378.8780) .. controls
+        				(302.4510,379.6530) and (300.9630,380.1170) .. (299.3430,380.1170) .. controls
+        				(296.1310,380.1170) and (293.6020,377.9030) .. (293.6020,373.8130) .. controls
+        				(293.6020,369.4770) and (295.5180,366.8200) .. (298.5930,366.8200) .. controls
+        				(298.9780,366.8200) and (299.3610,366.8480) .. (299.7730,366.9310);
+      				\path[fill=AGH@black,nonzero rule] (317.9930,380.5000) .. controls
+        				(317.9930,381.8280) and (316.9450,382.9040) .. (315.6530,382.9040) --
+        				(311.9490,382.9040) .. controls (312.7560,382.1870) and (312.9970,381.6040) ..
+        				(312.9970,380.4700) -- (312.9970,364.2930) -- (317.9930,364.2930) --
+        				(317.9930,372.1180) -- (323.6760,372.1180) -- (323.6760,364.2930) --
+        				(328.6580,364.2930) -- (328.6580,382.8500) -- (323.6760,382.8500) --
+        				(323.6760,375.2740) -- (317.9930,375.2740) -- (317.9930,380.5000) -- cycle;
+      				\path[fill=AGH@red,nonzero rule] (310.5620,395.3120) .. controls
+        				(314.6980,398.1550) and (318.3160,402.5500) .. (318.3170,411.8550) --
+        				(318.3170,467.6890) -- (322.4520,467.6890) -- (322.4520,411.8550) .. controls
+        				(322.4520,401.5160) and (317.2830,397.3800) .. (310.5620,395.3120);
+      				\path[fill=AGH@red,nonzero rule] (313.9250,395.3120) .. controls
+       		 			(317.8030,397.1210) and (324.5220,400.4810) .. (324.5220,411.8550) --
+        				(324.5220,467.6890) -- (328.6580,467.6890) -- (328.6580,411.8550) .. controls
+        				(328.6580,397.8960) and (317.8030,395.8290) .. (313.9250,395.3120);
+      				\path[fill=AGH@red,nonzero rule] (307.9770,395.3120) .. controls
+        				(311.0630,398.4150) and (312.1120,404.6170) .. (312.1120,412.8900) --
+        				(312.1120,467.6890) -- (316.2490,467.6890) -- (316.2490,411.8550) .. controls
+        				(316.2490,402.5770) and (313.1470,397.8960) .. (307.9770,395.3120);
+      				\path[fill=AGH@black,nonzero rule] (287.8150,486.3010) .. controls
+        				(291.9520,483.4580) and (295.5700,479.0630) .. (295.5700,469.7580) --
+        				(295.5700,405.6520) -- (299.7060,405.6520) -- (299.7060,469.7580) .. controls
+        				(299.7060,480.0970) and (294.5360,484.2330) .. (287.8150,486.3010);
+      				\path[fill=AGH@black,nonzero rule] (291.1780,486.3010) .. controls
+        				(295.0550,484.4920) and (301.7760,481.1310) .. (301.7760,469.7580) --
+        				(301.7760,405.6520) -- (305.9110,405.6520) -- (305.9110,469.7580) .. controls
+        				(305.9110,483.7160) and (295.0550,485.7840) .. (291.1780,486.3010);
+      				\path[fill=AGH@black,nonzero rule] (285.2300,486.3010) .. controls
+        				(288.3160,483.1990) and (289.3660,476.9950) .. (289.3660,468.7240) --
+        				(289.3660,405.6510) -- (293.5020,405.6520) -- (293.5020,469.7580) .. controls
+        				(293.5020,479.0360) and (290.4000,483.7160) .. (285.2300,486.3010);
+      				\path[fill=AGH@green,nonzero rule] (284.7140,395.3120) .. controls
+        				(280.5780,398.1550) and (276.9600,402.5500) .. (276.9590,411.8550) --
+        				(276.9590,467.6890) -- (272.8230,467.6890) -- (272.8230,411.8550) .. controls
+        				(272.8230,401.5160) and (277.9930,397.3800) .. (284.7140,395.3120);
+      				\path[fill=AGH@green,nonzero rule] (281.3510,395.3120) .. controls
+        				(277.4740,397.1210) and (270.7530,400.4810) .. (270.7530,411.8550) --
+        				(270.7530,467.6890) -- (266.6170,467.6890) -- (266.6170,411.8550) .. controls
+        				(266.6170,397.8960) and (277.4740,395.8290) .. (281.3510,395.3120);
+      				\path[fill=AGH@green,nonzero rule] (287.2990,395.3120) .. controls
+        				(284.2120,398.4150) and (283.1630,404.6170) .. (283.1630,412.8900) --
+        				(283.1630,467.6890) -- (279.0270,467.6890) -- (279.0270,411.8550) .. controls
+        				(279.0270,402.5770) and (282.1290,397.8960) .. (287.2990,395.3120);
+				\node (AGH) at (295,450) {};
+					
+  			\end{scope}
+		\end{scope}
+	},
+	%%%%%%%%%%%%%%
+	%Colored lines
+	%%%%%%%%%%%%%%
+	lines/.pic={ 
+		%black line
+		\ifnum\thepage=1 %If a title page
+			\coordinate [xshift=\leftedgeskip] (black_x1) at (current page.north west);
+		\else % If a non-title page 
+			\coordinate [xshift=\leftedgeskip,yshift=-9.5\headheight] (black_x1) at (current page.north west);
+		\fi
+		\coordinate [xshift=\leftedgeskip,yshift=3ex] (black_x2) at (current page.south west);
+		\draw[AGH@black,thick] (black_x1) -- (black_x2);
+		%green line
+		\coordinate [below left =  0.05\textheight and \coloredlinesskip of black_x1] (green_x1);
+		\coordinate [above left =  0.2\textheight and \coloredlinesskip of black_x2] (green_x2);
+		\draw[AGH@green,thick] (green_x1) -- (green_x2);
+		%red line
+		\coordinate [below right = 0.2\textheight and \coloredlinesskip of black_x1] (red_x1);
+		\coordinate [above right = 0.2\textheight and \coloredlinesskip of black_x2] (red_x2);
+		\draw[AGH@red,thick] (red_x1) -- (red_x2);
+	}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%Background images
+%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{background}{
+	\ifnum\thepage=1 % I assume that the title page is the first page of presentation ;-)
+	%%%%%%%%%%%%%%%%%%%%%%%
+	% Content of title page
+	%%%%%%%%%%%%%%%%%%%%%%%
+		\leftedgeskip=4em
+		%%%%%%%%%%%%%%%
+	   	% Colored lines			
+		%%%%%%%%%%%%%%%
+		\tikz[overlay]\pic {lines};
+		%%%%%%
+		% Logo
+		%%%%%%
+		\tikz[overlay,transform shape,transform canvas,x=0.80pt,y=0.80pt,yscale=-1.000000, xscale=1.000000,inner sep=0pt, outer sep=0pt] 
+			\path pic  [below right = -2ex and -1em of black_x1,scale=0.5] (logo-) {logo}; 
+		%%%%%%%%%%%%%%%%
+		% Name in Polish
+		%%%%%%%%%%%%%%%%
+		\tikz[overlay]
+			\node (polish) [align=left,right = 2em of logo-AGH,font={\tiny\bfseries}]{
+				Akademia G\'{o}rniczo-Hutnicza\\im. Stanis\l{}awa Staszica w Krakowie
+			};
+		%%%%%%%%%%%%%%%%%
+		% Name in English
+		%%%%%%%%%%%%%%%%%
+		\tikz[overlay]	
+			\node (english) [align=left,below = 1.5ex of polish.south west,anchor=west,color=AGH@gray,font=\tiny\bfseries]{
+				AGH University of Science\\and Technology
+			};
+        \else
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Content of non-title page
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\leftedgeskip=4mm
+		%%%%%%%%%%%%%%%
+	   	% Colored lines			
+		%%%%%%%%%%%%%%%
+		\tikz[overlay]\pic {lines};
+		%%%%%%
+		% Logo
+		%%%%%%
+		\tikz[overlay,transform shape,transform canvas,x=0.80pt,y=0.80pt,yscale=-1.000000, xscale=1.000000,inner sep=0pt, outer sep=0pt] 
+			\path pic at (current page.north west) [xshift=-\leftedgeskip,yshift=4.5\headheight,scale=0.3] {logo}; 
+		%%%%%%%%%%%%%
+		% WWW address
+		%%%%%%%%%%%%%
+		\tikz[overlay]\node[above = of black_x2,rotate=90,color=AGH@gray,font={\tiny}]{www.agh.edu.pl};
+			
+        \fi
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%Slide content margins
+%%%%%%%%%%%%%%%%%%%%%%
+\setbeamersize{text margin left=6em} 
+\setbeamersize{text margin right=2em}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Title page look and contents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\defbeamertemplate*{title page}{AGH}[1][]
+{
+	\vspace*{0.15\paperheight}
+	\vbox{}
+	\vfill
+	\hspace*{0.01\paperwidth}
+	\begingroup
+	\centering
+	\begin{beamercolorbox}[rounded=true,shadow=\ifAGH@dark false\else true\fi,sep=8pt,wd=0.6\textwidth,center,#1]{title}
+		\usebeamerfont{title}\inserttitle\par%
+		\ifx\insertsubtitle\@empty%
+		\else%
+			\vskip0.25em%
+			{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+		\fi%     
+	\end{beamercolorbox}%
+	\vskip1em\par
+	\begin{beamercolorbox}[sep=8pt,center,#1]{author}
+		\usebeamerfont{author}\insertauthor
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[sep=8pt,center,#1]{institute}
+		\usebeamerfont{institute}\insertinstitute
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[sep=8pt,center,#1]{date}
+	\usebeamerfont{date}\insertdate
+	\end{beamercolorbox}\vskip0.5em
+	{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+	\endgroup
+	\vfill
+}
+\mode<all>

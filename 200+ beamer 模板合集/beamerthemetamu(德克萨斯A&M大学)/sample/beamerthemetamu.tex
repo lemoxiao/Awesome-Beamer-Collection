@@ -1,0 +1,341 @@
+% Set onlycurpagenum when you do not want to show total page number.
+% Set secheader if you want to show a headline with (sub)section names.
+% Set infolines if you want to show a headline and a footline.
+\documentclass[onlycurpagenum,infolines,xcolor=table]{beamer}
+% Copyright 2017 Alick Zhao <alick9188@gmail.com>
+%
+% Last modified on: 2017-07-16
+
+% This file is modified from a solution template for:
+
+% - Giving a talk on some subject.
+% - The talk is between 15min and 45min long.
+% - Style is ornate.
+
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice.
+
+\mode<presentation>
+{
+\usetheme{tamu}
+} % end of mode presentation
+
+\usepackage{graphicx} % includegraphics support (already specified)
+%\graphicspath{{fig/}} % directories that hold graphics
+\usepackage{amsmath} % for math
+\usepackage{amssymb} % for additional math symbols
+\usepackage{siunitx} % for si units
+\usepackage[style=ieee]{biblatex}
+%\usepackage{listings} % for typesetting source code
+%\usepackage{algorithmic} % for typesetting algorithms
+
+\usepackage{iftex}
+\ifXeTeX
+\usepackage{fontspec}
+%\renewcommand\familydefault{\sfdefault} % for slides
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage{calligra}
+\usepackage{colortbl}
+\colorlet{tableheader}{blue!40}
+\colorlet{oddrow}{blue!20}
+\colorlet{evenrow}{blue!10}
+
+\newcommand*{\tamu}{Texas A\&M University}
+
+\title{Beamer Template for \tamu}
+
+\newcommand*{\theauthor}{Alick Zhao}
+\author{\theauthor}
+
+\institute[TAMU] % (optional, but mostly needed)
+{
+\tamu
+}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date % (optional)
+{\today}
+
+%\subject{Talks}
+
+\hypersetup{
+pdfauthor={Alick Zhao},
+pdfsubject={Talks},
+pdfkeywords={beamer,TAMU,theme},
+unicode=true,
+}
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+%\AtBeginSubsection[]
+%{
+%  \begin{frame}<beamer>{Outline}
+%    \tableofcontents[currentsection,currentsubsection]
+%  \end{frame}
+%}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command:
+
+%\beamerdefaultoverlayspecification{<+->}
+
+% listings setup
+%\lstset{basicstyle=\ttfamily,breaklines=true}
+
+% hyperref setup
+%\hypersetup{
+%pdfpagemode=FullScreen,
+%}
+
+\ExecuteBibliographyOptions{citetracker=true,sorting=none}
+
+% Suppress publisher, location, note, etc. in citations.
+\AtEveryCitekey{%
+  %\ifentrytype{article}
+    %{\clearfield{title}}
+    %{}%
+  \clearlist{publisher}%
+  \clearlist{location}%
+  \clearfield{isbn}%
+  \clearfield{issn}%
+  \clearfield{note}}
+
+% Number of each bibliography entry in brackets
+\DeclareFieldFormat{labelnumberwidth}{\mkbibbrackets{#1}}
+
+\makeatletter
+% Citation number in brackets.
+\renewcommand\@makefntext[1]{%
+  \normalfont[\@thefnmark]\enspace #1}
+\makeatother
+
+% Provide \notefullcite for footnote citations.
+% cf. http://www.texdev.net/2010/03/08/biblatex-numbered-citations-as-footnotes/
+
+% NOTE: for vanilla footnote coexistence, refer to
+% http://tex.stackexchange.com/questions/20754/tuning-numbered-citations-as-footnote
+% http://tex.stackexchange.com/questions/20787/biblatex-cite-with-footnote-only-once-with-use-of-brackets
+
+\DeclareCiteCommand{\notefullcite}[\mkbibbrackets]
+  {\usebibmacro{cite:init}%
+   \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{notefullcite}%
+   \usebibmacro{cite:comp}}
+  {}
+  {\usebibmacro{cite:dump}%
+   \usebibmacro{postnote}}
+
+\newbibmacro*{notefullcite}{%
+  \ifciteseen
+    {}
+    {\footnotetext[\thefield{labelnumber}]{%
+       \usedriver{}{\thefield{entrytype}}.}}}
+
+% Decrease the footnote size.
+\let\oldfootnotesize\footnotesize
+\renewcommand*{\footnotesize}{\oldfootnotesize\tiny}
+
+\addbibresource{beamerthemetamu-refs.bib}  % path to the bib database
+
+% Disable the navigation symbol bar.
+\beamertemplatenavigationsymbolsempty
+
+\newcommand*{\tamulogo}{%
+\IfFileExists{tamu-logo.pdf}{%
+\includegraphics[scale=.5]{tamu-logo.pdf}}{%
+}}
+
+\begin{document}
+
+\titlegraphic{\tamulogo}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+\tableofcontents
+% You might wish to add the option [pausesections]
+\end{frame}
+
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+\section{Sample Section}
+
+\begin{frame}
+  \frametitle{Bullet Items}
+  \begin{itemize}
+    \item Computers/computing everywhere --- $10^4$ CPUs per person
+      \begin{itemize}
+        \item Real-world computing --- sensors and actuators
+        \item Massively distributed and embedded
+        \item Collect data and make decisions
+      \end{itemize}
+    \item Massive data --- a TeraByte per person per day
+      \begin{itemize}
+        \item Sensors, personal, scientific, business, etc\ldots
+        \item Extract information from this mass of data
+        \item Serious privacy issues
+      \end{itemize}
+    \item People will spend much time in virtual environments
+      \begin{itemize}
+        \item Integrating digital and physical worlds
+        \item Games, Interactive Movies, Virtual Classrooms --- many connected
+        to physical spaces
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A Block Example}
+  \begin{block}{Computers/computing everywhere --- $10^4$ CPUs per person}
+    \begin{itemize}
+      \item Real-world computing --- sensors and actuators
+      \item Massively distributed and embedded
+      \item Collect data and make decisions
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Figure/Table in Columns}
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \begin{figure}[htbp]
+        \centering
+        \includegraphics{beamericonarticle.pdf}
+        \caption{A sample figure.}
+      \end{figure}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{table}[htbp]
+        \centering
+        \caption{A sample table.}
+        \label{tab:sample}
+        \rowcolors{2}{oddrow}{evenrow}
+        \begin{tabular}{ccc}
+          \rowcolor{tableheader}
+          Header & Value \\
+          Even & $2$\\
+          Odd & $3$\\
+        \end{tabular}
+      \end{table}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Formulas}
+  \begin{itemize}
+    \item Electromagnetic Wave
+      \begin{itemize}
+        \item Maxwell:
+          \begin{align}
+            \nabla \times \mathbf{E} & = - \frac{\partial
+            \mathbf{B}}{\partial t}\\
+            \nabla \times \mathbf{H} & = \mathbf{J} +
+            \frac{\partial \mathbf{D}}{\partial t}\\
+            \nabla \cdot \mathbf{D} & = \rho \\
+            \nabla \cdot\mathbf{B} & = 0
+            \label{eqn:maxwell}
+          \end{align}
+      \end{itemize}
+    \item Probability
+      \begin{itemize}
+        \item Normal Distribution $\mathcal{N}(\mu,\sigma^2)$:
+          \[
+          \int_{-\infty}^{\infty}\frac{1}{\sigma\sqrt{2\pi}}\mathrm{e}^{-\frac{(x-\mu)^2}{2\sigma^2}}\mathrm{d}x= 1 \, .
+          \]
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Formulas With Texts}
+  Formulas in plain texts: {\rmfamily $P_\text{out}$}
+  \begin{itemize}
+    \item Formulas in lists
+      \begin{itemize}
+        \item EARTH model
+\begin{equation}
+  P_\text{in} = \begin{cases}
+    N_{\text{TRX}} P_0 + \Delta_\text{p} P_\text{out}, & 0 < P_\text{out} \le P_\text{max} \\
+    N_{\text{TRX}} P_\text{sleep}, & P_\text{out} = 0
+  \end{cases}
+\end{equation}
+      \end{itemize}
+  \end{itemize}
+  \begin{exampleblock}{Formulas in blocks}
+    Here is the EARTH model again:\rmfamily
+\begin{equation}
+  P_\text{in} = \begin{cases}
+    N_{\text{TRX}} P_0 + \Delta_\text{p} P_\text{out}, & 0 < P_\text{out} \le P_\text{max} \\
+    N_{\text{TRX}} P_\text{sleep}, & P_\text{out} = 0
+  \end{cases}
+\end{equation}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Title}
+  \framesubtitle{Subtitle}
+  \begin{itemize}
+    \item Item 1
+    \item Item 2
+    \item Footnote citations~\notefullcite{beameruserguide,shannon1948}
+  \end{itemize}
+\end{frame}
+
+\section{Various Samples}
+\subsection{Sample Subsection}
+\subsection{Another Sample Subsection}
+\subsection{Yet Another Sample Subsection}
+
+\section{Summary}
+
+\begin{frame}{Summary}
+  \begin{itemize}
+    \item Lorem ipsum
+  \end{itemize}
+  \vspace{1cm}
+  \begin{itemize}
+    \item An outlook to the future.
+  \end{itemize}
+\end{frame}
+
+\appendix
+\section<presentation>*{\appendixname}
+
+% Final page.
+\begin{frame}[plain]
+  \begin{center}
+    {\Huge\calligra Thank you!\\}
+    \bigskip
+    \theauthor\\
+    \nolinkurl{alick9188@gmail.com}\\
+    \smallskip
+    \tamulogo
+  \end{center}
+\end{frame}
+\end{document}
+%%% vim: set sw=2 isk+=\: et tw=70 formatoptions+=mM:

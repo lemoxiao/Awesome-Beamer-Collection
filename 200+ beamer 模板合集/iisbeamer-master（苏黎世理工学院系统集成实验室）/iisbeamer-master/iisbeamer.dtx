@@ -1,0 +1,258 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2015 by Michael Muehlberghuber
+%
+% This file may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License, either version 1.2 of this license or (at your
+% option) any later version. The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.2 or later is part of all distributions of LaTeX version
+% 1999/12/01 or later.
+%
+% \fi
+% \iffalse
+%<*driver>
+\ProvidesFile{iisbeamer.dtx}
+%</driver>
+%<class>\NeedsTeXFormat{LaTeX2e}
+%<class>\ProvidesClass{iisbeamer}[2015/04/06 v0.1 A document class for beamer slides of the IIS]
+%<*class>
+    [2015/04/06 v0.1 A document class for beamer slides of the IIS]
+%</class>
+%
+%<*driver>
+\documentclass[a4paper,11pt]{ltxdoc}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+ \DocInput{iisbeamer.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v0.1}{2015/04/06}{Initial version}
+%
+% \GetFileInfo{iisbeamer.dtx}
+%
+% \DoNotIndex{\#,\$,\%,\@,\\,\{,\},\^,\_,\~,\ ,\"}
+% \DoNotIndex{\let,\def,\else,\empty,\ensuremath,\iflanguage,\ifthenelse,\ifx,\isempty}
+% \DoNotIndex{\textbf,\textsc,\textwidth,\vspace,\xspace,\url,\whiledo}
+% \DoNotIndex{\value,\vfill,\newcommand,\fi,\global,\end}
+% \DoNotIndex{\AtBeginDocument,\baselineskip,\begin,\CurrentOption,\DeclareOption}
+% \DoNotIndex{\fontfamily,\fontseries,\fontsize,\hookleftarrow,\hrulefill,\Huge}
+% \DoNotIndex{\itshape,\LARGE,\linewidth,\mbox,\newcounter,\newenvironment,\relax}
+%
+% \newcommand\latexcls[1]{\textsf{#1}}
+% \newcommand\latexsty[1]{\textsf{#1}}
+% \newcommand\package[1]{\textsf{#1}}
+% \newcommand\option[1]{\textsf{#1}}
+% \newcommand\name[1]{\textsc{#1}}
+% \newcommand\mail[1]{\texttt{#1}}
+%
+% \title{\latexcls{iisbeamer}\thanks{This document corresponds to
+%   \latexcls{iisbeamer}~\fileversion, dated~\filedate.}}
+% \author{\name{Michael Muehlberghuber} \\ \mail{mbgh@iis.ee.ethz.ch}}
+%
+% \maketitle
+%
+% \begin{abstract}
+%  The \latexcls{iisbeamer} document class ...
+% \end{abstract}
+%
+% \PrintChanges
+% \tableofcontents
+%
+% \section{Introduction}
+% Here comes the intro...
+%
+% \section{Implementation}
+%
+% Pass all not declared class options to the underlying document class (i.e.,
+% the \latexcls{beamer} class).
+%    \begin{macrocode}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
+%    \end{macrocode}
+%
+% Process the provided class options.
+%    \begin{macrocode}
+\ProcessOptions\relax
+%    \end{macrocode}
+%
+% Load the underlying document class (beamer).
+%    \begin{macrocode}
+\LoadClass{beamer}
+%    \end{macrocode}
+%
+% Load the required packages.
+%    \begin{macrocode}
+\RequirePackage{pgf}
+%    \end{macrocode}
+%
+% Determine the distances from left and right
+%    \begin{macrocode}
+\newcommand{\IISmargin}{0.5cm}
+%    \end{macrocode}
+%
+% Beamer settings taken from the Boadilla theme.
+%    \begin{macrocode}
+\useinnertheme{rounded}
+\usecolortheme{dolphin}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\setbeamertemplate{itemize item}[square]
+\setbeamertemplate{itemize subitem}[square]
+\setbeamertemplate{enumerate item}[circle]
+\setbeamertemplate{enumerate subitem}[square]
+\setbeamersize{text margin left=\IISmargin}
+\setbeamersize{text margin right=\IISmargin}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+%    \end{macrocode}
+%
+% Set math in roman letters.
+%    \begin{macrocode}
+\renewcommand\mathfamilydefault{\rmdefault}
+%    \end{macrocode}
+%
+% Define the ETH colors.
+%    \begin{macrocode}
+\definecolor{eth1}{rgb}{0.122,0.251,0.478}   %% 1F407A
+\definecolor{eth2}{rgb}{0.235,0.353,0.059}   %% 3C5A0F
+\definecolor{eth3}{rgb}{0.000,0.412,0.706}   %% 0069B4     
+\definecolor{eth4}{rgb}{0.443,0.475,0.110}   %% 71791C
+\definecolor{eth5}{rgb}{0.569,0.020,0.416}   %% 91056A
+\definecolor{eth6}{rgb}{0.435,0.435,0.431}   %% 6F6F6E
+\definecolor{eth7}{rgb}{0.659,0.196,0.176}   %% A8322D
+\definecolor{eth8}{rgb}{0.000,0.478,0.573}   %% 007A92
+\definecolor{eth9}{rgb}{0.584,0.376,0.075}   %% 956013
+\definecolor{eth10}{rgb}{0.510,0.745,0.118}  %% 82BE1E
+%    \end{macrocode}
+%
+% Margins need to change.
+%    \begin{macrocode}
+\setlength{\leftmargini}{1em}
+%    \end{macrocode}
+%
+% Main colortheme.
+%    \begin{macrocode}
+\usecolortheme[named=eth1]{structure}
+%    \end{macrocode}
+%
+% We need this for the header and the footer, you can set it separately.
+%    \begin{macrocode}
+\setbeamercolor{headfootcolor}{fg=white,bg=eth1}
+%    \end{macrocode}
+%
+% Redefine tghe standard box.
+%    \begin{macrocode}
+\setbeamercolor{block title}{fg=white,bg=eth1}
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!20!bg}
+%
+% Redefine the alert box.
+%    \begin{macrocode}
+\setbeamercolor{alerted text}{fg=eth7}
+\setbeamerfont{alerted text}{series=\bfseries}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg}
+\setbeamerfont{block title alerted}{series=\normalfont}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!20!bg}
+%    \end{macrocode}
+%
+% Redefine the example box.
+%    \begin{macrocode}
+\setbeamercolor{example text}{fg=eth4}
+\setbeamercolor{block title example}{use=example text,fg=white,bg=example text.fg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!20!bg}
+%    \end{macrocode}
+%
+% Definiation of the frame title.
+%    \begin{macrocode}
+\setbeamertemplate{frametitle}
+{       \vskip3pt
+        \insertframetitle
+}
+%    \end{macrocode}
+%
+% Definition of the header.
+%    \begin{macrocode}
+\setbeamertemplate{headline}{
+\begin{beamercolorbox}[ht=12pt]{headfootcolor}
+     \insertsectionnavigationhorizontal{\paperwidth}{\hskip0.2cm}{\hskip0pt plus1filll \insertframenumber /\inserttotalframenumber\hskip\IISmargin}%
+     \vskip2pt%
+\end{beamercolorbox}
+}
+%    \end{macrocode}
+%
+% Definition of the footer.
+%    \begin{macrocode}
+\setbeamertemplate{footline}{
+\begin{beamercolorbox}[ht=13pt]{headfootcolor}
+  \vskip2pt
+  \begin{columns}[b]
+    \begin{column}[l]{0.15\paperwidth}
+            \mbox{\hskip\IISmargin\hskip-1pt\includegraphics[width=1.7cm]{eth_logo_neg}}
+    \end{column}
+    \begin{column}[r]{0.80\paperwidth}
+      \hfill
+      \mbox{\textcolor{white}{\scriptsize\insertshortinstitute}\hskip\IISmargin\hskip-1pt}
+    \end{column}
+  \end{columns}
+  \vskip1pt
+  \end{beamercolorbox}
+}
+%    \end{macrocode}
+%
+% Definition of the title page.
+%    \begin{macrocode}
+\setbeamercolor{title}{fg=eth1}
+\setbeamercolor{subtitle}{fg=eth1}
+\setbeamertemplate{title page}
+{
+  \pgfputat{\pgfxy(-0.55,-5.0)}{\pgfbox[left,top]{\pgfimage[width=0.5\paperwidth]{./wafer}}}
+  %\vfill
+  \begin{flushright}
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}\textbf{\inserttitle}}
+    \vskip-0.2cm
+    \textcolor{eth1}{\rule{0.8\paperwidth}{2pt}}\\
+    %\vskip-0.2cm
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\textbf{\insertsubtitle}}\\
+    \usebeamerfont{date}{\footnotesize\insertdate}\\
+    \vfill
+    \usebeamerfont{author}{\small\insertauthor}
+    \vfill
+    \includegraphics[width=2cm]{./eth_logo}\\
+    \usebeamerfont{institute}{\insertinstitute}
+  \end{flushright}
+  \vspace{-1.5cm}
+}
+%    \end{macrocode}
+%
+% \Finale
+%
+\endinput

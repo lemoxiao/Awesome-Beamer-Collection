@@ -1,0 +1,51 @@
+\section{cross classification}
+
+\subsection{cross-component}
+\begin{frame}
+ \frametitle{Cross-component classification}
+ \alert{In the same project, Can we predict ARB in a new component ?}\\
+ Results of classifier when we exclude a component and use it as a test set:
+ \begin{center}
+  \begin{tabular}{l l|r r r}
+   Project & Component & PD & PF & Bal\\
+   \hline
+   Linux & Network drivers & 88.9 & 41.7 & 69.5\\
+    & SCSI drivers & 75.0 & 27.6 & 73.7\\
+    & EXT3 & 100.0 & 52.2 & 63.1\\
+    & IPv4 & 100.0 & 52.2 & 63.1\\
+   \hline
+   MySQL & InnoDB & 65.6 & 16.5 & 73.0\\
+    & Replication & 100.0 & 28.6 & 79.8\\
+    & Optimizer & 100.0 & 69.7 & 50.7\\
+   \hline
+   CARDAMOM & Foundation & 0.0 & 0.0 & 29.3\\
+    & Load Balancing & 100.0 & 9.0 & 93.7\\
+   \hline
+  \end{tabular}
+ \end{center}
+ \small (0\% of ARB detected in Foundation because there is only one ARB.) \normalsize
+\end{frame}
+%SCSI = Small Computer System Interface. Bus connecting the computer to peripherics or computers
+
+\subsection{cross-project}
+\begin{frame}
+ \frametitle{Cross-project classification}
+ \alert{Can those classifiers predict ARB for another project ?}\\
+ Results of classifier when the training set comes from another project than the test set:
+ \begin{center}
+ \begin{tabular}{l|r r r|r r r|r r r}
+  Train & \multicolumn{3}{c}{Linux} & \multicolumn{3}{c}{MySQL} & \multicolumn{3}{c}{CARDAMOM}\\
+  ~ & PD & PF & Bal & PD & PF & Bal & PD & PF & Bal\\
+  \hline
+  Linux & - & - & - & 82.9 & 23.8 & 79.3 & 0.0 & 0.2 & 29.3\\
+  MySQL & 100.0 & 50.7 & 64.2 & - & - & - & 33.3 & 11.8 & 52.1\\
+  CARDA & 0.0 & 0.1 & 29.3 & 0.0 & 0.6 & 29.3 & - & - & -\\
+  \hline
+ \end{tabular}
+ \end{center}
+ Low performance with CARDAMOM due to the difference of caracteristics between CARDAMOM and the two others.
+ \begin{center}
+  (CARDAMOM in pure C++, MySQL in mixed C/C++, Linux in pure C)
+ \end{center}
+\end{frame}
+%The language is not the only different caracteristics of course.

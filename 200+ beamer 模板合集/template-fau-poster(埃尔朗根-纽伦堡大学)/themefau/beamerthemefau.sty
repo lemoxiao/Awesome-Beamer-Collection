@@ -1,0 +1,150 @@
+%-------------------------------------------------------------------------------
+% Main file
+%
+% This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
+% International License. To view a copy of this license, visit
+% http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative
+% Commons, PO Box 1866, Mountain View, CA 94042, USA.
+% Copyright (C) 2017 Oliver Reiche <oliver.reiche@fau.de>
+%-------------------------------------------------------------------------------
+
+\ProvidesPackage{beamerthemefau}
+
+\mode<presentation>
+
+
+\usepackage{calc}
+\usepackage{pgf}
+\usepackage[framemethod=tikz,nobreak=true]{mdframed}% For custom block style
+
+
+\def\beamer@inst{}
+
+\newif\ifbeamer@outline
+\beamer@outlinetrue
+
+\newif\ifbeamer@basecolor
+\beamer@basecolorfalse
+
+\newif\ifbeamer@instcolor
+\beamer@instcolorfalse
+
+\newif\ifbeamer@titlebg
+\beamer@titlebgfalse
+
+\newif\ifbeamer@headtitle
+\beamer@headtitlefalse
+
+\ifx\beamer@framedblock\undefined
+  \newlength{\beamer@framedblock}
+  \setlength\beamer@framedblock{0pt}
+\fi
+
+\DeclareOptionBeamer{inst}[]{%
+  \def\beamer@inst{#1}
+}
+
+\DeclareOptionBeamer{outline}[true]{%
+  \csname beamer@outline#1\endcsname%
+  \ifbeamer@outline%
+    \beamer@basecolorfalse%
+    \beamer@instcolorfalse%
+    \beamer@titlebgfalse%
+  \fi
+}
+
+\DeclareOptionBeamer{basecolor}[true]{%
+  \csname beamer@basecolor#1\endcsname%
+  \ifbeamer@basecolor%
+    \beamer@outlinefalse%
+    \beamer@instcolorfalse%
+  \fi
+}
+
+\DeclareOptionBeamer{instcolor}[true]{%
+  \csname beamer@instcolor#1\endcsname%
+  \ifbeamer@instcolor%
+    \beamer@outlinefalse%
+    \beamer@basecolorfalse%
+  \fi
+}
+
+\DeclareOptionBeamer{titlebg}[true]{%
+  \csname beamer@titlebg#1\endcsname%
+  \ifbeamer@titlebg%
+    \beamer@headtitlefalse%
+    \beamer@outlinefalse%
+    \beamer@basecolorfalse%
+    \beamer@instcolortrue%
+  \fi
+}
+
+\DeclareOptionBeamer{headtitle}[true]{%
+  \csname beamer@headtitle#1\endcsname%
+  \ifbeamer@headtitle%
+    \beamer@titlebgfalse%
+  \fi
+}
+
+\DeclareOptionBeamer{framedblock}[2.25pt]{%
+  \setlength\beamer@framedblock{#1}%
+}
+
+\ProcessOptionsBeamer
+
+
+% Scaling factor for posters smaller than A0
+\pgfmathsetmacro{\factor}{\paperwidth/2388.89357pt}
+
+% Include each single theme file
+\usefonttheme{fau}
+\usecolortheme{fau}
+\useinnertheme{fau}
+\useoutertheme{fau}
+
+% Set box colors
+\colorlet{maincolor}{faublue}
+\colorlet{boxcolor1}{fauorange}
+\colorlet{boxcolor2}{faured}
+\colorlet{boxcolor3}{faucyan}
+\colorlet{boxcolor4}{faugreen}
+\colorlet{boxcolor5}{faugray}
+
+% Set background colors
+\colorlet{basecolor}{faublue!10}
+\colorlet{instcolor}{maincolor!20}
+
+
+\footline{www.fau.de}
+
+
+\ifx\beamer@inst\empty\else%
+  \usetheme[%
+    outline=\ifbeamer@outline true\else false\fi,
+    basecolor=\ifbeamer@basecolor true\else false\fi,
+    instcolor=\ifbeamer@instcolor true\else false\fi,
+    titlebg=\ifbeamer@titlebg true\else false\fi,
+    headtitle=\ifbeamer@headtitle true\else false\fi
+  ]{fau-\beamer@inst}
+\fi
+
+
+% Image path is set by institution files
+\ifdefined\imagepath
+  % Distinguish between languages
+  \def\faulogo{fau-logo-english}
+  \@ifpackageloaded{babel}{
+    \iflanguage{ngerman}{\def\faulogo{fau-logo-deutsch}}{}}{}
+\else
+  \def\imagepath{}
+  \def\faulogo{fau-logo}
+\fi
+
+% Graphics
+\pgfmathsetmacro{\logowidth}{\factor*29}
+\pgfdeclareimage[width=\logowidth cm]{faulogo}{art/\imagepath/\faulogo}
+
+
+\mode
+<all>
+

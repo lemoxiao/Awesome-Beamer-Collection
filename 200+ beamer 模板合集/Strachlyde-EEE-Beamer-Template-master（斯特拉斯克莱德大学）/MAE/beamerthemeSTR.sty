@@ -1,0 +1,189 @@
+% \LaTeX beamer theme with Strathclyde layout
+% author: Xavier Bellekens <xavier.bellekens@strath.ac.uk>
+% credits : https://github.com/satta/zbh-beamer-theme
+
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeSTR}[2010/02/06 STR beamer theme]
+\RequirePackage{ifthen}
+\RequirePackage[scaled=.75]{helvet}
+\RequirePackage{graphicx,psfrag,epsf,color,epstopdf,hyperref,lipsum}
+\RequirePackage[normalem]{ulem} % underline
+
+\newcommand{\headertext}{~}
+
+\newcommand{\addresstext}{
+  \textcolor[rgb]{1.00,0.50,0.00}{University of Strathclyde\\
+   Department of Mechanical \& Aerospace Engineering\\
+   Weir Advanced Research Centre (WARC)\\
+   Technology and Innovation Centre, Glasgow, Scotland, UK}\\[2mm]
+  \href{http://www.strath.ac.uk/mae/}{\uline{www.strath.ac.uk/mae/}}
+}
+
+\newcommand{\eventitletext}{
+  6th Edition of the International Conference on Fatigue Design\\
+  18 \& 19 November 2015, Senlis, France\\
+  \href{http://www.fatiguedesign.org}{\uline{www.fatiguedesign.org}}
+}
+
+\def\backgroundfile{background_MAE}
+\def\titlebackgroundfile{title-page_MAE}
+\def\lastbackgroundfile{questions_MAE}
+\def\eventlogofile{event_logo}
+\newboolean{@use1610}
+\setboolean{@use1610}{false}
+\newboolean{@use169}
+\setboolean{@use169}{false}
+\newlength{\@headerdist}
+\setlength{\@headerdist}{5mm}
+
+
+\DeclareOption{1610}{
+  \def\backgroundfile{strath_uni_16_10}
+  \setboolean{@use1610}{true}
+}
+
+\DeclareOption{169}{
+  \def\backgroundfile{strath_uni_16_9}
+  \setboolean{@use169}{true}
+}
+
+\ProcessOptions
+
+\ifthenelse{\boolean{@use1610}}{ }
+
+\ifthenelse{\boolean{@use169}}{
+  \ifthenelse{\boolean{@use1610}}{
+   \PackageError{STRbeamertheme}{Options '1610' and '169' are mutually exclusive.}{}%
+  } { }
+}
+
+\mode<presentation>
+
+% changing margins in a beamer frame
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% font settings of text elements 
+\setbeamerfont{author}{series=\bfseries,size=\large}
+\setbeamerfont{date}{size=\large}
+\setbeamerfont{example text}{series=\bfseries}
+\setbeamerfont{section}{series=\bfseries}
+\setbeamercolor{structure}{fg=black}
+\setbeamercolor{title}{fg=black}
+\setbeamerfont{title}{series=\bfseries}
+
+% disable navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% frame
+\setbeamercolor{frametitle}{fg=orange}
+\setbeamerfont{frametitle}{series=\mdseries,size=\Large}
+\setbeamerfont{framesubtitle}{series=\mdseries,size=\large}
+\setbeamertemplate{frametitle}
+{
+  \ifbeamer@plainframe
+  \else
+    \vspace{-0.5cm}
+    \textbf{\insertframetitle}
+%    \vspace{.25cm}
+  \fi
+}
+
+% headline
+\setbeamercolor{headline}{fg=yellow}
+\setbeamertemplate{headline}{
+  \ifbeamer@plainframe
+  \else
+    \ifthenelse{\boolean{@use1610}}{
+      \vspace{8.5mm}
+      \leavevmode\tiny%
+      \hspace*{12.25cm}
+    }{
+      \ifthenelse{\boolean{@use169}}{
+        \vspace{7mm}
+        \leavevmode\tiny%
+        \hspace*{12.35cm}
+      }{
+        \vspace{1cm}
+        \leavevmode
+        \hspace*{7.80cm}
+      }
+    }
+    \begin{minipage}[b]{2cm}
+      \flushright
+      \headertext
+    \end{minipage}
+    \normalsize
+  \fi
+}
+
+% title page with Strathclyde Logo
+\setbeamertemplate{title page}{
+%  \vspace{\@headerdist}
+  \vspace{-1.0cm}
+  \begin{columns}
+  \begin{column}{.3\textwidth}
+     \hspace*{2.5mm}
+     \includegraphics[width=0.9\columnwidth]{\eventlogofile}
+  \end{column}
+  \begin{column}{.6\textwidth}
+     \scriptsize
+     \eventitletext
+  \end{column}
+  \begin{column}{.1\textwidth}
+  \end{column}
+  \end{columns}
+
+  \vspace{2cm}
+
+  \begin{columns}
+  \begin{column}{.85\textwidth}
+    \center
+    \textbf{\LARGE{\inserttitle}}\\
+    \textbf{\large{\insertsubtitle}}\\[3mm]
+    \textbf{\textit{\insertauthor}}\\[3mm]
+    \small
+    \addresstext
+  \end{column}
+  \begin{column}{.15\textwidth}
+  \end{column}
+  \end{columns}
+  \normalsize
+}
+
+% footer with name, date and page numbers
+\setbeamercolor{footline}{fg=gray}
+\setbeamertemplate{footline}{
+  \ifbeamer@plainframe
+  \else
+    \leavevmode\tiny%
+    \vspace{1mm}%
+    \hspace*{5mm}%
+    \makebox[8cm][l]{\insertauthor}%
+      \hfill \makebox[1.95cm][l]{\insertdate}\hspace{5mm}%
+    \hspace*{5mm}%
+    \makebox[8cm][l]{\insertshorttitle}%
+      \hfill\insertframenumber~/~\inserttotalframenumber\hspace{1cm}%
+    \vspace{1.5mm}%
+  \fi
+}
+
+% use Strathclyde slide layout template
+\setbeamertemplate{background} {
+%  \ifbeamer@plainframe
+  \ifnum\c@framenumber=1%
+    \includegraphics[width=\paperwidth,height=\paperheight]{\titlebackgroundfile}
+  \else
+     \ifnum\c@framenumber=\inserttotalframenumber%
+     \begin{picture}(0,244.5)
+       \includegraphics[width=\paperwidth,height=\paperheight]{\lastbackgroundfile}
+     \end{picture}
+     \else
+       \includegraphics[width=\paperwidth,height=\paperheight]{\backgroundfile}
+  \fi
+  \fi
+}
+
+\mode
+<all>
+

@@ -1,0 +1,179 @@
+% 这是nwafu(西北农林科技大学)Flux扁平主题的内部主题.
+% 版权(c) 2015-2019, 信息工程学院 耿楠<nangeng@nwafu.edu.cn>
+%
+% 本主题修改于主题：https://github.com/pvanberg/flux-beamer
+%
+% 这是一个免费代码：发布和修改该代码，请遵守最新版的自由软件联盟发布
+% 的GNU通用公共协议
+%
+% 期望这一代码对你有用，但值得注意的是，我不对任何后续问题进行维护，
+% 请参考<http://www.gnu.org/licenses/>查看最新的协议内容。
+
+\mode<presentation>
+
+\usepackage{tikz}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 设置tikz
+\tikzset{section number/.style={
+    circle,  
+    fill=secondary,  
+    minimum size=0.4em,
+    text=secondary!10,
+    inner sep=1.5pt,
+  },
+  section/.style={
+    draw=none,
+    rectangle,
+    minimum height=1em,
+    minimum width=0.8\textwidth,
+    text width=0.8\textwidth,
+    text=primaryLight,
+    align=left
+  },
+  subsection number/.style={
+    circle,  
+    fill=Gray!50,
+    inner sep=0pt,
+    minimum size=0.15cm,
+  },
+  subsection/.style={
+    draw=none,
+    rectangle,
+    minimum height=1em,
+    minimum width=0.8\textwidth,
+    text width=0.8\textwidth,
+    text=text!80,
+    align=left
+  }
+}
+
+\setbeamertemplate{section in toc}{
+  \hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section number]{\textbf{\small\inserttocsectionnumber}};
+  \ \tikz[baseline=-0.5ex]\node[section]{\usebeamerfont*{toc title} \inserttocsection};\\[-0.3cm]
+  \hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
+}
+
+\setbeamertemplate{subsection in toc}{
+  \hspace*{0.53cm}\tikz[baseline=-0.5ex]\node[subsection number]{};
+  \hspace*{0.5cm} \tikz[baseline=-0.5ex]\node[subsection]{\usebeamerfont*{toc subtitle}\inserttocsubsection};\\[-0.2cm]
+}
+
+\setbeamertemplate{section in toc shaded}{
+  \hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section number, fill=Gray!40, text=background]{\usebeamerfont*{toc subtitle}\textbf{\inserttocsectionnumber}};
+  \ \tikz[baseline=-0.5ex]\node[section, text=primaryLight!20]{\usebeamerfont*{toc title} \inserttocsection};\\[-0.3cm]
+  \hspace*{1.3cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
+}
+
+\setbeamertemplate{subsection in toc shaded}{
+  \hspace*{0.55cm}\tikz[baseline=-0.5ex]\node[subsection number,fill=Gray!20]{};
+  \hspace*{0.5cm} \tikz[baseline=-0.5ex]\node[subsection, text=Gray!20]{};\\[-0.2cm]
+}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% itemize环境
+\setbeamertemplate{itemize item}{$\bullet$}
+\setbeamertemplate{itemize subitem}{$\bullet$}
+\setbeamertemplate{itemize subsubitem}{$\bullet$}
+\setlength{\parskip}{0.5em}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% example环境
+\renewenvironment{example}[1]{
+	\textcolor{tertiary}{#1}
+}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Blocks环境
+\def\beamer@blockstylenative{native}%
+\def\beamer@blockstylenobackground{nobackground}%
+\def\beamer@blockstylemetropolis{metropolis}%
+
+\newcommand{\setblockstyle}[1]{
+	\def\beamer@blockstyle{#1}
+	\ifx\beamer@blockstyle\beamer@blockstylenobackground%
+		\setbeamercolor{block title}{fg= primaryLight,bg=background}%
+   		\setbeamercolor{block body}{bg=background}%
+   		\setbeamercolor{block title alerted}{fg=secondary,bg=background}%
+   		\setbeamercolor{block body alerted}{bg=background}%
+   		\setbeamercolor{block title example}{fg=tertiary,bg=background}%
+  		\setbeamercolor{block body example}{bg=background}%
+	\else\ifx\beamer@blockstyle\beamer@blockstylemetropolis%
+		\setbeamercolor{block title}{use=normal text,fg=primaryLight,bg=normal text.bg!80!fg}
+		\setbeamercolor{block body}{use={block title, normal text},bg=block title.bg!50!normal text.bg}  
+		\setbeamercolor{block title alerted}{fg=secondary,bg=normal text.bg!80!fg}
+		\setbeamercolor{block body alerted}{use={block title, normal text},bg=block title.bg!50!normal text.bg}  
+		\setbeamercolor{block title example}{fg=tertiary,bg=normal text.bg!80!fg}
+	    \setbeamercolor{block body example}{use={block title, normal text},bg=block title.bg!50!normal text.bg} 
+    \else% 
+    	\setbeamercolor{block title}{bg=primaryLight, fg=background}%
+   		\setbeamercolor{block body}{bg=normal text.bg!90!fg}%
+   		\setbeamercolor{block title alerted}{bg=secondary!80, fg=background}%
+   		\setbeamercolor{block body alerted}{bg=normal text.bg!90!fg}%
+   		\setbeamercolor{block title example}{bg=tertiary!80, fg=background}%
+   		\setbeamercolor{block body example}{bg=normal text.bg!90!fg}%
+    \fi
+\fi%
+}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 解除blocks对字体的依赖
+\setbeamertemplate{block begin}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[colsep*=2mm]{block title}
+    \usebeamerfont*{block title}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title}
+  {}
+  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[colsep*=2mm,vmode]{block body}%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+
+\setbeamertemplate{block example begin}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[colsep*=2mm]{block title example}
+    \usebeamerfont*{block title example}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title example}
+  {}
+  {\ifbeamercolorempty[bg]{block body example}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body example}%
+  \begin{beamercolorbox}[colsep*=2mm,vmode]{block body example}%
+    \ifbeamercolorempty[bg]{block body example}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+
+\setbeamertemplate{block alerted begin}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[colsep*=2mm]{block title alerted}
+    \usebeamerfont*{block title alerted}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title alerted}
+  {}
+  {\ifbeamercolorempty[bg]{block body alerted}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body alerted}%
+  \begin{beamercolorbox}[colsep*=2mm,vmode]{block body alerted}%
+    \ifbeamercolorempty[bg]{block body alerted}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 参考文献
+\setbeamertemplate{bibliography item}{
+ 	\usebeamercolor[bg]{secondary}\insertbiblabel
+}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\mode<all>

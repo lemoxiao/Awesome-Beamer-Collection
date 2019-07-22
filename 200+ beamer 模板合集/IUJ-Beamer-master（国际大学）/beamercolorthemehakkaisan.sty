@@ -1,0 +1,53 @@
+% IUJ Hakkaisan Beamer Color Theme, ver. 0.01 (2016-10-04)
+% Copyright 2016 by Yuki Yanai <yanai@iuj.ac.jp>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+
+\ProvidesPackage{beamercolorthemehakkaisan}[10/04/2016]
+
+\mode<presentation>
+
+\definecolor{iujblue}{RGB}{0,80,153}
+\definecolor{iujbrick}{RGB}{196,0,0}
+\definecolor{iujgray}{RGB}{100,100,100}
+
+\setbeamercolor*{normal text}{fg=black,bg=white}
+\setbeamercolor*{alerted text}{fg=iujbrick}
+\setbeamercolor*{example text}{fg=iujblue}
+\setbeamercolor*{structure}{fg=iujblue,bg=white}
+
+\setbeamerfont{alerted text}{series=\bfseries}
+
+\setbeamercolor*{palette primary}{fg=white,bg=iujblue}
+\setbeamercolor*{palette secondary}{fg=iujblue,bg=white}
+\setbeamercolor*{palette tertiary}{fg=black,bg=white}
+\setbeamercolor*{palette quaternary}{fg=black,bg=white}
+
+\setbeamercolor{titlelike}{fg=white, bg=iujblue}
+\setbeamercolor{frametitle}{fg=iujblue, bg=white}
+\setbeamercolor{frametitle right}{fg=iujgray, bg=white}
+
+\setbeamercolor{sidebar}{bg=iujblue}
+
+\setbeamercolor*{palette sidebar primary}{fg=black}
+\setbeamercolor*{palette sidebar secondary}{fg=black}
+\setbeamercolor*{palette sidebar tertiary}{fg=black}
+\setbeamercolor*{palette sidebar quaternary}{fg=black}
+
+\setbeamercolor*{item projected}{fg=black,bg=black!20}
+
+\setbeamercolor{block title}{fg=white,bg=iujblue}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=iujbrick}
+\setbeamercolor{block title example}{use=example text,fg=white,bg=iujgray}
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!15!bg}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!15!bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!15!bg}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\mode
+<all>

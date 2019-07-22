@@ -1,0 +1,62 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\title[How to use \LaTeX for GUADEC 2015]{How to use \LaTeX for creating awesome slides for GUADEC 2015}
+\author{Adrien Plazas \texttt{kekun.plazas@laposte.net}}
+\date{August 7, 2015}
+
+\usetheme{guadec}
+
+\AtBeginSection{\frame{\sectionpage}}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Title Slide}
+
+\begin{frame}[containsverbatim]
+\frametitle{Content slide}
+\framesubtitle{With a subtitle}
+
+    Do math simply!
+
+    \begin{center}
+        $\sqrt{5} \neq 1$
+    \end{center}
+
+    \texttt{Use} the $^{power}$ of \LaTeX!
+
+    \begin{block}{With Lower Level Headers}
+        \begin{lstlisting}[language=Python]
+def some_code(is_easy_to):
+    integrate()
+
+# With syntax highlighting, of course!
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Incrementally Showing Lists}
+
+    \begin{itemize}
+        \item<1-> Is
+        \item<2-| alert@2> Dead
+        \item<3-> Easy!
+        \item<1-> Yet flexible
+    \end{itemize}
+\end{frame}
+
+\section{Compiling}
+
+\begin{frame}
+\frametitle{Compiling}
+
+    Simply use \texttt{make tex} in this directory!
+\end{frame}
+
+\end{document}
